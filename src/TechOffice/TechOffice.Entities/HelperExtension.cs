@@ -1,48 +1,13 @@
-﻿using TechOffice.Entities.Infos;
-using TechOffice.Entities.Results;
+﻿using System;
+using System.Threading.Tasks;
+using AnThinhPhat.Entities.Infos;
+using AnThinhPhat.Entities.Results;
+using AnThinhPhat.Utilities;
 
-namespace TechOffice.Entities
+namespace AnThinhPhat.Entities
 {
     public static class HelperExtension
     {
-        //public static DataInfo ToIfNotNullDataInfo(this DataResult entity)
-        //{
-        //    return entity.ToIfNotNullDataInfo<DataInfo, DataResult>();
-        //}
-
-        //public static DataInfo ToIfNotNullBaseInfo(this BaseResult entity)
-        //{
-        //    return entity.ToIfNotNullBaseInfo<DataInfo, BaseResult>();
-        //}
-
-        //public static TInfo ToIfNotNullDataInfo<TInfo, TResult>(this TResult entity) where TInfo : DataInfo where TResult : DataResult
-        //{
-        //    return entity == null ? null : entity.ToDataInfo<TInfo, TResult>();
-        //}
-
-        //public static TInfo ToDataInfo<TInfo, TResult>(this TResult entity) where TInfo : DataInfo where TResult : DataResult
-        //{
-        //    var info = default(TInfo);
-
-        //    info.Id = entity.Id;
-        //    info.Name = entity.Ten;
-
-        //    return info;
-        //}
-
-        //public static TInfo ToIfNotNullBaseInfo<TInfo, TResult>(this TResult entity) where TInfo : BaseInfo where TResult : BaseResult
-        //{
-        //    return entity == null ? null : entity.ToBaseInfo<TInfo, TResult>();
-        //}
-
-        //public static TInfo ToBaseInfo<TInfo, TResult>(this TResult entity) where TInfo : BaseInfo where TResult : BaseResult
-        //{
-        //    var info = default(TInfo);
-
-        //    info.Id = entity.Id;
-
-        //    return info;
-        //}
     }
 
     public static class ChucVuExtension
@@ -289,6 +254,21 @@ namespace TechOffice.Entities
         }
 
         public static UserInfo ToDataInfo(this UserResult entity)
+        {
+            return new UserInfo
+            {
+                Id = entity.Id,
+                UserName = entity.UserName,
+                HoVaTen = entity.HoVaTen,
+            };
+        }
+
+        public static UserInfo ToIfNotNullDataInfo(this User entity)
+        {
+            return entity == null ? null : entity.ToDataInfo();
+        }
+
+        public static UserInfo ToDataInfo(this User entity)
         {
             return new UserInfo
             {
@@ -558,6 +538,20 @@ namespace TechOffice.Entities
         }
 
         public static RoleInfo ToDataInfo(this RoleResult entity)
+        {
+            return new RoleInfo
+            {
+                Id = entity.Id,
+                Name = entity.Ten,
+            };
+        }
+
+        public static RoleInfo ToIfNotNullDataInfo(this Role entity)
+        {
+            return entity == null ? null : entity.ToDataInfo();
+        }
+
+        public static RoleInfo ToDataInfo(this Role entity)
         {
             return new RoleInfo
             {

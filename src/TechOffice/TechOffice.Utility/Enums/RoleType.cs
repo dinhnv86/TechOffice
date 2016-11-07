@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : TechOffice.Utilities
+// Assembly         : AnThinhPhat.Utilities
 // Author           : tranthiencdsp@gmail.com
 // Created          : 02-25-2016
 //
@@ -15,7 +15,7 @@
 /// <summary>
 /// The Types namespace.
 /// </summary>
-namespace TechOffice.Utilities.Enums
+namespace AnThinhPhat.Utilities.Enums
 {
     /// <summary>
     /// Enum RoleType

@@ -16,7 +16,7 @@
 /// The Services namespace.
 /// </summary>
 
-namespace TechOffice.Services
+namespace AnThinhPhat.Services
 {
     /// <summary>
     ///     Enum SaveResult

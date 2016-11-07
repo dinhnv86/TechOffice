@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TechOffice.Entities.Results
+namespace AnThinhPhat.Entities.Results
 {
     public class TacNghiepResult : BaseResult
     {

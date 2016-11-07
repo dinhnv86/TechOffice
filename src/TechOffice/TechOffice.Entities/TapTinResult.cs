@@ -1,6 +1,6 @@
-﻿using TechOffice.Entities.Infos;
+﻿using AnThinhPhat.Entities.Infos;
 
-namespace TechOffice.Entities
+namespace AnThinhPhat.Entities
 {
     public class TapTinResult : BaseResult
     {

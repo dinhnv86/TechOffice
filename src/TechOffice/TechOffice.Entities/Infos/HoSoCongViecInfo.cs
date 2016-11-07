@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TechOffice.Entities.Infos
+namespace AnThinhPhat.Entities.Infos
 {
     public class HoSoCongViecInfo : BaseInfo
     {

@@ -4,24 +4,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="EBROnline" />
+    <meta name="" content="" />
+    <meta name="seotitle" content="" />
+    <meta name="seometakeyword" content="" />
+    <meta name="seometadescription" content="" />
+
     <title>@ViewBag.Title - Phòng nội vụ</title>
     <link rel="shortcut icon" href="~/favicon.ico" type="/image/vnd.microsoft.icon" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/jqueryui")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-
-    @*@{Html.RenderPartial("_Header");}*@
-
+    @{Html.RenderPartial("_Header");}
     <div class="container body-content">
         @RenderBody()
     </div>
     <footer>
-        @*@{Html.RenderPartial("_Footer");}*@
+        @{Html.RenderPartial("_Footer");}
     </footer>
-    @*@Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/jqueryui")
-        @Scripts.Render("~/bundles/unobtrusive")*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/unobtrusive")
     @RenderSection("scripts", required: false)
 </body>
 </html>

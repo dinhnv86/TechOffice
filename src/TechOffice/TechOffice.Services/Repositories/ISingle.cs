@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 /// The Services namespace.
 /// </summary>
 
-namespace TechOffice.Services
+namespace AnThinhPhat.Services
 {
     /// <summary>
     ///     Create interface ISingle for Entity

@@ -15,7 +15,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TechOffice.Services.Repositories
+namespace AnThinhPhat.Services.Repositories
 {
     /// <summary>
     ///     Interface IRepository

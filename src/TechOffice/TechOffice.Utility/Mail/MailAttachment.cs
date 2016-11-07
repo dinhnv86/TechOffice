@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : TechOffice.Utilities
+// Assembly         : AnThinhPhat.Utilities
 // Author           : tranthiencdsp@gmail.com
 // Created          : 03-13-2016
 //
@@ -15,7 +15,7 @@ using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
 
-namespace TechOffice.Utilities
+namespace AnThinhPhat.Utilities
 {
     public class MailAttachment
     {

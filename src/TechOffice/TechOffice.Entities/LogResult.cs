@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TechOffice.Entities
+namespace AnThinhPhat.Entities
 {
     public class LogResult
     {

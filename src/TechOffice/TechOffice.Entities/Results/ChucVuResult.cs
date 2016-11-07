@@ -1,4 +1,4 @@
-﻿namespace TechOffice.Entities.Results
+﻿namespace AnThinhPhat.Entities.Results
 {
     public class ChucVuResult : DataResult
     {

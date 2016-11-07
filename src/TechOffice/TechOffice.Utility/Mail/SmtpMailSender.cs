@@ -5,7 +5,7 @@ using System.Text;
 /// <summary>
 /// 
 /// </summary>
-namespace TechOffice.Utilities
+namespace AnThinhPhat.Utilities
 {
     /// <summary>
     /// 

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using TechOffice.Entities;
-using TechOffice.Entities.Results;
-using TechOffice.Services.Abstracts;
-using TechOffice.Utilities;
+using AnThinhPhat.Entities;
+using AnThinhPhat.Entities.Results;
+using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Utilities;
 
-namespace TechOffice.Services.Implements
+namespace AnThinhPhat.Services.Implements
 {
     /// <summary>
     /// </summary>
-    public class RolesRepository : IRolesRepository
+    public class RolesRepository : IRoleRepository
     {
         /// <summary>
         ///     The _log service

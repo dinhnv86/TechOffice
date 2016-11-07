@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TechOffice.Entities
+namespace AnThinhPhat.Entities
 {
     using System;
     using System.Data.Entity;

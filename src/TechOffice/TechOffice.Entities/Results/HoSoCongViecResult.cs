@@ -1,7 +1,7 @@
 ﻿using System;
-using TechOffice.Entities.Infos;
+using AnThinhPhat.Entities.Infos;
 
-namespace TechOffice.Entities.Results
+namespace AnThinhPhat.Entities.Results
 {
     public class HoSoCongViecResult : BaseResult
     {

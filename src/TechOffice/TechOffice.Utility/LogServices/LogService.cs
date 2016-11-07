@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : TechOffice.Utilities
+// Assembly         : AnThinhPhat.Utilities
 // Author           : tranthiencdsp@gmail.com
 // Created          : 03-13-2016
 //
@@ -19,7 +19,7 @@ using System.Collections.Generic;
 /// <summary>
 /// The Utilities namespace.
 /// </summary>
-namespace TechOffice.Utilities
+namespace AnThinhPhat.Utilities
 {
     /// <summary>
     /// Class LogService.

@@ -1,11 +1,11 @@
-﻿using TechOffice.Entities.Results;
-using TechOffice.Services.Repositories;
+﻿using AnThinhPhat.Entities.Results;
+using AnThinhPhat.Services.Repositories;
 
-namespace TechOffice.Services.Abstracts
+namespace AnThinhPhat.Services.Abstracts
 {
     /// <summary>
     /// </summary>
-    public interface IRolesRepository : IRepository<RoleResult>
+    public interface IRoleRepository : IRepository<RoleResult>
     {
     }
 }

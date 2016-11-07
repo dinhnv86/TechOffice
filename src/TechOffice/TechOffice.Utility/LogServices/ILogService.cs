@@ -1,5 +1,5 @@
 ﻿// ***********************************************************************
-// Assembly         : TechOffice.Utilities
+// Assembly         : AnThinhPhat.Utilities
 // Author           : tranthiencdsp@gmail.com
 // Created          : 03-13-2016
 //
@@ -14,7 +14,7 @@
 
 using System;
 
-namespace TechOffice.Utilities
+namespace AnThinhPhat.Utilities
 {
     /// <summary>
     /// Interface ILogService
