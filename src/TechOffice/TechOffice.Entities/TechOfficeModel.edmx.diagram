@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5c6428e035ac49cb8dc559da828939dc" Name="Diagram1">
+        <EntityTypeShape EntityType="TechOfficeDevModel.ChucVu" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_PhoiHop" Width="1.5" PointX="5.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_QuaTrinhXuLy" Width="1.5" PointX="10.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_VanBan" Width="1.5" PointX="10.5" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.CoQuan" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.HoSoCongViec" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucCongViec" Width="1.5" PointX="6" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucThuTuc" Width="1.5" PointX="6.75" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.LoaiVanBan" Width="1.5" PointX="0.75" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.MucDoHoanThanh" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.MucTin" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.NhomCoQuan" Width="1.5" PointX="1.5" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.Role" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.sysdiagram" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_CoQuanLienQuan" Width="1.5" PointX="8.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_TinhHinhThucHien" Width="1.5" PointX="11.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_YKienCoQuan" Width="1.5" PointX="11.25" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinCongViec" Width="1.5" PointX="13.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinTacNghiep" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinThuTuc" Width="1.5" PointX="11.25" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinVanBan" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinYKienCoQuan" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.ThuTuc" Width="1.5" PointX="9" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.User" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.UserRole" Width="1.5" PointX="8.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.VanBan" Width="1.5" PointX="3" PointY="20.625" IsExpanded="true" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_User_ChucVu" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_PhoiHop_HoSoCongViec" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_PhoiHop_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_QuaTrinhXuLy_HoSoCongViec" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_VanBan_HoSoCongViec" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_CoQuan_NhomCoQuan" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_CoQuanLienQuan_CoQuan" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_TinhHinhThucHien_CoQuan" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_CoQuan" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_ThuTuc_CoQuan" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_VanBan_CoQuan" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_HoSoCongViec_LinhVucCongViec" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_HoSoCongViec_UserPhuTrach" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_HoSoCongViec_UserXuLyChinh" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinCongViec_HoSoCongViec" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_ThuTuc_LinhVucThuTuc" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_VanBan_LoaiVanBan" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_UserRole_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_CoQuanLienQuan_TacNghiep" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_TinhHinhThucHien_TacNghiep" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_TacNghiep" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinTacNghiep_TacNghiep" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinCongViec_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinTacNghiep_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinThuTuc_ThuTuc" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinVanBan_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinVanBan_VanBan" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_UserRole_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_User" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucVanBan" Width="1.5" PointX="7.375" PointY="1" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_VanBan_LinhVucVanBan" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinThuTuc_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

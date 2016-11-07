@@ -15,23 +15,26 @@
 /// <summary>
 /// The Services namespace.
 /// </summary>
+
 namespace TechOffice.Services
 {
     /// <summary>
-    /// Enum SaveResult
+    ///     Enum SaveResult
     /// </summary>
     public enum SaveResult
     {
         /// <summary>
-        /// The failure
+        ///     The failure
         /// </summary>
         FAILURE = 0,
+
         /// <summary>
-        /// The success
+        ///     The success
         /// </summary>
         SUCCESS = 1,
+
         /// <summary>
-        /// The unknown
+        ///     The unknown
         /// </summary>
         UNKNOWN = 2
     }

@@ -17,23 +17,24 @@ using System.Threading.Tasks;
 /// <summary>
 /// The Services namespace.
 /// </summary>
+
 namespace TechOffice.Services
 {
     /// <summary>
-    /// Create interface ISingle for Entity
+    ///     Create interface ISingle for Entity
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     public interface ISingle<TEntity> where TEntity : class
     {
         /// <summary>
-        /// Finds the specified identifier.
+        ///     Finds the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>TEntity.</returns>
         TEntity Single(int id);
 
         /// <summary>
-        /// Finds the asynchronous.
+        ///     Finds the asynchronous.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Task&lt;TEntity&gt;.</returns>

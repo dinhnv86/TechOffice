@@ -1,0 +1,2402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TechOfficeDevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChucVu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="1024" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="CongViec_PhoiHop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="HoSoCongViecId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="CongViec_QuaTrinhXuLy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GioBanHanh" Type="tinyint" Nullable="false" />
+          <Property Name="PhutBanHanh" Type="tinyint" Nullable="false" />
+          <Property Name="NgayBanHanh" Type="date" />
+          <Property Name="NoiDung" Type="text" />
+          <Property Name="NguoiThem" Type="nvarchar" MaxLength="1024" />
+          <Property Name="NhacNho" Type="tinyint" />
+          <Property Name="HoSoCongViecId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="CongViec_VanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoSoCongViecId" Type="int" Nullable="false" />
+          <Property Name="SoVanBan" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="NgayBanHanh" Type="datetime" />
+          <Property Name="NoiDung" Type="text" />
+          <Property Name="TenCoQuan" Type="nvarchar" MaxLength="1024" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="CoQuan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NhomCoQuanId" Type="int" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="text" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="HoSoCongViec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayHetHan" Type="datetime" />
+          <Property Name="UserPhuTrachId" Type="int" Nullable="false" />
+          <Property Name="UserXuLyId" Type="int" Nullable="false" />
+          <Property Name="LinhVucCongViecId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="tinyint" />
+          <Property Name="NoiDung" Type="text" Nullable="false" />
+          <Property Name="QuaTrinhXuLy" Type="text" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LinhVucCongViec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="1024" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LinhVucThuTuc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="1024" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LinhVucVanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="1024" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LoaiVanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="text" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="MucDoHoanThanh">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="1024" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="MucTin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="text" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="NhomCoQuan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="text" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="1024" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TacNghiep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayHetHan" Type="datetime" Nullable="false" />
+          <Property Name="NgayHoanThanh" Type="datetime" />
+          <Property Name="NoiDung" Type="text" />
+          <Property Name="NoiDungTraoDoi" Type="text" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TacNghiep_CoQuanLienQuan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TacNghiepId" Type="int" Nullable="false" />
+          <Property Name="CoQuanId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TacNghiep_TinhHinhThucHien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TacNghiepId" Type="int" Nullable="false" />
+          <Property Name="CoQuanId" Type="int" Nullable="false" />
+          <Property Name="ThoiGian" Type="int" Nullable="false" />
+          <Property Name="MucDoHoanThanh" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TacNghiep_YKienCoQuan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TacNghiepId" Type="int" Nullable="false" />
+          <Property Name="CoQuanId" Type="int" Nullable="false" />
+          <Property Name="NoiDung" Type="text" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TapTinCongViec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoSoCongViecId" Type="int" Nullable="false" />
+          <Property Name="UserUploadId" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TapTinTacNghiep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TacNghiepId" Type="int" Nullable="false" />
+          <Property Name="UserUploadId" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TapTinThuTuc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ThuTucId" Type="int" Nullable="false" />
+          <Property Name="UserUploadId" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TapTinVanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VanBanId" Type="int" Nullable="false" />
+          <Property Name="UserUploadId" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TapTinYKienCoQuan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YKiencoQuanTacNghiepId" Type="int" Nullable="false" />
+          <Property Name="UserUploadId" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ThuTuc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaThuTuc" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="NgayBanHanh" Type="datetime" />
+          <Property Name="TenThuTuc" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="CoQuanThucHienId" Type="int" Nullable="false" />
+          <Property Name="LoaiThuTucId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoVaTen" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ChucVuId" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="IsLocked" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="VanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SoVanBan" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="TenVanBan" Type="nvarchar" MaxLength="1024" Nullable="false" />
+          <Property Name="NgayBanHanh" Type="datetime" Nullable="false" />
+          <Property Name="CoQuanBanHanhId" Type="int" Nullable="false" />
+          <Property Name="LoaiVanBanId" Type="int" Nullable="false" />
+          <Property Name="LinhVucVanBanId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_CongViec_PhoiHop_HoSoCongViec">
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="1" />
+          <End Role="CongViec_PhoiHop" Type="Self.CongViec_PhoiHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoSoCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CongViec_PhoiHop">
+              <PropertyRef Name="HoSoCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CongViec_PhoiHop_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CongViec_PhoiHop" Type="Self.CongViec_PhoiHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CongViec_PhoiHop">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CongViec_QuaTrinhXuLy_HoSoCongViec">
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="1" />
+          <End Role="CongViec_QuaTrinhXuLy" Type="Self.CongViec_QuaTrinhXuLy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoSoCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CongViec_QuaTrinhXuLy">
+              <PropertyRef Name="HoSoCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CongViec_VanBan_HoSoCongViec">
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="1" />
+          <End Role="CongViec_VanBan" Type="Self.CongViec_VanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoSoCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CongViec_VanBan">
+              <PropertyRef Name="HoSoCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoQuan_NhomCoQuan">
+          <End Role="NhomCoQuan" Type="Self.NhomCoQuan" Multiplicity="1" />
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhomCoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoQuan">
+              <PropertyRef Name="NhomCoQuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoSoCongViec_LinhVucCongViec">
+          <End Role="LinhVucCongViec" Type="Self.LinhVucCongViec" Multiplicity="1" />
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVucCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoCongViec">
+              <PropertyRef Name="LinhVucCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoSoCongViec_UserPhuTrach">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoCongViec">
+              <PropertyRef Name="UserPhuTrachId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoSoCongViec_UserXuLyChinh">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoCongViec">
+              <PropertyRef Name="UserXuLyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_CoQuanLienQuan_CoQuan">
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="1" />
+          <End Role="TacNghiep_CoQuanLienQuan" Type="Self.TacNghiep_CoQuanLienQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_CoQuanLienQuan">
+              <PropertyRef Name="CoQuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_CoQuanLienQuan_TacNghiep">
+          <End Role="TacNghiep" Type="Self.TacNghiep" Multiplicity="1" />
+          <End Role="TacNghiep_CoQuanLienQuan" Type="Self.TacNghiep_CoQuanLienQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacNghiep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_CoQuanLienQuan">
+              <PropertyRef Name="TacNghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_TinhHinhThucHien_CoQuan">
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="1" />
+          <End Role="TacNghiep_TinhHinhThucHien" Type="Self.TacNghiep_TinhHinhThucHien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_TinhHinhThucHien">
+              <PropertyRef Name="CoQuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_TinhHinhThucHien_TacNghiep">
+          <End Role="TacNghiep" Type="Self.TacNghiep" Multiplicity="1" />
+          <End Role="TacNghiep_TinhHinhThucHien" Type="Self.TacNghiep_TinhHinhThucHien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacNghiep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_TinhHinhThucHien">
+              <PropertyRef Name="TacNghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_YKienCoQuan_CoQuan">
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="1" />
+          <End Role="TacNghiep_YKienCoQuan" Type="Self.TacNghiep_YKienCoQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_YKienCoQuan">
+              <PropertyRef Name="CoQuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_YKienCoQuan_TacNghiep">
+          <End Role="TacNghiep" Type="Self.TacNghiep" Multiplicity="1" />
+          <End Role="TacNghiep_YKienCoQuan" Type="Self.TacNghiep_YKienCoQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacNghiep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_YKienCoQuan">
+              <PropertyRef Name="TacNghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinCongViec_HoSoCongViec">
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="1" />
+          <End Role="TapTinCongViec" Type="Self.TapTinCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoSoCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinCongViec">
+              <PropertyRef Name="HoSoCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinCongViec_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TapTinCongViec" Type="Self.TapTinCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinCongViec">
+              <PropertyRef Name="UserUploadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinTacNghiep_TacNghiep">
+          <End Role="TacNghiep" Type="Self.TacNghiep" Multiplicity="1" />
+          <End Role="TapTinTacNghiep" Type="Self.TapTinTacNghiep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacNghiep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinTacNghiep">
+              <PropertyRef Name="TacNghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinTacNghiep_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TapTinTacNghiep" Type="Self.TapTinTacNghiep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinTacNghiep">
+              <PropertyRef Name="UserUploadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinThuTuc_ThuTuc">
+          <End Role="ThuTuc" Type="Self.ThuTuc" Multiplicity="1" />
+          <End Role="TapTinThuTuc" Type="Self.TapTinThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThuTuc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinThuTuc">
+              <PropertyRef Name="ThuTucId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinThuTuc_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TapTinThuTuc" Type="Self.TapTinThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinThuTuc">
+              <PropertyRef Name="UserUploadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinVanBan_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TapTinVanBan" Type="Self.TapTinVanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinVanBan">
+              <PropertyRef Name="UserUploadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinVanBan_VanBan">
+          <End Role="VanBan" Type="Self.VanBan" Multiplicity="1" />
+          <End Role="TapTinVanBan" Type="Self.TapTinVanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VanBan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinVanBan">
+              <PropertyRef Name="VanBanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan">
+          <End Role="TacNghiep_YKienCoQuan" Type="Self.TacNghiep_YKienCoQuan" Multiplicity="1" />
+          <End Role="TapTinYKienCoQuan" Type="Self.TapTinYKienCoQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacNghiep_YKienCoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinYKienCoQuan">
+              <PropertyRef Name="YKiencoQuanTacNghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinYKienCoQuan_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TapTinYKienCoQuan" Type="Self.TapTinYKienCoQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinYKienCoQuan">
+              <PropertyRef Name="UserUploadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThuTuc_CoQuan">
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="1" />
+          <End Role="ThuTuc" Type="Self.ThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThuTuc">
+              <PropertyRef Name="CoQuanThucHienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThuTuc_LinhVucThuTuc">
+          <End Role="LinhVucThuTuc" Type="Self.LinhVucThuTuc" Multiplicity="1" />
+          <End Role="ThuTuc" Type="Self.ThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVucThuTuc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThuTuc">
+              <PropertyRef Name="LoaiThuTucId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_ChucVu">
+          <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChucVu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ChucVuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VanBan_CoQuan">
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="1" />
+          <End Role="VanBan" Type="Self.VanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VanBan">
+              <PropertyRef Name="CoQuanBanHanhId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VanBan_LinhVucVanBan">
+          <End Role="LinhVucVanBan" Type="Self.LinhVucVanBan" Multiplicity="1" />
+          <End Role="VanBan" Type="Self.VanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVucVanBan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VanBan">
+              <PropertyRef Name="LinhVucVanBanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VanBan_LoaiVanBan">
+          <End Role="LoaiVanBan" Type="Self.LoaiVanBan" Multiplicity="1" />
+          <End Role="VanBan" Type="Self.VanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiVanBan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VanBan">
+              <PropertyRef Name="LoaiVanBanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TechOfficeDevModelStoreContainer">
+          <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CongViec_PhoiHop" EntityType="Self.CongViec_PhoiHop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CongViec_QuaTrinhXuLy" EntityType="Self.CongViec_QuaTrinhXuLy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CongViec_VanBan" EntityType="Self.CongViec_VanBan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoQuan" EntityType="Self.CoQuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HoSoCongViec" EntityType="Self.HoSoCongViec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinhVucCongViec" EntityType="Self.LinhVucCongViec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinhVucThuTuc" EntityType="Self.LinhVucThuTuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinhVucVanBan" EntityType="Self.LinhVucVanBan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiVanBan" EntityType="Self.LoaiVanBan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MucDoHoanThanh" EntityType="Self.MucDoHoanThanh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MucTin" EntityType="Self.MucTin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhomCoQuan" EntityType="Self.NhomCoQuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TacNghiep" EntityType="Self.TacNghiep" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TacNghiep_CoQuanLienQuan" EntityType="Self.TacNghiep_CoQuanLienQuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TacNghiep_TinhHinhThucHien" EntityType="Self.TacNghiep_TinhHinhThucHien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TacNghiep_YKienCoQuan" EntityType="Self.TacNghiep_YKienCoQuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TapTinCongViec" EntityType="Self.TapTinCongViec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TapTinTacNghiep" EntityType="Self.TapTinTacNghiep" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TapTinThuTuc" EntityType="Self.TapTinThuTuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TapTinVanBan" EntityType="Self.TapTinVanBan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TapTinYKienCoQuan" EntityType="Self.TapTinYKienCoQuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThuTuc" EntityType="Self.ThuTuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VanBan" EntityType="Self.VanBan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CongViec_PhoiHop_HoSoCongViec" Association="Self.FK_CongViec_PhoiHop_HoSoCongViec">
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
+            <End Role="CongViec_PhoiHop" EntitySet="CongViec_PhoiHop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CongViec_PhoiHop_User" Association="Self.FK_CongViec_PhoiHop_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CongViec_PhoiHop" EntitySet="CongViec_PhoiHop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CongViec_QuaTrinhXuLy_HoSoCongViec" Association="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec">
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
+            <End Role="CongViec_QuaTrinhXuLy" EntitySet="CongViec_QuaTrinhXuLy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CongViec_VanBan_HoSoCongViec" Association="Self.FK_CongViec_VanBan_HoSoCongViec">
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
+            <End Role="CongViec_VanBan" EntitySet="CongViec_VanBan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoQuan_NhomCoQuan" Association="Self.FK_CoQuan_NhomCoQuan">
+            <End Role="NhomCoQuan" EntitySet="NhomCoQuan" />
+            <End Role="CoQuan" EntitySet="CoQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoSoCongViec_LinhVucCongViec" Association="Self.FK_HoSoCongViec_LinhVucCongViec">
+            <End Role="LinhVucCongViec" EntitySet="LinhVucCongViec" />
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoSoCongViec_UserPhuTrach" Association="Self.FK_HoSoCongViec_UserPhuTrach">
+            <End Role="User" EntitySet="User" />
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoSoCongViec_UserXuLyChinh" Association="Self.FK_HoSoCongViec_UserXuLyChinh">
+            <End Role="User" EntitySet="User" />
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_CoQuan" Association="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan">
+            <End Role="CoQuan" EntitySet="CoQuan" />
+            <End Role="TacNghiep_CoQuanLienQuan" EntitySet="TacNghiep_CoQuanLienQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_TacNghiep" Association="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep">
+            <End Role="TacNghiep" EntitySet="TacNghiep" />
+            <End Role="TacNghiep_CoQuanLienQuan" EntitySet="TacNghiep_CoQuanLienQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_CoQuan" Association="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan">
+            <End Role="CoQuan" EntitySet="CoQuan" />
+            <End Role="TacNghiep_TinhHinhThucHien" EntitySet="TacNghiep_TinhHinhThucHien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_TacNghiep" Association="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep">
+            <End Role="TacNghiep" EntitySet="TacNghiep" />
+            <End Role="TacNghiep_TinhHinhThucHien" EntitySet="TacNghiep_TinhHinhThucHien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_YKienCoQuan_CoQuan" Association="Self.FK_TacNghiep_YKienCoQuan_CoQuan">
+            <End Role="CoQuan" EntitySet="CoQuan" />
+            <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_YKienCoQuan_TacNghiep" Association="Self.FK_TacNghiep_YKienCoQuan_TacNghiep">
+            <End Role="TacNghiep" EntitySet="TacNghiep" />
+            <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinCongViec_HoSoCongViec" Association="Self.FK_TapTinCongViec_HoSoCongViec">
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
+            <End Role="TapTinCongViec" EntitySet="TapTinCongViec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinCongViec_User" Association="Self.FK_TapTinCongViec_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TapTinCongViec" EntitySet="TapTinCongViec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinTacNghiep_TacNghiep" Association="Self.FK_TapTinTacNghiep_TacNghiep">
+            <End Role="TacNghiep" EntitySet="TacNghiep" />
+            <End Role="TapTinTacNghiep" EntitySet="TapTinTacNghiep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinTacNghiep_User" Association="Self.FK_TapTinTacNghiep_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TapTinTacNghiep" EntitySet="TapTinTacNghiep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinThuTuc_ThuTuc" Association="Self.FK_TapTinThuTuc_ThuTuc">
+            <End Role="ThuTuc" EntitySet="ThuTuc" />
+            <End Role="TapTinThuTuc" EntitySet="TapTinThuTuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinThuTuc_User" Association="Self.FK_TapTinThuTuc_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TapTinThuTuc" EntitySet="TapTinThuTuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinVanBan_User" Association="Self.FK_TapTinVanBan_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TapTinVanBan" EntitySet="TapTinVanBan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinVanBan_VanBan" Association="Self.FK_TapTinVanBan_VanBan">
+            <End Role="VanBan" EntitySet="VanBan" />
+            <End Role="TapTinVanBan" EntitySet="TapTinVanBan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" Association="Self.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan">
+            <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
+            <End Role="TapTinYKienCoQuan" EntitySet="TapTinYKienCoQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinYKienCoQuan_User" Association="Self.FK_TapTinYKienCoQuan_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TapTinYKienCoQuan" EntitySet="TapTinYKienCoQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThuTuc_CoQuan" Association="Self.FK_ThuTuc_CoQuan">
+            <End Role="CoQuan" EntitySet="CoQuan" />
+            <End Role="ThuTuc" EntitySet="ThuTuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThuTuc_LinhVucThuTuc" Association="Self.FK_ThuTuc_LinhVucThuTuc">
+            <End Role="LinhVucThuTuc" EntitySet="LinhVucThuTuc" />
+            <End Role="ThuTuc" EntitySet="ThuTuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_ChucVu" Association="Self.FK_User_ChucVu">
+            <End Role="ChucVu" EntitySet="ChucVu" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VanBan_CoQuan" Association="Self.FK_VanBan_CoQuan">
+            <End Role="CoQuan" EntitySet="CoQuan" />
+            <End Role="VanBan" EntitySet="VanBan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VanBan_LinhVucVanBan" Association="Self.FK_VanBan_LinhVucVanBan">
+            <End Role="LinhVucVanBan" EntitySet="LinhVucVanBan" />
+            <End Role="VanBan" EntitySet="VanBan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VanBan_LoaiVanBan" Association="Self.FK_VanBan_LoaiVanBan">
+            <End Role="LoaiVanBan" EntitySet="LoaiVanBan" />
+            <End Role="VanBan" EntitySet="VanBan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TechOfficeDevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ChucVu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_ChucVu" FromRole="ChucVu" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CongViec_PhoiHop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="HoSoCongViecId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_CongViec_PhoiHop_HoSoCongViec" FromRole="CongViec_PhoiHop" ToRole="HoSoCongViec" />
+          <NavigationProperty Name="User" Relationship="Self.FK_CongViec_PhoiHop_User" FromRole="CongViec_PhoiHop" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CongViec_QuaTrinhXuLy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GioBanHanh" Type="Byte" Nullable="false" />
+          <Property Name="PhutBanHanh" Type="Byte" Nullable="false" />
+          <Property Name="NgayBanHanh" Type="DateTime" Precision="0" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NguoiThem" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="NhacNho" Type="Byte" />
+          <Property Name="HoSoCongViecId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec" FromRole="CongViec_QuaTrinhXuLy" ToRole="HoSoCongViec" />
+        </EntityType>
+        <EntityType Name="CongViec_VanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoSoCongViecId" Type="Int32" Nullable="false" />
+          <Property Name="SoVanBan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgayBanHanh" Type="DateTime" Precision="3" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TenCoQuan" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_CongViec_VanBan_HoSoCongViec" FromRole="CongViec_VanBan" ToRole="HoSoCongViec" />
+        </EntityType>
+        <EntityType Name="CoQuan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NhomCoQuanId" Type="Int32" Nullable="false" />
+          <Property Name="Ten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NhomCoQuan" Relationship="Self.FK_CoQuan_NhomCoQuan" FromRole="CoQuan" ToRole="NhomCoQuan" />
+          <NavigationProperty Name="TacNghiep_CoQuanLienQuan" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan" FromRole="CoQuan" ToRole="TacNghiep_CoQuanLienQuan" />
+          <NavigationProperty Name="TacNghiep_TinhHinhThucHien" Relationship="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan" FromRole="CoQuan" ToRole="TacNghiep_TinhHinhThucHien" />
+          <NavigationProperty Name="TacNghiep_YKienCoQuan" Relationship="Self.FK_TacNghiep_YKienCoQuan_CoQuan" FromRole="CoQuan" ToRole="TacNghiep_YKienCoQuan" />
+          <NavigationProperty Name="ThuTucs" Relationship="Self.FK_ThuTuc_CoQuan" FromRole="CoQuan" ToRole="ThuTuc" />
+          <NavigationProperty Name="VanBans" Relationship="Self.FK_VanBan_CoQuan" FromRole="CoQuan" ToRole="VanBan" />
+        </EntityType>
+        <EntityType Name="HoSoCongViec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayHetHan" Type="DateTime" Precision="3" />
+          <Property Name="UserPhuTrachId" Type="Int32" Nullable="false" />
+          <Property Name="UserXuLyId" Type="Int32" Nullable="false" />
+          <Property Name="LinhVucCongViecId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QuaTrinhXuLy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CongViec_PhoiHop" Relationship="Self.FK_CongViec_PhoiHop_HoSoCongViec" FromRole="HoSoCongViec" ToRole="CongViec_PhoiHop" />
+          <NavigationProperty Name="CongViec_QuaTrinhXuLy" Relationship="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec" FromRole="HoSoCongViec" ToRole="CongViec_QuaTrinhXuLy" />
+          <NavigationProperty Name="CongViec_VanBan" Relationship="Self.FK_CongViec_VanBan_HoSoCongViec" FromRole="HoSoCongViec" ToRole="CongViec_VanBan" />
+          <NavigationProperty Name="LinhVucCongViec" Relationship="Self.FK_HoSoCongViec_LinhVucCongViec" FromRole="HoSoCongViec" ToRole="LinhVucCongViec" />
+          <NavigationProperty Name="User" Relationship="Self.FK_HoSoCongViec_UserPhuTrach" FromRole="HoSoCongViec" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_HoSoCongViec_UserXuLyChinh" FromRole="HoSoCongViec" ToRole="User" />
+          <NavigationProperty Name="TapTinCongViecs" Relationship="Self.FK_TapTinCongViec_HoSoCongViec" FromRole="HoSoCongViec" ToRole="TapTinCongViec" />
+        </EntityType>
+        <EntityType Name="LinhVucCongViec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HoSoCongViecs" Relationship="Self.FK_HoSoCongViec_LinhVucCongViec" FromRole="LinhVucCongViec" ToRole="HoSoCongViec" />
+        </EntityType>
+        <EntityType Name="LinhVucThuTuc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ThuTucs" Relationship="Self.FK_ThuTuc_LinhVucThuTuc" FromRole="LinhVucThuTuc" ToRole="ThuTuc" />
+        </EntityType>
+        <EntityType Name="LoaiVanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VanBans" Relationship="Self.FK_VanBan_LoaiVanBan" FromRole="LoaiVanBan" ToRole="VanBan" />
+        </EntityType>
+        <EntityType Name="MucDoHoanThanh">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MucTin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NhomCoQuan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoQuans" Relationship="Self.FK_CoQuan_NhomCoQuan" FromRole="NhomCoQuan" ToRole="CoQuan" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GhiChu" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Role" FromRole="Role" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TacNghiep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayHetHan" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NgayHoanThanh" Type="DateTime" Precision="3" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NoiDungTraoDoi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TacNghiep_CoQuanLienQuan" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep" FromRole="TacNghiep" ToRole="TacNghiep_CoQuanLienQuan" />
+          <NavigationProperty Name="TacNghiep_TinhHinhThucHien" Relationship="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep" FromRole="TacNghiep" ToRole="TacNghiep_TinhHinhThucHien" />
+          <NavigationProperty Name="TacNghiep_YKienCoQuan" Relationship="Self.FK_TacNghiep_YKienCoQuan_TacNghiep" FromRole="TacNghiep" ToRole="TacNghiep_YKienCoQuan" />
+          <NavigationProperty Name="TapTinTacNghieps" Relationship="Self.FK_TapTinTacNghiep_TacNghiep" FromRole="TacNghiep" ToRole="TapTinTacNghiep" />
+        </EntityType>
+        <EntityType Name="TacNghiep_CoQuanLienQuan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TacNghiepId" Type="Int32" Nullable="false" />
+          <Property Name="CoQuanId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoQuan" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan" FromRole="TacNghiep_CoQuanLienQuan" ToRole="CoQuan" />
+          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep" FromRole="TacNghiep_CoQuanLienQuan" ToRole="TacNghiep" />
+        </EntityType>
+        <EntityType Name="TacNghiep_TinhHinhThucHien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TacNghiepId" Type="Int32" Nullable="false" />
+          <Property Name="CoQuanId" Type="Int32" Nullable="false" />
+          <Property Name="ThoiGian" Type="Int32" Nullable="false" />
+          <Property Name="MucDoHoanThanh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoQuan" Relationship="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan" FromRole="TacNghiep_TinhHinhThucHien" ToRole="CoQuan" />
+          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep" FromRole="TacNghiep_TinhHinhThucHien" ToRole="TacNghiep" />
+        </EntityType>
+        <EntityType Name="TacNghiep_YKienCoQuan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TacNghiepId" Type="Int32" Nullable="false" />
+          <Property Name="CoQuanId" Type="Int32" Nullable="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoQuan" Relationship="Self.FK_TacNghiep_YKienCoQuan_CoQuan" FromRole="TacNghiep_YKienCoQuan" ToRole="CoQuan" />
+          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TacNghiep_YKienCoQuan_TacNghiep" FromRole="TacNghiep_YKienCoQuan" ToRole="TacNghiep" />
+          <NavigationProperty Name="TapTinYKienCoQuans" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" FromRole="TacNghiep_YKienCoQuan" ToRole="TapTinYKienCoQuan" />
+        </EntityType>
+        <EntityType Name="TapTinCongViec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoSoCongViecId" Type="Int32" Nullable="false" />
+          <Property Name="UserUploadId" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_TapTinCongViec_HoSoCongViec" FromRole="TapTinCongViec" ToRole="HoSoCongViec" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TapTinCongViec_User" FromRole="TapTinCongViec" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TapTinTacNghiep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TacNghiepId" Type="Int32" Nullable="false" />
+          <Property Name="UserUploadId" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TapTinTacNghiep_TacNghiep" FromRole="TapTinTacNghiep" ToRole="TacNghiep" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TapTinTacNghiep_User" FromRole="TapTinTacNghiep" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TapTinThuTuc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ThuTucId" Type="Int32" Nullable="false" />
+          <Property Name="UserUploadId" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ThuTuc" Relationship="Self.FK_TapTinThuTuc_ThuTuc" FromRole="TapTinThuTuc" ToRole="ThuTuc" />
+          <NavigationProperty Name="User" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_User" FromRole="TapTinThuTuc" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TapTinVanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VanBanId" Type="Int32" Nullable="false" />
+          <Property Name="UserUploadId" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TapTinVanBan_User" FromRole="TapTinVanBan" ToRole="User" />
+          <NavigationProperty Name="VanBan" Relationship="Self.FK_TapTinVanBan_VanBan" FromRole="TapTinVanBan" ToRole="VanBan" />
+        </EntityType>
+        <EntityType Name="TapTinYKienCoQuan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YKiencoQuanTacNghiepId" Type="Int32" Nullable="false" />
+          <Property Name="UserUploadId" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TacNghiep_YKienCoQuan" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" FromRole="TapTinYKienCoQuan" ToRole="TacNghiep_YKienCoQuan" />
+          <NavigationProperty Name="User" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_User" FromRole="TapTinYKienCoQuan" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ThuTuc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaThuTuc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgayBanHanh" Type="DateTime" Precision="3" />
+          <Property Name="TenThuTuc" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CoQuanThucHienId" Type="Int32" Nullable="false" />
+          <Property Name="LoaiThuTucId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoQuan" Relationship="Self.FK_ThuTuc_CoQuan" FromRole="ThuTuc" ToRole="CoQuan" />
+          <NavigationProperty Name="LinhVucThuTuc" Relationship="Self.FK_ThuTuc_LinhVucThuTuc" FromRole="ThuTuc" ToRole="LinhVucThuTuc" />
+          <NavigationProperty Name="TapTinThuTucs" Relationship="Self.FK_TapTinThuTuc_ThuTuc" FromRole="ThuTuc" ToRole="TapTinThuTuc" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoVaTen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChucVuId" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsLocked" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChucVu" Relationship="Self.FK_User_ChucVu" FromRole="User" ToRole="ChucVu" />
+          <NavigationProperty Name="CongViec_PhoiHop" Relationship="Self.FK_CongViec_PhoiHop_User" FromRole="User" ToRole="CongViec_PhoiHop" />
+          <NavigationProperty Name="HoSoCongViecs" Relationship="Self.FK_HoSoCongViec_UserPhuTrach" FromRole="User" ToRole="HoSoCongViec" />
+          <NavigationProperty Name="HoSoCongViecs1" Relationship="Self.FK_HoSoCongViec_UserXuLyChinh" FromRole="User" ToRole="HoSoCongViec" />
+          <NavigationProperty Name="TapTinCongViecs" Relationship="Self.FK_TapTinCongViec_User" FromRole="User" ToRole="TapTinCongViec" />
+          <NavigationProperty Name="TapTinTacNghieps" Relationship="Self.FK_TapTinTacNghiep_User" FromRole="User" ToRole="TapTinTacNghiep" />
+          <NavigationProperty Name="TapTinVanBans" Relationship="Self.FK_TapTinVanBan_User" FromRole="User" ToRole="TapTinVanBan" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
+          <NavigationProperty Name="TapTinYKienCoQuans" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_User" FromRole="User" ToRole="TapTinYKienCoQuan" />
+          <NavigationProperty Name="TapTinThuTucs" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_User" FromRole="User" ToRole="TapTinThuTuc" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_UserRole_Role" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserRole_User" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <EntityType Name="VanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SoVanBan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenVanBan" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgayBanHanh" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CoQuanBanHanhId" Type="Int32" Nullable="false" />
+          <Property Name="LoaiVanBanId" Type="Int32" Nullable="false" />
+          <Property Name="LinhVucVanBanId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoQuan" Relationship="Self.FK_VanBan_CoQuan" FromRole="VanBan" ToRole="CoQuan" />
+          <NavigationProperty Name="LoaiVanBan" Relationship="Self.FK_VanBan_LoaiVanBan" FromRole="VanBan" ToRole="LoaiVanBan" />
+          <NavigationProperty Name="TapTinVanBans" Relationship="Self.FK_TapTinVanBan_VanBan" FromRole="VanBan" ToRole="TapTinVanBan" />
+          <NavigationProperty Name="LinhVucVanBan" Relationship="TechOfficeDevModel.FK_VanBan_LinhVucVanBan" FromRole="VanBan" ToRole="LinhVucVanBan" />
+        </EntityType>
+        <Association Name="FK_User_ChucVu">
+          <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChucVu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ChucVuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CongViec_PhoiHop_HoSoCongViec">
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="1" />
+          <End Role="CongViec_PhoiHop" Type="Self.CongViec_PhoiHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoSoCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CongViec_PhoiHop">
+              <PropertyRef Name="HoSoCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CongViec_PhoiHop_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CongViec_PhoiHop" Type="Self.CongViec_PhoiHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CongViec_PhoiHop">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CongViec_QuaTrinhXuLy_HoSoCongViec">
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="1" />
+          <End Role="CongViec_QuaTrinhXuLy" Type="Self.CongViec_QuaTrinhXuLy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoSoCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CongViec_QuaTrinhXuLy">
+              <PropertyRef Name="HoSoCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CongViec_VanBan_HoSoCongViec">
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="1" />
+          <End Role="CongViec_VanBan" Type="Self.CongViec_VanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoSoCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CongViec_VanBan">
+              <PropertyRef Name="HoSoCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoQuan_NhomCoQuan">
+          <End Role="NhomCoQuan" Type="Self.NhomCoQuan" Multiplicity="1" />
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhomCoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoQuan">
+              <PropertyRef Name="NhomCoQuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_CoQuanLienQuan_CoQuan">
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="1" />
+          <End Role="TacNghiep_CoQuanLienQuan" Type="Self.TacNghiep_CoQuanLienQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_CoQuanLienQuan">
+              <PropertyRef Name="CoQuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_TinhHinhThucHien_CoQuan">
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="1" />
+          <End Role="TacNghiep_TinhHinhThucHien" Type="Self.TacNghiep_TinhHinhThucHien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_TinhHinhThucHien">
+              <PropertyRef Name="CoQuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_YKienCoQuan_CoQuan">
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="1" />
+          <End Role="TacNghiep_YKienCoQuan" Type="Self.TacNghiep_YKienCoQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_YKienCoQuan">
+              <PropertyRef Name="CoQuanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThuTuc_CoQuan">
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="1" />
+          <End Role="ThuTuc" Type="Self.ThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThuTuc">
+              <PropertyRef Name="CoQuanThucHienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VanBan_CoQuan">
+          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="1" />
+          <End Role="VanBan" Type="Self.VanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VanBan">
+              <PropertyRef Name="CoQuanBanHanhId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoSoCongViec_LinhVucCongViec">
+          <End Role="LinhVucCongViec" Type="Self.LinhVucCongViec" Multiplicity="1" />
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVucCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoCongViec">
+              <PropertyRef Name="LinhVucCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoSoCongViec_UserPhuTrach">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoCongViec">
+              <PropertyRef Name="UserPhuTrachId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoSoCongViec_UserXuLyChinh">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoCongViec">
+              <PropertyRef Name="UserXuLyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinCongViec_HoSoCongViec">
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="1" />
+          <End Role="TapTinCongViec" Type="Self.TapTinCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoSoCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinCongViec">
+              <PropertyRef Name="HoSoCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThuTuc_LinhVucThuTuc">
+          <End Role="LinhVucThuTuc" Type="Self.LinhVucThuTuc" Multiplicity="1" />
+          <End Role="ThuTuc" Type="Self.ThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVucThuTuc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThuTuc">
+              <PropertyRef Name="LoaiThuTucId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VanBan_LoaiVanBan">
+          <End Role="LoaiVanBan" Type="Self.LoaiVanBan" Multiplicity="1" />
+          <End Role="VanBan" Type="Self.VanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiVanBan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VanBan">
+              <PropertyRef Name="LoaiVanBanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_CoQuanLienQuan_TacNghiep">
+          <End Role="TacNghiep" Type="Self.TacNghiep" Multiplicity="1" />
+          <End Role="TacNghiep_CoQuanLienQuan" Type="Self.TacNghiep_CoQuanLienQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacNghiep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_CoQuanLienQuan">
+              <PropertyRef Name="TacNghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_TinhHinhThucHien_TacNghiep">
+          <End Role="TacNghiep" Type="Self.TacNghiep" Multiplicity="1" />
+          <End Role="TacNghiep_TinhHinhThucHien" Type="Self.TacNghiep_TinhHinhThucHien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacNghiep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_TinhHinhThucHien">
+              <PropertyRef Name="TacNghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_YKienCoQuan_TacNghiep">
+          <End Role="TacNghiep" Type="Self.TacNghiep" Multiplicity="1" />
+          <End Role="TacNghiep_YKienCoQuan" Type="Self.TacNghiep_YKienCoQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacNghiep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep_YKienCoQuan">
+              <PropertyRef Name="TacNghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinTacNghiep_TacNghiep">
+          <End Role="TacNghiep" Type="Self.TacNghiep" Multiplicity="1" />
+          <End Role="TapTinTacNghiep" Type="Self.TapTinTacNghiep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacNghiep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinTacNghiep">
+              <PropertyRef Name="TacNghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinCongViec_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TapTinCongViec" Type="Self.TapTinCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinCongViec">
+              <PropertyRef Name="UserUploadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinTacNghiep_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TapTinTacNghiep" Type="Self.TapTinTacNghiep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinTacNghiep">
+              <PropertyRef Name="UserUploadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinThuTuc_ThuTuc">
+          <End Role="ThuTuc" Type="Self.ThuTuc" Multiplicity="1" />
+          <End Role="TapTinThuTuc" Type="Self.TapTinThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThuTuc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinThuTuc">
+              <PropertyRef Name="ThuTucId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinVanBan_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TapTinVanBan" Type="Self.TapTinVanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinVanBan">
+              <PropertyRef Name="UserUploadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinVanBan_VanBan">
+          <End Role="VanBan" Type="Self.VanBan" Multiplicity="1" />
+          <End Role="TapTinVanBan" Type="Self.TapTinVanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VanBan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinVanBan">
+              <PropertyRef Name="VanBanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TechOfficeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChucVus" EntityType="Self.ChucVu" />
+          <EntitySet Name="CongViec_PhoiHop" EntityType="Self.CongViec_PhoiHop" />
+          <EntitySet Name="CongViec_QuaTrinhXuLy" EntityType="Self.CongViec_QuaTrinhXuLy" />
+          <EntitySet Name="CongViec_VanBan" EntityType="Self.CongViec_VanBan" />
+          <EntitySet Name="CoQuans" EntityType="Self.CoQuan" />
+          <EntitySet Name="HoSoCongViecs" EntityType="Self.HoSoCongViec" />
+          <EntitySet Name="LinhVucCongViecs" EntityType="Self.LinhVucCongViec" />
+          <EntitySet Name="LinhVucThuTucs" EntityType="Self.LinhVucThuTuc" />
+          <EntitySet Name="LoaiVanBans" EntityType="Self.LoaiVanBan" />
+          <EntitySet Name="MucDoHoanThanhs" EntityType="Self.MucDoHoanThanh" />
+          <EntitySet Name="MucTins" EntityType="Self.MucTin" />
+          <EntitySet Name="NhomCoQuans" EntityType="Self.NhomCoQuan" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TacNghieps" EntityType="Self.TacNghiep" />
+          <EntitySet Name="TacNghiep_CoQuanLienQuan" EntityType="Self.TacNghiep_CoQuanLienQuan" />
+          <EntitySet Name="TacNghiep_TinhHinhThucHien" EntityType="Self.TacNghiep_TinhHinhThucHien" />
+          <EntitySet Name="TacNghiep_YKienCoQuan" EntityType="Self.TacNghiep_YKienCoQuan" />
+          <EntitySet Name="TapTinCongViecs" EntityType="Self.TapTinCongViec" />
+          <EntitySet Name="TapTinTacNghieps" EntityType="Self.TapTinTacNghiep" />
+          <EntitySet Name="TapTinThuTucs" EntityType="Self.TapTinThuTuc" />
+          <EntitySet Name="TapTinVanBans" EntityType="Self.TapTinVanBan" />
+          <EntitySet Name="TapTinYKienCoQuans" EntityType="Self.TapTinYKienCoQuan" />
+          <EntitySet Name="ThuTucs" EntityType="Self.ThuTuc" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="VanBans" EntityType="Self.VanBan" />
+          <AssociationSet Name="FK_User_ChucVu" Association="Self.FK_User_ChucVu">
+            <End Role="ChucVu" EntitySet="ChucVus" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CongViec_PhoiHop_HoSoCongViec" Association="Self.FK_CongViec_PhoiHop_HoSoCongViec">
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
+            <End Role="CongViec_PhoiHop" EntitySet="CongViec_PhoiHop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CongViec_PhoiHop_User" Association="Self.FK_CongViec_PhoiHop_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CongViec_PhoiHop" EntitySet="CongViec_PhoiHop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CongViec_QuaTrinhXuLy_HoSoCongViec" Association="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec">
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
+            <End Role="CongViec_QuaTrinhXuLy" EntitySet="CongViec_QuaTrinhXuLy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CongViec_VanBan_HoSoCongViec" Association="Self.FK_CongViec_VanBan_HoSoCongViec">
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
+            <End Role="CongViec_VanBan" EntitySet="CongViec_VanBan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoQuan_NhomCoQuan" Association="Self.FK_CoQuan_NhomCoQuan">
+            <End Role="NhomCoQuan" EntitySet="NhomCoQuans" />
+            <End Role="CoQuan" EntitySet="CoQuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_CoQuan" Association="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan">
+            <End Role="CoQuan" EntitySet="CoQuans" />
+            <End Role="TacNghiep_CoQuanLienQuan" EntitySet="TacNghiep_CoQuanLienQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_CoQuan" Association="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan">
+            <End Role="CoQuan" EntitySet="CoQuans" />
+            <End Role="TacNghiep_TinhHinhThucHien" EntitySet="TacNghiep_TinhHinhThucHien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_YKienCoQuan_CoQuan" Association="Self.FK_TacNghiep_YKienCoQuan_CoQuan">
+            <End Role="CoQuan" EntitySet="CoQuans" />
+            <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThuTuc_CoQuan" Association="Self.FK_ThuTuc_CoQuan">
+            <End Role="CoQuan" EntitySet="CoQuans" />
+            <End Role="ThuTuc" EntitySet="ThuTucs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VanBan_CoQuan" Association="Self.FK_VanBan_CoQuan">
+            <End Role="CoQuan" EntitySet="CoQuans" />
+            <End Role="VanBan" EntitySet="VanBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoSoCongViec_LinhVucCongViec" Association="Self.FK_HoSoCongViec_LinhVucCongViec">
+            <End Role="LinhVucCongViec" EntitySet="LinhVucCongViecs" />
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoSoCongViec_UserPhuTrach" Association="Self.FK_HoSoCongViec_UserPhuTrach">
+            <End Role="User" EntitySet="Users" />
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoSoCongViec_UserXuLyChinh" Association="Self.FK_HoSoCongViec_UserXuLyChinh">
+            <End Role="User" EntitySet="Users" />
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinCongViec_HoSoCongViec" Association="Self.FK_TapTinCongViec_HoSoCongViec">
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
+            <End Role="TapTinCongViec" EntitySet="TapTinCongViecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThuTuc_LinhVucThuTuc" Association="Self.FK_ThuTuc_LinhVucThuTuc">
+            <End Role="LinhVucThuTuc" EntitySet="LinhVucThuTucs" />
+            <End Role="ThuTuc" EntitySet="ThuTucs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VanBan_LoaiVanBan" Association="Self.FK_VanBan_LoaiVanBan">
+            <End Role="LoaiVanBan" EntitySet="LoaiVanBans" />
+            <End Role="VanBan" EntitySet="VanBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_TacNghiep" Association="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep">
+            <End Role="TacNghiep" EntitySet="TacNghieps" />
+            <End Role="TacNghiep_CoQuanLienQuan" EntitySet="TacNghiep_CoQuanLienQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_TacNghiep" Association="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep">
+            <End Role="TacNghiep" EntitySet="TacNghieps" />
+            <End Role="TacNghiep_TinhHinhThucHien" EntitySet="TacNghiep_TinhHinhThucHien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_YKienCoQuan_TacNghiep" Association="Self.FK_TacNghiep_YKienCoQuan_TacNghiep">
+            <End Role="TacNghiep" EntitySet="TacNghieps" />
+            <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinTacNghiep_TacNghiep" Association="Self.FK_TapTinTacNghiep_TacNghiep">
+            <End Role="TacNghiep" EntitySet="TacNghieps" />
+            <End Role="TapTinTacNghiep" EntitySet="TapTinTacNghieps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinCongViec_User" Association="Self.FK_TapTinCongViec_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TapTinCongViec" EntitySet="TapTinCongViecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinTacNghiep_User" Association="Self.FK_TapTinTacNghiep_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TapTinTacNghiep" EntitySet="TapTinTacNghieps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinThuTuc_ThuTuc" Association="Self.FK_TapTinThuTuc_ThuTuc">
+            <End Role="ThuTuc" EntitySet="ThuTucs" />
+            <End Role="TapTinThuTuc" EntitySet="TapTinThuTucs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinVanBan_User" Association="Self.FK_TapTinVanBan_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TapTinVanBan" EntitySet="TapTinVanBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinVanBan_VanBan" Association="Self.FK_TapTinVanBan_VanBan">
+            <End Role="VanBan" EntitySet="VanBans" />
+            <End Role="TapTinVanBan" EntitySet="TapTinVanBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan">
+            <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
+            <End Role="TapTinYKienCoQuan" EntitySet="TapTinYKienCoQuans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinYKienCoQuan_User" Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TapTinYKienCoQuan" EntitySet="TapTinYKienCoQuans" />
+          </AssociationSet>
+          <EntitySet Name="LinhVucVanBans" EntityType="TechOfficeDevModel.LinhVucVanBan" />
+          <AssociationSet Name="FK_VanBan_LinhVucVanBan" Association="TechOfficeDevModel.FK_VanBan_LinhVucVanBan">
+            <End Role="LinhVucVanBan" EntitySet="LinhVucVanBans" />
+            <End Role="VanBan" EntitySet="VanBans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinThuTuc_User" Association="TechOfficeDevModel.FK_TapTinThuTuc_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TapTinThuTuc" EntitySet="TapTinThuTucs" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan">
+          <End Type="TechOfficeDevModel.TacNghiep_YKienCoQuan" Role="TacNghiep_YKienCoQuan" Multiplicity="1" />
+          <End Type="TechOfficeDevModel.TapTinYKienCoQuan" Role="TapTinYKienCoQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacNghiep_YKienCoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinYKienCoQuan">
+              <PropertyRef Name="YKiencoQuanTacNghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinYKienCoQuan_User">
+          <End Type="TechOfficeDevModel.User" Role="User" Multiplicity="1" />
+          <End Type="TechOfficeDevModel.TapTinYKienCoQuan" Role="TapTinYKienCoQuan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinYKienCoQuan">
+              <PropertyRef Name="UserUploadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LinhVucVanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VanBans" Relationship="TechOfficeDevModel.FK_VanBan_LinhVucVanBan" FromRole="LinhVucVanBan" ToRole="VanBan" />
+        </EntityType>
+        <Association Name="FK_VanBan_LinhVucVanBan">
+          <End Type="TechOfficeDevModel.LinhVucVanBan" Role="LinhVucVanBan" Multiplicity="1" />
+          <End Type="TechOfficeDevModel.VanBan" Role="VanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVucVanBan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VanBan">
+              <PropertyRef Name="LinhVucVanBanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinThuTuc_User">
+          <End Type="TechOfficeDevModel.User" Role="User" Multiplicity="1" />
+          <End Type="TechOfficeDevModel.TapTinThuTuc" Role="TapTinThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinThuTuc">
+              <PropertyRef Name="UserUploadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TechOfficeDevModelStoreContainer" CdmEntityContainer="TechOfficeEntities">
+          <EntitySetMapping Name="ChucVus">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.ChucVu">
+              <MappingFragment StoreEntitySet="ChucVu">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CongViec_PhoiHop">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.CongViec_PhoiHop">
+              <MappingFragment StoreEntitySet="CongViec_PhoiHop">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="HoSoCongViecId" ColumnName="HoSoCongViecId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CongViec_QuaTrinhXuLy">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.CongViec_QuaTrinhXuLy">
+              <MappingFragment StoreEntitySet="CongViec_QuaTrinhXuLy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GioBanHanh" ColumnName="GioBanHanh" />
+                <ScalarProperty Name="PhutBanHanh" ColumnName="PhutBanHanh" />
+                <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="NguoiThem" ColumnName="NguoiThem" />
+                <ScalarProperty Name="NhacNho" ColumnName="NhacNho" />
+                <ScalarProperty Name="HoSoCongViecId" ColumnName="HoSoCongViecId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CongViec_VanBan">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.CongViec_VanBan">
+              <MappingFragment StoreEntitySet="CongViec_VanBan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HoSoCongViecId" ColumnName="HoSoCongViecId" />
+                <ScalarProperty Name="SoVanBan" ColumnName="SoVanBan" />
+                <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="TenCoQuan" ColumnName="TenCoQuan" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoQuans">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.CoQuan">
+              <MappingFragment StoreEntitySet="CoQuan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NhomCoQuanId" ColumnName="NhomCoQuanId" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HoSoCongViecs">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.HoSoCongViec">
+              <MappingFragment StoreEntitySet="HoSoCongViec">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NgayHetHan" ColumnName="NgayHetHan" />
+                <ScalarProperty Name="UserPhuTrachId" ColumnName="UserPhuTrachId" />
+                <ScalarProperty Name="UserXuLyId" ColumnName="UserXuLyId" />
+                <ScalarProperty Name="LinhVucCongViecId" ColumnName="LinhVucCongViecId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="QuaTrinhXuLy" ColumnName="QuaTrinhXuLy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinhVucCongViecs">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.LinhVucCongViec">
+              <MappingFragment StoreEntitySet="LinhVucCongViec">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinhVucThuTucs">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.LinhVucThuTuc">
+              <MappingFragment StoreEntitySet="LinhVucThuTuc">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiVanBans">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.LoaiVanBan">
+              <MappingFragment StoreEntitySet="LoaiVanBan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MucDoHoanThanhs">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.MucDoHoanThanh">
+              <MappingFragment StoreEntitySet="MucDoHoanThanh">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MucTins">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.MucTin">
+              <MappingFragment StoreEntitySet="MucTin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhomCoQuans">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.NhomCoQuan">
+              <MappingFragment StoreEntitySet="NhomCoQuan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TacNghieps">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.TacNghiep">
+              <MappingFragment StoreEntitySet="TacNghiep">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NgayHetHan" ColumnName="NgayHetHan" />
+                <ScalarProperty Name="NgayHoanThanh" ColumnName="NgayHoanThanh" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="NoiDungTraoDoi" ColumnName="NoiDungTraoDoi" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TacNghiep_CoQuanLienQuan">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.TacNghiep_CoQuanLienQuan">
+              <MappingFragment StoreEntitySet="TacNghiep_CoQuanLienQuan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TacNghiepId" ColumnName="TacNghiepId" />
+                <ScalarProperty Name="CoQuanId" ColumnName="CoQuanId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TacNghiep_TinhHinhThucHien">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.TacNghiep_TinhHinhThucHien">
+              <MappingFragment StoreEntitySet="TacNghiep_TinhHinhThucHien">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TacNghiepId" ColumnName="TacNghiepId" />
+                <ScalarProperty Name="CoQuanId" ColumnName="CoQuanId" />
+                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
+                <ScalarProperty Name="MucDoHoanThanh" ColumnName="MucDoHoanThanh" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TacNghiep_YKienCoQuan">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.TacNghiep_YKienCoQuan">
+              <MappingFragment StoreEntitySet="TacNghiep_YKienCoQuan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TacNghiepId" ColumnName="TacNghiepId" />
+                <ScalarProperty Name="CoQuanId" ColumnName="CoQuanId" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TapTinCongViecs">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.TapTinCongViec">
+              <MappingFragment StoreEntitySet="TapTinCongViec">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HoSoCongViecId" ColumnName="HoSoCongViecId" />
+                <ScalarProperty Name="UserUploadId" ColumnName="UserUploadId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TapTinTacNghieps">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.TapTinTacNghiep">
+              <MappingFragment StoreEntitySet="TapTinTacNghiep">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TacNghiepId" ColumnName="TacNghiepId" />
+                <ScalarProperty Name="UserUploadId" ColumnName="UserUploadId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TapTinThuTucs">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.TapTinThuTuc">
+              <MappingFragment StoreEntitySet="TapTinThuTuc">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ThuTucId" ColumnName="ThuTucId" />
+                <ScalarProperty Name="UserUploadId" ColumnName="UserUploadId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TapTinVanBans">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.TapTinVanBan">
+              <MappingFragment StoreEntitySet="TapTinVanBan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VanBanId" ColumnName="VanBanId" />
+                <ScalarProperty Name="UserUploadId" ColumnName="UserUploadId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TapTinYKienCoQuans">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.TapTinYKienCoQuan">
+              <MappingFragment StoreEntitySet="TapTinYKienCoQuan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="YKiencoQuanTacNghiepId" ColumnName="YKiencoQuanTacNghiepId" />
+                <ScalarProperty Name="UserUploadId" ColumnName="UserUploadId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThuTucs">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.ThuTuc">
+              <MappingFragment StoreEntitySet="ThuTuc">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaThuTuc" ColumnName="MaThuTuc" />
+                <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
+                <ScalarProperty Name="TenThuTuc" ColumnName="TenThuTuc" />
+                <ScalarProperty Name="CoQuanThucHienId" ColumnName="CoQuanThucHienId" />
+                <ScalarProperty Name="LoaiThuTucId" ColumnName="LoaiThuTucId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ChucVuId" ColumnName="ChucVuId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VanBans">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.VanBan">
+              <MappingFragment StoreEntitySet="VanBan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SoVanBan" ColumnName="SoVanBan" />
+                <ScalarProperty Name="TenVanBan" ColumnName="TenVanBan" />
+                <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
+                <ScalarProperty Name="CoQuanBanHanhId" ColumnName="CoQuanBanHanhId" />
+                <ScalarProperty Name="LoaiVanBanId" ColumnName="LoaiVanBanId" />
+                <ScalarProperty Name="LinhVucVanBanId" ColumnName="LinhVucVanBanId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinhVucVanBans">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.LinhVucVanBan">
+              <MappingFragment StoreEntitySet="LinhVucVanBan">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

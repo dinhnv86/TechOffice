@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +51,183 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChucVu.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CongViec_PhoiHop.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CongViec_QuaTrinhXuLy.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CongViec_VanBan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CoQuan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HelperExtension.cs" />
+    <Compile Include="HoSoCongViec.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataInfo.cs" />
+    <Compile Include="Infos\ChucVuInfo.cs" />
+    <Compile Include="Infos\CoQuanInfo.cs" />
+    <Compile Include="Infos\HoSoCongViecInfo.cs" />
+    <Compile Include="Infos\LinhVucThuTucInfo.cs" />
+    <Compile Include="Infos\LinhVucCongViecInfo.cs" />
+    <Compile Include="Infos\LinhVucVanBanInfo.cs" />
+    <Compile Include="Infos\LoaiVanBanInfo.cs" />
+    <Compile Include="Infos\NhomCoQuanInfo.cs" />
+    <Compile Include="Infos\RoleInfo.cs" />
+    <Compile Include="Infos\TacNghiepInfo.cs" />
+    <Compile Include="Infos\ThuTucInfo.cs" />
+    <Compile Include="Infos\UserInfo.cs" />
+    <Compile Include="Infos\VanBanInfo.cs" />
+    <Compile Include="Infos\YKienCoQuanInfo.cs" />
+    <Compile Include="KeyResult.cs" />
+    <Compile Include="LinhVucCongViec.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LinhVucThuTuc.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LinhVucVanBan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoaiVanBan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogResult.cs" />
+    <Compile Include="MucDoHoanThanh.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MucTin.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NhomCoQuan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BaseResult.cs" />
+    <Compile Include="BaseInfo.cs" />
+    <Compile Include="Results\ChucVuResult.cs" />
+    <Compile Include="Results\CongViecPhoiHopResult.cs" />
+    <Compile Include="Results\CongViecQuaTrinhXuLyResult.cs" />
+    <Compile Include="Results\CongViecVanBanResult.cs" />
+    <Compile Include="Results\CoQuanResult.cs" />
+    <Compile Include="DataResult.cs" />
+    <Compile Include="Results\HoSoCongViecResult.cs" />
+    <Compile Include="Results\LinhVucVanBanResult.cs" />
+    <Compile Include="Results\LinhVucThuTucResult.cs" />
+    <Compile Include="Results\LinhVucCongViecResult.cs" />
+    <Compile Include="Results\LoaiVanBanResult.cs" />
+    <Compile Include="Results\MucDoHoanThanhResult.cs" />
+    <Compile Include="Results\MucTinResult.cs" />
+    <Compile Include="Results\NhomCoQuanResult.cs" />
+    <Compile Include="Results\RoleResult.cs" />
+    <Compile Include="Results\TacNghiepCoQuanLienQuanResult.cs" />
+    <Compile Include="Results\TacNghiepResult.cs" />
+    <Compile Include="Results\TacNghiepTinhHinhThucHienResult.cs" />
+    <Compile Include="Results\TacNghiepYKienCoQuanResult.cs" />
+    <Compile Include="Results\TapTinCongViecResult.cs" />
+    <Compile Include="Results\TapTinYKienCoQuanResult.cs" />
+    <Compile Include="Results\TapTinVanBanResult.cs" />
+    <Compile Include="Results\TapTinThuTucResult.cs" />
+    <Compile Include="Results\TapTinTacNghiepResult.cs" />
+    <Compile Include="Results\ThuTucResult.cs" />
+    <Compile Include="Results\UserResult.cs" />
+    <Compile Include="Results\UserRole.cs" />
+    <Compile Include="Results\VanBanResult.cs" />
+    <Compile Include="Role.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TacNghiep.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TacNghiep_CoQuanLienQuan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TacNghiep_TinhHinhThucHien.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TacNghiep_YKienCoQuan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TapTinCongViec.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TapTinResult.cs" />
+    <Compile Include="TapTinTacNghiep.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TapTinThuTuc.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TapTinVanBan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TapTinYKienCoQuan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TechOfficeModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechOfficeModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TechOfficeModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TechOfficeModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechOfficeModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ThuTuc.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRole.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VanBan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="TechOfficeModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TechOfficeModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <None Include="TechOfficeModel.edmx.diagram">
+      <DependentUpon>TechOfficeModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TechOfficeModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TechOfficeModel.edmx</DependentUpon>
+      <LastGenOutput>TechOfficeModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="TechOfficeModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TechOfficeModel.edmx</DependentUpon>
+      <LastGenOutput>TechOfficeModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

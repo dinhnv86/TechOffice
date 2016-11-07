@@ -11,28 +11,30 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.Threading.Tasks;
 
 /// <summary>
 /// The Services namespace.
 /// </summary>
+
 namespace TechOffice.Services
 {
     /// <summary>
-    /// Interface IAdd
+    ///     Interface IAdd
     /// </summary>
     /// <typeparam name="TEntity">The type of the t entity.</typeparam>
     public interface IAdd<TEntity> where TEntity : class
     {
         /// <summary>
-        /// Adds the specified entity.
+        ///     Adds the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns></returns>
         SaveResult Add(TEntity entity);
 
         /// <summary>
-        /// Adds the asynchronous.
+        ///     Adds the asynchronous.
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns></returns>
