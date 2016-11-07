@@ -1,0 +1,100 @@
+﻿body {
+    overflow-x: hidden;
+    min-height: 100%;
+    background: #f3f5f6;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+div {
+    display: block;
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(-20px);
+        -ms-transform: translateX(-20px);
+        -moz-transform: translateX(-20px);
+        transform: translateX(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+#error > h1, #error > h2, #error > h3, #error > h4, #error > h5, #error > h6, #error > p {
+    font-family: 'Open Sans', sans-seriff;
+    color: #C33C2D;
+    font-weight: bold;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 50px;
+}
+
+    h1.error-number {
+        text-align: center;
+        font-size: 20em;
+    }
+
+#error > p, #error > h3 {
+    font-size: 3em;
+    display: block;
+    text-align: center;
+}
+
+#error > h3 {
+    animation-duration: 2s;
+    -o-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    -webkit-animation-duration: 2s;
+}
+
+#error > p {
+    margin-bottom: 20px;
+}
+
+#error > .fadeInLeft {
+    animation-name: fadeInLeft;
+    -moz-animation-name: fadeInLeft;
+    -o-animation-name: fadeInLeft;
+    -webkit-animation-name: fadeInLeft;
+}
+
+#error > .animated {
+    animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+}
+
+.text-center {
+    vertical-align: central;
+}
+/* ------------------ Small devices --------------------*/
+@media all and (max-width: 460px) {
+    h1.error-number {
+        font-size: 12em;
+    }
+
+    #error > h3, #error > p {
+        font-size: 2em;
+    }
+}
+
+/* ------------------ Small devices --------------------*/
+@media all and (max-width: 420px) {
+    h1.error-number {
+        font-size: 11em;
+    }
+}
