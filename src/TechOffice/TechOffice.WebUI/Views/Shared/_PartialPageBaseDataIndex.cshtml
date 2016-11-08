@@ -3,13 +3,13 @@
     ViewBag.Title = "Index";
 }
 
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <div class="row">
     <h2>@Model</h2>
-    <input type="button" class="btn btn-link" id="lnkCreateNew" value="Thêm mới"/>
+    <input type="button" class="btn btn-link" id="lnkCreateNew" value="Thêm mới" />
 
-    @*@{Html.RenderPartial("_PartialPageAlert");}*@
+    @{Html.RenderPartial("_PartialPageAlert");}
 
     @Html.Action("List")
 
@@ -18,7 +18,7 @@
             <div class="modal-content">
                 <div class="modal-header"></div>
                 <div class="modal-body">
-                    @*@{Html.RenderPartial("_PartialPageMSTCreate", new EBROnline.ViewModel.MSTViewModel());}*@
+                    @{Html.RenderPartial("_PartialPageBaseDataCreate", new AnThinhPhat.ViewModel.BaseDataViewModel());}
                 </div>
                 @*<div class="modal-footer"></div>*@
             </div>
@@ -37,7 +37,4 @@
             </div>
         </div>
     </div>
-
 </div>
-
-@*@{Html.RenderPartial("_PartialPageLoading");}*@

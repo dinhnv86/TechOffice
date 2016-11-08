@@ -31,5 +31,15 @@ namespace AnThinhPhat.WebUI.Controllers
             var pageNumber = page ?? 1;
             return PartialView(items.ToPagedList(pageNumber, TechOfficeConfig.PAGESIZE));
         }
+
+        [HttpPost]
+        public JsonResult Create()
+        {
+            return new JsonResult()
+            {
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                Data = new { code = "SB02" }
+            };
+        }
     }
 }

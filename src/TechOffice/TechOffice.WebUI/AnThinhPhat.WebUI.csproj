@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app\error.css" />
+    <Content Include="Content\app\loading.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -261,6 +262,7 @@
     <Content Include="images\slider1.jpg" />
     <Content Include="images\Tap-huan-doan.jpg" />
     <Content Include="images\tongdai.png" />
+    <Content Include="Scripts\app\modaljs.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="connectionStrings.config" />
@@ -324,13 +326,16 @@
     <Content Include="Views\ThuTuc\Index.cshtml" />
     <Content Include="Views\Intro\Index.cshtml" />
     <Content Include="Views\Intro\Chart.cshtml" />
-    <Content Include="Views\Shared\_PartialPageList.cshtml" />
+    <Content Include="Views\Shared\_PartialPageBaseDataList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DisplayDateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\ChucVu\Index.cshtml" />
-    <Content Include="Views\Shared\_PartialPageIndex.cshtml" />
+    <Content Include="Views\Shared\_PartialPageBaseDataIndex.cshtml" />
     <Content Include="Views\ChucVu\List.cshtml" />
+    <Content Include="Views\Shared\_PartialPageBaseDataCreate.cshtml" />
+    <Content Include="Views\Shared\_PartialPageAlert.cshtml" />
+    <Content Include="Views\Shared\_PartialPageLoading.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
