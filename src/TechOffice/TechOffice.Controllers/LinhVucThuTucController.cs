@@ -12,10 +12,10 @@ using AnThinhPhat.Entities.Results;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
-    public class ChucVuController : OfficeController
+    public class LinhVucThuTucController : OfficeController
     {
         [Inject]
-        public IChucVuRepository ChucVuRepository { get; set; }
+        public ILinhVucThuTucRepository ThuTucRepository { get; set; }
 
         public ActionResult Index()
         {
@@ -30,7 +30,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult List(int? page)
         {
-            var items = ChucVuRepository.GetAll().Select(x => x.ToDataViewModel()).ToList();
+            var items = ThuTucRepository.GetAll().Select(x => x.ToDataViewModel()).ToList();
 
             var pageNumber = page ?? 1;
             return PartialView(items.ToPagedList(pageNumber, TechOfficeConfig.PAGESIZE));
@@ -41,14 +41,14 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var result = model.ToDataResult< ChucVuResult>().Update((u) =>
-                 {
-                     u.CreatedBy = UserName;
-                 });
+                var result = model.ToDataResult<LinhVucThuTucResult>().Update((u) =>
+                {
+                    u.CreatedBy = UserName;
+                });
 
                 return await ExecuteResultAsync(async () =>
                 {
-                    return await ChucVuRepository.AddAsync(result);
+                    return await ThuTucRepository.AddAsync(result);
                 });
             });
         }
@@ -56,7 +56,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult Edit(int id)
         {
-            var data = ChucVuRepository.Single(id).ToDataViewModel();
+            var data = ThuTucRepository.Single(id).ToDataViewModel();
 
             return PartialView("_PartialPageBaseDataEdit", data);
         }
@@ -65,7 +65,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var cv = model.ToDataResult<ChucVuResult>().Update((u) =>
+                var cv = model.ToDataResult<LinhVucThuTucResult>().Update((u) =>
                  {
                      u.Id = id;
                      u.LastUpdatedBy = UserName;
@@ -73,7 +73,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
                 return await ExecuteResultAsync(async () =>
                 {
-                    return await ChucVuRepository.UpdateAsync(cv);
+                    return await ThuTucRepository.UpdateAsync(cv);
                 });
             });
         }
@@ -91,7 +91,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
                 return await ExecuteResultAsync(async () =>
                 {
-                    return await ChucVuRepository.DeleteByAsync(id);
+                    return await ThuTucRepository.DeleteByAsync(id);
                 });
             });
         }

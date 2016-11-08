@@ -27,8 +27,8 @@ namespace AnThinhPhat.Services.Implements
                     add.Ten = entity.Ten;
                     add.MoTa = entity.MoTa;
                     add.IsDeleted = entity.IsDeleted;
-                    add.LastUpdatedBy = entity.LastUpdatedBy;
-                    add.LastUpdated = DateTime.Now;
+                    add.CreatedBy = entity.CreatedBy;
+                    add.CreateDate = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
                     return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
@@ -47,8 +47,8 @@ namespace AnThinhPhat.Services.Implements
                     add.Ten = entity.Ten;
                     add.MoTa = entity.MoTa;
                     add.IsDeleted = entity.IsDeleted;
-                    add.LastUpdatedBy = entity.LastUpdatedBy;
-                    add.LastUpdated = DateTime.Now;
+                    add.CreatedBy = entity.CreatedBy;
+                    add.CreateDate = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
@@ -70,8 +70,8 @@ namespace AnThinhPhat.Services.Implements
                         add.Ten = entity.Ten;
                         add.MoTa = entity.MoTa;
                         add.IsDeleted = entity.IsDeleted;
-                        add.LastUpdatedBy = entity.LastUpdatedBy;
-                        add.LastUpdated = DateTime.Now;
+                        add.CreatedBy = entity.CreatedBy;
+                        add.CreateDate = DateTime.Now;
 
                         context.Entry(add).State = EntityState.Added;
                     }
@@ -95,8 +95,8 @@ namespace AnThinhPhat.Services.Implements
                         add.Ten = entity.Ten;
                         add.MoTa = entity.MoTa;
                         add.IsDeleted = entity.IsDeleted;
-                        add.LastUpdatedBy = entity.LastUpdatedBy;
-                        add.LastUpdated = DateTime.Now;
+                        add.CreatedBy = entity.CreatedBy;
+                        add.CreateDate = DateTime.Now;
 
                         context.Entry(add).State = EntityState.Added;
                     }
@@ -184,18 +184,18 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.LinhVucCongViecs
-                        where item.IsDeleted == false
-                        select new LinhVucCongViecResult
-                        {
-                            Id = item.Id,
-                            Ten = item.Ten,
-                            MoTa = item.MoTa,
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToList();
+                            where item.IsDeleted == false
+                            select new LinhVucCongViecResult
+                            {
+                                Id = item.Id,
+                                Ten = item.Ten,
+                                MoTa = item.MoTa,
+                                IsDeleted = item.IsDeleted,
+                                CreateDate = item.CreateDate,
+                                CreatedBy = item.CreatedBy,
+                                LastUpdatedBy = item.LastUpdatedBy,
+                                LastUpdated = item.LastUpdated
+                            }).ToList();
                 }
             });
         }
@@ -207,18 +207,18 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.LinhVucCongViecs
-                        where item.IsDeleted == false
-                        select new LinhVucCongViecResult
-                        {
-                            Id = item.Id,
-                            Ten = item.Ten,
-                            MoTa = item.MoTa,
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToListAsync();
+                                  where item.IsDeleted == false
+                                  select new LinhVucCongViecResult
+                                  {
+                                      Id = item.Id,
+                                      Ten = item.Ten,
+                                      MoTa = item.MoTa,
+                                      IsDeleted = item.IsDeleted,
+                                      CreateDate = item.CreateDate,
+                                      CreatedBy = item.CreatedBy,
+                                      LastUpdatedBy = item.LastUpdatedBy,
+                                      LastUpdated = item.LastUpdated
+                                  }).ToListAsync();
                 }
             });
         }
@@ -230,9 +230,9 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.LinhVucCongViecs
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select item).Select(x => x.ToDataResult()).Single();
+                            where item.IsDeleted == false &&
+                                  item.Id == id
+                            select item).Select(x => x.ToDataResult()).Single();
                 }
             });
         }
@@ -244,9 +244,9 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.LinhVucCongViecs
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select item)
+                                  where item.IsDeleted == false &&
+                                        item.Id == id
+                                  select item)
                         .Select(x => x.ToDataResult())
                         .SingleAsync();
                 }

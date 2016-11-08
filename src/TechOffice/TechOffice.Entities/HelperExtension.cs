@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using AnThinhPhat.Entities.Infos;
 using AnThinhPhat.Entities.Results;
+using System.Data.Entity;
+using System.Threading.Tasks;
+using System;
 
 namespace AnThinhPhat.Entities
 {
@@ -9,6 +12,11 @@ namespace AnThinhPhat.Entities
         public static T[] MakeQueryToDatabase<T>(this IQueryable<T> source)
         {
             return source.ToArray();
+        }
+
+        public async static Task<T[]> MakeQueryToDatabaseAsync<T>(this IQueryable<T> source)
+        {
+            return await source.ToArrayAsync();
         }
     }
 

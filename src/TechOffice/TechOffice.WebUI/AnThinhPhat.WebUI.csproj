@@ -336,6 +336,15 @@
     <Content Include="Views\Shared\_PartialPageBaseDataCreate.cshtml" />
     <Content Include="Views\Shared\_PartialPageAlert.cshtml" />
     <Content Include="Views\Shared\_PartialPageLoading.cshtml" />
+    <Content Include="Views\Shared\_PartialPageBaseDataEdit.cshtml" />
+    <Content Include="Views\CoQuan\Index.cshtml" />
+    <Content Include="Views\CoQuan\List.cshtml" />
+    <Content Include="Views\NhomCoQuan\Index.cshtml" />
+    <Content Include="Views\NhomCoQuan\List.cshtml" />
+    <Content Include="Views\LinhVucCongViec\Index.cshtml" />
+    <Content Include="Views\LinhVucCongViec\List.cshtml" />
+    <Content Include="Views\LinhVucThuTuc\Index.cshtml" />
+    <Content Include="Views\LinhVucThuTuc\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,21 +1,23 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel;
 using Ninject;
-using PagedList;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
+using PagedList;
 using System.Net;
-using AnThinhPhat.Entities.Results;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
-    public class ChucVuController : OfficeController
+    public class NhomCoQuanController : OfficeController
     {
         [Inject]
-        public IChucVuRepository ChucVuRepository { get; set; }
+        public INhomCoQuanRepository NhomCoQuanRepository { get; set; }
 
         public ActionResult Index()
         {
@@ -30,7 +32,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult List(int? page)
         {
-            var items = ChucVuRepository.GetAll().Select(x => x.ToDataViewModel()).ToList();
+            var items = NhomCoQuanRepository.GetAll().Select(x => x.ToDataViewModel()).ToList();
 
             var pageNumber = page ?? 1;
             return PartialView(items.ToPagedList(pageNumber, TechOfficeConfig.PAGESIZE));
@@ -41,14 +43,14 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var result = model.ToDataResult< ChucVuResult>().Update((u) =>
-                 {
-                     u.CreatedBy = UserName;
-                 });
+                var result = model.ToDataResult<NhomCoQuanResult>().Update((u) =>
+               {
+                   u.CreatedBy = UserName;
+               });
 
                 return await ExecuteResultAsync(async () =>
                 {
-                    return await ChucVuRepository.AddAsync(result);
+                    return await NhomCoQuanRepository.AddAsync(result);
                 });
             });
         }
@@ -56,7 +58,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult Edit(int id)
         {
-            var data = ChucVuRepository.Single(id).ToDataViewModel();
+            var data = NhomCoQuanRepository.Single(id).ToDataViewModel();
 
             return PartialView("_PartialPageBaseDataEdit", data);
         }
@@ -65,15 +67,15 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var cv = model.ToDataResult<ChucVuResult>().Update((u) =>
-                 {
-                     u.Id = id;
-                     u.LastUpdatedBy = UserName;
-                 });
+                var cv = model.ToDataResult<NhomCoQuanResult>().Update((u) =>
+               {
+                   u.Id = id;
+                   u.LastUpdatedBy = UserName;
+               });
 
                 return await ExecuteResultAsync(async () =>
                 {
-                    return await ChucVuRepository.UpdateAsync(cv);
+                    return await NhomCoQuanRepository.UpdateAsync(cv);
                 });
             });
         }
@@ -91,10 +93,9 @@ namespace AnThinhPhat.WebUI.Controllers
 
                 return await ExecuteResultAsync(async () =>
                 {
-                    return await ChucVuRepository.DeleteByAsync(id);
+                    return await NhomCoQuanRepository.DeleteByAsync(id);
                 });
             });
         }
-
-    };
+    }
 }
