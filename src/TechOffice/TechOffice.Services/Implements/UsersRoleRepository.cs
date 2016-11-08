@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
-using AnThinhPhat.Entities;
 
 namespace AnThinhPhat.Services.Implements
 {
@@ -15,16 +11,12 @@ namespace AnThinhPhat.Services.Implements
     /// </summary>
     public class UserRoleRepository : DbExecute, IUserRoleRepository
     {
-        /// </summary>
-        private readonly ILogService _logService;
-
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ChuVuRepository" /> class.
+        ///     Initializes a new instance of the <see cref="ChucVuRepository" /> class.
         /// </summary>
         /// <param name="logService">The log service.</param>
-        public UserRoleRepository(ILogService logService)
+        public UserRoleRepository(ILogService logService) : base(logService)
         {
-            _logService = logService;
         }
 
         /// <summary>
@@ -36,25 +28,21 @@ namespace AnThinhPhat.Services.Implements
             return ExecuteDbWithHandle(
                 _logService,
                 () =>
-            {
-                using (var context = new TechOfficeEntities())
                 {
-                    return (from item in context.UserRoles
+                    using (var context = new TechOfficeEntities())
+                    {
+                        return (from item in context.UserRoles
                             where item.RoleId == roleId
-                            && item.IsDeleted == false
-                            select new UserRoleResult
-                            {
-                                Id = item.Id,
-                                UserInfo = item.User.ToDataInfo(),
-                                RoleId = item.RoleId,
-                                RoleInfo = item.Role.ToDataInfo(),
-                            }).ToList();
-                }
-            });
+                                  && item.IsDeleted == false
+                            select item)
+                            .Select(x => x.ToDataResult())
+                            .ToList();
+                    }
+                });
         }
 
         /// <summary>
-        /// Get all role by user id
+        ///     Get all role by user id
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
@@ -63,25 +51,21 @@ namespace AnThinhPhat.Services.Implements
             return ExecuteDbWithHandle(
                 _logService,
                 () =>
-            {
-                using (var context = new TechOfficeEntities())
                 {
-                    return (from item in context.UserRoles
+                    using (var context = new TechOfficeEntities())
+                    {
+                        return (from item in context.UserRoles
                             where item.UserId == userId
-                            && item.IsDeleted == false
-                            select new UserRoleResult
-                            {
-                                Id = item.Id,
-                                UserInfo = item.User.ToDataInfo(),
-                                RoleId = item.RoleId,
-                                RoleInfo = item.Role.ToDataInfo(),
-                            }).ToList();
-                }
-            });
+                                  && item.IsDeleted == false
+                            select item)
+                            .Select(x => x.ToDataResult())
+                            .ToList();
+                    }
+                });
         }
 
         /// <summary>
-        /// Get UserRole by id
+        ///     Get UserRole by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -90,21 +74,17 @@ namespace AnThinhPhat.Services.Implements
             return ExecuteDbWithHandle(
                 _logService,
                 () =>
-            {
-                using (var context = new TechOfficeEntities())
                 {
-                    return (from item in context.UserRoles
+                    using (var context = new TechOfficeEntities())
+                    {
+                        return (from item in context.UserRoles
                             where item.Id == id
-                            && item.IsDeleted == false
-                            select new UserRoleResult
-                            {
-                                Id = item.Id,
-                                UserInfo = item.User.ToDataInfo(),
-                                RoleId = item.RoleId,
-                                RoleInfo = item.Role.ToDataInfo(),
-                            }).Single();
-                }
-            });
+                                  && item.IsDeleted == false
+                            select item)
+                            .Select(x => x.ToDataResult())
+                            .Single();
+                    }
+                });
         }
     }
 }

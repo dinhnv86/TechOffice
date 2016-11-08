@@ -12,10 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-/// <summary>
-/// The Services namespace.
-/// </summary>
-
 namespace AnThinhPhat.Services
 {
     /// <summary>

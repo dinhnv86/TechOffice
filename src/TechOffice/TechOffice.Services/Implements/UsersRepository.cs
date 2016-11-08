@@ -47,18 +47,18 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     result = (from item in context.Users
-                              where item.IsDeleted == false && item.Id == id
-                              select new UserResult
-                              {
-                                  Id = item.Id,
-                                  UserName = item.UserName,
-                                  IsLocked = item.IsLocked,
-                                  HoVaTen = item.HoVaTen,
-                                  ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo(),
-                                  IsDeleted = item.IsDeleted,
-                                  LastUpdatedBy = item.LastUpdatedBy,
-                                  LastUpdated = item.LastUpdated
-                              }).Single();
+                        where item.IsDeleted == false && item.Id == id
+                        select new UserResult
+                        {
+                            Id = item.Id,
+                            UserName = item.UserName,
+                            IsLocked = item.IsLocked,
+                            HoVaTen = item.HoVaTen,
+                            ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo(),
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).Single();
                 }
             }
             catch (Exception ex)
@@ -81,18 +81,18 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     result = await (from item in context.Users
-                                    where item.IsDeleted == false && item.Id == id
-                                    select new UserResult
-                                    {
-                                        Id = item.Id,
-                                        UserName = item.UserName,
-                                        IsLocked = item.IsLocked,
-                                        HoVaTen = item.HoVaTen,
-                                        ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo(),
-                                        IsDeleted = item.IsDeleted,
-                                        LastUpdatedBy = item.LastUpdatedBy,
-                                        LastUpdated = item.LastUpdated
-                                    }).SingleAsync();
+                        where item.IsDeleted == false && item.Id == id
+                        select new UserResult
+                        {
+                            Id = item.Id,
+                            UserName = item.UserName,
+                            IsLocked = item.IsLocked,
+                            HoVaTen = item.HoVaTen,
+                            ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo(),
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).SingleAsync();
                 }
             }
             catch (Exception ex)
@@ -118,19 +118,19 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     results = (from item in context.Users
-                               where item.IsDeleted == false
-                               orderby item.UserName
-                               select new UserResult
-                               {
-                                   Id = item.Id,
-                                   UserName = item.UserName,
-                                   IsLocked = item.IsLocked,
-                                   HoVaTen = item.HoVaTen,
-                                   ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo(),
-                                   IsDeleted = item.IsDeleted,
-                                   LastUpdatedBy = item.LastUpdatedBy,
-                                   LastUpdated = item.LastUpdated
-                               }).ToList();
+                        where item.IsDeleted == false
+                        orderby item.UserName
+                        select new UserResult
+                        {
+                            Id = item.Id,
+                            UserName = item.UserName,
+                            IsLocked = item.IsLocked,
+                            HoVaTen = item.HoVaTen,
+                            ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo(),
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).ToList();
                 }
             }
             catch (Exception ex)
@@ -152,19 +152,19 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     results = await (from item in context.Users
-                                     where item.IsDeleted == false
-                                     orderby item.UserName
-                                     select new UserResult
-                                     {
-                                         Id = item.Id,
-                                         UserName = item.UserName,
-                                         IsLocked = item.IsLocked,
-                                         HoVaTen = item.HoVaTen,
-                                         ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo(),
-                                         IsDeleted = item.IsDeleted,
-                                         LastUpdatedBy = item.LastUpdatedBy,
-                                         LastUpdated = item.LastUpdated
-                                     }).ToListAsync();
+                        where item.IsDeleted == false
+                        orderby item.UserName
+                        select new UserResult
+                        {
+                            Id = item.Id,
+                            UserName = item.UserName,
+                            IsLocked = item.IsLocked,
+                            HoVaTen = item.HoVaTen,
+                            ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo(),
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).ToListAsync();
                 }
             }
             catch (Exception ex)
@@ -556,15 +556,15 @@ namespace AnThinhPhat.Services.Implements
                 {
                     var passHash = AppCipher.EncryptCipher(password);
                     result = (from item in context.Users
-                              where item.UserName == userName &&
-                                    item.Password == passHash
-                              select new UserResult
-                              {
-                                  Id = item.Id,
-                                  UserName = item.UserName,
-                                  HoVaTen = item.HoVaTen,
-                                  ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo()
-                              }).Single();
+                        where item.UserName == userName &&
+                              item.Password == passHash
+                        select new UserResult
+                        {
+                            Id = item.Id,
+                            UserName = item.UserName,
+                            HoVaTen = item.HoVaTen,
+                            ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo()
+                        }).Single();
                 }
             }
             catch (Exception ex)
@@ -591,15 +591,15 @@ namespace AnThinhPhat.Services.Implements
                 {
                     var passHash = AppCipher.EncryptCipher(password);
                     result = await (from item in context.Users
-                                    where item.UserName == userName &&
-                                          item.Password == passHash
-                                    select new UserResult
-                                    {
-                                        Id = item.Id,
-                                        UserName = item.UserName,
-                                        HoVaTen = item.HoVaTen,
-                                        ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo()
-                                    }).SingleAsync();
+                        where item.UserName == userName &&
+                              item.Password == passHash
+                        select new UserResult
+                        {
+                            Id = item.Id,
+                            UserName = item.UserName,
+                            HoVaTen = item.HoVaTen,
+                            ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo()
+                        }).SingleAsync();
                 }
             }
             catch (Exception ex)
@@ -751,17 +751,17 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     results = (from item in context.Users
-                               where item.IsDeleted == false && item.IsLocked == false
-                               select new UserResult
-                               {
-                                   Id = item.Id,
-                                   UserName = item.UserName,
-                                   IsLocked = item.IsLocked,
-                                   HoVaTen = item.HoVaTen,
-                                   IsDeleted = item.IsDeleted,
-                                   LastUpdatedBy = item.LastUpdatedBy,
-                                   LastUpdated = item.LastUpdated
-                               });
+                        where item.IsDeleted == false && item.IsLocked == false
+                        select new UserResult
+                        {
+                            Id = item.Id,
+                            UserName = item.UserName,
+                            IsLocked = item.IsLocked,
+                            HoVaTen = item.HoVaTen,
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        });
                 }
             }
             catch (Exception ex)
@@ -784,17 +784,17 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     results = await (from item in context.Users
-                                     where item.IsDeleted == false && item.IsLocked == false
-                                     select new UserResult
-                                     {
-                                         Id = item.Id,
-                                         UserName = item.UserName,
-                                         IsLocked = item.IsLocked,
-                                         HoVaTen = item.HoVaTen,
-                                         IsDeleted = item.IsDeleted,
-                                         LastUpdatedBy = item.LastUpdatedBy,
-                                         LastUpdated = item.LastUpdated
-                                     }).ToListAsync();
+                        where item.IsDeleted == false && item.IsLocked == false
+                        select new UserResult
+                        {
+                            Id = item.Id,
+                            UserName = item.UserName,
+                            IsLocked = item.IsLocked,
+                            HoVaTen = item.HoVaTen,
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).ToListAsync();
                 }
             }
             catch (Exception ex)
@@ -817,17 +817,17 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     results = (from item in context.Users
-                               where item.IsDeleted == false && item.IsLocked
-                               select new UserResult
-                               {
-                                   Id = item.Id,
-                                   UserName = item.UserName,
-                                   IsLocked = item.IsLocked,
-                                   HoVaTen = item.HoVaTen,
-                                   IsDeleted = item.IsDeleted,
-                                   LastUpdatedBy = item.LastUpdatedBy,
-                                   LastUpdated = item.LastUpdated
-                               });
+                        where item.IsDeleted == false && item.IsLocked
+                        select new UserResult
+                        {
+                            Id = item.Id,
+                            UserName = item.UserName,
+                            IsLocked = item.IsLocked,
+                            HoVaTen = item.HoVaTen,
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        });
                 }
             }
             catch (Exception ex)
@@ -850,17 +850,17 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     results = await (from item in context.Users
-                                     where item.IsDeleted == false && item.IsLocked
-                                     select new UserResult
-                                     {
-                                         Id = item.Id,
-                                         UserName = item.UserName,
-                                         IsLocked = item.IsLocked,
-                                         HoVaTen = item.HoVaTen,
-                                         IsDeleted = item.IsDeleted,
-                                         LastUpdatedBy = item.LastUpdatedBy,
-                                         LastUpdated = item.LastUpdated
-                                     }).ToListAsync();
+                        where item.IsDeleted == false && item.IsLocked
+                        select new UserResult
+                        {
+                            Id = item.Id,
+                            UserName = item.UserName,
+                            IsLocked = item.IsLocked,
+                            HoVaTen = item.HoVaTen,
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).ToListAsync();
                 }
             }
             catch (Exception ex)

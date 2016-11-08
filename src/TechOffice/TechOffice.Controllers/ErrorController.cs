@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace AnThinhPhat.Controllers
+namespace AnThinhPhat.WebUI.Controllers
 {
     public class ErrorController : Controller
     {

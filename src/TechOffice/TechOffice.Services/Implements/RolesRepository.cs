@@ -12,20 +12,14 @@ namespace AnThinhPhat.Services.Implements
 {
     /// <summary>
     /// </summary>
-    public class RolesRepository : IRoleRepository
+    public class RolesRepository : DbExecute, IRoleRepository
     {
-        /// <summary>
-        ///     The _log service
-        /// </summary>
-        private readonly ILogService _logService;
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="RolesRepository" /> class.
         /// </summary>
         /// <param name="logService"></param>
-        public RolesRepository(ILogService logService)
+        public RolesRepository(ILogService logService) : base(logService)
         {
-            _logService = logService;
         }
 
         /// <summary>
@@ -35,12 +29,11 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public RoleResult Single(int id)
         {
-            RoleResult result;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    result = (from item in context.Roles
+                    return (from item in context.Roles
                         where item.IsDeleted == false && item.Id == id
                         select new RoleResult
                         {
@@ -52,13 +45,7 @@ namespace AnThinhPhat.Services.Implements
                             LastUpdated = item.LastUpdated
                         }).Single();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = null;
-            }
-            return result;
+            });
         }
 
         /// <summary>
@@ -68,12 +55,11 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<RoleResult> SingleAsync(int id)
         {
-            RoleResult result;
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    result = await (from item in context.Roles
+                    return await (from item in context.Roles
                         where item.IsDeleted == false && item.Id == id
                         select new RoleResult
                         {
@@ -85,13 +71,7 @@ namespace AnThinhPhat.Services.Implements
                             LastUpdated = item.LastUpdated
                         }).SingleAsync();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = null;
-            }
-            return result;
+            });
         }
 
         /// <summary>
@@ -100,13 +80,11 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public IEnumerable<RoleResult> GetAll()
         {
-            IEnumerable<RoleResult> results;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    results = (from item in context.Roles
+                    return (from item in context.Roles
                         where item.IsDeleted == false
                         select new RoleResult
                         {
@@ -118,14 +96,7 @@ namespace AnThinhPhat.Services.Implements
                             LastUpdated = item.LastUpdated
                         }).ToList();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                results = null;
-            }
-
-            return results;
+            });
         }
 
         /// <summary>
@@ -134,12 +105,11 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<IEnumerable<RoleResult>> GetAllAsync()
         {
-            IEnumerable<RoleResult> results;
-            try
+            return await ExecuteDbWithHandle(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    results = await (from item in context.Roles
+                    return await (from item in context.Roles
                         where item.IsDeleted == false
                         select new RoleResult
                         {
@@ -151,13 +121,7 @@ namespace AnThinhPhat.Services.Implements
                             LastUpdated = item.LastUpdated
                         }).ToListAsync();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                results = null;
-            }
-            return results;
+            });
         }
 
         /// <summary>
@@ -167,9 +131,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult Update(RoleResult entity)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -182,16 +144,9 @@ namespace AnThinhPhat.Services.Implements
                     role.LastUpdated = DateTime.Now;
 
                     context.Entry(role).State = EntityState.Modified;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -201,9 +156,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> UpdateAsync(RoleResult entity)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -216,16 +169,9 @@ namespace AnThinhPhat.Services.Implements
                     role.LastUpdated = DateTime.Now;
 
                     context.Entry(role).State = EntityState.Modified;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -235,8 +181,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult Add(RoleResult entity)
         {
-            SaveResult result;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -249,15 +194,9 @@ namespace AnThinhPhat.Services.Implements
                     add.LastUpdated = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-            return result;
+            });
         }
 
         /// <summary>
@@ -267,8 +206,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> AddAsync(RoleResult entity)
         {
-            SaveResult result;
-            try
+            return await ExecuteDbWithHandle(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -281,15 +219,9 @@ namespace AnThinhPhat.Services.Implements
                     add.LastUpdated = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-            return result;
+            });
         }
 
         /// <summary>
@@ -299,8 +231,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult AddRange(IEnumerable<RoleResult> entities)
         {
-            SaveResult result;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -317,15 +248,9 @@ namespace AnThinhPhat.Services.Implements
 
                         context.Entry(add).State = EntityState.Added;
                     }
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-            return result;
+            });
         }
 
         /// <summary>
@@ -335,8 +260,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> AddRangeAsync(IEnumerable<RoleResult> entities)
         {
-            SaveResult result;
-            try
+            return await ExecuteDbWithHandle(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -353,15 +277,9 @@ namespace AnThinhPhat.Services.Implements
 
                         context.Entry(add).State = EntityState.Added;
                     }
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-            return result;
+            });
         }
 
         /// <summary>
@@ -371,28 +289,20 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult Delete(RoleResult entity)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
                     var role = context.Roles.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
                     role.IsDeleted = true;
                     role.LastUpdated = DateTime.Now;
                     role.LastUpdatedBy = entity.LastUpdatedBy;
 
                     context.Entry(role).State = EntityState.Modified;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -402,9 +312,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> DeleteAsync(RoleResult entity)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandle(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -414,16 +322,9 @@ namespace AnThinhPhat.Services.Implements
                     role.LastUpdatedBy = entity.LastUpdatedBy;
 
                     context.Entry(role).State = EntityState.Modified;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -433,9 +334,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult DeleteBy(int id)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -444,16 +343,9 @@ namespace AnThinhPhat.Services.Implements
                     role.LastUpdated = DateTime.Now;
 
                     context.Entry(role).State = EntityState.Modified;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -463,9 +355,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> DeleteByAsync(int id)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandle(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -474,16 +364,9 @@ namespace AnThinhPhat.Services.Implements
                     role.LastUpdated = DateTime.Now;
 
                     context.Entry(role).State = EntityState.Modified;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
     }
 }

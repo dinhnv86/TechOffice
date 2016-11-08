@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using AnThinhPhat.Entities.Results;
-using AnThinhPhat.Services.Repositories;
 
 namespace AnThinhPhat.Services.Abstracts
 {
@@ -16,14 +14,14 @@ namespace AnThinhPhat.Services.Abstracts
         IEnumerable<UserRoleResult> GetUsersByRoleId(int roleId);
 
         /// <summary>
-        /// Get all role by user id
+        ///     Get all role by user id
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
         IEnumerable<UserRoleResult> GetRolesByUserId(int userId);
 
         /// <summary>
-        /// Get UserRole by id
+        ///     Get UserRole by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

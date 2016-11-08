@@ -15,24 +15,27 @@
 /// <summary>
 /// The Utilities namespace.
 /// </summary>
+
 namespace AnThinhPhat.Utilities
 {
     /// <summary>
-    /// Enum MailType
+    ///     Enum MailType
     /// </summary>
     public enum MailType
     {
         /// <summary>
-        /// The normal
+        ///     The normal
         /// </summary>
         Normal = 0,
+
         /// <summary>
-        /// The register
+        ///     The register
         /// </summary>
         Register = 1,
+
         /// <summary>
-        /// The recover pass
+        ///     The recover pass
         /// </summary>
-        RecoverPass = 2,
+        RecoverPass = 2
     }
 }

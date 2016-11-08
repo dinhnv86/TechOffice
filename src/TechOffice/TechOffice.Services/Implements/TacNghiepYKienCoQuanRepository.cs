@@ -1,83 +1,326 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Utilities;
 
 namespace AnThinhPhat.Services.Implements
 {
     public class TacNghiepYKienCoQuanRepository : DbExecute, ITacNghiepYKienCoQuanRepository
     {
-        public SaveResult Add(TacNghiepYKienCoQuanResult entity)
+        public TacNghiepYKienCoQuanRepository(ILogService logService) : base(logService)
         {
-            throw new NotImplementedException();
         }
 
-        public Task<SaveResult> AddAsync(TacNghiepYKienCoQuanResult entity)
+        public SaveResult Add(TacNghiepYKienCoQuanResult entity)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var add = context.TacNghiep_YKienCoQuan.Create();
+
+                    add.NoiDung = entity.NoiDung;
+                    add.TacNghiepId = entity.TacNghiepId;
+                    add.CoQuanId = entity.CoQuanId;
+                    add.IsDeleted = entity.IsDeleted;
+                    add.LastUpdatedBy = entity.LastUpdatedBy;
+                    add.LastUpdated = DateTime.Now;
+
+                    context.Entry(add).State = EntityState.Added;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
+        }
+
+        public async Task<SaveResult> AddAsync(TacNghiepYKienCoQuanResult entity)
+        {
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var add = context.TacNghiep_YKienCoQuan.Create();
+
+                    add.NoiDung = entity.NoiDung;
+                    add.TacNghiepId = entity.TacNghiepId;
+                    add.CoQuanId = entity.CoQuanId;
+                    add.IsDeleted = entity.IsDeleted;
+                    add.LastUpdatedBy = entity.LastUpdatedBy;
+                    add.LastUpdated = DateTime.Now;
+
+                    context.Entry(add).State = EntityState.Added;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
         public SaveResult AddRange(IEnumerable<TacNghiepYKienCoQuanResult> entities)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    TacNghiep_YKienCoQuan add;
+                    foreach (var entity in entities)
+                    {
+                        add = context.TacNghiep_YKienCoQuan.Create();
+
+                        add.NoiDung = entity.NoiDung;
+                        add.TacNghiepId = entity.TacNghiepId;
+                        add.CoQuanId = entity.CoQuanId;
+                        add.IsDeleted = entity.IsDeleted;
+                        add.LastUpdatedBy = entity.LastUpdatedBy;
+                        add.LastUpdated = DateTime.Now;
+
+                        context.Entry(add).State = EntityState.Added;
+                    }
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public Task<SaveResult> AddRangeAsync(IEnumerable<TacNghiepYKienCoQuanResult> entities)
+        public async Task<SaveResult> AddRangeAsync(IEnumerable<TacNghiepYKienCoQuanResult> entities)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    TacNghiep_YKienCoQuan add;
+                    foreach (var entity in entities)
+                    {
+                        add = context.TacNghiep_YKienCoQuan.Create();
+
+                        add.NoiDung = entity.NoiDung;
+                        add.TacNghiepId = entity.TacNghiepId;
+                        add.CoQuanId = entity.CoQuanId;
+                        add.IsDeleted = entity.IsDeleted;
+                        add.LastUpdatedBy = entity.LastUpdatedBy;
+                        add.LastUpdated = DateTime.Now;
+
+                        context.Entry(add).State = EntityState.Added;
+                    }
+
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
         public SaveResult Delete(TacNghiepYKienCoQuanResult entity)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var cv = context.TacNghiep_YKienCoQuan.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    cv.IsDeleted = true;
+                    cv.LastUpdatedBy = entity.LastUpdatedBy;
+                    cv.LastUpdated = DateTime.Now;
+
+                    context.Entry(cv).State = EntityState.Modified;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public Task<SaveResult> DeleteAsync(TacNghiepYKienCoQuanResult entity)
+        public async Task<SaveResult> DeleteAsync(TacNghiepYKienCoQuanResult entity)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var cv = context.TacNghiep_YKienCoQuan.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    cv.IsDeleted = true;
+                    cv.LastUpdatedBy = entity.LastUpdatedBy;
+                    cv.LastUpdated = DateTime.Now;
+
+                    context.Entry(cv).State = EntityState.Modified;
+
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
         public SaveResult DeleteBy(int id)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var cv = context.TacNghiep_YKienCoQuan.Single(x => x.Id == id && x.IsDeleted == false);
+
+                    cv.IsDeleted = true;
+                    cv.LastUpdated = DateTime.Now;
+
+                    context.Entry(cv).State = EntityState.Modified;
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public Task<SaveResult> DeleteByAsync(int id)
+        public async Task<SaveResult> DeleteByAsync(int id)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var cv = context.TacNghiep_YKienCoQuan.Single(x => x.Id == id && x.IsDeleted == false);
+                    cv.IsDeleted = true;
+
+                    context.Entry(cv).State = EntityState.Modified;
+
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
         public IEnumerable<TacNghiepYKienCoQuanResult> GetAll()
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.TacNghiep_YKienCoQuan
+                        where item.IsDeleted == false
+                        select new TacNghiepYKienCoQuanResult
+                        {
+                            Id = item.Id,
+                            NoiDung = item.NoiDung,
+                            TacNghiepId = item.TacNghiepId,
+                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
+                            CoQuanId = item.CoQuanId,
+                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).ToList();
+                }
+            });
         }
 
-        public Task<IEnumerable<TacNghiepYKienCoQuanResult>> GetAllAsync()
+        public async Task<IEnumerable<TacNghiepYKienCoQuanResult>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return await (from item in context.TacNghiep_YKienCoQuan
+                        where item.IsDeleted == false
+                        select new TacNghiepYKienCoQuanResult
+                        {
+                            Id = item.Id,
+                            NoiDung = item.NoiDung,
+                            TacNghiepId = item.TacNghiepId,
+                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
+                            CoQuanId = item.CoQuanId,
+                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).ToListAsync();
+                }
+            });
         }
 
         public TacNghiepYKienCoQuanResult Single(int id)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.TacNghiep_YKienCoQuan
+                        where item.IsDeleted == false &&
+                              item.Id == id
+                        select new TacNghiepYKienCoQuanResult
+                        {
+                            Id = item.Id,
+                            NoiDung = item.NoiDung,
+                            TacNghiepId = item.TacNghiepId,
+                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
+                            CoQuanId = item.CoQuanId,
+                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).Single();
+                }
+            });
         }
 
-        public Task<TacNghiepYKienCoQuanResult> SingleAsync(int id)
+        public async Task<TacNghiepYKienCoQuanResult> SingleAsync(int id)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return await (from item in context.TacNghiep_YKienCoQuan
+                        where item.IsDeleted == false &&
+                              item.Id == id
+                        select new TacNghiepYKienCoQuanResult
+                        {
+                            Id = item.Id,
+                            NoiDung = item.NoiDung,
+                            TacNghiepId = item.TacNghiepId,
+                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
+                            CoQuanId = item.CoQuanId,
+                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).SingleAsync();
+                }
+            });
         }
 
         public SaveResult Update(TacNghiepYKienCoQuanResult entity)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var update = context.TacNghiep_YKienCoQuan.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    update.NoiDung = entity.NoiDung;
+                    update.TacNghiepId = entity.TacNghiepId;
+                    update.CoQuanId = entity.CoQuanId;
+                    update.IsDeleted = entity.IsDeleted;
+                    update.LastUpdatedBy = entity.LastUpdatedBy;
+                    update.LastUpdated = DateTime.Now;
+
+                    context.Entry(update).State = EntityState.Modified;
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public Task<SaveResult> UpdateAsync(TacNghiepYKienCoQuanResult entity)
+        public async Task<SaveResult> UpdateAsync(TacNghiepYKienCoQuanResult entity)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var update = context.TacNghiep_YKienCoQuan.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    update.NoiDung = entity.NoiDung;
+                    update.TacNghiepId = entity.TacNghiepId;
+                    update.CoQuanId = entity.CoQuanId;
+                    update.IsDeleted = entity.IsDeleted;
+                    update.LastUpdatedBy = entity.LastUpdatedBy;
+                    update.LastUpdated = DateTime.Now;
+
+                    context.Entry(update).State = EntityState.Modified;
+
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
     }
 }

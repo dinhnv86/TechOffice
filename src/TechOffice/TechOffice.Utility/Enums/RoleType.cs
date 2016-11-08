@@ -15,24 +15,27 @@
 /// <summary>
 /// The Types namespace.
 /// </summary>
+
 namespace AnThinhPhat.Utilities.Enums
 {
     /// <summary>
-    /// Enum RoleType
+    ///     Enum RoleType
     /// </summary>
     public enum RoleType
     {
         /// <summary>
-        /// The administrator
+        ///     The administrator
         /// </summary>
         ADMINISTRATOR = 1,
+
         /// <summary>
-        /// The manager
+        ///     The manager
         /// </summary>
         MANAGER = 2,
+
         /// <summary>
-        /// The requester
+        ///     The requester
         /// </summary>
-        REQUESTOR = 3,
+        REQUESTOR = 3
     }
 }

@@ -1,16 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="" content="" />
-    <meta name="seotitle" content="" />
-    <meta name="seometakeyword" content="" />
-    <meta name="seometadescription" content="" />
+    <meta name="" content=""/>
+    <meta name="seotitle" content=""/>
+    <meta name="seometakeyword" content=""/>
+    <meta name="seometadescription" content=""/>
 
     <title>Phòng nội vụ huyện Phú Riềng</title>
-    <link rel="shortcut icon" href="~/favicon.ico" type="/image/vnd.microsoft.icon" />
+    <link rel="shortcut icon" href="~/favicon.ico" type="/image/vnd.microsoft.icon"/>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/jqueryui")
     @Scripts.Render("~/bundles/modernizr")
@@ -18,94 +18,92 @@
     @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
-    @{Html.RenderPartial("_Header");}
-    @*<div class="container body-content">
+@{ Html.RenderPartial("_Header"); }
+@*<div class="container body-content">
             @RenderBody()
         </div>*@
-    <div class="bg dtapg">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    @{Html.RenderPartial("_PartialMenuLeft"); }
-                </div>
-                <div class="col-md-9">
-                    @RenderBody()
-                </div>
-                <div class="clearfix" />
+<div class="bg dtapg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                @{ Html.RenderPartial("_PartialMenuLeft"); }
             </div>
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+            <div class="clearfix"/>
         </div>
     </div>
-    <footer>
-        @{Html.RenderPartial("_Footer");}
-    </footer>
+</div>
+<footer>
+    @{ Html.RenderPartial("_Footer"); }
+</footer>
 
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/unobtrusive")
-    @RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/unobtrusive")
+@RenderSection("scripts", false)
 
-    @section scripts{
-        <script>
-            $(document).ready(function () {
-                $(".btn_down_sp").click(function () {
-                    $(".menu_products").slideToggle();
-                });
-
-                $(".btn_down_httt").click(function () {
-                    $(".sup").slideToggle();
-                });
-
-
-                $(".btn_down_dl").click(function () {
-                    $(".download").slideToggle();
-                });
-
-                $(".btn_down_news").click(function () {
-                    $(".news_new").slideToggle();
-                });
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            $(".btn_down_sp").click(function() {
+                $(".menu_products").slideToggle();
             });
-        </script>
 
-        <script>
+            $(".btn_down_httt").click(function() {
+                $(".sup").slideToggle();
+            });
 
-            $(document).ready(function () {
-                $('.navbar').css({ position: 'static' });
-                window.onscroll = function () {
-                    if (window.pageYOffset >= 61) {
-                        $('.navbar').css({ position: 'fixed', top: '0' });
-                        $('.navbar').addClass("menu_top_fix");
-                    }
 
-                    else {
-                        $('.navbar').css({ position: 'static' });
-                        $('.navbar').removeClass("menu_top_fix");
-                    }
+            $(".btn_down_dl").click(function() {
+                $(".download").slideToggle();
+            });
+
+            $(".btn_down_news").click(function() {
+                $(".news_new").slideToggle();
+            });
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function() {
+            $('.navbar').css({ position: 'static' });
+            window.onscroll = function() {
+                if (window.pageYOffset >= 61) {
+                    $('.navbar').css({ position: 'fixed', top: '0' });
+                    $('.navbar').addClass("menu_top_fix");
+                } else {
+                    $('.navbar').css({ position: 'static' });
+                    $('.navbar').removeClass("menu_top_fix");
+                }
+            };
+        });
+        $(document).on("mobileinit", function() {
+            $.mobile.ignoreContentEnabled = true;
+        });
+    </script>
+    <script>
+        jQuery(function() {
+            jQuery('#back-top').hide();
+            jQuery(window).scroll(function() {
+                if (jQuery(this).scrollTop() > 200) {
+                    jQuery('#back-top').fadeIn();
+                } else {
+                    jQuery('#back-top').fadeOut();
                 }
             });
-            $(document).on("mobileinit", function () {
-                $.mobile.ignoreContentEnabled = true;
-            });
-        </script>
-        <script>
-            jQuery(function () {
-                jQuery('#back-top').hide();
-                jQuery(window).scroll(function () {
-                    if (jQuery(this).scrollTop() > 200) {
-                        jQuery('#back-top').fadeIn();
-                    } else {
-                        jQuery('#back-top').fadeOut();
-                    }
-                });
 
-                // scroll body to 0px on click
-                jQuery('#back-top').click(function () {
-                    jQuery('body,html').stop(false, false).animate({
-                        scrollTop: 0
-                    }, 800);
-                    return false;
-                });
+            // scroll body to 0px on click
+            jQuery('#back-top').click(function() {
+                jQuery('body, html').stop(false, false).animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
             });
-        </script>
-    }
+        });
+    </script>
+}
 
 </body>
 </html>

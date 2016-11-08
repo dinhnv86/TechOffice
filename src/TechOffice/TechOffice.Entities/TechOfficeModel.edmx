@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TechOfficeDevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TechOfficeDevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012"
+              Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChucVu">
           <Key>
             <PropertyRef Name="Id" />
@@ -787,7 +791,8 @@
         <EntityContainer Name="TechOfficeDevModelStoreContainer">
           <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CongViec_PhoiHop" EntityType="Self.CongViec_PhoiHop" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CongViec_QuaTrinhXuLy" EntityType="Self.CongViec_QuaTrinhXuLy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CongViec_QuaTrinhXuLy" EntityType="Self.CongViec_QuaTrinhXuLy" Schema="dbo"
+                     store:Type="Tables" />
           <EntitySet Name="CongViec_VanBan" EntityType="Self.CongViec_VanBan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoQuan" EntityType="Self.CoQuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoSoCongViec" EntityType="Self.HoSoCongViec" Schema="dbo" store:Type="Tables" />
@@ -801,9 +806,12 @@
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TacNghiep" EntityType="Self.TacNghiep" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TacNghiep_CoQuanLienQuan" EntityType="Self.TacNghiep_CoQuanLienQuan" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TacNghiep_TinhHinhThucHien" EntityType="Self.TacNghiep_TinhHinhThucHien" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TacNghiep_YKienCoQuan" EntityType="Self.TacNghiep_YKienCoQuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TacNghiep_CoQuanLienQuan" EntityType="Self.TacNghiep_CoQuanLienQuan" Schema="dbo"
+                     store:Type="Tables" />
+          <EntitySet Name="TacNghiep_TinhHinhThucHien" EntityType="Self.TacNghiep_TinhHinhThucHien" Schema="dbo"
+                     store:Type="Tables" />
+          <EntitySet Name="TacNghiep_YKienCoQuan" EntityType="Self.TacNghiep_YKienCoQuan" Schema="dbo"
+                     store:Type="Tables" />
           <EntitySet Name="TapTinCongViec" EntityType="Self.TapTinCongViec" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TapTinTacNghiep" EntityType="Self.TapTinTacNghiep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TapTinThuTuc" EntityType="Self.TapTinThuTuc" Schema="dbo" store:Type="Tables" />
@@ -821,7 +829,8 @@
             <End Role="User" EntitySet="User" />
             <End Role="CongViec_PhoiHop" EntitySet="CongViec_PhoiHop" />
           </AssociationSet>
-          <AssociationSet Name="FK_CongViec_QuaTrinhXuLy_HoSoCongViec" Association="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec">
+          <AssociationSet Name="FK_CongViec_QuaTrinhXuLy_HoSoCongViec"
+                          Association="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec">
             <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
             <End Role="CongViec_QuaTrinhXuLy" EntitySet="CongViec_QuaTrinhXuLy" />
           </AssociationSet>
@@ -845,19 +854,23 @@
             <End Role="User" EntitySet="User" />
             <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_CoQuan" Association="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan">
+          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_CoQuan"
+                          Association="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan">
             <End Role="CoQuan" EntitySet="CoQuan" />
             <End Role="TacNghiep_CoQuanLienQuan" EntitySet="TacNghiep_CoQuanLienQuan" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_TacNghiep" Association="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep">
+          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_TacNghiep"
+                          Association="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep">
             <End Role="TacNghiep" EntitySet="TacNghiep" />
             <End Role="TacNghiep_CoQuanLienQuan" EntitySet="TacNghiep_CoQuanLienQuan" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_CoQuan" Association="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan">
+          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_CoQuan"
+                          Association="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan">
             <End Role="CoQuan" EntitySet="CoQuan" />
             <End Role="TacNghiep_TinhHinhThucHien" EntitySet="TacNghiep_TinhHinhThucHien" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_TacNghiep" Association="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep">
+          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_TacNghiep"
+                          Association="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep">
             <End Role="TacNghiep" EntitySet="TacNghiep" />
             <End Role="TacNghiep_TinhHinhThucHien" EntitySet="TacNghiep_TinhHinhThucHien" />
           </AssociationSet>
@@ -865,7 +878,8 @@
             <End Role="CoQuan" EntitySet="CoQuan" />
             <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacNghiep_YKienCoQuan_TacNghiep" Association="Self.FK_TacNghiep_YKienCoQuan_TacNghiep">
+          <AssociationSet Name="FK_TacNghiep_YKienCoQuan_TacNghiep"
+                          Association="Self.FK_TacNghiep_YKienCoQuan_TacNghiep">
             <End Role="TacNghiep" EntitySet="TacNghiep" />
             <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
           </AssociationSet>
@@ -901,7 +915,8 @@
             <End Role="VanBan" EntitySet="VanBan" />
             <End Role="TapTinVanBan" EntitySet="TapTinVanBan" />
           </AssociationSet>
-          <AssociationSet Name="FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" Association="Self.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan">
+          <AssociationSet Name="FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan"
+                          Association="Self.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan">
             <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
             <End Role="TapTinYKienCoQuan" EntitySet="TapTinYKienCoQuan" />
           </AssociationSet>
@@ -942,10 +957,14 @@
             <End Role="VanBan" EntitySet="VanBan" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TechOfficeDevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="TechOfficeDevModel" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ChucVu">
           <Key>
             <PropertyRef Name="Id" />
@@ -972,8 +991,10 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_CongViec_PhoiHop_HoSoCongViec" FromRole="CongViec_PhoiHop" ToRole="HoSoCongViec" />
-          <NavigationProperty Name="User" Relationship="Self.FK_CongViec_PhoiHop_User" FromRole="CongViec_PhoiHop" ToRole="User" />
+          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_CongViec_PhoiHop_HoSoCongViec"
+                              FromRole="CongViec_PhoiHop" ToRole="HoSoCongViec" />
+          <NavigationProperty Name="User" Relationship="Self.FK_CongViec_PhoiHop_User" FromRole="CongViec_PhoiHop"
+                              ToRole="User" />
         </EntityType>
         <EntityType Name="CongViec_QuaTrinhXuLy">
           <Key>
@@ -992,7 +1013,8 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec" FromRole="CongViec_QuaTrinhXuLy" ToRole="HoSoCongViec" />
+          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec"
+                              FromRole="CongViec_QuaTrinhXuLy" ToRole="HoSoCongViec" />
         </EntityType>
         <EntityType Name="CongViec_VanBan">
           <Key>
@@ -1009,7 +1031,8 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_CongViec_VanBan_HoSoCongViec" FromRole="CongViec_VanBan" ToRole="HoSoCongViec" />
+          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_CongViec_VanBan_HoSoCongViec"
+                              FromRole="CongViec_VanBan" ToRole="HoSoCongViec" />
         </EntityType>
         <EntityType Name="CoQuan">
           <Key>
@@ -1024,10 +1047,15 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="NhomCoQuan" Relationship="Self.FK_CoQuan_NhomCoQuan" FromRole="CoQuan" ToRole="NhomCoQuan" />
-          <NavigationProperty Name="TacNghiep_CoQuanLienQuan" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan" FromRole="CoQuan" ToRole="TacNghiep_CoQuanLienQuan" />
-          <NavigationProperty Name="TacNghiep_TinhHinhThucHien" Relationship="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan" FromRole="CoQuan" ToRole="TacNghiep_TinhHinhThucHien" />
-          <NavigationProperty Name="TacNghiep_YKienCoQuan" Relationship="Self.FK_TacNghiep_YKienCoQuan_CoQuan" FromRole="CoQuan" ToRole="TacNghiep_YKienCoQuan" />
+          <NavigationProperty Name="NhomCoQuan" Relationship="Self.FK_CoQuan_NhomCoQuan" FromRole="CoQuan"
+                              ToRole="NhomCoQuan" />
+          <NavigationProperty Name="TacNghiep_CoQuanLienQuan" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan"
+                              FromRole="CoQuan" ToRole="TacNghiep_CoQuanLienQuan" />
+          <NavigationProperty Name="TacNghiep_TinhHinhThucHien"
+                              Relationship="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan" FromRole="CoQuan"
+                              ToRole="TacNghiep_TinhHinhThucHien" />
+          <NavigationProperty Name="TacNghiep_YKienCoQuan" Relationship="Self.FK_TacNghiep_YKienCoQuan_CoQuan"
+                              FromRole="CoQuan" ToRole="TacNghiep_YKienCoQuan" />
           <NavigationProperty Name="ThuTucs" Relationship="Self.FK_ThuTuc_CoQuan" FromRole="CoQuan" ToRole="ThuTuc" />
           <NavigationProperty Name="VanBans" Relationship="Self.FK_VanBan_CoQuan" FromRole="CoQuan" ToRole="VanBan" />
         </EntityType>
@@ -1048,13 +1076,20 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CongViec_PhoiHop" Relationship="Self.FK_CongViec_PhoiHop_HoSoCongViec" FromRole="HoSoCongViec" ToRole="CongViec_PhoiHop" />
-          <NavigationProperty Name="CongViec_QuaTrinhXuLy" Relationship="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec" FromRole="HoSoCongViec" ToRole="CongViec_QuaTrinhXuLy" />
-          <NavigationProperty Name="CongViec_VanBan" Relationship="Self.FK_CongViec_VanBan_HoSoCongViec" FromRole="HoSoCongViec" ToRole="CongViec_VanBan" />
-          <NavigationProperty Name="LinhVucCongViec" Relationship="Self.FK_HoSoCongViec_LinhVucCongViec" FromRole="HoSoCongViec" ToRole="LinhVucCongViec" />
-          <NavigationProperty Name="User" Relationship="Self.FK_HoSoCongViec_UserPhuTrach" FromRole="HoSoCongViec" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="Self.FK_HoSoCongViec_UserXuLyChinh" FromRole="HoSoCongViec" ToRole="User" />
-          <NavigationProperty Name="TapTinCongViecs" Relationship="Self.FK_TapTinCongViec_HoSoCongViec" FromRole="HoSoCongViec" ToRole="TapTinCongViec" />
+          <NavigationProperty Name="CongViec_PhoiHop" Relationship="Self.FK_CongViec_PhoiHop_HoSoCongViec"
+                              FromRole="HoSoCongViec" ToRole="CongViec_PhoiHop" />
+          <NavigationProperty Name="CongViec_QuaTrinhXuLy" Relationship="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec"
+                              FromRole="HoSoCongViec" ToRole="CongViec_QuaTrinhXuLy" />
+          <NavigationProperty Name="CongViec_VanBan" Relationship="Self.FK_CongViec_VanBan_HoSoCongViec"
+                              FromRole="HoSoCongViec" ToRole="CongViec_VanBan" />
+          <NavigationProperty Name="LinhVucCongViec" Relationship="Self.FK_HoSoCongViec_LinhVucCongViec"
+                              FromRole="HoSoCongViec" ToRole="LinhVucCongViec" />
+          <NavigationProperty Name="User" Relationship="Self.FK_HoSoCongViec_UserPhuTrach" FromRole="HoSoCongViec"
+                              ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_HoSoCongViec_UserXuLyChinh" FromRole="HoSoCongViec"
+                              ToRole="User" />
+          <NavigationProperty Name="TapTinCongViecs" Relationship="Self.FK_TapTinCongViec_HoSoCongViec"
+                              FromRole="HoSoCongViec" ToRole="TapTinCongViec" />
         </EntityType>
         <EntityType Name="LinhVucCongViec">
           <Key>
@@ -1068,7 +1103,8 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="HoSoCongViecs" Relationship="Self.FK_HoSoCongViec_LinhVucCongViec" FromRole="LinhVucCongViec" ToRole="HoSoCongViec" />
+          <NavigationProperty Name="HoSoCongViecs" Relationship="Self.FK_HoSoCongViec_LinhVucCongViec"
+                              FromRole="LinhVucCongViec" ToRole="HoSoCongViec" />
         </EntityType>
         <EntityType Name="LinhVucThuTuc">
           <Key>
@@ -1082,7 +1118,8 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ThuTucs" Relationship="Self.FK_ThuTuc_LinhVucThuTuc" FromRole="LinhVucThuTuc" ToRole="ThuTuc" />
+          <NavigationProperty Name="ThuTucs" Relationship="Self.FK_ThuTuc_LinhVucThuTuc" FromRole="LinhVucThuTuc"
+                              ToRole="ThuTuc" />
         </EntityType>
         <EntityType Name="LoaiVanBan">
           <Key>
@@ -1096,7 +1133,8 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="VanBans" Relationship="Self.FK_VanBan_LoaiVanBan" FromRole="LoaiVanBan" ToRole="VanBan" />
+          <NavigationProperty Name="VanBans" Relationship="Self.FK_VanBan_LoaiVanBan" FromRole="LoaiVanBan"
+                              ToRole="VanBan" />
         </EntityType>
         <EntityType Name="MucDoHoanThanh">
           <Key>
@@ -1136,7 +1174,8 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CoQuans" Relationship="Self.FK_CoQuan_NhomCoQuan" FromRole="NhomCoQuan" ToRole="CoQuan" />
+          <NavigationProperty Name="CoQuans" Relationship="Self.FK_CoQuan_NhomCoQuan" FromRole="NhomCoQuan"
+                              ToRole="CoQuan" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -1176,10 +1215,15 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TacNghiep_CoQuanLienQuan" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep" FromRole="TacNghiep" ToRole="TacNghiep_CoQuanLienQuan" />
-          <NavigationProperty Name="TacNghiep_TinhHinhThucHien" Relationship="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep" FromRole="TacNghiep" ToRole="TacNghiep_TinhHinhThucHien" />
-          <NavigationProperty Name="TacNghiep_YKienCoQuan" Relationship="Self.FK_TacNghiep_YKienCoQuan_TacNghiep" FromRole="TacNghiep" ToRole="TacNghiep_YKienCoQuan" />
-          <NavigationProperty Name="TapTinTacNghieps" Relationship="Self.FK_TapTinTacNghiep_TacNghiep" FromRole="TacNghiep" ToRole="TapTinTacNghiep" />
+          <NavigationProperty Name="TacNghiep_CoQuanLienQuan" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep"
+                              FromRole="TacNghiep" ToRole="TacNghiep_CoQuanLienQuan" />
+          <NavigationProperty Name="TacNghiep_TinhHinhThucHien"
+                              Relationship="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep" FromRole="TacNghiep"
+                              ToRole="TacNghiep_TinhHinhThucHien" />
+          <NavigationProperty Name="TacNghiep_YKienCoQuan" Relationship="Self.FK_TacNghiep_YKienCoQuan_TacNghiep"
+                              FromRole="TacNghiep" ToRole="TacNghiep_YKienCoQuan" />
+          <NavigationProperty Name="TapTinTacNghieps" Relationship="Self.FK_TapTinTacNghiep_TacNghiep"
+                              FromRole="TacNghiep" ToRole="TapTinTacNghiep" />
         </EntityType>
         <EntityType Name="TacNghiep_CoQuanLienQuan">
           <Key>
@@ -1193,8 +1237,10 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CoQuan" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan" FromRole="TacNghiep_CoQuanLienQuan" ToRole="CoQuan" />
-          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep" FromRole="TacNghiep_CoQuanLienQuan" ToRole="TacNghiep" />
+          <NavigationProperty Name="CoQuan" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan"
+                              FromRole="TacNghiep_CoQuanLienQuan" ToRole="CoQuan" />
+          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep"
+                              FromRole="TacNghiep_CoQuanLienQuan" ToRole="TacNghiep" />
         </EntityType>
         <EntityType Name="TacNghiep_TinhHinhThucHien">
           <Key>
@@ -1210,8 +1256,10 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CoQuan" Relationship="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan" FromRole="TacNghiep_TinhHinhThucHien" ToRole="CoQuan" />
-          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep" FromRole="TacNghiep_TinhHinhThucHien" ToRole="TacNghiep" />
+          <NavigationProperty Name="CoQuan" Relationship="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan"
+                              FromRole="TacNghiep_TinhHinhThucHien" ToRole="CoQuan" />
+          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep"
+                              FromRole="TacNghiep_TinhHinhThucHien" ToRole="TacNghiep" />
         </EntityType>
         <EntityType Name="TacNghiep_YKienCoQuan">
           <Key>
@@ -1226,9 +1274,13 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CoQuan" Relationship="Self.FK_TacNghiep_YKienCoQuan_CoQuan" FromRole="TacNghiep_YKienCoQuan" ToRole="CoQuan" />
-          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TacNghiep_YKienCoQuan_TacNghiep" FromRole="TacNghiep_YKienCoQuan" ToRole="TacNghiep" />
-          <NavigationProperty Name="TapTinYKienCoQuans" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" FromRole="TacNghiep_YKienCoQuan" ToRole="TapTinYKienCoQuan" />
+          <NavigationProperty Name="CoQuan" Relationship="Self.FK_TacNghiep_YKienCoQuan_CoQuan"
+                              FromRole="TacNghiep_YKienCoQuan" ToRole="CoQuan" />
+          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TacNghiep_YKienCoQuan_TacNghiep"
+                              FromRole="TacNghiep_YKienCoQuan" ToRole="TacNghiep" />
+          <NavigationProperty Name="TapTinYKienCoQuans"
+                              Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan"
+                              FromRole="TacNghiep_YKienCoQuan" ToRole="TapTinYKienCoQuan" />
         </EntityType>
         <EntityType Name="TapTinCongViec">
           <Key>
@@ -1243,8 +1295,10 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_TapTinCongViec_HoSoCongViec" FromRole="TapTinCongViec" ToRole="HoSoCongViec" />
-          <NavigationProperty Name="User" Relationship="Self.FK_TapTinCongViec_User" FromRole="TapTinCongViec" ToRole="User" />
+          <NavigationProperty Name="HoSoCongViec" Relationship="Self.FK_TapTinCongViec_HoSoCongViec"
+                              FromRole="TapTinCongViec" ToRole="HoSoCongViec" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TapTinCongViec_User" FromRole="TapTinCongViec"
+                              ToRole="User" />
         </EntityType>
         <EntityType Name="TapTinTacNghiep">
           <Key>
@@ -1259,8 +1313,10 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TapTinTacNghiep_TacNghiep" FromRole="TapTinTacNghiep" ToRole="TacNghiep" />
-          <NavigationProperty Name="User" Relationship="Self.FK_TapTinTacNghiep_User" FromRole="TapTinTacNghiep" ToRole="User" />
+          <NavigationProperty Name="TacNghiep" Relationship="Self.FK_TapTinTacNghiep_TacNghiep"
+                              FromRole="TapTinTacNghiep" ToRole="TacNghiep" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TapTinTacNghiep_User" FromRole="TapTinTacNghiep"
+                              ToRole="User" />
         </EntityType>
         <EntityType Name="TapTinThuTuc">
           <Key>
@@ -1275,8 +1331,10 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ThuTuc" Relationship="Self.FK_TapTinThuTuc_ThuTuc" FromRole="TapTinThuTuc" ToRole="ThuTuc" />
-          <NavigationProperty Name="User" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_User" FromRole="TapTinThuTuc" ToRole="User" />
+          <NavigationProperty Name="ThuTuc" Relationship="Self.FK_TapTinThuTuc_ThuTuc" FromRole="TapTinThuTuc"
+                              ToRole="ThuTuc" />
+          <NavigationProperty Name="User" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_User"
+                              FromRole="TapTinThuTuc" ToRole="User" />
         </EntityType>
         <EntityType Name="TapTinVanBan">
           <Key>
@@ -1291,8 +1349,10 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK_TapTinVanBan_User" FromRole="TapTinVanBan" ToRole="User" />
-          <NavigationProperty Name="VanBan" Relationship="Self.FK_TapTinVanBan_VanBan" FromRole="TapTinVanBan" ToRole="VanBan" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TapTinVanBan_User" FromRole="TapTinVanBan"
+                              ToRole="User" />
+          <NavigationProperty Name="VanBan" Relationship="Self.FK_TapTinVanBan_VanBan" FromRole="TapTinVanBan"
+                              ToRole="VanBan" />
         </EntityType>
         <EntityType Name="TapTinYKienCoQuan">
           <Key>
@@ -1307,8 +1367,11 @@
           <Property Name="CreatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TacNghiep_YKienCoQuan" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" FromRole="TapTinYKienCoQuan" ToRole="TacNghiep_YKienCoQuan" />
-          <NavigationProperty Name="User" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_User" FromRole="TapTinYKienCoQuan" ToRole="User" />
+          <NavigationProperty Name="TacNghiep_YKienCoQuan"
+                              Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan"
+                              FromRole="TapTinYKienCoQuan" ToRole="TacNghiep_YKienCoQuan" />
+          <NavigationProperty Name="User" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_User"
+                              FromRole="TapTinYKienCoQuan" ToRole="User" />
         </EntityType>
         <EntityType Name="ThuTuc">
           <Key>
@@ -1326,8 +1389,10 @@
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CoQuan" Relationship="Self.FK_ThuTuc_CoQuan" FromRole="ThuTuc" ToRole="CoQuan" />
-          <NavigationProperty Name="LinhVucThuTuc" Relationship="Self.FK_ThuTuc_LinhVucThuTuc" FromRole="ThuTuc" ToRole="LinhVucThuTuc" />
-          <NavigationProperty Name="TapTinThuTucs" Relationship="Self.FK_TapTinThuTuc_ThuTuc" FromRole="ThuTuc" ToRole="TapTinThuTuc" />
+          <NavigationProperty Name="LinhVucThuTuc" Relationship="Self.FK_ThuTuc_LinhVucThuTuc" FromRole="ThuTuc"
+                              ToRole="LinhVucThuTuc" />
+          <NavigationProperty Name="TapTinThuTucs" Relationship="Self.FK_TapTinThuTuc_ThuTuc" FromRole="ThuTuc"
+                              ToRole="TapTinThuTuc" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1345,15 +1410,23 @@
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ChucVu" Relationship="Self.FK_User_ChucVu" FromRole="User" ToRole="ChucVu" />
-          <NavigationProperty Name="CongViec_PhoiHop" Relationship="Self.FK_CongViec_PhoiHop_User" FromRole="User" ToRole="CongViec_PhoiHop" />
-          <NavigationProperty Name="HoSoCongViecs" Relationship="Self.FK_HoSoCongViec_UserPhuTrach" FromRole="User" ToRole="HoSoCongViec" />
-          <NavigationProperty Name="HoSoCongViecs1" Relationship="Self.FK_HoSoCongViec_UserXuLyChinh" FromRole="User" ToRole="HoSoCongViec" />
-          <NavigationProperty Name="TapTinCongViecs" Relationship="Self.FK_TapTinCongViec_User" FromRole="User" ToRole="TapTinCongViec" />
-          <NavigationProperty Name="TapTinTacNghieps" Relationship="Self.FK_TapTinTacNghiep_User" FromRole="User" ToRole="TapTinTacNghiep" />
-          <NavigationProperty Name="TapTinVanBans" Relationship="Self.FK_TapTinVanBan_User" FromRole="User" ToRole="TapTinVanBan" />
+          <NavigationProperty Name="CongViec_PhoiHop" Relationship="Self.FK_CongViec_PhoiHop_User" FromRole="User"
+                              ToRole="CongViec_PhoiHop" />
+          <NavigationProperty Name="HoSoCongViecs" Relationship="Self.FK_HoSoCongViec_UserPhuTrach" FromRole="User"
+                              ToRole="HoSoCongViec" />
+          <NavigationProperty Name="HoSoCongViecs1" Relationship="Self.FK_HoSoCongViec_UserXuLyChinh" FromRole="User"
+                              ToRole="HoSoCongViec" />
+          <NavigationProperty Name="TapTinCongViecs" Relationship="Self.FK_TapTinCongViec_User" FromRole="User"
+                              ToRole="TapTinCongViec" />
+          <NavigationProperty Name="TapTinTacNghieps" Relationship="Self.FK_TapTinTacNghiep_User" FromRole="User"
+                              ToRole="TapTinTacNghiep" />
+          <NavigationProperty Name="TapTinVanBans" Relationship="Self.FK_TapTinVanBan_User" FromRole="User"
+                              ToRole="TapTinVanBan" />
           <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
-          <NavigationProperty Name="TapTinYKienCoQuans" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_User" FromRole="User" ToRole="TapTinYKienCoQuan" />
-          <NavigationProperty Name="TapTinThuTucs" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_User" FromRole="User" ToRole="TapTinThuTuc" />
+          <NavigationProperty Name="TapTinYKienCoQuans" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_User"
+                              FromRole="User" ToRole="TapTinYKienCoQuan" />
+          <NavigationProperty Name="TapTinThuTucs" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_User"
+                              FromRole="User" ToRole="TapTinThuTuc" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -1387,9 +1460,12 @@
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CoQuan" Relationship="Self.FK_VanBan_CoQuan" FromRole="VanBan" ToRole="CoQuan" />
-          <NavigationProperty Name="LoaiVanBan" Relationship="Self.FK_VanBan_LoaiVanBan" FromRole="VanBan" ToRole="LoaiVanBan" />
-          <NavigationProperty Name="TapTinVanBans" Relationship="Self.FK_TapTinVanBan_VanBan" FromRole="VanBan" ToRole="TapTinVanBan" />
-          <NavigationProperty Name="LinhVucVanBan" Relationship="TechOfficeDevModel.FK_VanBan_LinhVucVanBan" FromRole="VanBan" ToRole="LinhVucVanBan" />
+          <NavigationProperty Name="LoaiVanBan" Relationship="Self.FK_VanBan_LoaiVanBan" FromRole="VanBan"
+                              ToRole="LoaiVanBan" />
+          <NavigationProperty Name="TapTinVanBans" Relationship="Self.FK_TapTinVanBan_VanBan" FromRole="VanBan"
+                              ToRole="TapTinVanBan" />
+          <NavigationProperty Name="LinhVucVanBan" Relationship="TechOfficeDevModel.FK_VanBan_LinhVucVanBan"
+                              FromRole="VanBan" ToRole="LinhVucVanBan" />
         </EntityType>
         <Association Name="FK_User_ChucVu">
           <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="1" />
@@ -1767,7 +1843,8 @@
             <End Role="User" EntitySet="Users" />
             <End Role="CongViec_PhoiHop" EntitySet="CongViec_PhoiHop" />
           </AssociationSet>
-          <AssociationSet Name="FK_CongViec_QuaTrinhXuLy_HoSoCongViec" Association="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec">
+          <AssociationSet Name="FK_CongViec_QuaTrinhXuLy_HoSoCongViec"
+                          Association="Self.FK_CongViec_QuaTrinhXuLy_HoSoCongViec">
             <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
             <End Role="CongViec_QuaTrinhXuLy" EntitySet="CongViec_QuaTrinhXuLy" />
           </AssociationSet>
@@ -1779,11 +1856,13 @@
             <End Role="NhomCoQuan" EntitySet="NhomCoQuans" />
             <End Role="CoQuan" EntitySet="CoQuans" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_CoQuan" Association="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan">
+          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_CoQuan"
+                          Association="Self.FK_TacNghiep_CoQuanLienQuan_CoQuan">
             <End Role="CoQuan" EntitySet="CoQuans" />
             <End Role="TacNghiep_CoQuanLienQuan" EntitySet="TacNghiep_CoQuanLienQuan" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_CoQuan" Association="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan">
+          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_CoQuan"
+                          Association="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan">
             <End Role="CoQuan" EntitySet="CoQuans" />
             <End Role="TacNghiep_TinhHinhThucHien" EntitySet="TacNghiep_TinhHinhThucHien" />
           </AssociationSet>
@@ -1827,15 +1906,18 @@
             <End Role="Role" EntitySet="Roles" />
             <End Role="UserRole" EntitySet="UserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_TacNghiep" Association="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep">
+          <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_TacNghiep"
+                          Association="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep">
             <End Role="TacNghiep" EntitySet="TacNghieps" />
             <End Role="TacNghiep_CoQuanLienQuan" EntitySet="TacNghiep_CoQuanLienQuan" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_TacNghiep" Association="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep">
+          <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_TacNghiep"
+                          Association="Self.FK_TacNghiep_TinhHinhThucHien_TacNghiep">
             <End Role="TacNghiep" EntitySet="TacNghieps" />
             <End Role="TacNghiep_TinhHinhThucHien" EntitySet="TacNghiep_TinhHinhThucHien" />
           </AssociationSet>
-          <AssociationSet Name="FK_TacNghiep_YKienCoQuan_TacNghiep" Association="Self.FK_TacNghiep_YKienCoQuan_TacNghiep">
+          <AssociationSet Name="FK_TacNghiep_YKienCoQuan_TacNghiep"
+                          Association="Self.FK_TacNghiep_YKienCoQuan_TacNghiep">
             <End Role="TacNghiep" EntitySet="TacNghieps" />
             <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
           </AssociationSet>
@@ -1867,7 +1949,8 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserRole" EntitySet="UserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan">
+          <AssociationSet Name="FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan"
+                          Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan">
             <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
             <End Role="TapTinYKienCoQuan" EntitySet="TapTinYKienCoQuans" />
           </AssociationSet>
@@ -1921,7 +2004,8 @@
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="VanBans" Relationship="TechOfficeDevModel.FK_VanBan_LinhVucVanBan" FromRole="LinhVucVanBan" ToRole="VanBan" />
+          <NavigationProperty Name="VanBans" Relationship="TechOfficeDevModel.FK_VanBan_LinhVucVanBan"
+                              FromRole="LinhVucVanBan" ToRole="VanBan" />
         </EntityType>
         <Association Name="FK_VanBan_LinhVucVanBan">
           <End Type="TechOfficeDevModel.LinhVucVanBan" Role="LinhVucVanBan" Multiplicity="1" />
@@ -1952,7 +2036,8 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TechOfficeDevModelStoreContainer" CdmEntityContainer="TechOfficeEntities">
+        <EntityContainerMapping StorageEntityContainer="TechOfficeDevModelStoreContainer"
+                                CdmEntityContainer="TechOfficeEntities">
           <EntitySetMapping Name="ChucVus">
             <EntityTypeMapping TypeName="TechOfficeDevModel.ChucVu">
               <MappingFragment StoreEntitySet="ChucVu">

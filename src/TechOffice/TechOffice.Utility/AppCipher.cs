@@ -11,6 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 using System.Configuration;
 using System.IO;
@@ -20,21 +21,22 @@ using System.Text;
 /// <summary>
 /// The Utilities namespace.
 /// </summary>
+
 namespace AnThinhPhat.Utilities
 {
     /// <summary>
-    /// Class AppCipher.
+    ///     Class AppCipher.
     /// </summary>
     public static class AppCipher
     {
-        private static readonly byte[] iniVectorBytes = Encoding.ASCII.GetBytes("tu89geji340t89u2");
         // This constant is used to determine the key size of the encryption algorithm.
         private const int KEYSIZE = 256;
         private const int KILOBYTE = 8;
-        const string KEY = "office";
+        private const string KEY = "office";
+        private static readonly byte[] iniVectorBytes = Encoding.ASCII.GetBytes("tu89geji340t89u2");
 
         /// <summary>
-        /// Encrypts the cipher.
+        ///     Encrypts the cipher.
         /// </summary>
         /// <param name="plainText">The plain text.</param>
         /// <param name="passPhrase">The pass phrase.</param>
@@ -44,22 +46,22 @@ namespace AnThinhPhat.Utilities
             if (passPhrase == null)
                 passPhrase = GetKey();
 
-            byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-            using (PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null))
+            var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+            using (var password = new PasswordDeriveBytes(passPhrase, null))
             {
-                byte[] keyBytes = password.GetBytes(KEYSIZE / KILOBYTE);
-                using (RijndaelManaged symmetricKey = new RijndaelManaged())
+                var keyBytes = password.GetBytes(KEYSIZE/KILOBYTE);
+                using (var symmetricKey = new RijndaelManaged())
                 {
                     symmetricKey.Mode = CipherMode.CBC;
-                    using (ICryptoTransform encrypt = symmetricKey.CreateEncryptor(keyBytes, iniVectorBytes))
+                    using (var encrypt = symmetricKey.CreateEncryptor(keyBytes, iniVectorBytes))
                     {
-                        using (MemoryStream memoryStream = new MemoryStream())
+                        using (var memoryStream = new MemoryStream())
                         {
-                            using (CryptoStream encryptStream = new CryptoStream(memoryStream, encrypt, CryptoStreamMode.Write))
+                            using (var encryptStream = new CryptoStream(memoryStream, encrypt, CryptoStreamMode.Write))
                             {
                                 encryptStream.Write(plainTextBytes, 0, plainTextBytes.Length);
                                 encryptStream.FlushFinalBlock();
-                                byte[] cipherTextBytes = memoryStream.ToArray();
+                                var cipherTextBytes = memoryStream.ToArray();
                                 return Convert.ToBase64String(cipherTextBytes);
                             }
                         }
@@ -69,7 +71,7 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Decrypts the cipher.
+        ///     Decrypts the cipher.
         /// </summary>
         /// <param name="cipherText">The cipher text.</param>
         /// <param name="passPhrase">The pass phrase.</param>
@@ -79,21 +81,21 @@ namespace AnThinhPhat.Utilities
             if (passPhrase == null)
                 passPhrase = GetKey();
 
-            byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
-            using (PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null))
+            var cipherTextBytes = Convert.FromBase64String(cipherText);
+            using (var password = new PasswordDeriveBytes(passPhrase, null))
             {
-                byte[] keyBytes = password.GetBytes(KEYSIZE / KILOBYTE);
-                using (RijndaelManaged symmetricKey = new RijndaelManaged())
+                var keyBytes = password.GetBytes(KEYSIZE/KILOBYTE);
+                using (var symmetricKey = new RijndaelManaged())
                 {
                     symmetricKey.Mode = CipherMode.CBC;
-                    using (ICryptoTransform decrypter = symmetricKey.CreateDecryptor(keyBytes, iniVectorBytes))
+                    using (var decrypter = symmetricKey.CreateDecryptor(keyBytes, iniVectorBytes))
                     {
-                        using (MemoryStream memoryStream = new MemoryStream(cipherTextBytes))
+                        using (var memoryStream = new MemoryStream(cipherTextBytes))
                         {
-                            using (CryptoStream cryptStream = new CryptoStream(memoryStream, decrypter, CryptoStreamMode.Read))
+                            using (var cryptStream = new CryptoStream(memoryStream, decrypter, CryptoStreamMode.Read))
                             {
-                                byte[] plainTextBytes = new byte[cipherTextBytes.Length];
-                                int decryptedByteCount = cryptStream.Read(plainTextBytes, 0, plainTextBytes.Length);
+                                var plainTextBytes = new byte[cipherTextBytes.Length];
+                                var decryptedByteCount = cryptStream.Read(plainTextBytes, 0, plainTextBytes.Length);
                                 return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
                             }
                         }
@@ -103,16 +105,16 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Gets the key.
+        ///     Gets the key.
         /// </summary>
         /// <returns></returns>
         private static string GetKey()
         {
-            System.Configuration.AppSettingsReader settingsReader = new AppSettingsReader();
+            var settingsReader = new AppSettingsReader();
             // Get the key from config file
 
-            string key = (string)settingsReader.GetValue("KEY", typeof(String));
-            if (String.IsNullOrEmpty(key))
+            var key = (string) settingsReader.GetValue("KEY", typeof (string));
+            if (string.IsNullOrEmpty(key))
                 key = KEY;
 
             return key;

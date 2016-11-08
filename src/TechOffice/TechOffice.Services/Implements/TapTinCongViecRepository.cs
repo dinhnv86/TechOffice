@@ -1,144 +1,282 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
-using AnThinhPhat.Services.Repositories;
+using AnThinhPhat.Utilities;
 
 namespace AnThinhPhat.Services.Implements
 {
     public class TapTinCongViecRepository : DbExecute, ITapTinCongViecRepository
     {
+        public TapTinCongViecRepository(ILogService logService) : base(logService)
+        {
+        }
+
         public SaveResult Add(TapTinCongViecResult entity)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var add = context.TapTinCongViecs.Create();
+
+                    add.Url = entity.Url;
+                    add.UserUploadId = entity.UserUploadId;
+                    add.HoSoCongViecId = entity.HoSoCongViecId;
+                    add.IsDeleted = entity.IsDeleted;
+                    add.LastUpdatedBy = entity.LastUpdatedBy;
+                    add.LastUpdated = DateTime.Now;
+
+                    context.Entry(add).State = EntityState.Added;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public SaveResult Add(RoleResult entity)
+        public async Task<SaveResult> AddAsync(TapTinCongViecResult entity)
         {
-            throw new NotImplementedException();
-        }
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var add = context.TapTinCongViecs.Create();
 
-        public Task<SaveResult> AddAsync(TapTinCongViecResult entity)
-        {
-            throw new NotImplementedException();
-        }
+                    add.Url = entity.Url;
+                    add.UserUploadId = entity.UserUploadId;
+                    add.HoSoCongViecId = entity.HoSoCongViecId;
+                    add.IsDeleted = entity.IsDeleted;
+                    add.LastUpdatedBy = entity.LastUpdatedBy;
+                    add.LastUpdated = DateTime.Now;
 
-        public Task<SaveResult> AddAsync(RoleResult entity)
-        {
-            throw new NotImplementedException();
+                    context.Entry(add).State = EntityState.Added;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
         public SaveResult AddRange(IEnumerable<TapTinCongViecResult> entities)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    TapTinCongViec add;
+                    foreach (var entity in entities)
+                    {
+                        add = context.TapTinCongViecs.Create();
+
+                        add.Url = entity.Url;
+                        add.UserUploadId = entity.UserUploadId;
+                        add.HoSoCongViecId = entity.HoSoCongViecId;
+                        add.IsDeleted = entity.IsDeleted;
+                        add.LastUpdatedBy = entity.LastUpdatedBy;
+                        add.LastUpdated = DateTime.Now;
+
+                        context.Entry(add).State = EntityState.Added;
+                    }
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public SaveResult AddRange(IEnumerable<RoleResult> entities)
+        public async Task<SaveResult> AddRangeAsync(IEnumerable<TapTinCongViecResult> entities)
         {
-            throw new NotImplementedException();
-        }
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    TapTinCongViec add;
+                    foreach (var entity in entities)
+                    {
+                        add = context.TapTinCongViecs.Create();
 
-        public Task<SaveResult> AddRangeAsync(IEnumerable<TapTinCongViecResult> entities)
-        {
-            throw new NotImplementedException();
-        }
+                        add.Url = entity.Url;
+                        add.UserUploadId = entity.UserUploadId;
+                        add.HoSoCongViecId = entity.HoSoCongViecId;
+                        add.IsDeleted = entity.IsDeleted;
+                        add.LastUpdatedBy = entity.LastUpdatedBy;
+                        add.LastUpdated = DateTime.Now;
 
-        public Task<SaveResult> AddRangeAsync(IEnumerable<RoleResult> entities)
-        {
-            throw new NotImplementedException();
+                        context.Entry(add).State = EntityState.Added;
+                    }
+
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
         public SaveResult Delete(TapTinCongViecResult entity)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var cv = context.TapTinCongViecs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    cv.IsDeleted = true;
+                    cv.LastUpdatedBy = entity.LastUpdatedBy;
+                    cv.LastUpdated = DateTime.Now;
+
+                    context.Entry(cv).State = EntityState.Modified;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public SaveResult Delete(RoleResult entity)
+        public async Task<SaveResult> DeleteAsync(TapTinCongViecResult entity)
         {
-            throw new NotImplementedException();
-        }
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var cv = context.TapTinCongViecs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
-        public Task<SaveResult> DeleteAsync(TapTinCongViecResult entity)
-        {
-            throw new NotImplementedException();
-        }
+                    cv.IsDeleted = true;
+                    cv.LastUpdatedBy = entity.LastUpdatedBy;
+                    cv.LastUpdated = DateTime.Now;
 
-        public Task<SaveResult> DeleteAsync(RoleResult entity)
-        {
-            throw new NotImplementedException();
+                    context.Entry(cv).State = EntityState.Modified;
+
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
         public SaveResult DeleteBy(int id)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var cv = context.TapTinCongViecs.Single(x => x.Id == id && x.IsDeleted == false);
+
+                    cv.IsDeleted = true;
+                    cv.LastUpdated = DateTime.Now;
+
+                    context.Entry(cv).State = EntityState.Modified;
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public Task<SaveResult> DeleteByAsync(int id)
+        public async Task<SaveResult> DeleteByAsync(int id)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var cv = context.TapTinCongViecs.Single(x => x.Id == id && x.IsDeleted == false);
+                    cv.IsDeleted = true;
+
+                    context.Entry(cv).State = EntityState.Modified;
+
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public IEnumerable<RoleResult> GetAll()
+        public IEnumerable<TapTinCongViecResult> GetAll()
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.TapTinCongViecs
+                        where item.IsDeleted == false
+                        select item).Select(x => x.ToDataResult()).ToList();
+                }
+            });
         }
 
-        public Task<IEnumerable<RoleResult>> GetAllAsync()
+        public async Task<IEnumerable<TapTinCongViecResult>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return await (from item in context.TapTinCongViecs
+                        where item.IsDeleted == false
+                        select item).Select(x => x.ToDataResult()).ToListAsync();
+                }
+            });
         }
 
-        public RoleResult Single(int id)
+        public TapTinCongViecResult Single(int id)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.TapTinCongViecs
+                        where item.IsDeleted == false &&
+                              item.Id == id
+                        select item).Select(x => x.ToDataResult()).Single();
+                }
+            });
         }
 
-        public Task<RoleResult> SingleAsync(int id)
+        public async Task<TapTinCongViecResult> SingleAsync(int id)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return await (from item in context.TapTinCongViecs
+                        where item.IsDeleted == false &&
+                              item.Id == id
+                        select item).Select(x => x.ToDataResult()).SingleAsync();
+                }
+            });
         }
 
         public SaveResult Update(TapTinCongViecResult entity)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var update = context.TapTinCongViecs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    update.Url = entity.Url;
+                    update.UserUploadId = entity.UserUploadId;
+                    update.HoSoCongViecId = entity.HoSoCongViecId;
+                    update.IsDeleted = entity.IsDeleted;
+                    update.LastUpdatedBy = entity.LastUpdatedBy;
+                    update.LastUpdated = DateTime.Now;
+
+                    context.Entry(update).State = EntityState.Modified;
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public SaveResult Update(RoleResult entity)
+        public async Task<SaveResult> UpdateAsync(TapTinCongViecResult entity)
         {
-            throw new NotImplementedException();
-        }
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var update = context.TapTinCongViecs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
-        public Task<SaveResult> UpdateAsync(TapTinCongViecResult entity)
-        {
-            throw new NotImplementedException();
-        }
+                    update.Url = entity.Url;
+                    update.UserUploadId = entity.UserUploadId;
+                    update.HoSoCongViecId = entity.HoSoCongViecId;
+                    update.IsDeleted = entity.IsDeleted;
+                    update.LastUpdatedBy = entity.LastUpdatedBy;
+                    update.LastUpdated = DateTime.Now;
 
-        public Task<SaveResult> UpdateAsync(RoleResult entity)
-        {
-            throw new NotImplementedException();
-        }
+                    context.Entry(update).State = EntityState.Modified;
 
-        IEnumerable<TapTinCongViecResult> IRepository<TapTinCongViecResult>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<IEnumerable<TapTinCongViecResult>> IRepository<TapTinCongViecResult>.GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        TapTinCongViecResult IRepository<TapTinCongViecResult>.Single(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<TapTinCongViecResult> IRepository<TapTinCongViecResult>.SingleAsync(int id)
-        {
-            throw new NotImplementedException();
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
     }
 }

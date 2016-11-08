@@ -11,27 +11,28 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 
 /// <summary>
 /// 
 /// </summary>
+
 namespace AnThinhPhat.Utilities
 {
     /// <summary>
-    /// 
     /// </summary>
     public class LockUserException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LockUserException" /> class.
+        ///     Initializes a new instance of the <see cref="LockUserException" /> class.
         /// </summary>
         public LockUserException()
-            : base()
         {
         }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="LockUserException" /> class.
+        ///     Initializes a new instance of the <see cref="LockUserException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
         public LockUserException(string message)
@@ -40,14 +41,13 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LockUserException" /> class.
+        ///     Initializes a new instance of the <see cref="LockUserException" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="ex">The ex.</param>
         public LockUserException(string message, Exception ex)
             : base(message, ex)
         {
-
         }
     }
 }

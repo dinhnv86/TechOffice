@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace TechOffice.WebUI.Controllers
+namespace AnThinhPhat.WebUI.Controllers
 {
     [AllowAnonymous]
     public class HomeController : OfficeController
@@ -11,6 +11,11 @@ namespace TechOffice.WebUI.Controllers
         }
 
         public ActionResult Contact()
+        {
+            return View();
+        }
+
+        public ActionResult Article()
         {
             return View();
         }

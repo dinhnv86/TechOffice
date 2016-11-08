@@ -12,27 +12,29 @@
 // <summary></summary>
 // ***********************************************************************
 
-using log4net;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using log4net;
 
 /// <summary>
 /// The Utilities namespace.
 /// </summary>
+
 namespace AnThinhPhat.Utilities
 {
     /// <summary>
-    /// Class LogService.
+    ///     Class LogService.
     /// </summary>
     public class LogService : ILogService
     {
         /// <summary>
-        /// The  logger
+        ///     The  logger
         /// </summary>
-        private ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Errors the specified message.
+        ///     Errors the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="e">The e.</param>
@@ -42,7 +44,7 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Errors the specified message.
+        ///     Errors the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         public void Error(object message)
@@ -51,7 +53,7 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Informations the specified message.
+        ///     Informations the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="e">The e.</param>
@@ -61,7 +63,7 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Informations the specified message.
+        ///     Informations the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         public void Info(object message)
@@ -70,7 +72,7 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Warnings the specified message.
+        ///     Warnings the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="e">The e.</param>
@@ -80,7 +82,7 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Warnings the specified message.
+        ///     Warnings the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         public void Warning(object message)
@@ -89,7 +91,7 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Set some additional attributes that will be logged by log4net
+        ///     Set some additional attributes that will be logged by log4net
         /// </summary>
         /// <param name="attributes">The attributes.</param>
         public void SetAdditionalAttributes(Dictionary<string, object> attributes)
@@ -98,7 +100,7 @@ namespace AnThinhPhat.Utilities
                 return;
             foreach (var key in attributes.Keys)
             {
-                log4net.ThreadContext.Properties[key] = attributes;
+                ThreadContext.Properties[key] = attributes;
             }
         }
     }

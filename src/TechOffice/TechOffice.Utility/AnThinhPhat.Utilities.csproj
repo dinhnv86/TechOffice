@@ -55,6 +55,8 @@
     <Compile Include="Mail\MailType.cs" />
     <Compile Include="Mail\SmtpMailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TechOfficeConfig.cs" />
+    <Compile Include="UrlLink.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Logs\Log.csv" />

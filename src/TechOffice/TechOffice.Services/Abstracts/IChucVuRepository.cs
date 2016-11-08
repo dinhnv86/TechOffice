@@ -5,7 +5,7 @@ namespace AnThinhPhat.Services.Abstracts
 {
     /// <summary>
     /// </summary>
-    public interface IChuVuRepository : IRepository<ChucVuResult>
+    public interface IChucVuRepository : IRepository<ChucVuResult>
     {
     }
 }

@@ -1,35 +1,35 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System;
-using AnThinhPhat.Utilities;
-using Ninject;
-using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-using Ninject.Web.Common;
+using System.Web;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Services.Implements;
+using AnThinhPhat.Utilities;
+using AnThinhPhat.WebUI;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Ninject;
+using Ninject.Web.Common;
+using WebActivatorEx;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(AnThinhPhat.WebUI.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(AnThinhPhat.WebUI.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof (NinjectWebCommon), "Start")]
+[assembly: ApplicationShutdownMethod(typeof (NinjectWebCommon), "Stop")]
 
 namespace AnThinhPhat.WebUI
 {
-    public class NinjectWebCommon
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
-        /// Starts the application
+        ///     Starts the application
         /// </summary>
         public static void Start()
         {
-            DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
-            DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof (OnePerRequestHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof (NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
 
         /// <summary>
-        /// Stops the application.
+        ///     Stops the application.
         /// </summary>
         public static void Stop()
         {
@@ -37,7 +37,7 @@ namespace AnThinhPhat.WebUI
         }
 
         /// <summary>
-        /// Creates the kernel that will manage your application.
+        ///     Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
@@ -59,7 +59,7 @@ namespace AnThinhPhat.WebUI
         }
 
         /// <summary>
-        /// Load your modules or register your services here!
+        ///     Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
@@ -67,30 +67,46 @@ namespace AnThinhPhat.WebUI
             kernel.Bind<ILogService>().To<LogService>();
             var logService = kernel.Get<ILogService>();
 
-            kernel.Bind<IChuVuRepository>().To<ChuVuRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ICongViecPhoiHopRepository>().To<CongViecPhoiHopRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ICongViecQuaTrinhXuLyRepository>().To<CongViecQuaTrinhXuLyRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ICongViecVanBanRepository>().To<CongViecVanBanRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ICoQuanRepository>().To<CoQuanRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<IHoSoCongViecRepository>().To<HoSoCongViecRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ILinhVucCongViecRepository>().To<LinhVucCongViecRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ILinhVucThuTucRepository>().To<LinhVucThuTucRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ILoaiVanBanRepository>().To<LoaiVanBanRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<IMucDoHoanThanhRepository>().To<MucDoHoanThanhRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<IMucTinRepository>().To<MucTinRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<INhomCoQuanRepository>().To<NhomCoQuanRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<IRoleRepository>().To<RolesRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ITacNghiepCoQuanLienQuanRepository>().To<TacNghiepCoQuanLienQuanRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ITacNghiepRepository>().To<TacNghiepRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ITacNghiepTinhHinhThucHienRepository>().To<TacNghiepTinhHinhThucHienRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ITacNghiepYKienCoQuanRepository>().To<TacNghiepYKienCoQuanRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ITapTinCongViecRepository>().To<TapTinCongViecRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ITapTinTacNghiepRepository>().To<TapTinTacNghiepRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ITapTinTacNghiepRepository>().To<TapTinTacNghiepRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ITapTinThuTucRepository>().To<TapTinThuTucRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<ITapTinVanBanRepository>().To<TapTinVanBanRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>().WithConstructorArgument<ILogService>(logService);
-            kernel.Bind<IUsersRepository>().To<UsersRepository>().WithConstructorArgument<ILogService>(logService);
+            kernel.Bind<IChucVuRepository>().To<ChucVuRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ICongViecPhoiHopRepository>()
+                .To<CongViecPhoiHopRepository>()
+                .WithConstructorArgument(logService);
+            kernel.Bind<ICongViecQuaTrinhXuLyRepository>()
+                .To<CongViecQuaTrinhXuLyRepository>()
+                .WithConstructorArgument(logService);
+            kernel.Bind<ICongViecVanBanRepository>().To<CongViecVanBanRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ICoQuanRepository>().To<CoQuanRepository>().WithConstructorArgument(logService);
+            kernel.Bind<IHoSoCongViecRepository>().To<HoSoCongViecRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ILinhVucCongViecRepository>()
+                .To<LinhVucCongViecRepository>()
+                .WithConstructorArgument(logService);
+            kernel.Bind<ILinhVucThuTucRepository>().To<LinhVucThuTucRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ILoaiVanBanRepository>().To<LoaiVanBanRepository>().WithConstructorArgument(logService);
+            kernel.Bind<IMucDoHoanThanhRepository>().To<MucDoHoanThanhRepository>().WithConstructorArgument(logService);
+            kernel.Bind<IMucTinRepository>().To<MucTinRepository>().WithConstructorArgument(logService);
+            kernel.Bind<INhomCoQuanRepository>().To<NhomCoQuanRepository>().WithConstructorArgument(logService);
+            kernel.Bind<IRoleRepository>().To<RolesRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ITacNghiepCoQuanLienQuanRepository>()
+                .To<TacNghiepCoQuanLienQuanRepository>()
+                .WithConstructorArgument(logService);
+            kernel.Bind<ITacNghiepRepository>().To<TacNghiepRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ITacNghiepTinhHinhThucHienRepository>()
+                .To<TacNghiepTinhHinhThucHienRepository>()
+                .WithConstructorArgument(logService);
+            kernel.Bind<ITacNghiepYKienCoQuanRepository>()
+                .To<TacNghiepYKienCoQuanRepository>()
+                .WithConstructorArgument(logService);
+            kernel.Bind<ITapTinCongViecRepository>().To<TapTinCongViecRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ITapTinTacNghiepRepository>()
+                .To<TapTinTacNghiepRepository>()
+                .WithConstructorArgument(logService);
+            kernel.Bind<ITapTinTacNghiepRepository>()
+                .To<TapTinTacNghiepRepository>()
+                .WithConstructorArgument(logService);
+            kernel.Bind<ITapTinThuTucRepository>().To<TapTinThuTucRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ITapTinVanBanRepository>().To<TapTinVanBanRepository>().WithConstructorArgument(logService);
+            kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>().WithConstructorArgument(logService);
+            kernel.Bind<IUsersRepository>().To<UsersRepository>().WithConstructorArgument(logService);
         }
     }
 }

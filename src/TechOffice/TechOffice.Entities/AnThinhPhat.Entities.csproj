@@ -83,6 +83,7 @@
     <Compile Include="Infos\TacNghiepInfo.cs" />
     <Compile Include="Infos\ThuTucInfo.cs" />
     <Compile Include="Infos\UserInfo.cs" />
+    <Compile Include="Infos\UserRoleInfo.cs" />
     <Compile Include="Infos\VanBanInfo.cs" />
     <Compile Include="Infos\YKienCoQuanInfo.cs" />
     <Compile Include="KeyResult.cs" />

@@ -1,19 +1,20 @@
 ﻿using System.Diagnostics;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 
 /// <summary>
 /// 
 /// </summary>
+
 namespace AnThinhPhat.Utilities
 {
     /// <summary>
-    /// 
     /// </summary>
     public class SmtpMailSender
     {
         /// <summary>
-        /// Sends and email
+        ///     Sends and email
         /// </summary>
         /// <param name="to">Message to address</param>
         /// <param name="body">Text of message to send</param>
@@ -24,28 +25,28 @@ namespace AnThinhPhat.Utilities
         /// <param name="credentialPassword">User password used for message send</param>
         /// <param name="attachments">Optional attachments for message</param>
         public static void Email(string mailServerAddress,
-                                 string toAddress,
-                                 string body,
-                                 string subject,
-                                 string fromAddress,
-                                 string fromDisplay,
-                                 string credentialUser,
-                                 string credentialPassword,
-                                 MailAttachment[] attachments,
-                                 string linkConfirm = null,
-                                 string passPlainText = null,
-                                 MailType mailType = MailType.Normal,
-                                 MailPriority mailPriority = MailPriority.Normal)
+            string toAddress,
+            string body,
+            string subject,
+            string fromAddress,
+            string fromDisplay,
+            string credentialUser,
+            string credentialPassword,
+            MailAttachment[] attachments,
+            string linkConfirm = null,
+            string passPlainText = null,
+            MailType mailType = MailType.Normal,
+            MailPriority mailPriority = MailPriority.Normal)
         {
-            string host = mailServerAddress;
+            var host = mailServerAddress;
             body = UpgradeEmailFormat(body, linkConfirm, passPlainText, mailType);
             try
             {
-                MailMessage mail = new MailMessage() { Body = body, IsBodyHtml = true };
+                var mail = new MailMessage {Body = body, IsBodyHtml = true};
 
-                string[] toArray = toAddress.Split(';');
+                var toArray = toAddress.Split(';');
 
-                foreach (string to in toArray)
+                foreach (var to in toArray)
                 {
                     mail.To.Add(new MailAddress(to.Trim()));
                 }
@@ -55,12 +56,12 @@ namespace AnThinhPhat.Utilities
                 mail.SubjectEncoding = Encoding.UTF8;
                 mail.Priority = mailPriority;
 
-                using (SmtpClient smtp = new SmtpClient())
+                using (var smtp = new SmtpClient())
                 {
                     // This is necessary for gmail
 #if DEBUG
                     smtp.EnableSsl = true;
-                    smtp.Credentials = new System.Net.NetworkCredential(credentialUser, credentialPassword);
+                    smtp.Credentials = new NetworkCredential(credentialUser, credentialPassword);
 #endif
                     smtp.Host = host;
                     smtp.Send(mail);
@@ -68,7 +69,7 @@ namespace AnThinhPhat.Utilities
             }
             catch
             {
-                StringBuilder sb = new StringBuilder(1024);
+                var sb = new StringBuilder(1024);
                 sb.Append("\\nTo:" + toAddress);
                 sb.Append("\\nbody:" + body);
                 sb.Append("\\nsubject:" + subject);
@@ -82,7 +83,7 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Emails the asynchronous.
+        ///     Emails the asynchronous.
         /// </summary>
         /// <param name="mailServerAddress">The mail server address.</param>
         /// <param name="toAddress">To address.</param>
@@ -98,28 +99,28 @@ namespace AnThinhPhat.Utilities
         /// <param name="mailType">Type of the mail.</param>
         /// <param name="mailPriority">The mail Priority.</param>
         public static void EmailAsync(string mailServerAddress,
-                                 string toAddress,
-                                 string body,
-                                 string subject,
-                                 string fromAddress,
-                                 string fromDisplay,
-                                 string credentialUser,
-                                 string credentialPassword,
-                                 MailAttachment[] attachments,
-                                 string linkConfirm = null,
-                                 string passPlainText = null,
-                                 MailType mailType = MailType.Normal,
-                                 MailPriority mailPriority = MailPriority.Normal)
+            string toAddress,
+            string body,
+            string subject,
+            string fromAddress,
+            string fromDisplay,
+            string credentialUser,
+            string credentialPassword,
+            MailAttachment[] attachments,
+            string linkConfirm = null,
+            string passPlainText = null,
+            MailType mailType = MailType.Normal,
+            MailPriority mailPriority = MailPriority.Normal)
         {
-            string host = mailServerAddress;
+            var host = mailServerAddress;
             body = UpgradeEmailFormat(body, linkConfirm, passPlainText, mailType);
             try
             {
-                MailMessage mail = new MailMessage() { Body = body, IsBodyHtml = true };
+                var mail = new MailMessage {Body = body, IsBodyHtml = true};
 
-                string[] toArray = toAddress.Split(';');
+                var toArray = toAddress.Split(';');
 
-                foreach (string to in toArray)
+                foreach (var to in toArray)
                 {
                     mail.To.Add(new MailAddress(to.Trim()));
                 }
@@ -129,20 +130,20 @@ namespace AnThinhPhat.Utilities
                 mail.SubjectEncoding = Encoding.UTF8;
                 mail.Priority = mailPriority;
 
-                using (SmtpClient smtp = new SmtpClient())
+                using (var smtp = new SmtpClient())
                 {
                     // This is necessary for gmail
-                    #if DEBUG
+#if DEBUG
                     smtp.EnableSsl = true;
-                    smtp.Credentials = new System.Net.NetworkCredential(credentialUser, credentialPassword);
-                    #endif
+                    smtp.Credentials = new NetworkCredential(credentialUser, credentialPassword);
+#endif
                     smtp.Host = host;
                     smtp.SendMailAsync(mail);
                 }
             }
             catch
             {
-                StringBuilder sb = new StringBuilder(1024);
+                var sb = new StringBuilder(1024);
                 sb.Append("\\nTo:" + toAddress);
                 sb.Append("\\nbody:" + body);
                 sb.Append("\\nsubject:" + subject);
@@ -156,16 +157,17 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Upgrades the email format.
+        ///     Upgrades the email format.
         /// </summary>
         /// <param name="body">The body.</param>
         /// <param name="linkConfirm">The link confirm.</param>
         /// <param name="passPlainText">The pass plain text.</param>
         /// <param name="mailType">Type of the mail.</param>
         /// <returns></returns>
-        private static string UpgradeEmailFormat(string body, string linkConfirm, string passPlainText, MailType mailType)
+        private static string UpgradeEmailFormat(string body, string linkConfirm, string passPlainText,
+            MailType mailType)
         {
-            string ebody = body;
+            var ebody = body;
             // This has to be implemented as needed. Currently doing nothing!
             switch (mailType)
             {
@@ -183,27 +185,31 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Samples the register body.
+        ///     Samples the register body.
         /// </summary>
         /// <param name="linkConfirm">The link confirm.</param>
         /// <returns></returns>
         private static string SampleRegisterBody(string linkConfirm)
         {
-            StringBuilder strBuilderBody = new StringBuilder();
-            strBuilderBody.AppendLine("<table border='0' cellpadding='0' cellspacing='0' style='border-collapse:collapse;background-color:#fff;border:solid 1px #ededed!important' width='100%'>");
+            var strBuilderBody = new StringBuilder();
+            strBuilderBody.AppendLine(
+                "<table border='0' cellpadding='0' cellspacing='0' style='border-collapse:collapse;background-color:#fff;border:solid 1px #ededed!important' width='100%'>");
             strBuilderBody.AppendLine(" <tbody>");
             strBuilderBody.AppendLine("     <tr>");
             strBuilderBody.AppendLine("         <td>");
-            strBuilderBody.AppendLine("             <table align='center' border='0' cellpadding='0' cellspacing='0' style='border-collapse:collapse' width='100%'>");
+            strBuilderBody.AppendLine(
+                "             <table align='center' border='0' cellpadding='0' cellspacing='0' style='border-collapse:collapse' width='100%'>");
             strBuilderBody.AppendLine("                 <tbody>");
             strBuilderBody.AppendLine("                     <tr>");
             strBuilderBody.AppendLine("                         <td align='center' style='padding:55px 10px 30px'>");
-            strBuilderBody.AppendLine("                             <h2 style='margin:0;font-size:23px;font-weight:400;color:#2e3645'>Email Confirmation</h2>");
+            strBuilderBody.AppendLine(
+                "                             <h2 style='margin:0;font-size:23px;font-weight:400;color:#2e3645'>Email Confirmation</h2>");
             strBuilderBody.AppendLine("                         </td>");
             strBuilderBody.AppendLine("                     </tr>");
             strBuilderBody.AppendLine("                     <tr>");
             strBuilderBody.AppendLine("                         <td align='center' style='padding-bottom:30px'>");
-            strBuilderBody.AppendLine("                             <p style='font-size:15px;font-weight:300;color:#a5a5a5;line-height:1.4;margin:0 10px'>Please confirm your email address and agree to our Terms of Service. By clicking on the following link, you are agreeing to EBROnline </p>");
+            strBuilderBody.AppendLine(
+                "                             <p style='font-size:15px;font-weight:300;color:#a5a5a5;line-height:1.4;margin:0 10px'>Please confirm your email address and agree to our Terms of Service. By clicking on the following link, you are agreeing to EBROnline </p>");
             strBuilderBody.AppendLine("                         </td>");
             strBuilderBody.AppendLine("                     </tr>");
             strBuilderBody.AppendLine("                 </tbody>");
@@ -212,10 +218,13 @@ namespace AnThinhPhat.Utilities
             strBuilderBody.AppendLine("     </tr>");
             strBuilderBody.AppendLine("     <tr>");
             strBuilderBody.AppendLine("         <td style='padding-bottom:40px;border-bottom:1px solid #ededed'>");
-            strBuilderBody.AppendLine("             <table align='center' border='0' cellpadding='0' cellspacing='0' style='height:45px;margin:0 auto;table-layout:fixed' width='280'>");
+            strBuilderBody.AppendLine(
+                "             <table align='center' border='0' cellpadding='0' cellspacing='0' style='height:45px;margin:0 auto;table-layout:fixed' width='280'>");
             strBuilderBody.AppendLine("                 <tbody>");
             strBuilderBody.AppendLine("                     <tr>");
-            strBuilderBody.AppendLine("                         <td align='center' bgcolor='#3bca96'><a href=" + linkConfirm + " style='font-size:13px;color:#ffffff;background-color:#3bca96;text-decoration:none;text-decoration:none;padding:11px 44px 10px;border:1px solid #3bca96;display:inline-block' target='_blank'>Confirm Your Email Address</a></td>");
+            strBuilderBody.AppendLine("                         <td align='center' bgcolor='#3bca96'><a href=" +
+                                      linkConfirm +
+                                      " style='font-size:13px;color:#ffffff;background-color:#3bca96;text-decoration:none;text-decoration:none;padding:11px 44px 10px;border:1px solid #3bca96;display:inline-block' target='_blank'>Confirm Your Email Address</a></td>");
             strBuilderBody.AppendLine("                     </tr>");
             strBuilderBody.AppendLine("                 </tbody>");
             strBuilderBody.AppendLine("             </table>");
@@ -223,29 +232,34 @@ namespace AnThinhPhat.Utilities
             strBuilderBody.AppendLine("     </tr>");
             strBuilderBody.AppendLine(" </tbody>");
             strBuilderBody.AppendLine("</table>");
-            string body = strBuilderBody.ToString();
+            var body = strBuilderBody.ToString();
             return body;
         }
 
         /// <summary>
-        /// Samples the recover body.
+        ///     Samples the recover body.
         /// </summary>
         /// <param name="linkConfirm">The link confirm.</param>
         /// <param name="passPlainText">The pass plain text.</param>
         /// <returns></returns>
         private static string SampleRecoverBody(string linkConfirm, string passPlainText)
         {
-            StringBuilder strBuilderBody = new StringBuilder();
-            strBuilderBody.AppendLine("<table border='0' cellpadding='0' cellspacing='0' style='border-collapse:collapse;background-color:#fff;border:solid 1px #ededed!important' width='100%'>");
+            var strBuilderBody = new StringBuilder();
+            strBuilderBody.AppendLine(
+                "<table border='0' cellpadding='0' cellspacing='0' style='border-collapse:collapse;background-color:#fff;border:solid 1px #ededed!important' width='100%'>");
             strBuilderBody.AppendLine(" <tbody>");
             strBuilderBody.AppendLine("     <tr>");
             strBuilderBody.AppendLine("         <td>");
-            strBuilderBody.AppendLine("             <table align='center' border='0' cellpadding='0' cellspacing='0' style='border-collapse:collapse' width='100%'>");
+            strBuilderBody.AppendLine(
+                "             <table align='center' border='0' cellpadding='0' cellspacing='0' style='border-collapse:collapse' width='100%'>");
             strBuilderBody.AppendLine("                 <tbody>");
             strBuilderBody.AppendLine("                     <tr>");
             strBuilderBody.AppendLine("                         <td align='center' style='padding-bottom:30px'>");
-            strBuilderBody.AppendLine("                             <p style='font-size:15px;font-weight:300;line-height:1.4;margin:0 10px'>Your new password is <strong>" + passPlainText + "</strong>." +
-                " Please use this password to login, then change your password again. <a href='" + linkConfirm + "' target='_blank'>Click here</a> to go to login page.</p>");
+            strBuilderBody.AppendLine(
+                "                             <p style='font-size:15px;font-weight:300;line-height:1.4;margin:0 10px'>Your new password is <strong>" +
+                passPlainText + "</strong>." +
+                " Please use this password to login, then change your password again. <a href='" + linkConfirm +
+                "' target='_blank'>Click here</a> to go to login page.</p>");
             strBuilderBody.AppendLine("                         </td>");
             strBuilderBody.AppendLine("                     </tr>");
             strBuilderBody.AppendLine("                 </tbody>");
@@ -254,7 +268,7 @@ namespace AnThinhPhat.Utilities
             strBuilderBody.AppendLine("     </tr>");
             strBuilderBody.AppendLine(" </tbody>");
             strBuilderBody.AppendLine("</table>");
-            string body = strBuilderBody.ToString();
+            var body = strBuilderBody.ToString();
             return body;
         }
     }

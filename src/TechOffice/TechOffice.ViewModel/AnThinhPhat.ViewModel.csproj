@@ -40,7 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDataViewModel.cs" />
+    <Compile Include="BaseViewModel.cs" />
+    <Compile Include="BaseLogViewModel.cs" />
+    <Compile Include="HelpExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TechOffice.Entities\AnThinhPhat.Entities.csproj">
+      <Project>{98bca14e-3e24-4d33-9850-11336fd1d9cb}</Project>
+      <Name>AnThinhPhat.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

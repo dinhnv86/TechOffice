@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechOffice.WebUI.Controllers;
+﻿using System.Web.Mvc;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
     public class ThuTucController : OfficeController
     {
+        public ActionResult Index()
+        {
+            return View();
+        }
     }
 }

@@ -1,83 +1,308 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Utilities;
 
 namespace AnThinhPhat.Services.Implements
 {
-    public class LoaiVanBanRepository : ILoaiVanBanRepository
+    public class LoaiVanBanRepository : DbExecute, ILoaiVanBanRepository
     {
-        public SaveResult Add(LoaiVanBanResult entity)
+        public LoaiVanBanRepository(ILogService logService) : base(logService)
         {
-            throw new NotImplementedException();
         }
 
-        public Task<SaveResult> AddAsync(LoaiVanBanResult entity)
+        public SaveResult Add(LoaiVanBanResult entity)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var add = context.LoaiVanBans.Create();
+
+                    add.Ten = entity.Ten;
+                    add.MoTa = entity.MoTa;
+                    add.IsDeleted = entity.IsDeleted;
+                    add.LastUpdatedBy = entity.LastUpdatedBy;
+                    add.LastUpdated = DateTime.Now;
+
+                    context.Entry(add).State = EntityState.Added;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
+        }
+
+        public async Task<SaveResult> AddAsync(LoaiVanBanResult entity)
+        {
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var add = context.LoaiVanBans.Create();
+
+                    add.Ten = entity.Ten;
+                    add.MoTa = entity.MoTa;
+                    add.IsDeleted = entity.IsDeleted;
+                    add.LastUpdatedBy = entity.LastUpdatedBy;
+                    add.LastUpdated = DateTime.Now;
+
+                    context.Entry(add).State = EntityState.Added;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
         public SaveResult AddRange(IEnumerable<LoaiVanBanResult> entities)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    LoaiVanBan add;
+                    foreach (var entity in entities)
+                    {
+                        add = context.LoaiVanBans.Create();
+
+                        add.Ten = entity.Ten;
+                        add.MoTa = entity.MoTa;
+                        add.IsDeleted = entity.IsDeleted;
+                        add.LastUpdatedBy = entity.LastUpdatedBy;
+                        add.LastUpdated = DateTime.Now;
+
+                        context.Entry(add).State = EntityState.Added;
+                    }
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public Task<SaveResult> AddRangeAsync(IEnumerable<LoaiVanBanResult> entities)
+        public async Task<SaveResult> AddRangeAsync(IEnumerable<LoaiVanBanResult> entities)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    LoaiVanBan add;
+                    foreach (var entity in entities)
+                    {
+                        add = context.LoaiVanBans.Create();
+
+                        add.Ten = entity.Ten;
+                        add.MoTa = entity.MoTa;
+                        add.IsDeleted = entity.IsDeleted;
+                        add.LastUpdatedBy = entity.LastUpdatedBy;
+                        add.LastUpdated = DateTime.Now;
+
+                        context.Entry(add).State = EntityState.Added;
+                    }
+
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
         public SaveResult Delete(LoaiVanBanResult entity)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var vb = context.LoaiVanBans.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    vb.IsDeleted = true;
+                    vb.LastUpdatedBy = entity.LastUpdatedBy;
+                    vb.LastUpdated = DateTime.Now;
+
+                    context.Entry(vb).State = EntityState.Modified;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public Task<SaveResult> DeleteAsync(LoaiVanBanResult entity)
+        public async Task<SaveResult> DeleteAsync(LoaiVanBanResult entity)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var vb = context.LoaiVanBans.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    vb.IsDeleted = true;
+                    vb.LastUpdatedBy = entity.LastUpdatedBy;
+                    vb.LastUpdated = DateTime.Now;
+
+                    context.Entry(vb).State = EntityState.Modified;
+
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
         public SaveResult DeleteBy(int id)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var vb = context.LoaiVanBans.Single(x => x.Id == id && x.IsDeleted == false);
+
+                    vb.IsDeleted = true;
+                    vb.LastUpdated = DateTime.Now;
+
+                    context.Entry(vb).State = EntityState.Modified;
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public Task<SaveResult> DeleteByAsync(int id)
+        public async Task<SaveResult> DeleteByAsync(int id)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var vb = context.LoaiVanBans.Single(x => x.Id == id && x.IsDeleted == false);
+                    vb.IsDeleted = true;
+
+                    context.Entry(vb).State = EntityState.Modified;
+
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
         public IEnumerable<LoaiVanBanResult> GetAll()
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.LoaiVanBans
+                        where item.IsDeleted == false
+                        select new LoaiVanBanResult
+                        {
+                            Id = item.Id,
+                            Ten = item.Ten,
+                            MoTa = item.MoTa,
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).ToList();
+                }
+            });
         }
 
-        public Task<IEnumerable<LoaiVanBanResult>> GetAllAsync()
+        public async Task<IEnumerable<LoaiVanBanResult>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return await (from item in context.LoaiVanBans
+                        where item.IsDeleted == false
+                        select new LoaiVanBanResult
+                        {
+                            Id = item.Id,
+                            Ten = item.Ten,
+                            MoTa = item.MoTa,
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).ToListAsync();
+                }
+            });
         }
 
         public LoaiVanBanResult Single(int id)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.LoaiVanBans
+                        where item.IsDeleted == false &&
+                              item.Id == id
+                        select new LoaiVanBanResult
+                        {
+                            Id = item.Id,
+                            Ten = item.Ten,
+                            MoTa = item.MoTa,
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).Single();
+                }
+            });
         }
 
-        public Task<LoaiVanBanResult> SingleAsync(int id)
+        public async Task<LoaiVanBanResult> SingleAsync(int id)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return await (from item in context.LoaiVanBans
+                        where item.IsDeleted == false &&
+                              item.Id == id
+                        select new LoaiVanBanResult
+                        {
+                            Id = item.Id,
+                            Ten = item.Ten,
+                            MoTa = item.MoTa,
+                            IsDeleted = item.IsDeleted,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).SingleAsync();
+                }
+            });
         }
 
         public SaveResult Update(LoaiVanBanResult entity)
         {
-            throw new NotImplementedException();
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var update = context.LoaiVanBans.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    update.Ten = entity.Ten;
+                    update.MoTa = entity.MoTa;
+                    update.IsDeleted = entity.IsDeleted;
+                    update.LastUpdatedBy = entity.LastUpdatedBy;
+                    update.LastUpdated = DateTime.Now;
+
+                    context.Entry(update).State = EntityState.Modified;
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
 
-        public Task<SaveResult> UpdateAsync(LoaiVanBanResult entity)
+        public async Task<SaveResult> UpdateAsync(LoaiVanBanResult entity)
         {
-            throw new NotImplementedException();
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var update = context.LoaiVanBans.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    update.Ten = entity.Ten;
+                    update.MoTa = entity.MoTa;
+                    update.IsDeleted = entity.IsDeleted;
+                    update.LastUpdatedBy = entity.LastUpdatedBy;
+                    update.LastUpdated = DateTime.Now;
+
+                    context.Entry(update).State = EntityState.Modified;
+
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
         }
     }
 }

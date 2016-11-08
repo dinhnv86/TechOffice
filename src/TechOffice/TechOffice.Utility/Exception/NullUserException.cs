@@ -11,26 +11,29 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 
 /// <summary>
 /// The Utilities namespace.
 /// </summary>
+
 namespace AnThinhPhat.Utilities
 {
     /// <summary>
-    /// Class NullUserException.
+    ///     Class NullUserException.
     /// </summary>
     public class NullUserException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NullUserException" /> class.
+        ///     Initializes a new instance of the <see cref="NullUserException" /> class.
         /// </summary>
-        public NullUserException():base()
+        public NullUserException()
         {
         }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="NullUserException" /> class.
+        ///     Initializes a new instance of the <see cref="NullUserException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
         public NullUserException(string message)
@@ -39,14 +42,13 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NullUserException" /> class.
+        ///     Initializes a new instance of the <see cref="NullUserException" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="ex">The ex.</param>
         public NullUserException(string message, Exception ex)
             : base(message, ex)
         {
-
         }
     }
 }

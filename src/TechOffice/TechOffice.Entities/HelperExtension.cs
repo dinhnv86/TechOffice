@@ -1,20 +1,22 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using AnThinhPhat.Entities.Infos;
 using AnThinhPhat.Entities.Results;
-using AnThinhPhat.Utilities;
 
 namespace AnThinhPhat.Entities
 {
     public static class HelperExtension
     {
+        public static T[] MakeQueryToDatabase<T>(this IQueryable<T> source)
+        {
+            return source.ToArray();
+        }
     }
 
     public static class ChucVuExtension
     {
         public static ChucVuResult ToIfNotNullDataResult(this ChucVu entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static ChucVuResult ToDataResult(this ChucVu entity)
@@ -28,13 +30,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static ChucVuInfo ToIfNotNullDataInfo(this ChucVuResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static ChucVuInfo ToDataInfo(this ChucVuResult entity)
@@ -42,13 +44,13 @@ namespace AnThinhPhat.Entities
             return new ChucVuInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten,
+                Name = entity.Ten
             };
         }
 
         public static ChucVuInfo ToIfNotNullDataInfo(this ChucVu entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static ChucVuInfo ToDataInfo(this ChucVu entity)
@@ -56,7 +58,7 @@ namespace AnThinhPhat.Entities
             return new ChucVuInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten,
+                Name = entity.Ten
             };
         }
     }
@@ -65,7 +67,7 @@ namespace AnThinhPhat.Entities
     {
         public static CoQuanResult ToIfNotNullDataResult(this CoQuan entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static CoQuanResult ToDataResult(this CoQuan entity)
@@ -81,13 +83,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static CoQuanInfo ToIfNotNullDataInfo(this CoQuanResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static CoQuanInfo ToDataInfo(this CoQuanResult entity)
@@ -95,7 +97,21 @@ namespace AnThinhPhat.Entities
             return new CoQuanInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten,
+                Name = entity.Ten
+            };
+        }
+
+        public static CoQuanInfo ToIfNotNullDataInfo(this CoQuan entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static CoQuanInfo ToDataInfo(this CoQuan entity)
+        {
+            return new CoQuanInfo
+            {
+                Id = entity.Id,
+                Name = entity.Ten
             };
         }
     }
@@ -104,7 +120,7 @@ namespace AnThinhPhat.Entities
     {
         public static CongViecPhoiHopResult ToIfNotNullDataResult(this CongViec_PhoiHop entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static CongViecPhoiHopResult ToDataResult(this CongViec_PhoiHop entity)
@@ -120,7 +136,7 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
     }
@@ -129,7 +145,7 @@ namespace AnThinhPhat.Entities
     {
         public static CongViecQuaTrinhXuLyResult ToIfNotNullDataResult(this CongViec_QuaTrinhXuLy entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static CongViecQuaTrinhXuLyResult ToDataResult(this CongViec_QuaTrinhXuLy entity)
@@ -149,7 +165,7 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
     }
@@ -158,7 +174,7 @@ namespace AnThinhPhat.Entities
     {
         public static VanBanResult ToIfNotNullDataResult(this VanBan entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static VanBanResult ToDataResult(this VanBan entity)
@@ -179,7 +195,63 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
+
+        public static VanBanInfo ToIfNotNullDataInfo(this VanBanResult entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static VanBanInfo ToDataInfo(this VanBanResult entity)
+        {
+            return new VanBanInfo
+            {
+                Id = entity.Id,
+                SoVanBan = entity.SoVanBan,
+                TenVanBan = entity.TenVanBan
+            };
+        }
+
+        public static VanBanInfo ToIfNotNullDataInfo(this VanBan entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static VanBanInfo ToDataInfo(this VanBan entity)
+        {
+            return new VanBanInfo
+            {
+                Id = entity.Id,
+                SoVanBan = entity.SoVanBan,
+                TenVanBan = entity.TenVanBan
+            };
+        }
+    }
+
+    public static class TapTinVanBanExtension
+    {
+        public static TapTinVanBanResult ToIfNotNullDataResult(this TapTinVanBan entity)
+        {
+            return entity?.ToDataResult();
+        }
+
+        public static TapTinVanBanResult ToDataResult(this TapTinVanBan entity)
+        {
+            return new TapTinVanBanResult
+            {
+                Id = entity.Id,
+                VanBanId = entity.VanBanId,
+                VanBanInfo = entity.VanBan.ToIfNotNullDataInfo(),
+                Url = entity.Url,
+                UserUploadId = entity.UserUploadId,
+                UserInfo = entity.User.ToIfNotNullDataInfo(),
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
     }
@@ -188,7 +260,7 @@ namespace AnThinhPhat.Entities
     {
         public static HoSoCongViecResult ToIfNotNullDataResult(this HoSoCongViec entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static HoSoCongViecResult ToDataResult(this HoSoCongViec entity)
@@ -204,13 +276,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static HoSoCongViecInfo ToIfNotNullDataInfo(this HoSoCongViecResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static HoSoCongViecInfo ToDataInfo(this HoSoCongViecResult entity)
@@ -220,7 +292,23 @@ namespace AnThinhPhat.Entities
                 Id = entity.Id,
                 NgayHetHan = entity.NgayHetHan,
                 NoiDung = entity.NoiDung,
+                Status = entity.Status
+            };
+        }
+
+        public static HoSoCongViecInfo ToIfNotNullDataInfo(this HoSoCongViec entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static HoSoCongViecInfo ToDataInfo(this HoSoCongViec entity)
+        {
+            return new HoSoCongViecInfo
+            {
+                Id = entity.Id,
+                NgayHetHan = entity.NgayHetHan,
                 Status = entity.Status,
+                NoiDung = entity.NoiDung
             };
         }
     }
@@ -229,7 +317,7 @@ namespace AnThinhPhat.Entities
     {
         public static UserResult ToIfNotNullDataResult(this User entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static UserResult ToDataResult(this User entity)
@@ -244,13 +332,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static UserInfo ToIfNotNullDataInfo(this UserResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static UserInfo ToDataInfo(this UserResult entity)
@@ -259,13 +347,13 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 UserName = entity.UserName,
-                HoVaTen = entity.HoVaTen,
+                HoVaTen = entity.HoVaTen
             };
         }
 
         public static UserInfo ToIfNotNullDataInfo(this User entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static UserInfo ToDataInfo(this User entity)
@@ -274,7 +362,47 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 UserName = entity.UserName,
-                HoVaTen = entity.HoVaTen,
+                HoVaTen = entity.HoVaTen
+            };
+        }
+    }
+
+    public static class UserRoleExtension
+    {
+        public static UserRoleResult ToIfNotNullDataResult(this UserRole entity)
+        {
+            return entity?.ToDataResult();
+        }
+
+        public static UserRoleResult ToDataResult(this UserRole entity)
+        {
+            return new UserRoleResult
+            {
+                Id = entity.Id,
+                UserId = entity.UserId,
+                UserInfo = entity.User.ToIfNotNullDataInfo(),
+                RoleId = entity.RoleId,
+                RoleInfo = entity.Role.ToIfNotNullDataInfo(),
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
+
+        public static UserRoleInfo ToIfNotNullDataInfo(this UserRole entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static UserRoleInfo ToDataInfo(this UserRole entity)
+        {
+            return new UserRoleInfo
+            {
+                Id = entity.Id,
+                UserInfo = entity.User.ToIfNotNullDataInfo(),
+                RoleInfo = entity.Role.ToIfNotNullDataInfo()
             };
         }
     }
@@ -283,7 +411,7 @@ namespace AnThinhPhat.Entities
     {
         public static LinhVucVanBanResult ToIfNotNullDataResult(this LinhVucVanBan entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static LinhVucVanBanResult ToDataResult(this LinhVucVanBan entity)
@@ -297,13 +425,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static LinhVucVanBanInfo ToIfNotNullDataInfo(this LinhVucVanBanResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static LinhVucVanBanInfo ToDataInfo(this LinhVucVanBanResult entity)
@@ -311,7 +439,7 @@ namespace AnThinhPhat.Entities
             return new LinhVucVanBanInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten,
+                Name = entity.Ten
             };
         }
     }
@@ -320,7 +448,7 @@ namespace AnThinhPhat.Entities
     {
         public static LinhVucCongViecResult ToIfNotNullDataResult(this LinhVucCongViec entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static LinhVucCongViecResult ToDataResult(this LinhVucCongViec entity)
@@ -334,13 +462,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static LinhVucCongViecInfo ToIfNotNullDataInfo(this LinhVucCongViecResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static LinhVucCongViecInfo ToDataInfo(this LinhVucCongViecResult entity)
@@ -348,7 +476,21 @@ namespace AnThinhPhat.Entities
             return new LinhVucCongViecInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten,
+                Name = entity.Ten
+            };
+        }
+
+        public static LinhVucCongViecInfo ToIfNotNullDataInfo(this LinhVucCongViec entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static LinhVucCongViecInfo ToDataInfo(this LinhVucCongViec entity)
+        {
+            return new LinhVucCongViecInfo
+            {
+                Id = entity.Id,
+                Name = entity.Ten
             };
         }
     }
@@ -357,7 +499,7 @@ namespace AnThinhPhat.Entities
     {
         public static LinhVucThuTucResult ToIfNotNullDataResult(this LinhVucThuTuc entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static LinhVucThuTucResult ToDataResult(this LinhVucThuTuc entity)
@@ -371,13 +513,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static LinhVucThuTucInfo ToIfNotNullDataInfo(this LinhVucThuTucResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static LinhVucThuTucInfo ToDataInfo(this LinhVucThuTucResult entity)
@@ -385,7 +527,7 @@ namespace AnThinhPhat.Entities
             return new LinhVucThuTucInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten,
+                Name = entity.Ten
             };
         }
     }
@@ -394,7 +536,7 @@ namespace AnThinhPhat.Entities
     {
         public static LoaiVanBanResult ToIfNotNullDataResult(this LoaiVanBan entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static LoaiVanBanResult ToDataResult(this LoaiVanBan entity)
@@ -408,13 +550,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static LoaiVanBanInfo ToIfNotNullDataInfo(this LoaiVanBanResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static LoaiVanBanInfo ToDataInfo(this LoaiVanBanResult entity)
@@ -422,7 +564,7 @@ namespace AnThinhPhat.Entities
             return new LoaiVanBanInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten,
+                Name = entity.Ten
             };
         }
     }
@@ -431,7 +573,7 @@ namespace AnThinhPhat.Entities
     {
         public static MucDoHoanThanhResult ToIfNotNullDataResult(this MucDoHoanThanh entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static MucDoHoanThanhResult ToDataResult(this MucDoHoanThanh entity)
@@ -445,7 +587,7 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
     }
@@ -454,7 +596,7 @@ namespace AnThinhPhat.Entities
     {
         public static MucTinResult ToIfNotNullDataResult(this MucTin entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static MucTinResult ToDataResult(this MucTin entity)
@@ -468,7 +610,7 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
     }
@@ -477,7 +619,7 @@ namespace AnThinhPhat.Entities
     {
         public static NhomCoQuanResult ToIfNotNullDataResult(this NhomCoQuan entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static NhomCoQuanResult ToDataResult(this NhomCoQuan entity)
@@ -491,13 +633,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static NhomCoQuanInfo ToIfNotNullDataInfo(this NhomCoQuanResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static NhomCoQuanInfo ToDataInfo(this NhomCoQuanResult entity)
@@ -505,7 +647,7 @@ namespace AnThinhPhat.Entities
             return new NhomCoQuanInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten,
+                Name = entity.Ten
             };
         }
     }
@@ -514,7 +656,7 @@ namespace AnThinhPhat.Entities
     {
         public static RoleResult ToIfNotNullDataResult(this Role entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static RoleResult ToDataResult(this Role entity)
@@ -528,13 +670,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static RoleInfo ToIfNotNullDataInfo(this RoleResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static RoleInfo ToDataInfo(this RoleResult entity)
@@ -542,13 +684,13 @@ namespace AnThinhPhat.Entities
             return new RoleInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten,
+                Name = entity.Ten
             };
         }
 
         public static RoleInfo ToIfNotNullDataInfo(this Role entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static RoleInfo ToDataInfo(this Role entity)
@@ -556,7 +698,7 @@ namespace AnThinhPhat.Entities
             return new RoleInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten,
+                Name = entity.Ten
             };
         }
     }
@@ -565,7 +707,7 @@ namespace AnThinhPhat.Entities
     {
         public static TacNghiepCoQuanLienQuanResult ToIfNotNullDataResult(this TacNghiep_CoQuanLienQuan entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static TacNghiepCoQuanLienQuanResult ToDataResult(this TacNghiep_CoQuanLienQuan entity)
@@ -581,7 +723,7 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
     }
@@ -590,7 +732,7 @@ namespace AnThinhPhat.Entities
     {
         public static TacNghiepResult ToIfNotNullDataResult(this TacNghiep entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static TacNghiepResult ToDataResult(this TacNghiep entity)
@@ -606,13 +748,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static TacNghiepInfo ToIfNotNullDataInfo(this TacNghiepResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static TacNghiepInfo ToDataInfo(this TacNghiepResult entity)
@@ -620,7 +762,21 @@ namespace AnThinhPhat.Entities
             return new TacNghiepInfo
             {
                 Id = entity.Id,
-                NoiDung = entity.NoiDung,
+                NoiDung = entity.NoiDung
+            };
+        }
+
+        public static TacNghiepInfo ToIfNotNullDataInfo(this TacNghiep entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static TacNghiepInfo ToDataInfo(this TacNghiep entity)
+        {
+            return new TacNghiepInfo
+            {
+                Id = entity.Id,
+                NoiDung = entity.NoiDung
             };
         }
     }
@@ -629,7 +785,7 @@ namespace AnThinhPhat.Entities
     {
         public static TacNghiepTinhHinhThucHienResult ToIfNotNullDataResult(this TacNghiep_TinhHinhThucHien entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static TacNghiepTinhHinhThucHienResult ToDataResult(this TacNghiep_TinhHinhThucHien entity)
@@ -647,15 +803,16 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
     }
+
     public static class TacNghiepYKienCoQuanExtension
     {
         public static TacNghiepYKienCoQuanResult ToIfNotNullDataResult(this TacNghiep_YKienCoQuan entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static TacNghiepYKienCoQuanResult ToDataResult(this TacNghiep_YKienCoQuan entity)
@@ -672,7 +829,7 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
     }
@@ -681,7 +838,7 @@ namespace AnThinhPhat.Entities
     {
         public static TapTinCongViecResult ToIfNotNullDataResult(this TapTinCongViec entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static TapTinCongViecResult ToDataResult(this TapTinCongViec entity)
@@ -690,15 +847,15 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 HoSoCongViecId = entity.HoSoCongViecId,
-                HoSoCongViecInfo = entity.HoSoCongViec.ToIfNotNullDataResult().ToIfNotNullDataInfo(),
+                HoSoCongViecInfo = entity.HoSoCongViec.ToIfNotNullDataInfo(),
                 Url = entity.Url,
                 UserUploadId = entity.UserUploadId,
-                UserInfo = entity.User.ToIfNotNullDataResult().ToIfNotNullDataInfo(),
+                UserInfo = entity.User.ToIfNotNullDataInfo(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
     }
@@ -707,7 +864,7 @@ namespace AnThinhPhat.Entities
     {
         public static TapTinTacNghiepResult ToIfNotNullDataResult(this TapTinTacNghiep entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static TapTinTacNghiepResult ToDataResult(this TapTinTacNghiep entity)
@@ -716,15 +873,15 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 TacNghiepId = entity.TacNghiepId,
-                TacNghiepInfo = entity.TacNghiep.ToIfNotNullDataResult().ToIfNotNullDataInfo(),
+                TacNghiepInfo = entity.TacNghiep.ToIfNotNullDataInfo(),
                 Url = entity.Url,
                 UserUploadId = entity.UserUploadId,
-                UserInfo = entity.User.ToIfNotNullDataResult().ToIfNotNullDataInfo(),
+                UserInfo = entity.User.ToIfNotNullDataInfo(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
     }
@@ -733,7 +890,7 @@ namespace AnThinhPhat.Entities
     {
         public static TapTinThuTucResult ToIfNotNullDataResult(this TapTinThuTuc entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static TapTinThuTucResult ToDataResult(this TapTinThuTuc entity)
@@ -742,23 +899,24 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 ThuTucId = entity.ThuTucId,
-                ThuTucInfo = entity.ThuTuc.ToIfNotNullDataResult().ToIfNotNullDataInfo(),
+                ThuTucInfo = entity.ThuTuc.ToIfNotNullDataInfo(),
                 Url = entity.Url,
                 UserUploadId = entity.UserUploadId,
-                UserInfo = entity.User.ToIfNotNullDataResult().ToIfNotNullDataInfo(),
+                UserInfo = entity.User.ToIfNotNullDataInfo(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
     }
+
     public static class ThuTucExtension
     {
         public static ThuTucResult ToIfNotNullDataResult(this ThuTuc entity)
         {
-            return entity == null ? null : entity.ToDataResult();
+            return entity?.ToDataResult();
         }
 
         public static ThuTucResult ToDataResult(this ThuTuc entity)
@@ -777,13 +935,13 @@ namespace AnThinhPhat.Entities
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy
             };
         }
 
         public static ThuTucInfo ToIfNotNullDataInfo(this ThuTucResult entity)
         {
-            return entity == null ? null : entity.ToDataInfo();
+            return entity?.ToDataInfo();
         }
 
         public static ThuTucInfo ToDataInfo(this ThuTucResult entity)
@@ -793,7 +951,23 @@ namespace AnThinhPhat.Entities
                 Id = entity.Id,
                 MaThuTuc = entity.MaThuTuc,
                 TenThuTuc = entity.TenThuTuc,
-                NgayBanHanh = entity.NgayBanHanh,
+                NgayBanHanh = entity.NgayBanHanh
+            };
+        }
+
+        public static ThuTucInfo ToIfNotNullDataInfo(this ThuTuc entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static ThuTucInfo ToDataInfo(this ThuTuc entity)
+        {
+            return new ThuTucInfo
+            {
+                Id = entity.Id,
+                MaThuTuc = entity.MaThuTuc,
+                TenThuTuc = entity.TenThuTuc,
+                NgayBanHanh = entity.NgayBanHanh
             };
         }
     }

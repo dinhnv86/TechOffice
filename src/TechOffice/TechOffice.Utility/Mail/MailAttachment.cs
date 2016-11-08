@@ -11,46 +11,57 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Text;
 
 namespace AnThinhPhat.Utilities
 {
     public class MailAttachment
     {
-        private MemoryStream _stream;
         /// <summary>
-        /// The data memory stream to use
+        ///     Construct a mail attachment form a byte array
         /// </summary>
-        public MemoryStream Stream
+        /// <param name="data">Bytes to attach as a file</param>
+        /// <param name="filename">Logical filename for attachment</param>
+        public MailAttachment(byte[] data, string filename)
         {
-            get { return _stream; }
-            set { _stream = value; }
-        }
-
-        private string _filename;
-        /// <summary>
-        /// Gets the original filename for this attachment
-        /// </summary>
-        public string Filename
-        {
-            get { return _filename; }
-            set { _filename = value; }
-        }
-
-        private string _mediaType;
-        /// <summary>
-        /// Gets the attachment type: Bytes or String
-        /// </summary>
-        public string MediaType
-        {
-            get { return _mediaType; }
-            set { _mediaType = value; }
+            Stream = new MemoryStream(data);
+            Filename = filename;
+            MediaType = MediaTypeNames.Application.Octet;
         }
 
         /// <summary>
-        /// Gets the file for this attachment (as a new attachment)
+        ///     Construct a mail attachment from a string
+        /// </summary>
+        /// <param name="data">String to attach as a file</param>
+        /// <param name="filename">Logical filename for attachment</param>
+        public MailAttachment(string data, string filename)
+        {
+            Stream = new MemoryStream(Encoding.ASCII.GetBytes(data));
+            Filename = filename;
+            MediaType = MediaTypeNames.Text.Html;
+        }
+
+        /// <summary>
+        ///     The data memory stream to use
+        /// </summary>
+        public MemoryStream Stream { get; set; }
+
+        /// <summary>
+        ///     Gets the original filename for this attachment
+        /// </summary>
+        public string Filename { get; set; }
+
+        /// <summary>
+        ///     Gets the attachment type: Bytes or String
+        /// </summary>
+        public string MediaType { get; set; }
+
+        /// <summary>
+        ///     Gets the file for this attachment (as a new attachment)
         /// </summary>
         public Attachment File
         {
@@ -58,36 +69,11 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Gets the length of this attachement data
+        ///     Gets the length of this attachement data
         /// </summary>
         public double Size
         {
-            get { return this.Stream.Length; }
+            get { return Stream.Length; }
         }
-
-        /// <summary>
-        /// Construct a mail attachment form a byte array
-        /// </summary>
-        /// <param name="data">Bytes to attach as a file</param>
-        /// <param name="filename">Logical filename for attachment</param>
-        public MailAttachment(byte[] data, string filename)
-        {
-            this.Stream = new MemoryStream(data);
-            this.Filename = filename;
-            this.MediaType = MediaTypeNames.Application.Octet;
-        }
-
-        /// <summary>
-        /// Construct a mail attachment from a string
-        /// </summary>
-        /// <param name="data">String to attach as a file</param>
-        /// <param name="filename">Logical filename for attachment</param>
-        public MailAttachment(string data, string filename)
-        {
-            this.Stream = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(data));
-            this.Filename = filename;
-            this.MediaType = MediaTypeNames.Text.Html;
-        }
-
     }
 }

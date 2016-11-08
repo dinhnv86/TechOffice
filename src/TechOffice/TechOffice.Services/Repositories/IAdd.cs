@@ -14,17 +14,13 @@
 
 using System.Threading.Tasks;
 
-/// <summary>
-/// The Services namespace.
-/// </summary>
-
-namespace AnThinhPhat.Services
+namespace AnThinhPhat.Services.Repositories
 {
     /// <summary>
     ///     Interface IAdd
     /// </summary>
     /// <typeparam name="TEntity">The type of the t entity.</typeparam>
-    public interface IAdd<TEntity> where TEntity : class
+    public interface IAdd<in TEntity> where TEntity : class
     {
         /// <summary>
         ///     Adds the specified entity.

@@ -4,7 +4,7 @@ namespace AnThinhPhat.Entities.Results
 {
     public class TacNghiepResult : BaseResult
     {
-        public DateTime? NgayHetHan { get; set; }
+        public DateTime NgayHetHan { get; set; }
 
         public DateTime? NgayHoanThanh { get; set; }
 

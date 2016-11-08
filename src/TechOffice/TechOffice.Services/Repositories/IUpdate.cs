@@ -14,11 +14,7 @@
 
 using System.Threading.Tasks;
 
-/// <summary>
-/// The Services namespace.
-/// </summary>
-
-namespace AnThinhPhat.Services
+namespace AnThinhPhat.Services.Repositories
 {
     /// <summary>
     ///     Interface IUpdate

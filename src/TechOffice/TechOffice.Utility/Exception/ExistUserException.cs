@@ -11,26 +11,29 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+
 using System;
 
 /// <summary>
 /// The Utilities namespace.
 /// </summary>
+
 namespace AnThinhPhat.Utilities
 {
     /// <summary>
-    /// Class ExistUserException.
+    ///     Class ExistUserException.
     /// </summary>
     public class ExistUserException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExistUserException" /> class.
+        ///     Initializes a new instance of the <see cref="ExistUserException" /> class.
         /// </summary>
-        public ExistUserException():base()
+        public ExistUserException()
         {
         }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExistUserException" /> class.
+        ///     Initializes a new instance of the <see cref="ExistUserException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
         public ExistUserException(string message)
@@ -39,14 +42,13 @@ namespace AnThinhPhat.Utilities
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExistUserException" /> class.
+        ///     Initializes a new instance of the <see cref="ExistUserException" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="ex">The ex.</param>
         public ExistUserException(string message, Exception ex)
             : base(message, ex)
         {
-
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace AnThinhPhat.WebUI
 {
@@ -12,16 +8,16 @@ namespace AnThinhPhat.WebUI
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                "~/Scripts/jquery-{version}.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/respond.min.js"));
+                "~/Scripts/bootstrap.min.js",
+                "~/Scripts/respond.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/unobtrusive").Include(
                 "~/Scripts/jquery.unobtrusive-ajax.min.js",
@@ -29,10 +25,10 @@ namespace AnThinhPhat.WebUI
                 "~/Scripts/jquery.validate.unobtrusive.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.min.css",
-                      "~/Content/bootstrap-theme.min.css",
-                      "~/Content/font-awesome.min.css",
-                      "~/Content/style.css"));
+                "~/Content/bootstrap.min.css",
+                "~/Content/bootstrap-theme.min.css",
+                "~/Content/font-awesome.min.css",
+                "~/Content/style.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").
                 Include("~/Scripts/jquery-ui-{version}.js"));

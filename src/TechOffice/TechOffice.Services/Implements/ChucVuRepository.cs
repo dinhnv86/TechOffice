@@ -12,26 +12,19 @@ namespace AnThinhPhat.Services.Implements
 {
     /// <summary>
     /// </summary>
-    public class ChuVuRepository : IChuVuRepository
+    public class ChucVuRepository : DbExecute, IChucVuRepository
     {
         /// <summary>
-        ///     The _log service
-        /// </summary>
-        private readonly ILogService _logService;
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ChuVuRepository" /> class.
+        ///     Initializes a new instance of the <see cref="ChucVuRepository" /> class.
         /// </summary>
         /// <param name="logService">The log service.</param>
-        public ChuVuRepository(ILogService logService)
+        public ChucVuRepository(ILogService logService) : base(logService)
         {
-            _logService = logService;
         }
 
         public SaveResult Add(ChucVuResult entity)
         {
-            SaveResult result;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -44,21 +37,14 @@ namespace AnThinhPhat.Services.Implements
                     add.LastUpdated = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-            return result;
+            });
         }
 
         public async Task<SaveResult> AddAsync(ChucVuResult entity)
         {
-            SaveResult result;
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -71,21 +57,14 @@ namespace AnThinhPhat.Services.Implements
                     add.LastUpdated = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-            return result;
+            });
         }
 
         public SaveResult AddRange(IEnumerable<ChucVuResult> entities)
         {
-            SaveResult result;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -103,22 +82,14 @@ namespace AnThinhPhat.Services.Implements
                         context.Entry(add).State = EntityState.Added;
                     }
 
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         public async Task<SaveResult> AddRangeAsync(IEnumerable<ChucVuResult> entities)
         {
-            SaveResult result;
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -136,97 +107,69 @@ namespace AnThinhPhat.Services.Implements
                         context.Entry(add).State = EntityState.Added;
                     }
 
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         public SaveResult Delete(ChucVuResult entity)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
                     var chucvu = context.ChucVus.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
                     chucvu.IsDeleted = true;
+                    chucvu.LastUpdatedBy = entity.LastUpdatedBy;
+                    chucvu.LastUpdated = DateTime.Now;
 
                     context.Entry(chucvu).State = EntityState.Modified;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         public async Task<SaveResult> DeleteAsync(ChucVuResult entity)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
                     var chucvu = context.ChucVus.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
                     chucvu.IsDeleted = true;
+                    chucvu.LastUpdatedBy = entity.LastUpdatedBy;
+                    chucvu.LastUpdated = DateTime.Now;
 
                     context.Entry(chucvu).State = EntityState.Modified;
 
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         public SaveResult DeleteBy(int id)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
                     var chucvu = context.ChucVus.Single(x => x.Id == id && x.IsDeleted == false);
+
                     chucvu.IsDeleted = true;
+                    chucvu.LastUpdated = DateTime.Now;
 
                     context.Entry(chucvu).State = EntityState.Modified;
 
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         public async Task<SaveResult> DeleteByAsync(int id)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -235,54 +178,34 @@ namespace AnThinhPhat.Services.Implements
 
                     context.Entry(chucvu).State = EntityState.Modified;
 
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         public IEnumerable<ChucVuResult> GetAll()
         {
-            IEnumerable<ChucVuResult> results = null;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    results = (from item in context.ChucVus
+                    return (from item in context.ChucVus
                         where item.IsDeleted == false
-                        select new ChucVuResult
-                        {
-                            Id = item.Id,
-                            Ten = item.Ten,
-                            MoTa = item.MoTa,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToList();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .ToList();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-            }
-
-            return results;
+            });
         }
 
         public async Task<IEnumerable<ChucVuResult>> GetAllAsync()
         {
-            IEnumerable<ChucVuResult> results = null;
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    results = await (from item in context.ChucVus
+                    return await (from item in context.ChucVus
                         where item.IsDeleted == false
                         select new ChucVuResult
                         {
@@ -294,23 +217,16 @@ namespace AnThinhPhat.Services.Implements
                             LastUpdated = item.LastUpdated
                         }).ToListAsync();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-            }
-
-            return results;
+            });
         }
 
         public ChucVuResult Single(int id)
         {
-            ChucVuResult result = null;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    result = (from item in context.ChucVus
+                    return (from item in context.ChucVus
                         where item.IsDeleted == false &&
                               item.Id == id
                         select new ChucVuResult
@@ -323,23 +239,16 @@ namespace AnThinhPhat.Services.Implements
                             LastUpdated = item.LastUpdated
                         }).Single();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-            }
-
-            return result;
+            });
         }
 
         public async Task<ChucVuResult> SingleAsync(int id)
         {
-            ChucVuResult result = null;
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    result = await (from item in context.ChucVus
+                    return await (from item in context.ChucVus
                         where item.IsDeleted == false &&
                               item.Id == id
                         select new ChucVuResult
@@ -352,20 +261,12 @@ namespace AnThinhPhat.Services.Implements
                             LastUpdated = item.LastUpdated
                         }).SingleAsync();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-            }
-
-            return result;
+            });
         }
 
         public SaveResult Update(ChucVuResult entity)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -379,23 +280,14 @@ namespace AnThinhPhat.Services.Implements
 
                     context.Entry(update).State = EntityState.Modified;
 
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         public async Task<SaveResult> UpdateAsync(ChucVuResult entity)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -409,16 +301,9 @@ namespace AnThinhPhat.Services.Implements
 
                     context.Entry(update).State = EntityState.Modified;
 
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
     }
 }

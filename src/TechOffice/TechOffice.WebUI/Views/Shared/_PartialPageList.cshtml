@@ -1,0 +1,71 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<AnThinhPhat.ViewModel.BaseDataViewModel>
+@{
+    var ajaxPaging = new AjaxOptions
+    {
+        UpdateTargetId = "tblMST",
+        HttpMethod = "GET"
+    };
+}
+<link href="~/Content/main.css" rel="stylesheet"/>
+
+<div id="tblMST" class="table-responsive">
+    <table class="table table-bordered">
+        <thead class="header">
+        <tr>
+            <th class="text-center">STT</th>
+            <th class="text-center">Tên</th>
+            <th class="text-center">Mô tả</th>
+            <th class="text-center">Người cập nhật</th>
+            <th class="text-center">Ngày cập nhật </th>
+            <th class="text-center"></th>
+        </tr>
+        </thead>
+        @if (Model.Count > 0)
+        {
+            var iCount = 0;
+            <tbody>
+            @foreach (var item in Model)
+            {
+                iCount++;
+                <tr>
+                    <td class="text-center">@iCount</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.LastUpdatedBy</td>
+                    <td>@Html.DisplayFor(x => item.LastUpdated, "DisplayDateTime")</td>
+                    <td class="link-action">
+                        @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn-edit"}) |
+                        <a href="#" data-url='@Url.Action("Delete", new {id = item.Id})' id="lnkDelete_@item.Id" data-toggle="popover">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6">
+                    <div id="contentPager" class="pull-right">
+                        @Html.PagedListPager(Model, page => Url.Action("List", new {page}),
+                            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxPaging))
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        }
+        else
+        {
+            <tr>
+                <td colspan="6">
+                    No rows found
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<script>
+    try {
+        onRegisterPopover();
+    } catch (err) {
+    };
+</script>
