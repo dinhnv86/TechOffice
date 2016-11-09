@@ -336,6 +336,8 @@ namespace AnThinhPhat.Entities
                 HoVaTen = entity.HoVaTen,
                 IsLocked = entity.IsLocked,
                 UserName = entity.UserName,
+                ChucVuId = entity.ChucVuId,
+                ChucVuInfo = entity.ChucVu.ToIfNotNullDataInfo(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,

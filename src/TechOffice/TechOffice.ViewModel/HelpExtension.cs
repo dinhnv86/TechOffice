@@ -37,6 +37,7 @@ namespace AnThinhPhat.ViewModel
                 Id = entity.Id,
                 UserName = entity.UserName,
                 ChucVuId = entity.ChucVuId,
+                ChucVuInfo = entity.ChucVuInfo,
                 FullName = entity.HoVaTen,
                 Password = entity.Password,
                 IsLocked = entity.IsLocked,
