@@ -3723,6 +3723,10 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
+.navbar {
+    background: url(../images/menu_ngang.jpg) repeat-x left;
+}
+
 @media all and (min-width:300px) {
     .btn-width-md {
         min-width: 100px;

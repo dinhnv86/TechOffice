@@ -44,11 +44,14 @@
     <Compile Include="BaseDataViewModel.cs" />
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="BaseLogViewModel.cs" />
+    <Compile Include="CoQuan\CoQuanViewModel.cs" />
     <Compile Include="HelpExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThuTuc\InitThuTucViewModel.cs" />
     <Compile Include="Users\AddUserViewModel.cs" />
     <Compile Include="Users\InitUserViewModel.cs" />
     <Compile Include="Users\UserLoginViewModel.cs" />
+    <Compile Include="VanBan\InitVanBanViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechOffice.Entities\AnThinhPhat.Entities.csproj">

@@ -22,10 +22,10 @@ namespace AnThinhPhat.Entities
             this.HoSoCongViecs1 = new HashSet<HoSoCongViec>();
             this.TapTinCongViecs = new HashSet<TapTinCongViec>();
             this.TapTinTacNghieps = new HashSet<TapTinTacNghiep>();
-            this.TapTinVanBans = new HashSet<TapTinVanBan>();
-            this.UserRoles = new HashSet<UserRole>();
-            this.TapTinYKienCoQuans = new HashSet<TapTinYKienCoQuan>();
             this.TapTinThuTucs = new HashSet<TapTinThuTuc>();
+            this.TapTinVanBans = new HashSet<TapTinVanBan>();
+            this.TapTinYKienCoQuans = new HashSet<TapTinYKienCoQuan>();
+            this.UserRoles = new HashSet<UserRole>();
         }
     
         public int Id { get; set; }
@@ -52,12 +52,12 @@ namespace AnThinhPhat.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinTacNghiep> TapTinTacNghieps { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TapTinVanBan> TapTinVanBans { get; set; }
+        public virtual ICollection<TapTinThuTuc> TapTinThuTucs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<TapTinVanBan> TapTinVanBans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinYKienCoQuan> TapTinYKienCoQuans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TapTinThuTuc> TapTinThuTucs { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

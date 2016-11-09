@@ -1,3 +1,122 @@
-﻿@{
+﻿@model AnThinhPhat.ViewModel.VanBan.InitVanBanViewModel
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
+
+<!--start:body-->
+<div class="boxr" style="width:100%">
+    <h1 class="title title_ct"><span>Văn bản</span></h1>
+
+    <div class="pading">
+        <div class="entry form-horizontal">
+            @using (Html.BeginForm("Index", "VanBan", FormMethod.Get))
+            {
+                <div class="col-md-5">
+                    <label>Lĩnh vực</label>
+                    @Html.DropDownListFor(x => Model.LoaiVanBanId, new SelectList(Model.LoaiVanBanInfos, "Id", "Name"), "Tất cả lĩnh vực", htmlAttributes: new { @class = "form-control" })
+                    @*<select id="">
+                            <option>Tất cả lĩnh vực</option>
+                        </select>*@
+                    <label>Cơ quan ban hành</label>
+                    @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    @*<select id="">
+                            <option>Tất cả </option>
+                        </select>*@
+                </div>
+
+                <div class="col-md-5">
+                    <label>Năm ban hành</label>
+                    @Html.DropDownListFor(x => Model.NamBanHnahId, new SelectList(Model.NamBanHanhInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    @*<select id="">
+                            <option>Tất cả </option>
+                        </select>*@
+                </div>
+
+                <div class="col-md-2">
+                    <label>Số lượng kết quả</label>
+                    @Html.DropDownListFor(x => Model.PagingNumberId, new SelectList(Model.PagingNumberInfo.ToList(), "Number", "Number"), htmlAttributes: new { @class = "form-control" })
+                    @*<select id="">
+                            <option>20</option>
+                        </select>*@
+                </div>
+
+                <div class="col-md-7">
+                    <label>Tên văn bản</label>
+                    @Html.TextBoxFor(x => Model.TenVanBan, htmlAttributes: new { @class = "form-control" })
+                    @*<input type="text" />*@
+                </div>
+
+                <div class="col-md-12 form-inline">
+                    <label>Tìm trong: </label>
+                    <label>Số/Kí hiệu văn bản</label>
+                    @Html.CheckBoxFor(x => x.TimTrongSoHieu, htmlAttributes: new { @class = "form-control" })
+                    @*<input type="checkbox" value="" />*@
+                    <label>Trích yếu văn bản</label>
+                    @Html.CheckBoxFor(x => x.TimTrongTrichYeu, htmlAttributes: new { @class = "form-control" })
+                    @*<input type="checkbox" value="Trích yếu văn bản" />*@
+                    <label>Nội dung văn bản</label>
+                    @Html.CheckBoxFor(x => x.TimTrongNoiDung, htmlAttributes: new { @class = "form-control" })
+                    @*<input type="checkbox" value="Nội dung văn bản" />*@
+                </div>
+
+                <div class="col-md-2">
+                    <input type="submit" class="btn btn-primary btn-width-md" value="Tìm kiếm" />
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <h3><span style="font-size: x-large;">Danh sách văn bản</span></h3>
+    <div class="table_over">
+        <table style="width: 720px; border-collapse: collapse;" border="1" cellspacing="8" cellpadding="8">
+            <tbody>
+                <tr style="background-color: #d50100;" align="center" valign="middle">
+                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Số ký hiệu</span></span></strong></td>
+                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Ngày ban hành</span></span></strong></td>
+                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Trích yếu</span></span></strong></td>
+
+                </tr>
+                <tr align="center">
+                    <td><strong>46/2016CĐ - TTg</strong></td>
+                    <td>19/10/2016</td>
+                    <td>Về việc ban hành định mức phân bổ dự kiến chi thường xuyên ngân sách nhà nước</td>
+                </tr>
+                <tr align="center">
+                    <td><strong>46/2016CĐ - TTg</strong></td>
+                    <td>19/10/2016</td>
+                    <td>Về việc ban hành định mức phân bổ dự kiến chi thường xuyên ngân sách nhà nước</td>
+                </tr>
+                <tr align="center">
+                    <td><strong>46/2016CĐ - TTg</strong></td>
+                    <td>19/10/2016</td>
+                    <td>Về việc ban hành định mức phân bổ dự kiến chi thường xuyên ngân sách nhà nước</td>
+                </tr>
+                <tr align="center">
+                    <td><strong>46/2016CĐ - TTg</strong></td>
+                    <td>19/10/2016</td>
+                    <td>Về việc ban hành định mức phân bổ dự kiến chi thường xuyên ngân sách nhà nước</td>
+
+                </tr>
+                <tr align="center">
+                    <td><strong>46/2016CĐ - TTg</strong></td>
+                    <td>19/10/2016</td>
+                    <td>Về việc ban hành định mức phân bổ dự kiến chi thường xuyên ngân sách nhà nước</td>
+                </tr>
+                <tr align="center">
+                    <td><strong>46/2016CĐ - TTg</strong></td>
+                    <td>19/10/2016</td>
+                    <td>Về việc ban hành định mức phân bổ dự kiến chi thường xuyên ngân sách nhà nước</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <div class="scott">
+            <strong class="first active">1</strong> <a href="#">2</a> <a href="#">4</a> <a href="#4">5</a> <a href="#5">6</a> <a href="#6">7</a> <a href="#7">8</a> <a href="#8">9</a> <a href="#9">10</a> <a href="#1">Tiếp</a> <a href="#10" class="last">Cuối »</a>
+        </div>
+    </div>
+</div>
+<!--end:body-->

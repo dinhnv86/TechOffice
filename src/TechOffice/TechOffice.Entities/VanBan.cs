@@ -34,9 +34,9 @@ namespace AnThinhPhat.Entities
         public string LastUpdatedBy { get; set; }
     
         public virtual CoQuan CoQuan { get; set; }
+        public virtual LinhVucVanBan LinhVucVanBan { get; set; }
         public virtual LoaiVanBan LoaiVanBan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinVanBan> TapTinVanBans { get; set; }
-        public virtual LinhVucVanBan LinhVucVanBan { get; set; }
     }
 }

@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using PagedList;
 using System.Net;
+using AnThinhPhat.Entities;
+using AnThinhPhat.ViewModel.CoQuan;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -19,9 +21,16 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public ICoQuanRepository CoQuanRepository { get; set; }
 
+        [Inject]
+        public INhomCoQuanRepository NhomCoQuanRepository { get; set; }
+
         public ActionResult Index()
         {
-            return View();
+            var nhom = NhomCoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
+            var model = new CoQuanViewModel();
+            model.NhomCoQuanInfos = nhom;
+
+            return View(model);
         }
 
         /// <summary>
@@ -32,19 +41,25 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult List(int? page)
         {
-            var items = CoQuanRepository.GetAll().Select(x => x.ToDataViewModel()).ToList();
+            var nhom = NhomCoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
+            var items = CoQuanRepository.GetAll().Select(x => x.ToDataViewModel().Update(u =>
+            {
+                u.NhomCoQuanInfos = nhom;
+                u.NhomCoQuanInfo = NhomCoQuanRepository.Single(x.NhomCoQuanId).ToIfNotNullDataInfo();
+            })).ToList();
 
             var pageNumber = page ?? 1;
             return PartialView(items.ToPagedList(pageNumber, TechOfficeConfig.PAGESIZE));
         }
 
         [HttpPost]
-        public async Task<JsonResult> Create(BaseDataViewModel model)
+        public async Task<JsonResult> Create(CoQuanViewModel model)
         {
             return await ExecuteWithErrorHandling(async () =>
             {
                 var result = model.ToDataResult<CoQuanResult>().Update((u) =>
                {
+                   u.NhomCoQuanId = model.NhomCoQuanId;
                    u.CreatedBy = UserName;
                });
 

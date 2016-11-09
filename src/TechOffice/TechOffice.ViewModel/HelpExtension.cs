@@ -5,6 +5,7 @@ using System;
 using System.Reflection;
 using System.Linq;
 using AnThinhPhat.Entities.Infos;
+using AnThinhPhat.ViewModel.CoQuan;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -22,6 +23,22 @@ namespace AnThinhPhat.ViewModel
                 Id = entity.Id,
                 Name = entity.Ten,
                 Description = entity.MoTa,
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
+
+        public static CoQuanViewModel ToDataViewModel(this CoQuanResult entity)
+        {
+            return new CoQuanViewModel
+            {
+                Id = entity.Id,
+                Name = entity.Ten,
+                Description = entity.MoTa,
+                NhomCoQuanId = entity.NhomCoQuanId,
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -119,6 +136,12 @@ namespace AnThinhPhat.ViewModel
             action?.Invoke(entity);
 
             return entity;
+        }
+
+        public static string IfNotNull(this DataInfo entity, Func<DataInfo, string> func)
+        {
+            return entity == null ? string.Empty :
+            func(entity);
         }
     }
 }

@@ -30,6 +30,7 @@ namespace AnThinhPhat.Services.Implements
 
                     add.Ten = entity.Ten;
                     add.MoTa = entity.MoTa;
+                    add.NhomCoQuanId = entity.NhomCoQuanId;
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
                     add.CreateDate = DateTime.Now;
@@ -50,6 +51,7 @@ namespace AnThinhPhat.Services.Implements
 
                     add.Ten = entity.Ten;
                     add.MoTa = entity.MoTa;
+                    add.NhomCoQuanId = entity.NhomCoQuanId;
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
                     add.CreateDate = DateTime.Now;
@@ -73,6 +75,7 @@ namespace AnThinhPhat.Services.Implements
 
                         add.Ten = entity.Ten;
                         add.MoTa = entity.MoTa;
+                        add.NhomCoQuanId = entity.NhomCoQuanId;
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
                         add.CreateDate = DateTime.Now;
@@ -98,6 +101,7 @@ namespace AnThinhPhat.Services.Implements
 
                         add.Ten = entity.Ten;
                         add.MoTa = entity.MoTa;
+                        add.NhomCoQuanId = entity.NhomCoQuanId;
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
                         add.CreateDate = DateTime.Now;
@@ -187,16 +191,11 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.CoQuans
-                        where item.IsDeleted == false
-                        select new CoQuanResult
-                        {
-                            Id = item.Id,
-                            Ten = item.Ten,
-                            MoTa = item.MoTa,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToList();
+                            where item.IsDeleted == false
+                            select item)
+                            .MakeQueryToDatabase()
+                            .Select(x => x.ToDataResult())
+                            .ToList();
                 }
             });
         }
@@ -208,16 +207,16 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.CoQuans
-                        where item.IsDeleted == false
-                        select new CoQuanResult
-                        {
-                            Id = item.Id,
-                            Ten = item.Ten,
-                            MoTa = item.MoTa,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToListAsync();
+                                  where item.IsDeleted == false
+                                  select new CoQuanResult
+                                  {
+                                      Id = item.Id,
+                                      Ten = item.Ten,
+                                      MoTa = item.MoTa,
+                                      IsDeleted = item.IsDeleted,
+                                      LastUpdatedBy = item.LastUpdatedBy,
+                                      LastUpdated = item.LastUpdated
+                                  }).ToListAsync();
                 }
             });
         }
@@ -229,17 +228,17 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.CoQuans
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select new CoQuanResult
-                        {
-                            Id = item.Id,
-                            Ten = item.Ten,
-                            MoTa = item.MoTa,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).Single();
+                            where item.IsDeleted == false &&
+                                  item.Id == id
+                            select new CoQuanResult
+                            {
+                                Id = item.Id,
+                                Ten = item.Ten,
+                                MoTa = item.MoTa,
+                                IsDeleted = item.IsDeleted,
+                                LastUpdatedBy = item.LastUpdatedBy,
+                                LastUpdated = item.LastUpdated
+                            }).Single();
                 }
             });
         }
@@ -251,17 +250,17 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.CoQuans
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select new CoQuanResult
-                        {
-                            Id = item.Id,
-                            Ten = item.Ten,
-                            MoTa = item.MoTa,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).SingleAsync();
+                                  where item.IsDeleted == false &&
+                                        item.Id == id
+                                  select new CoQuanResult
+                                  {
+                                      Id = item.Id,
+                                      Ten = item.Ten,
+                                      MoTa = item.MoTa,
+                                      IsDeleted = item.IsDeleted,
+                                      LastUpdatedBy = item.LastUpdatedBy,
+                                      LastUpdated = item.LastUpdated
+                                  }).SingleAsync();
                 }
             });
         }

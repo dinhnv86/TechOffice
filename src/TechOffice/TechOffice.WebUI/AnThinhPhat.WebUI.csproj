@@ -358,6 +358,7 @@
     <Content Include="Views\Users\List.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RoleInfo.cshtml" />
+    <Content Include="Views\CoQuan\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
