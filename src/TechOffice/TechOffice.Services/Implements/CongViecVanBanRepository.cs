@@ -29,6 +29,7 @@ namespace AnThinhPhat.Services.Implements
                     add.NoiDung = entity.NoiDung;
                     add.SoVanBan = entity.SoVanBan;
                     add.TenCoQuan = entity.TenCoQuan;
+
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
                     add.CreateDate = DateTime.Now;
@@ -53,6 +54,7 @@ namespace AnThinhPhat.Services.Implements
                     add.NoiDung = entity.NoiDung;
                     add.SoVanBan = entity.SoVanBan;
                     add.TenCoQuan = entity.TenCoQuan;
+
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
                     add.CreateDate = DateTime.Now;
@@ -81,6 +83,7 @@ namespace AnThinhPhat.Services.Implements
                         add.NoiDung = entity.NoiDung;
                         add.SoVanBan = entity.SoVanBan;
                         add.TenCoQuan = entity.TenCoQuan;
+
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
                         add.CreateDate = DateTime.Now;
@@ -109,6 +112,7 @@ namespace AnThinhPhat.Services.Implements
                         add.NoiDung = entity.NoiDung;
                         add.SoVanBan = entity.SoVanBan;
                         add.TenCoQuan = entity.TenCoQuan;
+
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
                         add.CreateDate = DateTime.Now;

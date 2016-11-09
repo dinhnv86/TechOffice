@@ -43,14 +43,14 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var result = model.ToDataResult<NhomCoQuanResult>().Update((u) =>
+                var cq = model.ToDataResult<NhomCoQuanResult>().Update((u) =>
                {
                    u.CreatedBy = UserName;
                });
 
                 return await ExecuteResultAsync(async () =>
                 {
-                    return await NhomCoQuanRepository.AddAsync(result);
+                    return await NhomCoQuanRepository.AddAsync(cq);
                 });
             });
         }
@@ -67,7 +67,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var cv = model.ToDataResult<NhomCoQuanResult>().Update((u) =>
+                var vq = model.ToDataResult<NhomCoQuanResult>().Update((u) =>
                {
                    u.Id = id;
                    u.LastUpdatedBy = UserName;
@@ -75,7 +75,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
                 return await ExecuteResultAsync(async () =>
                 {
-                    return await NhomCoQuanRepository.UpdateAsync(cv);
+                    return await NhomCoQuanRepository.UpdateAsync(vq);
                 });
             });
         }

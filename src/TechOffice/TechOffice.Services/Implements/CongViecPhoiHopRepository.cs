@@ -26,6 +26,7 @@ namespace AnThinhPhat.Services.Implements
 
                     add.HoSoCongViecId = entity.HoSoCongViecId;
                     add.UserId = entity.UserId;
+
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
                     add.CreateDate = DateTime.Now;
@@ -47,6 +48,7 @@ namespace AnThinhPhat.Services.Implements
 
                     add.HoSoCongViecId = entity.HoSoCongViecId;
                     add.UserId = entity.UserId;
+
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
                     add.CreateDate = DateTime.Now;
@@ -71,6 +73,7 @@ namespace AnThinhPhat.Services.Implements
                         add = context.CongViec_PhoiHop.Create();
                         add.HoSoCongViecId = entity.HoSoCongViecId;
                         add.UserId = entity.UserId;
+
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
                         add.CreateDate = DateTime.Now;
@@ -96,6 +99,7 @@ namespace AnThinhPhat.Services.Implements
                         add = context.CongViec_PhoiHop.Create();
                         add.HoSoCongViecId = entity.HoSoCongViecId;
                         add.UserId = entity.UserId;
+
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
                         add.CreateDate = DateTime.Now;

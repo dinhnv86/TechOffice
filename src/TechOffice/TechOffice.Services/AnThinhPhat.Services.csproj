@@ -68,6 +68,7 @@
     <Compile Include="Abstracts\IUserRoleRepository.cs" />
     <Compile Include="Abstracts\IUsersRepository.cs" />
     <Compile Include="DbExecute.cs" />
+    <Compile Include="Extension.cs" />
     <Compile Include="Implements\ChucVuRepository.cs" />
     <Compile Include="Implements\CongViecPhoiHopRepository.cs" />
     <Compile Include="Implements\CongViecQuaTrinhXuLyRepository.cs" />

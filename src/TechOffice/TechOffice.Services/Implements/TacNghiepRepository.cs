@@ -28,9 +28,10 @@ namespace AnThinhPhat.Services.Implements
                     add.NgayHoanThanh = entity.NgayHoanThanh;
                     add.NoiDung = entity.NoiDung;
                     add.NoiDungTraoDoi = entity.NoiDungTraoDoi;
+
                     add.IsDeleted = entity.IsDeleted;
-                    add.LastUpdatedBy = entity.LastUpdatedBy;
-                    add.LastUpdated = DateTime.Now;
+                    add.CreatedBy = entity.CreatedBy;
+                    add.CreateDate = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
                     return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
@@ -50,9 +51,10 @@ namespace AnThinhPhat.Services.Implements
                     add.NgayHoanThanh = entity.NgayHoanThanh;
                     add.NoiDung = entity.NoiDung;
                     add.NoiDungTraoDoi = entity.NoiDungTraoDoi;
+
                     add.IsDeleted = entity.IsDeleted;
-                    add.LastUpdatedBy = entity.LastUpdatedBy;
-                    add.LastUpdated = DateTime.Now;
+                    add.CreatedBy = entity.CreatedBy;
+                    add.CreateDate = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
@@ -75,9 +77,10 @@ namespace AnThinhPhat.Services.Implements
                         add.NgayHoanThanh = entity.NgayHoanThanh;
                         add.NoiDung = entity.NoiDung;
                         add.NoiDungTraoDoi = entity.NoiDungTraoDoi;
+
                         add.IsDeleted = entity.IsDeleted;
-                        add.LastUpdatedBy = entity.LastUpdatedBy;
-                        add.LastUpdated = DateTime.Now;
+                        add.CreatedBy = entity.CreatedBy;
+                        add.CreateDate = DateTime.Now;
 
                         context.Entry(add).State = EntityState.Added;
                     }
@@ -102,9 +105,10 @@ namespace AnThinhPhat.Services.Implements
                         add.NgayHoanThanh = entity.NgayHoanThanh;
                         add.NoiDung = entity.NoiDung;
                         add.NoiDungTraoDoi = entity.NoiDungTraoDoi;
+
                         add.IsDeleted = entity.IsDeleted;
-                        add.LastUpdatedBy = entity.LastUpdatedBy;
-                        add.LastUpdated = DateTime.Now;
+                        add.CreatedBy = entity.CreatedBy;
+                        add.CreateDate = DateTime.Now;
 
                         context.Entry(add).State = EntityState.Added;
                     }

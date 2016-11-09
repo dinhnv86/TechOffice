@@ -1,7 +1,10 @@
 ﻿using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
+using AnThinhPhat.ViewModel.Users;
 using System;
 using System.Reflection;
+using System.Linq;
+using AnThinhPhat.Entities.Infos;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -25,6 +28,63 @@ namespace AnThinhPhat.ViewModel
                 LastUpdated = entity.LastUpdated,
                 LastUpdatedBy = entity.LastUpdatedBy
             };
+        }
+
+        public static InitUserViewModel ToDataViewModel(this UserResult entity)
+        {
+            return new InitUserViewModel
+            {
+                Id = entity.Id,
+                UserName = entity.UserName,
+                ChucVuId = entity.ChucVuId,
+                FullName = entity.HoVaTen,
+                Password = entity.Password,
+                IsLocked = entity.IsLocked,
+
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
+
+        public static AddRoleInfoViewModel ToRoleViewModel(this RoleResult entity)
+        {
+            return entity == null ? null :
+                new AddRoleInfoViewModel
+                {
+                    Id = entity.Id,
+                    Name = entity.Ten,
+                    IsChecked = false,
+                };
+        }
+
+        public static UserResult ToUseResult(this AddUserViewModel entity)
+        {
+            return entity == null ? null :
+                  new UserResult
+                  {
+                      Id = entity.Id,
+                      UserName = entity.UserName,
+                      ChucVuId = entity.ChucVuId,
+                      HoVaTen = entity.FullName,
+                      UserRoles = entity.RoleInfos
+                      .Where(x => x.IsChecked)
+                      .Select(x => x.ToUserRoleResult())
+                  };
+        }
+
+        public static UserRoleInfo ToUserRoleResult(this AddRoleInfoViewModel entity)
+        {
+            return entity == null ? null :
+                new UserRoleInfo
+                {
+                    RoleInfo = new RoleInfo
+                    {
+                        Id = entity.Id
+                    },
+                };
         }
 
         public static TResult ToDataResult<TResult>(this BaseDataViewModel entity) where TResult : DataResult

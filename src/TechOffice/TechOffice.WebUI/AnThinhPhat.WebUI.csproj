@@ -345,6 +345,19 @@
     <Content Include="Views\LinhVucCongViec\List.cshtml" />
     <Content Include="Views\LinhVucThuTuc\Index.cshtml" />
     <Content Include="Views\LinhVucThuTuc\List.cshtml" />
+    <Content Include="Views\LoaiVanBan\Index.cshtml" />
+    <Content Include="Views\LoaiVanBan\List.cshtml" />
+    <Content Include="Views\MucDoHoanThanh\Index.cshtml" />
+    <Content Include="Views\MucDoHoanThanh\List.cshtml" />
+    <Content Include="Views\MucTin\Index.cshtml" />
+    <Content Include="Views\MucTin\List.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\List.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\List.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RoleInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

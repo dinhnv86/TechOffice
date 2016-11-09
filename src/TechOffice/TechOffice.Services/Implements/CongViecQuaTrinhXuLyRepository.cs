@@ -16,7 +16,6 @@ namespace AnThinhPhat.Services.Implements
         {
         }
 
-
         public SaveResult Add(CongViecQuaTrinhXuLyResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>
@@ -32,6 +31,7 @@ namespace AnThinhPhat.Services.Implements
                     add.NguoiThem = entity.NguoiThem;
                     add.NhacNho = entity.NhacNho;
                     add.NoiDung = entity.NoiDung;
+
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
                     add.CreateDate = DateTime.Now;
@@ -58,6 +58,7 @@ namespace AnThinhPhat.Services.Implements
                     add.NguoiThem = entity.NguoiThem;
                     add.NhacNho = entity.NhacNho;
                     add.NoiDung = entity.NoiDung;
+
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
                     add.CreateDate = DateTime.Now;
@@ -86,6 +87,7 @@ namespace AnThinhPhat.Services.Implements
                         add.NguoiThem = entity.NguoiThem;
                         add.NhacNho = entity.NhacNho;
                         add.NoiDung = entity.NoiDung;
+
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
                         add.CreateDate = DateTime.Now;
@@ -114,6 +116,7 @@ namespace AnThinhPhat.Services.Implements
                         add.NguoiThem = entity.NguoiThem;
                         add.NhacNho = entity.NhacNho;
                         add.NoiDung = entity.NoiDung;
+
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
                         add.CreateDate = DateTime.Now;

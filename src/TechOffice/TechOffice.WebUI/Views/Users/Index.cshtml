@@ -1,0 +1,7 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.ActionLink("Thêm tài khoản", "Create", "Users", null, htmlAttributes: new { @class = "btn btn-link" })
+
+@Html.Action("List")

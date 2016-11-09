@@ -1,0 +1,71 @@
+﻿@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
+}
+
+@model AnThinhPhat.ViewModel.Users.UserLoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        @using (Html.BeginForm())
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">
+                        <strong>Login</strong>
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                @Html.ValidationSummary("")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtEmail" class="control-label col-sm-2">Email<span class="required">*</span></label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.UserName, htmlAttributes: new { @class = "form-control", @id = "txtEmail" })
+                                @Html.ValidationMessageFor(x => x.UserName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtPassword" class="col-sm-2 control-label">Password<span class="required">*</span></label>
+                            <div class="col-sm-10">
+                                @Html.PasswordFor(u => u.Password, htmlAttributes: new { @class = "form-control", @id = "txtPassword" })
+                                @Html.ValidationMessageFor(u => u.Password)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input class="btn btn-primary" type="submit" name="btnSubmit" id="btnSubmit" value="Login" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-sm-3"></div>
+</div>
+@section Scripts{
+    <script src="~/Scripts/app/loading.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#txtEmail').focus();
+        });
+    </script>
+}
+
+
+
+
+
+

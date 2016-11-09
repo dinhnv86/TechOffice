@@ -12,5 +12,15 @@
 
         public static string HISTORY = "history";
         public static string CHART = "organization-chart";
+
+        //===================== MASTER URL ==========================//
+        public static string CHUCVU = "chucvu";
+        public static string COQUAN = "coquan";
+        public static string NHOMCOQUAN = "nhomcoquan";
+        public static string LINHVUCCONGVIEC = "linhvuccongviec";
+        public static string LINHVUCTHUTUC = "linhvucthutuc";
+        public static string LOAIVANBAN = "loaivanban";
+        public static string MUCDOHOANTHANH = "mucdohoanthanh";
+        //===================== MASTER URL ==========================//
     }
 }

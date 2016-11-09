@@ -1,4 +1,5 @@
 ﻿using AnThinhPhat.Entities.Infos;
+using System.Collections.Generic;
 
 namespace AnThinhPhat.Entities.Results
 {
@@ -15,5 +16,7 @@ namespace AnThinhPhat.Entities.Results
         public bool IsLocked { get; set; }
 
         public ChucVuInfo ChucVuInfo { get; set; }
+
+        public IEnumerable<UserRoleInfo> UserRoles { get; set; }
     }
 }

@@ -106,5 +106,7 @@ namespace AnThinhPhat.Services.Abstracts
         /// <param name="newPassword">The new password.</param>
         /// <returns></returns>
         Task<SaveResult> ResetPasswordAsync(int id, string newPassword);
+
+        SaveResult AddUserWithRoles(UserResult entity);
     }
 }

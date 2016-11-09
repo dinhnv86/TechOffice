@@ -1,0 +1,84 @@
+﻿
+@model AnThinhPhat.ViewModel.Users.AddUserViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    AjaxOptions ajaxOption = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        OnBegin = "onBegin",
+        OnComplete = "onComplete",
+        OnSuccess = "onSuccess",
+        OnFailure = "onFailure",
+    };
+}
+
+@using (Ajax.BeginForm(ajaxOption))
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8 has-feedback">
+                        @Html.TextBoxFor(model => model.FullName, htmlAttributes: new { @class = "form-control", @id = "txtFullName" })
+                        @Html.ValidationMessageFor(model => model.FullName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8 has-feedback">
+                        @Html.TextBoxFor(model => model.UserName, htmlAttributes: new { @class = "form-control", @id = "txtUserName" })
+                        @Html.ValidationMessageFor(model => model.UserName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ChucVuId, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8 has-feedback">
+                        @Html.DropDownListFor(model => model.ChucVuId, new SelectList(Model.ChucVuInfos, "Id", "Name"), "--- Chọn chức vụ ---", htmlAttributes: new { @class = "form-control", @id = "txtChucVu" })
+                        @Html.ValidationMessageFor(model => model.ChucVuId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                @Html.LabelFor(x => Model.RoleInfos)
+                            </div>
+                            <div class="panel-body">
+                                @Html.EditorFor(x => x.RoleInfos, "RoleInfo")
+                            </div>
+                        </div>
+                    </div>
+                    @*@Html.LabelFor(model => model.RoleInfos, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8 has-feedback">
+                        </div>*@
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-xs-12">
+                        <input type="submit" value="Draft" class="btn btn-primary btn-width-md cancel" id="btnSaveDraf" name="saveType" />
+                        <input type="submit" value="Submit" class="btn btn-primary btn-width-md" id="btnSaveSubmit" name="saveType" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        /*BEGIN NEW REQUEST*/
+        onBegin = function () {
+        }
+        onSuccess = function (data) {
+
+        }
+        onFailure = function (data) {
+        }
+        onComplete = function () {
+        }
+
+        /*END NEW REQUEST*/
+    </script>
+}

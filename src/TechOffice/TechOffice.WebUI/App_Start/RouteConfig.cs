@@ -55,20 +55,26 @@ namespace AnThinhPhat.WebUI
             //End Error
 
             //===========================================CRUD DATA=======================================//
-            routes.MapRoute("chucvu", "chucvu",
+            routes.MapRoute(UrlLink.CHUCVU, UrlLink.CHUCVU,
                 new { controller = "ChucVu", action = "Index", id = UrlParameter.Optional });
 
-            routes.MapRoute("coquan", "coquan",
+            routes.MapRoute(UrlLink.COQUAN, UrlLink.COQUAN,
                new { controller = "CoQuan", action = "Index", id = UrlParameter.Optional });
 
-            routes.MapRoute("nhomcoquan", "nhomcoquan",
+            routes.MapRoute(UrlLink.NHOMCOQUAN, UrlLink.NHOMCOQUAN,
               new { controller = "NhomCoQuan", action = "Index", id = UrlParameter.Optional });
 
-            routes.MapRoute("linhvuccongviec", "linhvuccongviec",
+            routes.MapRoute(UrlLink.LINHVUCCONGVIEC, UrlLink.LINHVUCCONGVIEC,
              new { controller = "LinhVucCongViec", action = "Index", id = UrlParameter.Optional });
 
-            routes.MapRoute("linhvucthutuc", "linhvucthutuc",
+            routes.MapRoute(UrlLink.LINHVUCTHUTUC, UrlLink.LINHVUCTHUTUC,
              new { controller = "LinhVucThuTuc", action = "Index", id = UrlParameter.Optional });
+
+            routes.MapRoute(UrlLink.LOAIVANBAN, UrlLink.LOAIVANBAN,
+             new { controller = "LoaiVanBan", action = "Index", id = UrlParameter.Optional });
+
+            routes.MapRoute(UrlLink.MUCDOHOANTHANH, UrlLink.MUCDOHOANTHANH,
+             new { controller = "MucDoHoanThanh", action = "Index", id = UrlParameter.Optional });
             //===========================================CRUD DATA=======================================//
 
             routes.MapRoute("Default", "{controller}/{action}/{id}",

@@ -60,9 +60,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountController.cs" />
+    <Compile Include="UsersController.cs" />
+    <Compile Include="MucDoHoanThanhController.cs" />
+    <Compile Include="LoaiVanBanController.cs" />
     <Compile Include="LinhVucThuTucController.cs" />
     <Compile Include="LinhVucCongViecController.cs" />
     <Compile Include="ChucVuController.cs" />
+    <Compile Include="MucTinController.cs" />
+    <Compile Include="RoleController.cs" />
     <Compile Include="NhomCoQuanController.cs" />
     <Compile Include="CoQuanController.cs" />
     <Compile Include="ErrorController.cs" />
