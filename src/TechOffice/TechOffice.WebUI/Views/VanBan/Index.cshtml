@@ -15,51 +15,36 @@
                 <div class="col-md-5">
                     <label>Lĩnh vực</label>
                     @Html.DropDownListFor(x => Model.LoaiVanBanId, new SelectList(Model.LoaiVanBanInfos, "Id", "Name"), "Tất cả lĩnh vực", htmlAttributes: new { @class = "form-control" })
-                    @*<select id="">
-                            <option>Tất cả lĩnh vực</option>
-                        </select>*@
                     <label>Cơ quan ban hành</label>
                     @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
-                    @*<select id="">
-                            <option>Tất cả </option>
-                        </select>*@
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <label>Năm ban hành</label>
                     @Html.DropDownListFor(x => Model.NamBanHnahId, new SelectList(Model.NamBanHanhInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
-                    @*<select id="">
-                            <option>Tất cả </option>
-                        </select>*@
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label>Số lượng kết quả</label>
                     @Html.DropDownListFor(x => Model.PagingNumberId, new SelectList(Model.PagingNumberInfo.ToList(), "Number", "Number"), htmlAttributes: new { @class = "form-control" })
-                    @*<select id="">
-                            <option>20</option>
-                        </select>*@
                 </div>
 
                 <div class="col-md-7">
                     <label>Tên văn bản</label>
                     @Html.TextBoxFor(x => Model.TenVanBan, htmlAttributes: new { @class = "form-control" })
-                    @*<input type="text" />*@
                 </div>
 
                 <div class="col-md-12 form-inline">
                     <label>Tìm trong: </label>
                     <label>Số/Kí hiệu văn bản</label>
-                    @Html.CheckBoxFor(x => x.TimTrongSoHieu, htmlAttributes: new { @class = "form-control" })
-                    @*<input type="checkbox" value="" />*@
-                    <label>Trích yếu văn bản</label>
-                    @Html.CheckBoxFor(x => x.TimTrongTrichYeu, htmlAttributes: new { @class = "form-control" })
-                    @*<input type="checkbox" value="Trích yếu văn bản" />*@
-                    <label>Nội dung văn bản</label>
-                    @Html.CheckBoxFor(x => x.TimTrongNoiDung, htmlAttributes: new { @class = "form-control" })
-                    @*<input type="checkbox" value="Nội dung văn bản" />*@
-                </div>
+                    @Html.CheckBoxFor(x => x.TimTrongSoHieu, htmlAttributes: new { @class = "form-control checkbox-inline" })
 
+                    <label>Trích yếu văn bản</label>
+                    @Html.CheckBoxFor(x => x.TimTrongTrichYeu, htmlAttributes: new { @class = "form-control checkbox-inline" })
+
+                    <label>Nội dung văn bản</label>
+                    @Html.CheckBoxFor(x => x.TimTrongNoiDung, htmlAttributes: new { @class = "form-control checkbox-inline" })
+                </div>
                 <div class="col-md-2">
                     <input type="submit" class="btn btn-primary btn-width-md" value="Tìm kiếm" />
                 </div>

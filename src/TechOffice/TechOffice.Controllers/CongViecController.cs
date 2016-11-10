@@ -32,8 +32,12 @@ namespace AnThinhPhat.WebUI.Controllers
                 model.ValueSearch = new ValueSearchViewModel();
 
             model.ValueSearch.UserId = userId ?? 0;
-            model.ValueSearch.Role = (EnumRoleExecute)role;
-            model.ValueSearch.Status = (EnumStatus)status;
+            if (role != null)
+                model.ValueSearch.Role = (EnumRoleExecute)role;
+
+            if (status != null)
+                model.ValueSearch.Status = (EnumStatus)status;
+
             model.ValueSearch.LinhVucCongViecId = linhVucCongViecId ?? 0;
 
             return View(model);
