@@ -67,17 +67,19 @@
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="HelperExtension.cs" />
+    <Compile Include="DataInfo.cs" />
     <Compile Include="HoSoCongViec.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataInfo.cs" />
     <Compile Include="Infos\ChucVuInfo.cs" />
     <Compile Include="Infos\CoQuanInfo.cs" />
     <Compile Include="Infos\HoSoCongViecInfo.cs" />
+    <Compile Include="Infos\LinhVucTacNghiepInfo.cs" />
     <Compile Include="Infos\LinhVucThuTucInfo.cs" />
     <Compile Include="Infos\LinhVucCongViecInfo.cs" />
     <Compile Include="Infos\LinhVucVanBanInfo.cs" />
     <Compile Include="Infos\LoaiVanBanInfo.cs" />
+    <Compile Include="Infos\TrangThaiCongViecInfo.cs" />
     <Compile Include="Infos\NhomCoQuanInfo.cs" />
     <Compile Include="Infos\RoleInfo.cs" />
     <Compile Include="Infos\TacNghiepInfo.cs" />
@@ -88,6 +90,9 @@
     <Compile Include="Infos\YKienCoQuanInfo.cs" />
     <Compile Include="KeyResult.cs" />
     <Compile Include="LinhVucCongViec.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LinhVucTacNghiep.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LinhVucThuTuc.cs">
@@ -116,9 +121,11 @@
     <Compile Include="Results\CongViecPhoiHopResult.cs" />
     <Compile Include="Results\CongViecQuaTrinhXuLyResult.cs" />
     <Compile Include="Results\CongViecVanBanResult.cs" />
+    <Compile Include="Results\TrangThaiCongViecResult.cs" />
     <Compile Include="Results\CoQuanResult.cs" />
     <Compile Include="DataResult.cs" />
     <Compile Include="Results\HoSoCongViecResult.cs" />
+    <Compile Include="Results\LinhVucTacNghiepResult.cs" />
     <Compile Include="Results\LinhVucVanBanResult.cs" />
     <Compile Include="Results\LinhVucThuTucResult.cs" />
     <Compile Include="Results\LinhVucCongViecResult.cs" />
@@ -141,6 +148,9 @@
     <Compile Include="Results\UserRole.cs" />
     <Compile Include="Results\VanBanResult.cs" />
     <Compile Include="Role.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TacNghiep.cs">
@@ -187,6 +197,9 @@
       <DependentUpon>TechOfficeModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="ThuTuc.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrangThaiCongViec.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">

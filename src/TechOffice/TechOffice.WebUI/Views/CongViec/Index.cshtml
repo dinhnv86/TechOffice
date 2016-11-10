@@ -1,3 +1,68 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model AnThinhPhat.ViewModel.CongViec.InitCongViecViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutCV.cshtml";
 }
+<div class="bg dtapg">
+    <div class="container">
+
+        <!--start:body-->
+        <div class="boxr" style="width:100%">
+            <h1 class="title title_ct"><span>Quản lý công việc</span></h1>
+            <div class="pading">
+                <div class="entry">
+                    @using (Html.BeginForm("Index", "CongViec", FormMethod.Get))
+                    {
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Chọn nhân viên</label>
+                                @Html.DropDownListFor(x => Model.UserId, new SelectList(Model.UsersInfo, "Id", "HoVaTen"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-3">
+                                <label>Vai trò xử lý</label>
+                                @Html.OfficeEnumDropDownListFor(x => x.Role, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-3">
+                                <label>Tình trạng</label>
+                                @Html.DropDownListFor(x => x.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViec, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-3">
+                                <label>Lĩnh vực công việc</label>
+                                @Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViec, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                                @*<select>
+                                        <option>
+                                            Cán bộ
+                                        </option>
+                                        <option>
+                                            Lương
+                                        </option>
+                                        <option>
+                                            Tôn giáo
+                                        </option>
+                                        <option>
+                                            Văn thư
+                                        </option>
+                                        <option>
+                                            Đào tạo
+                                        </option>
+                                    </select>*@
+                            </div>
+                        </div>
+                        <div id="outer">
+                            <div class="inner"> <input type="submit" value="Tìm kiếm" class="inner btn btn-primary" /></div>
+                            <div class="inner">@Html.RouteLink("Thống kê", "", null, htmlAttributes: new { @class = "inner btn btn-primary" })</div>
+                            <div class="inner">@Html.RouteLink("Thêm mới", "", null, htmlAttributes: new { @class = "inner btn btn-primary" })</div>
+                        </div>
+                    }
+
+                    @{Html.RenderAction("List", Model.ValueSearch);}
+
+                </div>
+
+            </div>
+            <div><div class="scott"><strong class="first active">1</strong> <a href="#">2</a> <a href="#">4</a> <a href="#4">5</a> <a href="#5">6</a> <a href="#6">7</a> <a href="#7">8</a> <a href="#8">9</a> <a href="#9">10</a> <a href="#1">Tiếp</a> <a href="#10" class="last">Cuối »</a></div></div>
+        </div>
+        <!--end:body-->
+    </div>
+
+</div>

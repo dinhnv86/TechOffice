@@ -9,8 +9,8 @@ using Ninject;
 using Ninject.Web.Common;
 using WebActivatorEx;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof (NinjectWebCommon), "Start")]
-[assembly: ApplicationShutdownMethod(typeof (NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
 
 namespace AnThinhPhat.WebUI
 {
@@ -23,8 +23,8 @@ namespace AnThinhPhat.WebUI
         /// </summary>
         public static void Start()
         {
-            DynamicModuleUtility.RegisterModule(typeof (OnePerRequestHttpModule));
-            DynamicModuleUtility.RegisterModule(typeof (NinjectHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
 
@@ -81,6 +81,7 @@ namespace AnThinhPhat.WebUI
                 .To<LinhVucCongViecRepository>()
                 .WithConstructorArgument(logService);
             kernel.Bind<ILinhVucThuTucRepository>().To<LinhVucThuTucRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ILinhVucTacNghiepRepository>().To<LinhVucTacNghiepRepository>().WithConstructorArgument(logService);
             kernel.Bind<ILoaiVanBanRepository>().To<LoaiVanBanRepository>().WithConstructorArgument(logService);
             kernel.Bind<IMucDoHoanThanhRepository>().To<MucDoHoanThanhRepository>().WithConstructorArgument(logService);
             kernel.Bind<IMucTinRepository>().To<MucTinRepository>().WithConstructorArgument(logService);
@@ -97,6 +98,7 @@ namespace AnThinhPhat.WebUI
                 .To<TacNghiepYKienCoQuanRepository>()
                 .WithConstructorArgument(logService);
             kernel.Bind<ITapTinCongViecRepository>().To<TapTinCongViecRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ITrangThaiCongViecRepository>().To<TrangThaiCongViecRepository>().WithConstructorArgument(logService);
             kernel.Bind<ITapTinTacNghiepRepository>()
                 .To<TapTinTacNghiepRepository>()
                 .WithConstructorArgument(logService);

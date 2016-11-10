@@ -34,6 +34,24 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.TINTUC, UrlLink.TINTUC,
                 new { controller = "Home", action = "Article", id = UrlParameter.Optional });
 
+            routes.MapRoute(UrlLink.TACNGHIEP_THONGKE, UrlLink.TACNGHIEP_THONGKE,
+               new { controller = "TacNghiep", action = "Statistic", id = UrlParameter.Optional });
+
+            routes.MapRoute(UrlLink.TACNGHIEP_ADD, UrlLink.TACNGHIEP_ADD,
+              new { controller = "TacNghiep", action = "Add", id = UrlParameter.Optional });
+
+            routes.MapRoute(UrlLink.TACNGHIEP_DETAIL, UrlLink.TACNGHIEP_DETAIL,
+            new { controller = "TacNghiep", action = "Detail", id = UrlParameter.Optional });
+
+            routes.MapRoute(UrlLink.CONGVIEC_THONGKE, UrlLink.CONGVIEC_THONGKE,
+             new { controller = "CongViec", action = "Statistic", id = UrlParameter.Optional });
+
+            routes.MapRoute(UrlLink.CONGVIEC_ADD, UrlLink.CONGVIEC_ADD,
+              new { controller = "CongViec", action = "Add", id = UrlParameter.Optional });
+
+            routes.MapRoute(UrlLink.CONGVIEC_DETAIL, UrlLink.CONGVIEC_DETAIL,
+           new { controller = "CongViec", action = "Detail", id = UrlParameter.Optional });
+
             routes.MapRoute(UrlLink.LIENHE, UrlLink.LIENHE, new { controller = "Home", action = "Contact" });
 
             //Error
@@ -69,6 +87,9 @@ namespace AnThinhPhat.WebUI
 
             routes.MapRoute(UrlLink.LINHVUCTHUTUC, UrlLink.LINHVUCTHUTUC,
              new { controller = "LinhVucThuTuc", action = "Index", id = UrlParameter.Optional });
+
+            routes.MapRoute(UrlLink.LINHVUCTACNGHIEP, UrlLink.LINHVUCTACNGHIEP,
+           new { controller = "LinhVucTacNghiep", action = "Index", id = UrlParameter.Optional });
 
             routes.MapRoute(UrlLink.LOAIVANBAN, UrlLink.LOAIVANBAN,
              new { controller = "LoaiVanBan", action = "Index", id = UrlParameter.Optional });

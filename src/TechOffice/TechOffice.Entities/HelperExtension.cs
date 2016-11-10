@@ -278,7 +278,7 @@ namespace AnThinhPhat.Entities
                 Id = entity.Id,
                 NoiDung = entity.NoiDung,
                 NgayHetHan = entity.NgayHetHan,
-                Status = entity.Status,
+                TrangThai = entity.TrangThaiCongViec.ToIfNotNullDataInfo(),
                 QuaTrinhXuLy = entity.QuaTrinhXuLy,
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
@@ -300,7 +300,7 @@ namespace AnThinhPhat.Entities
                 Id = entity.Id,
                 NgayHetHan = entity.NgayHetHan,
                 NoiDung = entity.NoiDung,
-                Status = entity.Status
+                TrangThai = entity.TrangThai,
             };
         }
 
@@ -315,7 +315,7 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 NgayHetHan = entity.NgayHetHan,
-                Status = entity.Status,
+                TrangThai = entity.TrangThaiCongViec.ToIfNotNullDataInfo(),
                 NoiDung = entity.NoiDung
             };
         }
@@ -505,6 +505,57 @@ namespace AnThinhPhat.Entities
         }
     }
 
+    public static class TrangThaiCongViecExtension
+    {
+        public static TrangThaiCongViecResult ToIfNotNullDataResult(this TrangThaiCongViec entity)
+        {
+            return entity?.ToDataResult();
+        }
+
+        public static TrangThaiCongViecResult ToDataResult(this TrangThaiCongViec entity)
+        {
+            return new TrangThaiCongViecResult
+            {
+                Id = entity.Id,
+                Ten = entity.Ten,
+                MoTa = entity.MoTa,
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
+
+        public static TrangThaiCongViecInfo ToIfNotNullDataInfo(this TrangThaiCongViecResult entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static TrangThaiCongViecInfo ToDataInfo(this TrangThaiCongViecResult entity)
+        {
+            return new TrangThaiCongViecInfo
+            {
+                Id = entity.Id,
+                Name = entity.Ten
+            };
+        }
+
+        public static TrangThaiCongViecInfo ToIfNotNullDataInfo(this TrangThaiCongViec entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static TrangThaiCongViecInfo ToDataInfo(this TrangThaiCongViec entity)
+        {
+            return new TrangThaiCongViecInfo
+            {
+                Id = entity.Id,
+                Name = entity.Ten
+            };
+        }
+    }
+
     public static class LinhVucThuTucExtension
     {
         public static LinhVucThuTucResult ToIfNotNullDataResult(this LinhVucThuTuc entity)
@@ -535,6 +586,57 @@ namespace AnThinhPhat.Entities
         public static LinhVucThuTucInfo ToDataInfo(this LinhVucThuTucResult entity)
         {
             return new LinhVucThuTucInfo
+            {
+                Id = entity.Id,
+                Name = entity.Ten
+            };
+        }
+    }
+
+    public static class LinhVucTacNghiepExtension
+    {
+        public static LinhVucTacNghiepResult ToIfNotNullDataResult(this LinhVucTacNghiep entity)
+        {
+            return entity?.ToDataResult();
+        }
+
+        public static LinhVucTacNghiepResult ToDataResult(this LinhVucTacNghiep entity)
+        {
+            return new LinhVucTacNghiepResult
+            {
+                Id = entity.Id,
+                Ten = entity.Ten,
+                MoTa = entity.MoTa,
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
+
+        public static LinhVucTacNghiepInfo ToIfNotNullDataInfo(this LinhVucTacNghiepResult entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static LinhVucTacNghiepInfo ToDataInfo(this LinhVucTacNghiepResult entity)
+        {
+            return new LinhVucTacNghiepInfo
+            {
+                Id = entity.Id,
+                Name = entity.Ten
+            };
+        }
+
+        public static LinhVucTacNghiepInfo ToIfNotNullDataInfo(this LinhVucTacNghiep entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static LinhVucTacNghiepInfo ToDataInfo(this LinhVucTacNghiep entity)
+        {
+            return new LinhVucTacNghiepInfo
             {
                 Id = entity.Id,
                 Name = entity.Ten
@@ -750,6 +852,8 @@ namespace AnThinhPhat.Entities
             return new TacNghiepResult
             {
                 Id = entity.Id,
+                LinhVucTacNghiepId = entity.LinhVucTacNghiepId,
+                LinhVucTacNghiepInfo = entity.LinhVucTacNghiep.ToIfNotNullDataInfo(),
                 NgayHetHan = entity.NgayHetHan,
                 NgayHoanThanh = entity.NgayHoanThanh,
                 NoiDung = entity.NoiDung,

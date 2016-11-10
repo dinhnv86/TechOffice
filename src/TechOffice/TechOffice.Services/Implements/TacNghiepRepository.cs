@@ -24,6 +24,7 @@ namespace AnThinhPhat.Services.Implements
                 {
                     var add = context.TacNghieps.Create();
 
+                    add.LinhVucTacNghiepId = entity.LinhVucTacNghiepId;
                     add.NgayHetHan = entity.NgayHetHan;
                     add.NgayHoanThanh = entity.NgayHoanThanh;
                     add.NoiDung = entity.NoiDung;
@@ -47,6 +48,7 @@ namespace AnThinhPhat.Services.Implements
                 {
                     var add = context.TacNghieps.Create();
 
+                    add.LinhVucTacNghiepId = entity.LinhVucTacNghiepId;
                     add.NgayHetHan = entity.NgayHetHan;
                     add.NgayHoanThanh = entity.NgayHoanThanh;
                     add.NoiDung = entity.NoiDung;
@@ -73,6 +75,7 @@ namespace AnThinhPhat.Services.Implements
                     {
                         add = context.TacNghieps.Create();
 
+                        add.LinhVucTacNghiepId = entity.LinhVucTacNghiepId;
                         add.NgayHetHan = entity.NgayHetHan;
                         add.NgayHoanThanh = entity.NgayHoanThanh;
                         add.NoiDung = entity.NoiDung;
@@ -101,6 +104,7 @@ namespace AnThinhPhat.Services.Implements
                     {
                         add = context.TacNghieps.Create();
 
+                        add.LinhVucTacNghiepId = entity.LinhVucTacNghiepId;
                         add.NgayHetHan = entity.NgayHetHan;
                         add.NgayHoanThanh = entity.NgayHoanThanh;
                         add.NoiDung = entity.NoiDung;
@@ -196,18 +200,11 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.TacNghieps
-                        where item.IsDeleted == false
-                        select new TacNghiepResult
-                        {
-                            Id = item.Id,
-                            NgayHetHan = item.NgayHetHan,
-                            NgayHoanThanh = item.NgayHoanThanh,
-                            NoiDung = item.NoiDung,
-                            NoiDungTraoDoi = item.NoiDungTraoDoi,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToList();
+                            where item.IsDeleted == false
+                            select item)
+                            .MakeQueryToDatabase()
+                            .Select(x => x.ToDataResult())
+                            .ToList();
                 }
             });
         }
@@ -219,18 +216,12 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.TacNghieps
-                        where item.IsDeleted == false
-                        select new TacNghiepResult
-                        {
-                            Id = item.Id,
-                            NgayHetHan = item.NgayHetHan,
-                            NgayHoanThanh = item.NgayHoanThanh,
-                            NoiDung = item.NoiDung,
-                            NoiDungTraoDoi = item.NoiDungTraoDoi,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToListAsync();
+                                  where item.IsDeleted == false
+                                  select item)
+                                  .MakeQueryToDatabase()
+                                  .Select(x => x.ToDataResult())
+                                  .AsQueryable()
+                                  .ToListAsync();
                 }
             });
         }
@@ -242,19 +233,12 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.TacNghieps
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select new TacNghiepResult
-                        {
-                            Id = item.Id,
-                            NgayHetHan = item.NgayHetHan,
-                            NgayHoanThanh = item.NgayHoanThanh,
-                            NoiDung = item.NoiDung,
-                            NoiDungTraoDoi = item.NoiDungTraoDoi,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).Single();
+                            where item.IsDeleted == false &&
+                                  item.Id == id
+                            select item)
+                            .MakeQueryToDatabase()
+                            .Select(x => x.ToDataResult())
+                            .Single();
                 }
             });
         }
@@ -266,19 +250,13 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.TacNghieps
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select new TacNghiepResult
-                        {
-                            Id = item.Id,
-                            NgayHetHan = item.NgayHetHan,
-                            NgayHoanThanh = item.NgayHoanThanh,
-                            NoiDung = item.NoiDung,
-                            NoiDungTraoDoi = item.NoiDungTraoDoi,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).SingleAsync();
+                                  where item.IsDeleted == false &&
+                                        item.Id == id
+                                  select item)
+                                  .MakeQueryToDatabase()
+                                  .Select(x => x.ToDataResult())
+                                  .AsQueryable()
+                                  .SingleAsync();
                 }
             });
         }

@@ -24,5 +24,9 @@ namespace AnThinhPhat.Entities.Results
         public UserInfo UserPhuTrach { get; set; }
 
         public UserInfo UserXyLy { get; set; }
+
+        public int? TrangThaiCongViecId { get; set;}
+
+        public TrangThaiCongViecInfo TrangThai { get; set; }
     }
 }

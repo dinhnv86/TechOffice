@@ -22,12 +22,12 @@ namespace AnThinhPhat.ViewModel.TacNghiep
         public IEnumerable<CoQuanInfo> CoQuanInfos { get; set; }
 
         public int? LinhVucTacNghiepId { get; set; }
-        public IEnumerable<LinhVucCongViecInfo> LinhVucThuTucInfo { get; set; }
+        public IEnumerable<LinhVucTacNghiepInfo> LinhVucTacNghiepInfo { get; set; }
 
         public int? MucDoHoanThanhId { get; set; }
         public IEnumerable<MucDoHoanThanhResult> MucDoHoanThanhInfo { get; set; }
 
-        public int NamBanHanhId { get; set; }
+        public int? NamBanHanhId { get; set; }
         private IEnumerable<NamBanHanh> namBanHanh;
         public IEnumerable<NamBanHanh> NamBanHanhInfo
         {
@@ -55,5 +55,19 @@ namespace AnThinhPhat.ViewModel.TacNghiep
             }
         }
 
+        private ValueSearchViewModel valueSearch;
+        public ValueSearchViewModel ValueSearch
+        {
+            get
+            {
+                if (valueSearch == null)
+                    valueSearch = new ValueSearchViewModel();
+                return valueSearch;
+            }
+            set
+            {
+                valueSearch = value;
+            }
+        }
     }
 }

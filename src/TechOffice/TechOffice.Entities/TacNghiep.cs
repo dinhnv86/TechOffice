@@ -28,12 +28,14 @@ namespace AnThinhPhat.Entities
         public Nullable<System.DateTime> NgayHoanThanh { get; set; }
         public string NoiDung { get; set; }
         public string NoiDungTraoDoi { get; set; }
+        public int LinhVucTacNghiepId { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
     
+        public virtual LinhVucTacNghiep LinhVucTacNghiep { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TacNghiep_CoQuanLienQuan> TacNghiep_CoQuanLienQuan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

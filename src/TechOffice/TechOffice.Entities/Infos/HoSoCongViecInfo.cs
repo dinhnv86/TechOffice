@@ -7,7 +7,7 @@ namespace AnThinhPhat.Entities.Infos
         public DateTime? NgayHetHan { get; set; }
 
         //Should change to enum
-        public byte? Status { get; set; }
+        public TrangThaiCongViecInfo TrangThai { get; set; }
 
         public string NoiDung { get; set; }
     }

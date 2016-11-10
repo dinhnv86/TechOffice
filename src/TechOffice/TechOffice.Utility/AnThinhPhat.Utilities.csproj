@@ -35,6 +35,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +51,8 @@
     <Compile Include="Exception\ExistUserException.cs" />
     <Compile Include="Exception\LockUserException.cs" />
     <Compile Include="Exception\NullUserException.cs" />
+    <Compile Include="Helpers\HtmlOfficeExtension.cs" />
+    <Compile Include="Helpers\OfficeDictionary.cs" />
     <Compile Include="LogServices\ILogService.cs" />
     <Compile Include="LogServices\LogService.cs" />
     <Compile Include="Mail\MailAttachment.cs" />

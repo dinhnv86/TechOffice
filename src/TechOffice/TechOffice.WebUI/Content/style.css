@@ -3762,3 +3762,12 @@ input[type="checkbox"].input-validation-error {
         min-width: 100px;
     }
 }
+
+#outer {
+    width: 100%;
+    text-align: left;
+}
+
+.inner {
+    display: inline-block;
+}

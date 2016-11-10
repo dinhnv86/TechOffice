@@ -73,7 +73,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NhomCoQuanId" Type="int" Nullable="false" />
           <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="MoTa" Type="ntext" />
+          <Property Name="MoTa" Type="text" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -89,9 +89,9 @@
           <Property Name="UserPhuTrachId" Type="int" Nullable="false" />
           <Property Name="UserXuLyId" Type="int" Nullable="false" />
           <Property Name="LinhVucCongViecId" Type="int" Nullable="false" />
-          <Property Name="Status" Type="tinyint" />
+          <Property Name="TrangThaiCongViecId" Type="int" />
           <Property Name="NoiDung" Type="text" Nullable="false" />
-          <Property Name="QuaTrinhXuLy" Type="ntext" />
+          <Property Name="QuaTrinhXuLy" Type="text" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -99,6 +99,19 @@
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="LinhVucCongViec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="1024" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LinhVucTacNghiep">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -143,7 +156,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="MoTa" Type="ntext" />
+          <Property Name="MoTa" Type="text" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -169,7 +182,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="MoTa" Type="ntext" />
+          <Property Name="MoTa" Type="text" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -182,7 +195,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="MoTa" Type="ntext" />
+          <Property Name="MoTa" Type="text" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -202,6 +215,16 @@
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TacNghiep">
           <Key>
             <PropertyRef Name="Id" />
@@ -209,8 +232,9 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NgayHetHan" Type="datetime" Nullable="false" />
           <Property Name="NgayHoanThanh" Type="datetime" />
-          <Property Name="NoiDung" Type="ntext" />
-          <Property Name="NoiDungTraoDoi" Type="ntext" />
+          <Property Name="NoiDung" Type="text" />
+          <Property Name="NoiDungTraoDoi" Type="text" />
+          <Property Name="LinhVucTacNghiepId" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -252,7 +276,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TacNghiepId" Type="int" Nullable="false" />
           <Property Name="CoQuanId" Type="int" Nullable="false" />
-          <Property Name="NoiDung" Type="ntext" />
+          <Property Name="NoiDung" Type="text" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -339,6 +363,19 @@
           <Property Name="TenThuTuc" Type="nvarchar" MaxLength="1024" Nullable="false" />
           <Property Name="CoQuanThucHienId" Type="int" Nullable="false" />
           <Property Name="LoaiThuTucId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TrangThaiCongViec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="nvarchar" MaxLength="1024" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -463,6 +500,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HoSoCongViec_TrangThaiCongViec">
+          <End Role="TrangThaiCongViec" Type="Self.TrangThaiCongViec" Multiplicity="0..1" />
+          <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrangThaiCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoCongViec">
+              <PropertyRef Name="TrangThaiCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HoSoCongViec_UserPhuTrach">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="HoSoCongViec" Type="Self.HoSoCongViec" Multiplicity="*" />
@@ -508,6 +557,18 @@
             </Principal>
             <Dependent Role="TacNghiep_CoQuanLienQuan">
               <PropertyRef Name="TacNghiepId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_LinhVucTacNghiep">
+          <End Role="LinhVucTacNghiep" Type="Self.LinhVucTacNghiep" Multiplicity="1" />
+          <End Role="TacNghiep" Type="Self.TacNghiep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVucTacNghiep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep">
+              <PropertyRef Name="LinhVucTacNghiepId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -783,6 +844,7 @@
           <EntitySet Name="CoQuan" EntityType="Self.CoQuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoSoCongViec" EntityType="Self.HoSoCongViec" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LinhVucCongViec" EntityType="Self.LinhVucCongViec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinhVucTacNghiep" EntityType="Self.LinhVucTacNghiep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LinhVucThuTuc" EntityType="Self.LinhVucThuTuc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LinhVucVanBan" EntityType="Self.LinhVucVanBan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoaiVanBan" EntityType="Self.LoaiVanBan" Schema="dbo" store:Type="Tables" />
@@ -790,6 +852,7 @@
           <EntitySet Name="MucTin" EntityType="Self.MucTin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NhomCoQuan" EntityType="Self.NhomCoQuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TacNghiep" EntityType="Self.TacNghiep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TacNghiep_CoQuanLienQuan" EntityType="Self.TacNghiep_CoQuanLienQuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TacNghiep_TinhHinhThucHien" EntityType="Self.TacNghiep_TinhHinhThucHien" Schema="dbo" store:Type="Tables" />
@@ -800,6 +863,7 @@
           <EntitySet Name="TapTinVanBan" EntityType="Self.TapTinVanBan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TapTinYKienCoQuan" EntityType="Self.TapTinYKienCoQuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThuTuc" EntityType="Self.ThuTuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrangThaiCongViec" EntityType="Self.TrangThaiCongViec" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VanBan" EntityType="Self.VanBan" Schema="dbo" store:Type="Tables" />
@@ -827,6 +891,10 @@
             <End Role="LinhVucCongViec" EntitySet="LinhVucCongViec" />
             <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
           </AssociationSet>
+          <AssociationSet Name="FK_HoSoCongViec_TrangThaiCongViec" Association="Self.FK_HoSoCongViec_TrangThaiCongViec">
+            <End Role="TrangThaiCongViec" EntitySet="TrangThaiCongViec" />
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
+          </AssociationSet>
           <AssociationSet Name="FK_HoSoCongViec_UserPhuTrach" Association="Self.FK_HoSoCongViec_UserPhuTrach">
             <End Role="User" EntitySet="User" />
             <End Role="HoSoCongViec" EntitySet="HoSoCongViec" />
@@ -842,6 +910,10 @@
           <AssociationSet Name="FK_TacNghiep_CoQuanLienQuan_TacNghiep" Association="Self.FK_TacNghiep_CoQuanLienQuan_TacNghiep">
             <End Role="TacNghiep" EntitySet="TacNghiep" />
             <End Role="TacNghiep_CoQuanLienQuan" EntitySet="TacNghiep_CoQuanLienQuan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_LinhVucTacNghiep" Association="Self.FK_TacNghiep_LinhVucTacNghiep">
+            <End Role="LinhVucTacNghiep" EntitySet="LinhVucTacNghiep" />
+            <End Role="TacNghiep" EntitySet="TacNghiep" />
           </AssociationSet>
           <AssociationSet Name="FK_TacNghiep_TinhHinhThucHien_CoQuan" Association="Self.FK_TacNghiep_TinhHinhThucHien_CoQuan">
             <End Role="CoQuan" EntitySet="CoQuan" />
@@ -947,6 +1019,7 @@
           <EntitySet Name="CoQuans" EntityType="TechOfficeDevModel.CoQuan" />
           <EntitySet Name="HoSoCongViecs" EntityType="TechOfficeDevModel.HoSoCongViec" />
           <EntitySet Name="LinhVucCongViecs" EntityType="TechOfficeDevModel.LinhVucCongViec" />
+          <EntitySet Name="LinhVucTacNghieps" EntityType="TechOfficeDevModel.LinhVucTacNghiep" />
           <EntitySet Name="LinhVucThuTucs" EntityType="TechOfficeDevModel.LinhVucThuTuc" />
           <EntitySet Name="LinhVucVanBans" EntityType="TechOfficeDevModel.LinhVucVanBan" />
           <EntitySet Name="LoaiVanBans" EntityType="TechOfficeDevModel.LoaiVanBan" />
@@ -954,6 +1027,7 @@
           <EntitySet Name="MucTins" EntityType="TechOfficeDevModel.MucTin" />
           <EntitySet Name="NhomCoQuans" EntityType="TechOfficeDevModel.NhomCoQuan" />
           <EntitySet Name="Roles" EntityType="TechOfficeDevModel.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="TechOfficeDevModel.sysdiagram" />
           <EntitySet Name="TacNghieps" EntityType="TechOfficeDevModel.TacNghiep" />
           <EntitySet Name="TacNghiep_CoQuanLienQuan" EntityType="TechOfficeDevModel.TacNghiep_CoQuanLienQuan" />
           <EntitySet Name="TacNghiep_TinhHinhThucHien" EntityType="TechOfficeDevModel.TacNghiep_TinhHinhThucHien" />
@@ -964,6 +1038,7 @@
           <EntitySet Name="TapTinVanBans" EntityType="TechOfficeDevModel.TapTinVanBan" />
           <EntitySet Name="TapTinYKienCoQuans" EntityType="TechOfficeDevModel.TapTinYKienCoQuan" />
           <EntitySet Name="ThuTucs" EntityType="TechOfficeDevModel.ThuTuc" />
+          <EntitySet Name="TrangThaiCongViecs" EntityType="TechOfficeDevModel.TrangThaiCongViec" />
           <EntitySet Name="Users" EntityType="TechOfficeDevModel.User" />
           <EntitySet Name="UserRoles" EntityType="TechOfficeDevModel.UserRole" />
           <EntitySet Name="VanBans" EntityType="TechOfficeDevModel.VanBan" />
@@ -1015,6 +1090,10 @@
             <End Role="LinhVucCongViec" EntitySet="LinhVucCongViecs" />
             <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
           </AssociationSet>
+          <AssociationSet Name="FK_HoSoCongViec_TrangThaiCongViec" Association="TechOfficeDevModel.FK_HoSoCongViec_TrangThaiCongViec">
+            <End Role="TrangThaiCongViec" EntitySet="TrangThaiCongViecs" />
+            <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
+          </AssociationSet>
           <AssociationSet Name="FK_HoSoCongViec_UserPhuTrach" Association="TechOfficeDevModel.FK_HoSoCongViec_UserPhuTrach">
             <End Role="User" EntitySet="Users" />
             <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
@@ -1026,6 +1105,10 @@
           <AssociationSet Name="FK_TapTinCongViec_HoSoCongViec" Association="TechOfficeDevModel.FK_TapTinCongViec_HoSoCongViec">
             <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
             <End Role="TapTinCongViec" EntitySet="TapTinCongViecs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TacNghiep_LinhVucTacNghiep" Association="TechOfficeDevModel.FK_TacNghiep_LinhVucTacNghiep">
+            <End Role="LinhVucTacNghiep" EntitySet="LinhVucTacNghieps" />
+            <End Role="TacNghiep" EntitySet="TacNghieps" />
           </AssociationSet>
           <AssociationSet Name="FK_ThuTuc_LinhVucThuTuc" Association="TechOfficeDevModel.FK_ThuTuc_LinhVucThuTuc">
             <End Role="LinhVucThuTuc" EntitySet="LinhVucThuTucs" />
@@ -1168,7 +1251,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NhomCoQuanId" Type="Int32" Nullable="false" />
           <Property Name="Ten" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -1190,9 +1273,9 @@
           <Property Name="UserPhuTrachId" Type="Int32" Nullable="false" />
           <Property Name="UserXuLyId" Type="Int32" Nullable="false" />
           <Property Name="LinhVucCongViecId" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="Byte" />
+          <Property Name="TrangThaiCongViecId" Type="Int32" />
           <Property Name="NoiDung" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="QuaTrinhXuLy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QuaTrinhXuLy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -1202,6 +1285,7 @@
           <NavigationProperty Name="CongViec_QuaTrinhXuLy" Relationship="TechOfficeDevModel.FK_CongViec_QuaTrinhXuLy_HoSoCongViec" FromRole="HoSoCongViec" ToRole="CongViec_QuaTrinhXuLy" />
           <NavigationProperty Name="CongViec_VanBan" Relationship="TechOfficeDevModel.FK_CongViec_VanBan_HoSoCongViec" FromRole="HoSoCongViec" ToRole="CongViec_VanBan" />
           <NavigationProperty Name="LinhVucCongViec" Relationship="TechOfficeDevModel.FK_HoSoCongViec_LinhVucCongViec" FromRole="HoSoCongViec" ToRole="LinhVucCongViec" />
+          <NavigationProperty Name="TrangThaiCongViec" Relationship="TechOfficeDevModel.FK_HoSoCongViec_TrangThaiCongViec" FromRole="HoSoCongViec" ToRole="TrangThaiCongViec" />
           <NavigationProperty Name="User" Relationship="TechOfficeDevModel.FK_HoSoCongViec_UserPhuTrach" FromRole="HoSoCongViec" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="TechOfficeDevModel.FK_HoSoCongViec_UserXuLyChinh" FromRole="HoSoCongViec" ToRole="User" />
           <NavigationProperty Name="TapTinCongViecs" Relationship="TechOfficeDevModel.FK_TapTinCongViec_HoSoCongViec" FromRole="HoSoCongViec" ToRole="TapTinCongViec" />
@@ -1219,6 +1303,20 @@
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HoSoCongViecs" Relationship="TechOfficeDevModel.FK_HoSoCongViec_LinhVucCongViec" FromRole="LinhVucCongViec" ToRole="HoSoCongViec" />
+        </EntityType>
+        <EntityType Name="LinhVucTacNghiep">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TacNghieps" Relationship="TechOfficeDevModel.FK_TacNghiep_LinhVucTacNghiep" FromRole="LinhVucTacNghiep" ToRole="TacNghiep" />
         </EntityType>
         <EntityType Name="LinhVucThuTuc">
           <Key>
@@ -1254,7 +1352,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ten" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -1281,7 +1379,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ten" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -1294,7 +1392,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ten" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -1316,6 +1414,16 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserRoles" Relationship="TechOfficeDevModel.FK_UserRole_Role" FromRole="Role" ToRole="UserRole" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="TacNghiep">
           <Key>
             <PropertyRef Name="Id" />
@@ -1323,13 +1431,15 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NgayHetHan" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NgayHoanThanh" Type="DateTime" Precision="3" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NoiDungTraoDoi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NoiDungTraoDoi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LinhVucTacNghiepId" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LinhVucTacNghiep" Relationship="TechOfficeDevModel.FK_TacNghiep_LinhVucTacNghiep" FromRole="TacNghiep" ToRole="LinhVucTacNghiep" />
           <NavigationProperty Name="TacNghiep_CoQuanLienQuan" Relationship="TechOfficeDevModel.FK_TacNghiep_CoQuanLienQuan_TacNghiep" FromRole="TacNghiep" ToRole="TacNghiep_CoQuanLienQuan" />
           <NavigationProperty Name="TacNghiep_TinhHinhThucHien" Relationship="TechOfficeDevModel.FK_TacNghiep_TinhHinhThucHien_TacNghiep" FromRole="TacNghiep" ToRole="TacNghiep_TinhHinhThucHien" />
           <NavigationProperty Name="TacNghiep_YKienCoQuan" Relationship="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_TacNghiep" FromRole="TacNghiep" ToRole="TacNghiep_YKienCoQuan" />
@@ -1374,7 +1484,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TacNghiepId" Type="Int32" Nullable="false" />
           <Property Name="CoQuanId" Type="Int32" Nullable="false" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -1482,6 +1592,20 @@
           <NavigationProperty Name="CoQuan" Relationship="TechOfficeDevModel.FK_ThuTuc_CoQuan" FromRole="ThuTuc" ToRole="CoQuan" />
           <NavigationProperty Name="LinhVucThuTuc" Relationship="TechOfficeDevModel.FK_ThuTuc_LinhVucThuTuc" FromRole="ThuTuc" ToRole="LinhVucThuTuc" />
           <NavigationProperty Name="TapTinThuTucs" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_ThuTuc" FromRole="ThuTuc" ToRole="TapTinThuTuc" />
+        </EntityType>
+        <EntityType Name="TrangThaiCongViec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HoSoCongViecs" Relationship="TechOfficeDevModel.FK_HoSoCongViec_TrangThaiCongViec" FromRole="TrangThaiCongViec" ToRole="HoSoCongViec" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1689,6 +1813,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HoSoCongViec_TrangThaiCongViec">
+          <End Type="TechOfficeDevModel.TrangThaiCongViec" Role="TrangThaiCongViec" Multiplicity="0..1" />
+          <End Type="TechOfficeDevModel.HoSoCongViec" Role="HoSoCongViec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrangThaiCongViec">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoSoCongViec">
+              <PropertyRef Name="TrangThaiCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HoSoCongViec_UserPhuTrach">
           <End Type="TechOfficeDevModel.User" Role="User" Multiplicity="1" />
           <End Type="TechOfficeDevModel.HoSoCongViec" Role="HoSoCongViec" Multiplicity="*" />
@@ -1722,6 +1858,18 @@
             </Principal>
             <Dependent Role="TapTinCongViec">
               <PropertyRef Name="HoSoCongViecId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TacNghiep_LinhVucTacNghiep">
+          <End Type="TechOfficeDevModel.LinhVucTacNghiep" Role="LinhVucTacNghiep" Multiplicity="1" />
+          <End Type="TechOfficeDevModel.TacNghiep" Role="TacNghiep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVucTacNghiep">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TacNghiep">
+              <PropertyRef Name="LinhVucTacNghiepId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2025,7 +2173,7 @@
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="QuaTrinhXuLy" ColumnName="QuaTrinhXuLy" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TrangThaiCongViecId" ColumnName="TrangThaiCongViecId" />
                 <ScalarProperty Name="LinhVucCongViecId" ColumnName="LinhVucCongViecId" />
                 <ScalarProperty Name="UserXuLyId" ColumnName="UserXuLyId" />
                 <ScalarProperty Name="UserPhuTrachId" ColumnName="UserPhuTrachId" />
@@ -2037,6 +2185,20 @@
           <EntitySetMapping Name="LinhVucCongViecs">
             <EntityTypeMapping TypeName="TechOfficeDevModel.LinhVucCongViec">
               <MappingFragment StoreEntitySet="LinhVucCongViec">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinhVucTacNghieps">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.LinhVucTacNghiep">
+              <MappingFragment StoreEntitySet="LinhVucTacNghiep">
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
                 <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -2146,6 +2308,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TacNghieps">
             <EntityTypeMapping TypeName="TechOfficeDevModel.TacNghiep">
               <MappingFragment StoreEntitySet="TacNghiep">
@@ -2154,6 +2327,7 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LinhVucTacNghiepId" ColumnName="LinhVucTacNghiepId" />
                 <ScalarProperty Name="NoiDungTraoDoi" ColumnName="NoiDungTraoDoi" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
                 <ScalarProperty Name="NgayHoanThanh" ColumnName="NgayHoanThanh" />
@@ -2295,6 +2469,20 @@
                 <ScalarProperty Name="TenThuTuc" ColumnName="TenThuTuc" />
                 <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
                 <ScalarProperty Name="MaThuTuc" ColumnName="MaThuTuc" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrangThaiCongViecs">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.TrangThaiCongViec">
+              <MappingFragment StoreEntitySet="TrangThaiCongViec">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

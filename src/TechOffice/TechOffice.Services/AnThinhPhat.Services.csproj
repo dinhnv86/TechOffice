@@ -50,11 +50,13 @@
     <Compile Include="Abstracts\ICongViecVanBanRepository.cs" />
     <Compile Include="Abstracts\ICoQuanRepository.cs" />
     <Compile Include="Abstracts\IHoSoCongViecRepository.cs" />
+    <Compile Include="Abstracts\ILinhVucTacNghiepRepository.cs" />
     <Compile Include="Abstracts\ILinhVucCongViecRepository.cs" />
     <Compile Include="Abstracts\ILinhVucThuTucRepository.cs" />
     <Compile Include="Abstracts\ILoaiVanBanRepository.cs" />
     <Compile Include="Abstracts\IMucDoHoanThanhRepository.cs" />
     <Compile Include="Abstracts\IMucTinRepository.cs" />
+    <Compile Include="Abstracts\ITrangThaiCongViecRepository.cs" />
     <Compile Include="Abstracts\INhomCoQuanRepository.cs" />
     <Compile Include="Abstracts\ITapTinVanBanRepository.cs" />
     <Compile Include="Abstracts\ITapTinThuTucRepository.cs" />
@@ -75,11 +77,13 @@
     <Compile Include="Implements\CongViecVanBanRepository.cs" />
     <Compile Include="Implements\CoQuanRepository.cs" />
     <Compile Include="Implements\HoSoCongViecRepository.cs" />
+    <Compile Include="Implements\LinhVucTacNghiepRepository.cs" />
     <Compile Include="Implements\LinhVucCongViecRepository.cs" />
     <Compile Include="Implements\LinhVucThuTucRepository.cs" />
     <Compile Include="Implements\LoaiVanBanRepository.cs" />
     <Compile Include="Implements\MucDoHoanThanhRepository.cs" />
     <Compile Include="Implements\MucTinRepository.cs" />
+    <Compile Include="Implements\TrangThaiCongViecRepository.cs" />
     <Compile Include="Implements\NhomCoQuanRepository.cs" />
     <Compile Include="Implements\RolesRepository.cs" />
     <Compile Include="Implements\TacNghiepRepository.cs" />

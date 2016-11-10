@@ -10,21 +10,31 @@
 
     <div class="pading">
         <div class="entry form-horizontal">
-            @using (Html.BeginForm("Index", "ThuTuc", FormMethod.Get))
+            @using (Html.BeginForm("Index", "TacNghiep", FormMethod.Get))
             {
                 <div class="col-md-6">
                     <label>Chọn nhóm cơ quan</label>
                     @Html.DropDownListFor(x => Model.NhomCoQuanId, new SelectList(Model.NhomCoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
                     <label>Chọn cơ quan</label>
                     @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    <label>Chọn lĩnh vực</label>
+                    @Html.DropDownListFor(x => Model.LinhVucTacNghiepId, new SelectList(Model.LinhVucTacNghiepInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    <label>Chọn mức độ hoàn thành</label>
+                    @Html.DropDownListFor(x => Model.MucDoHoanThanhId, new SelectList(Model.MucDoHoanThanhInfo, "Id", "Ten"), "Tất cả", htmlAttributes: new { @class = "form-control" })
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <label>Chọn năm</label>
                     @Html.DropDownListFor(x => Model.NamBanHanhId, new SelectList(Model.NamBanHanhInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    <label>Chọn thông tin tìm kiếm</label>
+                    @Html.TextBoxFor(x => Model.NhapThongTinTimKiem, htmlAttributes: new { @class = "form-control" })
+                    <label>Chọn tiêu chí tìm kiếm</label>
+                    @Html.TextBoxFor(x => Model.TieuChiTimKiem, htmlAttributes: new { @class = "form-control" })
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <input type="submit" class="btn btn-primary btn-width-md" value="Tìm kiếm" />
+                    @Html.RouteLink("Thống kê", UrlLink.TACNGHIEP_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })
+                    @Html.RouteLink("Thêm mới", UrlLink.TACNGHIEP_ADD, null, htmlAttributes: new { @class = "btn btn-primary" })
                 </div>
             }
         </div>

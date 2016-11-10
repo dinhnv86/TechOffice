@@ -189,17 +189,10 @@ namespace AnThinhPhat.Services.Implements
                 {
                     return (from item in context.LinhVucCongViecs
                             where item.IsDeleted == false
-                            select new LinhVucCongViecResult
-                            {
-                                Id = item.Id,
-                                Ten = item.Ten,
-                                MoTa = item.MoTa,
-                                IsDeleted = item.IsDeleted,
-                                CreateDate = item.CreateDate,
-                                CreatedBy = item.CreatedBy,
-                                LastUpdatedBy = item.LastUpdatedBy,
-                                LastUpdated = item.LastUpdated
-                            }).ToList();
+                            select item)
+                            .MakeQueryToDatabase()
+                            .Select(x => x.ToDataResult())
+                            .ToList();
                 }
             });
         }
@@ -236,7 +229,9 @@ namespace AnThinhPhat.Services.Implements
                     return (from item in context.LinhVucCongViecs
                             where item.IsDeleted == false &&
                                   item.Id == id
-                            select item).Select(x => x.ToDataResult()).Single();
+                            select item)
+                            .Select(x => x.ToDataResult())
+                            .Single();
                 }
             });
         }

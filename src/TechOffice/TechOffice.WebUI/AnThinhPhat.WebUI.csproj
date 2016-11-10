@@ -359,6 +359,17 @@
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RoleInfo.cshtml" />
     <Content Include="Views\CoQuan\Create.cshtml" />
+    <Content Include="Views\LinhVucTacNghiep\Index.cshtml" />
+    <Content Include="Views\LinhVucTacNghiep\List.cshtml" />
+    <Content Include="Views\TacNghiep\Statistic.cshtml" />
+    <Content Include="Views\TacNghiep\Detail.cshtml" />
+    <Content Include="Views\TacNghiep\Add.cshtml" />
+    <Content Include="Views\Shared\_LayoutCV.cshtml" />
+    <Content Include="Views\CongViec\Detail.cshtml" />
+    <Content Include="Views\CongViec\Add.cshtml" />
+    <Content Include="Views\CongViec\Statistic.cshtml" />
+    <Content Include="Views\CongViec\_PartialPageList.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
