@@ -28,10 +28,14 @@ namespace AnThinhPhat.WebUI
                 "~/Content/bootstrap.min.css",
                 "~/Content/bootstrap-theme.min.css",
                 "~/Content/font-awesome.min.css",
+                 "~/Content/jquery-ui.min.css",
+                 "~/Content/jquery-ui.structure.min.css",
+                 "~/Content/jquery-ui.theme.min.css",
                 "~/Content/style.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").
-                Include("~/Scripts/jquery-ui-{version}.js"));
+                Include("~/Scripts/jquery-ui-{version}.js",
+                "~/Scripts/jquery.ui.core.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/fastrack").
                 Include("~/Scripts/app/loading.js"));

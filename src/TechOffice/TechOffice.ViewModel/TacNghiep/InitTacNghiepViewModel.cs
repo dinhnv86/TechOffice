@@ -19,16 +19,21 @@ namespace AnThinhPhat.ViewModel.TacNghiep
         public IEnumerable<NhomCoQuanInfo> NhomCoQuanInfos { get; set; }
 
         public int? CoQuanId { get; set; }
+
         public IEnumerable<CoQuanInfo> CoQuanInfos { get; set; }
 
         public int? LinhVucTacNghiepId { get; set; }
+
         public IEnumerable<LinhVucTacNghiepInfo> LinhVucTacNghiepInfo { get; set; }
 
         public int? MucDoHoanThanhId { get; set; }
+
         public IEnumerable<MucDoHoanThanhResult> MucDoHoanThanhInfo { get; set; }
 
         public int? NamBanHanhId { get; set; }
+
         private IEnumerable<NamBanHanh> namBanHanh;
+
         public IEnumerable<NamBanHanh> NamBanHanhInfo
         {
             get

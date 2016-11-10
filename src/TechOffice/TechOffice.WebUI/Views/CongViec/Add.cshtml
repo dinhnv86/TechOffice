@@ -2,4 +2,122 @@
     Layout = "~/Views/Shared/_LayoutCV.cshtml";
 }
 
+<div class="boxr" style="width:100%">
+    <h1 class="title title_ct"><span>Thêm mới công việc</span></h1>
+    <div class="pading">
+        <div class="entry">
+            <div class="col-md-4">
+                <label>Ngày khởi tạo</label>
+                <input type="text" class="control-datepicker" />
+                <label>Phụ trách</label>
+                <input type="date" />
+            </div>
+            <div class="col-md-4">
+                <label>Ngày hết hạn</label>
+                <input type="date" />
+                <label>Xử lý chính</label>
+                <select>
+                    <option>Trịnh Quang Hạnh</option>
+                    <option>Phạm Thị Thư</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>Lĩnh vực</label>
+                <select>
+                    <option>Trịnh Quang Hạnh</option>
+                    <option>Phạm Thị Thư</option>
+                </select>
+                <label>Phối hợp</label>
+                <select>
+                    <option>Trịnh Quang Hạnh</option>
+                    <option>Phạm Thị Thư</option>
+                </select>
+            </div>
+            <div class="clear"></div>
+            <div class="col-md-12">
+                <label>Nội dung</label>
+                <textarea rows="2" cols="2"></textarea>
+                <label>Văn bản liên quan</label>
+                <textarea rows="2" cols="2"></textarea>
+            </div>
+            <div class="col-md-3">
+                <label>Số văn bản</label>
+                <input type="text" />
+            </div>
+            <div class="col-md-3">
+                <label>Ngày</label>
+                <input type="date" />
+            </div>
+            <div class="col-md-12">
+                <label>Nội dung</label>
+                <textarea rows="2" cols="2"></textarea>
+            </div>
+            <div class="col-md-2">
+                <label>Cơ quan</label>
+                <input type="text" />
+            </div>
+            <div class="col-md-2">
+                <label></label>
+                <input type="button" value="Thêm" />
+            </div>
+            <div class="clear"></div>
+            <div class="col-md-12">
+                <label>Quá trình xử lý</label>
+                <textarea rows="2" cols="2"></textarea>
+            </div><div class="clear"></div>
+            <div class="col-md-12">
+                <label>Nội dung</label>
+                <textarea rows="2" cols="2"></textarea>
+            </div>
+            @*<div class="col-md-1">
+                    <label></label><br />
+                    <input type="button" value="Thêm" />
+                </div>*@
+            <div class="col-md-12">
+                <label>Các tập tin đính kèm</label>
+                @using (Html.BeginForm("UploadFileCongViec", "Update", FormMethod.Post, new { enctype = "multipart/form-data", @class = "dropzone" }))
+                {
+                    <div class="fallback">
+                        <input type="file" class="form-control" multiple />
+                    </div>
+                }
+            </div>
 
+            <div class="col-md-12">
+                <label>Trạng thái</label>
+                <select class="form-control">
+                    <option>Chưa xử lý</option>
+                </select>
+            </div>
+            <div class="clear"></div>
+            <div class="col-md-12">
+                <div id="outer">
+                    <div class="inner">
+                        <input type="submit" class="btn btn-primary btn-width-md" value="Thêm mới" />
+                    </div>
+                    <div class="inner"><input type="button" class="btn btn-primary btn-width-md" value="Hủy" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var optionCalendar =
+             {
+                 showOn: 'both',
+                 autoSize: true,
+                 constrainInput: true,
+                 //buttonImageOnly: true,
+                 @*buttonImage: "@Url.Content("~/Content/images/calendar.png")",*@
+                 buttonText: "Calendar",
+                 dateFormat: 'dd/mm/yy'
+             };
+            $('.control-datepicker').datepicker(optionCalendar);
+        });
+    </script>
+}
