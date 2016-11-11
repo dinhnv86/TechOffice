@@ -40,7 +40,6 @@ namespace AnThinhPhat.Entities
         public virtual DbSet<MucTin> MucTins { get; set; }
         public virtual DbSet<NhomCoQuan> NhomCoQuans { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TacNghiep> TacNghieps { get; set; }
         public virtual DbSet<TacNghiep_CoQuanLienQuan> TacNghiep_CoQuanLienQuan { get; set; }
         public virtual DbSet<TacNghiep_TinhHinhThucHien> TacNghiep_TinhHinhThucHien { get; set; }

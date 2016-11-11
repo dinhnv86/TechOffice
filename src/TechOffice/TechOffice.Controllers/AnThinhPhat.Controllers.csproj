@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountController.cs" />
+    <Compile Include="CategoryController.cs" />
     <Compile Include="LinhVucTacNghiepController.cs" />
     <Compile Include="UsersController.cs" />
     <Compile Include="MucDoHoanThanhController.cs" />

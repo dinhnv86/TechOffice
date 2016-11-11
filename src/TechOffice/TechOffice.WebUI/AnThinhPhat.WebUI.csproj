@@ -382,6 +382,7 @@
     <Content Include="Views\TacNghiep\_PartialPageList.cshtml" />
     <Content Include="Views\Shared\_LayoutThuTuc.cshtml" />
     <Content Include="Views\Shared\_PartialMenuLeftThuTuc.cshtml" />
+    <Content Include="Views\Shared\_PartialMenuLeftVanBan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
