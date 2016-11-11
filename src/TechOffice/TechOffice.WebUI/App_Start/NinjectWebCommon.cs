@@ -81,6 +81,7 @@ namespace AnThinhPhat.WebUI
                 .To<LinhVucCongViecRepository>()
                 .WithConstructorArgument(logService);
             kernel.Bind<ILinhVucThuTucRepository>().To<LinhVucThuTucRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ILinhVucVanBanRepository>().To<LinhVucVanBanRepository>().WithConstructorArgument(logService);
             kernel.Bind<ILinhVucTacNghiepRepository>().To<LinhVucTacNghiepRepository>().WithConstructorArgument(logService);
             kernel.Bind<ILoaiVanBanRepository>().To<LoaiVanBanRepository>().WithConstructorArgument(logService);
             kernel.Bind<IMucDoHoanThanhRepository>().To<MucDoHoanThanhRepository>().WithConstructorArgument(logService);

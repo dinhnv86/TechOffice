@@ -25,6 +25,7 @@
         public static string COQUAN = "coquan";
         public static string NHOMCOQUAN = "nhomcoquan";
         public static string LINHVUCCONGVIEC = "linhvuccongviec";
+        public static string LINHVUCVANBAN = "linhvucvanban";
         public static string LINHVUCTHUTUC = "linhvucthutuc";
         public static string LINHVUCTACNGHIEP = "linhvuctacnghiep";
         public static string LOAIVANBAN = "loaivanban";

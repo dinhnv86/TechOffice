@@ -223,15 +223,10 @@ namespace AnThinhPhat.Services.Implements
                     return (from item in context.LinhVucVanBans
                             where item.IsDeleted == false &&
                                   item.Id == id
-                            select new LinhVucVanBanResult
-                            {
-                                Id = item.Id,
-                                Ten = item.Ten,
-                                MoTa = item.MoTa,
-                                IsDeleted = item.IsDeleted,
-                                LastUpdatedBy = item.LastUpdatedBy,
-                                LastUpdated = item.LastUpdated
-                            }).Single();
+                            select item)
+                            .MakeQueryToDatabase()
+                            .Select(x => x.ToDataResult())
+                            .Single();
                 }
             });
         }
@@ -245,15 +240,11 @@ namespace AnThinhPhat.Services.Implements
                     return await (from item in context.LinhVucVanBans
                                   where item.IsDeleted == false &&
                                         item.Id == id
-                                  select new LinhVucVanBanResult
-                                  {
-                                      Id = item.Id,
-                                      Ten = item.Ten,
-                                      MoTa = item.MoTa,
-                                      IsDeleted = item.IsDeleted,
-                                      LastUpdatedBy = item.LastUpdatedBy,
-                                      LastUpdated = item.LastUpdated
-                                  }).SingleAsync();
+                                  select item)
+                            .MakeQueryToDatabase()
+                            .Select(x => x.ToDataResult())
+                            .AsQueryable()
+                            .SingleAsync();
                 }
             });
         }

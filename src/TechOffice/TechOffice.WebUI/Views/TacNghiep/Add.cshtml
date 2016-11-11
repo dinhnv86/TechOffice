@@ -1,7 +1,16 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<link href="~/Content/app/plus.css" rel="stylesheet" />
+<style>
+    .hiddenRow {
+        padding: 0 !important;
+    }
 
+    .glyphicon:hover {
+        cursor: pointer;
+    }
+</style>
 
 <div class="row">
     <div class="col-md-4">
@@ -26,24 +35,62 @@
             <thead>
                 <tr>
                     <td>Ten co quan</td>
-                    <td>Co lien quan</td>
+                    <td style="width:100px;">Co lien quan</td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Co quan 01</td>
-                    <td>
-                        <input type="checkbox" />
+                    <td colspan="2">
+                        <span class="glyphicon glyphicon-plus" data-toggle="collapse" data-target="#demo01">
+                        </span>
+                        Nhom Co quan 01
+                    </td>
+                    @*<td>
+                            <input type="checkbox" />
+                        </td>*@
+                </tr>
+                <tr>
+                    <td colspan="2" class="hiddenRow">
+                        <div class="collapse" id="demo01">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>Co quan 01</td>
+                                        <td style="width:100px;">
+                                            <input type="checkbox" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Co quan 01</td>
+                                        <td style="width:100px;">
+                                            <input type="checkbox" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Co quan 01</td>
+                                        <td>
+                                            <input type="checkbox" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </td>
                 </tr>
                 <tr>
-                    <td>Co quan 01</td>
                     <td>
-                        <input type="checkbox" />
+                        <span class="glyphicon glyphicon-plus" data-toggle="collapse" data-target="#demo02">
+                        </span>
+                        Nhom Co quan 02
+                    </td>
+                    <td>
+                       <div>
+                           <input type="checkbox" />
+                        </div> 
                     </td>
                 </tr>
                 <tr>
-                    <td>Co quan 01</td>
+                    <td>Nhom Co quan 03</td>
                     <td>
                         <input type="checkbox" />
                     </td>

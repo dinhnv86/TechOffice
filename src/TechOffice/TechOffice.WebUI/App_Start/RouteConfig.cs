@@ -88,6 +88,9 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.LINHVUCTHUTUC, UrlLink.LINHVUCTHUTUC,
              new { controller = "LinhVucThuTuc", action = "Index", id = UrlParameter.Optional });
 
+            routes.MapRoute(UrlLink.LINHVUCVANBAN, UrlLink.LINHVUCVANBAN,
+              new { controller = "LinhVucVanBan", action = "Index", id = UrlParameter.Optional });
+
             routes.MapRoute(UrlLink.LINHVUCTACNGHIEP, UrlLink.LINHVUCTACNGHIEP,
            new { controller = "LinhVucTacNghiep", action = "Index", id = UrlParameter.Optional });
 

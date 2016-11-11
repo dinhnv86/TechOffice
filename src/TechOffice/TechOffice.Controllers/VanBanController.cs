@@ -20,7 +20,7 @@ namespace AnThinhPhat.WebUI.Controllers
         public ILoaiVanBanRepository LoaiVanBanRepository { get; set; }
 
         [Inject]
-        public ICoQuanRepository CoQuanRepository { get; set; }
+        public ILinhVucVanBanRepository LinhVucVanRepository { get; set; }
 
         public ActionResult Index(int? loaiVanBanId = null,
             int? coQuanId = null,
@@ -43,7 +43,7 @@ namespace AnThinhPhat.WebUI.Controllers
             model.LoaiVanBanInfos = LoaiVanBanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
 
             //2. Get all co quan
-            model.CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
+            model.CoQuanBanHanhInfos = LinhVucVanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
 
             return model;
         }

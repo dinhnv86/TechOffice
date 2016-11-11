@@ -11,7 +11,7 @@ namespace AnThinhPhat.ViewModel.VanBan
     {
         public int? CoQuanId { get; set; }
 
-        public IEnumerable<CoQuanInfo> CoQuanInfos { get; set; }
+        public IEnumerable<LinhVucVanBanInfo> CoQuanBanHanhInfos { get; set; }
 
         public int? LoaiVanBanId { get; set; }
         public IEnumerable<LoaiVanBanInfo> LoaiVanBanInfos { get; set; }

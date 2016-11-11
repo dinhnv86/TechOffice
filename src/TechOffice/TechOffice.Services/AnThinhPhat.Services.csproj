@@ -52,6 +52,7 @@
     <Compile Include="Abstracts\IHoSoCongViecRepository.cs" />
     <Compile Include="Abstracts\ILinhVucTacNghiepRepository.cs" />
     <Compile Include="Abstracts\ILinhVucCongViecRepository.cs" />
+    <Compile Include="Abstracts\ILinhVucVanBanRepository.cs" />
     <Compile Include="Abstracts\ILinhVucThuTucRepository.cs" />
     <Compile Include="Abstracts\ILoaiVanBanRepository.cs" />
     <Compile Include="Abstracts\IMucDoHoanThanhRepository.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Implements\HoSoCongViecRepository.cs" />
     <Compile Include="Implements\LinhVucTacNghiepRepository.cs" />
     <Compile Include="Implements\LinhVucCongViecRepository.cs" />
+    <Compile Include="Implements\LinhVucVanBanRepository.cs" />
     <Compile Include="Implements\LinhVucThuTucRepository.cs" />
     <Compile Include="Implements\LoaiVanBanRepository.cs" />
     <Compile Include="Implements\MucDoHoanThanhRepository.cs" />

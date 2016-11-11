@@ -1,6 +1,6 @@
 ﻿@model AnThinhPhat.ViewModel.VanBan.InitVanBanViewModel
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutVanBan.cshtml";
 
 }
 
@@ -14,14 +14,14 @@
             {
                 <div class="col-md-5">
                     <label>Lĩnh vực</label>
-                    @Html.DropDownListFor(x => Model.LoaiVanBanId, new SelectList(Model.LoaiVanBanInfos, "Id", "Name"), "Tất cả lĩnh vực", htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(x => Model.LoaiVanBanId, new SelectList(Model.LoaiVanBanInfos, "Id", "Name"), "----------Tất cả lĩnh vực-----------", htmlAttributes: new { @class = "form-control" })
                     <label>Cơ quan ban hành</label>
-                    @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanBanHanhInfos, "Id", "Name"), "--------------Tất cả--------------", htmlAttributes: new { @class = "form-control" })
                 </div>
 
                 <div class="col-md-4">
                     <label>Năm ban hành</label>
-                    @Html.DropDownListFor(x => Model.NamBanHnahId, new SelectList(Model.NamBanHanhInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(x => Model.NamBanHnahId, new SelectList(Model.NamBanHanhInfo, "Id", "Name"), "--------------Tất cả--------------", htmlAttributes: new { @class = "form-control" })
                 </div>
 
                 <div class="col-md-3">

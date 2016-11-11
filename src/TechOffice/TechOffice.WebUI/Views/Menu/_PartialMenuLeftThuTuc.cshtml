@@ -1,0 +1,22 @@
+﻿@model AnThinhPhat.ViewModel.Menu.InitMenuThuTucViewModel
+
+<div class="supp">
+    <h3 class="sbar">
+        <a href="" style="color: #000">Danh mục</a>
+        <div class="btn_down btn_down_sp">
+            <i class="fa fa-chevron-down"></i>
+        </div>
+    </h3>
+    <div class="menu_products">
+        <ul id="menu_left">
+            @foreach (var item in Model.LinhVucThuTucInfos)
+            {
+                <li>
+                    @Html.RouteLink(item.Name, AnThinhPhat.Utilities.UrlLink.THUTUC, routeValues: new { linhVucThuTucId = item.Id })
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+@{Html.RenderPartial("_PartialPageMenuSubLeft");}

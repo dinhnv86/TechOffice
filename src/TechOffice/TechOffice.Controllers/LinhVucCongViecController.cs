@@ -56,7 +56,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult Edit(int id)
         {
-            var data = CongViecRepository.Single(id).ToDataViewModel();
+            var data = CongViecRepository.Single(id).ToIfNotNullDataViewModel();
 
             return PartialView("_PartialPageBaseDataEdit", data);
         }

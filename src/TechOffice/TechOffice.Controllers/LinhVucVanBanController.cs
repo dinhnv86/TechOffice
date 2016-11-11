@@ -15,7 +15,7 @@ namespace AnThinhPhat.WebUI.Controllers
     public class LinhVucVanBanController : OfficeController
     {
         [Inject]
-        public ILinhVucBanRepository ThuTucRepository { get; set; }
+        public ILinhVucVanBanRepository VanBanRepository { get; set; }
 
         public ActionResult Index()
         {
@@ -30,7 +30,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult List(int? page)
         {
-            var items = ThuTucRepository.GetAll().Select(x => x.ToDataViewModel()).ToList();
+            var items = VanBanRepository.GetAll().Select(x => x.ToDataViewModel()).ToList();
 
             var pageNumber = page ?? 1;
             return PartialView(items.ToPagedList(pageNumber, TechOfficeConfig.PAGESIZE));
@@ -41,14 +41,14 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var result = model.ToDataResult<LinhVucThuTucResult>().Update((u) =>
+                var result = model.ToDataResult<LinhVucVanBanResult>().Update((u) =>
                 {
                     u.CreatedBy = UserName;
                 });
 
                 return await ExecuteResultAsync(async () =>
                 {
-                    return await ThuTucRepository.AddAsync(result);
+                    return await VanBanRepository.AddAsync(result);
                 });
             });
         }
@@ -56,7 +56,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult Edit(int id)
         {
-            var data = ThuTucRepository.Single(id).ToDataViewModel();
+            var data = VanBanRepository.Single(id).ToDataViewModel();
 
             return PartialView("_PartialPageBaseDataEdit", data);
         }
@@ -65,7 +65,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var cv = model.ToDataResult<LinhVucThuTucResult>().Update((u) =>
+                var cv = model.ToDataResult<LinhVucVanBanResult>().Update((u) =>
                  {
                      u.Id = id;
                      u.LastUpdatedBy = UserName;
@@ -73,7 +73,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
                 return await ExecuteResultAsync(async () =>
                 {
-                    return await ThuTucRepository.UpdateAsync(cv);
+                    return await VanBanRepository.UpdateAsync(cv);
                 });
             });
         }
@@ -91,7 +91,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
                 return await ExecuteResultAsync(async () =>
                 {
-                    return await ThuTucRepository.DeleteByAsync(id);
+                    return await VanBanRepository.DeleteByAsync(id);
                 });
             });
         }
