@@ -188,11 +188,11 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.LinhVucCongViecs
-                            where item.IsDeleted == false
-                            select item)
-                            .MakeQueryToDatabase()
-                            .Select(x => x.ToDataResult())
-                            .ToList();
+                        where item.IsDeleted == false
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .ToList();
                 }
             });
         }
@@ -204,11 +204,11 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.LinhVucCongViecs
-                                  where item.IsDeleted == false
-                                  select item).MakeQueryToDatabase()
-                                  .Select(x => x.ToDataResult())
-                                  .AsQueryable()
-                                  .ToListAsync();
+                        where item.IsDeleted == false
+                        select item).MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .ToListAsync();
                 }
             });
         }
@@ -220,12 +220,12 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.LinhVucCongViecs
-                            where item.IsDeleted == false &&
-                                  item.Id == id
-                            select item)
-                            .MakeQueryToDatabase()
-                            .Select(x => x.ToDataResult())
-                            .Single();
+                        where item.IsDeleted == false &&
+                              item.Id == id
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .Single();
                 }
             });
         }
@@ -237,13 +237,13 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.LinhVucCongViecs
-                                  where item.IsDeleted == false &&
-                                        item.Id == id
-                                  select item)
-                                  .MakeQueryToDatabase()
-                                .Select(x => x.ToDataResult())
-                                .AsQueryable()
-                                .SingleAsync();
+                        where item.IsDeleted == false &&
+                              item.Id == id
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .SingleAsync();
                 }
             });
         }

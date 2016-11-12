@@ -1,17 +1,14 @@
-﻿using AnThinhPhat.Services.Abstracts;
-using Ninject;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
-using AnThinhPhat.ViewModel;
-using PagedList;
-using AnThinhPhat.Utilities;
-using AnThinhPhat.ViewModel.Users;
 using AnThinhPhat.Entities;
-using AnThinhPhat.Entities.Results;
+using AnThinhPhat.Services;
+using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Utilities;
+using AnThinhPhat.ViewModel;
+using AnThinhPhat.ViewModel.Users;
+using Ninject;
+using PagedList;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -53,7 +50,7 @@ namespace AnThinhPhat.WebUI.Controllers
             var userInfo = new AddUserViewModel
             {
                 RoleInfos = roles,
-                ChucVuInfos = cvs,
+                ChucVuInfos = cvs
             };
             return View(userInfo);
         }
@@ -65,19 +62,18 @@ namespace AnThinhPhat.WebUI.Controllers
             return ExecuteWithErrorHandling(() =>
             {
                 var pass = Guid.NewGuid().ToString().Substring(0, 6);
-                var result = UserRepository.AddUserWithRoles(model.ToUseResult().Update((x) =>
-                  {
-                      x.Password = pass;
-                      x.CreatedBy = UserName;
-                  }));
+                var result = UserRepository.AddUserWithRoles(model.ToUseResult().Update(x =>
+                {
+                    x.Password = pass;
+                    x.CreatedBy = UserName;
+                }));
 
                 return new JsonResult
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = result == Services.SaveResult.SUCCESS ? "SB01" : "SB02"
+                    Data = result == SaveResult.SUCCESS ? "SB01" : "SB02"
                 };
             });
-
         }
     }
 }

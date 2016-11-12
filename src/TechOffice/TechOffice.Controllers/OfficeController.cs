@@ -1,13 +1,13 @@
-﻿using AnThinhPhat.Services;
-using AnThinhPhat.Utilities;
-using Ninject;
-using System;
+﻿using System;
 using System.Net;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using Microsoft.Owin.Security;
-using System.Web;
 using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using AnThinhPhat.Services;
+using AnThinhPhat.Utilities;
+using Microsoft.Owin.Security;
+using Ninject;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -32,9 +32,12 @@ namespace AnThinhPhat.WebUI.Controllers
                 var claim = User as ClaimsPrincipal;
                 if (claim != null)
                     return claim.FindFirst(ClaimTypes.Name).Value;
-                else return string.Empty;
+                return string.Empty;
             }
         }
+
+        [Inject]
+        public ILogService LogService { get; set; }
 
         protected JsonResult ExecuteWithErrorHandling(Func<JsonResult> action)
         {
@@ -52,10 +55,10 @@ namespace AnThinhPhat.WebUI.Controllers
                 }
             }
 
-            return new JsonResult()
+            return new JsonResult
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = new { code = "SB02" }
+                Data = new {code = "SB02"}
             };
         }
 
@@ -75,10 +78,10 @@ namespace AnThinhPhat.WebUI.Controllers
                 }
             }
 
-            return new JsonResult()
+            return new JsonResult
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = new { code = "SB02" }
+                Data = new {code = "SB02"}
             };
         }
 
@@ -92,17 +95,17 @@ namespace AnThinhPhat.WebUI.Controllers
             switch (result)
             {
                 case SaveResult.SUCCESS:
-                    Response.StatusCode = (int)HttpStatusCode.OK;
-                    return new JsonResult()
+                    Response.StatusCode = (int) HttpStatusCode.OK;
+                    return new JsonResult
                     {
                         JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                        Data = new { code = "SB01" }
+                        Data = new {code = "SB01"}
                     };
                 default:
-                    return new JsonResult()
+                    return new JsonResult
                     {
                         JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                        Data = new { code = "SB02" }
+                        Data = new {code = "SB02"}
                     };
             }
         }
@@ -114,8 +117,5 @@ namespace AnThinhPhat.WebUI.Controllers
                 throw new ArgumentException();
             }
         }
-
-        [Inject]
-        public ILogService LogService { get; set; }
     }
 }

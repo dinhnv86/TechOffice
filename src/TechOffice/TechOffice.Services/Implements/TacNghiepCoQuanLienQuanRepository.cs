@@ -189,17 +189,9 @@ namespace AnThinhPhat.Services.Implements
                 {
                     return (from item in context.TacNghiep_CoQuanLienQuan
                         where item.IsDeleted == false
-                        select new TacNghiepCoQuanLienQuanResult
-                        {
-                            Id = item.Id,
-                            TacNghiepId = item.TacNghiepId,
-                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
-                            CoQuanId = item.CoQuanId,
-                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToList();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult());
                 }
             });
         }
@@ -212,17 +204,11 @@ namespace AnThinhPhat.Services.Implements
                 {
                     return await (from item in context.TacNghiep_CoQuanLienQuan
                         where item.IsDeleted == false
-                        select new TacNghiepCoQuanLienQuanResult
-                        {
-                            Id = item.Id,
-                            TacNghiepId = item.TacNghiepId,
-                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
-                            CoQuanId = item.CoQuanId,
-                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToListAsync();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .ToListAsync();
                 }
             });
         }
@@ -236,17 +222,10 @@ namespace AnThinhPhat.Services.Implements
                     return (from item in context.TacNghiep_CoQuanLienQuan
                         where item.IsDeleted == false &&
                               item.Id == id
-                        select new TacNghiepCoQuanLienQuanResult
-                        {
-                            Id = item.Id,
-                            TacNghiepId = item.TacNghiepId,
-                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
-                            CoQuanId = item.CoQuanId,
-                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).Single();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .Single();
                 }
             });
         }
@@ -260,17 +239,11 @@ namespace AnThinhPhat.Services.Implements
                     return await (from item in context.TacNghiep_CoQuanLienQuan
                         where item.IsDeleted == false &&
                               item.Id == id
-                        select new TacNghiepCoQuanLienQuanResult
-                        {
-                            Id = item.Id,
-                            TacNghiepId = item.TacNghiepId,
-                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
-                            CoQuanId = item.CoQuanId,
-                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).SingleAsync();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .SingleAsync();
                 }
             });
         }

@@ -2,7 +2,7 @@
 
 namespace AnThinhPhat.ViewModel.Users
 {
-    public  class UserLoginViewModel
+    public class UserLoginViewModel
     {
         [Required]
         [StringLength(150, MinimumLength = 3)]

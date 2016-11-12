@@ -1,16 +1,15 @@
-﻿using System.Web.Mvc;
-using AnThinhPhat.Services.Abstracts;
-using Ninject;
-using AnThinhPhat.ViewModel.CongViec;
-using System.Linq;
+﻿using System.Linq;
+using System.Web.Mvc;
 using AnThinhPhat.Entities;
+using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
+using AnThinhPhat.ViewModel.CongViec;
+using Ninject;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
     public class CongViecController : OfficeController
     {
-
         [Inject]
         public IUsersRepository UsersRepository { get; set; }
 
@@ -33,10 +32,10 @@ namespace AnThinhPhat.WebUI.Controllers
 
             model.ValueSearch.UserId = userId ?? 0;
             if (role != null)
-                model.ValueSearch.Role = (EnumRoleExecute)role;
+                model.ValueSearch.Role = (EnumRoleExecute) role;
 
             if (status != null)
-                model.ValueSearch.Status = (EnumStatus)status;
+                model.ValueSearch.Status = (EnumStatus) status;
 
             model.ValueSearch.LinhVucCongViecId = linhVucCongViecId ?? 0;
 
@@ -66,14 +65,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpPost, ActionName("Add")]
         public JsonResult AddRecord()
         {
-            return ExecuteWithErrorHandling(() =>
-            {
-                return new JsonResult
-                {
-
-                };
-
-            });
+            return ExecuteWithErrorHandling(() => { return new JsonResult(); });
         }
 
         public ActionResult Detail()
@@ -83,10 +75,12 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private InitCongViecViewModel InitModel()
         {
-            var model = new InitCongViecViewModel();
-            model.UsersInfo = UsersRepository.GetAll().Select(x => x.ToDataInfo());
-            model.LinhVucCongViec = LinhVucCongViecRepository.GetAll().Select(x => x.ToDataInfo());
-            model.TrangThaiCongViec = TrangThaiCongViecRepository.GetAll().Select(x => x.ToDataInfo());
+            var model = new InitCongViecViewModel
+            {
+                UsersInfo = UsersRepository.GetAll().Select(x => x.ToDataInfo()),
+                LinhVucCongViec = LinhVucCongViecRepository.GetAll().Select(x => x.ToDataInfo()),
+                TrangThaiCongViec = TrangThaiCongViecRepository.GetAll().Select(x => x.ToDataInfo())
+            };
 
             return model;
         }

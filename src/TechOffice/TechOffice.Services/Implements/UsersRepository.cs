@@ -15,6 +15,7 @@ namespace AnThinhPhat.Services.Implements
     public class UsersRepository : DbExecute, IUsersRepository
     {
         #region Constructor
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="UsersRepository" /> class.
         /// </summary>
@@ -34,31 +35,18 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public UserResult Single(int id)
         {
-            UserResult result = null;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    result = (from item in context.Users
-                              where item.IsDeleted == false && item.Id == id
-                              select new UserResult
-                              {
-                                  Id = item.Id,
-                                  UserName = item.UserName,
-                                  IsLocked = item.IsLocked,
-                                  HoVaTen = item.HoVaTen,
-                                  ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo(),
-                                  IsDeleted = item.IsDeleted,
-                                  LastUpdatedBy = item.LastUpdatedBy,
-                                  LastUpdated = item.LastUpdated
-                              }).Single();
+                    return (from item in context.Users
+                        where item.IsDeleted == false && item.Id == id
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .Single();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-            }
-            return result;
+            });
         }
 
         /// <summary>
@@ -68,31 +56,19 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<UserResult> SingleAsync(int id)
         {
-            UserResult result = null;
-            try
+            return await ExecuteDbWithHandle(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    result = await (from item in context.Users
-                                    where item.IsDeleted == false && item.Id == id
-                                    select new UserResult
-                                    {
-                                        Id = item.Id,
-                                        UserName = item.UserName,
-                                        IsLocked = item.IsLocked,
-                                        HoVaTen = item.HoVaTen,
-                                        ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo(),
-                                        IsDeleted = item.IsDeleted,
-                                        LastUpdatedBy = item.LastUpdatedBy,
-                                        LastUpdated = item.LastUpdated
-                                    }).SingleAsync();
+                    return await (from item in context.Users
+                        where item.IsDeleted == false && item.Id == id
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .SingleAsync();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-            }
-            return result;
+            });
         }
 
         #endregion
@@ -105,25 +81,19 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public IEnumerable<UserResult> GetAll()
         {
-            IEnumerable<UserResult> results = null;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    results = (from item in context.Users
-                               where item.IsDeleted == false
-                               orderby item.UserName
-                               select item)
-                               .MakeQueryToDatabase()
-                               .Select(x => x.ToDataResult())
-                               .ToList();
+                    return (from item in context.Users
+                        where item.IsDeleted == false
+                        orderby item.UserName
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .ToList();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-            }
-            return results;
+            });
         }
 
         /// <summary>
@@ -132,32 +102,20 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<IEnumerable<UserResult>> GetAllAsync()
         {
-            IEnumerable<UserResult> results = null;
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    results = await (from item in context.Users
-                                     where item.IsDeleted == false
-                                     orderby item.UserName
-                                     select new UserResult
-                                     {
-                                         Id = item.Id,
-                                         UserName = item.UserName,
-                                         IsLocked = item.IsLocked,
-                                         HoVaTen = item.HoVaTen,
-                                         ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo(),
-                                         IsDeleted = item.IsDeleted,
-                                         LastUpdatedBy = item.LastUpdatedBy,
-                                         LastUpdated = item.LastUpdated
-                                     }).ToListAsync();
+                    return await (from item in context.Users
+                        where item.IsDeleted == false
+                        orderby item.UserName
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .ToListAsync();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-            }
-            return results;
+            });
         }
 
         #endregion
@@ -171,9 +129,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult Update(UserResult entity)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -187,16 +143,9 @@ namespace AnThinhPhat.Services.Implements
                     update.LastUpdated = DateTime.Now;
 
                     context.Entry(update).State = EntityState.Modified;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -206,35 +155,24 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> UpdateAsync(UserResult entity)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
                     var update = context.Users.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
-
                     update.IsLocked = entity.IsLocked;
                     update.HoVaTen = entity.HoVaTen;
                     update.ChucVuId = entity.ChucVuId;
-
 
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
                     update.LastUpdated = DateTime.Now;
 
                     context.Entry(update).State = EntityState.Modified;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         #endregion
@@ -248,8 +186,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult Add(UserResult entity)
         {
-            SaveResult result;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -266,15 +203,9 @@ namespace AnThinhPhat.Services.Implements
                     add.CreateDate = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-            return result;
+            });
         }
 
         /// <summary>
@@ -284,8 +215,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> AddAsync(UserResult entity)
         {
-            SaveResult result;
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -304,15 +234,9 @@ namespace AnThinhPhat.Services.Implements
                     add.CreateDate = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-            return result;
+            });
         }
 
         /// <summary>
@@ -322,8 +246,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult AddRange(IEnumerable<UserResult> entities)
         {
-            SaveResult result;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -344,15 +267,9 @@ namespace AnThinhPhat.Services.Implements
 
                         context.Entry(add).State = EntityState.Added;
                     }
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-            return result;
+            });
         }
 
         /// <summary>
@@ -362,8 +279,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> AddRangeAsync(IEnumerable<UserResult> entities)
         {
-            SaveResult result;
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -384,22 +300,16 @@ namespace AnThinhPhat.Services.Implements
 
                         context.Entry(add).State = EntityState.Added;
                     }
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-            return result;
+            });
         }
 
         public SaveResult AddUserWithRoles(UserResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
-                SaveResult result = SaveResult.FAILURE;
+                var result = SaveResult.FAILURE;
 
                 using (var context = new TechOfficeEntities())
                 {
@@ -442,6 +352,7 @@ namespace AnThinhPhat.Services.Implements
                 return result;
             });
         }
+
         #endregion
 
         #region Implement Delete
@@ -453,9 +364,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult Delete(UserResult entity)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -463,16 +372,9 @@ namespace AnThinhPhat.Services.Implements
                     assembly.IsDeleted = true;
 
                     context.Entry(assembly).State = EntityState.Modified;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -482,9 +384,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> DeleteAsync(UserResult entity)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -492,16 +392,9 @@ namespace AnThinhPhat.Services.Implements
                     assembly.IsDeleted = true;
 
                     context.Entry(assembly).State = EntityState.Modified;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -511,9 +404,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult DeleteBy(int id)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -521,16 +412,9 @@ namespace AnThinhPhat.Services.Implements
                     assembly.IsDeleted = true;
 
                     context.Entry(assembly).State = EntityState.Modified;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -540,9 +424,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> DeleteByAsync(int id)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -550,16 +432,9 @@ namespace AnThinhPhat.Services.Implements
                     assembly.IsDeleted = true;
 
                     context.Entry(assembly).State = EntityState.Modified;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         #endregion
@@ -574,31 +449,20 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public UserResult Login(string userName, string password)
         {
-            UserResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
                     var passHash = AppCipher.EncryptCipher(password);
-                    result = (from item in context.Users
-                              where item.UserName == userName &&
-                                    item.Password == passHash
-                              select new UserResult
-                              {
-                                  Id = item.Id,
-                                  UserName = item.UserName,
-                                  HoVaTen = item.HoVaTen,
-                                  ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo()
-                              }).Single();
+                    return (from item in context.Users
+                        where item.UserName == userName &&
+                              item.Password == passHash
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .Single();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = null;
-            }
-            return result;
+            });
         }
 
         /// <summary>
@@ -609,37 +473,26 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<UserResult> LoginAsync(string userName, string password)
         {
-            UserResult result;
-
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
                     var passHash = AppCipher.EncryptCipher(password);
-                    result = await (from item in context.Users
-                                    where item.UserName == userName &&
-                                          item.Password == passHash
-                                    select new UserResult
-                                    {
-                                        Id = item.Id,
-                                        UserName = item.UserName,
-                                        HoVaTen = item.HoVaTen,
-                                        ChucVuInfo = item.ChucVu.ToIfNotNullDataInfo()
-                                    }).SingleAsync();
+                    return await (from item in context.Users
+                        where item.UserName == userName &&
+                              item.Password == passHash
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .SingleAsync();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = null;
-            }
-
-            return result;
+            });
         }
 
         #endregion
 
-        #region Implmenet Unlock and Lock
+        #region Implement Unlock and Lock
 
         /// <summary>
         ///     Unlockeds the specified identifier.
@@ -648,9 +501,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult Unlocked(int id)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -660,16 +511,9 @@ namespace AnThinhPhat.Services.Implements
                     assembly.LastUpdated = DateTime.Now;
 
                     context.Entry(assembly).State = EntityState.Modified;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -679,9 +523,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult Locked(int id)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -691,16 +533,9 @@ namespace AnThinhPhat.Services.Implements
                     assembly.LastUpdated = DateTime.Now;
 
                     context.Entry(assembly).State = EntityState.Modified;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -710,9 +545,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> UnlockedAsync(int id)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandle(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -722,16 +555,9 @@ namespace AnThinhPhat.Services.Implements
                     assembly.LastUpdated = DateTime.Now;
 
                     context.Entry(assembly).State = EntityState.Modified;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -741,9 +567,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> LockedAsync(int id)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -753,16 +577,9 @@ namespace AnThinhPhat.Services.Implements
                     assembly.LastUpdated = DateTime.Now;
 
                     context.Entry(assembly).State = EntityState.Modified;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -771,31 +588,17 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public IEnumerable<UserResult> FindAllUnlocked()
         {
-            IEnumerable<UserResult> results;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    results = (from item in context.Users
-                               where item.IsDeleted == false && item.IsLocked == false
-                               select new UserResult
-                               {
-                                   Id = item.Id,
-                                   UserName = item.UserName,
-                                   IsLocked = item.IsLocked,
-                                   HoVaTen = item.HoVaTen,
-                                   IsDeleted = item.IsDeleted,
-                                   LastUpdatedBy = item.LastUpdatedBy,
-                                   LastUpdated = item.LastUpdated
-                               });
+                    return (from item in context.Users
+                        where item.IsDeleted == false && item.IsLocked == false
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult());
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                results = null;
-            }
-            return results;
+            });
         }
 
         /// <summary>
@@ -804,31 +607,19 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<IEnumerable<UserResult>> FindAllUnlockedAsync()
         {
-            IEnumerable<UserResult> results;
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    results = await (from item in context.Users
-                                     where item.IsDeleted == false && item.IsLocked == false
-                                     select new UserResult
-                                     {
-                                         Id = item.Id,
-                                         UserName = item.UserName,
-                                         IsLocked = item.IsLocked,
-                                         HoVaTen = item.HoVaTen,
-                                         IsDeleted = item.IsDeleted,
-                                         LastUpdatedBy = item.LastUpdatedBy,
-                                         LastUpdated = item.LastUpdated
-                                     }).ToListAsync();
+                    return await (from item in context.Users
+                        where item.IsDeleted == false && item.IsLocked == false
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .ToListAsync();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                results = null;
-            }
-            return results;
+            });
         }
 
         /// <summary>
@@ -837,31 +628,17 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public IEnumerable<UserResult> FindAllLocked()
         {
-            IEnumerable<UserResult> results;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    results = (from item in context.Users
-                               where item.IsDeleted == false && item.IsLocked
-                               select new UserResult
-                               {
-                                   Id = item.Id,
-                                   UserName = item.UserName,
-                                   IsLocked = item.IsLocked,
-                                   HoVaTen = item.HoVaTen,
-                                   IsDeleted = item.IsDeleted,
-                                   LastUpdatedBy = item.LastUpdatedBy,
-                                   LastUpdated = item.LastUpdated
-                               });
+                    return (from item in context.Users
+                        where item.IsDeleted == false && item.IsLocked
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult());
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                results = null;
-            }
-            return results;
+            });
         }
 
         /// <summary>
@@ -870,31 +647,19 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<IEnumerable<UserResult>> FindAllLockedAsync()
         {
-            IEnumerable<UserResult> results;
-            try
+            return await ExecuteDbWithHandle(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    results = await (from item in context.Users
-                                     where item.IsDeleted == false && item.IsLocked
-                                     select new UserResult
-                                     {
-                                         Id = item.Id,
-                                         UserName = item.UserName,
-                                         IsLocked = item.IsLocked,
-                                         HoVaTen = item.HoVaTen,
-                                         IsDeleted = item.IsDeleted,
-                                         LastUpdatedBy = item.LastUpdatedBy,
-                                         LastUpdated = item.LastUpdated
-                                     }).ToListAsync();
+                    return await (from item in context.Users
+                        where item.IsDeleted == false && item.IsLocked
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .ToListAsync();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                results = null;
-            }
-            return results;
+            });
         }
 
         #endregion
@@ -908,32 +673,15 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public UserResult CheckUserName(string userName)
         {
-            UserResult exist = null;
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
                     var user = context.Users.SingleOrDefault(x => x.UserName == userName);
-                    if (user != null)
-                        exist = new UserResult
-                        {
-                            Id = user.Id,
-                            UserName = user.UserName,
-                            IsLocked = user.IsLocked,
-                            HoVaTen = user.HoVaTen,
-                            ChucVuInfo = user.ChucVu.ToIfNotNullDataInfo(),
-                            IsDeleted = user.IsDeleted,
-                            LastUpdatedBy = user.LastUpdatedBy,
-                            LastUpdated = user.LastUpdated
-                        };
+
+                    return user.ToIfNotNullDataResult();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                exist = null;
-            }
-            return exist;
+            });
         }
 
         /// <summary>
@@ -943,32 +691,14 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<UserResult> CheckUserNameAsync(string userName)
         {
-            UserResult exist = null;
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
                     var user = await context.Users.SingleOrDefaultAsync(x => x.UserName == userName);
-                    if (user != null)
-                        exist = new UserResult
-                        {
-                            Id = user.Id,
-                            UserName = user.UserName,
-                            IsLocked = user.IsLocked,
-                            HoVaTen = user.HoVaTen,
-                            ChucVuInfo = user.ChucVu.ToIfNotNullDataInfo(),
-                            IsDeleted = user.IsDeleted,
-                            LastUpdatedBy = user.LastUpdatedBy,
-                            LastUpdated = user.LastUpdated
-                        };
+                    return user.ToIfNotNullDataResult();
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                exist = null;
-            }
-            return exist;
+            });
         }
 
         #endregion
@@ -983,9 +713,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public SaveResult ResetPassword(int id, string newPassword)
         {
-            SaveResult result;
-
-            try
+            return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -994,16 +722,9 @@ namespace AnThinhPhat.Services.Implements
                     update.Password = AppCipher.EncryptCipher(newPassword);
 
                     context.Entry(update).State = EntityState.Modified;
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         /// <summary>
@@ -1014,9 +735,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> ResetPasswordAsync(int id, string newPassword)
         {
-            SaveResult result;
-
-            try
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -1025,16 +744,9 @@ namespace AnThinhPhat.Services.Implements
                     update.Password = AppCipher.EncryptCipher(newPassword);
 
                     context.Entry(update).State = EntityState.Modified;
-                    result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
-            }
-            catch (Exception ex)
-            {
-                _logService.Error(ex.Message, ex);
-                result = SaveResult.FAILURE;
-            }
-
-            return result;
+            });
         }
 
         #endregion

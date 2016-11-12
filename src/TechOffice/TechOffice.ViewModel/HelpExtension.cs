@@ -1,11 +1,10 @@
-﻿using AnThinhPhat.Entities;
-using AnThinhPhat.Entities.Results;
-using AnThinhPhat.ViewModel.Users;
-using System;
-using System.Reflection;
+﻿using System;
 using System.Linq;
+using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Infos;
+using AnThinhPhat.Entities.Results;
 using AnThinhPhat.ViewModel.CoQuan;
+using AnThinhPhat.ViewModel.Users;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -58,7 +57,6 @@ namespace AnThinhPhat.ViewModel
                 FullName = entity.HoVaTen,
                 Password = entity.Password,
                 IsLocked = entity.IsLocked,
-
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -69,50 +67,53 @@ namespace AnThinhPhat.ViewModel
 
         public static AddRoleInfoViewModel ToRoleViewModel(this RoleResult entity)
         {
-            return entity == null ? null :
-                new AddRoleInfoViewModel
+            return entity == null
+                ? null
+                : new AddRoleInfoViewModel
                 {
                     Id = entity.Id,
                     Name = entity.Ten,
-                    IsChecked = false,
+                    IsChecked = false
                 };
         }
 
         public static UserResult ToUseResult(this AddUserViewModel entity)
         {
-            return entity == null ? null :
-                  new UserResult
-                  {
-                      Id = entity.Id,
-                      UserName = entity.UserName,
-                      ChucVuId = entity.ChucVuId,
-                      HoVaTen = entity.FullName,
-                      UserRoles = entity.RoleInfos
-                      .Where(x => x.IsChecked)
-                      .Select(x => x.ToUserRoleResult())
-                  };
+            return entity == null
+                ? null
+                : new UserResult
+                {
+                    Id = entity.Id,
+                    UserName = entity.UserName,
+                    ChucVuId = entity.ChucVuId,
+                    HoVaTen = entity.FullName,
+                    UserRoles = entity.RoleInfos
+                        .Where(x => x.IsChecked)
+                        .Select(x => x.ToUserRoleResult())
+                };
         }
 
         public static UserRoleInfo ToUserRoleResult(this AddRoleInfoViewModel entity)
         {
-            return entity == null ? null :
-                new UserRoleInfo
+            return entity == null
+                ? null
+                : new UserRoleInfo
                 {
                     RoleInfo = new RoleInfo
                     {
                         Id = entity.Id
-                    },
+                    }
                 };
         }
 
         public static TResult ToDataResult<TResult>(this BaseDataViewModel entity) where TResult : DataResult
         {
-            Type type = typeof(TResult);
-            var result = (TResult)Activator.CreateInstance(type);
+            var type = typeof (TResult);
+            var result = (TResult) Activator.CreateInstance(type);
 
-            var proInfoFirsts = typeof(TResult).GetProperties();
+            var proInfoFirsts = typeof (TResult).GetProperties();
 
-            foreach (PropertyInfo info in proInfoFirsts)
+            foreach (var info in proInfoFirsts)
             {
                 switch (info.Name)
                 {
@@ -140,8 +141,9 @@ namespace AnThinhPhat.ViewModel
 
         public static string IfNotNull(this DataInfo entity, Func<DataInfo, string> func)
         {
-            return entity == null ? string.Empty :
-            func(entity);
+            return entity == null
+                ? string.Empty
+                : func(entity);
         }
     }
 }

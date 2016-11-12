@@ -1,10 +1,9 @@
-﻿using AnThinhPhat.Services.Abstracts;
-using AnThinhPhat.ViewModel.ThuTuc;
-using Ninject;
+﻿using System.Linq;
 using System.Web.Mvc;
-using System.Linq;
 using AnThinhPhat.Entities;
+using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.ViewModel.TacNghiep;
+using Ninject;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -72,24 +71,19 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpPost, ActionName("Add")]
         public JsonResult AddRecord()
         {
-            return ExecuteWithErrorHandling(() =>
-            {
-                return new JsonResult
-                {
-
-                };
-
-            });
+            return ExecuteWithErrorHandling(() => new JsonResult());
         }
 
         private InitTacNghiepViewModel CreateTacNghiepModel()
         {
-            var model = new InitTacNghiepViewModel();
+            var model = new InitTacNghiepViewModel
+            {
+                LinhVucTacNghiepInfo = LinhVucTacNghiepRepository.GetAll().Select(x => x.ToIfNotNullDataInfo()),
+                CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo()),
+                NhomCoQuanInfos = NhomCoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo()),
+                MucDoHoanThanhInfo = MucDoHoanThanhRepository.GetAll()
+            };
 
-            model.LinhVucTacNghiepInfo = LinhVucTacNghiepRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
-            model.CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
-            model.NhomCoQuanInfos = NhomCoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
-            model.MucDoHoanThanhInfo = MucDoHoanThanhRepository.GetAll();
 
             return model;
         }

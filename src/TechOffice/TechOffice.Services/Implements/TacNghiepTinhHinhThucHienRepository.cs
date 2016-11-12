@@ -197,21 +197,9 @@ namespace AnThinhPhat.Services.Implements
                 {
                     return (from item in context.TacNghiep_TinhHinhThucHien
                         where item.IsDeleted == false
-                        select new TacNghiepTinhHinhThucHienResult
-                        {
-                            Id = item.Id,
-                            ThoiGian = item.ThoiGian,
-                            MucDoHoanThanh = item.MucDoHoanThanh,
-                            TacNghiepId = item.TacNghiepId,
-                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
-                            CoQuanId = item.CoQuanId,
-                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToList();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult());
                 }
             });
         }
@@ -224,21 +212,11 @@ namespace AnThinhPhat.Services.Implements
                 {
                     return await (from item in context.TacNghiep_TinhHinhThucHien
                         where item.IsDeleted == false
-                        select new TacNghiepTinhHinhThucHienResult
-                        {
-                            Id = item.Id,
-                            ThoiGian = item.ThoiGian,
-                            MucDoHoanThanh = item.MucDoHoanThanh,
-                            TacNghiepId = item.TacNghiepId,
-                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
-                            CoQuanId = item.CoQuanId,
-                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToListAsync();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .ToListAsync();
                 }
             });
         }
@@ -252,21 +230,10 @@ namespace AnThinhPhat.Services.Implements
                     return (from item in context.TacNghiep_TinhHinhThucHien
                         where item.IsDeleted == false &&
                               item.Id == id
-                        select new TacNghiepTinhHinhThucHienResult
-                        {
-                            Id = item.Id,
-                            ThoiGian = item.ThoiGian,
-                            MucDoHoanThanh = item.MucDoHoanThanh,
-                            TacNghiepId = item.TacNghiepId,
-                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
-                            CoQuanId = item.CoQuanId,
-                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).Single();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .Single();
                 }
             });
         }
@@ -278,23 +245,12 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.TacNghiep_TinhHinhThucHien
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select new TacNghiepTinhHinhThucHienResult
-                        {
-                            Id = item.Id,
-                            ThoiGian = item.ThoiGian,
-                            MucDoHoanThanh = item.MucDoHoanThanh,
-                            TacNghiepId = item.TacNghiepId,
-                            TacNghiepInfo = item.TacNghiep.ToIfNotNullDataInfo(),
-                            CoQuanId = item.CoQuanId,
-                            CoQuanInfo = item.CoQuan.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).SingleAsync();
+                        where item.IsDeleted == false && item.Id == id
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .SingleAsync();
                 }
             });
         }

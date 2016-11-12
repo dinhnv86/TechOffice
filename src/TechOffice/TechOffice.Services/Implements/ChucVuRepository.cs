@@ -7,7 +7,6 @@ using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
-using System.Data.Entity;
 
 namespace AnThinhPhat.Services.Implements
 {
@@ -69,10 +68,9 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    ChucVu add;
                     foreach (var entity in entities)
                     {
-                        add = context.ChucVus.Create();
+                        var add = context.ChucVus.Create();
 
                         add.Ten = entity.Ten;
                         add.MoTa = entity.MoTa;
@@ -94,10 +92,9 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    ChucVu add;
                     foreach (var entity in entities)
                     {
-                        add = context.ChucVus.Create();
+                        var add = context.ChucVus.Create();
 
                         add.Ten = entity.Ten;
                         add.MoTa = entity.MoTa;
@@ -191,8 +188,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.ChucVus
-                            where item.IsDeleted == false
-                            select item)
+                        where item.IsDeleted == false
+                        select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .ToList();
@@ -207,19 +204,19 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await
-                                (from item in context.ChucVus
-                                 where item.IsDeleted == false
-                                 select new ChucVuResult
-                                 {
-                                     Id = item.Id,
-                                     Ten = item.Ten,
-                                     MoTa = item.MoTa,
-                                     IsDeleted = item.IsDeleted,
-                                     CreateDate = item.CreateDate,
-                                     CreatedBy = item.CreatedBy,
-                                     LastUpdatedBy = item.LastUpdatedBy,
-                                     LastUpdated = item.LastUpdated
-                                 }).ToListAsync();
+                        (from item in context.ChucVus
+                            where item.IsDeleted == false
+                            select new ChucVuResult
+                            {
+                                Id = item.Id,
+                                Ten = item.Ten,
+                                MoTa = item.MoTa,
+                                IsDeleted = item.IsDeleted,
+                                CreateDate = item.CreateDate,
+                                CreatedBy = item.CreatedBy,
+                                LastUpdatedBy = item.LastUpdatedBy,
+                                LastUpdated = item.LastUpdated
+                            }).ToListAsync();
                 }
             });
         }
@@ -231,11 +228,11 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.ChucVus
-                            where item.IsDeleted == false &&
-                                  item.Id == id
-                            select item)
-                            .MakeQueryToDatabase()
-                            .Select(x => x.ToDataResult()).Single();
+                        where item.IsDeleted == false &&
+                              item.Id == id
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult()).Single();
                 }
             });
         }
@@ -247,19 +244,19 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.ChucVus
-                                  where item.IsDeleted == false &&
-                                        item.Id == id
-                                  select new ChucVuResult
-                                  {
-                                      Id = item.Id,
-                                      Ten = item.Ten,
-                                      MoTa = item.MoTa,
-                                      IsDeleted = item.IsDeleted,
-                                      CreateDate = item.CreateDate,
-                                      CreatedBy = item.CreatedBy,
-                                      LastUpdatedBy = item.LastUpdatedBy,
-                                      LastUpdated = item.LastUpdated
-                                  }).SingleAsync();
+                        where item.IsDeleted == false &&
+                              item.Id == id
+                        select new ChucVuResult
+                        {
+                            Id = item.Id,
+                            Ten = item.Ten,
+                            MoTa = item.MoTa,
+                            IsDeleted = item.IsDeleted,
+                            CreateDate = item.CreateDate,
+                            CreatedBy = item.CreatedBy,
+                            LastUpdatedBy = item.LastUpdatedBy,
+                            LastUpdated = item.LastUpdated
+                        }).SingleAsync();
                 }
             });
         }

@@ -1,16 +1,16 @@
-﻿using AnThinhPhat.Entities.Infos;
+﻿using System;
+using System.Collections.Generic;
+using AnThinhPhat.Entities.Infos;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.ViewModel.VanBan;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnThinhPhat.ViewModel.TacNghiep
 {
     public class InitTacNghiepViewModel
     {
+        private IEnumerable<NamBanHanh> namBanHanh;
+
+        private ValueSearchViewModel valueSearch;
         public string NhapThongTinTimKiem { get; set; }
 
         public string TieuChiTimKiem { get; set; }
@@ -32,8 +32,6 @@ namespace AnThinhPhat.ViewModel.TacNghiep
 
         public int? NamBanHanhId { get; set; }
 
-        private IEnumerable<NamBanHanh> namBanHanh;
-
         public IEnumerable<NamBanHanh> NamBanHanhInfo
         {
             get
@@ -42,25 +40,9 @@ namespace AnThinhPhat.ViewModel.TacNghiep
                     namBanHanh = CreateNam();
                 return namBanHanh;
             }
-            private set
-            {
-                namBanHanh = value;
-            }
+            private set { namBanHanh = value; }
         }
 
-        private IEnumerable<NamBanHanh> CreateNam()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                yield return new NamBanHanh
-                {
-                    Id = i + 1,
-                    Name = DateTime.Now.AddYears(-i).Year,
-                };
-            }
-        }
-
-        private ValueSearchViewModel valueSearch;
         public ValueSearchViewModel ValueSearch
         {
             get
@@ -69,9 +51,18 @@ namespace AnThinhPhat.ViewModel.TacNghiep
                     valueSearch = new ValueSearchViewModel();
                 return valueSearch;
             }
-            set
+            set { valueSearch = value; }
+        }
+
+        private IEnumerable<NamBanHanh> CreateNam()
+        {
+            for (var i = 0; i < 10; i++)
             {
-                valueSearch = value;
+                yield return new NamBanHanh
+                {
+                    Id = i + 1,
+                    Name = DateTime.Now.AddYears(-i).Year
+                };
             }
         }
     }

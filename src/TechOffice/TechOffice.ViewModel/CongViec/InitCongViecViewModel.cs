@@ -1,7 +1,7 @@
-﻿using AnThinhPhat.Entities.Infos;
+﻿using System.Collections.Generic;
+using AnThinhPhat.Entities.Infos;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Utilities;
-using System.Collections.Generic;
 
 namespace AnThinhPhat.ViewModel.CongViec
 {

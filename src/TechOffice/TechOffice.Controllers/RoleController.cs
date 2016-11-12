@@ -1,13 +1,13 @@
-﻿using AnThinhPhat.Entities.Results;
+﻿using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel;
 using Ninject;
 using PagedList;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -41,15 +41,9 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var role = model.ToDataResult<RoleResult>().Update((u) =>
-               {
-                   u.CreatedBy = UserName;
-               });
+                var role = model.ToDataResult<RoleResult>().Update(u => { u.CreatedBy = UserName; });
 
-                return await ExecuteResultAsync(async () =>
-                {
-                    return await RoleRepository.AddAsync(role);
-                });
+                return await ExecuteResultAsync(async () => await RoleRepository.AddAsync(role));
             });
         }
 
@@ -65,16 +59,13 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var role = model.ToDataResult<RoleResult>().Update((u) =>
-               {
-                   u.Id = id;
-                   u.LastUpdatedBy = UserName;
-               });
-
-                return await ExecuteResultAsync(async () =>
+                var role = model.ToDataResult<RoleResult>().Update(u =>
                 {
-                    return await RoleRepository.UpdateAsync(role);
+                    u.Id = id;
+                    u.LastUpdatedBy = UserName;
                 });
+
+                return await ExecuteResultAsync(async () => await RoleRepository.UpdateAsync(role));
             });
         }
 
@@ -85,14 +76,11 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 if (id == 0)
                 {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    Response.StatusCode = (int) HttpStatusCode.BadRequest;
                     return Json("Bad Request", JsonRequestBehavior.AllowGet);
                 }
 
-                return await ExecuteResultAsync(async () =>
-                {
-                    return await RoleRepository.DeleteByAsync(id);
-                });
+                return await ExecuteResultAsync(async () => await RoleRepository.DeleteByAsync(id));
             });
         }
     }

@@ -193,7 +193,9 @@ namespace AnThinhPhat.Services.Implements
                 {
                     return (from item in context.TapTinThuTucs
                         where item.IsDeleted == false
-                        select item).Select(x => x.ToDataResult()).ToList();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult());
                 }
             });
         }
@@ -206,7 +208,11 @@ namespace AnThinhPhat.Services.Implements
                 {
                     return await (from item in context.TapTinThuTucs
                         where item.IsDeleted == false
-                        select item).Select(x => x.ToDataResult()).ToListAsync();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .ToListAsync();
                 }
             });
         }
@@ -220,7 +226,10 @@ namespace AnThinhPhat.Services.Implements
                     return (from item in context.TapTinThuTucs
                         where item.IsDeleted == false &&
                               item.Id == id
-                        select item).Select(x => x.ToDataResult()).Single();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .Single();
                 }
             });
         }
@@ -234,7 +243,11 @@ namespace AnThinhPhat.Services.Implements
                     return await (from item in context.TapTinThuTucs
                         where item.IsDeleted == false &&
                               item.Id == id
-                        select item).Select(x => x.ToDataResult()).SingleAsync();
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .SingleAsync();
                 }
             });
         }

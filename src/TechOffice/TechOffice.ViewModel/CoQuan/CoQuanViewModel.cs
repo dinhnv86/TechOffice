@@ -1,6 +1,6 @@
-﻿using AnThinhPhat.Entities.Infos;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using AnThinhPhat.Entities.Infos;
 
 namespace AnThinhPhat.ViewModel.CoQuan
 {

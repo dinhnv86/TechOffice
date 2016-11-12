@@ -1,9 +1,9 @@
-﻿using AnThinhPhat.Services.Abstracts;
+﻿using System.Linq;
+using System.Web.Mvc;
+using AnThinhPhat.Entities;
+using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.ViewModel.ThuTuc;
 using Ninject;
-using System.Web.Mvc;
-using System.Linq;
-using AnThinhPhat.Entities;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -15,7 +15,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public ICoQuanRepository CoQuanRepository { get; set; }
 
-        public ActionResult Index(string thuTucCongViec, int? CoQuanId, int? linhVucThuTucId)
+        public ActionResult Index(string thuTucCongViec, int? coQuanId, int? linhVucThuTucId)
         {
             var model = CreateVanBanModel();
             return View(model);
@@ -23,13 +23,11 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private InitThuTucViewModel CreateVanBanModel()
         {
-            var model = new InitThuTucViewModel();
-
-            //1.Get all linh vuc thu tuc
-            model.LinhVucThuTucInfo = LinhVucThuTucRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
-
-            //2. Get all co quan
-            model.CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
+            var model = new InitThuTucViewModel
+            {
+                LinhVucThuTucInfo = LinhVucThuTucRepository.GetAll().Select(x => x.ToIfNotNullDataInfo()),
+                CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo())
+            };
 
             return model;
         }

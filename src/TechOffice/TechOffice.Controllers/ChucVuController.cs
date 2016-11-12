@@ -1,14 +1,13 @@
 ﻿using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel;
 using Ninject;
 using PagedList;
-using System;
-using System.Threading.Tasks;
-using System.Net;
-using AnThinhPhat.Entities.Results;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -41,15 +40,9 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var result = model.ToDataResult< ChucVuResult>().Update((u) =>
-                 {
-                     u.CreatedBy = UserName;
-                 });
+                var result = model.ToDataResult<ChucVuResult>().Update(u => { u.CreatedBy = UserName; });
 
-                return await ExecuteResultAsync(async () =>
-                {
-                    return await ChucVuRepository.AddAsync(result);
-                });
+                return await ExecuteResultAsync(async () => await ChucVuRepository.AddAsync(result));
             });
         }
 
@@ -65,16 +58,13 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var cv = model.ToDataResult<ChucVuResult>().Update((u) =>
-                 {
-                     u.Id = id;
-                     u.LastUpdatedBy = UserName;
-                 });
-
-                return await ExecuteResultAsync(async () =>
+                var cv = model.ToDataResult<ChucVuResult>().Update(u =>
                 {
-                    return await ChucVuRepository.UpdateAsync(cv);
+                    u.Id = id;
+                    u.LastUpdatedBy = UserName;
                 });
+
+                return await ExecuteResultAsync(async () => await ChucVuRepository.UpdateAsync(cv));
             });
         }
 
@@ -85,16 +75,12 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 if (id == 0)
                 {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    Response.StatusCode = (int) HttpStatusCode.BadRequest;
                     return Json("Bad Request", JsonRequestBehavior.AllowGet);
                 }
 
-                return await ExecuteResultAsync(async () =>
-                {
-                    return await ChucVuRepository.DeleteByAsync(id);
-                });
+                return await ExecuteResultAsync(async () => await ChucVuRepository.DeleteByAsync(id));
             });
         }
-
     };
 }

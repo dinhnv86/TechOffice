@@ -18,10 +18,6 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-/// <summary>
-/// The Utilities namespace.
-/// </summary>
-
 namespace AnThinhPhat.Utilities
 {
     /// <summary>

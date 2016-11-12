@@ -1,18 +1,15 @@
-﻿using AnThinhPhat.Entities.Results;
+﻿using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using AnThinhPhat.Entities;
+using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel;
-using Ninject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using PagedList;
-using System.Net;
-using AnThinhPhat.Entities;
 using AnThinhPhat.ViewModel.CoQuan;
+using Ninject;
+using PagedList;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -27,8 +24,7 @@ namespace AnThinhPhat.WebUI.Controllers
         public ActionResult Index()
         {
             var nhom = NhomCoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
-            var model = new CoQuanViewModel();
-            model.NhomCoQuanInfos = nhom;
+            var model = new CoQuanViewModel {NhomCoQuanInfos = nhom};
 
             return View(model);
         }
@@ -57,16 +53,13 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var result = model.ToDataResult<CoQuanResult>().Update((u) =>
-               {
-                   u.NhomCoQuanId = model.NhomCoQuanId;
-                   u.CreatedBy = UserName;
-               });
-
-                return await ExecuteResultAsync(async () =>
+                var result = model.ToDataResult<CoQuanResult>().Update(u =>
                 {
-                    return await CoQuanRepository.AddAsync(result);
+                    u.NhomCoQuanId = model.NhomCoQuanId;
+                    u.CreatedBy = UserName;
                 });
+
+                return await ExecuteResultAsync(async () => await CoQuanRepository.AddAsync(result));
             });
         }
 
@@ -82,16 +75,13 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var cv = model.ToDataResult<CoQuanResult>().Update((u) =>
-               {
-                   u.Id = id;
-                   u.LastUpdatedBy = UserName;
-               });
-
-                return await ExecuteResultAsync(async () =>
+                var cv = model.ToDataResult<CoQuanResult>().Update(u =>
                 {
-                    return await CoQuanRepository.UpdateAsync(cv);
+                    u.Id = id;
+                    u.LastUpdatedBy = UserName;
                 });
+
+                return await ExecuteResultAsync(async () => await CoQuanRepository.UpdateAsync(cv));
             });
         }
 
@@ -102,14 +92,11 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 if (id == 0)
                 {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    Response.StatusCode = (int) HttpStatusCode.BadRequest;
                     return Json("Bad Request", JsonRequestBehavior.AllowGet);
                 }
 
-                return await ExecuteResultAsync(async () =>
-                {
-                    return await CoQuanRepository.DeleteByAsync(id);
-                });
+                return await ExecuteResultAsync(async () => await CoQuanRepository.DeleteByAsync(id));
             });
         }
     }

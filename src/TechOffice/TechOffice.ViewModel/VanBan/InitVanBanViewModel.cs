@@ -1,14 +1,13 @@
-﻿using AnThinhPhat.Entities.Infos;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AnThinhPhat.Entities.Infos;
 
 namespace AnThinhPhat.ViewModel.VanBan
 {
     public class InitVanBanViewModel
     {
+        private IEnumerable<NamBanHanh> namBanHanh;
+        private IEnumerable<PageNumberic> pagingNumberic;
         public int? CoQuanId { get; set; }
 
         public IEnumerable<LinhVucVanBanInfo> CoQuanBanHanhInfos { get; set; }
@@ -17,7 +16,7 @@ namespace AnThinhPhat.ViewModel.VanBan
         public IEnumerable<LoaiVanBanInfo> LoaiVanBanInfos { get; set; }
 
         public int? NamBanHnahId { get; set; }
-        private IEnumerable<NamBanHanh> namBanHanh;
+
         public IEnumerable<NamBanHanh> NamBanHanhInfo
         {
             get
@@ -26,14 +25,11 @@ namespace AnThinhPhat.ViewModel.VanBan
                     namBanHanh = CreateNam();
                 return namBanHanh;
             }
-            private set
-            {
-                namBanHanh = value;
-            }
+            private set { namBanHanh = value; }
         }
 
         public int PagingNumberId { get; set; } = 2;
-        private IEnumerable<PageNumberic> pagingNumberic;
+
         public IEnumerable<PageNumberic> PagingNumberInfo
         {
             get
@@ -42,10 +38,7 @@ namespace AnThinhPhat.ViewModel.VanBan
                     pagingNumberic = CreatePaging();
                 return pagingNumberic;
             }
-            private set
-            {
-                pagingNumberic = value;
-            }
+            private set { pagingNumberic = value; }
         }
 
         public string TenVanBan { get; set; }
@@ -58,24 +51,24 @@ namespace AnThinhPhat.ViewModel.VanBan
 
         private IEnumerable<NamBanHanh> CreateNam()
         {
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 yield return new NamBanHanh
                 {
                     Id = i + 1,
-                    Name = DateTime.Now.AddYears(-i).Year,
+                    Name = DateTime.Now.AddYears(-i).Year
                 };
             }
         }
 
         private IEnumerable<PageNumberic> CreatePaging()
         {
-            for (int i = 1; i < 4; i++)
+            for (var i = 1; i < 4; i++)
             {
                 yield return new PageNumberic
                 {
                     Id = i,
-                    Number = i * 10,
+                    Number = i*10
                 };
             }
         }

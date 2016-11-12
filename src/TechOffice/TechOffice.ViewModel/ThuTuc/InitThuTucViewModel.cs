@@ -1,5 +1,5 @@
-﻿using AnThinhPhat.Entities.Infos;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using AnThinhPhat.Entities.Infos;
 
 namespace AnThinhPhat.ViewModel.ThuTuc
 {
@@ -13,6 +13,5 @@ namespace AnThinhPhat.ViewModel.ThuTuc
 
         public int? LinhVucThuTucId { get; set; }
         public IEnumerable<LinhVucThuTucInfo> LinhVucThuTucInfo { get; set; }
-
     }
 }

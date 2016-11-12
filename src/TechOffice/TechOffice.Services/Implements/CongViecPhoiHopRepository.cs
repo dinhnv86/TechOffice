@@ -66,11 +66,9 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    CongViec_PhoiHop add;
-
                     foreach (var entity in entities)
                     {
-                        add = context.CongViec_PhoiHop.Create();
+                        var add = context.CongViec_PhoiHop.Create();
                         add.HoSoCongViecId = entity.HoSoCongViecId;
                         add.UserId = entity.UserId;
 
@@ -92,11 +90,9 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    CongViec_PhoiHop add;
-
                     foreach (var entity in entities)
                     {
-                        add = context.CongViec_PhoiHop.Create();
+                        var add = context.CongViec_PhoiHop.Create();
                         add.HoSoCongViecId = entity.HoSoCongViecId;
                         add.UserId = entity.UserId;
 

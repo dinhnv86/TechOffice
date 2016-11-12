@@ -25,20 +25,18 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public IEnumerable<UserRoleResult> GetUsersByRoleId(int roleId)
         {
-            return ExecuteDbWithHandle(
-                _logService,
-                () =>
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
                 {
-                    using (var context = new TechOfficeEntities())
-                    {
-                        return (from item in context.UserRoles
-                            where item.RoleId == roleId
-                                  && item.IsDeleted == false
-                            select item)
-                            .Select(x => x.ToDataResult())
-                            .ToList();
-                    }
-                });
+                    return (from item in context.UserRoles
+                        where item.RoleId == roleId
+                              && item.IsDeleted == false
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult());
+                }
+            });
         }
 
         /// <summary>
@@ -48,20 +46,18 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public IEnumerable<UserRoleResult> GetRolesByUserId(int userId)
         {
-            return ExecuteDbWithHandle(
-                _logService,
-                () =>
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
                 {
-                    using (var context = new TechOfficeEntities())
-                    {
-                        return (from item in context.UserRoles
-                            where item.UserId == userId
-                                  && item.IsDeleted == false
-                            select item)
-                            .Select(x => x.ToDataResult())
-                            .ToList();
-                    }
-                });
+                    return (from item in context.UserRoles
+                        where item.UserId == userId
+                              && item.IsDeleted == false
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult());
+                }
+            });
         }
 
         /// <summary>
@@ -71,20 +67,18 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public UserRoleResult GetUserRoleById(int id)
         {
-            return ExecuteDbWithHandle(
-                _logService,
-                () =>
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
                 {
-                    using (var context = new TechOfficeEntities())
-                    {
-                        return (from item in context.UserRoles
-                            where item.Id == id
-                                  && item.IsDeleted == false
-                            select item)
-                            .Select(x => x.ToDataResult())
-                            .Single();
-                    }
-                });
+                    return (from item in context.UserRoles
+                        where item.Id == id && item.IsDeleted == false
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .Single();
+                }
+            });
         }
     }
 }

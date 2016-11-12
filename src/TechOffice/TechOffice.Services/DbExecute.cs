@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AnThinhPhat.Utilities;
-using System.Data.Common;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 
 namespace AnThinhPhat.Services
 {

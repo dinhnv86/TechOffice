@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Web.Mvc;
-using AnThinhPhat.Services.Abstracts;
-using Ninject;
-using AnThinhPhat.ViewModel.Menu;
 using AnThinhPhat.Entities;
+using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.ViewModel.Menu;
+using Ninject;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -24,7 +20,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
         public PartialViewResult MenuVanBan()
         {
-            InitMenuVanBanViewModel model = new InitMenuVanBanViewModel();
+            var model = new InitMenuVanBanViewModel();
             model.LinhVucVanBanInfos = LinhVucVanBanRepository.GetAll().Select(x => x.ToDataInfo());
             model.LoaiVanBanInfos = LoaiVanBanRepository.GetAll().Select(x => x.ToDataInfo());
 
@@ -33,10 +29,10 @@ namespace AnThinhPhat.WebUI.Controllers
 
         public PartialViewResult MenuThuTuc()
         {
-            InitMenuThuTucViewModel model = new InitMenuThuTucViewModel();
+            var model = new InitMenuThuTucViewModel();
             model.LinhVucThuTucInfos = LinhVucThuTucRepository.GetAll().Select(x => x.ToDataInfo());
 
-            return PartialView("_PartialMenuLeftThuTuc", model); 
+            return PartialView("_PartialMenuLeftThuTuc", model);
         }
     }
 }

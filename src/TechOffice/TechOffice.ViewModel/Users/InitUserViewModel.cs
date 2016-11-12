@@ -1,13 +1,13 @@
-﻿using AnThinhPhat.Entities.Infos;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using AnThinhPhat.Entities.Infos;
 
 namespace AnThinhPhat.ViewModel.Users
 {
     public class InitUserViewModel : BaseViewModel
     {
-        [DisplayName("Họ và tên"),Required]
+        [DisplayName("Họ và tên"), Required]
         public string FullName { get; set; }
 
         [DisplayName("Tài khoản"), Required]

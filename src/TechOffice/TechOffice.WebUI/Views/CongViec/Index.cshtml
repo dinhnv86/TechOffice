@@ -29,28 +29,11 @@
                             <div class="col-md-3">
                                 <label>Lĩnh vực công việc</label>
                                 @Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViec, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
-                                @*<select>
-                                        <option>
-                                            Cán bộ
-                                        </option>
-                                        <option>
-                                            Lương
-                                        </option>
-                                        <option>
-                                            Tôn giáo
-                                        </option>
-                                        <option>
-                                            Văn thư
-                                        </option>
-                                        <option>
-                                            Đào tạo
-                                        </option>
-                                    </select>*@
                             </div>
                         </div>
                         <div id="outer">
                             <div class="inner"> <input type="submit" value="Tìm kiếm" class="inner btn btn-primary" /></div>
-                            <div class="inner">@Html.RouteLink("Thống kê", "congviec/thongke", null, htmlAttributes: new { @class = "inner btn btn-primary" })</div>
+                            <div class="inner">@Html.RouteLink("Thống kê",AnThinhPhat.Utilities.UrlLink.CONGVIEC_THONGKE, null, htmlAttributes: new { @class = "inner btn btn-primary" })</div>
                             <div class="inner">@Html.RouteLink("Thêm mới", "congviec/themmoi", null, htmlAttributes: new { @class = "inner btn btn-primary" })</div>
                         </div>
                     }

@@ -1,27 +1,24 @@
-﻿using AnThinhPhat.Services.Abstracts;
-using AnThinhPhat.ViewModel.Users;
-using Ninject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.ViewModel.Users;
+using Ninject;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
     public class AccountController : OfficeController
     {
         /// <summary>
-        /// Logs the in.
+        ///     Logs the in.
         /// </summary>
         /// <param name="ReturnUrl">The return URL.</param>
         /// <returns></returns>
         [HttpGet, AllowAnonymous]
         public ActionResult LogIn(string ReturnUrl)
         {
-            var userLogin = new UserLoginViewModel()
+            var userLogin = new UserLoginViewModel
             {
                 ReturnUrl = ReturnUrl
             };
@@ -30,7 +27,7 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         /// <summary>
-        /// Logins the specified user.
+        ///     Logins the specified user.
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns></returns>
@@ -48,7 +45,8 @@ namespace AnThinhPhat.WebUI.Controllers
                 {
                     if (checkUser.IsLocked)
                     {
-                        ModelState.AddModelError("Locked", "Your account is currently locked. Please contact System Administrator!");
+                        ModelState.AddModelError("Locked",
+                            "Your account is currently locked. Please contact System Administrator!");
                         return View(user);
                     }
 
@@ -57,53 +55,38 @@ namespace AnThinhPhat.WebUI.Controllers
                     {
                         //Get all role of current user login
                         var userRoleInfo = UserRoleRepository.GetRolesByUserId(userLogin.Id);
-                        var roles = userRoleInfo.Select(x => x.RoleInfo.Name).Aggregate((current, next) => current + "," + next);
-                        var identities = new ClaimsIdentity(new[] {
-                        new Claim(ClaimTypes.Name,userLogin.UserName),
-                        new Claim(ClaimTypes.Role,roles),
-                        new Claim(ClaimTypes.Email, user.UserName),},
-                        "ApplicationCookie", ClaimTypes.Name, ClaimTypes.Role);
+                        var roles =
+                            userRoleInfo.Select(x => x.RoleInfo.Name).Aggregate((current, next) => current + "," + next);
+                        var identities = new ClaimsIdentity(new[]
+                        {
+                            new Claim(ClaimTypes.Name, userLogin.UserName),
+                            new Claim(ClaimTypes.Role, roles),
+                            new Claim(ClaimTypes.Email, user.UserName)
+                        },
+                            "ApplicationCookie", ClaimTypes.Name, ClaimTypes.Role);
                         AuthenticationManager.SignIn(identities);
 
                         return Redirect(GetRedirectUrl(user.ReturnUrl));
                     }
-                    else
-                    {
-                        ModelState.AddModelError("", "Login data is incorrect or User is not yet allowed. Contact System Administrator!");
-                        return View(user);
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Login data is incorrect or User is not yet allowed. Contact System Administrator!");
+                    ModelState.AddModelError("",
+                        "Login data is incorrect or User is not yet allowed. Contact System Administrator!");
                     return View(user);
                 }
+                ModelState.AddModelError("",
+                    "Login data is incorrect or User is not yet allowed. Contact System Administrator!");
+                return View(user);
             }
             return View();
         }
 
-        #region Inject
         /// <summary>
-        /// Gets or sets the user repository.
-        /// </summary>
-        /// <value>
-        /// The user repository.
-        /// </value>
-        [Inject]
-        public IUsersRepository UserRepository { get; set; }
-
-        public IUserRoleRepository UserRoleRepository { get; set; }
-
-        #endregion
-
-        /// <summary>
-        /// Gets the redirect URL.
+        ///     Gets the redirect URL.
         /// </summary>
         /// <param name="returnUrl">The return URL.</param>
         /// <returns></returns>
         private string GetRedirectUrl(string returnUrl)
         {
-            if (String.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
+            if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
             {
                 var user = User;
                 return Url.Action("Index", "Home");
@@ -111,5 +94,20 @@ namespace AnThinhPhat.WebUI.Controllers
 
             return returnUrl;
         }
+
+        #region Inject
+
+        /// <summary>
+        ///     Gets or sets the user repository.
+        /// </summary>
+        /// <value>
+        ///     The user repository.
+        /// </value>
+        [Inject]
+        public IUsersRepository UserRepository { get; set; }
+
+        public IUserRoleRepository UserRoleRepository { get; set; }
+
+        #endregion
     }
 }

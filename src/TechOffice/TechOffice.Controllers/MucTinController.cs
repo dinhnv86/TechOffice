@@ -1,13 +1,13 @@
-﻿using AnThinhPhat.Entities.Results;
+﻿using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel;
 using Ninject;
 using PagedList;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -40,15 +40,9 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var mt = model.ToDataResult<MucTinResult>().Update((u) =>
-               {
-                   u.CreatedBy = UserName;
-               });
+                var mt = model.ToDataResult<MucTinResult>().Update(u => { u.CreatedBy = UserName; });
 
-                return await ExecuteResultAsync(async () =>
-                {
-                    return await MucTinRepository.AddAsync(mt);
-                });
+                return await ExecuteResultAsync(async () => await MucTinRepository.AddAsync(mt));
             });
         }
 
@@ -64,16 +58,13 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var mt = model.ToDataResult<MucTinResult>().Update((u) =>
-               {
-                   u.Id = id;
-                   u.LastUpdatedBy = UserName;
-               });
-
-                return await ExecuteResultAsync(async () =>
+                var mt = model.ToDataResult<MucTinResult>().Update(u =>
                 {
-                    return await MucTinRepository.UpdateAsync(mt);
+                    u.Id = id;
+                    u.LastUpdatedBy = UserName;
                 });
+
+                return await ExecuteResultAsync(async () => await MucTinRepository.UpdateAsync(mt));
             });
         }
 
@@ -84,14 +75,11 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 if (id == 0)
                 {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    Response.StatusCode = (int) HttpStatusCode.BadRequest;
                     return Json("Bad Request", JsonRequestBehavior.AllowGet);
                 }
 
-                return await ExecuteResultAsync(async () =>
-                {
-                    return await MucTinRepository.DeleteByAsync(id);
-                });
+                return await ExecuteResultAsync(async () => await MucTinRepository.DeleteByAsync(id));
             });
         }
     }

@@ -34,16 +34,11 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.Roles
-                            where item.IsDeleted == false && item.Id == id
-                            select new RoleResult
-                            {
-                                Id = item.Id,
-                                Ten = item.Ten,
-                                MoTa = item.GhiChu,
-                                IsDeleted = item.IsDeleted,
-                                LastUpdatedBy = item.LastUpdatedBy,
-                                LastUpdated = item.LastUpdated
-                            }).Single();
+                        where item.IsDeleted == false && item.Id == id
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .Single();
                 }
             });
         }
@@ -60,16 +55,12 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.Roles
-                                  where item.IsDeleted == false && item.Id == id
-                                  select new RoleResult
-                                  {
-                                      Id = item.Id,
-                                      Ten = item.Ten,
-                                      MoTa = item.GhiChu,
-                                      IsDeleted = item.IsDeleted,
-                                      LastUpdatedBy = item.LastUpdatedBy,
-                                      LastUpdated = item.LastUpdated
-                                  }).SingleAsync();
+                        where item.IsDeleted == false && item.Id == id
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .SingleAsync();
                 }
             });
         }
@@ -85,10 +76,10 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.Roles
-                            where item.IsDeleted == false
-                            select item)
-                            .MakeQueryToDatabase()
-                            .Select(x => x.ToDataResult()).ToList();
+                        where item.IsDeleted == false
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult());
                 }
             });
         }
@@ -104,18 +95,12 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.Roles
-                                  where item.IsDeleted == false
-                                  select new RoleResult
-                                  {
-                                      Id = item.Id,
-                                      Ten = item.Ten,
-                                      MoTa = item.GhiChu,
-                                      IsDeleted = item.IsDeleted,
-                                      CreateDate = item.CreateDate,
-                                      CreatedBy = item.CreatedBy,
-                                      LastUpdatedBy = item.LastUpdatedBy,
-                                      LastUpdated = item.LastUpdated
-                                  }).ToListAsync();
+                        where item.IsDeleted == false
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .ToListAsync();
                 }
             });
         }
@@ -203,7 +188,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> AddAsync(RoleResult entity)
         {
-            return await ExecuteDbWithHandle(_logService, async () =>
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -259,7 +244,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> AddRangeAsync(IEnumerable<RoleResult> entities)
         {
-            return await ExecuteDbWithHandle(_logService, async () =>
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -312,7 +297,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> DeleteAsync(RoleResult entity)
         {
-            return await ExecuteDbWithHandle(_logService, async () =>
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
@@ -355,7 +340,7 @@ namespace AnThinhPhat.Services.Implements
         /// <returns></returns>
         public async Task<SaveResult> DeleteByAsync(int id)
         {
-            return await ExecuteDbWithHandle(_logService, async () =>
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {

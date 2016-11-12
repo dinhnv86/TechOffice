@@ -1,5 +1,5 @@
-﻿using AnThinhPhat.Entities.Infos;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using AnThinhPhat.Entities.Infos;
 
 namespace AnThinhPhat.ViewModel.Menu
 {

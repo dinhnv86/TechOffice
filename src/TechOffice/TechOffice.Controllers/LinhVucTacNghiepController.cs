@@ -1,14 +1,13 @@
 ﻿using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel;
 using Ninject;
 using PagedList;
-using System;
-using System.Threading.Tasks;
-using System.Net;
-using AnThinhPhat.Entities.Results;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -41,15 +40,9 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var tn = model.ToDataResult<LinhVucTacNghiepResult>().Update((u) =>
-                {
-                    u.CreatedBy = UserName;
-                });
+                var tn = model.ToDataResult<LinhVucTacNghiepResult>().Update(u => { u.CreatedBy = UserName; });
 
-                return await ExecuteResultAsync(async () =>
-                {
-                    return await LinhVucTacNghiepRepository.AddAsync(tn);
-                });
+                return await ExecuteResultAsync(async () => await LinhVucTacNghiepRepository.AddAsync(tn));
             });
         }
 
@@ -65,16 +58,14 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var tn = model.ToDataResult<LinhVucTacNghiepResult>().Update((u) =>
-                 {
-                     u.Id = id;
-                     u.LastUpdatedBy = UserName;
-                 });
-
-                return await ExecuteResultAsync(async () =>
+                var tn = model.ToDataResult<LinhVucTacNghiepResult>().Update(u =>
                 {
-                    return await LinhVucTacNghiepRepository.UpdateAsync(tn);
+                    u.Id = id;
+                    u.LastUpdatedBy = UserName;
                 });
+
+                return
+                    await ExecuteResultAsync(async () => await LinhVucTacNghiepRepository.UpdateAsync(tn));
             });
         }
 
@@ -85,16 +76,13 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 if (id == 0)
                 {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    Response.StatusCode = (int) HttpStatusCode.BadRequest;
                     return Json("Bad Request", JsonRequestBehavior.AllowGet);
                 }
 
-                return await ExecuteResultAsync(async () =>
-                {
-                    return await LinhVucTacNghiepRepository.DeleteByAsync(id);
-                });
+                return
+                    await ExecuteResultAsync(async () => await LinhVucTacNghiepRepository.DeleteByAsync(id));
             });
         }
-
     };
 }
