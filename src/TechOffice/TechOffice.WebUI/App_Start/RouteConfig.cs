@@ -11,94 +11,104 @@ namespace AnThinhPhat.WebUI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(UrlLink.TRANGCHU, UrlLink.TRANGCHU,
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+                new { controller = "Home", action = "Index" });
 
             routes.MapRoute(UrlLink.HISTORY, UrlLink.HISTORY,
-                new { controller = "Intro", action = "Index", id = UrlParameter.Optional });
+                new { controller = "Intro", action = "Index" });
 
             routes.MapRoute(UrlLink.CHART, UrlLink.CHART,
-                new { controller = "Intro", action = "Chart", id = UrlParameter.Optional });
+                new { controller = "Intro", action = "Chart" });
 
             routes.MapRoute(UrlLink.VANBAN, UrlLink.VANBAN,
-                new { controller = "VanBan", action = "Index", id = UrlParameter.Optional });
+                new { controller = "VanBan", action = "Index" });
+
+            routes.MapRoute(UrlLink.VANBAN_DETAIL, UrlLink.VANBAN_DETAIL,
+              new { controller = "VanBan", action = "Detail" },
+              new { id = @"\d+" });
 
             routes.MapRoute(UrlLink.THUTUC, UrlLink.THUTUC,
-                new { controller = "ThuTuc", action = "Index", id = UrlParameter.Optional });
+                new { controller = "ThuTuc", action = "Index" });
+
+            routes.MapRoute(UrlLink.THUTUC_DETAIL, UrlLink.THUTUC_DETAIL,
+              new { controller = "ThuTuc", action = "Detail" },
+              new { id = @"\d+" });
 
             routes.MapRoute(UrlLink.TACNGHIEP, UrlLink.TACNGHIEP,
-                new { controller = "TacNghiep", action = "Index", id = UrlParameter.Optional });
+                new { controller = "TacNghiep", action = "Index" });
 
             routes.MapRoute(UrlLink.CONGVIEC, UrlLink.CONGVIEC,
-                new { controller = "CongViec", action = "Index", id = UrlParameter.Optional });
+                new { controller = "CongViec", action = "Index" });
 
             routes.MapRoute(UrlLink.TINTUC, UrlLink.TINTUC,
-                new { controller = "Home", action = "Article", id = UrlParameter.Optional });
+                new { controller = "Home", action = "Article" });
 
             routes.MapRoute(UrlLink.TACNGHIEP_THONGKE, UrlLink.TACNGHIEP_THONGKE,
-               new { controller = "TacNghiep", action = "Statistic", id = UrlParameter.Optional });
+               new { controller = "TacNghiep", action = "Statistic" });
 
             routes.MapRoute(UrlLink.TACNGHIEP_ADD, UrlLink.TACNGHIEP_ADD,
-              new { controller = "TacNghiep", action = "Add", id = UrlParameter.Optional });
+              new { controller = "TacNghiep", action = "Add" });
 
             routes.MapRoute(UrlLink.TACNGHIEP_DETAIL, UrlLink.TACNGHIEP_DETAIL,
-            new { controller = "TacNghiep", action = "Detail", id = UrlParameter.Optional });
+            new { controller = "TacNghiep", action = "Detail" },
+            new { id = @"\d+" });
 
             routes.MapRoute(UrlLink.CONGVIEC_THONGKE, UrlLink.CONGVIEC_THONGKE,
-             new { controller = "CongViec", action = "Statistic", id = UrlParameter.Optional });
+             new { controller = "CongViec", action = "Statistic" });
 
             routes.MapRoute(UrlLink.CONGVIEC_ADD, UrlLink.CONGVIEC_ADD,
-              new { controller = "CongViec", action = "Add", id = UrlParameter.Optional });
+              new { controller = "CongViec", action = "Add" });
 
             routes.MapRoute(UrlLink.CONGVIEC_DETAIL, UrlLink.CONGVIEC_DETAIL,
-           new { controller = "CongViec", action = "Detail", id = UrlParameter.Optional });
+              new { controller = "CongViec", action = "Detail" },
+              new { id = @"\d+" });
 
             routes.MapRoute(UrlLink.LIENHE, UrlLink.LIENHE, new { controller = "Home", action = "Contact" });
 
             //Error
             routes.MapRoute("error", "error/internalserver",
-                new { controller = "Error", action = "InternalServer", id = UrlParameter.Optional });
+                new { controller = "Error", action = "InternalServer" });
 
-            routes.MapRoute("ErrorNotFound404", "error/notfound",
-                new { controller = "Error", action = "NotFound", id = UrlParameter.Optional });
+            routes.MapRoute(UrlLink.ERROR_NOTFOUND404, "error/notfound",
+                new { controller = "Error", action = "NotFound" });
 
-            routes.MapRoute("ErrorNotFound405", "error/notfound",
-                new { controller = "Error", action = "NotFound405", id = UrlParameter.Optional });
+            routes.MapRoute(UrlLink.ERROR_NOTFOUND405, "error/notfound",
+                new { controller = "Error", action = "NotFound405" });
 
             routes.MapRoute("ErrorUnauthorized", "error/unauthorized",
-                new { controller = "Error", action = "Unauthorized", id = UrlParameter.Optional });
+                new { controller = "Error", action = "Unauthorized" });
 
             routes.MapRoute("ErrorForbidenaccess", "error/forbidenaccess",
-                new { controller = "Error", action = "ForbidenAccess", id = UrlParameter.Optional });
+                new { controller = "Error", action = "ForbidenAccess" });
 
             //End Error
 
             //===========================================CRUD DATA=======================================//
             routes.MapRoute(UrlLink.CHUCVU, UrlLink.CHUCVU,
-                new { controller = "ChucVu", action = "Index", id = UrlParameter.Optional });
+                new { controller = "ChucVu", action = "Index" });
 
             routes.MapRoute(UrlLink.COQUAN, UrlLink.COQUAN,
-               new { controller = "CoQuan", action = "Index", id = UrlParameter.Optional });
+               new { controller = "CoQuan", action = "Index" });
 
             routes.MapRoute(UrlLink.NHOMCOQUAN, UrlLink.NHOMCOQUAN,
-              new { controller = "NhomCoQuan", action = "Index", id = UrlParameter.Optional });
+              new { controller = "NhomCoQuan", action = "Index" });
 
             routes.MapRoute(UrlLink.LINHVUCCONGVIEC, UrlLink.LINHVUCCONGVIEC,
-             new { controller = "LinhVucCongViec", action = "Index", id = UrlParameter.Optional });
+             new { controller = "LinhVucCongViec", action = "Index" });
 
             routes.MapRoute(UrlLink.LINHVUCTHUTUC, UrlLink.LINHVUCTHUTUC,
-             new { controller = "LinhVucThuTuc", action = "Index", id = UrlParameter.Optional });
+             new { controller = "LinhVucThuTuc", action = "Index" });
 
             routes.MapRoute(UrlLink.LINHVUCVANBAN, UrlLink.LINHVUCVANBAN,
-              new { controller = "LinhVucVanBan", action = "Index", id = UrlParameter.Optional });
+              new { controller = "LinhVucVanBan", action = "Index" });
 
             routes.MapRoute(UrlLink.LINHVUCTACNGHIEP, UrlLink.LINHVUCTACNGHIEP,
-           new { controller = "LinhVucTacNghiep", action = "Index", id = UrlParameter.Optional });
+           new { controller = "LinhVucTacNghiep", action = "Index" });
 
             routes.MapRoute(UrlLink.LOAIVANBAN, UrlLink.LOAIVANBAN,
-             new { controller = "LoaiVanBan", action = "Index", id = UrlParameter.Optional });
+             new { controller = "LoaiVanBan", action = "Index" });
 
             routes.MapRoute(UrlLink.MUCDOHOANTHANH, UrlLink.MUCDOHOANTHANH,
-             new { controller = "MucDoHoanThanh", action = "Index", id = UrlParameter.Optional });
+             new { controller = "MucDoHoanThanh", action = "Index" });
             //===========================================CRUD DATA=======================================//
 
             routes.MapRoute("Default", "{controller}/{action}/{id}",

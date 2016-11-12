@@ -1,0 +1,10 @@
+﻿@model IEnumerable<AnThinhPhat.Entities.TapTinResult>
+
+@if (Model != null && Model.Count() > 0)
+{
+    foreach (var file in Model)
+    {
+        <a href='@Url.Action("DownloadFile", "File", routeValues: new { id = file.Id, file = file })'>>@file</a>
+        <br />
+    }
+}

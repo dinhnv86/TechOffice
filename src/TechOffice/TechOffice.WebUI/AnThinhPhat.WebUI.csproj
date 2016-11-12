@@ -192,6 +192,7 @@
     <Content Include="Content\app\error.css" />
     <Content Include="Content\app\loading.css" />
     <Content Include="Content\app\plus.css" />
+    <Content Include="Content\app\table.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -389,6 +390,11 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutVanBan.cshtml" />
     <Content Include="Views\Shared\_PartialPageMenuSubLeft.cshtml" />
+    <Content Include="Views\VanBan\Detail.cshtml" />
+    <Content Include="Views\Shared\_PartialPageFiles.cshtml" />
+    <Content Include="Views\ThuTuc\Detail.cshtml" />
+    <Content Include="Views\ThuTuc\_PartialPageList.cshtml" />
+    <Content Include="Views\VanBan\_PartialPageList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

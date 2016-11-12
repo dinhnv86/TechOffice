@@ -58,7 +58,7 @@ namespace AnThinhPhat.WebUI.Controllers
             return new JsonResult
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = new {code = "SB02"}
+                Data = new { code = "SB02" }
             };
         }
 
@@ -81,7 +81,7 @@ namespace AnThinhPhat.WebUI.Controllers
             return new JsonResult
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = new {code = "SB02"}
+                Data = new { code = "SB02" }
             };
         }
 
@@ -95,19 +95,37 @@ namespace AnThinhPhat.WebUI.Controllers
             switch (result)
             {
                 case SaveResult.SUCCESS:
-                    Response.StatusCode = (int) HttpStatusCode.OK;
+                    Response.StatusCode = (int)HttpStatusCode.OK;
                     return new JsonResult
                     {
                         JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                        Data = new {code = "SB01"}
+                        Data = new { code = "SB01" }
                     };
                 default:
                     return new JsonResult
                     {
                         JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                        Data = new {code = "SB02"}
+                        Data = new { code = "SB02" }
                     };
             }
+        }
+
+        protected ActionResult ExecuteWithErrorHandling(Func<ActionResult> action)
+        {
+            CheckModelState();
+
+            if (action != null)
+            {
+                try
+                {
+                    return action();
+                }
+                catch (Exception ex)
+                {
+                    LogService.Error(ex);
+                }
+            }
+            return RedirectToRoute(Utilities.UrlLink.ERROR_NOTFOUND404);
         }
 
         private void CheckModelState()

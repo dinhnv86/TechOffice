@@ -192,8 +192,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.TapTinVanBans
-                        where item.IsDeleted == false
-                        select item)
+                            where item.IsDeleted == false
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult());
                 }
@@ -207,12 +207,27 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.TapTinVanBans
-                        where item.IsDeleted == false
-                        select item)
+                                  where item.IsDeleted == false
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()
                         .ToListAsync();
+                }
+            });
+        }
+
+        public IEnumerable<TapTinVanBanResult> GetAllByVanBanId(int id)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.TapTinVanBans
+                            where item.IsDeleted == false && item.VanBanId == id
+                            select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult());
                 }
             });
         }
@@ -224,8 +239,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.TapTinVanBans
-                        where item.IsDeleted == false && item.Id == id
-                        select item)
+                            where item.IsDeleted == false && item.Id == id
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .Single();
@@ -240,8 +255,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.TapTinVanBans
-                        where item.IsDeleted == false && item.Id == id
-                        select item)
+                                  where item.IsDeleted == false && item.Id == id
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()

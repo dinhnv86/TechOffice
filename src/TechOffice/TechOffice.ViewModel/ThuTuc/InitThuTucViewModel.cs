@@ -12,6 +12,9 @@ namespace AnThinhPhat.ViewModel.ThuTuc
         public IEnumerable<CoQuanInfo> CoQuanInfos { get; set; }
 
         public int? LinhVucThuTucId { get; set; }
+
         public IEnumerable<LinhVucThuTucInfo> LinhVucThuTucInfo { get; set; }
+
+        public ValueSearchViewModel ValueSearch { get; set; }
     }
 }

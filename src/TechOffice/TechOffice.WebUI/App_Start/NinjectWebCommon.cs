@@ -8,6 +8,8 @@ using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
 using WebActivatorEx;
+using System.Reflection;
+using System.Linq;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
@@ -71,6 +73,9 @@ namespace AnThinhPhat.WebUI
             kernel.Bind<ICongViecPhoiHopRepository>()
                 .To<CongViecPhoiHopRepository>()
                 .WithConstructorArgument(logService);
+            kernel.Bind<IVanBanRepository>()
+              .To<VanBanRepository>()
+              .WithConstructorArgument(logService);
             kernel.Bind<ICongViecQuaTrinhXuLyRepository>()
                 .To<CongViecQuaTrinhXuLyRepository>()
                 .WithConstructorArgument(logService);
@@ -107,6 +112,7 @@ namespace AnThinhPhat.WebUI
                 .To<TapTinTacNghiepRepository>()
                 .WithConstructorArgument(logService);
             kernel.Bind<ITapTinThuTucRepository>().To<TapTinThuTucRepository>().WithConstructorArgument(logService);
+            kernel.Bind<IThuTucRepository>().To<ThuTucRepository>().WithConstructorArgument(logService);
             kernel.Bind<ITapTinVanBanRepository>().To<TapTinVanBanRepository>().WithConstructorArgument(logService);
             kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>().WithConstructorArgument(logService);
             kernel.Bind<IUsersRepository>().To<UsersRepository>().WithConstructorArgument(logService);

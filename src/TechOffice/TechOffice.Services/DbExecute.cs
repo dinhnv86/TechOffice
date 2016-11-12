@@ -22,7 +22,6 @@ namespace AnThinhPhat.Services
 
         protected TResult ExecuteDbWithHandle<TResult>(ILogService logService, Func<TResult> func)
         {
-            var result = default(TResult);
             try
             {
                 return func();
@@ -30,9 +29,8 @@ namespace AnThinhPhat.Services
             catch (Exception ex)
             {
                 logService.Error(ex.Message, ex);
+                throw ex;
             }
-
-            return result;
         }
 
         protected async Task<TResult> ExecuteDbWithHandleAsync<TResult>(ILogService logService, Func<Task<TResult>> func)

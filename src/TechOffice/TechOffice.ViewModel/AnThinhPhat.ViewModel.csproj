@@ -56,10 +56,12 @@
     <Compile Include="TacNghiep\ResultSearchViewModel.cs" />
     <Compile Include="TacNghiep\ValueSearchViewModel.cs" />
     <Compile Include="ThuTuc\InitThuTucViewModel.cs" />
+    <Compile Include="ThuTuc\ValueSearchViewModel.cs" />
     <Compile Include="Users\AddUserViewModel.cs" />
     <Compile Include="Users\InitUserViewModel.cs" />
     <Compile Include="Users\UserLoginViewModel.cs" />
     <Compile Include="VanBan\InitVanBanViewModel.cs" />
+    <Compile Include="VanBan\ValueSearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechOffice.Entities\AnThinhPhat.Entities.csproj">

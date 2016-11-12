@@ -1,0 +1,58 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<AnThinhPhat.Entities.Results.ThuTucResult>
+
+@{
+    AjaxOptions ajaxPaging = new AjaxOptions()
+    {
+        UpdateTargetId = "tableAdmin",
+        HttpMethod = "GET",
+    };
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center">STT</th>
+            <th class="text-center">Thủ tục</th>
+            <th class="text-center">Lĩnh vực</th>
+            <th class="text-center">Cơ quan thực hiện</th>
+        </tr>
+    </thead>
+    @if (Model.Count() > 0)
+    {
+        <tbody>
+            @{ int i = 1; }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.Raw((i++).ToString())
+                    </td>
+                    <td>
+                        <strong>
+                            @Html.RouteLink(item.TenThuTuc, UrlLink.THUTUC_DETAIL, routeValues: new { id = item.Id }, htmlAttributes: new { @class = "btn-link", target = "_blank" })
+                        </strong>
+                    </td>
+                    <td>@Html.DisplayFor(x => item.NgayBanHanh, "DisplayDateTime")</td>
+                    <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
+                </tr>
+            }
+        </tbody>
+                }
+                else
+                {
+                    <tr><td colspan="7">No rows found.</td></tr>
+                }
+    <tfoot>
+        <tr>
+            <td colspan="7">
+                <div id="contentPager" class="pull-right">
+                    @Html.PagedListPager(Model, page => Url.Action("List", "ThuTuc", new { page }),
+                           PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxPaging))
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>

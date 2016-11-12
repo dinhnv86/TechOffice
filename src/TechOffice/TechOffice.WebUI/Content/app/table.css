@@ -1,0 +1,21 @@
+﻿body {
+}
+
+table > thead > tr {
+    background-color: #d50100;
+    align-content: center;
+    vertical-align: middle;
+}
+
+    table > thead > tr > th {
+        color: #fff;
+    }
+
+.pagination-container {
+    height: 30px;
+}
+
+.pagination {
+    height: 28px !important;
+    margin-top: -1px !important;
+}

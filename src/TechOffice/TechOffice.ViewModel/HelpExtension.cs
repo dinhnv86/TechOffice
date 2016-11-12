@@ -108,10 +108,10 @@ namespace AnThinhPhat.ViewModel
 
         public static TResult ToDataResult<TResult>(this BaseDataViewModel entity) where TResult : DataResult
         {
-            var type = typeof (TResult);
-            var result = (TResult) Activator.CreateInstance(type);
+            var type = typeof(TResult);
+            var result = (TResult)Activator.CreateInstance(type);
 
-            var proInfoFirsts = typeof (TResult).GetProperties();
+            var proInfoFirsts = typeof(TResult).GetProperties();
 
             foreach (var info in proInfoFirsts)
             {

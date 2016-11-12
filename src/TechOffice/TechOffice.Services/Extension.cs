@@ -1,4 +1,7 @@
-﻿using System.Data;
+﻿using AnThinhPhat.Entities;
+using AnThinhPhat.Entities.Results;
+using System;
+using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -9,7 +12,7 @@ namespace AnThinhPhat.Services
     {
         public static DbConnection OpenConnection(this DbContext context)
         {
-            var objectContext = ((IObjectContextAdapter) context).ObjectContext;
+            var objectContext = ((IObjectContextAdapter)context).ObjectContext;
             if (objectContext.Connection.State != ConnectionState.Open)
             {
                 objectContext.Connection.Open();
@@ -20,6 +23,128 @@ namespace AnThinhPhat.Services
         public static DbTransaction BeginTransaction(this DbContext context)
         {
             return context.OpenConnection().BeginTransaction();
+        }
+
+        public static void AddToDb(this VanBanResult entity, TechOfficeEntities context)
+        {
+            var add = context.VanBans.Create();
+
+            add.TenVanBan = entity.TenVanBan;
+            add.SoVanBan = entity.SoVanBan;
+            add.NgayBanHanh = entity.NgayBanHanh;
+            add.CoQuanBanHanhId = entity.CoQuanBanHanhId;
+            add.LoaiVanBanId = entity.LoaiVanBanId;
+            add.LinhVucVanBanId = entity.LinhVucVanBanId;
+
+            add.IsDeleted = false;
+            add.CreatedBy = entity.CreatedBy;
+            add.CreateDate = DateTime.Now;
+
+            context.Entry(add).State = EntityState.Added;
+        }
+
+        public static void DeleteToDb(this VanBan entity, DbContext context, string userName = null)
+        {
+            entity.IsDeleted = true;
+            if (string.IsNullOrWhiteSpace(userName))
+                entity.LastUpdatedBy = userName;
+            entity.LastUpdated = DateTime.Now;
+
+            context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public static void UpdateToDb(this VanBan entity, VanBanResult data, DbContext context)
+        {
+            entity.TenVanBan = data.TenVanBan;
+            entity.SoVanBan = data.SoVanBan;
+            entity.CoQuanBanHanhId = data.CoQuanBanHanhId;
+            entity.LoaiVanBanId = data.LoaiVanBanId;
+            entity.LinhVucVanBanId = data.LinhVucVanBanId;
+            entity.NgayBanHanh = data.NgayBanHanh;
+
+            entity.IsDeleted = data.IsDeleted;
+            entity.LastUpdatedBy = data.LastUpdatedBy;
+            entity.LastUpdated = DateTime.Now;
+
+            context.Entry(entity).State = EntityState.Modified;
+
+        }
+
+        public static void AddToDb(this ThuTucResult entity, TechOfficeEntities context)
+        {
+            var add = context.ThuTucs.Create();
+
+            add.CoQuanThucHienId = entity.CoQuanThucHienId;
+            add.LoaiThuTucId = entity.LoaiThuTucId;
+            add.NgayBanHanh = entity.NgayBanHanh;
+            add.TenThuTuc = entity.TenThuTuc;
+            add.MaThuTuc = entity.MaThuTuc;
+
+            add.IsDeleted = false;
+            add.CreatedBy = entity.CreatedBy;
+            add.CreateDate = DateTime.Now;
+
+            context.Entry(add).State = EntityState.Added;
+        }
+
+        public static void DeleteToDb(this ThuTuc entity, DbContext context, string userName = null)
+        {
+            entity.IsDeleted = true;
+            if (string.IsNullOrWhiteSpace(userName))
+                entity.LastUpdatedBy = userName;
+            entity.LastUpdated = DateTime.Now;
+
+            context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public static void UpdateToDb(this ThuTuc entity, ThuTucResult data, DbContext context)
+        {
+            entity.CoQuanThucHienId = data.CoQuanThucHienId;
+            entity.LoaiThuTucId = data.LoaiThuTucId;
+            entity.NgayBanHanh = data.NgayBanHanh;
+            entity.TenThuTuc = data.TenThuTuc;
+            entity.MaThuTuc = data.MaThuTuc;
+
+            entity.IsDeleted = data.IsDeleted;
+            entity.LastUpdatedBy = data.LastUpdatedBy;
+            entity.LastUpdated = DateTime.Now;
+
+            context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public static void AddToDb(this LinhVucThuTucResult entity, TechOfficeEntities context)
+        {
+            var add = context.LinhVucThuTucs.Create();
+
+            add.Ten = entity.Ten;
+            add.MoTa = entity.MoTa;
+
+            add.IsDeleted = entity.IsDeleted;
+            add.CreatedBy = entity.CreatedBy;
+            add.CreateDate = DateTime.Now;
+
+            context.Entry(add).State = EntityState.Added;
+        }
+
+        public static void DeleteToDb(this LinhVucThuTuc entity, DbContext context, string userName = null)
+        {
+            entity.IsDeleted = true;
+            if (string.IsNullOrWhiteSpace(userName))
+                entity.LastUpdatedBy = userName;
+            entity.LastUpdated = DateTime.Now;
+
+            context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public static void UpdateToDb(this LinhVucThuTuc entity, LinhVucThuTucResult data, DbContext context)
+        {
+            entity.Ten = data.Ten;
+            entity.MoTa = data.MoTa;
+            entity.IsDeleted = data.IsDeleted;
+            entity.LastUpdatedBy = data.LastUpdatedBy;
+            entity.LastUpdated = DateTime.Now;
+
+            context.Entry(entity).State = EntityState.Modified;
         }
     }
 }

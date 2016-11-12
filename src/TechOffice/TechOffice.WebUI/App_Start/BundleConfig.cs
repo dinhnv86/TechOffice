@@ -31,7 +31,8 @@ namespace AnThinhPhat.WebUI
                  "~/Content/jquery-ui.min.css",
                  "~/Content/jquery-ui.structure.min.css",
                  "~/Content/jquery-ui.theme.min.css",
-                "~/Content/style.css"));
+                "~/Content/style.css",
+                "~/Content/app/table.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").
                 Include("~/Scripts/jquery-ui-{version}.js",

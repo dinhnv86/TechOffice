@@ -4,87 +4,33 @@
 
 }
 
-<!--start:body-->
-<div class="boxr" style="width:100%">
-    <h1 class="title title_ct"><span>Văn bản</span></h1>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
-    <div class="pading">
-        <div class="entry form-horizontal">
-            @using (Html.BeginForm("Index", "ThuTuc", FormMethod.Get))
-            {
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Thủ tục công việc</label>
-                        @Html.TextBoxFor(x => Model.ThuTucCongViec, htmlAttributes: new { @class = "form-control" })
-                        <label>Đơn vị thực hiện</label>
-                        @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-6">
-                        <label>Lĩnh vực</label>
-                        @Html.DropDownListFor(x => Model.LinhVucThuTucId, new SelectList(Model.LinhVucThuTucInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
-                        <label>&nbsp;</label>
-                        <input type="submit" class="btn btn-primary" value="Tìm kiếm" />
-                    </div>
+<h1 class="title title_ct"><span>Văn bản</span></h1>
+<div class="pading">
+    <div class="entry form-horizontal">
+        @using (Html.BeginForm("Index", "ThuTuc", FormMethod.Get))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Thủ tục công việc</label>
+                    @Html.TextBoxFor(x => Model.ThuTucCongViec, htmlAttributes: new { @class = "form-control" })
+                    <label>Đơn vị thực hiện</label>
+                    @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
                 </div>
-            }
-        </div>
-    </div>
-
-    <div class="clear"></div>
-    <h3><span style="font-size: x-large;">Danh sách thủ tục hành chính</span></h3>
-    <div class="table_over">
-        <table style="width: 720px; border-collapse: collapse;" border="1" cellspacing="8" cellpadding="8">
-            <tbody>
-                <tr style="background-color: #d50100;" align="center" valign="middle">
-                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">STT</span></span></strong></td>
-                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Thủ tục</span></span></strong></td>
-                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Lĩnh vực</span></span></strong></td>
-                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Cơ quan thực hiện</span></span></strong></td>
-
-                </tr>
-                <tr align="center">
-                    <td>1</td>
-                    <td>Thủ tục bổ nhiệm ngạch công chức</td>
-                    <td>Cán bộ, công viên chức</td>
-                    <td>Sổ nội vụ</td>
-                </tr>
-                <tr align="center">
-                    <td>1</td>
-                    <td>Thủ tục bổ nhiệm ngạch công chức</td>
-                    <td>Cán bộ, công viên chức</td>
-                    <td>Sổ nội vụ</td>
-                </tr>
-                <tr align="center">
-                    <td>1</td>
-                    <td>Thủ tục bổ nhiệm ngạch công chức</td>
-                    <td>Cán bộ, công viên chức</td>
-                    <td>Sổ nội vụ</td>
-                </tr>
-                <tr align="center">
-                    <td>1</td>
-                    <td>Thủ tục bổ nhiệm ngạch công chức</td>
-                    <td>Cán bộ, công viên chức</td>
-                    <td>Sổ nội vụ</td>
-                </tr>
-                <tr align="center">
-                    <td>1</td>
-                    <td>Thủ tục bổ nhiệm ngạch công chức</td>
-                    <td>Cán bộ, công viên chức</td>
-                    <td>Sổ nội vụ</td>
-                </tr>
-                <tr align="center">
-                    <td>1</td>
-                    <td>Thủ tục bổ nhiệm ngạch công chức</td>
-                    <td>Cán bộ, công viên chức</td>
-                    <td>Sổ nội vụ</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div>
-        <div class="scott">
-            <strong class="first active">1</strong> <a href="#">2</a> <a href="#">4</a> <a href="#4">5</a> <a href="#5">6</a> <a href="#6">7</a> <a href="#7">8</a> <a href="#8">9</a> <a href="#9">10</a> <a href="#1">Tiếp</a> <a href="#10" class="last">Cuối »</a>
-        </div>
+                <div class="col-md-6">
+                    <label>Lĩnh vực</label>
+                    @Html.DropDownListFor(x => Model.LinhVucThuTucId, new SelectList(Model.LinhVucThuTucInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    <label>&nbsp;</label>
+                    <input type="submit" class="btn btn-primary" value="Tìm kiếm" />
+                </div>
+            </div>
+        }
     </div>
 </div>
-<!--end:body-->
+
+<h3><span style="font-size: x-large;">Danh sách thủ tục hành chính</span></h3>
+
+<div id="tableAdmin" class="table-responsive">
+    @{Html.RenderAction("List", "ThuTuc", routeValues: new { search = Model.ValueSearch });}
+</div>

@@ -9,6 +9,7 @@
         public int? LinhVucTacNghiepId { get; set; }
 
         public int? MucDoHoanThanhId { get; set; }
+
         public int? NamBanHanhId { get; set; }
 
         public string NhapThongTinTimKiem { get; set; }

@@ -11,9 +11,13 @@
                     <div class="logo_head">
                         <h2>PHÒNG NỘI VỤ HUYỆN PHÚ RIỀNG</h2>
                     </div>
-                    <div class="search_head">
-                        <input type="text" /><input type="button" value="Tìm kiếm" />
-                    </div>
+                    @*<div class="search_head">
+                            <input type="text" class="form-control" />
+                            <button type="button" value="Tìm kiếm" class="btn btn-default" style="width:100px;">
+                                Tìm kiếm
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>*@
                 </div>
             </div>
         </div>
@@ -86,3 +90,64 @@
 </nav>
 
 <div class="slide"></div>
+
+<script>
+    $(document).ready(function () {
+        $(".btn_down_sp").click(function () {
+            $(".menu_products").slideToggle();
+        });
+
+        $(".btn_down_httt").click(function () {
+            $(".sup").slideToggle();
+        });
+
+
+        $(".btn_down_dl").click(function () {
+            $(".download").slideToggle();
+        });
+
+        $(".btn_down_news").click(function () {
+            $(".news_new").slideToggle();
+        });
+    });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        $('.navbar').css({ position: 'static' });
+        window.onscroll = function () {
+            if (window.pageYOffset >= 61) {
+                $('.navbar').css({ position: 'fixed', top: '0' });
+                $('.navbar').addClass("menu_top_fix");
+            } else {
+                $('.navbar').css({ position: 'static' });
+                $('.navbar').removeClass("menu_top_fix");
+            }
+        };
+    });
+    $(document).on("mobileinit", function () {
+        $.mobile.ignoreContentEnabled = true;
+    });
+</script>
+
+<script>
+    jQuery(function () {
+        jQuery('#back-top').hide();
+        jQuery(window).scroll(function () {
+            if (jQuery(this).scrollTop() > 200) {
+                jQuery('#back-top').fadeIn();
+            } else {
+                jQuery('#back-top').fadeOut();
+            }
+        });
+
+        // scroll body to 0px on click
+        jQuery('#back-top').click(function () {
+            jQuery('body, html').stop(false, false).animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+</script>

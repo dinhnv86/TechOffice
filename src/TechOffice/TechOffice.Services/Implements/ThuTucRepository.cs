@@ -10,39 +10,37 @@ using AnThinhPhat.Utilities;
 
 namespace AnThinhPhat.Services.Implements
 {
-    public class LinhVucThuTucRepository : DbExecute, ILinhVucThuTucRepository
+    public class ThuTucRepository : DbExecute, IThuTucRepository
     {
-        public LinhVucThuTucRepository(ILogService logService) : base(logService)
+        public ThuTucRepository(ILogService logService) : base(logService)
         {
         }
 
-        public SaveResult Add(LinhVucThuTucResult entity)
+        public SaveResult Add(ThuTucResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
                     entity.AddToDb(context);
-
                     return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
         }
 
-        public async Task<SaveResult> AddAsync(LinhVucThuTucResult entity)
+        public async Task<SaveResult> AddAsync(ThuTucResult entity)
         {
             return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
                     entity.AddToDb(context);
-
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
         }
 
-        public SaveResult AddRange(IEnumerable<LinhVucThuTucResult> entities)
+        public SaveResult AddRange(IEnumerable<ThuTucResult> entities)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
@@ -58,7 +56,7 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public async Task<SaveResult> AddRangeAsync(IEnumerable<LinhVucThuTucResult> entities)
+        public async Task<SaveResult> AddRangeAsync(IEnumerable<ThuTucResult> entities)
         {
             return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
@@ -74,13 +72,13 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public SaveResult Delete(LinhVucThuTucResult entity)
+        public SaveResult Delete(ThuTucResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var tt = context.LinhVucThuTucs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+                    var tt = context.ThuTucs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
                     tt.DeleteToDb(context, entity.LastUpdatedBy);
 
@@ -89,13 +87,13 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public async Task<SaveResult> DeleteAsync(LinhVucThuTucResult entity)
+        public async Task<SaveResult> DeleteAsync(ThuTucResult entity)
         {
             return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var tt = context.LinhVucThuTucs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+                    var tt = context.ThuTucs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
                     tt.DeleteToDb(context, entity.LastUpdatedBy);
 
@@ -110,7 +108,7 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var tt = context.LinhVucThuTucs.Single(x => x.Id == id && x.IsDeleted == false);
+                    var tt = context.ThuTucs.Single(x => x.Id == id && x.IsDeleted == false);
 
                     tt.DeleteToDb(context);
 
@@ -125,7 +123,7 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var tt = context.LinhVucThuTucs.Single(x => x.Id == id && x.IsDeleted == false);
+                    var tt = context.ThuTucs.Single(x => x.Id == id && x.IsDeleted == false);
 
                     tt.DeleteToDb(context);
 
@@ -134,29 +132,29 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public IEnumerable<LinhVucThuTucResult> GetAll()
+        public IEnumerable<ThuTucResult> GetAll()
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    return (from item in context.LinhVucThuTucs
+                    return (from item in context.ThuTucs
                             where item.IsDeleted == false
                             select item)
-                        .MakeQueryToDatabase()
-                        .Select(x => x.ToDataResult())
-                        .ToList();
+                            .MakeQueryToDatabase()
+                            .Select(x => x.ToDataResult())
+                            .ToList();
                 }
             });
         }
 
-        public async Task<IEnumerable<LinhVucThuTucResult>> GetAllAsync()
+        public async Task<IEnumerable<ThuTucResult>> GetAllAsync()
         {
             return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    return await (from item in context.LinhVucThuTucs
+                    return await (from item in context.ThuTucs
                                   where item.IsDeleted == false
                                   select item)
                                   .MakeQueryToDatabase()
@@ -167,15 +165,15 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public LinhVucThuTucResult Single(int id)
+        public ThuTucResult Single(int id)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    return (from item in context.LinhVucThuTucs
-                            where item.IsDeleted == false &&
-                                  item.Id == id
+                    return (from item in context.ThuTucs
+                            .Include(x => x.TapTinThuTucs)
+                            where item.IsDeleted == false && item.Id == id
                             select item)
                             .MakeQueryToDatabase()
                             .Select(x => x.ToDataResult())
@@ -184,15 +182,15 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public async Task<LinhVucThuTucResult> SingleAsync(int id)
+        public async Task<ThuTucResult> SingleAsync(int id)
         {
             return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    return await (from item in context.LinhVucThuTucs
-                                  where item.IsDeleted == false &&
-                                        item.Id == id
+                    return await (from item in context.ThuTucs
+                                   .Include(x => x.TapTinThuTucs)
+                                  where item.IsDeleted == false && item.Id == id
                                   select item)
                                   .MakeQueryToDatabase()
                                   .Select(x => x.ToDataResult())
@@ -202,13 +200,13 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public SaveResult Update(LinhVucThuTucResult entity)
+        public SaveResult Update(ThuTucResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var update = context.LinhVucThuTucs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+                    var update = context.ThuTucs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
                     update.UpdateToDb(entity, context);
 
@@ -217,13 +215,13 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public async Task<SaveResult> UpdateAsync(LinhVucThuTucResult entity)
+        public async Task<SaveResult> UpdateAsync(ThuTucResult entity)
         {
             return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var update = context.LinhVucThuTucs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+                    var update = context.ThuTucs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
                     update.UpdateToDb(entity, context);
 

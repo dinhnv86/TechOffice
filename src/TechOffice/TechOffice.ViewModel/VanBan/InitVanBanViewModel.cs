@@ -68,10 +68,12 @@ namespace AnThinhPhat.ViewModel.VanBan
                 yield return new PageNumberic
                 {
                     Id = i,
-                    Number = i*10
+                    Number = i * 10
                 };
             }
         }
+
+        public ValueSearchViewModel ValueSearch { get; set; }
     }
 
     public class NamBanHanh
