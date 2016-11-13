@@ -1,0 +1,16 @@
+﻿@model IEnumerable<AnThinhPhat.Entities.Infos.CoQuanInfo>
+
+<table class="table table-bordered">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td style="width:100px;">
+                    @Html.CheckBoxFor(x => item.IsSelected, htmlAttributes: new { @class = "checkbox checkbox-inline" })
+                    @*<input type="checkbox" class="checkbox checkbox-inline"/>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

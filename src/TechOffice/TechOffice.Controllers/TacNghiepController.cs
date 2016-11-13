@@ -74,6 +74,20 @@ namespace AnThinhPhat.WebUI.Controllers
             return ExecuteWithErrorHandling(() => new JsonResult());
         }
 
+        [ChildActionOnly]
+        public PartialViewResult CoQuanLienQuan(int? id) //id: tacNghiepId
+        {
+            var model = CoQuanRepository.GetAll().GroupBy(x => x.NhomCoQuan, x => x, (key, cq) =>
+                     new InitCoQuanCoLienQuan
+                     {
+                         NhomCoQuan = key,
+                         CoQuanInfo = cq.Select(q => q.ToDataInfo()),
+                     });
+
+            return PartialView("_PartialPageGroupListBodies", model);
+        }
+
+        [NonAction]
         private InitTacNghiepViewModel CreateTacNghiepModel()
         {
             var model = new InitTacNghiepViewModel

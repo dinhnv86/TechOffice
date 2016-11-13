@@ -395,6 +395,8 @@
     <Content Include="Views\ThuTuc\Detail.cshtml" />
     <Content Include="Views\ThuTuc\_PartialPageList.cshtml" />
     <Content Include="Views\VanBan\_PartialPageList.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageGroupListBodies.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageListBodies.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

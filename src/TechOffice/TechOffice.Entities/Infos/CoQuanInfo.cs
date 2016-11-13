@@ -2,5 +2,7 @@
 {
     public class CoQuanInfo : DataInfo
     {
+        //For new add tac nghiep
+        public bool IsSelected { get; set; } = false;
     }
 }

@@ -13,94 +13,28 @@
 </style>
 
 <div class="row">
+
     <div class="col-md-4">
-        <label>Ngay tao</label>
-        <input type="text" class="form-control" />
+        <label>Ngày tạo</label>
+        <input type="text" class="form-control control-datepicker" />
     </div>
     <div class="col-md-4">
-        <label>Ngay het han</label>
-        <input type="text" class="form-control" />
+        <label>Ngày hết hạn</label>
+        <input type="text" class="form-control control-datepicker" />
     </div>
     <div class="col-md-4">
-        <label>Ngay hoan thanh</label>
-        <input type="text" class="form-control" />
+        <label>Ngày hoàn thành</label>
+        <input type="text" class="form-control control-datepicker" />
     </div>
     <div class="col-md-12">
-        <label>Noi dung</label>
+        <label>Nội dung</label>
         <textarea rows="10"></textarea>
     </div>
-    <div class="col-md-12">
-        <label>Cac co quan co lien quan</label>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <td>Ten co quan</td>
-                    <td style="width:100px;">Co lien quan</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="2">
-                        <span class="glyphicon glyphicon-plus" data-toggle="collapse" data-target="#demo01">
-                        </span>
-                        Nhom Co quan 01
-                    </td>
-                    @*<td>
-                            <input type="checkbox" />
-                        </td>*@
-                </tr>
-                <tr>
-                    <td colspan="2" class="hiddenRow">
-                        <div class="collapse" id="demo01">
-                            <table class="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td>Co quan 01</td>
-                                        <td style="width:100px;">
-                                            <input type="checkbox" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Co quan 01</td>
-                                        <td style="width:100px;">
-                                            <input type="checkbox" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Co quan 01</td>
-                                        <td>
-                                            <input type="checkbox" />
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="glyphicon glyphicon-plus" data-toggle="collapse" data-target="#demo02">
-                        </span>
-                        Nhom Co quan 02
-                    </td>
-                    <td>
-                       <div>
-                           <input type="checkbox" />
-                        </div> 
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nhom Co quan 03</td>
-                    <td>
-                        <input type="checkbox" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+
+    @{ Html.RenderAction("CoQuanLienQuan");}
 
     <div class="col-md-12">
-        <label>Danh sach cac tap tin</label>
+        <label>Danh sách các tập tin</label>
         <div> <a href="#">File 01</a></div>
         <div>
             <a href="#">File 02</a>
@@ -111,11 +45,12 @@
         <div> <a href="#">File 04</a></div>
     </div>
     <div class="col-md-12">
-        <label>Noi dung y kien trao doi</label>
+        <label>Nội dung ý kiên trao đổi</label>
         <textarea rows="10"></textarea>
     </div>
+
     <div class="col-md-12">
-        <label>Noi dung y kien cua cac co quan</label>
+        <label>Nội dụng các ý kiến của các cơ quan</label>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -175,7 +110,7 @@
     </div>
 
     <div class="col-md-12">
-        <label>Tinh hinh cong viec</label>
+        <label>Tình hình công việc</label>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -205,4 +140,20 @@
     </div>
 </div>
 
-
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var optionCalendar =
+             {
+                 //showOn: 'both',
+                 autoSize: true,
+                 constrainInput: true,
+                 //buttonImageOnly: true,
+                 @*buttonImage: "@Url.Content("~/Content/images/calendar.png")",*@
+                 //buttonText: "Calendar",
+                 dateFormat: 'dd/mm/yy'
+             };
+            $('.control-datepicker').datepicker(optionCalendar);
+        });
+    </script>
+}
