@@ -32,6 +32,8 @@ namespace AnThinhPhat.Entities
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
+        public string NoiDung { get; set; }
+        public string TrichYeu { get; set; }
     
         public virtual CoQuan CoQuan { get; set; }
         public virtual LinhVucVanBan LinhVucVanBan { get; set; }

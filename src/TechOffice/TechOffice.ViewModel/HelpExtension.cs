@@ -5,6 +5,7 @@ using AnThinhPhat.Entities.Infos;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.ViewModel.CoQuan;
 using AnThinhPhat.ViewModel.Users;
+using AnThinhPhat.ViewModel.TacNghiep;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -73,6 +74,7 @@ namespace AnThinhPhat.ViewModel
                 {
                     Id = entity.Id,
                     Name = entity.Ten,
+                    Display = entity.Display,
                     IsChecked = false
                 };
         }
@@ -104,6 +106,20 @@ namespace AnThinhPhat.ViewModel
                         Id = entity.Id
                     }
                 };
+        }
+
+        public static TacNghiepResult ToTacNghiepResult(this AddTacNghiepViewModel entity)
+        {
+            return new TacNghiepResult
+            {
+                LinhVucTacNghiepId = entity.LinhVucId,
+                NgayHetHan = entity.NgayHetHan,
+                NgayHoanThanh = entity.NgayHoanThanh,
+                NgayTao = entity.NgayTao,
+                NoiDung = entity.NoiDung,
+                NoiDungTraoDoi = entity.NoiDungYKienTraoDoi,
+                CoQuanInfos = entity.CoQuanInfos.Select(x => x.CoQuanInfo.Where(y => y.IsSelected)).Aggregate((a, b) => { return a.Concat(b); }),
+            };
         }
 
         public static TResult ToDataResult<TResult>(this BaseDataViewModel entity) where TResult : DataResult

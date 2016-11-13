@@ -6,7 +6,7 @@ namespace AnThinhPhat.ViewModel.Users
 {
     public class AddUserViewModel : InitUserViewModel
     {
-        [DisplayName("Vai trò"), Required]
+        [DisplayName("Vai trò")]
         public IEnumerable<AddRoleInfoViewModel> RoleInfos { get; set; }
     }
 
@@ -15,6 +15,8 @@ namespace AnThinhPhat.ViewModel.Users
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public string Display { get; set; }
 
         public bool IsChecked { get; set; }
     }

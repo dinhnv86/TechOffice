@@ -9,6 +9,8 @@ namespace AnThinhPhat.Utilities
         //format file image upload
         private const string _FILE_EXTENSION = "jpg,png,jpeg,gif,bmp,tif,tiff|images/*";
 
+        private const string _PASS_DEFAULT = "phu@rieng";
+
         public static int PAGESIZE
         {
             get
@@ -17,7 +19,7 @@ namespace AnThinhPhat.Utilities
                 var pagesize = _PAGESIZE;
                 try
                 {
-                    pagesize = (int) settingsReader.GetValue("PAGESIZE", typeof (int));
+                    pagesize = (int)settingsReader.GetValue("PAGESIZE", typeof(int));
                 }
                 catch
                 {
@@ -36,7 +38,7 @@ namespace AnThinhPhat.Utilities
                 var fileExtension = _FILE_EXTENSION;
                 try
                 {
-                    fileExtension = (string) settingsReader.GetValue("FILEEXTENSION", typeof (string));
+                    fileExtension = (string)settingsReader.GetValue("FILEEXTENSION", typeof(string));
                 }
                 catch
                 {
@@ -46,5 +48,26 @@ namespace AnThinhPhat.Utilities
                 return fileExtension;
             }
         }
+
+        public static string PASSDEFAULT
+        {
+            get
+            {
+                var settingsReader = new AppSettingsReader();
+                var passDefault = _PASS_DEFAULT;
+                try
+                {
+                    passDefault = (string)settingsReader.GetValue("PASSDEFAULT", typeof(string));
+                }
+                catch
+                {
+                    passDefault = _PASS_DEFAULT;
+                }
+
+                return passDefault;
+            }
+        }
+
+        public static int LENGTHFOLDER = 10;
     }
 }

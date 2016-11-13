@@ -7,6 +7,6 @@ namespace AnThinhPhat.ViewModel.TacNghiep
     {
         public NhomCoQuanInfo NhomCoQuan { get; set; }
 
-        public IEnumerable<CoQuanInfo> CoQuanInfo { get; set; }
+        public List<CoQuanInfo> CoQuanInfo { get; set; }
     }
 }

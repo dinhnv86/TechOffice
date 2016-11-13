@@ -1,5 +1,66 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@using AnThinhPhat.ViewModel.TacNghiep;
+
+@model DetailTacNghiepViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<link href="~/Content/app/plus.css" rel="stylesheet" />
+<style>
+    .hiddenRow {
+        padding: 0px !important;
+    }
 
+    .glyphicon:hover {
+        cursor: pointer;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-6">
+        <label>Ngày tạo<span class="required">*</span></label>
+        @Html.DisplayFor(x => x.NgayTao, "DateTime")
+    </div>
+
+    <div class="col-sm-6">
+        <label>Ngày hết hạn<span class="required">*</span></label>
+        @Html.DisplayFor(x => x.NgayHetHan, "DateTime")
+        @Html.ValidationMessageFor(x => x.NgayHetHan)
+    </div>
+
+    <div class="col-sm-6">
+        <label>Ngày hoàn thành</label>
+        @Html.DisplayFor(x => x.NgayHoanThanh, "DateTime")
+    </div>
+
+    <div class="col-sm-6">
+        <label>Lĩnh vực<span class="required">*</span></label>
+        @Html.TextBoxFor(x => x.LinhVucString, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+    </div>
+
+    <div class="col-md-12">
+        <label>Nội dung</label>
+        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 10 })
+    </div>
+
+    @{ Html.RenderPartial("_PartialPageGroupListBodies", new InitNhomCoQuanCoLienQuanBindDataTemp { ParentNameSpace = "CoQuanInfos", CoQuanInfos = Model.CoQuanInfos }); }
+
+    <div class="col-md-12">
+        <label>Nội dung ý kiên trao đổi</label>
+        @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 })
+    </div>
+
+    <label class="col-sm-12">Đính kèm tập tin</label>
+    @*@{ Html.RenderPartial("_PartialPageFiles");}*@
+
+    <div class="col-sm-12">
+        <label>Nội dung các ý kiến của cơ quan</label>
+        @*@{ Html.RenderAction("_PartialPageNoiDungYKien", new { id = Model.Id });}*@
+    </div>
+
+    <div class="col-sm-12">
+        <label>Tình hình thực hiện công việc các cơ quan</label>
+        @*@{ Html.RenderAction("_PartialPageTinhHinhThucHien", new { id = Model.Id });}*@
+    </div>
+</div>

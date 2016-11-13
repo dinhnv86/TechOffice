@@ -22,19 +22,7 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var add = context.TacNghieps.Create();
-
-                    add.LinhVucTacNghiepId = entity.LinhVucTacNghiepId;
-                    add.NgayHetHan = entity.NgayHetHan;
-                    add.NgayHoanThanh = entity.NgayHoanThanh;
-                    add.NoiDung = entity.NoiDung;
-                    add.NoiDungTraoDoi = entity.NoiDungTraoDoi;
-
-                    add.IsDeleted = entity.IsDeleted;
-                    add.CreatedBy = entity.CreatedBy;
-                    add.CreateDate = DateTime.Now;
-
-                    context.Entry(add).State = EntityState.Added;
+                    entity.AddToDb(context);
                     return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
@@ -46,19 +34,7 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var add = context.TacNghieps.Create();
-
-                    add.LinhVucTacNghiepId = entity.LinhVucTacNghiepId;
-                    add.NgayHetHan = entity.NgayHetHan;
-                    add.NgayHoanThanh = entity.NgayHoanThanh;
-                    add.NoiDung = entity.NoiDung;
-                    add.NoiDungTraoDoi = entity.NoiDungTraoDoi;
-
-                    add.IsDeleted = entity.IsDeleted;
-                    add.CreatedBy = entity.CreatedBy;
-                    add.CreateDate = DateTime.Now;
-
-                    context.Entry(add).State = EntityState.Added;
+                    entity.AddToDb(context);
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
@@ -70,22 +46,9 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    TacNghiep add;
                     foreach (var entity in entities)
                     {
-                        add = context.TacNghieps.Create();
-
-                        add.LinhVucTacNghiepId = entity.LinhVucTacNghiepId;
-                        add.NgayHetHan = entity.NgayHetHan;
-                        add.NgayHoanThanh = entity.NgayHoanThanh;
-                        add.NoiDung = entity.NoiDung;
-                        add.NoiDungTraoDoi = entity.NoiDungTraoDoi;
-
-                        add.IsDeleted = entity.IsDeleted;
-                        add.CreatedBy = entity.CreatedBy;
-                        add.CreateDate = DateTime.Now;
-
-                        context.Entry(add).State = EntityState.Added;
+                        entity.AddToDb(context);
                     }
 
                     return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
@@ -99,22 +62,9 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    TacNghiep add;
                     foreach (var entity in entities)
                     {
-                        add = context.TacNghieps.Create();
-
-                        add.LinhVucTacNghiepId = entity.LinhVucTacNghiepId;
-                        add.NgayHetHan = entity.NgayHetHan;
-                        add.NgayHoanThanh = entity.NgayHoanThanh;
-                        add.NoiDung = entity.NoiDung;
-                        add.NoiDungTraoDoi = entity.NoiDungTraoDoi;
-
-                        add.IsDeleted = entity.IsDeleted;
-                        add.CreatedBy = entity.CreatedBy;
-                        add.CreateDate = DateTime.Now;
-
-                        context.Entry(add).State = EntityState.Added;
+                        entity.AddToDb(context);
                     }
 
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
@@ -200,10 +150,11 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.TacNghieps
-                        where item.IsDeleted == false
-                        select item)
+                            where item.IsDeleted == false
+                            select item)
                         .MakeQueryToDatabase()
-                        .Select(x => x.ToDataResult());
+                        .Select(x => x.ToDataResult())
+                        .ToList();
                 }
             });
         }
@@ -215,8 +166,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.TacNghieps
-                        where item.IsDeleted == false
-                        select item)
+                                  where item.IsDeleted == false
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()
@@ -232,9 +183,9 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.TacNghieps
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select item)
+                            where item.IsDeleted == false &&
+                                  item.Id == id
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .Single();
@@ -249,9 +200,9 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.TacNghieps
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select item)
+                                  where item.IsDeleted == false &&
+                                        item.Id == id
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()
@@ -272,6 +223,7 @@ namespace AnThinhPhat.Services.Implements
                     update.NgayHoanThanh = entity.NgayHoanThanh;
                     update.NoiDung = entity.NoiDung;
                     update.NoiDungTraoDoi = entity.NoiDungTraoDoi;
+                    update.MucDoHoanThanhId = entity.MucDoHoanThanhId;
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
                     update.LastUpdated = DateTime.Now;
@@ -295,6 +247,7 @@ namespace AnThinhPhat.Services.Implements
                     update.NgayHoanThanh = entity.NgayHoanThanh;
                     update.NoiDung = entity.NoiDung;
                     update.NoiDungTraoDoi = entity.NoiDungTraoDoi;
+                    update.MucDoHoanThanhId = entity.MucDoHoanThanhId;
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
                     update.LastUpdated = DateTime.Now;
@@ -303,6 +256,45 @@ namespace AnThinhPhat.Services.Implements
 
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
+            });
+        }
+
+        public SaveResult AddTacNghiepWithCoQuan(TacNghiepResult entity)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                var result = SaveResult.FAILURE;
+
+                using (var context = new TechOfficeEntities())
+                {
+                    using (var transaction = context.BeginTransaction())
+                    {
+                        entity.AddToDb(context);
+                        var tt = context.TacNghieps.Local.FirstOrDefault();
+                        if (tt != null)
+                        {
+                            foreach (var item in entity.CoQuanInfos)
+                            {
+                                var co = context.TacNghiep_CoQuanLienQuan.Create();
+
+                                co.CoQuanId = item.Id;
+                                co.TacNghiepId = tt.Id;
+
+                                co.IsDeleted = tt.IsDeleted;
+                                co.CreatedBy = tt.CreatedBy;
+                                co.CreateDate = tt.CreateDate;
+
+                                context.Entry(co).State = EntityState.Added;
+                            }
+                        }
+                        result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+
+                        transaction.Commit();
+
+                        entity.Id = tt.Id;
+                    }
+                }
+                return result;
             });
         }
     }

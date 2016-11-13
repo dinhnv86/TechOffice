@@ -21,8 +21,9 @@ namespace AnThinhPhat.Entities
         }
     
         public int Id { get; set; }
-        public string Ten { get; set; }
-        public string GhiChu { get; set; }
+        public string Name { get; set; }
+        public string Display { get; set; }
+        public string Description { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }

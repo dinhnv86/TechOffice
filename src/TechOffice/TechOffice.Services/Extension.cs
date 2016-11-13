@@ -112,6 +112,25 @@ namespace AnThinhPhat.Services
             context.Entry(entity).State = EntityState.Modified;
         }
 
+        public static void AddToDb(this TacNghiepResult entity, TechOfficeEntities context)
+        {
+            var add = context.TacNghieps.Create();
+
+            add.LinhVucTacNghiepId = entity.LinhVucTacNghiepId;
+            add.NgayHetHan = entity.NgayHetHan;
+            add.NgayHoanThanh = entity.NgayHoanThanh;
+            add.NoiDung = entity.NoiDung;
+            add.NoiDungTraoDoi = entity.NoiDungTraoDoi;
+            add.MucDoHoanThanhId = entity.MucDoHoanThanhId;
+            add.NgayTao = entity.NgayTao;
+
+            add.IsDeleted = entity.IsDeleted;
+            add.CreatedBy = entity.CreatedBy;
+            add.CreateDate = DateTime.Now;
+
+            context.Entry(add).State = EntityState.Added;
+        }
+
         public static void AddToDb(this LinhVucThuTucResult entity, TechOfficeEntities context)
         {
             var add = context.LinhVucThuTucs.Create();

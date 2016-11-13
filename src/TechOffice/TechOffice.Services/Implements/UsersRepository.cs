@@ -40,8 +40,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.Users
-                        where item.IsDeleted == false && item.Id == id
-                        select item)
+                            where item.IsDeleted == false && item.Id == id
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .Single();
@@ -61,8 +61,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.Users
-                        where item.IsDeleted == false && item.Id == id
-                        select item)
+                                  where item.IsDeleted == false && item.Id == id
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()
@@ -86,9 +86,9 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.Users
-                        where item.IsDeleted == false
-                        orderby item.UserName
-                        select item)
+                            where item.IsDeleted == false
+                            orderby item.UserName
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .ToList();
@@ -107,9 +107,9 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.Users
-                        where item.IsDeleted == false
-                        orderby item.UserName
-                        select item)
+                                  where item.IsDeleted == false
+                                  orderby item.UserName
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()
@@ -451,16 +451,23 @@ namespace AnThinhPhat.Services.Implements
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
-                using (var context = new TechOfficeEntities())
+                try
                 {
-                    var passHash = AppCipher.EncryptCipher(password);
-                    return (from item in context.Users
-                        where item.UserName == userName &&
-                              item.Password == passHash
-                        select item)
-                        .MakeQueryToDatabase()
-                        .Select(x => x.ToDataResult())
-                        .Single();
+                    using (var context = new TechOfficeEntities())
+                    {
+                        var passHash = AppCipher.EncryptCipher(password);
+                        return (from item in context.Users
+                                where item.UserName == userName &&
+                                      item.Password == passHash
+                                select item)
+                            .MakeQueryToDatabase()
+                            .Select(x => x.ToDataResult())
+                            .Single();
+                    }
+                }
+                catch
+                {
+                    return null;
                 }
             });
         }
@@ -479,9 +486,9 @@ namespace AnThinhPhat.Services.Implements
                 {
                     var passHash = AppCipher.EncryptCipher(password);
                     return await (from item in context.Users
-                        where item.UserName == userName &&
-                              item.Password == passHash
-                        select item)
+                                  where item.UserName == userName &&
+                                        item.Password == passHash
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()
@@ -593,8 +600,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.Users
-                        where item.IsDeleted == false && item.IsLocked == false
-                        select item)
+                            where item.IsDeleted == false && item.IsLocked == false
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult());
                 }
@@ -612,8 +619,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.Users
-                        where item.IsDeleted == false && item.IsLocked == false
-                        select item)
+                                  where item.IsDeleted == false && item.IsLocked == false
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()
@@ -633,8 +640,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.Users
-                        where item.IsDeleted == false && item.IsLocked
-                        select item)
+                            where item.IsDeleted == false && item.IsLocked
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult());
                 }
@@ -652,8 +659,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.Users
-                        where item.IsDeleted == false && item.IsLocked
-                        select item)
+                                  where item.IsDeleted == false && item.IsLocked
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()

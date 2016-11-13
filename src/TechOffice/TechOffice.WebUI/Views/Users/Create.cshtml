@@ -2,7 +2,7 @@
 @model AnThinhPhat.ViewModel.Users.AddUserViewModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
     AjaxOptions ajaxOption = new AjaxOptions
     {
@@ -13,67 +13,65 @@
         OnFailure = "onFailure",
     };
 }
-
+<link href="~/Content/app/loading.css" rel="stylesheet" />
 @using (Ajax.BeginForm(ajaxOption))
 {
     <div class="row">
-        <div class="col-sm-12">
-            <div class="form-horizontal">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8 has-feedback">
-                        @Html.TextBoxFor(model => model.FullName, htmlAttributes: new { @class = "form-control", @id = "txtFullName" })
-                        @Html.ValidationMessageFor(model => model.FullName)
+        <div class="col-sm-12 col-md-offset-2 col-md-8 ">
+            @*@Html.Label   For(model => model.FullName, htmlAttributes: new { @class = "control-label" })*@
+            <div class="col-xs-12 col-md-8 has-feedback">
+                <label>Họ và tên<span class="required">*</span></label>
+                @Html.TextBoxFor(model => model.FullName, htmlAttributes: new { @class = "form-control", @id = "txtFullName" })
+                @Html.ValidationMessageFor(model => model.FullName)
+            </div>
+            @*@Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-4" })*@
+            <div class="col-md-8 has-feedback">
+                <label>Tên đăng nhập<span class="required">*</span></label>
+                @Html.TextBoxFor(model => model.UserName, htmlAttributes: new { @class = "form-control", @id = "txtUserName" })
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+            @*@Html.LabelFor(model => model.ChucVuId, htmlAttributes: new { @class = "control-label col-md-4" })*@
+            <div class="col-md-8 has-feedback">
+                <label>Chức vụ<span class="required">*</span></label>
+                @Html.DropDownListFor(model => model.ChucVuId, new SelectList(Model.ChucVuInfos, "Id", "Name"), "--- Chọn chức vụ ---",
+                    htmlAttributes: new { @class = "form-control", @id = "txtChucVu" })
+                @Html.ValidationMessageFor(model => model.ChucVuId)
+            </div>
+            <div class="col-xs-12 col-md-8">
+                <label>&nbsp;</label>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @Html.LabelFor(x => Model.RoleInfos)
+                        @Html.ValidationMessageFor(x => x.RoleInfos)
+                    </div>
+                    <div class="panel-body">
+                        @Html.EditorFor(x => x.RoleInfos, "RoleInfo")
+
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8 has-feedback">
-                        @Html.TextBoxFor(model => model.UserName, htmlAttributes: new { @class = "form-control", @id = "txtUserName" })
-                        @Html.ValidationMessageFor(model => model.UserName)
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ChucVuId, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-8 has-feedback">
-                        @Html.DropDownListFor(model => model.ChucVuId, new SelectList(Model.ChucVuInfos, "Id", "Name"), "--- Chọn chức vụ ---", htmlAttributes: new { @class = "form-control", @id = "txtChucVu" })
-                        @Html.ValidationMessageFor(model => model.ChucVuId)
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-4 col-md-8">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                @Html.LabelFor(x => Model.RoleInfos)
-                            </div>
-                            <div class="panel-body">
-                                @Html.EditorFor(x => x.RoleInfos, "RoleInfo")
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-4 col-md-8">
-                        <input type="submit" value="Cancel" class="btn btn-primary btn-width-md cancel" id="btnCancel" name="saveType" />
-                        <input type="submit" value="Submit" class="btn btn-primary btn-width-md" id="btnSaveSubmit" name="saveType" />
-                    </div>
-                </div>
+            </div>
+            <div class="col-xs-12 col-md-8" id="outer">
+                <div class="inner"> <input type="submit" value="Tạo tài khoản" class="btn btn-primary btn-width-md" id="btnSaveSubmit" name="saveType" /></div>
+                <div class="inner"> <input type="submit" value="Hủy bỏ" class="btn btn-default btn-width-md cancel" id="btnCancel" name="saveType" /></div>
             </div>
         </div>
     </div>
 }
 
 @section Scripts{
+    <script src="~/Scripts/app/modaljs.js"></script>
     <script type="text/javascript">
         /*BEGIN NEW REQUEST*/
         onBegin = function () {
+            onShowLoading();
         }
         onSuccess = function (data) {
-
+            $('input').val('');
         }
         onFailure = function (data) {
         }
         onComplete = function () {
+            onHideLoading();
         }
 
         /*END NEW REQUEST*/

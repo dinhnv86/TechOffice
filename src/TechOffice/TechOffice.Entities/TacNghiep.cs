@@ -24,6 +24,7 @@ namespace AnThinhPhat.Entities
         }
     
         public int Id { get; set; }
+        public int LinhVucTacNghiepId { get; set; }
         public System.DateTime NgayHetHan { get; set; }
         public Nullable<System.DateTime> NgayHoanThanh { get; set; }
         public string NoiDung { get; set; }
@@ -33,8 +34,10 @@ namespace AnThinhPhat.Entities
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
-        public int LinhVucTacNghiepId { get; set; }
+        public System.DateTime NgayTao { get; set; }
+        public Nullable<int> MucDoHoanThanhId { get; set; }
     
+        public virtual LinhVucTacNghiep LinhVucTacNghiep { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TacNghiep_CoQuanLienQuan> TacNghiep_CoQuanLienQuan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -43,6 +46,6 @@ namespace AnThinhPhat.Entities
         public virtual ICollection<TacNghiep_YKienCoQuan> TacNghiep_YKienCoQuan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinTacNghiep> TapTinTacNghieps { get; set; }
-        public virtual LinhVucTacNghiep LinhVucTacNghiep { get; set; }
+        public virtual MucDoHoanThanh MucDoHoanThanh { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.ViewModel.Users;
 using Ninject;
+using AnThinhPhat.Utilities;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -32,7 +33,7 @@ namespace AnThinhPhat.WebUI.Controllers
         /// <param name="user">The user.</param>
         /// <returns></returns>
         [HttpPost, AllowAnonymous]
-        public async Task<ActionResult> Login(UserLoginViewModel user)
+        public ActionResult Login(UserLoginViewModel user)
         {
             if (!ModelState.IsValid)
                 return View(user);
@@ -50,20 +51,21 @@ namespace AnThinhPhat.WebUI.Controllers
                         return View(user);
                     }
 
-                    var userLogin = await UserRepository.LoginAsync(user.UserName, user.Password);
+                    var userLogin = UserRepository.Login(user.UserName, user.Password);
                     if (userLogin != null)
                     {
                         //Get all role of current user login
                         var userRoleInfo = UserRoleRepository.GetRolesByUserId(userLogin.Id);
                         var roles =
-                            userRoleInfo.Select(x => x.RoleInfo.Name).Aggregate((current, next) => current + "," + next);
+                            userRoleInfo.Select(x => x.RoleInfo.Name).Aggregate((current, next) => current + ", " + next);
                         var identities = new ClaimsIdentity(new[]
                         {
+                            new Claim(ClaimTypes.NameIdentifier,userLogin.Id.ToString()),
                             new Claim(ClaimTypes.Name, userLogin.UserName),
                             new Claim(ClaimTypes.Role, roles),
                             new Claim(ClaimTypes.Email, user.UserName)
-                        },
-                            "ApplicationCookie", ClaimTypes.Name, ClaimTypes.Role);
+                        }, "ApplicationCookie", ClaimTypes.Name, ClaimTypes.Role);
+
                         AuthenticationManager.SignIn(identities);
 
                         return Redirect(GetRedirectUrl(user.ReturnUrl));
@@ -79,6 +81,13 @@ namespace AnThinhPhat.WebUI.Controllers
             return View();
         }
 
+        [HttpPost, Authorize]
+        public ActionResult LogOut()
+        {
+            AuthenticationManager.SignOut("ApplicationCookie");
+
+            return RedirectToRoute(UrlLink.TRANGCHU);
+        }
         /// <summary>
         ///     Gets the redirect URL.
         /// </summary>
@@ -106,6 +115,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public IUsersRepository UserRepository { get; set; }
 
+        [Inject]
         public IUserRoleRepository UserRoleRepository { get; set; }
 
         #endregion

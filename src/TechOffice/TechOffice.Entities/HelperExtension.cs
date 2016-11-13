@@ -777,8 +777,9 @@ namespace AnThinhPhat.Entities
             return new RoleResult
             {
                 Id = entity.Id,
-                Ten = entity.Ten,
-                MoTa = entity.GhiChu,
+                Ten = entity.Name,
+                Display = entity.Display,
+                MoTa = entity.Description,
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -811,7 +812,7 @@ namespace AnThinhPhat.Entities
             return new RoleInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten
+                Name = entity.Name
             };
         }
     }
@@ -857,8 +858,10 @@ namespace AnThinhPhat.Entities
                 LinhVucTacNghiepInfo = entity.LinhVucTacNghiep.ToIfNotNullDataInfo(),
                 NgayHetHan = entity.NgayHetHan,
                 NgayHoanThanh = entity.NgayHoanThanh,
+                NgayTao = entity.NgayTao,
                 NoiDung = entity.NoiDung,
                 NoiDungTraoDoi = entity.NoiDungTraoDoi,
+                MucDoHoanThanhId =entity.MucDoHoanThanhId,
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,

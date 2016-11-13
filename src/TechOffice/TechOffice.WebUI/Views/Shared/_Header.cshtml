@@ -5,7 +5,7 @@
 
 <div class="bg dtapg">
     <div class="row" style="margin-top: 0px;">
-        <div class="col-lg-12">
+        <div class="col-md-8">
             <div class="header">
                 <div class="menu_head">
                     <div class="logo_head">
@@ -21,11 +21,35 @@
                 </div>
             </div>
         </div>
-        <!--<div class="logo_mobi">
-            <a href="">
-                <img alt=" " src="Images/logo.png">
-            </a>
-        </div>-->
+        <div class="col-md-4">
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a>@Html.Encode(User.Identity.Name)</a></li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a href="@Url.Action("Index", "Admin")"><span class="glyphicon glyphicon-lock"></span>Admin</a></li>
+                        }
+                        <li>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                        </li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="@Url.Action("LogIn", "Account")">Login</a></li>
+                </ul>
+            }
+        </div>
+        @*<div class="logo_mobi">
+                <a href="">
+                    <img alt=" " src="Images/logo.png">
+                </a>
+            </div>*@
     </div>
 </div>
 

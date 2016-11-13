@@ -1,6 +1,5 @@
 ﻿@{
-    //Layout = "~/Views/Shared/_Layout.cshtml";
-    Layout = null;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 @model AnThinhPhat.ViewModel.Users.UserLoginViewModel
@@ -30,14 +29,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="txtEmail" class="control-label col-sm-2">Email<span class="required">*</span></label>
+                            <label for="txtEmail" class="control-label col-sm-2">Tên<span class="required">*</span></label>
                             <div class="col-sm-10">
                                 @Html.TextBoxFor(x => x.UserName, htmlAttributes: new { @class = "form-control", @id = "txtEmail" })
                                 @Html.ValidationMessageFor(x => x.UserName)
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="txtPassword" class="col-sm-2 control-label">Password<span class="required">*</span></label>
+                            <label for="txtPassword" class="col-sm-2 control-label">Mật khẩu<span class="required">*</span></label>
                             <div class="col-sm-10">
                                 @Html.PasswordFor(u => u.Password, htmlAttributes: new { @class = "form-control", @id = "txtPassword" })
                                 @Html.ValidationMessageFor(u => u.Password)
@@ -45,7 +44,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <input class="btn btn-primary" type="submit" name="btnSubmit" id="btnSubmit" value="Login" />
+                                <input class="btn btn-primary" type="submit" name="btnSubmit" id="btnSubmit" value="Đăng nhập" />
                             </div>
                         </div>
                     </div>

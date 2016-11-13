@@ -61,7 +61,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             return ExecuteWithErrorHandling(() =>
             {
-                var pass = Guid.NewGuid().ToString().Substring(0, 6);
+                var pass = TechOfficeConfig.PASSDEFAULT;
                 var result = UserRepository.AddUserWithRoles(model.ToUseResult().Update(x =>
                 {
                     x.Password = pass;

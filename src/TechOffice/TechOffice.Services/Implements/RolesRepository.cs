@@ -79,7 +79,8 @@ namespace AnThinhPhat.Services.Implements
                         where item.IsDeleted == false
                         select item)
                         .MakeQueryToDatabase()
-                        .Select(x => x.ToDataResult());
+                        .Select(x => x.ToDataResult())
+                        .ToList();
                 }
             });
         }
@@ -118,9 +119,9 @@ namespace AnThinhPhat.Services.Implements
                 {
                     var role = context.Roles.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
-                    role.Ten = entity.Ten;
+                    role.Name = entity.Ten;
                     role.IsDeleted = entity.IsDeleted;
-                    role.GhiChu = entity.MoTa;
+                    role.Display = entity.MoTa;
                     role.LastUpdatedBy = entity.LastUpdatedBy;
                     role.LastUpdated = DateTime.Now;
 
@@ -143,9 +144,9 @@ namespace AnThinhPhat.Services.Implements
                 {
                     var role = context.Roles.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
-                    role.Ten = entity.Ten;
+                    role.Name = entity.Ten;
                     role.IsDeleted = entity.IsDeleted;
-                    role.GhiChu = entity.MoTa;
+                    role.Display = entity.MoTa;
                     role.LastUpdatedBy = entity.LastUpdatedBy;
                     role.LastUpdated = DateTime.Now;
 
@@ -168,8 +169,8 @@ namespace AnThinhPhat.Services.Implements
                 {
                     var add = context.Roles.Create();
 
-                    add.GhiChu = entity.MoTa;
-                    add.Ten = entity.Ten;
+                    add.Display = entity.MoTa;
+                    add.Name = entity.Ten;
 
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
@@ -194,8 +195,8 @@ namespace AnThinhPhat.Services.Implements
                 {
                     var add = context.Roles.Create();
 
-                    add.GhiChu = entity.MoTa;
-                    add.Ten = entity.Ten;
+                    add.Display = entity.MoTa;
+                    add.Name = entity.Ten;
 
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
@@ -223,8 +224,8 @@ namespace AnThinhPhat.Services.Implements
                     {
                         add = context.Roles.Create();
 
-                        add.GhiChu = entity.MoTa;
-                        add.Ten = entity.Ten;
+                        add.Display = entity.MoTa;
+                        add.Name = entity.Ten;
 
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
@@ -253,8 +254,8 @@ namespace AnThinhPhat.Services.Implements
                     {
                         add = context.Roles.Create();
 
-                        add.GhiChu = entity.MoTa;
-                        add.Ten = entity.Ten;
+                        add.Display = entity.MoTa;
+                        add.Name = entity.Ten;
 
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;

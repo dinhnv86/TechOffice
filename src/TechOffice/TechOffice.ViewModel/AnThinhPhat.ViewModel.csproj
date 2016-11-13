@@ -52,7 +52,11 @@
     <Compile Include="CoQuan\CoQuanViewModel.cs" />
     <Compile Include="HelpExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TacNghiep\DetailTacNghiepViewModel.cs" />
+    <Compile Include="TacNghiep\AddTacNghiepViewModel.cs" />
     <Compile Include="TacNghiep\InitCoQuanCoLienQuan.cs" />
+    <Compile Include="TacNghiep\InitCoQuanCoLienQuanBindDataTemp.cs" />
+    <Compile Include="TacNghiep\InitNhomCoQuanCoLienQuanBindDataTemp.cs" />
     <Compile Include="TacNghiep\InitTacNghiepViewModel.cs" />
     <Compile Include="TacNghiep\ResultSearchViewModel.cs" />
     <Compile Include="TacNghiep\ValueSearchViewModel.cs" />

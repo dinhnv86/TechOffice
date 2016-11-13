@@ -8,6 +8,7 @@ using Ninject;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
+    [Authorize]
     public class CongViecController : OfficeController
     {
         [Inject]

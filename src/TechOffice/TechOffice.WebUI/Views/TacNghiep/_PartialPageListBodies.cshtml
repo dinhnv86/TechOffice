@@ -1,14 +1,25 @@
-﻿@model IEnumerable<AnThinhPhat.Entities.Infos.CoQuanInfo>
+﻿@model AnThinhPhat.ViewModel.TacNghiep.InitCoQuanCoLienQuanBindDataTemp
 
 <table class="table table-bordered">
     <tbody>
-        @foreach (var item in Model)
+        @for (int i = 0; i < Model.CoQuanInfos.Count; i++)
         {
+            <input type="hidden" name=@string.Format("{0}[{1}].{2}{3}{4}", Model.ParentNameSpace, Model.ParentId, "CoQuanInfo[", i, "].Id") value="@Model.CoQuanInfos[i].Id" />
+
             <tr>
-                <td>@item.Name</td>
+                <td style="padding-left:30px;">@Model.CoQuanInfos[i].Name</td>
                 <td style="width:100px;">
-                    @Html.CheckBoxFor(x => item.IsSelected, htmlAttributes: new { @class = "checkbox checkbox-inline" })
-                    @*<input type="checkbox" class="checkbox checkbox-inline"/>*@
+                    <input type="checkbox" data-val="true" class="checkbox checkbox-inline" name=@string.Format("{0}[{1}].{2}{3}{4}", Model.ParentNameSpace, Model.ParentId, "CoQuanInfo[", i, "].IsSelected")
+                           id=@string.Format("{0}_{1}__CoQuanInfo_{2}__IsSelected", Model.ParentNameSpace, Model.ParentId, i)
+                           value="true" />
+                    @*@Html.CheckBoxFor(x => Model.CoQuanInfos[i].IsSelected,
+                        htmlAttributes: new
+                        {
+                            @class = "checkbox",
+                            name = string.Format("{0}.{1}{2}{3}", Model.ParentNameSpace, "CoQuanInfo[", i, "].IsSelected"),
+                            id = string.Format("{0}__CoQuanInfo_{1}__IsSelected", Model.ParentNameSpace, i)
+                        })*@
+                    <input type="hidden" name=@string.Format("{0}[{1}].{2}{3}{4}", Model.ParentNameSpace, Model.ParentId, "CoQuanInfo[", i, "].IsSelected") value="@Model.CoQuanInfos[i].IsSelected.ToString().ToLower()" />
                 </td>
             </tr>
         }

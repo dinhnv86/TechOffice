@@ -1,10 +1,26 @@
-﻿@{
+﻿@using AnThinhPhat.ViewModel.TacNghiep;
+
+@model AddTacNghiepViewModel
+
+@{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+@{
+    AjaxOptions ajaxOption = new AjaxOptions
+    {
+        Url = Url.Action("Add"),
+        HttpMethod = "POST",
+        OnBegin = "onAddBegin",
+        OnComplete = "onAddComplete",
+        OnSuccess = "onAddSuccess",
+        OnFailure = "onAddFailure",
+    };
+}
+
 <link href="~/Content/app/plus.css" rel="stylesheet" />
 <style>
     .hiddenRow {
-        padding: 0 !important;
+        padding: 0px !important;
     }
 
     .glyphicon:hover {
@@ -13,131 +29,64 @@
 </style>
 
 <div class="row">
+    @using (Ajax.BeginForm(ajaxOption))
+    {
+        //Id temp
+        @Html.HiddenFor(x => x.Guid)
 
-    <div class="col-md-4">
-        <label>Ngày tạo</label>
-        <input type="text" class="form-control control-datepicker" />
-    </div>
-    <div class="col-md-4">
-        <label>Ngày hết hạn</label>
-        <input type="text" class="form-control control-datepicker" />
-    </div>
-    <div class="col-md-4">
-        <label>Ngày hoàn thành</label>
-        <input type="text" class="form-control control-datepicker" />
-    </div>
-    <div class="col-md-12">
-        <label>Nội dung</label>
-        <textarea rows="10"></textarea>
-    </div>
-
-    @{ Html.RenderAction("CoQuanLienQuan");}
-
-    <div class="col-md-12">
-        <label>Danh sách các tập tin</label>
-        <div> <a href="#">File 01</a></div>
-        <div>
-            <a href="#">File 02</a>
+        <div class="col-sm-6">
+            <label>Ngày tạo<span class="required">*</span></label>
+            @Html.EditorFor(x => x.NgayTao, "DateTime")
+            @Html.ValidationMessageFor(x => x.NgayTao)
         </div>
-        <div>
-            <a href="#">File 03</a>
+
+        <div class="col-sm-6">
+            <label>Ngày hết hạn<span class="required">*</span></label>
+            @Html.EditorFor(x => x.NgayHetHan, "DateTime")
+            @Html.ValidationMessageFor(x => x.NgayHetHan)
         </div>
-        <div> <a href="#">File 04</a></div>
-    </div>
-    <div class="col-md-12">
-        <label>Nội dung ý kiên trao đổi</label>
-        <textarea rows="10"></textarea>
-    </div>
 
-    <div class="col-md-12">
-        <label>Nội dụng các ý kiến của các cơ quan</label>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <td>Co quan</td>
-                    <td>Y kien</td>
-                    <td>Tap tin dinh kem</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Co quan 01</td>
-                    <td>
-                        <p>y kien 01</p>
-                    </td>
-                    <td>
-                        <div>
-                            <a href="#">File 02</a>
-                        </div>
-                        <div>
-                            <a href="#">File 03</a>
-                        </div>
-                        <div> <a href="#">File 04</a></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Co quan 01</td>
-                    <td>
-                        <p>y kien 02" </p>
-                    </td>
-                    <td>
-                        <div>
-                            <a href="#">File 02</a>
-                        </div>
-                        <div>
-                            <a href="#">File 03</a>
-                        </div>
-                        <div> <a href="#">File 04</a></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Co quan 01</td>
-                    <td>
-                        <p> value="y kien 03" </p>
-                    </td>
-                    <td>
-                        <div>
-                            <a href="#">File 02</a>
-                        </div>
-                        <div>
-                            <a href="#">File 03</a>
-                        </div>
-                        <div> <a href="#">File 04</a></div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="col-sm-6">
+            <label>Ngày hoàn thành</label>
+            @Html.EditorFor(x => x.NgayHoanThanh, "DateTime")
+        </div>
 
-    <div class="col-md-12">
-        <label>Tình hình công việc</label>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Co quan</th>
-                    <th>Muc do hoan thanh</th>
-                    <th>Thoi gian</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>co quan 01</td>
-                    <td> Tot</td>
-                    <td>1-1-2016</td>
-                </tr>
-                <tr>
-                    <td>co quan 01</td>
-                    <td> Tot</td>
-                    <td>1-1-2016</td>
-                </tr>
-                <tr>
-                    <td>co quan 01</td>
-                    <td> Tot</td>
-                    <td>1-1-2016</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="col-sm-6">
+            <label>Lĩnh vực<span class="required">*</span></label>
+            @Html.DropDownListFor(x => x.LinhVucId, new SelectList(Model.LinhVucInfos, "Id", "Name"), "---Chọn lĩnh vực---", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.LinhVucId)
+        </div>
+
+        <div class="col-md-12">
+            <label>Nội dung</label>
+            @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 10 })
+        </div>
+
+        { Html.RenderPartial("_PartialPageGroupListBodies", new InitNhomCoQuanCoLienQuanBindDataTemp { ParentNameSpace = "CoQuanInfos", CoQuanInfos = Model.CoQuanInfos }); }
+
+        <div class="col-md-12">
+            <label>Nội dung ý kiên trao đổi</label>
+            @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 })
+        </div>
+
+        <label class="col-sm-12">Đính kèm tập tin</label>
+        <div class="col-sm-12">
+            <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
+            <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
+                <span class="glyphicon glyphicon-upload"></span>
+                Upload
+            </button>
+        </div>
+        <span class="col-xs-12" id="spanUpload"></span>
+
+        <div class="col-xs-12" id="filesName">
+        </div>
+
+        <div class="col-sm-6" style="display:inline-flex; padding-top:15px;">
+            <input type="submit" value="Lưu" class="btn btn-primary btn-width-md col-sm-2" name="btnAdd" id="btnAdd" />&nbsp;
+            <button type="button" class="btn btn-default btn-width-md col-sm-2" name="btnCancel" id="btnCancel" data-dismiss="modal">Hủy</button>
+        </div>
+    }
 </div>
 
 @section Scripts{
@@ -145,15 +94,81 @@
         $(document).ready(function () {
             var optionCalendar =
              {
-                 //showOn: 'both',
                  autoSize: true,
                  constrainInput: true,
-                 //buttonImageOnly: true,
-                 @*buttonImage: "@Url.Content("~/Content/images/calendar.png")",*@
-                 //buttonText: "Calendar",
+                 minDate: 0,
                  dateFormat: 'dd/mm/yy'
              };
             $('.control-datepicker').datepicker(optionCalendar);
+
+            $.validator.addMethod('date',
+            function (value, element) {
+                if (this.optional(element)) {
+                    return true;
+                }
+
+                var ok = true;
+                try {
+                    $.datepicker.parseDate('dd/mm/yy', value);
+                }
+                catch (err) {
+                    ok = false;
+                }
+                return ok;
+            });
+
+            /*begin upload*/
+            $('input[type="file"]').change(function (e) {
+                $('#spanUpload').text('');
+                var files = e.originalEvent.target.files;
+                if (files.length > 0) {
+                    $(this).next().removeAttr('disabled');
+                }
+                else {
+                    $(this).next().attr('disabled', 'disabled');
+                }
+            });
+
+            $('#btnUpload').on('click', function (e) {
+                if (window.FormData !== undefined) {
+                    var ajaxRequest = $.ajax({
+                        type: "POST",
+                        processData: false,
+                        contentType: false,
+                        url: '@Url.Action("FilesAttach", "File")' + '?guid=' + '@Model.Guid' + '&type=1',
+                        data: function () {
+                            var formData = new FormData();
+                            var files = $('#filesUpload').get(0).files;
+                            if (files.length > 0) {
+                                for (var i = 0; i < files.length; i++) {
+                                    formData.append("file" + i, files[i]);
+                                }
+                            }
+                            return formData;
+                        }()
+                    });
+
+                    ajaxRequest.success(function (e, data) {
+                        $('#filesName').html(e);
+                        $('#btnUpload').attr('disabled', 'disabled');
+                        $('#spanUpload').text('Upload file successfully');
+                    });
+                    ajaxRequest.error(function () {
+                        alert('Has Error in while upload file');
+                    });
+                    ajaxRequest.always(function () {
+                    });
+                }
+                else {
+                    alert("This browser doesn't support HTML5 file uploads!");
+                }
+            });
+            /*end upload*/
+
+            onAddBegin = function () { }
+            onAddComplete = function () { }
+            onAddSuccess = function () { }
+            onAddFailure = function () { }
         });
     </script>
 }

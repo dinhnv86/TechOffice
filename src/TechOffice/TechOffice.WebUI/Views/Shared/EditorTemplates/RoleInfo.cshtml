@@ -1,7 +1,16 @@
 ﻿@model List<AnThinhPhat.ViewModel.Users.AddRoleInfoViewModel>
-@for (int i = 0; i < Model.Count; i++)
-{
-    @Html.HiddenFor(x => Model[i].Id)
-    @Html.DisplayFor(m => Model[i].Name)
-    @Html.CheckBoxFor(x => Model[i].IsChecked)
-}
+
+<div class="form-horizontal">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x => Model[i].Id)
+            <div class="col-xs-3">
+                @Html.DisplayFor(m => Model[i].Display)
+            </div>
+            <div class="col-xs-2">
+                @Html.CheckBoxFor(x => Model[i].IsChecked, htmlAttributes: new { @class = "checkbox" })
+            </div>
+        </div>
+    }
+</div>

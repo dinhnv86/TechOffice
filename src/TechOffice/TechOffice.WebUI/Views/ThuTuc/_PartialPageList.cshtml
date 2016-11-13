@@ -43,11 +43,11 @@
                 }
                 else
                 {
-                    <tr><td colspan="7">No rows found.</td></tr>
+                    <tr><td colspan="4">No rows found.</td></tr>
                 }
     <tfoot>
         <tr>
-            <td colspan="7">
+            <td colspan="4">
                 <div id="contentPager" class="pull-right">
                     @Html.PagedListPager(Model, page => Url.Action("List", "ThuTuc", new { page }),
                            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxPaging))
