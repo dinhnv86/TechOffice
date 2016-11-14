@@ -351,9 +351,6 @@ namespace AnThinhPhat.WebUI.Controllers
                     a.CoQuanInfos = a.CoQuanInfos.Where(x => x.Id == model.CoQuanId.Value);
                 });
 
-            if (model.NhomCoquanId.HasValue)
-                all = all.Where(x => x.CoQuanInfos.Any(c => c.NhomCoQuanId == model.NhomCoquanId.Value));
-
             if (model.LinhVucTacNghiepId.HasValue)
                 all = all.Where(x => x.LinhVucTacNghiepId == model.LinhVucTacNghiepId.Value);
 
