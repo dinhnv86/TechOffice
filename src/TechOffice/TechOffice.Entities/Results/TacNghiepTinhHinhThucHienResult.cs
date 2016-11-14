@@ -10,10 +10,12 @@ namespace AnThinhPhat.Entities.Results
 
         public int ThoiGian { get; set; }
 
-        public string MucDoHoanThanh { get; set; }
+        public int? MucDoHoanThanhId { get; set; }
 
         public CoQuanInfo CoQuanInfo { get; set; }
 
         public TacNghiepInfo TacNghiepInfo { get; set; }
+
+        public MucDoHoanThanhResult MucDoHoanThanhInfo { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace AnThinhPhat.Entities
         public int TacNghiepId { get; set; }
         public int CoQuanId { get; set; }
         public int ThoiGian { get; set; }
-        public string MucDoHoanThanh { get; set; }
+        public Nullable<int> MucDoHoanThanhId { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }
@@ -26,6 +26,7 @@ namespace AnThinhPhat.Entities
         public string LastUpdatedBy { get; set; }
     
         public virtual CoQuan CoQuan { get; set; }
+        public virtual MucDoHoanThanh MucDoHoanThanh { get; set; }
         public virtual TacNghiep TacNghiep { get; set; }
     }
 }

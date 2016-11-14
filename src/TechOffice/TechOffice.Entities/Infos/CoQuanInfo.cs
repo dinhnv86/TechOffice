@@ -4,5 +4,7 @@
     {
         //For new add tac nghiep
         public bool IsSelected { get; set; } = false;
+
+        public int NhomCoQuanId { get; set; }
     }
 }

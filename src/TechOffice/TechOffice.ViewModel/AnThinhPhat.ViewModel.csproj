@@ -44,6 +44,7 @@
     <Compile Include="BaseDataViewModel.cs" />
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="BaseLogViewModel.cs" />
+    <Compile Include="EnumMucDoHoanThanh.cs" />
     <Compile Include="Menu\InitMenuThuTucViewModel.cs" />
     <Compile Include="Menu\InitMenuVanBanViewModel.cs" />
     <Compile Include="CongViec\InitCongViecViewModel.cs" />

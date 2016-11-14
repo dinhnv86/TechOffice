@@ -150,6 +150,7 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.TacNghieps
+                            .Include(i => i.TacNghiep_CoQuanLienQuan)
                             where item.IsDeleted == false
                             select item)
                         .MakeQueryToDatabase()

@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class TacNghiepController : OfficeController
     {
         [Inject]
@@ -121,12 +121,69 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public ActionResult StatisticCongViec(ValueSearchStatisticViewModel model)
         {
-            return PartialView("_PartialPageStatisticCongViec", null);
+            var find = Find(model);
+            List<TacNghiepTinhHinhThucHienResult> tinhHinhThucHienByTacNghiep = new List<TacNghiepTinhHinhThucHienResult>();
+            find.ToList().ForEach(x =>
+            {
+                tinhHinhThucHienByTacNghiep.AddRange(TinhHinhThucHienRepository.GetAll().Where(t => t.TacNghiepId == x.Id));
+            });
+
+            var result = tinhHinhThucHienByTacNghiep.GroupBy(x => x.TacNghiepInfo, y => y, (a, b) =>
+            {
+                return new ResultStatisticByCongViecViewModel
+                {
+                    NgayTao = a.NgayTao,
+                    Name = a.NoiDung,
+                    NotExecuteResults = b.Where(w => w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.CHUATHUHIEN).Select(s => new ResultCoQuanThucHien
+                    {
+                        Name = s.CoQuanInfo.Name,
+                    }),
+                    ExecutingResults = b.Where(w => w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DANGTHUCHIEN).Select(s => new ResultCoQuanThucHien
+                    {
+                        Name = s.CoQuanInfo.Name,
+                    }),
+                    ExecutedResults = b.Where(w => w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DATHUCHIEN).Select(s => new ResultCoQuanThucHien
+                    {
+                        Name = s.CoQuanInfo.Name,
+                        NgayHoanThanh = a.NgayHoanThanh,
+                    }),
+                };
+            });
+
+            return PartialView("_PartialPageStatisticCongViec", result);
         }
 
         public ActionResult StatisticCoQuan(ValueSearchStatisticViewModel model)
         {
-            return PartialView("_PartialPageStatisticCoQuan", null);
+            var find = Find(model);
+
+            List<TacNghiepTinhHinhThucHienResult> tinhHinhThucHienByTacNghiep = new List<TacNghiepTinhHinhThucHienResult>();
+            find.ToList().ForEach(x =>
+            {
+                tinhHinhThucHienByTacNghiep.AddRange(TinhHinhThucHienRepository.GetAll().Where(t => t.TacNghiepId == x.Id));
+            });
+
+            var result = tinhHinhThucHienByTacNghiep.GroupBy(x => x.CoQuanInfo, y => y, (a, b) =>
+            {
+                return new ResultStatisticByCoQuanViewModel
+                {
+                    Name = a.Name,
+                    NotExecuteResults = b.Where(x => x.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.CHUATHUHIEN).Select(s => new ResultCongViecThucHien
+                    {
+                        Name = s.TacNghiepInfo.NoiDung,
+                    }),
+                    ExecutingResults = b.Where(w => w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DANGTHUCHIEN).Select(s => new ResultCongViecThucHien
+                    {
+                        Name = s.TacNghiepInfo.NoiDung,
+                    }),
+                    ExecutedResults = b.Where(w => w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DATHUCHIEN).Select(s => new ResultCongViecThucHien
+                    {
+                        Name = s.TacNghiepInfo.NoiDung,
+                    }),
+                };
+            });
+
+            return PartialView("_PartialPageStatisticCoQuan", result);
         }
 
         [HttpGet]
@@ -282,6 +339,34 @@ namespace AnThinhPhat.WebUI.Controllers
                 seachAll = seachAll.Where(x => x.NoiDungTraoDoi.Contains(model.TieuChiTimKiem));
 
             return seachAll.ToPagedList(model.Page, TechOfficeConfig.PAGESIZE);
+        }
+
+        private IEnumerable<TacNghiepResult> Find(ValueSearchStatisticViewModel model)
+        {
+            var all = TacNghiepRepository.GetAll();
+
+            if (model.CoQuanId.HasValue)
+                all.ToList().ForEach(a =>
+                {
+                    a.CoQuanInfos = a.CoQuanInfos.Where(x => x.Id == model.CoQuanId.Value);
+                });
+
+            if (model.NhomCoquanId.HasValue)
+                all = all.Where(x => x.CoQuanInfos.Any(c => c.NhomCoQuanId == model.NhomCoquanId.Value));
+
+            if (model.LinhVucTacNghiepId.HasValue)
+                all = all.Where(x => x.LinhVucTacNghiepId == model.LinhVucTacNghiepId.Value);
+
+            if (model.MucDoHoanThanhId.HasValue)
+                all = all.Where(x => x.MucDoHoanThanhId == model.MucDoHoanThanhId.Value);
+
+            if (model.From.HasValue)
+                all = all.Where(x => x.NgayTao >= model.From.Value);
+
+            if (model.To.HasValue)
+                all = all.Where(x => x.NgayTao <= model.To.Value);
+
+            return all;
         }
 
         private void MoveFiles(string guid, int id)

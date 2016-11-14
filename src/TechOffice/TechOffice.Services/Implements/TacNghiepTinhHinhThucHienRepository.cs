@@ -25,7 +25,7 @@ namespace AnThinhPhat.Services.Implements
                     var add = context.TacNghiep_TinhHinhThucHien.Create();
 
                     add.ThoiGian = entity.ThoiGian;
-                    add.MucDoHoanThanh = entity.MucDoHoanThanh;
+                    add.MucDoHoanThanhId = entity.MucDoHoanThanhId;
                     add.TacNghiepId = entity.TacNghiepId;
                     add.CoQuanId = entity.CoQuanId;
 
@@ -48,7 +48,7 @@ namespace AnThinhPhat.Services.Implements
                     var add = context.TacNghiep_TinhHinhThucHien.Create();
 
                     add.ThoiGian = entity.ThoiGian;
-                    add.MucDoHoanThanh = entity.MucDoHoanThanh;
+                    add.MucDoHoanThanhId = entity.MucDoHoanThanhId;
                     add.TacNghiepId = entity.TacNghiepId;
                     add.CoQuanId = entity.CoQuanId;
 
@@ -74,7 +74,7 @@ namespace AnThinhPhat.Services.Implements
                         add = context.TacNghiep_TinhHinhThucHien.Create();
 
                         add.ThoiGian = entity.ThoiGian;
-                        add.MucDoHoanThanh = entity.MucDoHoanThanh;
+                        add.MucDoHoanThanhId = entity.MucDoHoanThanhId;
                         add.TacNghiepId = entity.TacNghiepId;
                         add.CoQuanId = entity.CoQuanId;
 
@@ -96,13 +96,12 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    TacNghiep_TinhHinhThucHien add;
                     foreach (var entity in entities)
                     {
-                        add = context.TacNghiep_TinhHinhThucHien.Create();
+                        var add = context.TacNghiep_TinhHinhThucHien.Create();
 
                         add.ThoiGian = entity.ThoiGian;
-                        add.MucDoHoanThanh = entity.MucDoHoanThanh;
+                        add.MucDoHoanThanhId = entity.MucDoHoanThanhId;
                         add.TacNghiepId = entity.TacNghiepId;
                         add.CoQuanId = entity.CoQuanId;
 
@@ -266,7 +265,7 @@ namespace AnThinhPhat.Services.Implements
                         context.TacNghiep_TinhHinhThucHien.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
                     update.ThoiGian = entity.ThoiGian;
-                    update.MucDoHoanThanh = entity.MucDoHoanThanh;
+                    update.MucDoHoanThanhId = entity.MucDoHoanThanhId;
                     update.TacNghiepId = entity.TacNghiepId;
                     update.CoQuanId = entity.CoQuanId;
                     update.IsDeleted = entity.IsDeleted;
@@ -286,11 +285,10 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var update =
-                        context.TacNghiep_TinhHinhThucHien.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+                    var update = context.TacNghiep_TinhHinhThucHien.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
                     update.ThoiGian = entity.ThoiGian;
-                    update.MucDoHoanThanh = entity.MucDoHoanThanh;
+                    update.MucDoHoanThanhId = entity.MucDoHoanThanhId;
                     update.TacNghiepId = entity.TacNghiepId;
                     update.CoQuanId = entity.CoQuanId;
                     update.IsDeleted = entity.IsDeleted;

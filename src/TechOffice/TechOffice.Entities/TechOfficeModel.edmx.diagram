@@ -6,34 +6,34 @@
     <edmx:Diagrams>
       <Diagram DiagramId="5c6428e035ac49cb8dc559da828939dc" Name="Diagram1">
         <EntityTypeShape EntityType="TechOfficeDevModel.ChucVu" Width="1.5" PointX="0.75" PointY="18.5" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_PhoiHop" Width="1.5" PointX="10.5" PointY="18.375" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_QuaTrinhXuLy" Width="1.5" PointX="7.5" PointY="9" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_VanBan" Width="1.5" PointX="7.5" PointY="26.25" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.CoQuan" Width="1.5" PointX="0.75" PointY="12.375" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.HoSoCongViec" Width="1.5" PointX="5.25" PointY="17.375" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucCongViec" Width="1.5" PointX="3" PointY="31.25" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucTacNghiep" Width="1.5" PointX="3.75" PointY="36.5" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucThuTuc" Width="1.5" PointX="3.75" PointY="4.5" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucVanBan" Width="1.5" PointX="0.75" PointY="8.875" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.LoaiVanBan" Width="1.5" PointX="0.75" PointY="5.375" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.MucDoHoanThanh" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.MucTin" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.NhomCoQuan" Width="1.5" PointX="1.5" PointY="24" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.Role" Width="1.5" PointX="3" PointY="40.375" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep" Width="1.5" PointX="6" PointY="35.75" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_CoQuanLienQuan" Width="1.5" PointX="11.25" PointY="22.75" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_TinhHinhThucHien" Width="1.5" PointX="10.25" PointY="26.5" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_YKienCoQuan" Width="1.5" PointX="6" PointY="31.125" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinCongViec" Width="1.5" PointX="10.5" PointY="14.25" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinTacNghiep" Width="1.5" PointX="8.25" PointY="18.25" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinThuTuc" Width="1.5" PointX="8.25" PointY="14.25" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinVanBan" Width="1.5" PointX="5.25" PointY="13.25" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinYKienCoQuan" Width="1.5" PointX="8.25" PointY="22.25" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.ThuTuc" Width="1.5" PointX="6" PointY="4" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.TrangThaiCongViec" Width="1.5" PointX="3" PointY="27.75" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_PhoiHop" Width="1.5" PointX="8.25" PointY="18.375" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_QuaTrinhXuLy" Width="1.5" PointX="10.5" PointY="11" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_VanBan" Width="1.5" PointX="10.5" PointY="22.25" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.CoQuan" Width="1.5" PointX="0.75" PointY="9.125" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.HoSoCongViec" Width="1.5" PointX="8.25" PointY="12.375" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucCongViec" Width="1.5" PointX="6" PointY="10.75" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucTacNghiep" Width="1.5" PointX="0.75" PointY="23.625" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucThuTuc" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucVanBan" Width="1.5" PointX="3.75" PointY="30.75" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.LoaiVanBan" Width="1.5" PointX="3.75" PointY="34.25" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.MucDoHoanThanh" Width="1.5" PointX="0.75" PointY="27.125" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.MucTin" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.NhomCoQuan" Width="1.5" PointX="1.5" PointY="4.75" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.Role" Width="1.5" PointX="3" PointY="38.375" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep" Width="1.5" PointX="3" PointY="24.5" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_CoQuanLienQuan" Width="1.5" PointX="13.25" PointY="11.75" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_TinhHinhThucHien" Width="1.5" PointX="13.25" PointY="22.875" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_YKienCoQuan" Width="1.5" PointX="9" PointY="27.125" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinCongViec" Width="1.5" PointX="13.5" PointY="15.75" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinTacNghiep" Width="1.5" PointX="5.25" PointY="18.25" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinThuTuc" Width="1.5" PointX="5.25" PointY="14.25" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinVanBan" Width="1.5" PointX="8.25" PointY="22.25" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TapTinYKienCoQuan" Width="1.5" PointX="11.25" PointY="18.25" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.ThuTuc" Width="1.5" PointX="3" PointY="11" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TrangThaiCongViec" Width="1.5" PointX="6" PointY="7.25" />
         <EntityTypeShape EntityType="TechOfficeDevModel.User" Width="1.5" PointX="3" PointY="17.375" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.UserRole" Width="1.5" PointX="5.25" PointY="23.375" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.VanBan" Width="1.5" PointX="3" PointY="8.625" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.UserRole" Width="1.5" PointX="5.25" PointY="22.375" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.VanBan" Width="1.5" PointX="6" PointY="31.625" />
         <AssociationConnector Association="TechOfficeDevModel.FK_User_ChucVu" />
         <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_PhoiHop_HoSoCongViec" />
         <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_PhoiHop_User" />
@@ -54,6 +54,8 @@
         <AssociationConnector Association="TechOfficeDevModel.FK_ThuTuc_LinhVucThuTuc" />
         <AssociationConnector Association="TechOfficeDevModel.FK_VanBan_LinhVucVanBan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_VanBan_LoaiVanBan" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_MucDoHoanThanh" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_TinhHinhThucHien_MucDoHoanThanh" />
         <AssociationConnector Association="TechOfficeDevModel.FK_UserRole_Role" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_CoQuanLienQuan_TacNghiep" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_TinhHinhThucHien_TacNghiep" />
@@ -68,7 +70,6 @@
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinVanBan_VanBan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_User" />
         <AssociationConnector Association="TechOfficeDevModel.FK_UserRole_User" />
-        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_MucDoHoanThanh" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

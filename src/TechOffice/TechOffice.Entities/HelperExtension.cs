@@ -105,7 +105,8 @@ namespace AnThinhPhat.Entities
             return new CoQuanInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten
+                Name = entity.Ten,
+                NhomCoQuanId = entity.NhomCoQuanId,
             };
         }
 
@@ -119,7 +120,8 @@ namespace AnThinhPhat.Entities
             return new CoQuanInfo
             {
                 Id = entity.Id,
-                Name = entity.Ten
+                Name = entity.Ten,
+                NhomCoQuanId = entity.NhomCoQuanId,
             };
         }
     }
@@ -863,6 +865,7 @@ namespace AnThinhPhat.Entities
                 NoiDung = entity.NoiDung,
                 NoiDungTraoDoi = entity.NoiDungTraoDoi,
                 MucDoHoanThanhId = entity.MucDoHoanThanhId,
+                CoQuanInfos = entity.TacNghiep_CoQuanLienQuan.Select(x => new CoQuanInfo { Id = x.CoQuanId, Name = x.CoQuan.Ten, NhomCoQuanId = x.CoQuan.NhomCoQuanId }).ToList(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -881,7 +884,9 @@ namespace AnThinhPhat.Entities
             return new TacNghiepInfo
             {
                 Id = entity.Id,
-                NoiDung = entity.NoiDung
+                NoiDung = entity.NoiDung,
+                NgayTao = entity.NgayTao,
+                NgayHoanThanh = entity.NgayHoanThanh,
             };
         }
 
@@ -895,7 +900,9 @@ namespace AnThinhPhat.Entities
             return new TacNghiepInfo
             {
                 Id = entity.Id,
-                NoiDung = entity.NoiDung
+                NoiDung = entity.NoiDung,
+                NgayTao = entity.NgayTao,
+                NgayHoanThanh = entity.NgayHoanThanh,
             };
         }
     }
@@ -912,10 +919,11 @@ namespace AnThinhPhat.Entities
             return new TacNghiepTinhHinhThucHienResult
             {
                 Id = entity.Id,
-                MucDoHoanThanh = entity.MucDoHoanThanh,
+                MucDoHoanThanhId = entity.MucDoHoanThanhId,
+                MucDoHoanThanhInfo = entity.MucDoHoanThanh.ToIfNotNullDataResult(),
                 ThoiGian = entity.ThoiGian,
                 CoQuanId = entity.CoQuanId,
-                CoQuanInfo = entity.CoQuan.ToIfNotNullDataResult().ToDataInfo(),
+                CoQuanInfo = entity.CoQuan.ToDataInfo(),
                 TacNghiepId = entity.TacNghiepId,
                 TacNghiepInfo = entity.TacNghiep.ToIfNotNullDataResult().ToDataInfo(),
                 CreateDate = entity.CreateDate,
