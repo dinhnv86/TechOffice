@@ -23,6 +23,9 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public IRoleRepository RoleRepository { get; set; }
 
+        [Inject]
+        public ICoQuanRepository CoQuanRepository { get; set; }
+
         public ActionResult Index()
         {
             return View();
@@ -47,10 +50,13 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             var cvs = ChucVuRepository.GetAll().Select(x => x.ToIfNotNullDataInfo()).ToList();
             var roles = RoleRepository.GetAll().Select(x => x.ToRoleViewModel()).ToList();
+            var cqs = CoQuanRepository.GetAll().Select(x => x.ToDataInfo()).ToList();
+
             var userInfo = new AddUserViewModel
             {
                 RoleInfos = roles,
-                ChucVuInfos = cvs
+                ChucVuInfos = cvs,
+                CoQuanInfos = cqs,
             };
             return View(userInfo);
         }

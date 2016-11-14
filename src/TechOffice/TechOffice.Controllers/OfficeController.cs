@@ -8,6 +8,9 @@ using AnThinhPhat.Services;
 using AnThinhPhat.Utilities;
 using Microsoft.Owin.Security;
 using Ninject;
+using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Entities.Infos;
+using AnThinhPhat.Entities.Results;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -21,6 +24,9 @@ namespace AnThinhPhat.WebUI.Controllers
                 return ctx.Authentication;
             }
         }
+
+        [Inject]
+        public IUsersRepository UserRepository { get; set; }
 
         protected string UserName
         {
@@ -165,6 +171,11 @@ namespace AnThinhPhat.WebUI.Controllers
                 }
             }
             return RedirectToRoute(Utilities.UrlLink.ERROR_NOTFOUND404);
+        }
+
+        protected UserResult AuthInfo()
+        {
+            return UserRepository.Single(Convert.ToInt32(UserId));
         }
 
         private void CheckModelState()

@@ -4,7 +4,6 @@
 
 }
 
-<!--start:body-->
 <div class="boxr" style="width:100%">
     <h1 class="title title_ct"><span>Văn bản</span></h1>
 
@@ -45,9 +44,10 @@
     </div>
 
     <div class="clear"></div>
-    <h3><span style="font-size: x-large;">Danh sách thủ tục hành chính</span></h3>
-    <div id="tableAdmin" class="table-responsive">
-        @{Html.RenderAction("List", UrlLink.TACNGHIEP, routeValues: new { search = Model.ValueSearch });}
+    <div class="col-xs-12">
+        <h3><span style="font-size: x-large;">Danh sách thủ tục hành chính</span></h3>
+        <div id="tableAdmin" class="table-responsive">
+            @{Html.RenderAction("List", UrlLink.TACNGHIEP, routeValues: new { search = Model.ValueSearch });}
+        </div>
     </div>
 </div>
-<!--end:body-->

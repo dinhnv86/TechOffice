@@ -195,7 +195,8 @@ namespace AnThinhPhat.Services.Implements
                         where item.IsDeleted == false
                         select item)
                         .MakeQueryToDatabase()
-                        .Select(x => x.ToDataResult());
+                        .Select(x => x.ToDataResult())
+                        .ToList();
                 }
             });
         }

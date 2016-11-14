@@ -88,6 +88,7 @@ namespace AnThinhPhat.ViewModel
                     Id = entity.Id,
                     UserName = entity.UserName,
                     ChucVuId = entity.ChucVuId,
+                    CoQuanId=entity.CoQuanId,
                     HoVaTen = entity.FullName,
                     UserRoles = entity.RoleInfos
                         .Where(x => x.IsChecked)

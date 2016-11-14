@@ -197,6 +197,7 @@ namespace AnThinhPhat.Services.Implements
                     add.IsLocked = entity.IsLocked;
                     add.HoVaTen = entity.HoVaTen;
                     add.ChucVuId = entity.ChucVuId;
+                    add.CoQuanId = entity.CoQuanId;
 
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
@@ -227,6 +228,7 @@ namespace AnThinhPhat.Services.Implements
                     add.IsLocked = entity.IsLocked;
                     add.HoVaTen = entity.HoVaTen;
                     add.ChucVuId = entity.ChucVuId;
+                    add.CoQuanId = entity.CoQuanId;
                     add.HoVaTen = entity.HoVaTen;
 
                     add.IsDeleted = entity.IsDeleted;
@@ -260,6 +262,7 @@ namespace AnThinhPhat.Services.Implements
                         add.IsLocked = entity.IsLocked;
                         add.HoVaTen = entity.HoVaTen;
                         add.ChucVuId = entity.ChucVuId;
+                        add.CoQuanId = entity.CoQuanId;
 
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
@@ -293,6 +296,7 @@ namespace AnThinhPhat.Services.Implements
                         add.IsLocked = entity.IsLocked;
                         add.HoVaTen = entity.HoVaTen;
                         add.ChucVuId = entity.ChucVuId;
+                        add.CoQuanId = entity.CoQuanId;
 
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
@@ -322,6 +326,7 @@ namespace AnThinhPhat.Services.Implements
                         add.IsLocked = entity.IsLocked;
                         add.HoVaTen = entity.HoVaTen;
                         add.ChucVuId = entity.ChucVuId;
+                        add.CoQuanId = entity.CoQuanId;
 
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;

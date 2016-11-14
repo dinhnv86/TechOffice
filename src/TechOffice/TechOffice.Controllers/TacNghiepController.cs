@@ -222,17 +222,6 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             var cqlq = CoQuanCoLienQuanRepository.GetAllByTacNghiepId(id);
 
-            //var coQuanInfos = CoQuanRepository.GetAll().GroupBy(x => x.NhomCoQuan, x => x, (key, cq) =>
-            //         new InitCoQuanCoLienQuan
-            //         {
-            //             NhomCoQuan = key,
-            //             CoQuanInfo = cq.Where(x => cqlq.Any(y => x.Id == y.CoQuanId)).Select(q => q.ToDataInfo().Update(x => x.IsSelected = true)).ToList(),
-            //         }).Where(x => x.CoQuanInfo.Count > 0).OrderBy(x => x.NhomCoQuan.Id).ToList();
-
-            //var linhVucs = LinhVucTacNghiepRepository.GetAll().Select(x => x.ToDataInfo());
-
-            //var ttth = TinhHinhThucHienRepository.GetAllByTacNghiepId(id);
-
             var result = TacNghiepRepository.Single(id);
 
             //get files in folder upload
@@ -240,6 +229,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
             var detail = new DetailTacNghiepViewModel
             {
+                Id = id,
                 NgayHetHan = result.NgayHetHan,
                 NgayHoanThanh = result.NgayHoanThanh,
                 NgayTao = result.NgayTao,
@@ -249,6 +239,8 @@ namespace AnThinhPhat.WebUI.Controllers
                 CoQuanInfos = cqlq,
                 JsonFiles = GetPathFiles(urlFiles),
             };
+
+            //Update status for tinhinhcongviec
 
             return View(detail);
         }
@@ -280,6 +272,13 @@ namespace AnThinhPhat.WebUI.Controllers
         public PartialViewResult NoiDungYKienCuaCacCoQuan(int id)//TacNghiepId
         {
             var result = YKienCoQuanRepository.GetAll().Where(x => x.TacNghiepId == id);
+
+            if (!User.IsInRole("Admin"))
+            {
+                var user = AuthInfo();
+                result = result.Where(x => x.CoQuanId == user.CoQuanId);
+            }
+           
             return PartialView("_PartialPageNoiDungYKien", result);
         }
 
@@ -346,10 +345,7 @@ namespace AnThinhPhat.WebUI.Controllers
             var all = TacNghiepRepository.GetAll();
 
             if (model.CoQuanId.HasValue)
-                all.ToList().ForEach(a =>
-                {
-                    a.CoQuanInfos = a.CoQuanInfos.Where(x => x.Id == model.CoQuanId.Value);
-                });
+                all.ToList().ForEach(a => { a.CoQuanInfos = a.CoQuanInfos.Where(x => x.Id == model.CoQuanId.Value); });
 
             if (model.LinhVucTacNghiepId.HasValue)
                 all = all.Where(x => x.LinhVucTacNghiepId == model.LinhVucTacNghiepId.Value);

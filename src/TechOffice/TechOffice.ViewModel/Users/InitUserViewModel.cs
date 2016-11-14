@@ -16,13 +16,18 @@ namespace AnThinhPhat.ViewModel.Users
         [DisplayName("Mật khẩu")]
         public string Password { get; set; }
 
-        [DisplayName("Chức vụ")]
+        [DisplayName("Chức vụ"), Required]
         public int ChucVuId { get; set; }
+
+        [DisplayName("Cơ quan"), Required]
+        public int CoQuanId { get; set; }
 
         public bool IsLocked { get; set; }
 
         public ChucVuInfo ChucVuInfo { get; set; }
 
         public IEnumerable<ChucVuInfo> ChucVuInfos { get; set; }
+
+        public IEnumerable<CoQuanInfo> CoQuanInfos { get; set; }
     }
 }

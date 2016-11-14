@@ -61,17 +61,19 @@
     </div>
 
     <div class="row">
-        @if (Model.IsShowResult)
-        {
-            if (Model.TypeStatistic == "T01")
+        <div class="col-xs-12">
+            @if (Model.IsShowResult)
             {
-                Html.RenderAction("StatisticCongViec", Model.ValueSearch);
+                if (Model.TypeStatistic == "T01")
+                {
+                    Html.RenderAction("StatisticCongViec", Model.ValueSearch);
+                }
+                else
+                {
+                    Html.RenderAction("StatisticCoQuan", Model.ValueSearch);
+                }
             }
-            else
-            {
-                Html.RenderAction("StatisticCoQuan", Model.ValueSearch);
-            }
-        }
+        </div>
     </div>
 </div>
 

@@ -60,7 +60,7 @@ onEditMSTComplete = function () {
 }
 
 onShowLoading = function () {
-    $('#screen').css({ opacity: 0.2, 'width': '100%', 'height': '100%' });
+    $('#screen').css({ opacity: 0.2, 'width': $(document).width(), 'height': $(document).height() });
     $('body').css({ 'overflow': 'hidden' });
     $('#box').css({ 'display': 'block' });
 }

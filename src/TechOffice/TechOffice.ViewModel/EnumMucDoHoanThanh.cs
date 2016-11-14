@@ -4,6 +4,7 @@
     {
         CHUATHUHIEN = 1,
         DANGTHUCHIEN = 2,
-        DATHUCHIEN = 3
+        DATHUCHIEN = 3,
+        DAXEM = 4,
     }
 }

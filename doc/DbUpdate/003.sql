@@ -1,0 +1,8 @@
+ALTER TABLE [User] ADD CoQuanId int NULL
+GO
+ 
+UPDATE [User] SET CoQuanId = 1
+GO
+ 
+ALTER TABLE [User] ALTER COLUMN CoQuanId int NOT NULL
+GO
