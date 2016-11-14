@@ -188,8 +188,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.NhomCoQuans
-                        where item.IsDeleted == false
-                        select item)
+                            where item.IsDeleted == false
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .ToList();
@@ -204,16 +204,32 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.NhomCoQuans
-                        where item.IsDeleted == false
-                        select new NhomCoQuanResult
-                        {
-                            Id = item.Id,
-                            Ten = item.Ten,
-                            MoTa = item.MoTa,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToListAsync();
+                                  where item.IsDeleted == false
+                                  select new NhomCoQuanResult
+                                  {
+                                      Id = item.Id,
+                                      Ten = item.Ten,
+                                      MoTa = item.MoTa,
+                                      IsDeleted = item.IsDeleted,
+                                      LastUpdatedBy = item.LastUpdatedBy,
+                                      LastUpdated = item.LastUpdated
+                                  }).ToListAsync();
+                }
+            });
+        }
+
+        public IEnumerable<NhomCoQuanResult> GetAllWithChildren()
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.NhomCoQuans.Include(x => x.CoQuans)
+                            where item.IsDeleted == false
+                            select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .ToList();
                 }
             });
         }
@@ -225,17 +241,17 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.NhomCoQuans
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select new NhomCoQuanResult
-                        {
-                            Id = item.Id,
-                            Ten = item.Ten,
-                            MoTa = item.MoTa,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).Single();
+                            where item.IsDeleted == false &&
+                                  item.Id == id
+                            select new NhomCoQuanResult
+                            {
+                                Id = item.Id,
+                                Ten = item.Ten,
+                                MoTa = item.MoTa,
+                                IsDeleted = item.IsDeleted,
+                                LastUpdatedBy = item.LastUpdatedBy,
+                                LastUpdated = item.LastUpdated
+                            }).Single();
                 }
             });
         }
@@ -247,17 +263,17 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.NhomCoQuans
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select new NhomCoQuanResult
-                        {
-                            Id = item.Id,
-                            Ten = item.Ten,
-                            MoTa = item.MoTa,
-                            IsDeleted = item.IsDeleted,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).SingleAsync();
+                                  where item.IsDeleted == false &&
+                                        item.Id == id
+                                  select new NhomCoQuanResult
+                                  {
+                                      Id = item.Id,
+                                      Ten = item.Ten,
+                                      MoTa = item.MoTa,
+                                      IsDeleted = item.IsDeleted,
+                                      LastUpdatedBy = item.LastUpdatedBy,
+                                      LastUpdated = item.LastUpdated
+                                  }).SingleAsync();
                 }
             });
         }

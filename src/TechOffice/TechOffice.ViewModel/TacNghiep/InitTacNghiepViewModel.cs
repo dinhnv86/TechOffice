@@ -11,6 +11,7 @@ namespace AnThinhPhat.ViewModel.TacNghiep
         private IEnumerable<NamBanHanh> namBanHanh;
 
         private ValueSearchViewModel valueSearch;
+
         public string NhapThongTinTimKiem { get; set; }
 
         public string TieuChiTimKiem { get; set; }

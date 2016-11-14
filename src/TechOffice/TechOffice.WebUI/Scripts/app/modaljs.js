@@ -97,7 +97,7 @@ onAlertSuccess = function () {
 }
 
 onAlertFailure = function () {
-    $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
-        $("#success-alert").css('display', 'none');
+    $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
+        $("#danger-alert").css('display', 'none');
     });
 }

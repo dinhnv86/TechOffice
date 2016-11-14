@@ -1,0 +1,25 @@
+﻿@model IEnumerable<AnThinhPhat.Entities.Results.TacNghiepYKienCoQuanResult>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="col-sm-3">Tên cơ quan</th>
+            <th class="col-sm-6">Nội dung</th>
+            <th class="col-sm-3">Các tập tin đính kèm</th>
+        </tr>
+    </thead>
+    @if (Model.Any())
+    {
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
+                    <td>@Html.DisplayFor(x => item.NoiDung)</td>
+                    <td>Chưa implement</td>
+                </tr>
+            }
+        </tbody>
+    }
+</table>

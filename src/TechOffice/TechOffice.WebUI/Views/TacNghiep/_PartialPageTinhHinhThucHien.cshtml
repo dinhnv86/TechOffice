@@ -1,0 +1,26 @@
+﻿@model IEnumerable<AnThinhPhat.Entities.Results.TacNghiepTinhHinhThucHienResult>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="col-sm-3">Tên cơ quan</th>
+            <th class="col-sm-6">Mức độ hoàn thành</th>
+            <th class="col-sm-3">Thời gian</th>
+        </tr>
+    </thead>
+    @if (Model.Any())
+    {
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
+                    <td>@Html.DisplayFor(x => item.MucDoHoanThanh)</td>
+                    <td>@Html.DisplayFor(x=>item.ThoiGian)</td>
+                </tr>
+            }
+        </tbody>
+    }
+</table>
+

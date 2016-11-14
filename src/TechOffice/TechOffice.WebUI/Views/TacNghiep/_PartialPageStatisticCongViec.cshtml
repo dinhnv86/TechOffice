@@ -1,0 +1,49 @@
+﻿
+@model IEnumerable<AnThinhPhat.ViewModel.TacNghiep.ResultStatisticByCongViecViewModel>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <label>@item.NgayTao -  @item.Name</label>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Các cơ quan chưa thực hiện</th>
+                    <th>Các cơ quan đang thưc hiện</th>
+                    <th>Các cơ quan đã thực hiện</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @foreach (var exe in item.NotExecuteResults)
+                        {
+                        <p>@exe.Name</p>
+                        }
+                    </td>
+                    <td>
+                        @foreach (var exe in item.ExecutingResults)
+                        {
+                        <p>@exe.Name</p>
+                        }
+                    </td>
+                    <td>
+                        @foreach (var exe in item.ExecutedResults)
+                        {
+                        <p>
+                            <span>@exe.Name</span>-@Html.DisplayFor(x => exe.NgayHoanThanh, "DisplayDateTime")
+                        </p>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+}
+else
+{
+    <div>
+        Không tìm thấy kết quả
+    </div>
+}

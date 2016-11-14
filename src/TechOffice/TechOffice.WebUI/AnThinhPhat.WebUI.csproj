@@ -270,6 +270,8 @@
     <Content Include="images\slider1.jpg" />
     <Content Include="images\Tap-huan-doan.jpg" />
     <Content Include="images\tongdai.png" />
+    <Content Include="Scripts\app\datepickerjs.js" />
+    <Content Include="Scripts\app\menuslidejs.js" />
     <Content Include="Scripts\app\modaljs.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -397,6 +399,10 @@
     <Content Include="Views\VanBan\_PartialPageList.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageGroupListBodies.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageListBodies.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageNoiDungYKien.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageTinhHinhThucHien.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageStatisticCongViec.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageStatisticCoQuan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

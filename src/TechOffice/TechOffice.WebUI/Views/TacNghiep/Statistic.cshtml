@@ -1,5 +1,108 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿
+@model AnThinhPhat.ViewModel.TacNghiep.InitTacNghiepThongKeViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
 }
 
+<div class="boxr" style="width:100%">
+    <h1 class="title title_ct"><span>Văn bản</span></h1>
 
+    <div class="pading">
+        <div class="entry form-horizontal">
+            @using (Html.BeginRouteForm(UrlLink.TACNGHIEP_THONGKE, FormMethod.Get))
+            {
+            <div class="col-md-6">
+                <label>Chọn nhóm cơ quan</label>
+                @Html.DropDownListFor(x => Model.NhomCoQuanId, new SelectList(Model.NhomCoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.NhomCoQuanId)
+            </div>
+            <div class="col-md-6">
+                <label>Chọn cơ quan</label>
+                @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.CoQuanId)
+            </div>
+            <div class="col-md-6">
+                <label>Chọn lĩnh vực</label>
+                @Html.DropDownListFor(x => Model.LinhVucTacNghiepId, new SelectList(Model.LinhVucTacNghiepInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.LinhVucTacNghiepId)
+            </div>
+            <div class="col-md-6">
+                <label>Chọn mức độ hoàn thành</label>
+                @Html.DropDownListFor(x => Model.MucDoHoanThanhId, new SelectList(Model.MucDoHoanThanhInfo, "Id", "Ten"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.MucDoHoanThanhId)
+            </div>
+            <div class="col-md-6">
+                <label>Từ</label>
+                @Html.EditorFor(x => x.From, "DateTime")
+
+            </div>
+            <div class="col-md-6">
+                <label>Đến</label>
+                @Html.EditorFor(x => x.To, "DateTime")
+            </div>
+            <div class="col-md-6">
+                <label>&nbsp;</label>
+                <div id="outer">
+                    <div class="inner">
+                        @*<input type="submit" class="btn btn-primary" value="Thống kê theo công việc" name="Submit" />*@
+                        <button type="submit" name="Submit" value="SB01" class="btn btn-primary">Thống kê theo công việc</button>
+                        @*@Html.RouteLink("Thống kê theo công việc", UrlLink.TACNGHIEP_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })*@
+                    </div>
+                    <div class="inner">
+                        @*<input type="submit" class="btn btn-primary" value="Thống kê theo cơ quan" name="Submit" />*@
+                        <button type="submit" name="Submit" value="SB02" class="btn btn-primary">Thống kê theo cơ quan</button>
+                        @*@Html.RouteLink("Thống kê theo cơ quan", UrlLink.TACNGHIEP_ADD, null, htmlAttributes: new { @class = "btn btn-primary" })*@
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        @if (Model.IsShowResult)
+        {
+            if (Model.TypeStatistic == "T01")
+            {
+                Html.RenderAction("StatisticCongViec", Model.ValueSearch);
+            }
+            else
+            {
+                Html.RenderAction("StatisticCoQuan", Model.ValueSearch);
+            }
+        }
+    </div>
+</div>
+
+@section Scripts{
+    @*<script src="~/Scripts/app/datepickerjs.js"></script>*@
+    <script>
+        $(document).ready(function () {
+            var optionCalendar =
+           {
+               autoSize: true,
+               constrainInput: true,
+               dateFormat: 'dd/mm/yy',
+               setDate: new Date()
+           };
+            $('.control-datepicker').datepicker(optionCalendar);
+
+            $.validator.addMethod('date',
+               function (value, element) {
+                   if (this.optional(element)) {
+                       return true;
+                   }
+
+                   var ok = true;
+                   try {
+                       $.datepicker.parseDate('dd/mm/yy', value);
+                   }
+                   catch (err) {
+                       ok = false;
+                   }
+                   return ok;
+               });
+        });
+    </script>
+}

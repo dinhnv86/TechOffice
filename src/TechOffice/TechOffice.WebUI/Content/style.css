@@ -3571,11 +3571,10 @@ table.table_form, table.table_form tr, table.table_form td {
 
 input, button, select, textarea {
     -moz-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .map_in > iframe {

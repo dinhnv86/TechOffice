@@ -38,8 +38,9 @@ namespace AnThinhPhat.WebUI
                 Include("~/Scripts/jquery-ui-{version}.js",
                 "~/Scripts/jquery.ui.core.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/fastrack").
-                Include("~/Scripts/app/loading.js"));
+            bundles.Add(new ScriptBundle("~/bundles/tech").
+                Include("~/Scripts/app/loading.js",
+                "~/Scripts/app/menuslidejs.js"));
 
             bundles.Add(new StyleBundle("~/Content/jqueryui").
                 Include("~/Content/themes/base/*.css"));

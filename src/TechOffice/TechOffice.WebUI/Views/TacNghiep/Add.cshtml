@@ -17,6 +17,8 @@
     };
 }
 
+@{Html.RenderPartial("_PartialPageAlert");}
+
 <link href="~/Content/app/plus.css" rel="stylesheet" />
 <style>
     .hiddenRow {
@@ -28,23 +30,22 @@
     }
 </style>
 
-<div class="row">
-    @using (Ajax.BeginForm(ajaxOption))
-    {
-        //Id temp
-        @Html.HiddenFor(x => x.Guid)
+@using (Ajax.BeginForm(ajaxOption))
+{
+    //Id temp
+    @Html.HiddenFor(x => x.Guid)
 
-        <div class="col-sm-6">
-            <label>Ngày tạo<span class="required">*</span></label>
-            @Html.EditorFor(x => x.NgayTao, "DateTime")
-            @Html.ValidationMessageFor(x => x.NgayTao)
-        </div>
+    <div class="col-sm-6">
+        <label>Ngày tạo<span class="required">*</span></label>
+        @Html.EditorFor(x => x.NgayTao, "DateTime")
+        @Html.ValidationMessageFor(x => x.NgayTao)
+    </div>
 
-        <div class="col-sm-6">
-            <label>Ngày hết hạn<span class="required">*</span></label>
-            @Html.EditorFor(x => x.NgayHetHan, "DateTime")
-            @Html.ValidationMessageFor(x => x.NgayHetHan)
-        </div>
+    <div class="col-sm-6">
+        <label>Ngày hết hạn<span class="required">*</span></label>
+        @Html.EditorFor(x => x.NgayHetHan, "DateTime")
+        @Html.ValidationMessageFor(x => x.NgayHetHan)
+    </div>
 
         <div class="col-sm-6">
             <label>Ngày hoàn thành</label>
@@ -62,14 +63,14 @@
             @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 10 })
         </div>
 
-        { Html.RenderPartial("_PartialPageGroupListBodies", new InitNhomCoQuanCoLienQuanBindDataTemp { ParentNameSpace = "CoQuanInfos", CoQuanInfos = Model.CoQuanInfos }); }
+    { Html.RenderPartial("_PartialPageGroupListBodies", new InitNhomCoQuanCoLienQuanBindDataTemp { ParentNameSpace = "CoQuanInfos", CoQuanInfos = Model.CoQuanInfos }); }
 
-        <div class="col-md-12">
-            <label>Nội dung ý kiên trao đổi</label>
-            @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 })
-        </div>
+    <div class="col-md-12">
+        <label>Nội dung ý kiên trao đổi</label>
+        @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 })
+    </div>
 
-        <label class="col-sm-12">Đính kèm tập tin</label>
+    <label class="col-sm-12">Đính kèm tập tin</label>
         <div class="col-sm-12">
             <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
             <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
@@ -86,10 +87,10 @@
             <input type="submit" value="Lưu" class="btn btn-primary btn-width-md col-sm-2" name="btnAdd" id="btnAdd" />&nbsp;
             <button type="button" class="btn btn-default btn-width-md col-sm-2" name="btnCancel" id="btnCancel" data-dismiss="modal">Hủy</button>
         </div>
-    }
-</div>
+}
 
 @section Scripts{
+    <script src="~/Scripts/app/modaljs.js"></script>
     <script>
         $(document).ready(function () {
             var optionCalendar =
@@ -165,10 +166,19 @@
             });
             /*end upload*/
 
-            onAddBegin = function () { }
-            onAddComplete = function () { }
-            onAddSuccess = function () { }
-            onAddFailure = function () { }
+            onAddBegin = function () {
+                debugger;
+                onShowLoading();
+            }
+            onAddComplete = function () {
+                onHideLoading();
+            }
+            onAddSuccess = function () {
+                onAlertSuccess();
+            }
+            onAddFailure = function () {
+                onAlertFailure();
+            }
         });
     </script>
 }

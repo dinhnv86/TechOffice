@@ -57,8 +57,12 @@
     <Compile Include="TacNghiep\InitCoQuanCoLienQuan.cs" />
     <Compile Include="TacNghiep\InitCoQuanCoLienQuanBindDataTemp.cs" />
     <Compile Include="TacNghiep\InitNhomCoQuanCoLienQuanBindDataTemp.cs" />
+    <Compile Include="TacNghiep\InitTacNghiepThongKeViewModel.cs" />
     <Compile Include="TacNghiep\InitTacNghiepViewModel.cs" />
     <Compile Include="TacNghiep\ResultSearchViewModel.cs" />
+    <Compile Include="TacNghiep\ResultStatisticByCoQuanViewModel.cs" />
+    <Compile Include="TacNghiep\ResultStatisticByCongViecViewModel.cs" />
+    <Compile Include="TacNghiep\ValueSearchStatisticViewModel.cs" />
     <Compile Include="TacNghiep\ValueSearchViewModel.cs" />
     <Compile Include="ThuTuc\InitThuTucViewModel.cs" />
     <Compile Include="ThuTuc\ValueSearchViewModel.cs" />

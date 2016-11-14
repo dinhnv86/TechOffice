@@ -18,10 +18,12 @@ namespace AnThinhPhat.ViewModel.TacNghiep
 
         public string NoiDung { get; set; }
 
-        public List<InitCoQuanCoLienQuan> CoQuanInfos { get; set; }
+        public IEnumerable<TacNghiepCoQuanLienQuanResult> CoQuanInfos { get; set; }
 
         public string NoiDungYKienTraoDoi { get; set; }
 
         public string LinhVucString { get; set; }
+
+        public string JsonFiles { get; set; }
     }
 }
