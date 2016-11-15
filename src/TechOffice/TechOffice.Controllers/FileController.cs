@@ -9,11 +9,15 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using System.Net;
+using AnThinhPhat.Services.Abstracts;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
     public class FileController : OfficeController
     {
+        [Inject]
+        public ITapTinYKienCoQuanRepository TapTinYKienCoQuanRepository { get; set; }
+
         [HttpGet]
         public FilePathResult DownloadFile(string path, string file)
         {
@@ -61,6 +65,57 @@ namespace AnThinhPhat.WebUI.Controllers
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">Id Noi dung y kien cua cac co quan</param>
+        /// <param name="tacNghiepId">Id tac nghiep</param>
+        /// <param name="coQuanId">Id Co quan</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ContentResult FilesAttachNoiDungYKien(int id, int tacNghiepId, int coQuanId)
+        {
+            //Create folder YKienCoQuan
+            string folder = EnsureFolderTacNghiepWithCoQuan(tacNghiepId, coQuanId);
+
+            try
+            {
+                foreach (string file in Request.Files)
+                {
+                    HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+                    if (hpf.ContentLength == 0)
+                        continue;
+
+                    SaveFilesCoQuan(hpf, folder);
+
+                    TapTinYKienCoQuanRepository.Add(new Entities.Results.TapTinYKienCoQuanResult
+                    {
+                        YKienCoQuanId = id,
+                        UserUploadId = Convert.ToInt32(UserId),
+                        CreatedBy = UserName,
+                        Url = Path.Combine(folder, Path.GetFileName(hpf.FileName)),
+                    });
+                }
+
+                // Returns json
+                var files = Directory.GetFiles(Path.Combine(folder));
+                string json = string.Empty;
+                foreach (string file in files)
+                {
+                    json += "<a href=" + Url.Action("DownloadFile", new { path = folder, file = Path.GetFileName(file) }) + ">" + Path.GetFileName(file) + "</a>" + "<br/>";
+                }
+
+                return Content(json, "application/html");
+            }
+            catch (Exception ex)
+            {
+                LogService.Error(ex.Message, ex);
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Content("ERROR", "application/html");
+            }
+        }
+
         private void SaveFilesTacNghiep(HttpPostedFileBase file, string guid)
         {
             var folderTemp = EnsureFolderTemp(guid);
@@ -73,6 +128,35 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 LogService.Error(string.Format("Has error in while save file {0}", file.FileName), ex);
             }
+        }
+
+        private void SaveFilesCoQuan(HttpPostedFileBase file, string path)
+        {
+            string savedFileName = Path.Combine(path, Path.GetFileName(file.FileName));
+            try
+            {
+                file.SaveAs(savedFileName); // Save the file
+                //Upload Db
+            }
+            catch (Exception ex)
+            {
+                LogService.Error(string.Format("Has error in while save file {0}", file.FileName), ex);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">Id co quan</param>
+        /// <returns></returns>
+        private string EnsureFolderTacNghiepWithCoQuan(int tacNghiepId, int coQuanId)
+        {
+            string folderTN = EnsureFolderTacNghiep(tacNghiepId);
+
+            string folderCQ = Path.Combine(folderTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
+            EnsureFolder(folderCQ);
+
+            return folderCQ;
         }
 
         private string EnsureFolderTemp(string guid)
@@ -97,9 +181,15 @@ namespace AnThinhPhat.WebUI.Controllers
             }
         }
 
-        private void EnsureFolderTacNghiep()
+        private string EnsureFolderTacNghiep(int tacNghiepId)
         {
+            string folderParentTN = Server.MapPath(TechOfficeConfig.UPLOAD_TACNGHIEP);
+            EnsureFolder(folderParentTN);
 
+            string folderTN = Path.Combine(folderParentTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
+            EnsureFolder(folderTN);
+
+            return folderTN;
         }
 
         private string GetPathFilesTemp(string guid)
@@ -112,5 +202,12 @@ namespace AnThinhPhat.WebUI.Controllers
             }
             return json;
         }
+
+        private void EnsureFolder(string folder)
+        {
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+        }
+
     }
 }

@@ -79,6 +79,7 @@
     <Compile Include="Infos\LinhVucCongViecInfo.cs" />
     <Compile Include="Infos\LinhVucVanBanInfo.cs" />
     <Compile Include="Infos\LoaiVanBanInfo.cs" />
+    <Compile Include="Infos\TacNghiepYKienCoQuanInfo.cs" />
     <Compile Include="Infos\TrangThaiCongViecInfo.cs" />
     <Compile Include="Infos\NhomCoQuanInfo.cs" />
     <Compile Include="Infos\RoleInfo.cs" />

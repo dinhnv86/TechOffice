@@ -69,5 +69,10 @@ namespace AnThinhPhat.Utilities
         }
 
         public static int LENGTHFOLDER = 10;
+
+        public static string UPLOAD_TACNGHIEP = "~/Uploads/TN";//tac nghiep
+        public static string UPLOAD_TT = "~/Uploads/TT";//thu tuc
+        public static string UPLOAD_CV = "~/Uploads/CV";//cong viec
+        public static string UPLOAD_VB = "~/Uploads/VB";//van ban
     }
 }

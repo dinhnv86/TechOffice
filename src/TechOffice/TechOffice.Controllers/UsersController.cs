@@ -15,9 +15,6 @@ namespace AnThinhPhat.WebUI.Controllers
     public class UsersController : OfficeController
     {
         [Inject]
-        public IUsersRepository UserRepository { get; set; }
-
-        [Inject]
         public IChucVuRepository ChucVuRepository { get; set; }
 
         [Inject]

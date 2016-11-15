@@ -12,6 +12,7 @@ using AnThinhPhat.Utilities;
 using PagedList;
 using AnThinhPhat.Entities.Results;
 using System.Collections.Generic;
+using System.Web;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -225,7 +226,7 @@ namespace AnThinhPhat.WebUI.Controllers
             var result = TacNghiepRepository.Single(id);
 
             //get files in folder upload
-            var urlFiles = EnsureFolderTacNghiep(id);
+            var urlFiles = EnsureFolderTacNghiepWithUser(id);
 
             var detail = new DetailTacNghiepViewModel
             {
@@ -278,7 +279,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 var user = AuthInfo();
                 result = result.Where(x => x.CoQuanId == user.CoQuanId);
             }
-           
+
             return PartialView("_PartialPageNoiDungYKien", result);
         }
 
@@ -300,6 +301,29 @@ namespace AnThinhPhat.WebUI.Controllers
                      });
 
             return PartialView("_PartialPageGroupListBodies", model);
+        }
+
+        [HttpGet]
+        public PartialViewResult EditYKien(int id)//id y kien cua cac co quan
+        {
+            var model = YKienCoQuanRepository.Single(id);
+            //var model = new EditNoiDungYKienCuaCoQuan();
+            return PartialView("_PartialPageNoiDungYKienEdit", model);
+        }
+
+        [HttpPost]
+        public JsonResult EditYKien(int id, string noiDung)//id y kien co quan
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                var model = YKienCoQuanRepository.Single(id);
+                model.NoiDung = noiDung;
+
+                return ExecuteResult(() =>
+                {
+                    return YKienCoQuanRepository.Update(model);
+                });
+            });
         }
 
         [NonAction]
@@ -370,7 +394,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
                 if (Directory.Exists(folderTemp) && Directory.GetFiles(folderTemp).Count() > 0)
                 {
-                    string folderTN = EnsureFolderTacNghiep(id);
+                    string folderTN = EnsureFolderTacNghiepWithUser(id);
                     foreach (var item in Directory.GetFiles(folderTemp))
                     {
                         string dest = Path.Combine(folderTN, Path.GetFileName(item));
@@ -398,9 +422,9 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
-        private string EnsureFolderTacNghiep(int id)
+        private string EnsureFolderTacNghiepWithUser(int id)
         {
-            string folderParentTT = Server.MapPath("~/Uploads/TT");
+            string folderParentTT = Server.MapPath(TechOfficeConfig.UPLOAD_TACNGHIEP);
             EnsureFolder(folderParentTT);
 
             string folderTT = Path.Combine(folderParentTT, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
@@ -412,6 +436,7 @@ namespace AnThinhPhat.WebUI.Controllers
             return folderUser;
         }
 
+      
         private void EnsureFolder(string folder)
         {
             if (!Directory.Exists(folder))

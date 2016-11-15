@@ -97,6 +97,7 @@ namespace AnThinhPhat.WebUI
             kernel.Bind<ITapTinVanBanRepository>().To<TapTinVanBanRepository>().WithConstructorArgument(logService);
             kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>().WithConstructorArgument(logService);
             kernel.Bind<IUsersRepository>().To<UsersRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ITapTinYKienCoQuanRepository>().To<TapTinYKienCoQuanRepository>().WithConstructorArgument(logService);
         }
     }
 }

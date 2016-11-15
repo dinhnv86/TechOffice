@@ -46,9 +46,9 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             get
             {
-#if DEBUG
-                return "1";
-#endif
+                //#if DEBUG
+                //                return "1";
+                //#endif
                 var claim = User as ClaimsPrincipal;
                 if (claim != null)
                     return claim.FindFirst(ClaimTypes.NameIdentifier).Value;

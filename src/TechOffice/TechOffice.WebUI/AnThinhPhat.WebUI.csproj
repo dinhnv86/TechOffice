@@ -403,6 +403,7 @@
     <Content Include="Views\TacNghiep\_PartialPageTinhHinhThucHien.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageStatisticCongViec.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageStatisticCoQuan.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageNoiDungYKienEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

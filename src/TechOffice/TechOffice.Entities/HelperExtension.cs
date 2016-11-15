@@ -961,6 +961,47 @@ namespace AnThinhPhat.Entities
                 LastUpdatedBy = entity.LastUpdatedBy
             };
         }
+
+        public static YKienCoQuanInfo ToIfNotNullDataInfo(this TacNghiep_YKienCoQuan entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static YKienCoQuanInfo ToDataInfo(this TacNghiep_YKienCoQuan entity)
+        {
+            return new YKienCoQuanInfo
+            {
+                Id = entity.Id,
+                CoQuanId = entity.CoQuanId,
+                TacNghiepId = entity.TacNghiepId,
+            };
+        }
+    }
+
+    public static class TapTinYKienCoQuanExtension
+    {
+        public static TapTinYKienCoQuanResult ToIfNotNullDataResult(this TapTinYKienCoQuan entity)
+        {
+            return entity?.ToDataResult();
+        }
+
+        public static TapTinYKienCoQuanResult ToDataResult(this TapTinYKienCoQuan entity)
+        {
+            return new TapTinYKienCoQuanResult
+            {
+                Id = entity.Id,
+                YKienCoQuanId = entity.YKiencoQuanTacNghiepId,
+                YKienCoQuanInfo = entity.TacNghiep_YKienCoQuan.ToDataInfo(),
+                Url = entity.Url,
+                UserUploadId = entity.UserUploadId,
+                UserInfo = entity.User.ToIfNotNullDataInfo(),
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
     }
 
     public static class TapTinCongViecExtension
