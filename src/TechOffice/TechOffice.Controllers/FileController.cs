@@ -65,7 +65,6 @@ namespace AnThinhPhat.WebUI.Controllers
             }
         }
 
-
         /// <summary>
         /// 
         /// </summary>
