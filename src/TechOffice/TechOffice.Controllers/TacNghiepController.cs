@@ -46,6 +46,9 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public ITapTinTacNghiepRepository TapTinTacNghiepRepository { get; set; }
 
+        [Inject]
+        public ITapTinYKienCoQuanRepository TapTinYKienCoQuanRepository { get; set; }
+
         [HttpGet]
         public ActionResult Index(int? nhomCoquanId,
             int? coQuanId,
@@ -261,7 +264,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
                   if (entity.Id > 0)
                   {
-                      MoveFiles(model.Guid, entity.Id);
+                      MoveFilesTacNghiep(model.Guid, entity.Id);
                   }
 
                   return saveResult;
@@ -273,14 +276,24 @@ namespace AnThinhPhat.WebUI.Controllers
         public PartialViewResult NoiDungYKienCuaCacCoQuan(int id)//TacNghiepId
         {
             var result = YKienCoQuanRepository.GetAll().Where(x => x.TacNghiepId == id);
-
+            var user = AuthInfo();
             if (!User.IsInRole("Admin"))
             {
-                var user = AuthInfo();
                 result = result.Where(x => x.CoQuanId == user.CoQuanId);
             }
+            result.ToList().ForEach(x =>
+            {
+                //GetPathFikles()
+            });
 
-            return PartialView("_PartialPageNoiDungYKien", result);
+            var model = new InitNoiDungYKienCuaCacCoQuanViewModel
+            {
+                CoQuanId = user.CoQuanId,
+                TacNghiepId = id,
+                CacYKienCuaCoQuanResult = result,
+            };
+
+            return PartialView("_PartialPageNoiDungYKien", model);
         }
 
         [HttpGet]
@@ -322,6 +335,44 @@ namespace AnThinhPhat.WebUI.Controllers
                 return ExecuteResult(() =>
                 {
                     return YKienCoQuanRepository.Update(model);
+                });
+            });
+        }
+
+        [HttpGet]
+        public PartialViewResult AddYKien(int tacNghiepId, int coQuanId)
+        {
+            var model = new EditNoiDungYKienCuaCoQuan
+            {
+                TacNghiepId = tacNghiepId,
+                CoQuanId = coQuanId,
+                NoiDung = string.Empty,
+                Guid = Guid.NewGuid().ToString(),
+            };
+            return PartialView("_PartialPageNoiDungYKienAdd", model);
+        }
+
+        [HttpPost]
+        public JsonResult AddYKien(int tacNghiepId, int coQuanId, string guid, string noiDung)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                return ExecuteResult(() =>
+                {
+                    var add = new TacNghiepYKienCoQuanResult
+                    {
+                        CoQuanId = coQuanId,
+                        TacNghiepId = tacNghiepId,
+                        NoiDung = noiDung,
+                        CreatedBy = UserName,
+                    };
+
+                    //1. Save data to DB
+                    var save = YKienCoQuanRepository.Add(add);
+                    //2. Move files temp into the upload folder
+                    MoveFilesYKienCuaCacCoQuan(guid, tacNghiepId, add.Id);
+
+                    return save;
                 });
             });
         }
@@ -386,7 +437,7 @@ namespace AnThinhPhat.WebUI.Controllers
             return all;
         }
 
-        private void MoveFiles(string guid, int id)
+        private void MoveFilesTacNghiep(string guid, int tacNghiepId)
         {
             try
             {
@@ -394,12 +445,12 @@ namespace AnThinhPhat.WebUI.Controllers
 
                 if (Directory.Exists(folderTemp) && Directory.GetFiles(folderTemp).Count() > 0)
                 {
-                    string folderTN = EnsureFolderTacNghiepWithUser(id);
+                    string folderTN = EnsureFolderTacNghiepWithUser(tacNghiepId);
                     foreach (var item in Directory.GetFiles(folderTemp))
                     {
                         string dest = Path.Combine(folderTN, Path.GetFileName(item));
                         System.IO.File.Move(item, dest);
-                        HistoryMoveFiles(id, dest);
+                        HistoryMoveFilesTacNghiep(tacNghiepId, dest);
                     }
 
                     Directory.Delete(folderTemp);
@@ -407,28 +458,60 @@ namespace AnThinhPhat.WebUI.Controllers
             }
             catch (Exception ex)
             {
-                LogService.Error(string.Format("Has Error while move files from {0} to {1}", guid, id), ex);
+                LogService.Error(string.Format("Has Error while move files from {0} to {1}", guid, tacNghiepId), ex);
             }
         }
 
-        private void HistoryMoveFiles(int id, string url)
+        private void MoveFilesYKienCuaCacCoQuan(string guid, int tacNghiepId, int yKienCuaCacCoQuanId)
+        {
+            try
+            {
+                string folderTemp = Path.Combine(Server.MapPath("~/Uploads"), guid);
+
+                if (Directory.Exists(folderTemp) && Directory.GetFiles(folderTemp).Count() > 0)
+                {
+                    string folderTN = EnsureFolderTacNghiepWithCoQuan(tacNghiepId, yKienCuaCacCoQuanId);
+                    foreach (var item in Directory.GetFiles(folderTemp))
+                    {
+                        string dest = Path.Combine(folderTN, Path.GetFileName(item));
+                        System.IO.File.Move(item, dest);
+                        HistoryMoveFilesYKienCoQuan(yKienCuaCacCoQuanId, dest);
+                    }
+
+                    Directory.Delete(folderTemp);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogService.Error(string.Format("Has Error while move files from {0} to {1}", guid, tacNghiepId), ex);
+            }
+        }
+
+        private void HistoryMoveFilesTacNghiep(int tacNghiepId, string url)
         {
             TapTinTacNghiepRepository.Add(new TapTinTacNghiepResult
             {
-                TacNghiepId = id,
+                TacNghiepId = tacNghiepId,
                 UserUploadId = Convert.ToInt32(UserId),
                 Url = url,
                 CreatedBy = UserName,
             });
         }
 
-        private string EnsureFolderTacNghiepWithUser(int id)
+        private void HistoryMoveFilesYKienCoQuan(int yKienCoQuanId, string url)
         {
-            string folderParentTT = Server.MapPath(TechOfficeConfig.UPLOAD_TACNGHIEP);
-            EnsureFolder(folderParentTT);
+            TapTinYKienCoQuanRepository.Add(new TapTinYKienCoQuanResult
+            {
+                YKienCoQuanId = yKienCoQuanId,
+                Url = url,
+                CreatedBy = UserName,
+                UserUploadId = Convert.ToInt32(UserId),
+            });
+        }
 
-            string folderTT = Path.Combine(folderParentTT, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
-            EnsureFolder(folderTT);
+        private string EnsureFolderTacNghiepWithUser(int tacNghiepId)//
+        {
+            string folderTT = EnsureFolderTacNghiep(tacNghiepId);
 
             string folderUser = Path.Combine(folderTT, UserId.PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
             EnsureFolder(folderUser);
@@ -436,7 +519,27 @@ namespace AnThinhPhat.WebUI.Controllers
             return folderUser;
         }
 
-      
+        private string EnsureFolderTacNghiepWithCoQuan(int tacNghiepId, int yKienCoQuanId)//
+        {
+            string folderTT = EnsureFolderTacNghiep(tacNghiepId);
+
+            string folderCoQuan = Path.Combine(folderTT, yKienCoQuanId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
+            EnsureFolder(folderCoQuan);
+
+            return folderCoQuan;
+        }
+
+        private string EnsureFolderTacNghiep(int tacNghiepId)
+        {
+            string folderParentTN = Server.MapPath(TechOfficeConfig.UPLOAD_TACNGHIEP);
+            EnsureFolder(folderParentTN);
+
+            string folderTN = Path.Combine(folderParentTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
+            EnsureFolder(folderTN);
+
+            return folderTN;
+        }
+
         private void EnsureFolder(string folder)
         {
             if (!Directory.Exists(folder))

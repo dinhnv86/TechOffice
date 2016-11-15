@@ -275,12 +275,12 @@
     <Content Include="Scripts\app\modaljs.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="connectionStrings.config" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="connectionStrings.config" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -404,6 +404,7 @@
     <Content Include="Views\TacNghiep\_PartialPageStatisticCongViec.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageStatisticCoQuan.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageNoiDungYKienEdit.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageNoiDungYKienAdd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

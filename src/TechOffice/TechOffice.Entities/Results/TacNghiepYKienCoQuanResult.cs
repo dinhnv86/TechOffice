@@ -13,5 +13,7 @@ namespace AnThinhPhat.Entities.Results
         public CoQuanInfo CoQuanInfo { get; set; }
 
         public TacNghiepInfo TacNghiepInfo { get; set; }
+
+        public string JsonFiles { get; set; }
     }
 }

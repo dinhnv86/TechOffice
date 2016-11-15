@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AnThinhPhat.Entities.Results.TacNghiepYKienCoQuanResult>
+﻿@model AnThinhPhat.ViewModel.TacNghiep.InitNoiDungYKienCuaCacCoQuanViewModel
 
 <table class="table table-bordered">
     <thead>
@@ -6,21 +6,24 @@
             <th class="col-sm-2">Tên cơ quan</th>
             <th class="col-sm-6">Nội dung</th>
             <th class="col-sm-3">Các tập tin đính kèm</th>
-            <th class="col-sm-1"></th>
+            <th class="col-sm-1">
+                @if (!Model.CacYKienCuaCoQuanResult.Any())
+                {
+                    @Html.ActionLink("Thêm", "AddYKien", "TacNghiep", new { tacNghiepId = Model.TacNghiepId, coQuanId = Model.CoQuanId }, new { @class = "btn-edit" })
+                }
+            </th>
         </tr>
     </thead>
-    @if (Model.Any())
+    @if (Model.CacYKienCuaCoQuanResult.Any())
     {
-
         <tbody>
-            @foreach (var item in Model)
-            {
+            @foreach (var item in Model.CacYKienCuaCoQuanResult)
+                {
                 <tr>
                     <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
                     <td class="content">@Html.DisplayFor(x => item.NoiDung)</td>
                     <td>Chưa implement</td>
                     <td>@Html.ActionLink("Chỉnh sửa", "EditYKien", "TacNghiep", new { id = item.Id }, new { @class = "btn-edit" })</td>
-                    @*<td><button id="btnEdit" data-tacnghiepid="@item.TacNghiepId" data-coquanid="@item.CoQuanId" class="btn btn-link">Edit</button></td>*@
                 </tr>
             }
         </tbody>

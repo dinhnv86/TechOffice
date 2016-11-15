@@ -41,7 +41,7 @@
 
     <div class="col-md-12">
         <label>Nội dung</label>
-        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 10 })
+        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 10, @readonly = "readonly" })
     </div>
 
     <div class="col-sm-12 table-responsive" style="padding:30px 15px 15px 15px;">
@@ -69,7 +69,7 @@
 
     <div class="col-md-12" style="padding-bottom:30px;">
         <label>Nội dung ý kiên trao đổi</label>
-        @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 })
+        @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10, @readonly = "readonly" })
     </div>
 
     <div class="col-sm-12">
@@ -110,7 +110,9 @@
 
     <script>
         $(document).ready(function () {
+
             $('#modalEditBody').height(260);
+
             $('#formYKienCoQuan').on('click', '.btn-edit', function (event) {
                 event.preventDefault();
                 var url = $(this).attr('href');
@@ -133,6 +135,22 @@
             onEditYKienFailure = function () {
                 alert("Đã xảy ra lỗi trong quá trình cập nhật. Xin vui lòng thử lại");
             };
+
+            onAddYKienBegin = function () {
+                onShowLoading();
+            };
+            onAddYKienComplete = function () {
+                onHideLoading();
+            };
+            onAddYKienSuccess = function () {
+                //reload page
+                var url = window.location.href;
+                window.location.href = url;
+            };
+            onAddYKienFailure = function () {
+                alert("Đã xảy ra lỗi trong quá trình cập nhật. Xin vui lòng thử lại");
+            };
+
 
             $('#formYKienCoQuan').on('change', 'input[type="file"]', function (e) {
                 $('#spanUpload').text('');

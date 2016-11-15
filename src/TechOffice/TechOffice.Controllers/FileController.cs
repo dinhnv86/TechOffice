@@ -76,7 +76,7 @@ namespace AnThinhPhat.WebUI.Controllers
         public ContentResult FilesAttachNoiDungYKien(int id, int tacNghiepId, int coQuanId)
         {
             //Create folder YKienCoQuan
-            string folder = EnsureFolderTacNghiepWithCoQuan(tacNghiepId, coQuanId);
+            string folder = EnsureFolderTacNghiepWithCoQuan(tacNghiepId, id);
 
             try
             {
@@ -152,7 +152,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             string folderTN = EnsureFolderTacNghiep(tacNghiepId);
 
-            string folderCQ = Path.Combine(folderTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
+            string folderCQ = Path.Combine(folderTN, coQuanId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
             EnsureFolder(folderCQ);
 
             return folderCQ;
@@ -164,12 +164,10 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 //1. Get folder upload
                 string folderUpload = Server.MapPath("~/Uploads");
-                if (!Directory.Exists(folderUpload))
-                    Directory.CreateDirectory(folderUpload);
+                EnsureFolder(folderUpload);
 
                 string folderTemp = Path.Combine(folderUpload, guid);
-                if (!Directory.Exists(folderTemp))
-                    Directory.CreateDirectory(folderTemp);
+                EnsureFolder(folderTemp);
 
                 return folderTemp;
             }

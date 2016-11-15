@@ -1,0 +1,93 @@
+﻿
+@model AnThinhPhat.ViewModel.TacNghiep.EditNoiDungYKienCuaCoQuan
+
+@{
+    AjaxOptions ajaxOption = new AjaxOptions
+    {
+        Url = Url.Action("AddYKien", "TacNghiep", routeValues: new { tacNghiepId = Model.TacNghiepId, coQuanId = Model.CoQuanId, guid = Model.Guid }),
+        HttpMethod = "POST",
+        OnBegin = "onAddYKienBegin",
+        OnComplete = "onAddYKienComplete",
+        OnSuccess = "onAddYKienSuccess",
+        OnFailure = "onAddYKienFailure",
+    };
+}
+
+@using (Ajax.BeginForm(ajaxOption))
+{
+    @Html.HiddenFor(x => x.TacNghiepId)
+    @Html.HiddenFor(x => x.CoQuanId)
+
+    <div class="col-xs-12">
+        <label>Nội dung</label>
+        @Html.TextAreaFor(x => x.NoiDung, htmlAttributes: new { @class = "form-control", rows = 5 })
+    </div>
+    <div class="col-xs-12">
+        <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
+        <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
+            <span class="glyphicon glyphicon-upload"></span>
+            Upload
+        </button>
+    </div>
+
+    <span class="col-xs-12" id="spanUpload"></span>
+
+    <div class="col-xs-12" id="filesName">
+    </div>
+
+    <div class="col-sm-6" id="outer">
+        <div class="inner"> <input type="submit" value="Lưu" class="btn btn-primary btn-width-md col-sm-2" name="btnAdd" id="btnAdd" /></div>
+        <div class="inner">
+            <button type="button" class="btn btn-default btn-width-md col-sm-2" name="btnCancel" id="btnCancel" data-dismiss="modal">Hủy</button>
+        </div>
+    </div>
+}
+
+<script>
+
+    $('input[type="file"]').on('change', function (e) {
+        $('#spanUpload').text('');
+        var files = e.originalEvent.target.files;
+        if (files.length > 0) {
+            $(this).next().removeAttr('disabled');
+        }
+        else {
+            $(this).next().attr('disabled', 'disabled');
+        }
+    });
+
+    $('#btnUpload').on('click', function (e) {
+        if (window.FormData !== undefined) {
+            var ajaxRequest = $.ajax({
+                type: "POST",
+                processData: false,
+                contentType: false,
+                url: '@Url.Action("FilesAttach", "File")' + '?guid=' + '@Model.Guid' + '&type=1',
+                data: function () {
+                    var formData = new FormData();
+                    var files = $('#filesUpload').get(0).files;
+                    if (files.length > 0) {
+                        for (var i = 0; i < files.length; i++) {
+                            formData.append("file" + i, files[i]);
+                        }
+                    }
+                    return formData;
+                }()
+            });
+
+            ajaxRequest.success(function (e, data) {
+                //$('#filesName').html(e);
+                $('#btnUpload').attr('disabled', 'disabled');
+                $('#spanUpload').text('Upload file successfully');
+            });
+            ajaxRequest.error(function () {
+                alert('Has Error in while upload file');
+            });
+            ajaxRequest.always(function () {
+            });
+        }
+        else {
+            alert("This browser doesn't support HTML5 file uploads!");
+        }
+    });
+</script>

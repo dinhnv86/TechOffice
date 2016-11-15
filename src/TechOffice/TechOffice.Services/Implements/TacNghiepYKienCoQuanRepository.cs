@@ -33,7 +33,11 @@ namespace AnThinhPhat.Services.Implements
                     add.CreateDate = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
-                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    var result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+
+                    entity.Id = add.Id;
+
+                    return result;
                 }
             });
         }
@@ -55,7 +59,10 @@ namespace AnThinhPhat.Services.Implements
                     add.CreateDate = DateTime.Now;
 
                     context.Entry(add).State = EntityState.Added;
-                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    var result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+
+                    entity.Id = add.Id;
+                    return result;
                 }
             });
         }
@@ -192,8 +199,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.TacNghiep_YKienCoQuan
-                        where item.IsDeleted == false
-                        select item)
+                            where item.IsDeleted == false
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .ToList();
@@ -208,8 +215,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.TacNghiep_YKienCoQuan
-                        where item.IsDeleted == false
-                        select item)
+                                  where item.IsDeleted == false
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()
@@ -225,9 +232,9 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.TacNghiep_YKienCoQuan
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select item)
+                            where item.IsDeleted == false &&
+                                  item.Id == id
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .Single();
@@ -242,8 +249,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.TacNghiep_YKienCoQuan
-                        where item.IsDeleted == false && item.Id == id
-                        select item)
+                                  where item.IsDeleted == false && item.Id == id
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()

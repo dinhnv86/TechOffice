@@ -6,6 +6,8 @@
 
         public int CoQuanId { get; set; }
 
+        public string Guid { get; set; }
+
         public string NoiDung { get; set; }
     }
 }
