@@ -62,6 +62,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
             model.ValueSearch.NhomCoquanId = nhomCoquanId;
             model.ValueSearch.CoQuanId = coQuanId;
+            model.ValueSearch.LinhVucTacNghiepId = linhVucTacNghiepId;
             model.ValueSearch.MucDoHoanThanhId = mucDoHoanThanhId;
             model.ValueSearch.NamBanHanhId = namBanHanhId;
             model.ValueSearch.NhapThongTinTimKiem = nhapThongTinTimKiem;
@@ -283,7 +284,9 @@ namespace AnThinhPhat.WebUI.Controllers
             }
             result.ToList().ForEach(x =>
             {
-                //GetPathFikles()
+                //Get files by yKienCoQuanId
+                string path = EnsureFolderTacNghiepWithCoQuan(x.TacNghiepId, x.Id);
+                x.JsonFiles = GetPathFiles(path);
             });
 
             var model = new InitNoiDungYKienCuaCacCoQuanViewModel
@@ -552,7 +555,7 @@ namespace AnThinhPhat.WebUI.Controllers
             string json = string.Empty;
             foreach (string file in files)
             {
-                json += "<a href=" + Url.Action("DownloadFile", new { path = path, file = Path.GetFileName(file) }) + ">" + Path.GetFileName(file) + "</a>" + "<br/>";
+                json += "<a href=" + Url.Action("DownloadFile", "File", new { path = path, file = Path.GetFileName(file) }) + ">" + Path.GetFileName(file) + "</a>" + "<br/>";
             }
             return json;
         }

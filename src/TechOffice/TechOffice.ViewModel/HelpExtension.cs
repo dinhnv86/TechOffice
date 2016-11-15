@@ -6,6 +6,8 @@ using AnThinhPhat.Entities.Results;
 using AnThinhPhat.ViewModel.CoQuan;
 using AnThinhPhat.ViewModel.Users;
 using AnThinhPhat.ViewModel.TacNghiep;
+using System.Security.Principal;
+using System.Security.Claims;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -88,7 +90,7 @@ namespace AnThinhPhat.ViewModel
                     Id = entity.Id,
                     UserName = entity.UserName,
                     ChucVuId = entity.ChucVuId,
-                    CoQuanId=entity.CoQuanId,
+                    CoQuanId = entity.CoQuanId,
                     HoVaTen = entity.FullName,
                     UserRoles = entity.RoleInfos
                         .Where(x => x.IsChecked)
@@ -161,6 +163,13 @@ namespace AnThinhPhat.ViewModel
             return entity == null
                 ? string.Empty
                 : func(entity);
+        }
+
+        public static string FullName(this IIdentity identity)
+        {
+            ClaimsIdentity claims = (ClaimsIdentity)identity;
+
+            return claims.Claims.Where(x => x.Type == ClaimTypes.Surname).Select(x => x.Value).FirstOrDefault();
         }
     }
 }

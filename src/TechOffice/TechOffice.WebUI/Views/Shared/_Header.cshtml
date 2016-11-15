@@ -27,11 +27,20 @@
                 using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a>@Html.Encode(User.Identity.Name)</a></li>
                         @if (User.IsInRole("Admin"))
                         {
-                            <li><a href="@Url.Action("Index", "Admin")"><span class="glyphicon glyphicon-lock"></span>Admin</a></li>
+                            <li>
+                                <a href="@Url.Action("Index", "Admin")">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                    @Html.Encode(User.Identity.FullName())
+                                </a>
+                            </li>
                         }
+                        else
+                        {
+                            <li><a>@Html.Encode(User.Identity.FullName())</a></li>
+                        }
+
                         <li>
                             <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
                         </li>

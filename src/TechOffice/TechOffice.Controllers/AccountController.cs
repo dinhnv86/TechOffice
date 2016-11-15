@@ -56,15 +56,17 @@ namespace AnThinhPhat.WebUI.Controllers
                     {
                         //Get all role of current user login
                         var userRoleInfo = UserRoleRepository.GetRolesByUserId(userLogin.Id);
-                        var roles =
-                            userRoleInfo.Select(x => x.RoleInfo.Name).Aggregate((current, next) => current + ", " + next);
+                        //var roles =
+                        //    userRoleInfo.Select(x => x.RoleInfo.Name).Aggregate((current, next) => current + ", " + next);
+
+                        var role = userRoleInfo.Select(x => new Claim(ClaimTypes.Role, x.RoleInfo.Name));
+
                         var identities = new ClaimsIdentity(new[]
                         {
                             new Claim(ClaimTypes.NameIdentifier,userLogin.Id.ToString()),
                             new Claim(ClaimTypes.Name, userLogin.UserName),
-                            new Claim(ClaimTypes.Role, roles),
-                            new Claim(ClaimTypes.Email, user.UserName)
-                        }, "ApplicationCookie", ClaimTypes.Name, ClaimTypes.Role);
+                            new Claim(ClaimTypes.Surname, userLogin.HoVaTen)
+                        }.Concat(role), "ApplicationCookie", ClaimTypes.Name, ClaimTypes.Role);
 
                         AuthenticationManager.SignIn(identities);
 
