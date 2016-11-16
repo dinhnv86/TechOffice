@@ -14,6 +14,9 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public ITapTinYKienCoQuanRepository TapTinYKienCoQuanRepository { get; set; }
 
+        [Inject]
+        public ITacNghiepTinhHinhThucHienRepository TacNghiepTinhHinhThucHienRepository { get; set; }
+
         [HttpGet]
         public FilePathResult DownloadFile(string path, string file)
         {
@@ -68,6 +71,7 @@ namespace AnThinhPhat.WebUI.Controllers
         /// <param name="tacNghiepId">Id tac nghiep</param>
         /// <param name="coQuanId">Id Co quan</param>
         /// <returns></returns>
+        [Authorize]
         [HttpPost]
         public ContentResult FilesAttachNoiDungYKien(int id, int tacNghiepId, int coQuanId)
         {
@@ -92,6 +96,12 @@ namespace AnThinhPhat.WebUI.Controllers
                         Url = Path.Combine(folder, Path.GetFileName(hpf.FileName)),
                     });
                 }
+
+                ExecuteWithLog(() =>
+                {
+                    //Update Status MucDoHoanThanh
+                    TacNghiepTinhHinhThucHienRepository.UpdateIncrementMucDoHoanThanh(tacNghiepId, coQuanId, UserName, Utilities.Enums.EnumMucDoHoanThanh.DANGTHUCHIEN);
+                });
 
                 // Returns json
                 string json = GetPathFiles(folder);

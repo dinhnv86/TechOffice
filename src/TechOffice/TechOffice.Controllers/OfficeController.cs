@@ -170,6 +170,21 @@ namespace AnThinhPhat.WebUI.Controllers
             return RedirectToRoute(Utilities.UrlLink.ERROR_NOTFOUND404);
         }
 
+        protected void ExecuteWithLog(Action action)
+        {
+            if (action != null)
+            {
+                try
+                {
+                    action();
+                }
+                catch (Exception ex)
+                {
+                    LogService.Error(ex);
+                }
+            }
+        }
+
         protected UserResult AuthInfo()
         {
             return UserRepository.Single(UserId);

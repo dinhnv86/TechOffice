@@ -7,6 +7,7 @@ using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
+using AnThinhPhat.Utilities.Enums;
 
 namespace AnThinhPhat.Services.Implements
 {
@@ -314,6 +315,47 @@ namespace AnThinhPhat.Services.Implements
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .ToList();
+                }
+            });
+        }
+
+        public SaveResult UpdateIncrementMucDoHoanThanh(int tacNghiepId, int coQuanId, string userName, EnumMucDoHoanThanh status)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var update = context.TacNghiep_TinhHinhThucHien.Where(x => x.TacNghiepId == tacNghiepId
+                    && x.CoQuanId == coQuanId
+                    && x.IsDeleted == false).FirstOrDefault();
+
+                    if (update == null)//case not yet record data then insert 
+                    {
+                        update = new TacNghiep_TinhHinhThucHien
+                        {
+                            CoQuanId = coQuanId,
+                            TacNghiepId = tacNghiepId,
+                            CreatedBy = userName,
+                            CreateDate = DateTime.Now,
+                            IsDeleted = false,
+                            MucDoHoanThanhId = (int)status,
+                        };
+
+                        context.Entry(update).State = EntityState.Added;
+                    }
+                    else
+                    {
+                        if (update.MucDoHoanThanhId <= (int)status)
+                            return SaveResult.SUCCESS;
+
+                        update.MucDoHoanThanhId = (int)status;
+                        update.LastUpdatedBy = userName;
+                        update.LastUpdated = DateTime.Now;
+
+                        context.Entry(update).State = EntityState.Modified;
+                    }
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
         }

@@ -60,9 +60,8 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-12">
-            @if (Model.IsShowResult)
+    <div class="col-xs-12">
+        @if (Model.IsShowResult)
             {
                 if (Model.TypeStatistic == "T01")
                 {
@@ -73,7 +72,6 @@
                     Html.RenderAction("StatisticCoQuan", Model.ValueSearch);
                 }
             }
-        </div>
     </div>
 </div>
 

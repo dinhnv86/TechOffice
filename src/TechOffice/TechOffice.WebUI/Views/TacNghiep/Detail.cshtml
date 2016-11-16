@@ -1,4 +1,5 @@
 ﻿@using AnThinhPhat.ViewModel.TacNghiep;
+@using AnThinhPhat.WebUI.Helpers;
 
 @model DetailTacNghiepViewModel
 
@@ -25,68 +26,72 @@
 
     <div class="col-sm-6">
         <label>Ngày hết hạn</label>
-        @Html.DisplayFor(x => x.NgayHetHan, "DateTime")
+        @Html.TechShowFor(x => Model.NgayHetHan, "DateTime", !Model.IsRoleAdmin)
         @Html.ValidationMessageFor(x => x.NgayHetHan)
     </div>
 
     <div class="col-sm-6">
         <label>Ngày hoàn thành</label>
-        @Html.DisplayFor(x => x.NgayHoanThanh, "DateTime")
+        @Html.TechShowFor(x => Model.NgayHoanThanh, "DateTime", !Model.IsRoleAdmin)
     </div>
 
     <div class="col-sm-6">
         <label>Lĩnh vực</label>
-        @Html.TextBoxFor(x => x.LinhVucString, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+        @*@Html.TextBoxFor(x => x.LinhVucTacNghiepId, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })*@
+        @Html.TechDropDownListFor(x => Model.LinhVucTacNghiepId, new SelectList(Model.LinhVucTacNghiepInfo, "Id", "Name"), htmlAttributes: new { @class = "form-control" }, disabled: !Model.IsRoleAdmin)
     </div>
 
     <div class="col-md-12">
         <label>Nội dung</label>
-        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 3, @readonly = "readonly" })
+        @Html.TechTextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 3 }, disabled: !Model.IsRoleAdmin)
     </div>
 
-    <div class="col-sm-12 table-responsive" style="padding:30px 15px 15px 15px;">
-        <label>Các cơ quan có liên quan</label>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th class="col-sm-10">Tên cơ quan</th>
-                    <th class="col-sm-2">Có liên quan</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.CoQuanInfos)
-                {
+    @Html.TechShowFor(x => Model.NhomCoQuanCoLienQuanInfo, "GroupListBodies", !Model.IsRoleAdmin)
+
+    @*<div class="col-sm-12 table-responsive" style="padding:30px 15px 15px 15px;">
+            <label>Các cơ quan có liên quan</label>
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
-                        <td>
-                            <input type="checkbox" value="true" checked="checked" disabled="disabled" />
-                        </td>
+                        <th class="col-sm-10">Tên cơ quan</th>
+                        <th class="col-sm-2">Có liên quan</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    @Html.EditorFor(x => x.CoQuanInfos, "CoQuanLienQuan")
+                </tbody>
+            </table>
+        </div>*@
 
     <div class="col-md-12" style="padding-bottom:30px;">
         <label>Nội dung ý kiên trao đổi</label>
-        @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 })
+        @Html.TechTextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 }, disabled: !Model.IsRoleAdmin)
     </div>
 
+    <label class="col-sm-12">Các tập tin đính kèm</label>
     <div class="col-sm-12">
-        <label>Các tập tin đính kèm</label>
+        <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
+        <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
+            <span class="glyphicon glyphicon-upload"></span>
+            Upload
+        </button>
         <div style="padding-bottom:30px;">
-            @Html.Raw(Model.JsonFiles)
+            <span class="col-xs-12" id="spanUpload">
+            </span>
+            <div id="filesName">
+                @Html.Raw(Model.JsonFiles)
+            </div>
         </div>
     </div>
 
     <div class="col-sm-12" id="formYKienCoQuan">
         <label>Nội dung ý kiến của các cơ quan</label>
-        @{ Html.RenderAction("NoiDungYKienCuaCacCoQuan", new { id = Model.Id });}
+        @{ Html.RenderAction("NoiDungYKienCuaCacCoQuan", new { id = Model.Id }); }
     </div>
 
     <div class="col-sm-12">
         <label>Tình hình thực hiện công việc của các cơ quan</label>
-        @{ Html.RenderAction("TinhHinhThucHien", new { id = Model.Id });}
+        @{ Html.RenderAction("TinhHinhThucHien", new { id = Model.Id }); }
     </div>
 </div>
 
@@ -110,6 +115,31 @@
 
     <script>
         $(document).ready(function () {
+
+            var optionCalendar =
+             {
+                 autoSize: true,
+                 constrainInput: true,
+                 minDate: 0,
+                 dateFormat: 'dd/mm/yy'
+             };
+            $('.control-datepicker').datepicker(optionCalendar);
+
+            $.validator.addMethod('date',
+            function (value, element) {
+                if (this.optional(element)) {
+                    return true;
+                }
+
+                var ok = true;
+                try {
+                    $.datepicker.parseDate('dd/mm/yy', value);
+                }
+                catch (err) {
+                    ok = false;
+                }
+                return ok;
+            });
 
             $('#modalEditBody').height(260);
 
@@ -151,7 +181,6 @@
                 alert("Đã xảy ra lỗi trong quá trình cập nhật. Xin vui lòng thử lại");
             };
 
-
             $('#formYKienCoQuan').on('change', 'input[type="file"]', function (e) {
                 $('#spanUpload').text('');
                 var files = e.originalEvent.target.files;
@@ -160,6 +189,54 @@
                 }
                 else {
                     $(this).next().attr('disabled', 'disabled');
+                }
+            });
+
+            //Upload files
+            $('input[type="file"]').change(function (e) {
+                $('#spanUpload').text('');
+                var files = e.originalEvent.target.files;
+                if (files.length > 0) {
+                    $(this).next().removeAttr('disabled');
+                }
+                else {
+                    $(this).next().attr('disabled', 'disabled');
+                }
+            });
+
+            $('#btnUpload').on('click', function (e) {
+                alert('thiett');
+                if (window.FormData !== undefined) {
+                    var ajaxRequest = $.ajax({
+                        type: "POST",
+                        processData: false,
+                        contentType: false,
+                        url: '@Url.Action("FilesAttach", "File")' + '?guid=' + 'TN\\@Model.Id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER,TechOfficeConfig.PADDING_CHAR)' + '&type=1',
+                        data: function () {
+                            var formData = new FormData();
+                            var files = $('#filesUpload').get(0).files;
+                            if (files.length > 0) {
+                                for (var i = 0; i < files.length; i++) {
+                                    formData.append("file" + i, files[i]);
+                                }
+                            }
+                            return formData;
+                        }()
+                    });
+
+                    ajaxRequest.success(function (e, data) {
+                        $('#filesName').html(e);
+                        $('#btnUpload').attr('disabled', 'disabled');
+                        $('#spanUpload').text('Upload file successfully');
+                    });
+                    ajaxRequest.error(function () {
+                        alert('Has Error in while upload file');
+                    });
+                    ajaxRequest.always(function () {
+                    });
+                }
+                else {
+                    alert("This browser doesn't support HTML5 file uploads!");
                 }
             });
         });

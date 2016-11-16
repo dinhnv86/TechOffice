@@ -63,7 +63,7 @@
         @Html.TextBoxFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control"})
     </div>
 
-    { Html.RenderPartial("_PartialPageGroupListBodies", new InitNhomCoQuanCoLienQuanBindDataTemp { ParentNameSpace = "CoQuanInfos", CoQuanInfos = Model.CoQuanInfos }); }
+    { Html.RenderPartial("_PartialPageGroupListBodies", new InitNhomCoQuanCoLienQuanBindDataTemp { ParentNameSpace = "CoQuanInfos", NhomCoQuanInfos = Model.CoQuanInfos }); }
 
     <div class="col-md-12">
         <label>Nội dung ý kiên trao đổi</label>

@@ -121,7 +121,7 @@ namespace AnThinhPhat.ViewModel
                 NgayTao = entity.NgayTao,
                 NoiDung = entity.NoiDung,
                 NoiDungTraoDoi = entity.NoiDungYKienTraoDoi,
-                CoQuanInfos = entity.CoQuanInfos.Select(x => x.CoQuanInfo.Where(y => y.IsSelected)).Aggregate((a, b) => { return a.Concat(b); }),
+                CoQuanInfos = entity.CoQuanInfos.Select(x => x.CoQuanInfos.Where(y => y.IsSelected)).Aggregate((a, b) => { return a.Concat(b); }),
             };
         }
 

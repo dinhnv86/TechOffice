@@ -6,6 +6,6 @@ namespace AnThinhPhat.ViewModel.TacNghiep
     {
         public string ParentNameSpace { get; set; }
 
-        public List<InitCoQuanCoLienQuan> CoQuanInfos { get; set; }
+        public List<InitCoQuanCoLienQuan> NhomCoQuanInfos { get; set; }
     }
 }

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppCipher.cs" />
+    <Compile Include="Enums\EnumMucDoHoanThanh.cs" />
     <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Exception\DeactivateUserException.cs" />
     <Compile Include="Exception\ExistUserException.cs" />

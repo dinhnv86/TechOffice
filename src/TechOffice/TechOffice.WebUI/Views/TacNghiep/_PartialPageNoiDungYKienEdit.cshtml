@@ -23,8 +23,8 @@
         @Html.TextAreaFor(x => x.NoiDung, htmlAttributes: new { @class = "form-control", rows = 5 })
     </div>
     <div class="col-xs-12">
-        <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
-        <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
+        <input type="file" id="filesUploadYKien" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
+        <button type="button" class="btn btn-primary" id="btnUploadFilesYKien" value="Upload" disabled="disabled" style="width:100px;">
             <span class="glyphicon glyphicon-upload"></span>
             Upload
         </button>
@@ -45,49 +45,55 @@
 
 <script>
 
-    $('input[type="file"]').on('change', function (e) {
-        $('#spanUpload').text('');
-        var files = e.originalEvent.target.files;
-        if (files.length > 0) {
-            $(this).next().removeAttr('disabled');
+    $(document).ready(function () {
+        uploadData = function () {
+            alert('sfsdf');
         }
-        else {
-            $(this).next().attr('disabled', 'disabled');
-        }
-    });
 
-    $('#btnUpload').on('click', function (e) {
-        if (window.FormData !== undefined) {
-            var ajaxRequest = $.ajax({
-                type: "POST",
-                processData: false,
-                contentType: false,
-                url: '@Url.Action("FilesAttachNoiDungYKien", "File")' + '?Id=' + '@Model.Id' + '&TacNghiepId=' + '@Model.TacNghiepId' + '&CoQuanId=' + '@Model.CoQuanId',
-                data: function () {
-                    var formData = new FormData();
-                    var files = $('#filesUpload').get(0).files;
-                    if (files.length > 0) {
-                        for (var i = 0; i < files.length; i++) {
-                            formData.append("file" + i, files[i]);
+        $('input[type="file"]').on('change', function (e) {
+            $('#spanUpload').text('');
+            var files = e.originalEvent.target.files;
+            if (files.length > 0) {
+                $(this).next().removeAttr('disabled');
+            }
+            else {
+                $(this).next().attr('disabled', 'disabled');
+            }
+        });
+
+        $('#btnUploadFilesYKien').on('click', function (e) {
+            if (window.FormData !== undefined) {
+                var ajaxRequest = $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    url: '@Url.Action("FilesAttachNoiDungYKien", "File")' + '?Id=' + '@Model.Id' + '&TacNghiepId=' + '@Model.TacNghiepId' + '&CoQuanId=' + '@Model.CoQuanId',
+                    data: function () {
+                        var formData = new FormData();
+                        var files = $('#filesUploadYKien').get(0).files;
+                        if (files.length > 0) {
+                            for (var i = 0; i < files.length; i++) {
+                                formData.append("file" + i, files[i]);
+                            }
                         }
-                    }
-                    return formData;
-                }()
-            });
+                        return formData;
+                    }()
+                });
 
-            ajaxRequest.success(function (e, data) {
-                //$('#filesName').html(e);
-                $('#btnUpload').attr('disabled', 'disabled');
-                $('#spanUpload').text('Upload file successfully');
-            });
-            ajaxRequest.error(function () {
-                alert('Has Error in while upload file');
-            });
-            ajaxRequest.always(function () {
-            });
-        }
-        else {
-            alert("This browser doesn't support HTML5 file uploads!");
-        }
+                ajaxRequest.success(function (e, data) {
+                    //$('#filesName').html(e);
+                    $('#btnUploadFilesYKien').attr('disabled', 'disabled');
+                    $('#spanUpload').text('Upload file successfully');
+                });
+                ajaxRequest.error(function () {
+                    alert('Has Error in while upload file');
+                });
+                ajaxRequest.always(function () {
+                });
+            }
+            else {
+                alert("This browser doesn't support HTML5 file uploads!");
+            }
+        });
     });
 </script>

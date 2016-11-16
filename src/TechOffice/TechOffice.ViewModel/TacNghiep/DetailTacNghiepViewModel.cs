@@ -22,8 +22,14 @@ namespace AnThinhPhat.ViewModel.TacNghiep
 
         public string NoiDungYKienTraoDoi { get; set; }
 
-        public string LinhVucString { get; set; }
+        public int LinhVucTacNghiepId { get; set; }
+
+        public IEnumerable<LinhVucTacNghiepInfo> LinhVucTacNghiepInfo { get; set; }
 
         public string JsonFiles { get; set; }
+
+        public bool IsRoleAdmin { get; set; }
+
+        public IEnumerable<InitCoQuanCoLienQuan> NhomCoQuanCoLienQuanInfo { get; set; }
     }
 }
