@@ -358,6 +358,55 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
+        public SaveResult EditUserWtithRoles(UserResult entity)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                var result = SaveResult.FAILURE;
+
+                using (var context = new TechOfficeEntities())
+                {
+                    using (var transaction = context.BeginTransaction())
+                    {
+                        var update = context.Users.Where(x => x.Id == entity.Id).Single();
+
+                        update.UserName = entity.UserName;
+                        update.IsLocked = entity.IsLocked;
+                        update.HoVaTen = entity.HoVaTen;
+                        update.ChucVuId = entity.ChucVuId;
+                        update.CoQuanId = entity.CoQuanId;
+
+                        update.IsDeleted = entity.IsDeleted;
+                        update.LastUpdatedBy = entity.LastUpdatedBy;
+                        update.LastUpdated = DateTime.Now;
+
+                        context.Entry(update).State = EntityState.Modified;
+
+                        //Remove all roles of user
+                        RemoveAllRolesOfUser(context, entity.Id);
+
+                        UserRole role;
+                        foreach (var item in entity.UserRoles)
+                        {
+                            role = context.UserRoles.Create();
+                            role.RoleId = item.RoleInfo.Id;
+                            role.UserId = update.Id;
+
+                            role.IsDeleted = entity.IsDeleted;
+                            role.CreatedBy = update.CreatedBy;
+                            role.CreateDate = update.CreateDate;
+
+                            context.Entry(role).State = EntityState.Added;
+                        }
+
+                        result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+
+                        transaction.Commit();
+                    }
+                }
+                return result;
+            });
+        }
         #endregion
 
         #region Implement Delete
@@ -762,5 +811,13 @@ namespace AnThinhPhat.Services.Implements
         }
 
         #endregion
+
+        private void RemoveAllRolesOfUser(TechOfficeEntities context, int userId)
+        {
+            context.UserRoles.Where(x => x.UserId == userId).ToList().ForEach(x =>
+            {
+                context.Entry<UserRole>(x).State = EntityState.Deleted;
+            });
+        }
     }
 }

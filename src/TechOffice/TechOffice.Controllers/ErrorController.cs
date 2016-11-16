@@ -2,6 +2,7 @@
 
 namespace AnThinhPhat.WebUI.Controllers
 {
+    [AllowAnonymous]
     public class ErrorController : Controller
     {
         [ActionName("NotFound")]

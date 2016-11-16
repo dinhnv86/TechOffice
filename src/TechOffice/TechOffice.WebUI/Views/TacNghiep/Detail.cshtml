@@ -41,7 +41,7 @@
 
     <div class="col-md-12">
         <label>Nội dung</label>
-        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows =3, @readonly = "readonly" })
+        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 3, @readonly = "readonly" })
     </div>
 
     <div class="col-sm-12 table-responsive" style="padding:30px 15px 15px 15px;">
@@ -55,11 +55,11 @@
             </thead>
             <tbody>
                 @foreach (var item in Model.CoQuanInfos)
-            {
+                {
                     <tr>
                         <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
                         <td>
-                            <input type="checkbox" value="true" checked="checked" />
+                            <input type="checkbox" value="true" checked="checked" disabled="disabled" />
                         </td>
                     </tr>
                 }
@@ -69,7 +69,7 @@
 
     <div class="col-md-12" style="padding-bottom:30px;">
         <label>Nội dung ý kiên trao đổi</label>
-        @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10})
+        @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 })
     </div>
 
     <div class="col-sm-12">

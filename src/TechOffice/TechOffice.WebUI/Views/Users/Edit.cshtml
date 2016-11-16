@@ -24,7 +24,7 @@
             Thành công!
         </strong>
         @*Record have added to successfully.*@
-        Thêm người dùng thành công
+        Chỉnh sửa người dùng thành công
     </div>
 
     <div class="alert alert-danger" role="alert" id="danger-alert" style="display:none">
@@ -32,12 +32,13 @@
             <span aria-hidden="true">&times;</span>
         </button>
         <strong>Thất bại!</strong>
-        Thêm người dùng thất bại
+        Chỉnh sửa người dùng thất bại
     </div>
     @*END ADD REQUEST*@
 </div>
 
 <link href="~/Content/app/loading.css" rel="stylesheet" />
+
 @using (Ajax.BeginForm(ajaxOption))
 {
     <div class="row">
@@ -81,7 +82,7 @@
             </div>
 
             <div id="outer">
-                <div class="inner"> <input type="submit" value="Tạo tài khoản" class="btn btn-primary btn-width-md" id="btnSaveSubmit" name="saveType" /></div>
+                <div class="inner"> <input type="submit" value="Cập nhật" class="btn btn-primary btn-width-md" id="btnSaveSubmit" name="saveType" /></div>
                 <div class="inner">@Html.RouteLink("Hủy bỏ", UrlLink.USERS, null, htmlAttributes: new { @class = "btn btn-default btn-width-md cancel" })</div>
             </div>
         </div>
@@ -91,6 +92,7 @@
 @section Scripts{
     <script src="~/Scripts/jquery-1.12.4.js"></script>
     <script src="~/Scripts/app/modaljs.js"></script>
+
     <script type="text/javascript" src="~/Scripts/app/user-update.js">
     </script>
 }

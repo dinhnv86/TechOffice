@@ -272,7 +272,9 @@
     <Content Include="images\tongdai.png" />
     <Content Include="Scripts\app\datepickerjs.js" />
     <Content Include="Scripts\app\menuslidejs.js" />
+    <Content Include="Scripts\app\message.js" />
     <Content Include="Scripts\app\modaljs.js" />
+    <Content Include="Scripts\app\user-update.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -405,6 +407,10 @@
     <Content Include="Views\TacNghiep\_PartialPageStatisticCoQuan.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageNoiDungYKienEdit.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageNoiDungYKienAdd.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\CoQuan\Edit.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CoQuanLienQuan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

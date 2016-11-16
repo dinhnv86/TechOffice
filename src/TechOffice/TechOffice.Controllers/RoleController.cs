@@ -11,7 +11,7 @@ using PagedList;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
-    //[Authorize]
+    [Authorize(Roles = RoleConstant.SUPPER_ADMIN + TechOfficeConfig.SEPARATE_CHAR + RoleConstant.ADMIN)]
     public class RoleController : OfficeController
     {
         [Inject]

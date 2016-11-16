@@ -1,16 +1,15 @@
-﻿using System;
+﻿using AnThinhPhat.Entities.Results;
+using AnThinhPhat.Services;
+using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Utilities;
+using Microsoft.Owin.Security;
+using Ninject;
+using System;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using AnThinhPhat.Services;
-using AnThinhPhat.Utilities;
-using Microsoft.Owin.Security;
-using Ninject;
-using AnThinhPhat.Services.Abstracts;
-using AnThinhPhat.Entities.Infos;
-using AnThinhPhat.Entities.Results;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -32,9 +31,6 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             get
             {
-#if DEBUG
-                return "admin";
-#endif
                 var claim = User as ClaimsPrincipal;
                 if (claim != null)
                     return claim.FindFirst(ClaimTypes.Name).Value;
@@ -42,7 +38,7 @@ namespace AnThinhPhat.WebUI.Controllers
             }
         }
 
-        protected string UserId
+        protected int UserId
         {
             get
             {
@@ -51,8 +47,9 @@ namespace AnThinhPhat.WebUI.Controllers
                 //#endif
                 var claim = User as ClaimsPrincipal;
                 if (claim != null)
-                    return claim.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return string.Empty;
+                    return claim.FindFirst(ClaimTypes.NameIdentifier).Value.ParseInt32();
+
+                throw new Exception("Can't convert value to Int32 type");
             }
         }
 
@@ -175,7 +172,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
         protected UserResult AuthInfo()
         {
-            return UserRepository.Single(Convert.ToInt32(UserId));
+            return UserRepository.Single(UserId);
         }
 
         private void CheckModelState()

@@ -278,10 +278,12 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             var result = YKienCoQuanRepository.GetAll().Where(x => x.TacNghiepId == id);
             var user = AuthInfo();
-            if (!User.IsInRole("Admin"))
+
+            if (!User.IsInRole(RoleConstant.ADMIN) || !User.IsInRole(RoleConstant.SUPPER_ADMIN))
             {
                 result = result.Where(x => x.CoQuanId == user.CoQuanId);
             }
+
             result.ToList().ForEach(x =>
             {
                 //Get files by yKienCoQuanId
@@ -323,7 +325,6 @@ namespace AnThinhPhat.WebUI.Controllers
         public PartialViewResult EditYKien(int id)//id y kien cua cac co quan
         {
             var model = YKienCoQuanRepository.Single(id);
-            //var model = new EditNoiDungYKienCuaCoQuan();
             return PartialView("_PartialPageNoiDungYKienEdit", model);
         }
 
@@ -444,7 +445,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             try
             {
-                string folderTemp = Path.Combine(Server.MapPath("~/Uploads"), guid);
+                string folderTemp = Path.Combine(Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD), guid);
 
                 if (Directory.Exists(folderTemp) && Directory.GetFiles(folderTemp).Count() > 0)
                 {
@@ -469,7 +470,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             try
             {
-                string folderTemp = Path.Combine(Server.MapPath("~/Uploads"), guid);
+                string folderTemp = Path.Combine(Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD), guid);
 
                 if (Directory.Exists(folderTemp) && Directory.GetFiles(folderTemp).Count() > 0)
                 {
@@ -495,7 +496,7 @@ namespace AnThinhPhat.WebUI.Controllers
             TapTinTacNghiepRepository.Add(new TapTinTacNghiepResult
             {
                 TacNghiepId = tacNghiepId,
-                UserUploadId = Convert.ToInt32(UserId),
+                UserUploadId = UserId,
                 Url = url,
                 CreatedBy = UserName,
             });
@@ -508,7 +509,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 YKienCoQuanId = yKienCoQuanId,
                 Url = url,
                 CreatedBy = UserName,
-                UserUploadId = Convert.ToInt32(UserId),
+                UserUploadId = UserId,
             });
         }
 
@@ -516,7 +517,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             string folderTT = EnsureFolderTacNghiep(tacNghiepId);
 
-            string folderUser = Path.Combine(folderTT, UserId.PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
+            string folderUser = Path.Combine(folderTT, UserId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
             EnsureFolder(folderUser);
 
             return folderUser;
@@ -526,7 +527,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             string folderTT = EnsureFolderTacNghiep(tacNghiepId);
 
-            string folderCoQuan = Path.Combine(folderTT, yKienCoQuanId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
+            string folderCoQuan = Path.Combine(folderTT, yKienCoQuanId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
             EnsureFolder(folderCoQuan);
 
             return folderCoQuan;
@@ -534,10 +535,10 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private string EnsureFolderTacNghiep(int tacNghiepId)
         {
-            string folderParentTN = Server.MapPath(TechOfficeConfig.UPLOAD_TACNGHIEP);
+            string folderParentTN = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_TACNGHIEP);
             EnsureFolder(folderParentTN);
 
-            string folderTN = Path.Combine(folderParentTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
+            string folderTN = Path.Combine(folderParentTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
             EnsureFolder(folderTN);
 
             return folderTN;

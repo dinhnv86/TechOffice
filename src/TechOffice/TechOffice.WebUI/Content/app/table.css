@@ -19,3 +19,13 @@ table > thead > tr {
     height: 28px !important;
     margin-top: -1px !important;
 }
+
+th.col-stt {
+    width: 40px;
+    max-width: 40px;
+}
+
+th.col-action {
+    width: 140px;
+    max-width: 140px;
+}

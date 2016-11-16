@@ -13,6 +13,7 @@ using PagedList;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
+    [Authorize(Roles = (RoleConstant.SUPPER_ADMIN + TechOfficeConfig.SEPARATE_CHAR + RoleConstant.ADMIN))]
     public class CoQuanController : OfficeController
     {
         [Inject]
@@ -24,7 +25,7 @@ namespace AnThinhPhat.WebUI.Controllers
         public ActionResult Index()
         {
             var nhom = NhomCoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
-            var model = new CoQuanViewModel {NhomCoQuanInfos = nhom};
+            var model = new CoQuanViewModel { NhomCoQuanInfos = nhom };
 
             return View(model);
         }
@@ -37,11 +38,11 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult List(int? page)
         {
-            var nhom = NhomCoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
+            var nhom = NhomCoQuanRepository.GetAll().Select(x => x.ToDataInfo());
             var items = CoQuanRepository.GetAll().Select(x => x.ToDataViewModel().Update(u =>
             {
                 u.NhomCoQuanInfos = nhom;
-                u.NhomCoQuanInfo = NhomCoQuanRepository.Single(x.NhomCoQuanId).ToIfNotNullDataInfo();
+                u.NhomCoQuanInfo = NhomCoQuanRepository.Single(x.NhomCoQuanId).ToDataInfo();
             })).ToList();
 
             var pageNumber = page ?? 1;
@@ -66,9 +67,13 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult Edit(int id)
         {
-            var data = CoQuanRepository.Single(id).ToDataViewModel();
+            var nhom = NhomCoQuanRepository.GetAll().Select(x => x.ToDataInfo());
+            var data = CoQuanRepository.Single(id).ToDataViewModel().Update(u =>
+            {
+                u.NhomCoQuanInfos = nhom;
+            });
 
-            return PartialView("_PartialPageBaseDataEdit", data);
+            return PartialView("Edit", data);
         }
 
         public async Task<JsonResult> Edit(int id, BaseDataViewModel model)
@@ -92,7 +97,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 if (id == 0)
                 {
-                    Response.StatusCode = (int) HttpStatusCode.BadRequest;
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     return Json("Bad Request", JsonRequestBehavior.AllowGet);
                 }
 

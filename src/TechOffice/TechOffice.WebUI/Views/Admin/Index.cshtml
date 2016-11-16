@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<ul>
+    <li>
+        @Html.RouteLink("Tài khoản người dùng", UrlLink.USERS, null, htmlAttributes: new { @class = "btn btn-link" })
+    </li>
+    <li>
+        @Html.RouteLink("Chức vụ", UrlLink.CHUCVU, null, htmlAttributes: new { @class = "btn btn-link" })
+    </li>
+    <li>
+        @Html.RouteLink("Nhóm cơ quan", UrlLink.NHOMCOQUAN, null, htmlAttributes: new { @class = "btn btn-link" })
+    </li>
+    <li>
+        @Html.RouteLink("Cơ quan", UrlLink.COQUAN, null, htmlAttributes: new { @class = "btn btn-link" })
+    </li>
+    <li>
+        @Html.RouteLink("Lĩnh vực văn bản", UrlLink.LINHVUCVANBAN, null, htmlAttributes: new { @class = "btn btn-link" })
+    </li>
+    <li>
+        @Html.RouteLink("Lĩnh vực công việc", UrlLink.LINHVUCCONGVIEC, null, htmlAttributes: new { @class = "btn btn-link" })
+    </li>
+    <li>
+        @Html.RouteLink("Lĩnh vực thủ tục", UrlLink.LINHVUCTHUTUC, null, htmlAttributes: new { @class = "btn btn-link" })
+    </li>
+    <li>
+        @Html.RouteLink("Lĩnh vực tác nghiệp", UrlLink.LINHVUCTACNGHIEP, null, htmlAttributes: new { @class = "btn btn-link" })
+    </li>
+    <li>
+        @Html.RouteLink("Lĩnh vực loại văn bản", UrlLink.LOAIVANBAN, null, htmlAttributes: new { @class = "btn btn-link" })
+    </li>
+    <li>
+        @Html.RouteLink("Mức độ hoàn thành", UrlLink.MUCDOHOANTHANH, null, htmlAttributes: new { @class = "btn btn-link" })
+    </li>
+</ul>

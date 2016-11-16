@@ -2553,7 +2553,7 @@ border:1px solid #3b3b3b ! important; color:#fff
 .logo_head {
     float: left;
     padding: 20px;
-    width: 50%;
+    /*width: 50%;*/
 }
 
 .search_head {

@@ -111,6 +111,19 @@ namespace AnThinhPhat.WebUI
              new { controller = "MucDoHoanThanh", action = "Index" });
             //===========================================CRUD DATA=======================================//
 
+            routes.MapRoute(UrlLink.ADMIN, UrlLink.ADMIN,
+            new { controller = "Admin", action = "Index" });
+
+            routes.MapRoute(UrlLink.USERS, UrlLink.USERS,
+            new { controller = "Users", action = "Index" });
+
+            routes.MapRoute(UrlLink.USERS_ADD, UrlLink.USERS_ADD,
+            new { controller = "Users", action = "Create" });
+
+            routes.MapRoute(UrlLink.USERS_EDIT, UrlLink.USERS_EDIT,
+            new { controller = "Users", action = "Edit" },
+            new { id = @"\d+" });
+
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }

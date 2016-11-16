@@ -77,7 +77,7 @@ namespace AnThinhPhat.ViewModel
                     Id = entity.Id,
                     Name = entity.Ten,
                     Display = entity.Display,
-                    IsChecked = false
+                    IsChecked = entity.IsChecked
                 };
         }
 

@@ -11,6 +11,7 @@ using PagedList;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
+    [Authorize(Roles = (RoleConstant.SUPPER_ADMIN + TechOfficeConfig.SEPARATE_CHAR + RoleConstant.ADMIN))]
     public class NhomCoQuanController : OfficeController
     {
         [Inject]
@@ -75,7 +76,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 if (id == 0)
                 {
-                    Response.StatusCode = (int) HttpStatusCode.BadRequest;
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     return Json("Bad Request", JsonRequestBehavior.AllowGet);
                 }
 

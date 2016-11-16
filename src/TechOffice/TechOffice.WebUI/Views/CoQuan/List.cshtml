@@ -10,19 +10,18 @@
         HttpMethod = "GET"
     };
 }
-<link href="~/Content/main.css" rel="stylesheet" />
 
-<div id="tblMST" class="table-responsive">
+<div id="tblMST">
     <table class="table table-bordered">
         <thead class="header">
             <tr>
-                <th class="text-center">STT</th>
-                <th class="text-center">Tên</th>
-                <th class="text-center">Trực thuộc</th>
-                <th class="text-center">Mô tả</th>
-                <th class="text-center">Người cập nhật</th>
-                <th class="text-center">Ngày cập nhật </th>
-                <th class="text-center"></th>
+                <th class="text-center col-stt">STT</th>
+                <th class="text-center col-xs-2">Tên</th>
+                <th class="text-center col-xs-2">Trực thuộc</th>
+                <th class="text-center col-xs-3">Mô tả</th>
+                <th class="text-center col-xs-2">Người cập nhật</th>
+                <th class="text-center col-xs-1">Ngày cập nhật </th>
+                <th class="text-center col-action"></th>
             </tr>
         </thead>
         @if (Model.Count > 0)
@@ -64,16 +63,16 @@
                     </tr>
                 }
             </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="7">
-                            <div id="contentPager" class="pull-right">
-                                @Html.PagedListPager(Model, page => Url.Action("List", new { page }),
+            <tfoot>
+                <tr>
+                    <td colspan="7">
+                        <div id="contentPager" class="pull-right">
+                            @Html.PagedListPager(Model, page => Url.Action("List", new { page }),
                             PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxPaging))
-                            </div>
-                        </td>
-                    </tr>
-                </tfoot>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
         }
         else
         {
@@ -85,10 +84,3 @@
         }
     </table>
 </div>
-
-<script>
-    try {
-        onRegisterPopover();
-    } catch (err) {
-    };
-</script>

@@ -2,6 +2,10 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-@Html.ActionLink("Thêm tài khoản", "Create", "Users", null, htmlAttributes: new { @class = "btn btn-link" })
+<div class="row">
+    <h2>Danh sách người dùng trong hệ thống</h2>
 
-@Html.Action("List")
+    @Html.RouteLink("Thêm tài khoản", UrlLink.USERS_ADD, null, htmlAttributes: new { @class = "btn btn-link" })
+
+    @Html.Action("List")
+</div>

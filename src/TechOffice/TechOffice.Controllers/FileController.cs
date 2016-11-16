@@ -1,15 +1,11 @@
-﻿using AnThinhPhat.Utilities;
+﻿using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Utilities;
 using Ninject;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
 using System.IO;
 using System.Net;
-using AnThinhPhat.Services.Abstracts;
+using System.Web;
+using System.Web.Mvc;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -21,7 +17,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public FilePathResult DownloadFile(string path, string file)
         {
-            string folder = System.IO.Path.Combine(Server.MapPath("~/Uploads"), path, file);
+            string folder = Path.Combine(Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD), path, file);
             return File(folder, System.Net.Mime.MediaTypeNames.Application.Octet, file);
         }
 
@@ -53,7 +49,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 }
 
                 // Returns json
-                var json = GetPathFilesTemp(guid);
+                var json = GetPathFiles(guid);
 
                 return Content(json, "application/html");
             }
@@ -91,19 +87,14 @@ namespace AnThinhPhat.WebUI.Controllers
                     TapTinYKienCoQuanRepository.Add(new Entities.Results.TapTinYKienCoQuanResult
                     {
                         YKienCoQuanId = id,
-                        UserUploadId = Convert.ToInt32(UserId),
+                        UserUploadId = UserId,
                         CreatedBy = UserName,
                         Url = Path.Combine(folder, Path.GetFileName(hpf.FileName)),
                     });
                 }
 
                 // Returns json
-                var files = Directory.GetFiles(Path.Combine(folder));
-                string json = string.Empty;
-                foreach (string file in files)
-                {
-                    json += "<a href=" + Url.Action("DownloadFile", new { path = folder, file = Path.GetFileName(file) }) + ">" + Path.GetFileName(file) + "</a>" + "<br/>";
-                }
+                string json = GetPathFiles(folder);
 
                 return Content(json, "application/html");
             }
@@ -152,7 +143,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             string folderTN = EnsureFolderTacNghiep(tacNghiepId);
 
-            string folderCQ = Path.Combine(folderTN, coQuanId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
+            string folderCQ = Path.Combine(folderTN, coQuanId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
             EnsureFolder(folderCQ);
 
             return folderCQ;
@@ -163,7 +154,7 @@ namespace AnThinhPhat.WebUI.Controllers
             try
             {
                 //1. Get folder upload
-                string folderUpload = Server.MapPath("~/Uploads");
+                string folderUpload = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD);
                 EnsureFolder(folderUpload);
 
                 string folderTemp = Path.Combine(folderUpload, guid);
@@ -180,22 +171,22 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private string EnsureFolderTacNghiep(int tacNghiepId)
         {
-            string folderParentTN = Server.MapPath(TechOfficeConfig.UPLOAD_TACNGHIEP);
+            string folderParentTN = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_TACNGHIEP);
             EnsureFolder(folderParentTN);
 
-            string folderTN = Path.Combine(folderParentTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, '0'));
+            string folderTN = Path.Combine(folderParentTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
             EnsureFolder(folderTN);
 
             return folderTN;
         }
 
-        private string GetPathFilesTemp(string guid)
+        private string GetPathFiles(string path)
         {
-            var files = Directory.GetFiles(Path.Combine(Server.MapPath("~/Uploads"), guid));
+            var files = Directory.GetFiles(Path.Combine(Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD), path));
             string json = string.Empty;
             foreach (string file in files)
             {
-                json += "<a href=" + Url.Action("DownloadFile", new { path = guid, file = Path.GetFileName(file) }) + ">" + Path.GetFileName(file) + "</a>" + "<br/>";
+                json += "<a href=" + Url.Action("DownloadFile", new { path = path, file = Path.GetFileName(file) }) + ">" + Path.GetFileName(file) + "</a>" + "<br/>";
             }
             return json;
         }
