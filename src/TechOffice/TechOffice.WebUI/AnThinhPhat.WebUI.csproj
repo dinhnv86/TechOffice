@@ -274,6 +274,7 @@
     <Content Include="Scripts\app\menuslidejs.js" />
     <Content Include="Scripts\app\message.js" />
     <Content Include="Scripts\app\modaljs.js" />
+    <Content Include="Scripts\app\tacnghiep-detail.js" />
     <Content Include="Scripts\app\user-update.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -416,6 +417,7 @@
     <Content Include="Views\Shared\EditorTemplates\ListBodies.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ListBodies.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\GroupListBodies.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageResultThucHienCongViec.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -135,7 +135,6 @@
     <Compile Include="Results\MucTinResult.cs" />
     <Compile Include="Results\NhomCoQuanResult.cs" />
     <Compile Include="Results\RoleResult.cs" />
-    <Compile Include="Results\TacNghiepCoQuanLienQuanResult.cs" />
     <Compile Include="Results\TacNghiepResult.cs" />
     <Compile Include="Results\TacNghiepTinhHinhThucHienResult.cs" />
     <Compile Include="Results\TacNghiepYKienCoQuanResult.cs" />
@@ -152,9 +151,6 @@
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TacNghiep.cs">
-      <DependentUpon>TechOfficeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TacNghiep_CoQuanLienQuan.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TacNghiep_TinhHinhThucHien.cs">

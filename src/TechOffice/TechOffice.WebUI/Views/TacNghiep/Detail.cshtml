@@ -5,6 +5,16 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    AjaxOptions ajaxOption = new AjaxOptions
+    {
+        Url = Url.Action("EditRecord"),
+        HttpMethod = "POST",
+        OnBegin = "onEditBegin",
+        OnComplete = "onEditComplete",
+        OnSuccess = "onEditSuccess",
+        OnFailure = "onEditFailure",
+    };
 }
 
 <link href="~/Content/app/plus.css" rel="stylesheet" />
@@ -19,80 +29,83 @@
 </style>
 
 <div class="row">
-    <div class="col-sm-6">
-        <label>Ngày tạo</label>
-        @Html.DisplayFor(x => x.NgayTao, "DateTime")
-    </div>
+    @using (Ajax.BeginForm(ajaxOption))
+    {
+        @Html.HiddenFor(x => Model.Id)
 
-    <div class="col-sm-6">
-        <label>Ngày hết hạn</label>
-        @Html.TechShowFor(x => Model.NgayHetHan, "DateTime", !Model.IsRoleAdmin)
-        @Html.ValidationMessageFor(x => x.NgayHetHan)
-    </div>
+        <div class="col-sm-6">
+            <label>Ngày tạo</label>
+            @Html.TechShowFor(x => x.NgayTao, "DateTime", !Model.IsRoleAdmin)
+        </div>
 
-    <div class="col-sm-6">
-        <label>Ngày hoàn thành</label>
-        @Html.TechShowFor(x => Model.NgayHoanThanh, "DateTime", !Model.IsRoleAdmin)
-    </div>
+        <div class="col-sm-6">
+            <label>Ngày hết hạn</label>
+            @Html.TechShowFor(x => Model.NgayHetHan, "DateTime", !Model.IsRoleAdmin)
+            @Html.ValidationMessageFor(x => x.NgayHetHan)
+        </div>
 
-    <div class="col-sm-6">
-        <label>Lĩnh vực</label>
-        @*@Html.TextBoxFor(x => x.LinhVucTacNghiepId, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })*@
-        @Html.TechDropDownListFor(x => Model.LinhVucTacNghiepId, new SelectList(Model.LinhVucTacNghiepInfo, "Id", "Name"), htmlAttributes: new { @class = "form-control" }, disabled: !Model.IsRoleAdmin)
-    </div>
+        <div class="col-sm-6">
+            <label>Ngày hoàn thành</label>
+            @Html.TechShowFor(x => Model.NgayHoanThanh, "DateTime", !Model.IsRoleAdmin)
+        </div>
 
-    <div class="col-md-12">
-        <label>Nội dung</label>
-        @Html.TechTextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 3 }, disabled: !Model.IsRoleAdmin)
-    </div>
+        <div class="col-sm-6">
+            <label>Lĩnh vực</label>
+            @Html.TechDropDownListFor(x => Model.LinhVucTacNghiepId, new SelectList(Model.LinhVucTacNghiepInfo, "Id", "Name"), htmlAttributes: new { @class = "form-control" }, disabled: !Model.IsRoleAdmin)
+        </div>
 
-    @Html.TechShowFor(x => Model.NhomCoQuanCoLienQuanInfo, "GroupListBodies", !Model.IsRoleAdmin)
+        <div class="col-md-12">
+            <label>Nội dung</label>
+            @Html.TechTextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 3 }, disabled: !Model.IsRoleAdmin)
+        </div>
 
-    @*<div class="col-sm-12 table-responsive" style="padding:30px 15px 15px 15px;">
-            <label>Các cơ quan có liên quan</label>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th class="col-sm-10">Tên cơ quan</th>
-                        <th class="col-sm-2">Có liên quan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @Html.EditorFor(x => x.CoQuanInfos, "CoQuanLienQuan")
-                </tbody>
-            </table>
-        </div>*@
+        @Html.TechShowFor(x => Model.NhomCoQuanCoLienQuanInfo, "GroupListBodies", !Model.IsRoleAdmin)
 
-    <div class="col-md-12" style="padding-bottom:30px;">
-        <label>Nội dung ý kiên trao đổi</label>
-        @Html.TechTextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 }, disabled: !Model.IsRoleAdmin)
-    </div>
+        <div class="col-md-12" style="padding-bottom:30px;">
+            <label>Nội dung ý kiên trao đổi</label>
+            @Html.TechTextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 }, disabled: !Model.IsRoleAdmin)
+        </div>
 
-    <label class="col-sm-12">Các tập tin đính kèm</label>
-    <div class="col-sm-12">
-        <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
-        <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
-            <span class="glyphicon glyphicon-upload"></span>
-            Upload
-        </button>
-        <div style="padding-bottom:30px;">
-            <span class="col-xs-12" id="spanUpload">
-            </span>
-            <div id="filesName">
-                @Html.Raw(Model.JsonFiles)
+        <label class="col-sm-12">Các tập tin đính kèm</label>
+        <div class="col-sm-12">
+            @if (Model.IsRoleAdmin)
+            {
+                <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
+                <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
+                    <span class="glyphicon glyphicon-upload"></span>
+                    Upload
+                </button>
+            }
+            <div style="padding-bottom:30px;">
+                <span class="col-xs-12" id="spanUpload">
+                </span>
+                <div id="filesName">
+                    @Html.Raw(Model.JsonFiles)
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-12" id="formYKienCoQuan">
-        <label>Nội dung ý kiến của các cơ quan</label>
-        @{ Html.RenderAction("NoiDungYKienCuaCacCoQuan", new { id = Model.Id }); }
-    </div>
+        <div class="col-sm-12" id="formYKienCoQuan">
+            <label>Nội dung ý kiến của các cơ quan</label>
+            @{ Html.RenderAction("NoiDungYKienCuaCacCoQuan", new { id = Model.Id }); }
+        </div>
 
-    <div class="col-sm-12">
-        <label>Tình hình thực hiện công việc của các cơ quan</label>
-        @{ Html.RenderAction("TinhHinhThucHien", new { id = Model.Id }); }
-    </div>
+        <div class="col-sm-12">
+            <label>Tình hình thực hiện công việc của các cơ quan</label>
+            @{ Html.RenderAction("TinhHinhThucHien", new { id = Model.Id }); }
+        </div>
+
+                if (Model.IsRoleAdmin)
+                {
+                    <div class="col-sm-6" id="outer">
+                        <div class="inner"><input type="submit" value="Lưu" class="btn btn-primary btn-width-md col-sm-2" name="btnAdd" id="btnAdd" /></div>
+                        <div class="inner">
+                            @Html.RouteLink("Hủy", UrlLink.TACNGHIEP, null, htmlAttributes: new { @class = "btn btn-default btn-width-md col-sm-2" })
+                            @*<button type="button" class="btn btn-default btn-width-md col-sm-2" name="btnCancel" id="btnCancel" data-dismiss="modal">Hủy</button>*@
+                        </div>
+                    </div>
+                    }
+                }
 </div>
 
 <div class="modal fade in" id="modalEditYKienCoQuan">
@@ -107,105 +120,17 @@
             </div>
         </div>
     </div>
+
 </div>
 
 @section Scripts{
 
     <script src="~/Scripts/app/modaljs.js"></script>
+    <script src="~/Scripts/app/tacnghiep-detail.js"></script>
 
     <script>
         $(document).ready(function () {
-
-            var optionCalendar =
-             {
-                 autoSize: true,
-                 constrainInput: true,
-                 minDate: 0,
-                 dateFormat: 'dd/mm/yy'
-             };
-            $('.control-datepicker').datepicker(optionCalendar);
-
-            $.validator.addMethod('date',
-            function (value, element) {
-                if (this.optional(element)) {
-                    return true;
-                }
-
-                var ok = true;
-                try {
-                    $.datepicker.parseDate('dd/mm/yy', value);
-                }
-                catch (err) {
-                    ok = false;
-                }
-                return ok;
-            });
-
-            $('#modalEditBody').height(260);
-
-            $('#formYKienCoQuan').on('click', '.btn-edit', function (event) {
-                event.preventDefault();
-                var url = $(this).attr('href');
-
-                $('#modalEditBody').load(url);
-                $('#modalEditYKienCoQuan').modal({ backdrop: 'static', keyboard: false, show: true });
-            });
-
-            onEditYKienBegin = function () {
-                onShowLoading();
-            };
-            onEditYKienComplete = function () {
-                onHideLoading();
-            };
-            onEditYKienSuccess = function () {
-                //reload page
-                var url = window.location.href;
-                window.location.href = url;
-            };
-            onEditYKienFailure = function () {
-                alert("Đã xảy ra lỗi trong quá trình cập nhật. Xin vui lòng thử lại");
-            };
-
-            onAddYKienBegin = function () {
-                onShowLoading();
-            };
-            onAddYKienComplete = function () {
-                onHideLoading();
-            };
-            onAddYKienSuccess = function () {
-                //reload page
-                var url = window.location.href;
-                window.location.href = url;
-            };
-            onAddYKienFailure = function () {
-                alert("Đã xảy ra lỗi trong quá trình cập nhật. Xin vui lòng thử lại");
-            };
-
-            $('#formYKienCoQuan').on('change', 'input[type="file"]', function (e) {
-                $('#spanUpload').text('');
-                var files = e.originalEvent.target.files;
-                if (files.length > 0) {
-                    $(this).next().removeAttr('disabled');
-                }
-                else {
-                    $(this).next().attr('disabled', 'disabled');
-                }
-            });
-
-            //Upload files
-            $('input[type="file"]').change(function (e) {
-                $('#spanUpload').text('');
-                var files = e.originalEvent.target.files;
-                if (files.length > 0) {
-                    $(this).next().removeAttr('disabled');
-                }
-                else {
-                    $(this).next().attr('disabled', 'disabled');
-                }
-            });
-
             $('#btnUpload').on('click', function (e) {
-                alert('thiett');
                 if (window.FormData !== undefined) {
                     var ajaxRequest = $.ajax({
                         type: "POST",
@@ -238,6 +163,29 @@
                 else {
                     alert("This browser doesn't support HTML5 file uploads!");
                 }
+            });
+
+
+
+            /*Update co quan lien quan*/
+            $('.check-cqlq').on('change', function () {
+                var nhomCoQuanId = $(this).attr('data-ncq');
+                var coQuanId = $(this).attr('id');
+                var tacNghiepId = '@Model.Id';
+                var url = '@Url.Action("UpdateCoQuanLienQuan", "TacNghiepTinhHinhThucHien")';
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: {
+                        tacNghiepId: tacNghiepId,
+                        coQuanId: coQuanId,
+                    }
+                });
+            });
+            /*Update co quan lien quan*/
+
+            $('.check-dahoanthanh').on('change', function () {
+                alert('sfsd');
             });
         });
     </script>

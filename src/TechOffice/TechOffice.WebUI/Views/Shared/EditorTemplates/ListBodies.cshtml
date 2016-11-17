@@ -8,7 +8,7 @@
             <tr>
                 <td class="col-sm-10">@Model[i].Name</td>
                 <td class="col-sm-2">
-                    @Html.CheckBoxFor(x => Model[i].IsSelected)
+                    @Html.CheckBoxFor(x => Model[i].IsSelected, htmlAttributes: new { id = Model[i].Id, data_ncq = Model[i].NhomCoQuanId, @class = "check-cqlq" })
                 </td>
             </tr>
         }

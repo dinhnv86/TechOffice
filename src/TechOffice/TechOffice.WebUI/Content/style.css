@@ -28,7 +28,7 @@ body {
     right: 100px;
     text-align: center;
     width: 35px;
-    z-index: 10000;
+    z-index: 999;
 }
 
 div#back-top > i.fa {

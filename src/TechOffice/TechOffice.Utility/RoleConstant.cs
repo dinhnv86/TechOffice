@@ -6,5 +6,6 @@
         public const string ADMIN = "Admin";
         public const string STAFF = "Staff";
         public const string USER = "User";
+        public const string NEW_TACNGHIEP = "NewTacNghiep";
     }
 }

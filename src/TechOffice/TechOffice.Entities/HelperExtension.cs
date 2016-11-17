@@ -822,30 +822,30 @@ namespace AnThinhPhat.Entities
         }
     }
 
-    public static class TacNghiepCoQuanLienQuanExtension
-    {
-        public static TacNghiepCoQuanLienQuanResult ToIfNotNullDataResult(this TacNghiep_CoQuanLienQuan entity)
-        {
-            return entity?.ToDataResult();
-        }
+    //public static class TacNghiepCoQuanLienQuanExtension
+    //{
+    //    public static TacNghiepCoQuanLienQuanResult ToIfNotNullDataResult(this TacNghiep_CoQuanLienQuan entity)
+    //    {
+    //        return entity?.ToDataResult();
+    //    }
 
-        public static TacNghiepCoQuanLienQuanResult ToDataResult(this TacNghiep_CoQuanLienQuan entity)
-        {
-            return new TacNghiepCoQuanLienQuanResult
-            {
-                Id = entity.Id,
-                CoQuanId = entity.CoQuanId,
-                CoQuanInfo = entity.CoQuan.ToIfNotNullDataInfo(),
-                TacNghiepId = entity.TacNghiepId,
-                TacNghiepInfo = entity.TacNghiep.ToIfNotNullDataInfo(),
-                CreateDate = entity.CreateDate,
-                CreatedBy = entity.CreatedBy,
-                IsDeleted = entity.IsDeleted,
-                LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy
-            };
-        }
-    }
+    //    public static TacNghiepCoQuanLienQuanResult ToDataResult(this TacNghiep_CoQuanLienQuan entity)
+    //    {
+    //        return new TacNghiepCoQuanLienQuanResult
+    //        {
+    //            Id = entity.Id,
+    //            CoQuanId = entity.CoQuanId,
+    //            CoQuanInfo = entity.CoQuan.ToIfNotNullDataInfo(),
+    //            TacNghiepId = entity.TacNghiepId,
+    //            TacNghiepInfo = entity.TacNghiep.ToIfNotNullDataInfo(),
+    //            CreateDate = entity.CreateDate,
+    //            CreatedBy = entity.CreatedBy,
+    //            IsDeleted = entity.IsDeleted,
+    //            LastUpdated = entity.LastUpdated,
+    //            LastUpdatedBy = entity.LastUpdatedBy
+    //        };
+    //    }
+    //}
 
     public static class TacNghiepExtension
     {
@@ -867,7 +867,7 @@ namespace AnThinhPhat.Entities
                 NoiDung = entity.NoiDung,
                 NoiDungTraoDoi = entity.NoiDungTraoDoi,
                 MucDoHoanThanhId = entity.MucDoHoanThanhId,
-                CoQuanInfos = entity.TacNghiep_CoQuanLienQuan.Select(x => new CoQuanInfo { Id = x.CoQuanId, Name = x.CoQuan.Ten, NhomCoQuanId = x.CoQuan.NhomCoQuanId }).ToList(),
+                CoQuanInfos = entity.TacNghiep_TinhHinhThucHien.Select(x => new CoQuanInfo { Id = x.CoQuanId, Name = x.CoQuan.Ten, NhomCoQuanId = x.CoQuan.NhomCoQuanId }).ToList(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -889,6 +889,8 @@ namespace AnThinhPhat.Entities
                 NoiDung = entity.NoiDung,
                 NgayTao = entity.NgayTao,
                 NgayHoanThanh = entity.NgayHoanThanh,
+                NgayHetHan = entity.NgayHetHan,
+                LinhVucTacNghiepInfo = entity.LinhVucTacNghiepInfo
             };
         }
 
@@ -905,6 +907,8 @@ namespace AnThinhPhat.Entities
                 NoiDung = entity.NoiDung,
                 NgayTao = entity.NgayTao,
                 NgayHoanThanh = entity.NgayHoanThanh,
+                NgayHetHan = entity.NgayHetHan,
+                LinhVucTacNghiepInfo = entity.LinhVucTacNghiep.ToIfNotNullDataInfo(),
             };
         }
     }
@@ -922,12 +926,13 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 MucDoHoanThanhId = entity.MucDoHoanThanhId,
+                NgayHoanThanh = entity.NgayHoanThanh,
                 MucDoHoanThanhInfo = entity.MucDoHoanThanh.ToIfNotNullDataResult(),
                 ThoiGian = entity.ThoiGian,
                 CoQuanId = entity.CoQuanId,
                 CoQuanInfo = entity.CoQuan.ToDataInfo(),
                 TacNghiepId = entity.TacNghiepId,
-                TacNghiepInfo = entity.TacNghiep.ToIfNotNullDataResult().ToDataInfo(),
+                TacNghiepInfo = entity.TacNghiep.ToDataInfo(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,

@@ -7,6 +7,6 @@ namespace AnThinhPhat.Services.Abstracts
     /// </summary>
     public interface ITacNghiepRepository : IRepository<TacNghiepResult>
     {
-        SaveResult AddTacNghiepWithCoQuan(TacNghiepResult entity);
+        SaveResult AddTacNghiepWithTinhHinhThucHien(TacNghiepResult entity);
     }
 }

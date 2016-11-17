@@ -5,7 +5,7 @@
 }
 
 <div class="boxr" style="width:100%">
-    <h1 class="title title_ct"><span>Văn bản</span></h1>
+    <h1 class="title title_ct"><span>Tác nghiệp</span></h1>
 
     <div class="pading">
         <div class="entry form-horizontal">
@@ -34,9 +34,12 @@
                         <div class="inner">
                             @Html.RouteLink("Thống kê", UrlLink.TACNGHIEP_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })
                         </div>
-                        <div class="inner">
-                            @Html.RouteLink("Thêm mới", UrlLink.TACNGHIEP_ADD, null, htmlAttributes: new { @class = "btn btn-primary" })
-                        </div>
+                        @if (User.IsInRole(RoleConstant.NEW_TACNGHIEP))
+                        {
+                            <div class="inner">
+                                @Html.RouteLink("Thêm mới", UrlLink.TACNGHIEP_ADD, null, htmlAttributes: new { @class = "btn btn-primary" })
+                            </div>
+                        }
                     </div>
                 </div>
             }

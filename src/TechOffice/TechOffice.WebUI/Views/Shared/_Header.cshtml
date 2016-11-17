@@ -32,13 +32,13 @@
                             <li>
                                 <a href = "@Url.RouteUrl(UrlLink.ADMIN)" >
                                 <span class="glyphicon glyphicon-lock"></span>
-                                @Html.Encode(User.Identity.FullName())
+                                @Html.Raw(User.Identity.FullName())
                                 </a>
                             </li>
                         }
                         else
                         {
-                            <li><a>@Html.Encode(User.Identity.FullName())</a></li>
+                            <li><a>@Html.Raw(User.Identity.FullName())</a></li>
                         }
 
                         <li>

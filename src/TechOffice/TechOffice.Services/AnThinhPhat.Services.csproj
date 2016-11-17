@@ -70,7 +70,6 @@
     <Compile Include="Abstracts\ITacNghiepYKienCoQuanRepository.cs" />
     <Compile Include="Abstracts\ITacNghiepTinhHinhThucHienRepository.cs" />
     <Compile Include="Abstracts\ITacNghiepRepository.cs" />
-    <Compile Include="Abstracts\ITacNghiepCoQuanLienQuanRepository.cs" />
     <Compile Include="Abstracts\IUserRoleRepository.cs" />
     <Compile Include="Abstracts\IUsersRepository.cs" />
     <Compile Include="DbExecute.cs" />
@@ -95,7 +94,6 @@
     <Compile Include="Implements\NhomCoQuanRepository.cs" />
     <Compile Include="Implements\RolesRepository.cs" />
     <Compile Include="Implements\TacNghiepRepository.cs" />
-    <Compile Include="Implements\TacNghiepCoQuanLienQuanRepository.cs" />
     <Compile Include="Implements\TacNghiepTinhHinhThucHienRepository.cs" />
     <Compile Include="Implements\TacNghiepYKienCoQuanRepository.cs" />
     <Compile Include="Implements\TapTinCongViecRepository.cs" />

@@ -66,6 +66,7 @@
     <Compile Include="MenuController.cs" />
     <Compile Include="LinhVucTacNghiepController.cs" />
     <Compile Include="LinhVucVanBanController.cs" />
+    <Compile Include="TacNghiepTinhHinhThucHienController.cs" />
     <Compile Include="UsersController.cs" />
     <Compile Include="MucDoHoanThanhController.cs" />
     <Compile Include="LoaiVanBanController.cs" />

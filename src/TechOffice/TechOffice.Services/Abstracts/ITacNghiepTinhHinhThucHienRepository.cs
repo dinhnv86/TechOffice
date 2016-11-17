@@ -11,6 +11,10 @@ namespace AnThinhPhat.Services.Abstracts
     {
         IEnumerable<TacNghiepTinhHinhThucHienResult> GetAllByTacNghiepId(int id);
 
+        IEnumerable<TacNghiepTinhHinhThucHienResult> GetAllByListTacNghiepId(IEnumerable<int> tacNghiepId);
+
         SaveResult UpdateIncrementMucDoHoanThanh(int tacNghiepId, int coQuanId, string userName, EnumMucDoHoanThanh status);
+
+        SaveResult UpdateCoQuanLienQuan(int tacNghiepId, int coQuanId,string userName);
     }
 }

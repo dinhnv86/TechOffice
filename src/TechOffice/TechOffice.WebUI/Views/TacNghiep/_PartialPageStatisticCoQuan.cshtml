@@ -1,48 +1,78 @@
 ﻿@model IEnumerable<AnThinhPhat.ViewModel.TacNghiep.ResultStatisticByCoQuanViewModel>
 
-@if (Model != null && Model.Any())
-{
-    @foreach (var item in Model)
-    {
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center col-sm-2">Trạng thái</th>
+            <th class="text-center col-xs-2">Ngày tạo <br />Ngày hết hạn</th>
+            <th class="text-center col-sm-2">Lĩnh vực</th>
+            <th class="text-center col-sm-3">Nội dung</th>
+            <th class="text-center col-xs-2">Các văn bản liên quan</th>
+            <th class="text-center col-xs-1">Ngày hoàn thành</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="6">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <label>@item.TenCoQuan</label>
 
-        <label>@item.Name</label>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Công việc chưa hoàn thành</th>
-                    <th>Công việc đang hoàn thành</th>
-                    <th>Các công việc đã hoàn thành</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        @*Hien thi danh sách cong viec chua hoan thanh*@
-                        @foreach (var exe in item.NotExecuteResults)
-                        {
-                            <p>@exe.Name</p>
-                        }
-                    </td>
-                    <td>
-                        @foreach (var exe in item.ExecutingResults)
-                        {
-                            <p>@exe.Name</p>
-                        }
-                    </td>
-                    <td>
-                        @foreach (var exe in item.ExecutedResults)
-                        {
-                            <p>@exe.Name</p>
-                        }
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    }
-}
-else
-{
-    <div>
-        Không tìm thấy kết quả
-    </div>
-}
+                        <table class="table">
+                            @{ Html.RenderPartial("_PartialPageResultThucHienCongViec", item.NotExecuteResults);}
+                            @{ Html.RenderPartial("_PartialPageResultThucHienCongViec", item.ExecutingResults);}
+                        </table>
+
+                        @*<table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @foreach (var exe in item.NotExecuteResults)
+                                            {
+                                                <p>@exe.Name</p>
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var exe in item.ExecutingResults)
+                                            {
+                                                <p>@exe.Name</p>
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var exe in item.ExecutedResults)
+                                            {
+                                                <p>@exe.Name</p>
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var exe in item.ExecutedResults)
+                                            {
+                                                <p>@exe.NgayHoanThanh</p>
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var exe in item.ExecutedOverResults)
+                                            {
+                                                <p>@exe.Name</p>
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var exe in item.ExecutedOverResults)
+                                            {
+                                                <p>@exe.NgayHoanThanh</p>
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                    </tr>
+                                </tbody>
+                            </table>*@
+                                    }
+                                }
+            </td>
+        </tr>
+    </tbody>
+</table>

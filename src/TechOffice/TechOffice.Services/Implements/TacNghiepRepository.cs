@@ -7,6 +7,7 @@ using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
+using AnThinhPhat.Utilities.Enums;
 
 namespace AnThinhPhat.Services.Implements
 {
@@ -150,7 +151,7 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.TacNghieps
-                            .Include(i => i.TacNghiep_CoQuanLienQuan)
+                            .Include(i => i.TacNghiep_TinhHinhThucHien)
                             where item.IsDeleted == false
                             select item)
                         .MakeQueryToDatabase()
@@ -260,7 +261,7 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public SaveResult AddTacNghiepWithCoQuan(TacNghiepResult entity)
+        public SaveResult AddTacNghiepWithTinhHinhThucHien(TacNghiepResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
@@ -276,10 +277,11 @@ namespace AnThinhPhat.Services.Implements
                         {
                             foreach (var item in entity.CoQuanInfos)
                             {
-                                var co = context.TacNghiep_CoQuanLienQuan.Create();
+                                var co = context.TacNghiep_TinhHinhThucHien.Create();
 
                                 co.CoQuanId = item.Id;
                                 co.TacNghiepId = tt.Id;
+                                co.MucDoHoanThanhId = (int)EnumMucDoHoanThanh.CHUATHUHIEN;
 
                                 co.IsDeleted = tt.IsDeleted;
                                 co.CreatedBy = tt.CreatedBy;

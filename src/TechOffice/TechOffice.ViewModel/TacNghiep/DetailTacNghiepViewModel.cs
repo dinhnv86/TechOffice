@@ -18,7 +18,7 @@ namespace AnThinhPhat.ViewModel.TacNghiep
 
         public string NoiDung { get; set; }
 
-        public IEnumerable<TacNghiepCoQuanLienQuanResult> CoQuanInfos { get; set; }
+        public IEnumerable<TacNghiepTinhHinhThucHienResult> CoQuanInfos { get; set; }
 
         public string NoiDungYKienTraoDoi { get; set; }
 

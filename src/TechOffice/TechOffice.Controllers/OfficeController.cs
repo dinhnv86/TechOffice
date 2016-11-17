@@ -170,7 +170,7 @@ namespace AnThinhPhat.WebUI.Controllers
             return RedirectToRoute(Utilities.UrlLink.ERROR_NOTFOUND404);
         }
 
-        protected void ExecuteWithLog(Action action)
+        protected void ExecuteTryLogException(Action action)
         {
             if (action != null)
             {

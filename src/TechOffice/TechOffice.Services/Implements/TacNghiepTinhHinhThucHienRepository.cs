@@ -359,5 +359,59 @@ namespace AnThinhPhat.Services.Implements
                 }
             });
         }
+
+        public IEnumerable<TacNghiepTinhHinhThucHienResult> GetAllByListTacNghiepId(IEnumerable<int> tacNghiepId)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.TacNghiep_TinhHinhThucHien.Include(x => x.TacNghiep.LinhVucTacNghiep)
+                            where item.IsDeleted == false && tacNghiepId.Contains(item.TacNghiepId)// .Contains(item.TacNghiepId)
+                            select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .ToList();
+                }
+            });
+        }
+
+        public SaveResult UpdateCoQuanLienQuan(int tacNghiepId, int coQuanId, string userName)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var update = context.TacNghiep_TinhHinhThucHien.Where(x => x.TacNghiepId == tacNghiepId
+                    && x.CoQuanId == coQuanId
+                    && x.IsDeleted == false).FirstOrDefault();
+
+                    if (update == null)//case not yet record data then insert 
+                    {
+                        update = new TacNghiep_TinhHinhThucHien
+                        {
+                            CoQuanId = coQuanId,
+                            TacNghiepId = tacNghiepId,
+                            CreatedBy = userName,
+                            CreateDate = DateTime.Now,
+                            IsDeleted = false,
+                            MucDoHoanThanhId = (int)EnumMucDoHoanThanh.CHUATHUHIEN,
+                        };
+
+                        context.Entry(update).State = EntityState.Added;
+                    }
+                    else
+                    {
+                        update.IsDeleted = !(update.IsDeleted);
+                        update.LastUpdatedBy = userName;
+                        update.LastUpdated = DateTime.Now;
+
+                        context.Entry(update).State = EntityState.Modified;
+                    }
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
+        }
     }
 }

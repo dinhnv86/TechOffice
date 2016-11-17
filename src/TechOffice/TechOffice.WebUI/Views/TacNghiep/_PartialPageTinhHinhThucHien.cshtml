@@ -5,7 +5,11 @@
         <tr>
             <th class="col-sm-3">Tên cơ quan</th>
             <th class="col-sm-6">Mức độ hoàn thành</th>
-            <th class="col-sm-3">Thời gian</th>
+            @*<th class="col-sm-3">Thời gian</th>*@
+            @if (User.IsInRole(RoleConstant.SUPPER_ADMIN) || User.IsInRole(RoleConstant.ADMIN))
+            {
+                <th class="col-sm-3">Đã hoàn thành</th>
+            }
         </tr>
     </thead>
     @if (Model.Any())
@@ -16,7 +20,13 @@
                 <tr>
                     <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
                     <td>@item.MucDoHoanThanhInfo.Ten</td>
-                    <td>@item.ThoiGian</td>
+                    @*<td>@item.ThoiGian</td>*@
+                    @if (User.IsInRole(RoleConstant.SUPPER_ADMIN) || User.IsInRole(RoleConstant.ADMIN))
+                    {
+                        <td>
+                            @Html.CheckBoxFor(x => item.IsDaHoanThanh, htmlAttributes: new { id = item.Id, @class = "check-dahoanthanh" })
+                        </td>
+                    }
                 </tr>
             }
         </tbody>

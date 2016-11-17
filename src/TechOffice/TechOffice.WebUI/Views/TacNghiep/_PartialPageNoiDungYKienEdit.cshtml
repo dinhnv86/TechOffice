@@ -30,7 +30,7 @@
         </button>
     </div>
 
-    <span class="col-xs-12" id="spanUpload"></span>
+    <span class="col-xs-12" id="spanUploadYKien"></span>
 
     <div class="col-xs-12" id="filesName">
     </div>
@@ -51,7 +51,7 @@
         }
 
         $('input[type="file"]').on('change', function (e) {
-            $('#spanUpload').text('');
+            $('#spanUploadYKien').text('');
             var files = e.originalEvent.target.files;
             if (files.length > 0) {
                 $(this).next().removeAttr('disabled');
@@ -83,7 +83,7 @@
                 ajaxRequest.success(function (e, data) {
                     //$('#filesName').html(e);
                     $('#btnUploadFilesYKien').attr('disabled', 'disabled');
-                    $('#spanUpload').text('Upload file successfully');
+                    $('#spanUploadYKien').text('Upload file successfully');
                 });
                 ajaxRequest.error(function () {
                     alert('Has Error in while upload file');

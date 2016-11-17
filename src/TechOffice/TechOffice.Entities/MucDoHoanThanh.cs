@@ -17,7 +17,6 @@ namespace AnThinhPhat.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MucDoHoanThanh()
         {
-            this.TacNghieps = new HashSet<TacNghiep>();
             this.TacNghiep_TinhHinhThucHien = new HashSet<TacNghiep_TinhHinhThucHien>();
         }
     
@@ -30,8 +29,6 @@ namespace AnThinhPhat.Entities
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TacNghiep> TacNghieps { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TacNghiep_TinhHinhThucHien> TacNghiep_TinhHinhThucHien { get; set; }
     }

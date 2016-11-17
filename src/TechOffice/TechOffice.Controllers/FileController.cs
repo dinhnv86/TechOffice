@@ -97,7 +97,7 @@ namespace AnThinhPhat.WebUI.Controllers
                     });
                 }
 
-                ExecuteWithLog(() =>
+                ExecuteTryLogException(() =>
                 {
                     //Update Status MucDoHoanThanh
                     TacNghiepTinhHinhThucHienRepository.UpdateIncrementMucDoHoanThanh(tacNghiepId, coQuanId, UserName, Utilities.Enums.EnumMucDoHoanThanh.DANGTHUCHIEN);
