@@ -24,7 +24,7 @@
                 <th class="text-center col-action"></th>
             </tr>
         </thead>
-        @if (Model.Count > 0)
+        @if (Model.Any())
             {
                 var iCount = 0;
             <tbody>
@@ -57,8 +57,8 @@
                             }
                         </td>
                         <td class="link-action">
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn-edit" }) |
-                            <a href="#" data-url='@Url.Action("Delete", new {id = item.Id})' id="lnkDelete_@item.Id" data-toggle="popover">Delete</a>
+                            @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn-edit" }) |
+                            <a href="#" data-url='@Url.Action("Delete", new {id = item.Id})' id="lnkDelete_@item.Id" data-toggle="popover">Xóa</a>
                         </td>
                     </tr>
                 }

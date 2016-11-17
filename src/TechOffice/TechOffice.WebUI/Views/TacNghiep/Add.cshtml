@@ -60,7 +60,7 @@
 
     <div class="col-md-12">
         <label>Nội dung</label>
-        @Html.TextBoxFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control" })
+        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 3 })
         @Html.ValidationMessageFor(x => x.NoiDung)
     </div>
 

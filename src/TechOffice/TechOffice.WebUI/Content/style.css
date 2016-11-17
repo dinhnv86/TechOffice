@@ -3657,7 +3657,7 @@ input#phone {
     }
 
         table tr td:first-child {
-            width: 150px;
+            /*width: 150px;*/
         }
 }
 

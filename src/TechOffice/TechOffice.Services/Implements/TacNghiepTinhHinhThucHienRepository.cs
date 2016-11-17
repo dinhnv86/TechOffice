@@ -413,5 +413,36 @@ namespace AnThinhPhat.Services.Implements
                 }
             });
         }
+
+        public SaveResult UpdateMucDoHoanThanhForTacNghiep(int id, string userName)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var update = context.TacNghiep_TinhHinhThucHien.Where(x => x.Id == id
+                    && x.IsDeleted == false).Single();
+
+                    if (update.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DANGTHUCHIEN)
+                    {
+                        update.MucDoHoanThanhId = (int)EnumMucDoHoanThanh.DAHOANHTHANH;
+                        update.NgayHoanThanh = DateTime.Now;
+                    }
+                    else
+                    {
+                        update.MucDoHoanThanhId = (int)EnumMucDoHoanThanh.DANGTHUCHIEN;
+                        update.NgayHoanThanh = null;
+                    }
+
+                    update.LastUpdatedBy = userName;
+                    update.LastUpdated = DateTime.Now;
+
+
+                    context.Entry(update).State = EntityState.Modified;
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
+        }
     }
 }

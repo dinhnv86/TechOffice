@@ -185,7 +185,15 @@
             /*Update co quan lien quan*/
 
             $('.check-dahoanthanh').on('change', function () {
-                alert('sfsd');
+                var id = $(this).attr('id');
+                var url = '@Url.Action("UpdateMucDoHoanThanh", "TacNghiepTinhHinhThucHien")';
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: {
+                        id: id,
+                    }
+                });
             });
         });
     </script>

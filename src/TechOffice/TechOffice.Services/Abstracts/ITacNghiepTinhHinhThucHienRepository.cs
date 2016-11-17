@@ -15,6 +15,8 @@ namespace AnThinhPhat.Services.Abstracts
 
         SaveResult UpdateIncrementMucDoHoanThanh(int tacNghiepId, int coQuanId, string userName, EnumMucDoHoanThanh status);
 
-        SaveResult UpdateCoQuanLienQuan(int tacNghiepId, int coQuanId,string userName);
+        SaveResult UpdateCoQuanLienQuan(int tacNghiepId, int coQuanId, string userName);
+
+        SaveResult UpdateMucDoHoanThanhForTacNghiep(int id, string userName);
     }
 }

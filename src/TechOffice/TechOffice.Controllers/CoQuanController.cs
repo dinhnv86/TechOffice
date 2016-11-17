@@ -104,5 +104,25 @@ namespace AnThinhPhat.WebUI.Controllers
                 return await ExecuteResultAsync(async () => await CoQuanRepository.DeleteByAsync(id));
             });
         }
+
+        public JsonResult GetCoQuanByNhomCoQuan(int nhomCoQuanId)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                var result = CoQuanRepository.GetAllByNhomCoQuanId(nhomCoQuanId);
+                var jsonResult = "<option selected='selected' value>Tất cả</option>";
+
+                foreach (var item in result)
+                {
+                    jsonResult += string.Format("<option value={0}>{1}</option>", item.Id, item.Ten);
+                }
+
+                return new JsonResult
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = jsonResult,
+                };
+            });
+        }
     }
 }

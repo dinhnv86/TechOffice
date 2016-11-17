@@ -4,6 +4,7 @@ using AnThinhPhat.Entities.Results;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System;
+using AnThinhPhat.Utilities.Enums;
 
 namespace AnThinhPhat.Entities
 {
@@ -867,7 +868,7 @@ namespace AnThinhPhat.Entities
                 NoiDung = entity.NoiDung,
                 NoiDungTraoDoi = entity.NoiDungTraoDoi,
                 MucDoHoanThanhId = entity.MucDoHoanThanhId,
-                CoQuanInfos = entity.TacNghiep_TinhHinhThucHien.Select(x => new CoQuanInfo { Id = x.CoQuanId, Name = x.CoQuan.Ten, NhomCoQuanId = x.CoQuan.NhomCoQuanId }).ToList(),
+                CoQuanInfos = entity.TacNghiep_TinhHinhThucHien.Select(x => new CoQuanInfo { Id = x.CoQuanId, Name = x.CoQuan.Ten, NhomCoQuanId = x.CoQuan.NhomCoQuanId, MucDoHoanThanhId = x.MucDoHoanThanhId }).ToList(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -933,6 +934,7 @@ namespace AnThinhPhat.Entities
                 CoQuanInfo = entity.CoQuan.ToDataInfo(),
                 TacNghiepId = entity.TacNghiepId,
                 TacNghiepInfo = entity.TacNghiep.ToDataInfo(),
+                IsDaHoanThanh = (entity.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DAHOANHTHANH && entity.NgayHoanThanh.HasValue),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,

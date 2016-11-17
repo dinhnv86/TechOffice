@@ -190,6 +190,7 @@ namespace AnThinhPhat.Services.Implements
                 {
                     return (from item in context.CoQuans
                             where item.IsDeleted == false
+                            orderby item.Ten
                             select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
@@ -296,6 +297,24 @@ namespace AnThinhPhat.Services.Implements
                     context.Entry(update).State = EntityState.Modified;
 
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
+        }
+
+        public IEnumerable<CoQuanResult> GetAllByNhomCoQuanId(int nhomCoQuanId)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.CoQuans
+                            where item.IsDeleted == false
+                            && item.NhomCoQuanId == nhomCoQuanId
+                            orderby item.Ten
+                            select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .ToList();
                 }
             });
         }

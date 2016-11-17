@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AnThinhPhat.Services.Abstracts;
+using System.Web.Mvc;
+using AnThinhPhat.Utilities;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -23,6 +25,20 @@ namespace AnThinhPhat.WebUI.Controllers
             ExecuteTryLogException(() =>
             {
                 TacNghiepTinhHinhThucHienRepository.UpdateCoQuanLienQuan(tacNghiepId, coQuanId, UserName);
+            });
+        }
+
+        /// <summary>
+        /// Update MucDoHoanThanh of CoQuan
+        /// Action just allow with roles (SupperAdmin, Admin) can update this.
+        /// </summary>
+        /// <param name="id"></param>
+        [Authorize(Roles = RoleConstant.SUPPER_ADMIN + TechOfficeConfig.SEPARATE_CHAR + RoleConstant.ADMIN)]
+        public void UpdateMucDoHoanThanh(int id)//TinhHinhThucHienId
+        {
+            ExecuteTryLogException(() =>
+            {
+                TacNghiepTinhHinhThucHienRepository.UpdateMucDoHoanThanhForTacNghiep(id, UserName);
             });
         }
     }

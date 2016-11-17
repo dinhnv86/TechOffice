@@ -21,12 +21,20 @@
                     <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
                     <td>@item.MucDoHoanThanhInfo.Ten</td>
                     @*<td>@item.ThoiGian</td>*@
-                    @if (User.IsInRole(RoleConstant.SUPPER_ADMIN) || User.IsInRole(RoleConstant.ADMIN))
+                    @if ((User.IsInRole(RoleConstant.SUPPER_ADMIN) || User.IsInRole(RoleConstant.ADMIN)))
                     {
                         <td>
-                            @Html.CheckBoxFor(x => item.IsDaHoanThanh, htmlAttributes: new { id = item.Id, @class = "check-dahoanthanh" })
+                            @if (item.MucDoHoanThanhId == (int)AnThinhPhat.Utilities.Enums.EnumMucDoHoanThanh.DANGTHUCHIEN || item.MucDoHoanThanhId == (int)AnThinhPhat.Utilities.Enums.EnumMucDoHoanThanh.DAHOANHTHANH)
+                            {
+                                @Html.CheckBoxFor(x => item.IsDaHoanThanh, htmlAttributes: new { id = item.Id, @class = "check-dahoanthanh" })
+                            }
+                            else
+                            {
+                                @Html.CheckBoxFor(x => item.IsDaHoanThanh, htmlAttributes: new { disabled = "disabled" })
+                            }
                         </td>
                     }
+
                 </tr>
             }
         </tbody>

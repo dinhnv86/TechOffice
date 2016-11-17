@@ -1,4 +1,5 @@
 ﻿using AnThinhPhat.Entities;
+using AnThinhPhat.Entities.Infos;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
@@ -57,10 +58,13 @@ namespace AnThinhPhat.WebUI.Controllers
             string nhapThongTinTimKiem,
             string tieuChiTimKiem)
         {
-            var model = CreateTacNghiepModel();
+            var model = CreateTacNghiepModel(nhomCoquanId);
 
-            model.ValueSearch.NhomCoquanId = nhomCoquanId;
-            model.ValueSearch.CoQuanId = coQuanId;
+            //Check user allow select nhom co quan and co quan when satistic or not
+            model.ValueSearch.NhomCoquanId = model.NhomCoQuanId.HasValue ? model.NhomCoQuanId.Value : nhomCoquanId;
+            model.ValueSearch.CoQuanId = model.CoQuanId.HasValue ? model.CoQuanId.Value : coQuanId;
+            //end check
+
             model.ValueSearch.LinhVucTacNghiepId = linhVucTacNghiepId;
             model.ValueSearch.MucDoHoanThanhId = mucDoHoanThanhId;
             model.ValueSearch.NamBanHanhId = namBanHanhId;
@@ -71,6 +75,7 @@ namespace AnThinhPhat.WebUI.Controllers
             return View(model);
         }
 
+        [ChildActionOnly]
         public ActionResult List(ValueSearchViewModel search)
         {
             return ExecuteWithErrorHandling(() =>
@@ -83,7 +88,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public ActionResult Statistic(int? nhomCoQuanId, int? coQuanId, int? linhVucTacNghiepId, int? mucDoHoanThanhId, DateTime? from, DateTime? to, string submit)
         {
-            var dataBind = CreateTacNghiepModel();
+            var dataBind = CreateTacNghiepModel(nhomCoQuanId);
             var model = new InitTacNghiepThongKeViewModel
             {
                 CoQuanInfos = dataBind.CoQuanInfos,
@@ -458,15 +463,32 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [NonAction]
-        private InitTacNghiepViewModel CreateTacNghiepModel()
+        private InitTacNghiepViewModel CreateTacNghiepModel(int? nhomCoQuanId)
         {
             var model = new InitTacNghiepViewModel
             {
                 LinhVucTacNghiepInfo = LinhVucTacNghiepRepository.GetAll().Select(x => x.ToDataInfo()),
-                CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo()),
+                MucDoHoanThanhInfo = MucDoHoanThanhRepository.GetAll(),
                 NhomCoQuanInfos = NhomCoQuanRepository.GetAll().Select(x => x.ToDataInfo()),
-                MucDoHoanThanhInfo = MucDoHoanThanhRepository.GetAll()
             };
+
+            //Check user has role allow select nhom co quan and co quan when statistic
+            if (User.IsInRole(RoleConstant.ALLOW_SELECT))
+            {
+                model.CoQuanInfos = nhomCoQuanId.HasValue ?
+                         CoQuanRepository.GetAllByNhomCoQuanId(nhomCoQuanId.Value).Select(x => x.ToDataInfo()).ToList()
+                         : new List<CoQuanInfo>();
+            }
+            else
+            {
+                var user = AuthInfo();
+                model.NhomCoQuanId = user.CoQuanInfo.NhomCoQuanId;
+                model.CoQuanId = user.CoQuanId;
+                model.CoQuanInfos = new List<CoQuanInfo>() {
+                    user.CoQuanInfo
+                };
+            }
+            //end check
 
             return model;
         }
@@ -474,6 +496,9 @@ namespace AnThinhPhat.WebUI.Controllers
         private IPagedList<TacNghiepResult> Find(ValueSearchViewModel model)
         {
             var seachAll = TacNghiepRepository.GetAll();
+            if (model.NhomCoquanId.HasValue)
+                seachAll = seachAll.Where(x => x.CoQuanInfos.Any(y => y.NhomCoQuanId == model.NhomCoquanId));
+
             if (model.CoQuanId.HasValue)
                 seachAll = seachAll.Where(x => x.CoQuanInfos.Any(y => y.Id == model.CoQuanId.Value));
 
@@ -481,7 +506,10 @@ namespace AnThinhPhat.WebUI.Controllers
                 seachAll = seachAll.Where(x => x.LinhVucTacNghiepId == model.LinhVucTacNghiepId.Value);
 
             if (model.MucDoHoanThanhId.HasValue)
-                seachAll = seachAll.Where(x => x.MucDoHoanThanhId == model.MucDoHoanThanhId.Value);
+                seachAll = seachAll.Where(x => x.CoQuanInfos.Any((y) =>
+                   {
+                       return y.MucDoHoanThanhId == model.MucDoHoanThanhId;
+                    }));
 
             if (model.NamBanHanhId.HasValue)
                 seachAll = seachAll.Where(x => x.NgayTao.Year == model.NamBanHanhId.Value);

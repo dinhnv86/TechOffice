@@ -16,6 +16,10 @@ namespace AnThinhPhat.ViewModel.TacNghiep
 
         public string TieuChiTimKiem { get; set; }
 
+        public bool IsTimKiemNoiDung { get; set; }
+
+        public bool IsTimKiemYKienTraoDoi { get; set; }
+
         public int? NhomCoQuanId { get; set; }
         public IEnumerable<NhomCoQuanInfo> NhomCoQuanInfos { get; set; }
 
@@ -61,7 +65,7 @@ namespace AnThinhPhat.ViewModel.TacNghiep
             {
                 yield return new NamBanHanh
                 {
-                    Id = i + 1,
+                    Id = DateTime.Now.AddYears(-i).Year,
                     Name = DateTime.Now.AddYears(-i).Year
                 };
             }
