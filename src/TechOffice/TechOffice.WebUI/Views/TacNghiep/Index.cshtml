@@ -27,28 +27,14 @@
                     <label>Chọn thông tin tìm kiếm</label>
                     @Html.TextBoxFor(x => Model.NhapThongTinTimKiem, htmlAttributes: new { @class = "form-control" })
                     <label>Chọn tiêu chí tìm kiếm</label>
-                    @*@Html.TextBoxFor(x => Model.TieuChiTimKiem, htmlAttributes: new { @class = "form-control" })*@
                     <div class="form-group col-xs-12">
                         <div class="radio-inline">
-                            @Html.RadioButton("Search", "IsTimKiemNoiDung", true,
-                        new { id = "IsTimKiemNoiDung" }) Nội dung
+                            @Html.RadioButtonFor(x => Model.SearchTypeValue, true, htmlAttributes: new { id = "noiDungId" }) Nội dung
                         </div>
                         <div class="radio-inline">
-                            @Html.RadioButton("Search", "IsTimKiemYKienTraoDoi",
-                        new { id = "IsTimKiemYKienTraoDoi" }) Ý kiến trao đổi
+                            @Html.RadioButtonFor(x => Model.SearchTypeValue, false, htmlAttributes: new { id = "YKienId" }) Ý kiến trao đổi
                         </div>
                     </div>
-
-                    @*<div id="outer">
-                            <div class="inner">
-                                @Html.RadioButtonFor(x => Model.IsTimKiemNoiDung, true, htmlAttributes: new { @class = "radio radio-inline" })
-                                @Html.Raw("Nội dung")
-                            </div>
-                            <div class="inner">
-                                @Html.RadioButtonFor(x => Model.IsTimKiemYKienTraoDoi, true, htmlAttributes: new { @class = "radio radio-inline" })
-                                @Html.Raw("Ý kiến trao đổi")
-                            </div>
-                        </div>*@
                     <label>&nbsp;</label>
                     <div id="outer" style="padding-top:62px;">
                         <div class="inner"><input type="submit" class="btn btn-primary btn-width-md" value="Tìm kiếm" /></div>

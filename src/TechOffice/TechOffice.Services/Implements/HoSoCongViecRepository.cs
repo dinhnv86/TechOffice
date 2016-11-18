@@ -369,7 +369,7 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public IEnumerable<HoSoCongViecResult> Find(ValueSearchCongViec value)
+        public IEnumerable<HoSoCongViecResult> Find(ValueSearchCongViec valueSearch)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
@@ -379,20 +379,20 @@ namespace AnThinhPhat.Services.Implements
                                  where item.IsDeleted == false
                                  select item);
 
-                    if (value.NhanVienId.HasValue)
+                    if (valueSearch.NhanVienId.HasValue)
                     {
-                        if (value.Role.HasValue)
+                        if (valueSearch.Role.HasValue)
                         {
-                            switch (value.Role.Value)
+                            switch (valueSearch.Role.Value)
                             {
                                 case EnumRoleExecute.PHOIHOP:
-                                    query = query.Where(x => x.CongViec_PhoiHop.Any(y => y.UserId == value.NhanVienId.Value));
+                                    query = query.Where(x => x.CongViec_PhoiHop.Any(y => y.UserId == valueSearch.NhanVienId.Value));
                                     break;
                                 case EnumRoleExecute.PHUTRACH:
-                                    query = query.Where(x => x.UserPhuTrachId == value.NhanVienId.Value);
+                                    query = query.Where(x => x.UserPhuTrachId == valueSearch.NhanVienId.Value);
                                     break;
                                 case EnumRoleExecute.XULYCHINH:
-                                    query = query.Where(x => x.UserXuLyId == value.NhanVienId.Value);
+                                    query = query.Where(x => x.UserXuLyId == valueSearch.NhanVienId.Value);
                                     break;
                                 default:
                                     break;
@@ -400,15 +400,15 @@ namespace AnThinhPhat.Services.Implements
                         }
                         else
                         {
-                            query = query.Where(x => x.CongViec_PhoiHop.Any(y => y.UserId == value.NhanVienId.Value)
-                              || x.UserPhuTrachId == value.NhanVienId.Value
-                              || x.UserXuLyId == value.NhanVienId.Value);
+                            query = query.Where(x => x.CongViec_PhoiHop.Any(y => y.UserId == valueSearch.NhanVienId.Value)
+                              || x.UserPhuTrachId == valueSearch.NhanVienId.Value
+                              || x.UserXuLyId == valueSearch.NhanVienId.Value);
                         }
                     }
 
-                    if (value.Status.HasValue)
+                    if (valueSearch.Status.HasValue)
                     {
-                        switch (value.Status.Value)
+                        switch (valueSearch.Status.Value)
                         {
                             case EnumStatus.DAXULY:
                                 query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.DAXULY - 1));
@@ -423,13 +423,13 @@ namespace AnThinhPhat.Services.Implements
                                 break;
                         }
                     }
-                    if (value.LinhVucCongViecId.HasValue)
-                        query = query.Where(x => x.LinhVucCongViecId == value.LinhVucCongViecId.Value);
+                    if (valueSearch.LinhVucCongViecId.HasValue)
+                        query = query.Where(x => x.LinhVucCongViecId == valueSearch.LinhVucCongViecId.Value);
 
-                    if (!string.IsNullOrEmpty(value.NoiDungCongViec))
-                        query = query.Where(x => x.NoiDung.Contains(value.NoiDungCongViec));
+                    if (!string.IsNullOrEmpty(valueSearch.NoiDungCongViec))
+                        query = query.Where(x => x.NoiDung.Contains(valueSearch.NoiDungCongViec));
 
-                    return query.MakeQueryToDatabase().Select(x => x.ToDataResult()).ToList();
+                    return query.OrderBy(x => x.TrangThaiCongViecId).MakeQueryToDatabase().Select(x => x.ToDataResult()).ToList();
                 }
             });
         }

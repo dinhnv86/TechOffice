@@ -108,15 +108,6 @@ namespace AnThinhPhat.WebUI.Controllers
 
         #region Inject
 
-        /// <summary>
-        ///     Gets or sets the user repository.
-        /// </summary>
-        /// <value>
-        ///     The user repository.
-        /// </value>
-        [Inject]
-        public IUsersRepository UserRepository { get; set; }
-
         [Inject]
         public IUserRoleRepository UserRoleRepository { get; set; }
 

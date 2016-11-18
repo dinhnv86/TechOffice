@@ -9,13 +9,11 @@
     <meta name="seometakeyword" content="" />
     <meta name="seometadescription" content="" />
 
-    <title>Phòng nội vụ huyện Phú Riềng</title>
-    <link rel="shortcut icon" href="~/favicon.ico" type="/image/vnd.microsoft.icon" />
+    <title>@Labels.Page_Title</title>
+    <link rel="shortcut icon" href="~/images/favicon.ico" type="/image/vnd.microsoft.icon" />
+
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/jqueryui")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
     @{ Html.RenderPartial("_Header"); }
@@ -33,8 +31,12 @@
         @{ Html.RenderPartial("_Footer"); }
     </footer>
 
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/unobtrusive")
+    @Scripts.Render("~/bundles/tech")
     @RenderSection("scripts", false)
 </body>
 </html>

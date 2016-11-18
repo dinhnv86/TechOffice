@@ -23,4 +23,16 @@ namespace AnThinhPhat.Utilities
 
         [Description("Đã xử lý")] DAXULY = 4
     }
+
+    public enum EnumNhacNho
+    {
+        [Description("Nhắc nhở")]
+        TATCA = 1,
+
+        [Description("Mức 1")]
+        CHUAXULY = 2,
+
+        [Description("Mức 2")]
+        DANGXYLY = 3,
+    }
 }

@@ -417,6 +417,7 @@
     <Content Include="Views\Shared\DisplayTemplates\ListBodies.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\GroupListBodies.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageResultThucHienCongViec.cshtml" />
+    <Content Include="Views\CongViec\_PartialPageVanBanLienQuan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

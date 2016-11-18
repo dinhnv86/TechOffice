@@ -56,7 +56,8 @@ namespace AnThinhPhat.WebUI.Controllers
             int? mucDoHoanThanhId,
             int? namBanHanhId,
             string nhapThongTinTimKiem,
-            string tieuChiTimKiem)
+            string tieuChiTimKiem,
+            bool? searchTypeValue)
         {
             var model = CreateTacNghiepModel(nhomCoquanId);
 
@@ -68,8 +69,8 @@ namespace AnThinhPhat.WebUI.Controllers
             model.ValueSearch.LinhVucTacNghiepId = linhVucTacNghiepId;
             model.ValueSearch.MucDoHoanThanhId = mucDoHoanThanhId;
             model.ValueSearch.NamBanHanhId = namBanHanhId;
-            model.ValueSearch.NhapThongTinTimKiem = nhapThongTinTimKiem;
-            model.ValueSearch.TieuChiTimKiem = tieuChiTimKiem;
+            model.ValueSearch.NoiDungTimKiem = nhapThongTinTimKiem;
+            model.ValueSearch.SearchTypeValue = searchTypeValue;
             model.ValueSearch.Page = 1;
 
             return View(model);
@@ -495,30 +496,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private IPagedList<TacNghiepResult> Find(ValueSearchViewModel model)
         {
-            var seachAll = TacNghiepRepository.GetAll();
-            if (model.NhomCoquanId.HasValue)
-                seachAll = seachAll.Where(x => x.CoQuanInfos.Any(y => y.NhomCoQuanId == model.NhomCoquanId));
-
-            if (model.CoQuanId.HasValue)
-                seachAll = seachAll.Where(x => x.CoQuanInfos.Any(y => y.Id == model.CoQuanId.Value));
-
-            if (model.LinhVucTacNghiepId.HasValue)
-                seachAll = seachAll.Where(x => x.LinhVucTacNghiepId == model.LinhVucTacNghiepId.Value);
-
-            if (model.MucDoHoanThanhId.HasValue)
-                seachAll = seachAll.Where(x => x.CoQuanInfos.Any((y) =>
-                   {
-                       return y.MucDoHoanThanhId == model.MucDoHoanThanhId;
-                    }));
-
-            if (model.NamBanHanhId.HasValue)
-                seachAll = seachAll.Where(x => x.NgayTao.Year == model.NamBanHanhId.Value);
-
-            if (!string.IsNullOrEmpty(model.NhapThongTinTimKiem))
-                seachAll = seachAll.Where(x => x.NoiDung.Contains(model.NhapThongTinTimKiem));
-
-            if (!string.IsNullOrEmpty(model.TieuChiTimKiem))
-                seachAll = seachAll.Where(x => x.NoiDungTraoDoi.Contains(model.TieuChiTimKiem));
+            var seachAll = TacNghiepRepository.Find(model.ToValueSearch());
 
             return seachAll.ToPagedList(model.Page, TechOfficeConfig.PAGESIZE);
         }

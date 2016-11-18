@@ -6,6 +6,10 @@
         public const string ADMIN = "Admin";
         public const string STAFF = "Staff";
         public const string USER = "User";
+
+        /// <summary>
+        /// Allow user add new tac nghiep
+        /// </summary>
         public const string NEW_TACNGHIEP = "NewTacNghiep";
 
         /// <summary>

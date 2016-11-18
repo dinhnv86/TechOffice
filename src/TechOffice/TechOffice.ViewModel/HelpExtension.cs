@@ -8,6 +8,7 @@ using AnThinhPhat.ViewModel.Users;
 using AnThinhPhat.ViewModel.TacNghiep;
 using System.Security.Principal;
 using System.Security.Claims;
+using AnThinhPhat.Entities.Searchs;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -122,6 +123,32 @@ namespace AnThinhPhat.ViewModel
                 NoiDung = entity.NoiDung,
                 NoiDungTraoDoi = entity.NoiDungYKienTraoDoi,
                 CoQuanInfos = entity.CoQuanInfos.Select(x => x.CoQuanInfos.Where(y => y.IsSelected)).Aggregate((a, b) => { return a.Concat(b); }),
+            };
+        }
+
+        public static ValueSearchTacNghiep ToValueSearch(this ValueSearchViewModel valueSearch)
+        {
+            return new ValueSearchTacNghiep
+            {
+                CoQuanId = valueSearch.CoQuanId,
+                LinhVucTacNghiepId = valueSearch.LinhVucTacNghiepId,
+                MucDoHoanThanhId = valueSearch.MucDoHoanThanhId,
+                NamBanHanhId = valueSearch.NamBanHanhId,
+                NhomCoquanId = valueSearch.NhomCoquanId,
+                NoiDungTimKiem = valueSearch.NoiDungTimKiem,
+                SearchTypeValue = valueSearch.SearchTypeValue,
+            };
+        }
+
+        public static ValueSearchCongViec ToValueSearch(this CongViec.ValueSearchViewModel valueSearch)
+        {
+            return new ValueSearchCongViec
+            {
+                NhanVienId = valueSearch.UserId,
+                LinhVucCongViecId = valueSearch.LinhVucCongViecId,
+                NoiDungCongViec = valueSearch.NoiDungCongViec,
+                Role = valueSearch.Role,
+                Status = valueSearch.Status,
             };
         }
 

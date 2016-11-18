@@ -7,6 +7,8 @@ using AnThinhPhat.ViewModel.CongViec;
 using Ninject;
 using System.Collections.Generic;
 using AnThinhPhat.Entities.Results;
+using AnThinhPhat.ViewModel;
+using PagedList;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -28,15 +30,29 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public IHoSoCongViecRepository HoSoCongViecRepository { get; set; }
 
+        [Inject]
+        public ICoQuanRepository CoQuanRepository { get; set; }
+
         [HttpGet]
         public ActionResult Index(int? userId, int? role, int? trangThaiCongViecId, int? linhVucCongViecId, string noiDungCongViec)
         {
-            var model = InitModel();
+            var init = InitModel();
+
+            var model = new InitCongViecViewModel
+            {
+                UsersInfos = init.UsersInfos,
+                LinhVucCongViecInfos = init.LinhVucCongViecInfos,
+                TrangThaiCongViecInfos = init.TrangThaiCongViecInfos,
+            };
 
             if (model.ValueSearch == null)
                 model.ValueSearch = new ValueSearchViewModel();
 
-            model.ValueSearch.UserId = userId;
+            if (userId == null)
+                model.ValueSearch.UserId = UserId;//set current user 
+            else
+                model.ValueSearch.UserId = userId;
+
             if (role != null)
                 model.ValueSearch.Role = (EnumRoleExecute)role;
             else
@@ -49,6 +65,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
             model.ValueSearch.LinhVucCongViecId = linhVucCongViecId;
             model.ValueSearch.NoiDungCongViec = noiDungCongViec;
+            model.ValueSearch.Page = 1;
 
             return View(model);
         }
@@ -75,7 +92,15 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            return View();
+            var init = InitModel();
+            var model = new AddCongViecViewModel
+            {
+                UsersInfos = init.UsersInfos,
+                LinhVucCongViecInfos = init.LinhVucCongViecInfos,
+                TrangThaiCongViecInfos = init.TrangThaiCongViecInfos,
+            };
+
+            return View(model);
         }
 
         [HttpPost, ActionName("Add")]
@@ -89,28 +114,31 @@ namespace AnThinhPhat.WebUI.Controllers
             return View();
         }
 
-        private InitCongViecViewModel InitModel()
+        public PartialViewResult GetPageVanBanLienQuan()
         {
-            var model = new InitCongViecViewModel
+            var model = new InitVanBanViewModel
             {
-                UsersInfo = UsersRepository.GetAll().Select(x => x.ToDataInfo()),
-                LinhVucCongViec = LinhVucCongViecRepository.GetAll().Select(x => x.ToDataInfo()),
-                TrangThaiCongViec = TrangThaiCongViecRepository.GetAll().Select(x => x.ToDataInfo())
+                CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToDataInfo()),
+            };
+            return PartialView("_PartialPageVanBanLienQuan", model);
+        }
+
+        private BaseCongViecViewModel InitModel()
+        {
+            var model = new BaseCongViecViewModel
+            {
+                UsersInfos = UsersRepository.GetAll().Select(x => x.ToDataInfo()),
+                LinhVucCongViecInfos = LinhVucCongViecRepository.GetAll().Select(x => x.ToDataInfo()),
+                TrangThaiCongViecInfos = TrangThaiCongViecRepository.GetAll().Select(x => x.ToDataInfo()),
             };
 
             return model;
         }
 
-        private IEnumerable<HoSoCongViecResult> Find(ValueSearchViewModel model)
+        private IPagedList<HoSoCongViecResult> Find(ValueSearchViewModel model)
         {
-            return HoSoCongViecRepository.Find(new Entities.Searchs.ValueSearchCongViec
-            {
-                LinhVucCongViecId = model.LinhVucCongViecId,
-                NhanVienId = model.UserId,
-                NoiDungCongViec = model.NoiDungCongViec,
-                Role = model.Role,
-                Status = model.Status,
-            });
+            var query = HoSoCongViecRepository.Find(model.ToValueSearch());
+            return query.ToPagedList(model.Page, TechOfficeConfig.PAGESIZE);
         }
     }
 }

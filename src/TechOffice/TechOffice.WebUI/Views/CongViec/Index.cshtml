@@ -5,14 +5,14 @@
 }
 <div class="bg dtapg">
     <div class="boxr" style="width:100%">
-        <h1 class="title title_ct"><span>@AnThinhPhat.Resources.Labels.CongViec_Index_Title</span></h1>
+        <h1 class="title title_ct"><span>@Labels.CongViec_Index_Title</span></h1>
         <div class="pading">
             <div class="entry">
-                @using (Html.BeginRouteForm(UrlLink.CONGVIEC_NAME, FormMethod.Get))
+                @using (Html.BeginRouteForm(UrlLink.CONGVIEC, FormMethod.Get))
                 {
                     <div class="col-md-3">
-                        <label>@AnThinhPhat.Resources.Labels.CongViec_Index_ChonNhanVien</label>
-                        @Html.DropDownListFor(x => Model.UserId, new SelectList(Model.UsersInfo, "Id", "HoVaTen"), AnThinhPhat.Resources.Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })
+                        <label>@Labels.CongViec_Index_ChonNhanVien</label>
+                        @Html.DropDownListFor(x => Model.UserId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), htmlAttributes: new { @class = "form-control" })
                     </div>
                     <div class="col-md-3">
                         <label>@AnThinhPhat.Resources.Labels.CongViec_Index_VaiTroXuLy</label>
@@ -20,11 +20,11 @@
                     </div>
                     <div class="col-md-3">
                         <label>@AnThinhPhat.Resources.Labels.CongViec_Index_TinhTrang</label>
-                        @Html.DropDownListFor(x => x.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViec, "Id", "Name"), AnThinhPhat.Resources.Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownListFor(x => x.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })
                     </div>
                     <div class="col-md-3">
                         <label>@AnThinhPhat.Resources.Labels.CongViec_Index_LinhVucCongViec</label>
-                        @Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViec, "Id", "Name"), AnThinhPhat.Resources.Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })
                     </div>
                     <div class="col-xs-12">
                         <label>@AnThinhPhat.Resources.Labels.CongViec_Index_NoiDungCongViec</label>
@@ -32,10 +32,10 @@
                     </div>
                     <div class="col-xs-12" id="outer" style="padding-top:20px;">
                         <div class="inner">
-                            <input type="submit" value='@AnThinhPhat.Resources.Buttons.CongViec_Index_TimKiem' class="btn btn-primary" id="btnSearch" />
+                            <input type="submit" value='@Buttons.CongViec_Index_TimKiem' class="btn btn-primary" id="btnSearch" />
                         </div>
-                        <div class="inner">@Html.RouteLink(AnThinhPhat.Resources.Buttons.CongViec_Index_ThongKe, UrlLink.CONGVIEC_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })</div>
-                        <div class="inner">@Html.RouteLink(AnThinhPhat.Resources.Buttons.CongViec_Index_ThemMoi, "congviec/themmoi", null, htmlAttributes: new { @class = "btn btn-primary" })</div>
+                        <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThongKe, UrlLink.CONGVIEC_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })</div>
+                        <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThemMoi, "congviec/themmoi", null, htmlAttributes: new { @class = "btn btn-primary" })</div>
                     </div>
                 }
 

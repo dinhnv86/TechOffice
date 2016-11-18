@@ -44,6 +44,10 @@
     <Compile Include="BaseDataViewModel.cs" />
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="BaseLogViewModel.cs" />
+    <Compile Include="CongViec\AddCongViecViewModel.cs" />
+    <Compile Include="CongViec\BaseCongViecViewModel.cs" />
+    <Compile Include="CongViec\InitQuaTrinhXuLyViewModel.cs" />
+    <Compile Include="CongViec\InitVanBanViewModel.cs" />
     <Compile Include="Menu\InitMenuThuTucViewModel.cs" />
     <Compile Include="Menu\InitMenuVanBanViewModel.cs" />
     <Compile Include="CongViec\InitCongViecViewModel.cs" />

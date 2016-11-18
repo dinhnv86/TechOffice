@@ -1,6 +1,6 @@
-﻿namespace AnThinhPhat.ViewModel.TacNghiep
+﻿namespace AnThinhPhat.Entities.Searchs
 {
-    public class ValueSearchViewModel
+    public class ValueSearchTacNghiep
     {
         public int? NhomCoquanId { get; set; }
 
@@ -15,7 +15,5 @@
         public string NoiDungTimKiem { get; set; }
 
         public bool? SearchTypeValue { get; set; }
-
-        public int Page { get; set; }
     }
 }

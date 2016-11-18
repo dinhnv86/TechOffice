@@ -1,102 +1,130 @@
-﻿@{
+﻿@model AnThinhPhat.ViewModel.CongViec.AddCongViecViewModel
+@{
     Layout = "~/Views/Shared/_LayoutCV.cshtml";
 }
 
-<div class="boxr" style="width:100%">
-    <h1 class="title title_ct"><span>Thêm mới công việc</span></h1>
-    <div class="pading">
-        <div class="entry">
-            <div class="col-md-4">
-                <label>Ngày khởi tạo</label>
-                <input type="text" class="control-datepicker" />
-                <label>Phụ trách</label>
-                <input type="date" />
-            </div>
-            <div class="col-md-4">
-                <label>Ngày hết hạn</label>
-                <input type="date" />
-                <label>Xử lý chính</label>
-                <select>
-                    <option>Trịnh Quang Hạnh</option>
-                    <option>Phạm Thị Thư</option>
-                </select>
-            </div>
-            <div class="col-md-4">
-                <label>Lĩnh vực</label>
-                <select>
-                    <option>Trịnh Quang Hạnh</option>
-                    <option>Phạm Thị Thư</option>
-                </select>
-                <label>Phối hợp</label>
-                <select>
-                    <option>Trịnh Quang Hạnh</option>
-                    <option>Phạm Thị Thư</option>
-                </select>
-            </div>
-            <div class="clear"></div>
-            <div class="col-md-12">
-                <label>Nội dung</label>
-                <textarea rows="2" cols="2"></textarea>
-                <label>Văn bản liên quan</label>
-                <textarea rows="2" cols="2"></textarea>
-            </div>
-            <div class="col-md-3">
-                <label>Số văn bản</label>
-                <input type="text" />
-            </div>
-            <div class="col-md-3">
-                <label>Ngày</label>
-                <input type="date" />
-            </div>
-            <div class="col-md-12">
-                <label>Nội dung</label>
-                <textarea rows="2" cols="2"></textarea>
-            </div>
-            <div class="col-md-2">
-                <label>Cơ quan</label>
-                <input type="text" />
-            </div>
-            <div class="col-md-2">
-                <label></label>
-                <input type="button" value="Thêm" />
-            </div>
-            <div class="clear"></div>
-            <div class="col-md-12">
-                <label>Quá trình xử lý</label>
-                <textarea rows="2" cols="2"></textarea>
-            </div><div class="clear"></div>
-            <div class="col-md-12">
-                <label>Nội dung</label>
-                <textarea rows="2" cols="2"></textarea>
-            </div>
-            @*<div class="col-md-1">
-                    <label></label><br />
-                    <input type="button" value="Thêm" />
-                </div>*@
-            <div class="col-md-12">
-                <label>Các tập tin đính kèm</label>
-                @using (Html.BeginForm("UploadFileCongViec", "Update", FormMethod.Post, new { enctype = "multipart/form-data", @class = "dropzone" }))
-                {
-                    <div class="fallback">
-                        <input type="file" class="form-control" multiple />
-                    </div>
-                }
-            </div>
 
-            <div class="col-md-12">
-                <label>Trạng thái</label>
-                <select class="form-control">
-                    <option>Chưa xử lý</option>
-                </select>
-            </div>
-            <div class="clear"></div>
-            <div class="col-md-12">
-                <div id="outer">
-                    <div class="inner">
-                        <input type="submit" class="btn btn-primary btn-width-md" value="Thêm mới" />
-                    </div>
-                    <div class="inner"><input type="button" class="btn btn-primary btn-width-md" value="Hủy" /></div>
+<h1 class="title title_ct"><span>Thêm mới công việc</span></h1>
+<div class="pading">
+    <div class="entry">
+        <div class="col-sm-4">
+            <label>Ngày khởi tạo<span class="required">*</span></label>
+            @Html.DisplayFor(x => Model.NgayKhoiTao, "DateTime")
+        </div>
+        <div class="col-sm-4">
+            <label>Ngày hết hạn</label>
+            @Html.EditorFor(x => Model.NgayHetHan, "DateTime")
+        </div>
+        <div class="col-sm-4">
+            <label>Lĩnh vực <span class="required">*</span></label>
+            @Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), "--Chọn lĩnh vực công việc--", htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            <label>Phụ trách<span class="required">*</span></label>
+            @Html.DropDownListFor(x => Model.UserPhuTrachId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người phụ trách--", htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            <label>Xử lý chính<span class="required">*</span></label>
+            @Html.DropDownListFor(x => Model.UserXuLyChinhId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người xử lý chính--", htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            <label>Phối hợp</label>
+            @Html.DropDownListFor(x => Model.UserPhoiHopId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người phối hợp--", htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="clear"></div>
+        <div class="col-sm-12">
+            <label>Nội dung</label>
+            @Html.TextAreaFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control", rows = "2" })
+        </div>
+        <div class="col-sm-12">
+            <label>Văn bản liên quan</label>
+            <button class="pull-right btn btn-link" id="btnAddVanBan">Them</button>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th> Số VB </th>
+                        <th>Ngày</th>
+                        <th>Nội dung</th>
+                        <th>Cơ quan</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyAddVanBan">
+                    @foreach (var item in Model.VanBanLienQuan)
+                    {
+                        <tr>
+                            <td>@item.SoVanBan</td>
+                            <td>@Html.DisplayFor(x => item.Ngay, "DisplayDateTime")</td>
+                            <td>@item.NoiDung</td>
+                            <td>@item.NameCoQuan</td>
+                            <td class="link-action">
+                                <input type="button" value="Xóa" class="btn btn-link" />
+                                <button class="btn btn-link">Sửa</button> |
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="col-sm-12">
+            <label>Quá trình xử lý</label>
+            <button class="pull-right btn btn-link" id="btnAddQuaTrinhXuLy">Them</button>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Giờ</th>
+                        <th>Ngày</th>
+                        <th>Nội dung</th>
+                        <th>Người thêm</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyAddQuaTrinhXuLy">
+                    @foreach (var item in Model.QuaTringXuLyViewModel)
+                    {
+                        <tr>
+                            <td>@item.Gio : @item.Phut</td>
+                            <td>@Html.DisplayFor(x => item.Ngay, "DisplayDateTime")</td>
+                            <td></td>
+                            <td></td>
+                            <td class="link-action">
+                                <input type="button" value="Xóa" class="btn btn-link" />
+                                <button class="btn btn-link">Sửa</button> |
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <label class="col-sm-12">Các tập tin đính kèm</label>
+        <div class="col-sm-12">
+            <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
+            <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
+                <span class="glyphicon glyphicon-upload"></span>
+                Upload
+            </button>
+        </div>
+        <span class="col-xs-12" id="spanUpload"></span>
+
+        <div class="col-xs-12" id="filesName">
+        </div>
+
+        <div class="col-sm-4">
+            <label>Trạng thái</label>
+            @Html.DropDownListFor(x => Model.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), "Chọn trạng thái công việc", htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="clear"></div>
+        <div class="col-sm-12">
+            <label>&nbsp;</label>
+            <div id="outer">
+                <div class="inner">
+                    <input type="submit" class="btn btn-primary btn-width-md" value="Tạo mới" />
                 </div>
+                <div class="inner"><input type="button" class="btn btn-primary btn-width-md" value="Hủy" /></div>
             </div>
         </div>
     </div>
@@ -104,20 +132,27 @@
 
 <div class="clearfix"></div>
 
+<div class="hide" id="templateVanBan">
+    @{Html.RenderAction("GetPageVanBanLienQuan"); }
+</div>
+
 @section Scripts{
     <script>
         $(document).ready(function () {
             var optionCalendar =
              {
-                 //showOn: 'both',
                  autoSize: true,
                  constrainInput: true,
-                 //buttonImageOnly: true,
-                 @*buttonImage: "@Url.Content("~/Content/images/calendar.png")",*@
-                 //buttonText: "Calendar",
-                 dateFormat: 'dd/mm/yy'
+                 dateFormat: 'dd/mm/yy',
+                 minDate: new Date(),
              };
             $('.control-datepicker').datepicker(optionCalendar);
+
+            $('#btnAddVanBan').on('click', function () {
+
+                $("#tbodyAddVanBan").append($('#templateRow').html());
+            });
+            $('#btnAddQuaTrinhXuLy').on('click', function () { });
         });
     </script>
 }

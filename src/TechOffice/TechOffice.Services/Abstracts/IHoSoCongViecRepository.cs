@@ -9,6 +9,6 @@ namespace AnThinhPhat.Services.Abstracts
     /// </summary>
     public interface IHoSoCongViecRepository : IRepository<HoSoCongViecResult>
     {
-        IEnumerable<HoSoCongViecResult> Find(ValueSearchCongViec value);
+        IEnumerable<HoSoCongViecResult> Find(ValueSearchCongViec valueSearch);
     }
 }

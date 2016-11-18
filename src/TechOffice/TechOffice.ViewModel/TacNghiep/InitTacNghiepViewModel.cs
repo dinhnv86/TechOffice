@@ -14,11 +14,7 @@ namespace AnThinhPhat.ViewModel.TacNghiep
 
         public string NhapThongTinTimKiem { get; set; }
 
-        public string TieuChiTimKiem { get; set; }
-
-        public bool IsTimKiemNoiDung { get; set; }
-
-        public bool IsTimKiemYKienTraoDoi { get; set; }
+        public bool SearchTypeValue { get; set; } = true;
 
         public int? NhomCoQuanId { get; set; }
         public IEnumerable<NhomCoQuanInfo> NhomCoQuanInfos { get; set; }

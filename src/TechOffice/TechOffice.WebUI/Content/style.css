@@ -129,7 +129,7 @@ a {
 
 
 .navbar .nav li a {
-    background: url("../images/space_menu.png") no-repeat scroll right center transparent;
+    /*background: url("../images/space_menu.png") no-repeat scroll right center transparent;*/
     color: #FFF;
     font-size: 15px;
     padding: 31px 13px;
@@ -278,7 +278,7 @@ a {
 }
 
 .title {
-    background: url("img/h-border.png") repeat-x scroll center center transparent;
+    /*background: url("img/h-border.png") repeat-x scroll center center transparent;*/
     border-bottom: 1px solid #AAA;
     margin: 0px;
     padding: 0px 0px 3px 0px;
@@ -1355,7 +1355,7 @@ border:1px solid #3b3b3b ! important; color:#fff
 
 
     .navbar .nav li a {
-        background: url("../images/space_menu.png") no-repeat scroll right center transparent;
+        /*background: url("../images/space_menu.png") no-repeat scroll right center transparent;*/
         color: #FFF;
         font-size: 14px;
         padding: 31px 8px;
@@ -1372,7 +1372,7 @@ border:1px solid #3b3b3b ! important; color:#fff
 
 
     .navbar .nav li a {
-        background: url("../images/space_menu.png") no-repeat scroll right center transparent;
+        /*background: url("../images/space_menu.png") no-repeat scroll right center transparent;*/
         color: #FFF;
         font-size: 15px;
         padding: 31px 9px;
@@ -1912,7 +1912,7 @@ border:1px solid #3b3b3b ! important; color:#fff
     }
 
     .navbar .nav li a {
-        background: url("../images/space_menu.png") no-repeat scroll right center transparent;
+        /*background: url("../images/space_menu.png") no-repeat scroll right center transparent;*/
         color: #FFF;
         font-size: 15px;
         padding: 31px 6px;

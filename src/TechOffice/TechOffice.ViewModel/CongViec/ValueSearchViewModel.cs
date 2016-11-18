@@ -13,5 +13,7 @@ namespace AnThinhPhat.ViewModel.CongViec
         public int? LinhVucCongViecId { get; set; }
 
         public string NoiDungCongViec { get; set; }
+
+        public int Page { get; set; }
     }
 }
