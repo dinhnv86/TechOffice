@@ -30,9 +30,9 @@
                         @if (User.IsInRole("SupperAdmin") || (User.IsInRole("Admin")))
                         {
                             <li>
-                                <a href = "@Url.RouteUrl(UrlLink.ADMIN)" >
-                                <span class="glyphicon glyphicon-lock"></span>
-                                @Html.Raw(User.Identity.FullName())
+                                <a href="@Url.RouteUrl(UrlLink.ADMIN)">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                    @Html.Raw(User.Identity.FullName())
                                 </a>
                             </li>
                         }
@@ -42,7 +42,7 @@
                         }
 
                         <li>
-                            <a href="javascript:document.getElementById('logoutForm').submit()"> Log off</a>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Thoát</a>
                         </li>
                     </ul>
                 }
@@ -50,7 +50,7 @@
             else
             {
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="@Url.Action("LogIn", "Account")">Login</a></li>
+                    <li><a href="@Url.Action("LogIn", "Account")">Đăng nhập</a></li>
                 </ul>
             }
         </div>
@@ -106,7 +106,7 @@
                     @*<a href="tacnghiep.html">Tác nghiệp</a>*@
                 </li>
                 <li>
-                    @Html.RouteLink("CÔNG VIỆC", UrlLink.CONGVIEC)
+                    @Html.RouteLink("CÔNG VIỆC", UrlLink.CONGVIEC_NAME)
                     @*<a href="quanlycongviec.html">Quản lý công việc</a>*@
                 </li>
                 <li>

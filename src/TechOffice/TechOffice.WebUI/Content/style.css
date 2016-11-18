@@ -3618,10 +3618,10 @@ input#phone {
     background: #2070BC;
 }
 
-.table_over {
+/*.table_over {
     overflow-x: auto;
     width: 100%;
-}
+}*/
 
 @media (max-width: 600px) {
     .span3 {

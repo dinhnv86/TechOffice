@@ -1,10 +1,10 @@
 ﻿using AnThinhPhat.Utilities;
 
-namespace AnThinhPhat.ViewModel.CongViec
+namespace AnThinhPhat.Entities.Searchs
 {
-    public class ValueSearchViewModel
+    public class ValueSearchCongViec
     {
-        public int? UserId { get; set; }
+        public int? NhanVienId { get; set; }
 
         public EnumRoleExecute? Role { get; set; }
 

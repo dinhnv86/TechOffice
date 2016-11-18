@@ -2,13 +2,42 @@
 {
     public static class UrlLink
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static string TRANGCHU = "trangchu";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string VANBAN = "vanban";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string VANBAN_DETAIL = "vanban/{id}";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string THUTUC = "thutuc";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string THUTUC_DETAIL = "thutuc/{id}";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string TACNGHIEP = "tacnghiep";
-        public static string CONGVIEC = "congviec";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string CONGVIEC_NAME = "congviec";
+        public static string CONGVIEC_URL = "{controller}/{action}/{UserId}/{Role}/{TrangThaiCongViecId}/{LinhVucCongViecId}/{noiDungCongViec}"; /*UserId=&Role=1&TrangThaiCongViecId=&LinhVucCongViecId=*/
+
         public static string TINTUC = "tintuc";
         public static string LIENHE = "lienhe";
         public static string TACNGHIEP_THONGKE = "tacnghiep/thongke";

@@ -36,8 +36,9 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.TACNGHIEP, UrlLink.TACNGHIEP,
                 new { controller = "TacNghiep", action = "Index" });
 
-            routes.MapRoute(UrlLink.CONGVIEC, UrlLink.CONGVIEC,
-                new { controller = "CongViec", action = "Index" });
+            routes.MapRoute(UrlLink.CONGVIEC_NAME, UrlLink.CONGVIEC_URL,
+                new { controller = "CongViec", action = "Index", UserId = 0, Role = 0, TrangThaiCongViecId = -1, LinhVucCongViecId = 0, NoiDungCongViec = string.Empty },
+                new { userId = @"\d+", role = @"\d+", trangThaiCongViecId = @"\d+", linhVucCongViecId = @"\d+", });
 
             routes.MapRoute(UrlLink.TINTUC, UrlLink.TINTUC,
                 new { controller = "Home", action = "Article" });

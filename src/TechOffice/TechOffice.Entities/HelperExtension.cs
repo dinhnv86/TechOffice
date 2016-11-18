@@ -139,9 +139,9 @@ namespace AnThinhPhat.Entities
             return new CongViecPhoiHopResult
             {
                 Id = entity.Id,
-                HoSoCongViec = entity.HoSoCongViec.ToDataResult().ToIfNotNullDataInfo(),
+                HoSoCongViec = entity.HoSoCongViec.ToDataInfo(),
                 HoSoCongViecId = entity.HoSoCongViecId,
-                UserInfo = entity.User.ToDataResult().ToIfNotNullDataInfo(),
+                UserInfo = entity.User.ToDataInfo(),
                 UserId = entity.UserId,
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
@@ -164,7 +164,7 @@ namespace AnThinhPhat.Entities
             return new CongViecQuaTrinhXuLyResult
             {
                 Id = entity.Id,
-                HoSoCongViec = entity.HoSoCongViec.ToDataResult().ToIfNotNullDataInfo(),
+                HoSoCongViec = entity.HoSoCongViec.ToDataInfo(),
                 HoSoCongViecId = entity.HoSoCongViecId,
                 PhutBanHanh = entity.PhutBanHanh,
                 GioBanHanh = entity.GioBanHanh,
@@ -282,8 +282,18 @@ namespace AnThinhPhat.Entities
                 Id = entity.Id,
                 NoiDung = entity.NoiDung,
                 NgayHetHan = entity.NgayHetHan,
-                TrangThai = entity.TrangThaiCongViec.ToIfNotNullDataInfo(),
+                NgayTao = entity.NgayTao,
+                TrangThaiCongViecId = entity.TrangThaiCongViecId,
+                TrangThaiCongViecInfo = entity.TrangThaiCongViec.ToIfNotNullDataInfo(),
+                LinhVucCongViecId = entity.LinhVucCongViecId,
+                LinhVucCongViec = entity.LinhVucCongViec.ToDataInfo(),
                 QuaTrinhXuLy = entity.QuaTrinhXuLy,
+                UserPhuTrachId = entity.UserPhuTrachId,
+                UserPhuTrach = entity.User.ToDataInfo(),
+                UserXuLyId = entity.UserXuLyId,
+                UserXyLy = entity.User1.ToDataInfo(),
+                CongViecPhoiHopResult = entity.CongViec_PhoiHop.Select(x => x.ToDataResult()),
+                CongViecQuaTrinhXuLyResult = entity.CongViec_QuaTrinhXuLy.Select(x => x.ToDataResult()),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -304,7 +314,7 @@ namespace AnThinhPhat.Entities
                 Id = entity.Id,
                 NgayHetHan = entity.NgayHetHan,
                 NoiDung = entity.NoiDung,
-                TrangThai = entity.TrangThai,
+                TrangThai = entity.TrangThaiCongViecInfo,
             };
         }
 

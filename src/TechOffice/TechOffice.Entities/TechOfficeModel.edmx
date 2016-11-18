@@ -97,6 +97,7 @@
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="NgayTao" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="LinhVucCongViec">
           <Key>
@@ -1269,6 +1270,7 @@
           <NavigationProperty Name="User" Relationship="TechOfficeDevModel.FK_HoSoCongViec_UserPhuTrach" FromRole="HoSoCongViec" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="TechOfficeDevModel.FK_HoSoCongViec_UserXuLyChinh" FromRole="HoSoCongViec" ToRole="User" />
           <NavigationProperty Name="TapTinCongViecs" Relationship="TechOfficeDevModel.FK_TapTinCongViec_HoSoCongViec" FromRole="HoSoCongViec" ToRole="TapTinCongViec" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="LinhVucCongViec">
           <Key>
@@ -2130,6 +2132,7 @@
           <EntitySetMapping Name="HoSoCongViecs">
             <EntityTypeMapping TypeName="TechOfficeDevModel.HoSoCongViec">
               <MappingFragment StoreEntitySet="HoSoCongViec">
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
                 <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />

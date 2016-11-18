@@ -5,6 +5,8 @@ using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel.CongViec;
 using Ninject;
+using System.Collections.Generic;
+using AnThinhPhat.Entities.Results;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -23,32 +25,45 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public ITrangThaiCongViecRepository TrangThaiCongViecRepository { get; set; }
 
+        [Inject]
+        public IHoSoCongViecRepository HoSoCongViecRepository { get; set; }
+
         [HttpGet]
-        public ActionResult Index(int? userId, int? role, int? status, int? linhVucCongViecId)
+        public ActionResult Index(int? userId, int? role, int? trangThaiCongViecId, int? linhVucCongViecId, string noiDungCongViec)
         {
             var model = InitModel();
 
             if (model.ValueSearch == null)
                 model.ValueSearch = new ValueSearchViewModel();
 
-            model.ValueSearch.UserId = userId ?? 0;
+            model.ValueSearch.UserId = userId;
             if (role != null)
-                model.ValueSearch.Role = (EnumRoleExecute) role;
+                model.ValueSearch.Role = (EnumRoleExecute)role;
+            else
+                model.ValueSearch.Role = EnumRoleExecute.TATCA;
 
-            if (status != null)
-                model.ValueSearch.Status = (EnumStatus) status;
+            if (trangThaiCongViecId != null)
+                model.ValueSearch.Status = (EnumStatus)trangThaiCongViecId;
+            else
+                model.ValueSearch.Status = EnumStatus.TATCA;
 
-            model.ValueSearch.LinhVucCongViecId = linhVucCongViecId ?? 0;
+            model.ValueSearch.LinhVucCongViecId = linhVucCongViecId;
+            model.ValueSearch.NoiDungCongViec = noiDungCongViec;
 
             return View(model);
         }
 
         public ActionResult List(ValueSearchViewModel model)
         {
-            if (model == null)
-                return View("_PartialPageList");
+            if (model.UserId == null)
+            {
+                //Get current UserId
+                model.UserId = UserId;
+            }
 
-            return View("_PartialPageList");
+            var result = Find(model);
+
+            return View("_PartialPageList", result);
         }
 
         [HttpGet]
@@ -84,6 +99,18 @@ namespace AnThinhPhat.WebUI.Controllers
             };
 
             return model;
+        }
+
+        private IEnumerable<HoSoCongViecResult> Find(ValueSearchViewModel model)
+        {
+            return HoSoCongViecRepository.Find(new Entities.Searchs.ValueSearchCongViec
+            {
+                LinhVucCongViecId = model.LinhVucCongViecId,
+                NhanVienId = model.UserId,
+                NoiDungCongViec = model.NoiDungCongViec,
+                Role = model.Role,
+                Status = model.Status,
+            });
         }
     }
 }

@@ -150,6 +150,7 @@
     <Compile Include="Role.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Searchs\ValueSearchCongViec.cs" />
     <Compile Include="TacNghiep.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>

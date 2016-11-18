@@ -23,6 +23,8 @@ namespace AnThinhPhat.ViewModel.CongViec
 
         public EnumRoleExecute Role { get; set; }
 
+        public string NoiDungCongViec { get; set; }
+
         public ValueSearchViewModel ValueSearch { get; set; }
     }
 }
