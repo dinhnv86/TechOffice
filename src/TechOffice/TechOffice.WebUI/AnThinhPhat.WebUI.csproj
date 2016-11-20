@@ -270,11 +270,13 @@
     <Content Include="images\slider1.jpg" />
     <Content Include="images\Tap-huan-doan.jpg" />
     <Content Include="images\tongdai.png" />
+    <Content Include="Scripts\app\congviec_add.js" />
     <Content Include="Scripts\app\datepickerjs.js" />
     <Content Include="Scripts\app\menuslidejs.js" />
     <Content Include="Scripts\app\message.js" />
     <Content Include="Scripts\app\modaljs.js" />
     <Content Include="Scripts\app\tacnghiep-detail.js" />
+    <Content Include="Scripts\app\uploadfiles.js" />
     <Content Include="Scripts\app\user-update.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -284,6 +286,7 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="connectionStrings.config" />
+    <Content Include="appsettings.config" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -417,7 +420,7 @@
     <Content Include="Views\Shared\DisplayTemplates\ListBodies.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\GroupListBodies.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageResultThucHienCongViec.cshtml" />
-    <Content Include="Views\CongViec\_PartialPageVanBanLienQuan.cshtml" />
+    <Content Include="Views\Shared\_PartialPageUploadFiles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

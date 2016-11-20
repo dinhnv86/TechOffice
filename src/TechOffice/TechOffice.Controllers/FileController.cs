@@ -34,7 +34,7 @@ namespace AnThinhPhat.WebUI.Controllers
         /// 3: ThuTuc</param>
         /// <returns></returns>
         [HttpPost]
-        public ContentResult FilesAttach(string guid, string type)
+        public ContentResult FilesAttach(string guid)
         {
             try
             {
@@ -44,11 +44,7 @@ namespace AnThinhPhat.WebUI.Controllers
                     if (hpf.ContentLength == 0)
                         continue;
 
-                    if (type == "1")
-                    {
-                        SaveFilesTacNghiep(hpf, guid);
-                        continue;
-                    }
+                    SaveFilesTacNghiep(hpf, guid);
                 }
 
                 // Returns json

@@ -64,7 +64,6 @@
         @Html.ValidationMessageFor(x => x.NoiDung)
     </div>
 
-    //{ Html.RenderPartial("_PartialPageGroupListBodies", new InitNhomCoQuanCoLienQuanBindDataTemp { ParentNameSpace = "CoQuanInfos", NhomCoQuanInfos = Model.CoQuanInfos }); }
     @Html.EditorFor(x => Model.CoQuanInfos, "GroupListBodies")
 
     <div class="col-md-12">
@@ -72,18 +71,7 @@
         @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 })
     </div>
 
-    <label class="col-sm-12">Đính kèm tập tin</label>
-    <div class="col-sm-12">
-        <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
-        <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
-            <span class="glyphicon glyphicon-upload"></span>
-            Upload
-        </button>
-    </div>
-    <span class="col-xs-12" id="spanUpload"></span>
-
-    <div class="col-xs-12" id="filesName">
-    </div>
+    { Html.RenderPartial("_PartialPageUploadFiles", Model.Guid); }
 
     <div class="col-sm-6" id="outer">
         <div class="inner"><input type="submit" value="Lưu" class="btn btn-primary btn-width-md col-sm-2" name="btnAdd" id="btnAdd" /></div>
@@ -124,7 +112,7 @@
             });
 
             /*begin upload*/
-            $('input[type="file"]').change(function (e) {
+            @*$('input[type="file"]').change(function (e) {
                 $('#spanUpload').text('');
                 var files = e.originalEvent.target.files;
                 if (files.length > 0) {
@@ -168,7 +156,7 @@
                 else {
                     alert("This browser doesn't support HTML5 file uploads!");
                 }
-            });
+            });*@
             /*end upload*/
 
             onAddBegin = function () {

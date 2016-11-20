@@ -1,158 +1,198 @@
 ﻿@model AnThinhPhat.ViewModel.CongViec.AddCongViecViewModel
 @{
     Layout = "~/Views/Shared/_LayoutCV.cshtml";
+
+    AjaxOptions ajaxOption = new AjaxOptions
+    {
+        Url = Url.Action("Add"),
+        HttpMethod = "POST",
+        OnBegin = "onAddBegin",
+        OnComplete = "onAddComplete",
+        OnSuccess = "onAddSuccess",
+        OnFailure = "onAddFailure",
+    };
 }
 
-
 <h1 class="title title_ct"><span>Thêm mới công việc</span></h1>
+
 <div class="pading">
     <div class="entry">
-        <div class="col-sm-4">
-            <label>Ngày khởi tạo<span class="required">*</span></label>
-            @Html.DisplayFor(x => Model.NgayKhoiTao, "DateTime")
-        </div>
-        <div class="col-sm-4">
-            <label>Ngày hết hạn</label>
-            @Html.EditorFor(x => Model.NgayHetHan, "DateTime")
-        </div>
-        <div class="col-sm-4">
-            <label>Lĩnh vực <span class="required">*</span></label>
-            @Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), "--Chọn lĩnh vực công việc--", htmlAttributes: new { @class = "form-control" })
-        </div>
-        <div class="col-sm-4">
-            <label>Phụ trách<span class="required">*</span></label>
-            @Html.DropDownListFor(x => Model.UserPhuTrachId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người phụ trách--", htmlAttributes: new { @class = "form-control" })
-        </div>
-        <div class="col-sm-4">
-            <label>Xử lý chính<span class="required">*</span></label>
-            @Html.DropDownListFor(x => Model.UserXuLyChinhId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người xử lý chính--", htmlAttributes: new { @class = "form-control" })
-        </div>
-        <div class="col-sm-4">
-            <label>Phối hợp</label>
-            @Html.DropDownListFor(x => Model.UserPhoiHopId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người phối hợp--", htmlAttributes: new { @class = "form-control" })
-        </div>
-        <div class="clear"></div>
-        <div class="col-sm-12">
-            <label>Nội dung</label>
-            @Html.TextAreaFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control", rows = "2" })
-        </div>
-        <div class="col-sm-12">
-            <label>Văn bản liên quan</label>
-            <button class="pull-right btn btn-link" id="btnAddVanBan">Them</button>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th> Số VB </th>
-                        <th>Ngày</th>
-                        <th>Nội dung</th>
-                        <th>Cơ quan</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="tbodyAddVanBan">
-                    @foreach (var item in Model.VanBanLienQuan)
-                    {
-                        <tr>
-                            <td>@item.SoVanBan</td>
-                            <td>@Html.DisplayFor(x => item.Ngay, "DisplayDateTime")</td>
-                            <td>@item.NoiDung</td>
-                            <td>@item.NameCoQuan</td>
-                            <td class="link-action">
-                                <input type="button" value="Xóa" class="btn btn-link" />
-                                <button class="btn btn-link">Sửa</button> |
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-        <div class="clear"></div>
-
-        <div class="col-sm-12">
-            <label>Quá trình xử lý</label>
-            <button class="pull-right btn btn-link" id="btnAddQuaTrinhXuLy">Them</button>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Giờ</th>
-                        <th>Ngày</th>
-                        <th>Nội dung</th>
-                        <th>Người thêm</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="tbodyAddQuaTrinhXuLy">
-                    @foreach (var item in Model.QuaTringXuLyViewModel)
-                    {
-                        <tr>
-                            <td>@item.Gio : @item.Phut</td>
-                            <td>@Html.DisplayFor(x => item.Ngay, "DisplayDateTime")</td>
-                            <td></td>
-                            <td></td>
-                            <td class="link-action">
-                                <input type="button" value="Xóa" class="btn btn-link" />
-                                <button class="btn btn-link">Sửa</button> |
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-        <label class="col-sm-12">Các tập tin đính kèm</label>
-        <div class="col-sm-12">
-            <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
-            <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
-                <span class="glyphicon glyphicon-upload"></span>
-                Upload
-            </button>
-        </div>
-        <span class="col-xs-12" id="spanUpload"></span>
-
-        <div class="col-xs-12" id="filesName">
-        </div>
-
-        <div class="col-sm-4">
-            <label>Trạng thái</label>
-            @Html.DropDownListFor(x => Model.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), "Chọn trạng thái công việc", htmlAttributes: new { @class = "form-control" })
-        </div>
-        <div class="clear"></div>
-        <div class="col-sm-12">
-            <label>&nbsp;</label>
-            <div id="outer">
-                <div class="inner">
-                    <input type="submit" class="btn btn-primary btn-width-md" value="Tạo mới" />
-                </div>
-                <div class="inner"><input type="button" class="btn btn-primary btn-width-md" value="Hủy" /></div>
+        @using (Ajax.BeginForm(ajaxOption))
+        {
+            <div class="col-sm-4">
+                <label>Ngày khởi tạo<span class="required">*</span></label>
+                @Html.DisplayFor(x => Model.NgayKhoiTao, "DateTime")
             </div>
-        </div>
+            <div class="col-sm-4">
+                <label>Ngày hết hạn</label>
+                @Html.EditorFor(x => Model.NgayHetHan, "DateTime")
+            </div>
+            <div class="col-sm-4">
+                <label>Lĩnh vực <span class="required">*</span></label>
+                @Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), "--Chọn lĩnh vực công việc--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => Model.LinhVucCongViecId)
+            </div>
+            <div class="col-sm-4">
+                <label>Phụ trách<span class="required">*</span></label>
+                @Html.DropDownListFor(x => Model.UserPhuTrachId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người phụ trách--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => Model.UserPhuTrachId)
+            </div>
+            <div class="col-sm-4">
+                <label>Xử lý chính<span class="required">*</span></label>
+                @Html.DropDownListFor(x => Model.UserXuLyChinhId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người xử lý chính--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => Model.UserXuLyChinhId)
+            </div>
+            <div class="col-sm-4">
+                <label>Phối hợp</label>
+                @Html.DropDownListFor(x => Model.UserPhoiHopId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người phối hợp--", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="clear"></div>
+            <div class="col-sm-12">
+                <label>Nội dung<span class="required">*</span></label>
+                @Html.TextAreaFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control", rows = "2" })
+                @Html.ValidationMessageFor(x => Model.NoiDungCongViec)
+            </div>
+            <div class="col-sm-12">
+                <label>Văn bản liên quan</label>
+                <table class="table table-bordered" id="tableAddVanBan">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-2 text-center"> Số VB </th>
+                            <th class="col-xs-2 text-center">Ngày</th>
+                            <th class="col-4 text-center">Nội dung</th>
+                            <th class="col-xs-2 text-center">Cơ quan</th>
+                            <th class="col-xs-2 text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyAddVanBan">
+                        @for (int i = 0; i < Model.VanBanLienQuan.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.TextBoxFor(x => Model.VanBanLienQuan[i].SoVanBan, htmlAttributes: new { @class = "form-control" })
+                                    @Html.HiddenFor(x => Model.VanBanLienQuan[i].SoVanBan)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(x => Model.VanBanLienQuan[i].Ngay)
+                                    @Html.HiddenFor(x => Model.VanBanLienQuan[i].Ngay)
+                                </td>
+                                <td>@Html.TextBoxFor(x => Model.VanBanLienQuan[i].NoiDung, htmlAttributes: new { @class = "form-control" })</td>
+                                <td>@Html.DropDownListFor(x => Model.VanBanLienQuan[i].CoQuanId, new SelectList(Model.VanBanLienQuan[i].CoQuanInfos, "Id", "Name"), "-- Chọn cơ quan --", htmlAttributes: new { @class = "form-control" }) </td>
+                                <td class="link-action">
+                                    <input type="button" value="Lưu" class="btn btn-link" id="btnAddVanBanLienQuan" disabled="disabled" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="col-sm-12">
+                <label>Quá trình xử lý</label>
+                <table class="table table-bordered" id="tableAddQuaTrinhXuLy">
+                    <thead>
+                        <tr>
+                            <th class="text-center col-xs-1">Giờ</th>
+                            <th class="text-center col-xs-2">Ngày</th>
+                            <th class="text-center col-xs-5">Nội dung</th>
+                            <th class="col-xs-2">Người thêm</th>
+                            <th class="text-center col-xs-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyAddQuaTrinhXuLy">
+                        @for (int i = 0; i < Model.QuaTrinhXuLyViewModel.Count; i++)
+                        {
+                            <tr>
+                                <td colspan="4">@Html.TextBoxFor(x => Model.QuaTrinhXuLyViewModel[i].NoiDung, htmlAttributes: new { @class = "form-control" })</td>
+                                @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].Gio) : @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].Phut)
+                                @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].Ngay)
+                                @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].NguoiThem)
+                                <td class="link-action">
+                                    <input type="button" value="Lưu" class="btn btn-link" id="btnAddQuaTrinhXuLy" disabled="disabled" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            { Html.RenderPartial("_PartialPageUploadFiles", Model.Guid); }
+
+            <div class="col-sm-4">
+                <label>Trạng thái</label>
+                @Html.DropDownListFor(x => Model.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), "Chọn trạng thái công việc", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="clear"></div>
+                <div class="col-sm-12">
+                    <label>&nbsp;</label>
+                    <div id="outer">
+                        <div class="inner">
+                            <input type="submit" class="btn btn-primary btn-width-md" value="Tạo mới" />
+                        </div>
+                        <div class="inner"><input type="button" class="btn btn-primary btn-width-md" value="Hủy" /></div>
+                    </div>
+                </div>
+        }
     </div>
 </div>
 
 <div class="clearfix"></div>
 
-<div class="hide" id="templateVanBan">
-    @{Html.RenderAction("GetPageVanBanLienQuan"); }
-</div>
-
 @section Scripts{
-    <script>
-        $(document).ready(function () {
-            var optionCalendar =
-             {
-                 autoSize: true,
-                 constrainInput: true,
-                 dateFormat: 'dd/mm/yy',
-                 minDate: new Date(),
-             };
-            $('.control-datepicker').datepicker(optionCalendar);
+    @*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
+    <script src="~/Scripts/app/modaljs.js"></script>
+    <script src="~/Scripts/app/congviec_add.js"></script>
 
-            $('#btnAddVanBan').on('click', function () {
+    @*<script>
+            $(document).ready(function () {
+                $('input[type="file"]').change(function (e) {
+                    $('#spanUpload').text('');
+                    var files = e.originalEvent.target.files;
+                    if (files.length > 0) {
+                        $(this).next().removeAttr('disabled');
+                    }
+                    else {
+                        $(this).next().attr('disabled', 'disabled');
+                    }
+                });
 
-                $("#tbodyAddVanBan").append($('#templateRow').html());
+                $('#btnUpload').on('click', function (e) {
+                    if (window.FormData !== undefined) {
+                        var ajaxRequest = $.ajax({
+                            type: "POST",
+                            processData: false,
+                            contentType: false,
+                            url: '@Url.Action("FilesAttach", "File")' + '?guid=' + '@Model.Guid' + '&type=2',
+                            data: function () {
+                                var formData = new FormData();
+                                var files = $('#filesUpload').get(0).files;
+                                if (files.length > 0) {
+                                    for (var i = 0; i < files.length; i++) {
+                                        formData.append("file" + i, files[i]);
+                                    }
+                                }
+                                return formData;
+                            }()
+                        });
+
+                        ajaxRequest.success(function (e, data) {
+                            $('#filesName').html(e);
+                            $('#btnUpload').attr('disabled', 'disabled');
+                            $('#spanUpload').text('Upload file successfully');
+                        });
+                        ajaxRequest.error(function () {
+                            alert('Has Error in while upload file');
+                        });
+                        ajaxRequest.always(function () {
+                        });
+                    }
+                    else {
+                        alert("This browser doesn't support HTML5 file uploads!");
+                    }
+                });
+                /*end upload*/
             });
-            $('#btnAddQuaTrinhXuLy').on('click', function () { });
-        });
-    </script>
+        </script>*@
 }

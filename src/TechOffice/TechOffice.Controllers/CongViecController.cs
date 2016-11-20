@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.ViewModel;
 using PagedList;
+using System;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -98,13 +99,31 @@ namespace AnThinhPhat.WebUI.Controllers
                 UsersInfos = init.UsersInfos,
                 LinhVucCongViecInfos = init.LinhVucCongViecInfos,
                 TrangThaiCongViecInfos = init.TrangThaiCongViecInfos,
+                VanBanLienQuan = new List<InitVanBanViewModel>
+                {
+                    new InitVanBanViewModel
+                    {
+                        CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToDataInfo()),
+                    }
+                },
+                QuaTrinhXuLyViewModel = new List<InitQuaTrinhXuLyViewModel>
+                {
+                   new InitQuaTrinhXuLyViewModel
+                   {
+                       Gio=0,
+                       Ngay=new System.DateTime(),
+                       NoiDung =string.Empty,
+                       NguoiThem=UserName,
+                   },
+                },
+                Guid = Guid.NewGuid().ToString()
             };
 
             return View(model);
         }
 
         [HttpPost, ActionName("Add")]
-        public JsonResult AddRecord()
+        public JsonResult AddRecord(AddCongViecViewModel model)
         {
             return ExecuteWithErrorHandling(() => { return new JsonResult(); });
         }
@@ -112,15 +131,6 @@ namespace AnThinhPhat.WebUI.Controllers
         public ActionResult Detail()
         {
             return View();
-        }
-
-        public PartialViewResult GetPageVanBanLienQuan()
-        {
-            var model = new InitVanBanViewModel
-            {
-                CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToDataInfo()),
-            };
-            return PartialView("_PartialPageVanBanLienQuan", model);
         }
 
         private BaseCongViecViewModel InitModel()

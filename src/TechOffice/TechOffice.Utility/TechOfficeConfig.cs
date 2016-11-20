@@ -11,6 +11,10 @@ namespace AnThinhPhat.Utilities
 
         private const string _PASS_DEFAULT = "phu@rieng";
 
+        private const int _IDENTITY_PHONGNOIVU = 9;
+
+        private const int _IDENTITY_LANHDAO = 1;
+
         public static int PAGESIZE
         {
             get
@@ -65,6 +69,44 @@ namespace AnThinhPhat.Utilities
                 }
 
                 return passDefault;
+            }
+        }
+
+        public static int IDENTITY_PHONGNOIVU
+        {
+            get
+            {
+                var settingsReader = new AppSettingsReader();
+                var identity = _IDENTITY_PHONGNOIVU;
+                try
+                {
+                    identity = (int)settingsReader.GetValue("IDENTITY_PHONGNOIVU", typeof(int));
+                }
+                catch
+                {
+                    identity = _IDENTITY_PHONGNOIVU;
+                }
+
+                return identity;
+            }
+        }
+
+        public static int IDENTITY_LANHDAO
+        {
+            get
+            {
+                var settingsReader = new AppSettingsReader();
+                var identity = _IDENTITY_LANHDAO;
+                try
+                {
+                    identity = (int)settingsReader.GetValue("IDENTITY_LANHDAO", typeof(int));
+                }
+                catch
+                {
+                    identity = _IDENTITY_LANHDAO;
+                }
+
+                return identity;
             }
         }
 

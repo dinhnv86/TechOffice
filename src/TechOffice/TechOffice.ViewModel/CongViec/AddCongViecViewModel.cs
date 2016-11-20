@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AnThinhPhat.ViewModel.CongViec
 {
-    public class AddCongViecViewModel: BaseCongViecViewModel
+    public class AddCongViecViewModel : BaseCongViecViewModel
     {
         public DateTime NgayKhoiTao { get; set; } = DateTime.Now;
 
@@ -17,7 +17,7 @@ namespace AnThinhPhat.ViewModel.CongViec
         [Required]
         public int UserXuLyChinhId { get; set; }
 
-        public int UserPhoiHopId { get; set; }
+        public int? UserPhoiHopId { get; set; }
 
         [Required]
         public int? LinhVucCongViecId { get; set; }
@@ -29,8 +29,8 @@ namespace AnThinhPhat.ViewModel.CongViec
 
         public ValueSearchViewModel ValueSearch { get; set; }
 
-        private IEnumerable<InitVanBanViewModel> vanBanLienQuan;
-        public IEnumerable<InitVanBanViewModel> VanBanLienQuan
+        private List<InitVanBanViewModel> vanBanLienQuan;
+        public List<InitVanBanViewModel> VanBanLienQuan
         {
             get
             {
@@ -45,8 +45,8 @@ namespace AnThinhPhat.ViewModel.CongViec
             }
         }
 
-        private IEnumerable<InitQuaTrinhXuLyViewModel> quanTringXuLyViewModel;
-        public IEnumerable<InitQuaTrinhXuLyViewModel> QuaTringXuLyViewModel
+        private List<InitQuaTrinhXuLyViewModel> quanTringXuLyViewModel;
+        public List<InitQuaTrinhXuLyViewModel> QuaTrinhXuLyViewModel
         {
             get
             {
@@ -61,6 +61,8 @@ namespace AnThinhPhat.ViewModel.CongViec
             }
         }
 
+        public InitVanBanViewModel VanBanViewModel { get; set; }
 
+        public string Guid { get; set; }
     }
 }

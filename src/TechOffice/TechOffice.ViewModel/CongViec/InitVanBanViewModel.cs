@@ -7,17 +7,14 @@ namespace AnThinhPhat.ViewModel.CongViec
 {
     public class InitVanBanViewModel
     {
-        [Required]
         public string SoVanBan { get; set; }
 
-        [Required]
-        public DateTime Ngay { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime Ngay { get; set; } = DateTime.Now;
 
-        [Required]
         public string NoiDung { get; set; }
 
-        [Required]
-        public int CoQuanId { get; set; }
+        public int? CoQuanId { get; set; }
 
         public string NameCoQuan { get; set; }
 

@@ -1,0 +1,67 @@
+﻿@model string
+
+<label class="col-sm-12">Các tập tin đính kèm</label>
+<div class="col-sm-12">
+    <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
+    <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
+        <span class="glyphicon glyphicon-upload"></span>
+        Upload
+    </button>
+</div>
+<span class="col-xs-12" id="spanUpload"></span>
+
+<div class="col-xs-12" id="filesName">
+</div>
+
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('input[type="file"]').change(function (e) {
+            $('#spanUpload').text('');
+            var files = e.originalEvent.target.files;
+            if (files.length > 0) {
+                $(this).next().removeAttr('disabled');
+            }
+            else {
+                $(this).next().attr('disabled', 'disabled');
+            }
+        });
+
+        $('#btnUpload').on('click', function (e) {
+            if (window.FormData !== undefined) {
+                var ajaxRequest = $.ajax({
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    url: '@Url.Action("FilesAttach", "File")' + '?guid=' + '@Model',
+                    data: function () {
+                        var formData = new FormData();
+                        var files = $('#filesUpload').get(0).files;
+                        if (files.length > 0) {
+                            for (var i = 0; i < files.length; i++) {
+                                formData.append("file" + i, files[i]);
+                            }
+                        }
+                        return formData;
+                    }()
+                });
+
+                ajaxRequest.success(function (e, data) {
+                    $('#filesName').html(e);
+                    $('#btnUpload').attr('disabled', 'disabled');
+                    $('#spanUpload').text('Upload file successfully');
+                });
+                ajaxRequest.error(function () {
+                    alert('Has Error in while upload file');
+                });
+                ajaxRequest.always(function () {
+                });
+            }
+            else {
+                alert("This browser doesn't support HTML5 file uploads!");
+            }
+        });
+        /*end upload*/
+    });
+</script>

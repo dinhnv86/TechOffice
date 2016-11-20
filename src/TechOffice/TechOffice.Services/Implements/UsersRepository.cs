@@ -505,23 +505,16 @@ namespace AnThinhPhat.Services.Implements
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
-                try
+                using (var context = new TechOfficeEntities())
                 {
-                    using (var context = new TechOfficeEntities())
-                    {
-                        var passHash = AppCipher.EncryptCipher(password);
-                        return (from item in context.Users
-                                where item.UserName == userName &&
-                                      item.Password == passHash
-                                select item)
-                            .MakeQueryToDatabase()
-                            .Select(x => x.ToDataResult())
-                            .Single();
-                    }
-                }
-                catch
-                {
-                    return null;
+                    var passHash = AppCipher.EncryptCipher(password);
+                    return (from item in context.Users
+                            where item.UserName == userName &&
+                                  item.Password == passHash
+                            select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .Single();
                 }
             });
         }

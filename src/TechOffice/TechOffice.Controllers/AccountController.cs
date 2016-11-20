@@ -1,11 +1,12 @@
-﻿using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel.Users;
 using Ninject;
-using AnThinhPhat.Utilities;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Web.Mvc;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -56,17 +57,15 @@ namespace AnThinhPhat.WebUI.Controllers
                     {
                         //Get all role of current user login
                         var userRoleInfo = UserRoleRepository.GetRolesByUserId(userLogin.Id);
-                        //var roles =
-                        //    userRoleInfo.Select(x => x.RoleInfo.Name).Aggregate((current, next) => current + ", " + next);
 
-                        var role = userRoleInfo.Select(x => new Claim(ClaimTypes.Role, x.RoleInfo.Name));
+                        var roles = GetRolesOfUser(userRoleInfo, userLogin);
 
                         var identities = new ClaimsIdentity(new[]
                         {
                             new Claim(ClaimTypes.NameIdentifier,userLogin.Id.ToString()),
                             new Claim(ClaimTypes.Name, userLogin.UserName),
                             new Claim(ClaimTypes.Surname, userLogin.HoVaTen)
-                        }.Concat(role), "ApplicationCookie", ClaimTypes.Name, ClaimTypes.Role);
+                        }.Concat(roles), "ApplicationCookie", ClaimTypes.Name, ClaimTypes.Role);
 
                         AuthenticationManager.SignIn(identities);
 
@@ -104,6 +103,21 @@ namespace AnThinhPhat.WebUI.Controllers
             }
 
             return returnUrl;
+        }
+
+        private IEnumerable<Claim> GetRolesOfUser(IEnumerable<UserRoleResult> userRole, UserResult user)
+        {
+            var role = userRole.Select(x => new Claim(ClaimTypes.Role, x.RoleInfo.Name)).ToList();
+
+            //Get co quan of user
+            if (user.CoQuanId == TechOfficeConfig.IDENTITY_PHONGNOIVU)
+                role.Add(new Claim(ClaimTypes.Role, RoleConstant.PHONGNOIVU));
+
+            //Get chuc vu of user
+            if (user.ChucVuId == TechOfficeConfig.IDENTITY_LANHDAO)
+                role.Add(new Claim(ClaimTypes.Role, RoleConstant.LANHDAO));
+
+            return role;
         }
 
         #region Inject

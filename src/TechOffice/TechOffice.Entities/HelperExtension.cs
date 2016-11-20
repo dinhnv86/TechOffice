@@ -406,9 +406,9 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 UserId = entity.UserId,
-                UserInfo = entity.User.ToIfNotNullDataInfo(),
+                UserResult = entity.User.ToDataResult(),
                 RoleId = entity.RoleId,
-                RoleInfo = entity.Role.ToIfNotNullDataInfo(),
+                RoleInfo = entity.Role.ToDataInfo(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,

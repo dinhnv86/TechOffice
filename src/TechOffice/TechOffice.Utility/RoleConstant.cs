@@ -16,5 +16,15 @@
         /// Allow user select nhom co quan and co quan when statictis
         /// </summary>
         public const string ALLOW_SELECT = "AllowSelect";
+
+        /// <summary>
+        /// User belong to NOIVU room.
+        /// </summary>
+        public const string PHONGNOIVU = "PHONGNOIVU";
+
+        /// <summary>
+        /// User is Lanh dao
+        /// </summary>
+        public const string LANHDAO = "LANHDAO";
     }
 }
