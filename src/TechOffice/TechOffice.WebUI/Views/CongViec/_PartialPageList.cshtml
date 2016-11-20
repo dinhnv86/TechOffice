@@ -27,22 +27,35 @@
                     foreach (var item in Model)
                     {
                         i = i + 1;
+                        var fontColor = string.Empty;
+                        switch (item.TrangThaiCongViecId)
+                        {
+                            case 1:
+                                fontColor = "text-danger";
+                                break;
+                            case 2:
+                                fontColor = "text-info";
+                                break;
+                            default:
+                                break;
+                        }
+
                         <tr>
-                            <td>@Html.Raw(i + 1)</td>
-                            <td>@Html.DisplayFor(x => item.NgayTao, "DisplayDateTime")</td>
-                            <td>@Html.DisplayFor(x => item.NgayHetHan, "DisplayDateTime")</td>
-                            <td>@item.UserPhuTrach.HoVaTen</td>
-                            <td>@item.UserXyLy.HoVaTen</td>
-                            <td>
+                            <td class="@fontColor">@Html.Raw(i + 1)</td>
+                            <td class="@fontColor">@Html.DisplayFor(x => item.NgayTao, "DisplayDateTime")</td>
+                            <td class="@fontColor">@Html.DisplayFor(x => item.NgayHetHan, "DisplayDateTime")</td>
+                            <td class="@fontColor">@item.UserPhuTrach.HoVaTen</td>
+                            <td class="@fontColor">@item.UserXyLy.HoVaTen</td>
+                            <td class="@fontColor">
                                 @foreach (var phoihop in item.CongViecPhoiHopResult)
                                 {
                                     <span> @phoihop.UserInfo.UserName</span><br />
                                 }
                             </td>
-                            <td>@item.TrangThaiCongViecInfo.Name</td>
-                            <td>@item.LinhVucCongViec.Name</td>
-                            <td>@item.NoiDung</td>
-                            <td>
+                            <td class="@fontColor">@item.TrangThaiCongViecInfo.Name</td>
+                            <td class="@fontColor">@item.LinhVucCongViec.Name</td>
+                            <td class="@fontColor">@Html.RouteLink(item.NoiDung, routeName: UrlLink.CONGVIEC_DETAIL, routeValues: new { id = item.Id })</td>
+                            <td class="@fontColor">
                                 @foreach (var qt in item.CongViecQuaTrinhXuLyResult)
                                 {
                                     <span>@string.Format("{0}:{1} {2} {3}: {4}", qt.GioBanHanh, qt.PhutBanHanh, qt.NgayBanHanh?.ToString("dd/MM/yyyy"), qt.NguoiThem, qt.NoiDung)</span><br />

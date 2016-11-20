@@ -92,6 +92,10 @@
       <Project>{98bca14e-3e24-4d33-9850-11336fd1d9cb}</Project>
       <Name>AnThinhPhat.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TechOffice.Resources\AnThinhPhat.Resources.csproj">
+      <Project>{cf553a82-9525-4cd4-8405-aea027f5c097}</Project>
+      <Name>AnThinhPhat.Resources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TechOffice.Services\AnThinhPhat.Services.csproj">
       <Project>{4ff29c11-f209-4868-9863-385349d6ac46}</Project>
       <Name>AnThinhPhat.Services</Name>

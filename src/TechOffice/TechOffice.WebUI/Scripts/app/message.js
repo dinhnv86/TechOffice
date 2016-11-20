@@ -8,5 +8,7 @@
     '</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-default btn-sm" id="btnDeleteNo">'
     + 'No' + '</button></div></div></div>',
 
-    DuplicateUser: 'Người dùng này đã tồn tại trong hệ thông',
+    DuplicateUser: 'Người dùng này đã tồn tại trong hệ thông.',
+    CongViec_Add_Error: 'Thêm mới công việc không thành công.',
+    CongViec_Detail_Delete_VanBanLienQuan: 'Đã xảy ra lỗi trong quá trình xóa. Xin vui lòng thử lại!'
 };

@@ -3770,3 +3770,24 @@ input[type="checkbox"].input-validation-error {
 .inner {
     display: inline-block;
 }
+
+span.multiselect-native-select > div.btn-group {
+    width: 100%;
+}
+
+div.btn-group > button.multiselect {
+    width: 100%;
+}
+
+    div.btn-group > button.multiselect > span {
+        float: left;
+    }
+
+    div.btn-group > button.multiselect > .caret {
+        float: right;
+        margin-top: 8px;
+    }
+
+    div.btn-group > ul{
+        width:100%;
+    }

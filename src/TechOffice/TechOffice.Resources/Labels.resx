@@ -117,6 +117,69 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CongViec_Add_LinhVuc" xml:space="preserve">
+    <value>Lĩnh vực</value>
+  </data>
+  <data name="CongViec_Add_NgayHetHan" xml:space="preserve">
+    <value>Ngày hết hạn</value>
+  </data>
+  <data name="CongViec_Add_NgayHoanThanh" xml:space="preserve">
+    <value>Ngày hoàn thành</value>
+  </data>
+  <data name="CongViec_Add_NgayKhoiTao" xml:space="preserve">
+    <value>Ngày khởi tạo</value>
+  </data>
+  <data name="CongViec_Add_NoiDung" xml:space="preserve">
+    <value>Nội dung</value>
+  </data>
+  <data name="CongViec_Add_NoiDungTraoDoi" xml:space="preserve">
+    <value>Nội dung ý kiến trao đổi</value>
+  </data>
+  <data name="CongViec_Add_PhoiHop" xml:space="preserve">
+    <value>Phối hợp</value>
+  </data>
+  <data name="CongViec_Add_PhuTrach" xml:space="preserve">
+    <value>Phụ trách</value>
+  </data>
+  <data name="CongViec_Add_QuaTrinhXuLy" xml:space="preserve">
+    <value>Quá trình xử lý</value>
+  </data>
+  <data name="CongViec_Add_QuaTrinhXuLy_Gio" xml:space="preserve">
+    <value>Giờ</value>
+  </data>
+  <data name="CongViec_Add_QuaTrinhXuLy_Ngay" xml:space="preserve">
+    <value>Ngày</value>
+  </data>
+  <data name="CongViec_Add_QuaTrinhXuLy_NguoiThem" xml:space="preserve">
+    <value>Người thêm</value>
+  </data>
+  <data name="CongViec_Add_QuaTrinhXuLy_NoiDung" xml:space="preserve">
+    <value>Nội dung</value>
+  </data>
+  <data name="CongViec_Add_Title" xml:space="preserve">
+    <value>Thêm mới công việc</value>
+  </data>
+  <data name="CongViec_Add_TrangThai" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="CongViec_Add_VanBanLienQuan" xml:space="preserve">
+    <value>Văn bản liên quan</value>
+  </data>
+  <data name="CongViec_Add_VanBanLienQuan_CoQuan" xml:space="preserve">
+    <value>Cơ quan</value>
+  </data>
+  <data name="CongViec_Add_VanBanLienQuan_Ngay" xml:space="preserve">
+    <value>Ngày</value>
+  </data>
+  <data name="CongViec_Add_VanBanLienQuan_NoiDung" xml:space="preserve">
+    <value>Nội dung</value>
+  </data>
+  <data name="CongViec_Add_VanBanLienQuan_SoVanBan" xml:space="preserve">
+    <value>Số VB</value>
+  </data>
+  <data name="CongViec_Add_XuLyChinh" xml:space="preserve">
+    <value>Xử lý chính</value>
+  </data>
   <data name="CongViec_Index_ChonNhanVien" xml:space="preserve">
     <value>Chọn nhân viên</value>
   </data>
@@ -182,5 +245,8 @@
   </data>
   <data name="TacNghiep_TinhHinhThucHien_TenCoQuan" xml:space="preserve">
     <value>Tên cơ quan</value>
+  </data>
+  <data name="UploadFiles_Title" xml:space="preserve">
+    <value>Các tập tin đính kèm</value>
   </data>
 </root>

@@ -8,7 +8,7 @@ namespace AnThinhPhat.Entities.Searchs
 
         public EnumRoleExecute? Role { get; set; }
 
-        public EnumStatus? Status { get; set; }
+        public int? TrangThaiCongViecId { get; set; }
 
         public int? LinhVucCongViecId { get; set; }
 

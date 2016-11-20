@@ -61,6 +61,114 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hủy.
+        /// </summary>
+        public static string CongViec_Add_Cancel {
+            get {
+                return ResourceManager.GetString("CongViec_Add_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lưu.
+        /// </summary>
+        public static string CongViec_Add_QuaTrinhXuLy_Save {
+            get {
+                return ResourceManager.GetString("CongViec_Add_QuaTrinhXuLy_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tạo mới.
+        /// </summary>
+        public static string CongViec_Add_Save {
+            get {
+                return ResourceManager.GetString("CongViec_Add_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lưu.
+        /// </summary>
+        public static string CongViec_Add_VanBanLienQuan_Save {
+            get {
+                return ResourceManager.GetString("CongViec_Add_VanBanLienQuan_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hủy.
+        /// </summary>
+        public static string CongViec_Detail_Cancel {
+            get {
+                return ResourceManager.GetString("CongViec_Detail_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xóa.
+        /// </summary>
+        public static string CongViec_Detail_QuaTrinhXuLy_Delete {
+            get {
+                return ResourceManager.GetString("CongViec_Detail_QuaTrinhXuLy_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sửa.
+        /// </summary>
+        public static string CongViec_Detail_QuaTrinhXuLy_Edit {
+            get {
+                return ResourceManager.GetString("CongViec_Detail_QuaTrinhXuLy_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lưu.
+        /// </summary>
+        public static string CongViec_Detail_QuaTrinhXuLy_Save {
+            get {
+                return ResourceManager.GetString("CongViec_Detail_QuaTrinhXuLy_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cập nhật.
+        /// </summary>
+        public static string CongViec_Detail_Update {
+            get {
+                return ResourceManager.GetString("CongViec_Detail_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xóa.
+        /// </summary>
+        public static string CongViec_Detail_VanBanLienQuan_Delete {
+            get {
+                return ResourceManager.GetString("CongViec_Detail_VanBanLienQuan_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sửa.
+        /// </summary>
+        public static string CongViec_Detail_VanBanLienQuan_Edit {
+            get {
+                return ResourceManager.GetString("CongViec_Detail_VanBanLienQuan_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lưu.
+        /// </summary>
+        public static string CongViec_Detail_VanBanLienQuan_Save {
+            get {
+                return ResourceManager.GetString("CongViec_Detail_VanBanLienQuan_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thêm mới.
         /// </summary>
         public static string CongViec_Index_ThemMoi {
@@ -84,6 +192,15 @@ namespace AnThinhPhat.Resources {
         public static string CongViec_Index_TimKiem {
             get {
                 return ResourceManager.GetString("CongViec_Index_TimKiem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload.
+        /// </summary>
+        public static string UploadFiles_Upload {
+            get {
+                return ResourceManager.GetString("UploadFiles_Upload", resourceCulture);
             }
         }
     }

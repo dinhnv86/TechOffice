@@ -13,7 +13,9 @@ namespace AnThinhPhat.Entities.Results
 
         public string NoiDung { get; set; }
 
-        public string TenCoQuan { get; set; }
+        public int CoQuanId { get; set; }
+
+        public CoQuanInfo CoQuanIfo { get; set; }
 
         public HoSoCongViecInfo HoSoCongViec { get; set; }
     }

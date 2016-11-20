@@ -110,5 +110,7 @@ namespace AnThinhPhat.Services.Abstracts
         SaveResult AddUserWithRoles(UserResult entity);
 
         SaveResult EditUserWtithRoles(UserResult entity);
+
+        IEnumerable<UserResult> GetUsersByCoQuanId(int coQuanId);
     }
 }

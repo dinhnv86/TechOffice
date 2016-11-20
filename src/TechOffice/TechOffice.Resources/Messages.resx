@@ -117,52 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CongViec_Add_Cancel" xml:space="preserve">
-    <value>Hủy</value>
+  <data name="Account_Login_Incorrect" xml:space="preserve">
+    <value>Tài khoản người dùng không hợ lệ</value>
   </data>
-  <data name="CongViec_Add_QuaTrinhXuLy_Save" xml:space="preserve">
-    <value>Lưu</value>
+  <data name="Account_Login_Locked" xml:space="preserve">
+    <value>Tài khoản của bạn hiện tại đang bị khóa. Xin vui lòng liên hệ với quản trị hệ thống</value>
   </data>
-  <data name="CongViec_Add_Save" xml:space="preserve">
-    <value>Tạo mới</value>
+  <data name="CongViec_Add_LinhVucCongViec" xml:space="preserve">
+    <value>Xin vui lòng chọn lĩnh vực công việc</value>
   </data>
-  <data name="CongViec_Add_VanBanLienQuan_Save" xml:space="preserve">
-    <value>Lưu</value>
+  <data name="CongViec_Add_NoiDungCongViec" xml:space="preserve">
+    <value>Xin vui lòng nhập nội dung công việc</value>
   </data>
-  <data name="CongViec_Detail_Cancel" xml:space="preserve">
-    <value>Hủy</value>
+  <data name="CongViec_Add_UserPhuTrach" xml:space="preserve">
+    <value>Xin vui lòng chọn người phụ trách</value>
   </data>
-  <data name="CongViec_Detail_QuaTrinhXuLy_Delete" xml:space="preserve">
-    <value>Xóa</value>
-  </data>
-  <data name="CongViec_Detail_QuaTrinhXuLy_Edit" xml:space="preserve">
-    <value>Sửa</value>
-  </data>
-  <data name="CongViec_Detail_QuaTrinhXuLy_Save" xml:space="preserve">
-    <value>Lưu</value>
-  </data>
-  <data name="CongViec_Detail_Update" xml:space="preserve">
-    <value>Cập nhật</value>
-  </data>
-  <data name="CongViec_Detail_VanBanLienQuan_Delete" xml:space="preserve">
-    <value>Xóa</value>
-  </data>
-  <data name="CongViec_Detail_VanBanLienQuan_Edit" xml:space="preserve">
-    <value>Sửa</value>
-  </data>
-  <data name="CongViec_Detail_VanBanLienQuan_Save" xml:space="preserve">
-    <value>Lưu</value>
-  </data>
-  <data name="CongViec_Index_ThemMoi" xml:space="preserve">
-    <value>Thêm mới</value>
-  </data>
-  <data name="CongViec_Index_ThongKe" xml:space="preserve">
-    <value>Thống kê</value>
-  </data>
-  <data name="CongViec_Index_TimKiem" xml:space="preserve">
-    <value>Tìm kiếm</value>
-  </data>
-  <data name="UploadFiles_Upload" xml:space="preserve">
-    <value>Upload</value>
+  <data name="CongViec_Add_UserXuLy" xml:space="preserve">
+    <value>Xin vui lòng chọn người xử lý chính</value>
   </data>
 </root>

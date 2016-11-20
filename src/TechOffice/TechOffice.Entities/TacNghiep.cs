@@ -43,5 +43,6 @@ namespace AnThinhPhat.Entities
         public virtual ICollection<TacNghiep_YKienCoQuan> TacNghiep_YKienCoQuan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinTacNghiep> TapTinTacNghieps { get; set; }
+        public virtual MucDoHoanThanh MucDoHoanThanh { get; set; }
     }
 }

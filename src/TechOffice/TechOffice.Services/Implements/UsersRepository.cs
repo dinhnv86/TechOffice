@@ -118,6 +118,22 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
+        public IEnumerable<UserResult> GetUsersByCoQuanId(int coQuanId)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.Users
+                            where item.IsDeleted == false && item.CoQuanId == coQuanId
+                            orderby item.UserName
+                            select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .ToList();
+                }
+            });
+        }
         #endregion
 
         #region Implement Update

@@ -1,11 +1,11 @@
 ﻿@model string
 
-<label class="col-sm-12">Các tập tin đính kèm</label>
+<label class="col-sm-12">@Labels.UploadFiles_Title</label>
 <div class="col-sm-12">
     <input type="file" id="filesUpload" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
     <button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
         <span class="glyphicon glyphicon-upload"></span>
-        Upload
+        @Buttons.UploadFiles_Upload
     </button>
 </div>
 <span class="col-xs-12" id="spanUpload"></span>

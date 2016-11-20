@@ -22,6 +22,7 @@ namespace AnThinhPhat.Entities
             this.ThuTucs = new HashSet<ThuTuc>();
             this.Users = new HashSet<User>();
             this.VanBans = new HashSet<VanBan>();
+            this.CongViec_VanBan = new HashSet<CongViec_VanBan>();
         }
     
         public int Id { get; set; }
@@ -45,5 +46,7 @@ namespace AnThinhPhat.Entities
         public virtual ICollection<User> Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VanBan> VanBans { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CongViec_VanBan> CongViec_VanBan { get; set; }
     }
 }

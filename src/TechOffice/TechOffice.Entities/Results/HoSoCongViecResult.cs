@@ -32,6 +32,8 @@ namespace AnThinhPhat.Entities.Results
 
         public IEnumerable<CongViecQuaTrinhXuLyResult> CongViecQuaTrinhXuLyResult { get; set; }
 
+        public IEnumerable<CongViecVanBanResult> CongViecVanBanResults { get; set; }
+
         public int? TrangThaiCongViecId { get; set; }
 
         public TrangThaiCongViecInfo TrangThaiCongViecInfo { get; set; }

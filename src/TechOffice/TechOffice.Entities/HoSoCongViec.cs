@@ -19,8 +19,8 @@ namespace AnThinhPhat.Entities
         {
             this.CongViec_PhoiHop = new HashSet<CongViec_PhoiHop>();
             this.CongViec_QuaTrinhXuLy = new HashSet<CongViec_QuaTrinhXuLy>();
-            this.CongViec_VanBan = new HashSet<CongViec_VanBan>();
             this.TapTinCongViecs = new HashSet<TapTinCongViec>();
+            this.CongViec_VanBan = new HashSet<CongViec_VanBan>();
         }
     
         public int Id { get; set; }
@@ -42,13 +42,13 @@ namespace AnThinhPhat.Entities
         public virtual ICollection<CongViec_PhoiHop> CongViec_PhoiHop { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CongViec_QuaTrinhXuLy> CongViec_QuaTrinhXuLy { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CongViec_VanBan> CongViec_VanBan { get; set; }
         public virtual LinhVucCongViec LinhVucCongViec { get; set; }
         public virtual TrangThaiCongViec TrangThaiCongViec { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinCongViec> TapTinCongViecs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CongViec_VanBan> CongViec_VanBan { get; set; }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using AnThinhPhat.Utilities;
+using System;
 
 namespace AnThinhPhat.ViewModel.CongViec
 {
@@ -11,9 +11,10 @@ namespace AnThinhPhat.ViewModel.CongViec
 
         public DateTime Ngay { get; set; }
 
-        [Required]
         public string NoiDung { get; set; }
 
         public string NguoiThem { get; set; }
+
+        public EnumNhacNho NhacNho { get; set; }
     }
 }

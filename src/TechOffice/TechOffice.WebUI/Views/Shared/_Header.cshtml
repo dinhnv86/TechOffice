@@ -99,9 +99,12 @@
                 <li>
                     @Html.RouteLink("TÁC NGHIỆP", UrlLink.TACNGHIEP)
                 </li>
-                <li>
-                    @Html.RouteLink("CÔNG VIỆC", UrlLink.CONGVIEC)
-                </li>
+                @if (User.IsInRole(RoleConstant.PHONGNOIVU))
+                {
+                    <li>
+                        @Html.RouteLink("CÔNG VIỆC", UrlLink.CONGVIEC)
+                    </li>
+                }
                 <li>
                     @Html.RouteLink("TIN TỨC", UrlLink.TINTUC)
                 </li>

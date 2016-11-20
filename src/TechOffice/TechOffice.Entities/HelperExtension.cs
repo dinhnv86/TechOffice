@@ -181,6 +181,34 @@ namespace AnThinhPhat.Entities
         }
     }
 
+    public static class CongViecVanVanLienQuanExtension
+    {
+        public static CongViecVanBanResult ToIfNotNullDataResult(this CongViec_VanBan entity)
+        {
+            return entity?.ToDataResult();
+        }
+
+        public static CongViecVanBanResult ToDataResult(this CongViec_VanBan entity)
+        {
+            return new CongViecVanBanResult
+            {
+                Id = entity.Id,
+                HoSoCongViecId = entity.HoSoCongViecId,
+                HoSoCongViec = entity.HoSoCongViec.ToDataInfo(),
+                SoVanBan = entity.SoVanBan,
+                CoQuanId = entity.CoQuanId,
+                CoQuanIfo = entity.CoQuan.ToDataInfo(),
+                NgayBanHanh = entity.NgayBanHanh,
+                NoiDung = entity.NoiDung,
+                IsDeleted = entity.IsDeleted,
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdated = entity.LastUpdated
+            };
+        }
+    }
+
     public static class VanBanExtension
     {
         public static VanBanResult ToIfNotNullDataResult(this VanBan entity)
@@ -284,7 +312,7 @@ namespace AnThinhPhat.Entities
                 NgayHetHan = entity.NgayHetHan,
                 NgayTao = entity.NgayTao,
                 TrangThaiCongViecId = entity.TrangThaiCongViecId,
-                TrangThaiCongViecInfo = entity.TrangThaiCongViec.ToIfNotNullDataInfo(),
+                TrangThaiCongViecInfo = entity.TrangThaiCongViec.ToDataInfo(),
                 LinhVucCongViecId = entity.LinhVucCongViecId,
                 LinhVucCongViec = entity.LinhVucCongViec.ToDataInfo(),
                 QuaTrinhXuLy = entity.QuaTrinhXuLy,
@@ -292,8 +320,9 @@ namespace AnThinhPhat.Entities
                 UserPhuTrach = entity.User.ToDataInfo(),
                 UserXuLyId = entity.UserXuLyId,
                 UserXyLy = entity.User1.ToDataInfo(),
-                CongViecPhoiHopResult = entity.CongViec_PhoiHop.Select(x => x.ToDataResult()),
-                CongViecQuaTrinhXuLyResult = entity.CongViec_QuaTrinhXuLy.Select(x => x.ToDataResult()),
+                CongViecPhoiHopResult = entity.CongViec_PhoiHop.Where(x => !x.IsDeleted).Select(x => x.ToDataResult()).ToList(),
+                CongViecQuaTrinhXuLyResult = entity.CongViec_QuaTrinhXuLy.Where(x => !x.IsDeleted).Select(x => x.ToDataResult()).ToList(),
+                CongViecVanBanResults = entity.CongViec_VanBan.Where(x => !x.IsDeleted).Select(x => x.ToDataResult()).ToList(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,

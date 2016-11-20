@@ -117,7 +117,7 @@ namespace AnThinhPhat.Utilities
         public static string FOLDER_UPLOAD = "~/Uploads";//folder upload;
         public static string FOLDER_UPLOAD_TACNGHIEP = FOLDER_UPLOAD + "/TN";//tac nghiep
         public static string FOLDER_UPLOAD_TT = FOLDER_UPLOAD + "/TT";//thu tuc
-        public static string FOLDER_UPLOAD_CV = FOLDER_UPLOAD + "/ CV";//cong viec
+        public static string FOLDER_UPLOAD_CONGVIEC = FOLDER_UPLOAD + "/ CV";//cong viec
         public static string FOLDER_UPLOAD_VB = FOLDER_UPLOAD + "/ VB";//van ban
     }
 }

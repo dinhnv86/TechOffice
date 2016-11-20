@@ -47,8 +47,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 {
                     if (checkUser.IsLocked)
                     {
-                        ModelState.AddModelError("Locked",
-                            "Your account is currently locked. Please contact System Administrator!");
+                        ModelState.AddModelError("Locked", Resources.Messages.Account_Login_Locked);
                         return View(user);
                     }
 
@@ -71,12 +70,10 @@ namespace AnThinhPhat.WebUI.Controllers
 
                         return Redirect(GetRedirectUrl(user.ReturnUrl));
                     }
-                    ModelState.AddModelError("",
-                        "Login data is incorrect or User is not yet allowed. Contact System Administrator!");
+                    ModelState.AddModelError("", Resources.Messages.Account_Login_Incorrect);
                     return View(user);
                 }
-                ModelState.AddModelError("",
-                    "Login data is incorrect or User is not yet allowed. Contact System Administrator!");
+                ModelState.AddModelError("", Resources.Messages.Account_Login_Incorrect);
                 return View(user);
             }
             return View();

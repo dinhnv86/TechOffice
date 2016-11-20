@@ -15,19 +15,19 @@
                         @Html.DropDownListFor(x => Model.UserId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), htmlAttributes: new { @class = "form-control" })
                     </div>
                     <div class="col-md-3">
-                        <label>@AnThinhPhat.Resources.Labels.CongViec_Index_VaiTroXuLy</label>
+                        <label>@Labels.CongViec_Index_VaiTroXuLy</label>
                         @Html.OfficeEnumDropDownListFor(x => x.Role, htmlAttributes: new { @class = "form-control" })
                     </div>
                     <div class="col-md-3">
-                        <label>@AnThinhPhat.Resources.Labels.CongViec_Index_TinhTrang</label>
+                        <label>@Labels.CongViec_Index_TinhTrang</label>
                         @Html.DropDownListFor(x => x.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })
                     </div>
                     <div class="col-md-3">
-                        <label>@AnThinhPhat.Resources.Labels.CongViec_Index_LinhVucCongViec</label>
+                        <label>@Labels.CongViec_Index_LinhVucCongViec</label>
                         @Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })
                     </div>
                     <div class="col-xs-12">
-                        <label>@AnThinhPhat.Resources.Labels.CongViec_Index_NoiDungCongViec</label>
+                        <label>@Labels.CongViec_Index_NoiDungCongViec</label>
                         @Html.TextBoxFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control" })
                     </div>
                     <div class="col-xs-12" id="outer" style="padding-top:20px;">

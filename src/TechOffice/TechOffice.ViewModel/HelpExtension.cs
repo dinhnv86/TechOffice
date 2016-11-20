@@ -148,7 +148,7 @@ namespace AnThinhPhat.ViewModel
                 LinhVucCongViecId = valueSearch.LinhVucCongViecId,
                 NoiDungCongViec = valueSearch.NoiDungCongViec,
                 Role = valueSearch.Role,
-                Status = valueSearch.Status,
+                TrangThaiCongViecId = valueSearch.TrangThaiCongViecId,
             };
         }
 

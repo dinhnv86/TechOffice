@@ -265,24 +265,10 @@ namespace AnThinhPhat.Services.Implements
                 {
                     return (from item in context.HoSoCongViecs
                             where item.IsDeleted == false && item.Id == id
-                            select new HoSoCongViecResult
-                            {
-                                Id = item.Id,
-                                NgayHetHan = item.NgayHetHan,
-                                UserPhuTrachId = item.UserPhuTrachId,
-                                UserPhuTrach = item.User.ToIfNotNullDataInfo(),
-                                UserXuLyId = item.UserXuLyId,
-                                UserXyLy = item.User1.ToIfNotNullDataInfo(),
-                                LinhVucCongViecId = item.LinhVucCongViecId,
-                                LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
-                                NoiDung = item.NoiDung,
-                                QuaTrinhXuLy = item.QuaTrinhXuLy,
-                                IsDeleted = item.IsDeleted,
-                                CreateDate = item.CreateDate,
-                                CreatedBy = item.CreatedBy,
-                                LastUpdatedBy = item.LastUpdatedBy,
-                                LastUpdated = item.LastUpdated
-                            }).Single();
+                            select item)
+                            .MakeQueryToDatabase()
+                            .Select(x => x.ToDataResult())
+                            .Single();
                 }
             });
         }
@@ -375,7 +361,7 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var query = (from item in context.HoSoCongViecs
+                    var query = (from item in context.HoSoCongViecs.Include(x => x.User)
                                  where item.IsDeleted == false
                                  select item);
 
@@ -406,22 +392,24 @@ namespace AnThinhPhat.Services.Implements
                         }
                     }
 
-                    if (valueSearch.Status.HasValue)
+                    if (valueSearch.TrangThaiCongViecId.HasValue)
                     {
-                        switch (valueSearch.Status.Value)
-                        {
-                            case EnumStatus.DAXULY:
-                                query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.DAXULY - 1));
-                                break;
-                            case EnumStatus.DANGXYLY:
-                                query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.DANGXYLY - 1));
-                                break;
-                            case EnumStatus.CHUAXULY:
-                                query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.CHUAXULY - 1));
-                                break;
-                            default:
-                                break;
-                        }
+                        query = query.Where(x => x.TrangThaiCongViecId == valueSearch.TrangThaiCongViecId);
+
+                        //switch (valueSearch.TrangThaiCongViecId.Value)
+                        //{
+                        //    case EnumStatus.DAXULY:
+                        //        query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.DAXULY - 1));
+                        //        break;
+                        //    case EnumStatus.DANGXYLY:
+                        //        query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.DANGXYLY - 1));
+                        //        break;
+                        //    case EnumStatus.CHUAXULY:
+                        //        query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.CHUAXULY - 1));
+                        //        break;
+                        //    default:
+                        //        break;
+                        //}
                     }
                     if (valueSearch.LinhVucCongViecId.HasValue)
                         query = query.Where(x => x.LinhVucCongViecId == valueSearch.LinhVucCongViecId.Value);
@@ -429,7 +417,34 @@ namespace AnThinhPhat.Services.Implements
                     if (!string.IsNullOrEmpty(valueSearch.NoiDungCongViec))
                         query = query.Where(x => x.NoiDung.Contains(valueSearch.NoiDungCongViec));
 
-                    return query.OrderBy(x => x.TrangThaiCongViecId).MakeQueryToDatabase().Select(x => x.ToDataResult()).ToList();
+                    return query
+                    .MakeQueryToDatabase()
+                    .Select(x => x.ToDataResult())
+                    .ToList();
+                }
+            });
+        }
+
+        public SaveResult AddCongViecWithChildren(HoSoCongViecResult entity)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                var saveResult = SaveResult.FAILURE;
+
+                using (var context = new TechOfficeEntities())
+                {
+                    using (var transaction = context.BeginTransaction())
+                    {
+                        entity.AddWithChildrenToDb(context);
+                        var cv = context.HoSoCongViecs.Local.FirstOrDefault();
+
+                        saveResult = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                        transaction.Commit();
+
+                        entity.Id = cv != null ? cv.Id : 0;
+
+                        return saveResult;
+                    }
                 }
             });
         }

@@ -26,13 +26,13 @@ namespace AnThinhPhat.Utilities
 
     public enum EnumNhacNho
     {
-        [Description("Nhắc nhở")]
-        TATCA = 1,
+        [Description("-- Nhắc nhở --")]
+        LEVEL0 = 1,
 
         [Description("Mức 1")]
-        CHUAXULY = 2,
+        LEVEL1 = 2,
 
         [Description("Mức 2")]
-        DANGXYLY = 3,
+        LEVEL2 = 3,
     }
 }

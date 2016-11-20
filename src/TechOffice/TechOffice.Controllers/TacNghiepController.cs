@@ -34,9 +34,6 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public ITacNghiepRepository TacNghiepRepository { get; set; }
 
-        //[Inject]
-        //public ITacNghiepCoQuanLienQuanRepository TacNghiepCoQuanCoLienQuanRepository { get; set; }
-
         [Inject]
         public ITacNghiepTinhHinhThucHienRepository TacNghiepTinhHinhThucHienRepository { get; set; }
 

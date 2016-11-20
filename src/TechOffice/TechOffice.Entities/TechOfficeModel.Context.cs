@@ -28,7 +28,6 @@ namespace AnThinhPhat.Entities
         public virtual DbSet<ChucVu> ChucVus { get; set; }
         public virtual DbSet<CongViec_PhoiHop> CongViec_PhoiHop { get; set; }
         public virtual DbSet<CongViec_QuaTrinhXuLy> CongViec_QuaTrinhXuLy { get; set; }
-        public virtual DbSet<CongViec_VanBan> CongViec_VanBan { get; set; }
         public virtual DbSet<CoQuan> CoQuans { get; set; }
         public virtual DbSet<HoSoCongViec> HoSoCongViecs { get; set; }
         public virtual DbSet<LinhVucCongViec> LinhVucCongViecs { get; set; }
@@ -53,5 +52,6 @@ namespace AnThinhPhat.Entities
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<VanBan> VanBans { get; set; }
+        public virtual DbSet<CongViec_VanBan> CongViec_VanBan { get; set; }
     }
 }

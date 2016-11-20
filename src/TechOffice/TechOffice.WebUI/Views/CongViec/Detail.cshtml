@@ -1,5 +1,239 @@
-﻿@{
+﻿@model AnThinhPhat.ViewModel.CongViec.EditCongViecViewModel
+@{
     Layout = "~/Views/Shared/_LayoutCV.cshtml";
+
+    AjaxOptions ajaxOption = new AjaxOptions
+    {
+        Url = Url.Action("Add"),
+        HttpMethod = "POST",
+        OnBegin = "onAddBegin",
+        OnComplete = "onAddComplete",
+        OnSuccess = "onAddSuccess",
+        OnFailure = "onAddFailure",
+    };
+
+    bool isLanhDao = User.IsInRole(RoleConstant.LANHDAO);
 }
+<link href="~/Content/app/loading.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
 
+<h1 class="title title_ct"><span>@Labels.CongViec_Add_Title</span></h1>
 
+<div class="pading">
+    <div class="entry">
+        @using (Ajax.BeginForm(ajaxOption))
+        {
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_NgayKhoiTao<span class="required">*</span></label>
+                @Html.DisplayFor(x => Model.NgayKhoiTao, "DateTime")
+            </div>
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_NgayHetHan</label>
+                @if (isLanhDao)
+                {
+                    @Html.EditorFor(x => Model.NgayHetHan, "DateTime")
+                }
+                else
+                {
+                    @Html.DisplayFor(x => Model.NgayHetHan, "DateTime")
+                }
+            </div>
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_LinhVuc<span class="required">*</span></label>
+                @Html.TechDropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), "--Chọn lĩnh vực công việc--", htmlAttributes: new { @class = "form-control" }, disabled: !isLanhDao)
+                @Html.ValidationMessageFor(x => Model.LinhVucCongViecId)
+            </div>
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_PhuTrach<span class="required">*</span></label>
+                @Html.TechDropDownListFor(x => Model.UserPhuTrachId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người phụ trách--", htmlAttributes: new { @class = "form-control" }, disabled: !isLanhDao)
+                @Html.ValidationMessageFor(x => Model.UserPhuTrachId)
+            </div>
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_XuLyChinh<span class="required">*</span></label>
+                @Html.TechDropDownListFor(x => Model.UserXuLyChinhId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người xử lý chính--", htmlAttributes: new { @class = "form-control" }, disabled: !isLanhDao)
+                @Html.ValidationMessageFor(x => Model.UserXuLyChinhId)
+            </div>
+            <div class="col-sm-4">
+                <label style="width:100%;">@Labels.CongViec_Add_PhoiHop</label>
+                @if (isLanhDao)
+                {
+                    @Html.ListBoxFor(x => Model.UsersPhoiHopId, new MultiSelectList(Model.UsersInfos, "Id", "HoVaTen"), htmlAttributes: new { @class = "form-control" })
+                }
+                else
+                {
+                    @Html.ListBoxFor(x => Model.UsersPhoiHopId, new MultiSelectList(Model.UsersInfos, "Id", "HoVaTen"), htmlAttributes: new { @class = "form-control", disables = "disabled" })
+                }
+            </div>
+            <div class="clear"></div>
+            <div class="col-sm-12">
+                <label>@Labels.CongViec_Add_NoiDung<span class="required">*</span></label>
+                @Html.TextAreaFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control", rows = "2" })
+                @Html.ValidationMessageFor(x => Model.NoiDungCongViec)
+            </div>
+            <div class="col-sm-12">
+                <label>@Labels.CongViec_Add_VanBanLienQuan</label>
+                <table class="table table-bordered" id="tableAddVanBan">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-2 text-center">@Labels.CongViec_Add_VanBanLienQuan_SoVanBan</th>
+                            <th class="col-xs-2 text-center">@Labels.CongViec_Add_VanBanLienQuan_Ngay</th>
+                            <th class="col-4 text-center">@Labels.CongViec_Add_VanBanLienQuan_NoiDung</th>
+                            <th class="col-xs-2 text-center">@Labels.CongViec_Add_VanBanLienQuan_CoQuan</th>
+                            <th class="col-xs-2 text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyAddVanBan">
+                        @for (int i = 0; i < Model.VanBanLienQuanViewModel.Count; i++)
+                        {
+                            <tr>
+                                @Html.HiddenFor(x => Model.VanBanLienQuanViewModel[i].Id)
+                                <td>
+                                    <span>@Model.VanBanLienQuanViewModel[i].SoVanBan</span>
+                                    @Html.HiddenFor(x => Model.VanBanLienQuanViewModel[i].SoVanBan)
+                                </td>
+                                <td>
+                                    <span>@Html.DisplayFor(x => Model.VanBanLienQuanViewModel[i].NgayBanHanh, "DisplayDateTime")</span>
+                                    @Html.HiddenFor(x => Model.VanBanLienQuanViewModel[i].NgayBanHanh)
+                                </td>
+                                <td>
+                                    <span>@Html.Raw(Model.VanBanLienQuanViewModel[i].NoiDung)</span>
+                                    @Html.HiddenFor(x => Model.VanBanLienQuanViewModel[i].NoiDung)
+                                </td>
+                                <td>
+                                    <span> @Model.VanBanLienQuanViewModel[i].CoQuanIfo.IfNotNull(x => x.Name) </span>
+                                    @Html.HiddenFor(x => Model.VanBanLienQuanViewModel[i].CoQuanId)
+                                </td>
+                                <td class="link-action">
+                                    <input type="button" value="@Buttons.CongViec_Detail_VanBanLienQuan_Delete" class="btn btn-link btnDeleteVanBanLienQuan" />
+                                    <input type="button" value="@Buttons.CongViec_Detail_VanBanLienQuan_Edit" class="btn btn-link btnEditVanBanLienQuan" />
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" id="txtSoVanBan" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control control-datepicker" id="txtVanBanLienQuanNgay" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="txtVanBanLienQuanNoiDung" />
+                            </td>
+                            <td>
+                                @Html.DropDownListFor(x => Model.CoQuanIdTemp, new SelectList(Model.CoQuanInfos, "Id", "Name"), "", htmlAttributes: new { @class = "form-control" })
+                            </td>
+                            <td class="link-action">
+                                <input type="button" value="@Buttons.CongViec_Detail_VanBanLienQuan_Save" class="btn btn-link" id="btnSaveVanBanLienQuan" disabled="disabled" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="col-sm-12">
+                <label>@Labels.CongViec_Add_QuaTrinhXuLy</label>
+                <table class="table table-bordered" id="tableAddQuaTrinhXuLy">
+                    <thead>
+                        <tr>
+                            <th class="text-center col-xs-1">@Labels.CongViec_Add_QuaTrinhXuLy_Gio</th>
+                            <th class="text-center col-xs-2">@Labels.CongViec_Add_QuaTrinhXuLy_Ngay</th>
+                            <th class="text-center col-xs-5">@Labels.CongViec_Add_QuaTrinhXuLy_NoiDung</th>
+                            <th class="text-center col-xs-2">@Labels.CongViec_Add_QuaTrinhXuLy_NguoiThem</th>
+                            <th class="text-center col-xs-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyAddQuaTrinhXuLy">
+                        @for (int i = 0; i < Model.QuaTrinhXuLyViewModel.Count; i++)
+                        {
+                            <tr>
+                                @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].Id)
+                                <td>
+                                    @Html.Raw(Model.QuaTrinhXuLyViewModel[i].GioBanHanh) : @Html.Raw(Model.QuaTrinhXuLyViewModel[i].PhutBanHanh)
+                                </td>
+                                <td>@Model.QuaTrinhXuLyViewModel[i].NgayBanHanh</td>
+                                <td>@Model.QuaTrinhXuLyViewModel[i].NoiDung</td>
+                                <td>@Model.QuaTrinhXuLyViewModel[i].NguoiThem</td>
+                                @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].NhacNho)
+                                <td class="link-action">
+                                    <input type="button" value="@Buttons.CongViec_Detail_QuaTrinhXuLy_Delete" class="btn btn-link" id="btnDeleteQuaTrinhXuLy" />
+                                    <input type="button" value="@Buttons.CongViec_Detail_QuaTrinhXuLy_Edit" class="btn btn-link" id="btnEditQuaTrinhXuLy" />
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4">
+                                <input type="text" class="form-control" />
+                            </td>
+                            <td class="link-action">
+                                <input type="button" value="@Buttons.CongViec_Detail_QuaTrinhXuLy_Save" class="btn btn-link" id="btnSaveVanBanLienQuan" disabled="disabled" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            //{ Html.RenderPartial("_PartialPageUploadFiles", Model.Guid); }
+
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_TrangThai</label>
+                @Html.DropDownListFor(x => Model.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), "-- Chọn trạng thái công việc--", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="clear"></div>
+            <div class="col-sm-12">
+                <label>&nbsp;</label>
+                <div id="outer">
+                    <div class="inner">
+                        <input type="submit" class="btn btn-primary btn-width-md" value="@Buttons.CongViec_Detail_Update" />
+                    </div>
+                    <div class="inner">
+                        @Html.RouteLink(Buttons.CongViec_Detail_Cancel, UrlLink.CONGVIEC, null, htmlAttributes: new { @class = "btn btn-primary btn-width-md" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+@section Scripts{
+    <script src="~/Scripts/app/modaljs.js"></script>
+    <script src="~/Scripts/bootstrap-multiselect.js"></script>
+    <script src="~/Scripts/app/congviec-detail.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var lanhDao = '@isLanhDao';
+
+            if (lanhDao == 'False') {
+                var Options = $('#UsersPhoiHopId option').filter(function () {
+                    return !$(this).is(':selected');
+                });
+
+                Options.each(function () {
+                    var input = $('input[value="' + $(this).val() + '"]');
+                    input.prop('disabled', true);
+                    input.parent('li').addClass('disabled');
+                });
+            }
+
+            /*BEGIN SUBMIT*/
+            onAddBegin = function () {
+                onShowLoading();
+            }
+            onAddComplete = function () {
+                onHideLoading();
+            }
+            onAddSuccess = function () {
+                window.location.href = '@Url.RouteUrl(UrlLink.CONGVIEC)';
+            }
+            onAddFailure = function () {
+                alert(message.CongViec_Add_Error)
+            }
+            /*END SUBMIT*/
+
+        });
+    </script>
+}

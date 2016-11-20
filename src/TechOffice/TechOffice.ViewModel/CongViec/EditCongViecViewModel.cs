@@ -1,10 +1,12 @@
-﻿using System;
+﻿using AnThinhPhat.Entities.Infos;
+using AnThinhPhat.Entities.Results;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AnThinhPhat.ViewModel.CongViec
 {
-    public class AddCongViecViewModel : BaseCongViecViewModel
+    public class EditCongViecViewModel : BaseCongViecViewModel
     {
         public DateTime NgayKhoiTao { get; set; } = DateTime.Now;
 
@@ -26,42 +28,18 @@ namespace AnThinhPhat.ViewModel.CongViec
 
         public int? TrangThaiCongViecId { get; set; }
 
-        //public ValueSearchViewModel ValueSearch { get; set; }
-
-        private List<InitVanBanViewModel> vanBanLienQuan;
-        public List<InitVanBanViewModel> VanBanLienQuanViewModel
+        public IList<CongViecVanBanResult> VanBanLienQuanViewModel
         {
-            get
-            {
-                if (vanBanLienQuan == null)
-                    vanBanLienQuan = new List<InitVanBanViewModel>();
-
-                return vanBanLienQuan;
-            }
-            set
-            {
-                vanBanLienQuan = value;
-            }
+            get; set;
         }
 
-        private List<InitQuaTrinhXuLyViewModel> quanTringXuLyViewModel;
-        public List<InitQuaTrinhXuLyViewModel> QuaTrinhXuLyViewModel
+        public IList<CongViecQuaTrinhXuLyResult> QuaTrinhXuLyViewModel
         {
-            get
-            {
-                if (quanTringXuLyViewModel == null)
-                    quanTringXuLyViewModel = new List<InitQuaTrinhXuLyViewModel>();
-
-                return quanTringXuLyViewModel;
-            }
-            set
-            {
-                quanTringXuLyViewModel = value;
-            }
+            get; set;
         }
 
-        //public InitVanBanViewModel VanBanViewModel { get; set; }
+        public IEnumerable<CoQuanInfo> CoQuanInfos { get; set; }
 
-        public string Guid { get; set; }
+        public int? CoQuanIdTemp { get; set; }
     }
 }

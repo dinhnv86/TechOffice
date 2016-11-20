@@ -7,7 +7,7 @@ $(document).ready(function () {
     var isAddModeXuLy = true;
     var rowEditingXuLy = undefined;
 
-    $('#VanBanLienQuan_0__Ngay').removeClass('control-datepicker');
+    $('#VanBanLienQuanViewModel_0__Ngay').removeClass('control-datepicker');
 
     var optionCalendarDefault =
      {
@@ -25,7 +25,7 @@ $(document).ready(function () {
 
     $('.control-datepicker').datepicker(optionCalendar);
 
-    $('#VanBanLienQuan_0__Ngay').datepicker(optionCalendarDefault);
+    $('#VanBanLienQuanViewModel_0__Ngay').datepicker(optionCalendarDefault);
 
     $.validator.addMethod('date',
    function (value, element) {
@@ -72,10 +72,10 @@ $(document).ready(function () {
         var noiDung = listTD.eq(2).text();
         var coQuanId = listTD.eq(3).find('input').eq(0).val();
 
-        $('#VanBanLienQuan_0__SoVanBan').val(soVanBan);
-        $('#VanBanLienQuan_0__Ngay').val(ngay);
-        $('#VanBanLienQuan_0__NoiDung').val(noiDung);
-        $('#VanBanLienQuan_0__CoQuanId').val(coQuanId);
+        $('#VanBanLienQuanViewModel_0__SoVanBan').val(soVanBan);
+        $('#VanBanLienQuanViewModel_0__Ngay').val(ngay);
+        $('#VanBanLienQuanViewModel_0__NoiDung').val(noiDung);
+        $('#VanBanLienQuanViewModel_0__CoQuanId').val(coQuanId);
 
         valueEditId = ($(this).attr('id'));
         rowEditingVanBan = listTD;
@@ -89,8 +89,10 @@ $(document).ready(function () {
     $('#tbodyAddQuaTrinhXuLy').on('click', '.btnEditTemp', function () {
         var listTD = $(this).closest('tr').find('td');
         var noiDung = listTD.eq(2).text();
+        var mucDoId = $(listTD.eq(1).find('input:last')[0]).val();
 
         $('#QuaTrinhXuLyViewModel_0__NoiDung').val(noiDung);
+        $('#QuaTrinhXuLyViewModel_0__NhacNho').val(mucDoId);
 
         valueEditId = ($(this).attr('id'));
         rowEditingXuLy = listTD;
@@ -99,18 +101,18 @@ $(document).ready(function () {
 
     /*Add, edit, delete row*/
     function addRowVanBan() {
-        var soVanBan = $('#VanBanLienQuan_0__SoVanBan').val();
-        var ngay = $('#VanBanLienQuan_0__Ngay').val();
-        var noiDung = $('#VanBanLienQuan_0__NoiDung').val();
-        var nameCoQuan = $('#VanBanLienQuan_0__CoQuanId option:selected').text();
-        var coQuanId = $('#VanBanLienQuan_0__CoQuanId').val();
+        var soVanBan = $('#VanBanLienQuanViewModel_0__SoVanBan').val();
+        var ngay = $('#VanBanLienQuanViewModel_0__Ngay').val();
+        var noiDung = $('#VanBanLienQuanViewModel_0__NoiDung').val();
+        var nameCoQuan = $('#VanBanLienQuanViewModel_0__CoQuanId option:selected').text();
+        var coQuanId = $('#VanBanLienQuanViewModel_0__CoQuanId').val();
         var tbody = $('#tbodyAddVanBan > tr');
         var tbody_len = (tbody.length);
         var template = ('<tr>' +
-        '<td>' + '<input id="VanBanLienQuan_' + tbody_len + '__SoVanBan" name="VanBanLienQuan[' + tbody_len + '].SoVanBan" type="hidden" value=' + soVanBan + '>' + '<span>' + soVanBan + '</span>' + '</td>'
-        + '<td>' + '<input id="VanBanLienQuan_' + tbody_len + '__Ngay" name="VanBanLienQuan[' + tbody_len + '].Ngay" type="hidden" value=' + ngay + '>' + '<span>' + ngay + '</span>' + '</td>'
-        + '<td>' + '<input id="VanBanLienQuan_' + tbody_len + '__NoiDung" name="VanBanLienQuan[' + tbody_len + '].NoiDung" type="hidden" value=' + noiDung + '>' + '<span>' + noiDung + '</span>' + '</td>'
-        + '<td>' + '<input id="VanBanLienQuan_' + tbody_len + '__CoQuanId" name="VanBanLienQuan[' + tbody_len + '].CoQuanId" type="hidden" value=' + coQuanId + '>' + '<span>' + nameCoQuan + '</span>' + '</td>'
+        '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__SoVanBan" name="VanBanLienQuanViewModel[' + tbody_len + '].SoVanBan" type="hidden" value="' + soVanBan + '">' + '<span>' + soVanBan + '</span>' + '</td>'
+        + '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__Ngay" name="VanBanLienQuanViewModel[' + tbody_len + '].Ngay" type="hidden" value="' + ngay + '">' + '<span>' + ngay + '</span>' + '</td>'
+        + '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__NoiDung" name="VanBanLienQuanViewModel[' + tbody_len + '].NoiDung" type="hidden" value="' + noiDung + '">' + '<span>' + noiDung + '</span>' + '</td>'
+        + '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__CoQuanId" name="VanBanLienQuanViewModel[' + tbody_len + '].CoQuanId" type="hidden" value="' + coQuanId + '">' + '<span>' + nameCoQuan + '</span>' + '</td>'
         + '<td>' + '<input type="button" value="Xóa" class="btn btn-link btnDeleteTemp" id="btnDeleteTemp_' + tbody_len + '"/>|<input type="button" value="Sửa" class="btn btn-link btnEditTemp" id="btnEditTemp_' + tbody_len + '"/>' + '</td>'
         + '</tr>');
 
@@ -121,11 +123,11 @@ $(document).ready(function () {
 
     function editRowVanBan() {
         if (rowEditingVanBan != undefined) {
-            var soVanBan = $("#VanBanLienQuan_0__SoVanBan").val();
-            var ngay = $("#VanBanLienQuan_0__Ngay").val();
-            var noiDung = $("#VanBanLienQuan_0__NoiDung").val();
-            var coQuanId = $("#VanBanLienQuan_0__CoQuanId").val();
-            var nameCoQuan = $('#VanBanLienQuan_0__CoQuanId option:selected').text();
+            var soVanBan = $("#VanBanLienQuanViewModel_0__SoVanBan").val();
+            var ngay = $("#VanBanLienQuanViewModel_0__Ngay").val();
+            var noiDung = $("#VanBanLienQuanViewModel_0__NoiDung").val();
+            var coQuanId = $("#VanBanLienQuanViewModel_0__CoQuanId").val();
+            var nameCoQuan = $('#VanBanLienQuanViewModel_0__CoQuanId option:selected').text();
 
             $(rowEditingVanBan).eq(0).each(function () {
                 $(this).find("input[type='hidden']").val(soVanBan);
@@ -179,6 +181,7 @@ $(document).ready(function () {
     function addRowXuLy() {
         var vanBan = $('#QuaTrinhXuLyViewModel_0__NoiDung').val();
         var nguoiThem = $('#QuaTrinhXuLyViewModel_0__NguoiThem').val();
+        var mucDoId = $('#QuaTrinhXuLyViewModel_0__NhacNho').val();
 
         var tbody = $('#tbodyAddQuaTrinhXuLy > tr');
         var tbody_len = (tbody.length);
@@ -188,9 +191,13 @@ $(document).ready(function () {
             '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__Phut" name="QuaTrinhXuLyViewModel[' + tbody_len + '].Phut" type="hidden" value=' + getMinutes() + '>' +
             '<span>' + getHours() + '</span>' + ':' + '<span>' + getMinutes() + '</span>' +
         '</td>'
-        + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__Ngay" name="QuaTrinhXuLyViewModel[' + tbody_len + '].Ngay" type="hidden" value=' + formatDate() + '>' + '<span>' + formatDate() + '</span>' + '</td>'
-        + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__NoiDung" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NoiDung" type="hidden" value=' + vanBan + '>' + '<span>' + vanBan + '</span>' + '</td>'
-        + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__CoQuanId" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NguoiThem" type="hidden" value=' + nguoiThem + '>' + '<span>' + nguoiThem + '</span>' + '</td>'
+        + '<td>' +
+            '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__Ngay" name="QuaTrinhXuLyViewModel[' + tbody_len + '].Ngay" type="hidden" value=' + formatDate() + '>' +
+            '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__NhacNho" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NhacNho" type="hidden" value=' + mucDoId + '>' +
+            '<span>' + formatDate() + '</span>'
+        + '</td>'
+        + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__NoiDung" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NoiDung" type="hidden" value="' + vanBan + '">' + '<span>' + vanBan + '</span>' + '</td>'
+        + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__CoQuanId" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NguoiThem" type="hidden" value="' + nguoiThem + '">' + '<span>' + nguoiThem + '</span>' + '</td>'
         + '<td>' + '<input type="button" value="Xóa" class="btn btn-link btnDeleteTemp" id="btnDeleteTemp_' + tbody_len + '"/>|<input type="button" value="Sửa" class="btn btn-link btnEditTemp" id="btnEditTemp_' + tbody_len + '"/>' + '</td>'
         + '</tr>');
 
@@ -202,10 +209,8 @@ $(document).ready(function () {
     function editRowXuLy() {
         if (rowEditingXuLy != undefined) {
 
-            var soVanBan = $("#VanBanLienQuan_0__SoVanBan").val();
             var noiDung = $("#QuaTrinhXuLyViewModel_0__NoiDung").val();
-            var coQuanId = $("#VanBanLienQuan_0__CoQuanId").val();
-            var nameCoQuan = $('#VanBanLienQuan_0__CoQuanId option:selected').text();
+            var mucDoId = $("#QuaTrinhXuLyViewModel_0__NhacNho").val();
 
             $(rowEditingXuLy).eq(0).each(function () {
                 $(this).find("input[type='hidden']:first").val(getHours());
@@ -215,7 +220,8 @@ $(document).ready(function () {
             });
 
             $(rowEditingXuLy).eq(1).each(function () {
-                $(this).find("input[type='hidden']").val(formatDate());
+                $(this).find("input[type='hidden']:first").val(formatDate());
+                $(this).find("input[type='hidden']:last").val(mucDoId);
                 $(this).find('span').text(formatDate());
             });
 
@@ -232,14 +238,14 @@ $(document).ready(function () {
     }
 
     //check validate value
-    $('#VanBanLienQuan_0__SoVanBan, #VanBanLienQuan_0__Ngay, #VanBanLienQuan_0__NoiDung').keyup(function () {
+    $('#VanBanLienQuanViewModel_0__SoVanBan, #VanBanLienQuanViewModel_0__Ngay, #VanBanLienQuanViewModel_0__NoiDung').keyup(function () {
         if (validateValueVanBan())
             $('#btnAddVanBanLienQuan').attr('disabled', false);
         else
             $('#btnAddVanBanLienQuan').attr('disabled', true);
     });
 
-    $('#VanBanLienQuan_0__CoQuanId').on('change', function () {
+    $('#VanBanLienQuanViewModel_0__CoQuanId').on('change', function () {
         if (validateValueVanBan())
             $('#btnAddVanBanLienQuan').attr('disabled', false);
         else
@@ -257,10 +263,10 @@ $(document).ready(function () {
     });
 
     validateValueVanBan = function () {
-        var soVanBan = ($('#VanBanLienQuan_0__SoVanBan').val());
-        var ngay = $('#VanBanLienQuan_0__Ngay').val();
-        var noiDung = $('#VanBanLienQuan_0__NoiDung').val();
-        var coQuanId = $('#VanBanLienQuan_0__CoQuanId').val();
+        var soVanBan = ($('#VanBanLienQuanViewModel_0__SoVanBan').val());
+        var ngay = $('#VanBanLienQuanViewModel_0__Ngay').val();
+        var noiDung = $('#VanBanLienQuanViewModel_0__NoiDung').val();
+        var coQuanId = $('#VanBanLienQuanViewModel_0__CoQuanId').val();
 
         if (soVanBan == '' || soVanBan == undefined) {
             return false;
@@ -278,16 +284,18 @@ $(document).ready(function () {
     };
 
     resetRowTemplateVanBan = function () {
-        $('#VanBanLienQuan_0__SoVanBan').val('');
-        $('#VanBanLienQuan_0__Ngay').val(formatDate());
-        $('#VanBanLienQuan_0__NoiDung').val('');
-        $('#VanBanLienQuan_0__CoQuanId').val('');
+        $('#VanBanLienQuanViewModel_0__SoVanBan').val('');
+        $('#VanBanLienQuanViewModel_0__Ngay').val(formatDate());
+        $('#VanBanLienQuanViewModel_0__NoiDung').val('');
+        $('#VanBanLienQuanViewModel_0__CoQuanId').val('');
 
         $('#btnAddVanBanLienQuan').attr('disabled', true);
     }
 
     resetRowTempalteXuLy = function () {
         $('#QuaTrinhXuLyViewModel_0__NoiDung').val('');
+        $('#QuaTrinhXuLyViewModel_0__NhacNho').val(1);//reset default to -- Nhac nho --
+
         $('#btnAddQuaTrinhXuLy').attr('disabled', true);
     }
 
@@ -322,14 +330,7 @@ $(document).ready(function () {
     }
     /*End Add, Edit, Delete row*/
 
-    /*BEGIN SUBMIT*/
-    onAddBegin = function () {
-        onShowLoading();
-    }
-    onAddComplete = function () {
-        onHideLoading();
-    }
-    OnAddSuccess = function () { }
-    onAddFailure = function () { }
-    /*END SUBMIT*/
+    $('#UsersPhoiHopId').multiselect({
+        includeSelectAllOption: true
+    });
 });

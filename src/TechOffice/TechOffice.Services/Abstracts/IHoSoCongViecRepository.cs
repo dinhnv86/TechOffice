@@ -10,5 +10,7 @@ namespace AnThinhPhat.Services.Abstracts
     public interface IHoSoCongViecRepository : IRepository<HoSoCongViecResult>
     {
         IEnumerable<HoSoCongViecResult> Find(ValueSearchCongViec valueSearch);
+
+        SaveResult AddCongViecWithChildren(HoSoCongViecResult entity);
     }
 }

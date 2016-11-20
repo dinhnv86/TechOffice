@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="TechOfficeDevModel.ChucVu" Width="1.5" PointX="3" PointY="18.25" />
         <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_PhoiHop" Width="1.5" PointX="7.5" PointY="14.125" />
         <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_QuaTrinhXuLy" Width="1.5" PointX="12.75" PointY="26.625" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_VanBan" Width="1.5" PointX="12.75" PointY="13.625" />
         <EntityTypeShape EntityType="TechOfficeDevModel.CoQuan" Width="1.5" PointX="3" PointY="23.625" />
         <EntityTypeShape EntityType="TechOfficeDevModel.HoSoCongViec" Width="1.5" PointX="10.5" PointY="12.125" />
         <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucCongViec" Width="1.5" PointX="8.25" PointY="10.5" />
@@ -37,7 +36,6 @@
         <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_PhoiHop_HoSoCongViec" />
         <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_PhoiHop_User" />
         <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_QuaTrinhXuLy_HoSoCongViec" />
-        <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_VanBan_HoSoCongViec" />
         <AssociationConnector Association="TechOfficeDevModel.FK_CoQuan_NhomCoQuan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_TinhHinhThucHien_CoQuan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_CoQuan" />
@@ -67,6 +65,10 @@
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinVanBan_VanBan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_User" />
         <AssociationConnector Association="TechOfficeDevModel.FK_UserRole_User" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_MucDoHoanThanh" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_VanBan" Width="1.5" PointX="15.75" PointY="20.125" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_VanBan_HoSoCongViec" />
+        <AssociationConnector Association="TechOfficeDevModel.PK_CoQuan_CongViecVanBan" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
