@@ -2,14 +2,21 @@
 $(document).ready(function () {
 
     /*BEGIN DATE PICKER*/
-    var optionCalendar = {
+
+    $('#txtVanBanLienQuanNgay').removeClass('control-datepicker');
+
+    var optionCalendarDefault =
+    {
         autoSize: true,
         constrainInput: true,
         dateFormat: 'dd/mm/yy',
-        minDate: new Date(),
     };
 
+    var optionCalendar = optionCalendarDefault;
+    optionCalendar.minDate = new Date();
+
     $('.control-datepicker').datepicker(optionCalendar);
+    $('#txtVanBanLienQuanNgay').datepicker(optionCalendarDefault);
 
     $.validator.addMethod('date',
   function (value, element) {
@@ -30,27 +37,34 @@ $(document).ready(function () {
 
     /*BEGIN VAN BAN LIEN QUAN*/
     var suffixVanBan = undefined;
-    var listTD = undefined;
+    var rowEditingVanBan = undefined;
 
     $('.btnDeleteVanBanLienQuan').on('click', function () {
         var row = $(this).closest('tr');
         var idVanBan = row.find('input[type="hidden"]').val();
-        $.ajax({
-            type: 'POST',
-            async: false,
-            url: '/congviec/deleteVanBanLienQuan',
-            data: {
-                vanBanLienQuanId: idVanBan,
-            },
-            success: function (data) {
-                if (data.code == 'SB01')
-                    deleteRow(row);
-                else
-                    alert(message.CongViec_Detail_Delete_VanBanLienQuan);
-            }
-        }).fail(function () {
-            alert(message.CongViec_Detail_Delete_VanBanLienQuan);
-        });
+        if (idVanBan != null && idVanBan != undefined) {
+            //Delete row at server
+            $.ajax({
+                type: 'POST',
+                async: false,
+                url: '/congviec/deleteVanBanLienQuan',
+                data: {
+                    vanBanLienQuanId: idVanBan,
+                },
+                success: function (data) {
+                    if (data.code == 'SB01')
+                        resetRowNumber(row);
+                    else
+                        alert(message.CongViec_Detail_Delete_VanBanLienQuan);
+                }
+            }).fail(function () {
+                alert(message.CongViec_Detail_Delete_VanBanLienQuan);
+            });
+        }
+        else {
+            //Delete row at client
+            deleteRowVanBanAtClient(row);
+        }
     });
 
     $('.btnEditVanBanLienQuan').on('click', function () {
@@ -63,39 +77,100 @@ $(document).ready(function () {
         $('#txtVanBanLienQuanNoiDung').val(tds.eq(2).find('input[type="hidden"]').val());
         $('#CoQuanIdTemp').val(tds.eq(3).find('input[type="hidden"]').val());
 
-        listTD = tds;
+        rowEditingVanBan = tds;
     });
 
     $('#btnSaveVanBanLienQuan').on('click', function () {
-        if (editRowVanBan()) {
-            listTD = undefined;
+        var idVanBan = $(rowEditingVanBan).find('input[type="hidden"]').val();
+        var saveResult = false;
+        if (rowEditingVanBan != undefined) {
+            if (idVanBan != null && idVanBan != undefined) {
+                //case edit row at server
+                saveResult = editRowVanBanAtServer();
+            }
+                //case edit row at client
+            else {
+                saveResult = editRowVanBanAtClient();
+            }
+        }
+        else {
+            addRowVanBanAtClient();
+        }
+        if (saveResult) {
+            rowEditingVanBan = undefined;
             resetRowTemplateVanBan();
         }
     });
 
-    editRowVanBan = function () {
-        var prefix = "VanBanLienQuanViewModel_";
-        $('#txtSoVanBan').val();
+    editRowVanBanAtServer = function () {
+        //Case edit row at client
+        var soVanBan = $('#txtSoVanBan').val();
+        rowEditingVanBan.eq(0).find('input[type="hidden"]').val(soVanBan);
+        rowEditingVanBan.eq(0).find('span').text(soVanBan);
 
-        if (listTD != undefined) {
-            var soVanBan = $('#txtSoVanBan').val();
-            listTD.eq(0).find('input[type="hidden"]').val(soVanBan);
-            listTD.eq(0).find('span').text(soVanBan);
+        var ngay = $('#txtVanBanLienQuanNgay').val();
+        rowEditingVanBan.eq(1).find('input[type="hidden"]').val(ngay);
+        rowEditingVanBan.eq(1).find('span').text(ngay);
 
-            var ngay = $('#txtVanBanLienQuanNgay').val();
-            listTD.eq(1).find('input[type="hidden"]').val(ngay);
-            listTD.eq(1).find('span').text(ngay);
+        var noiDung = $('#txtVanBanLienQuanNoiDung').val();
+        rowEditingVanBan.eq(2).find('input[type="hidden"]').val(noiDung);
+        rowEditingVanBan.eq(2).find('span').text(noiDung);
 
-            var noiDung = $('#txtVanBanLienQuanNoiDung').val();
-            listTD.eq(2).find('input[type="hidden"]').val(noiDung);
-            listTD.eq(2).find('span').text(noiDung);
+        rowEditingVanBan.eq(3).find('input[type="hidden"]').val($('#CoQuanIdTemp').val());
+        var nameCoQuan = $('#CoQuanIdTemp option:selected').text();
+        rowEditingVanBan.eq(3).find('span').text(nameCoQuan);
 
-            listTD.eq(3).find('input[type="hidden"]').val($('#CoQuanIdTemp').val());
-            var nameCoQuan = $('#CoQuanIdTemp option:selected').text();
-            listTD.eq(3).find('span').text(nameCoQuan);
+        return true;
+    };
 
-            return true;
-        }
+    editRowVanBanAtClient = function () {
+
+        var getValues = getValuesTemplateVanBan();
+
+        $(rowEditingVanBan).eq(0).each(function () {
+            $(this).find("input[type='hidden']").val(getValues.soVanBan);
+            $(this).find('span').text(soVanBan);
+        });
+
+        $(rowEditingVanBan).eq(1).each(function () {
+            $(this).find("input[type='hidden']").val(getValues.ngay);
+            $(this).find('span').text(ngay);
+        });
+
+        $(rowEditingVanBan).eq(2).each(function () {
+            $(this).find('input[type="hidden"]').val(getValues.noiDung);
+            $(this).find('span').text(noiDung);
+        });
+
+        $(rowEditingVanBan).eq(3).each(function () {
+            $(this).find('input[type="hidden"]').val(getValues.coQuanId);
+            $(this).find('span').text(getValues.nameCoQuan);
+        });
+
+        return true;
+    };
+
+    deleteRowVanBanAtClient = function (rowDeleted) {
+        resetRowNumber(rowDeleted);
+    };
+
+    addRowVanBanAtClient = function () {
+        var values = getValuesTemplateVanBan();
+        var tbody = $('#tbodyEditVanBan > tr');
+        var tbody_len = (tbody.length) - 1;
+        var prefix = "VanBanLienQuanViewModel";
+        var template = ('<tr>' +
+        '<td>' + '<input id="' + prefix + '_' + tbody_len + '__SoVanBan" name="' + prefix + '[' + tbody_len + '].SoVanBan" type="hidden" value="' + values.soVanBan + '">' + '<span>' + values.soVanBan + '</span>' + '</td>'
+        + '<td>' + '<input id="' + prefix + '_' + tbody_len + '__Ngay" name="' + prefix + '[' + tbody_len + '].Ngay" type="hidden" value="' + values.ngay + '">' + '<span>' + values.ngay + '</span>' + '</td>'
+        + '<td>' + '<input id="' + prefix + '_' + tbody_len + '__NoiDung" name="' + prefix + '[' + tbody_len + '].NoiDung" type="hidden" value="' + values.noiDung + '">' + '<span>' + values.noiDung + '</span>' + '</td>'
+        + '<td>' + '<input id="' + prefix + '_' + tbody_len + '__CoQuanId" name="' + prefix + '[' + tbody_len + '].CoQuanId" type="hidden" value="' + values.coQuanId + '">' + '<span>' + values.nameCoQuan + '</span>' + '</td>'
+        + '<td>' + '<input type="button" value="Xóa" class="btn btn-link btnDeleteVanBanLienQuan" id="btnDeleteTemp_' + tbody_len + '"/>|' +
+                    '<input type="button" value="Sửa" class="btn btn-link btnEditVanBanLienQuan" id="btnEditTemp_' + tbody_len + '"/>' + '</td>'
+        + '</tr>');
+
+        var row = $('table#tableAddVanBan > tbody > tr:last').before(template);
+
+        resetRowTemplateVanBan();
     };
 
     $('#txtSoVanBan, #txtVanBanLienQuanNgay, #txtVanBanLienQuanNoiDung').keyup(function () {
@@ -141,9 +216,8 @@ $(document).ready(function () {
 
         $('#btnSaveVanBanLienQuan').attr('disabled', true);
     };
-    /*END VAN BAN LIEN QUAN*/
 
-    function deleteRow(rowDeleted) {
+    function resetRowNumber(rowDeleted) {
         $(rowDeleted).closest('tr').nextAll('tr').each(function () {
             $(this).find('td').each(function () {
                 var input = $(this).find('input[type="hidden"]').each(function () {
@@ -164,9 +238,39 @@ $(document).ready(function () {
         $(rowDeleted).closest('tr').remove();
     }
 
+    getValuesTemplateVanBan = function () {
+        var soVanBan = $('#txtSoVanBan').val();
+        var ngay = $('#txtVanBanLienQuanNgay').val();
+        var noiDung = $('#txtVanBanLienQuanNoiDung').val();
+        var coQuanId = $('#CoQuanIdTemp').val();
+        var nameCoQuan = $('#CoQuanIdTemp option:selected').text();
+
+        return {
+            soVanBan: soVanBan,
+            ngay: ngay,
+            noiDung: noiDung,
+            coQuanId: coQuanId,
+            nameCoQuan: nameCoQuan,
+        };
+    };
+    /*END VAN BAN LIEN QUAN*/
+
     /*dropdown list multiple select*/
     $('#UsersPhoiHopId').multiselect({
         includeSelectAllOption: true
     });
     /*end*/
+
+    /*BEGIN SUBMIT FORM*/
+    onDetailBegin = function () {
+        onShowLoading();
+    };
+    onDetaiComplete = function () {
+        onHideLoading()
+    };
+    onDetaiSuccess = function () {
+        window.location.href = '/congviec';
+    };
+    onDetaiFailure = function () { };
+    /*END SUBMIT FORM*/
 });

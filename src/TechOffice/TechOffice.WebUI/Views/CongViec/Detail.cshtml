@@ -4,12 +4,12 @@
 
     AjaxOptions ajaxOption = new AjaxOptions
     {
-        Url = Url.Action("Add"),
+        Url = Url.Action("Detail"),
         HttpMethod = "POST",
-        OnBegin = "onAddBegin",
-        OnComplete = "onAddComplete",
-        OnSuccess = "onAddSuccess",
-        OnFailure = "onAddFailure",
+        OnBegin = "onDetailBegin",
+        OnComplete = "onDetaiComplete",
+        OnSuccess = "onDetaiSuccess",
+        OnFailure = "onDetaiFailure",
     };
 
     bool isLanhDao = User.IsInRole(RoleConstant.LANHDAO);
@@ -82,7 +82,7 @@
                             <th class="col-xs-2 text-center"></th>
                         </tr>
                     </thead>
-                    <tbody id="tbodyAddVanBan">
+                    <tbody id="tbodyEditVanBan">
                         @for (int i = 0; i < Model.VanBanLienQuanViewModel.Count; i++)
                         {
                             <tr>
