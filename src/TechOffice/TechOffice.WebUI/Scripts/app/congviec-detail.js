@@ -12,8 +12,13 @@ $(document).ready(function () {
         dateFormat: 'dd/mm/yy',
     };
 
-    var optionCalendar = optionCalendarDefault;
-    optionCalendar.minDate = new Date();
+    var optionCalendar =
+   {
+       autoSize: true,
+       constrainInput: true,
+       dateFormat: 'dd/mm/yy',
+       minDate: new Date(),
+   };
 
     $('.control-datepicker').datepicker(optionCalendar);
     $('#txtVanBanLienQuanNgay').datepicker(optionCalendarDefault);
@@ -103,7 +108,7 @@ $(document).ready(function () {
     });
 
     editRowVanBanAtServer = function () {
-        //Case edit row at client
+        //Case edit row at server
         var soVanBan = $('#txtSoVanBan').val();
         rowEditingVanBan.eq(0).find('input[type="hidden"]').val(soVanBan);
         rowEditingVanBan.eq(0).find('span').text(soVanBan);
@@ -255,6 +260,179 @@ $(document).ready(function () {
     };
     /*END VAN BAN LIEN QUAN*/
 
+    /*BEGIN QUA TRINH XU LY*/
+    $('#txtNoiDungQuaTrinhXuLy').keyup(function () {
+        var noiDung = $(this).val();
+
+        if (noiDung == '' || noiDung == undefined) {
+            $('#btnSaveQuaTrinhXuly').attr('disabled', true);
+            return;
+        }
+        $('#btnSaveQuaTrinhXuly').attr('disabled', false);
+    });
+
+    $('.btnDeleteQuaTrinhXuLy').on('click', function () {
+        var row = $(this).closest('tr');
+        var idQuaTrinhXuLy = row.find('input[type="hidden"]').val();
+        if (idQuaTrinhXuLy != null && idQuaTrinhXuLy != undefined) {
+            //Delete row at server
+            $.ajax({
+                type: 'POST',
+                async: false,
+                url: '/congviec/deleteQuaTrinhXuLy',
+                data: {
+                    quaTrinhXuLyId: idQuaTrinhXuLy,
+                },
+                success: function (data) {
+                    if (data.code == 'SB01')
+                        resetRowNumber(row);
+                    else
+                        alert(message.CongViec_Detail_Delete_QuaTrinhXuLy);
+                }
+            }).fail(function () {
+                alert(message.CongViec_Detail_Delete_QuaTrinhXuLy);
+            });
+        }
+        else {
+            //Delete row at client
+            deleteRowVanBanAtClient(row);
+        }
+    });
+
+    var rowEditingQuaTrinhXuLy = undefined;
+
+    $('.btnEditQuaTrinhXuLy').on('click', function () {
+        var tds = $(this).closest('tr').find('td');
+
+        $('#txtNoiDungQuaTrinhXuLy').val(tds.eq(2).find('input[type="hidden"]').val());
+        $('#EnumNhacNho').val(tds.eq(0).find('input[type="hidden"]:eq(2)').val());
+
+        rowEditingQuaTrinhXuLy = tds;
+    });
+
+    $('#btnSaveQuaTrinhXuly').on('click', function () {
+
+        var idQuaTrinhXuLy = $(rowEditingQuaTrinhXuLy).find('input[type="hidden"]').val();
+        var saveResult = false;
+        if (rowEditingQuaTrinhXuLy != undefined) {
+            if (idQuaTrinhXuLy != null && idQuaTrinhXuLy != undefined) {
+                //case edit row at server
+                saveResult = editRowQuaTrinhXuLyAtServer();
+            }
+                //case edit row at client
+            else {
+                saveResult = editRowQuaTrinhXuLyAtClient();
+            }
+        }
+        else {
+            addRowQuaTrinhXuLyAtClient();
+        }
+        if (saveResult) {
+            rowEditingQuaTrinhXuLy = undefined;
+            resetRowTemplateQuaTrinhXuLy();
+        }
+    });
+
+    editRowQuaTrinhXuLyAtServer = function () {
+
+        //Case edit row at server
+        var noiDung = $('#txtNoiDungQuaTrinhXuLy').val();
+        rowEditingQuaTrinhXuLy.eq(2).find('input[type="hidden"]').val(noiDung);
+        rowEditingQuaTrinhXuLy.eq(2).find('span').text(noiDung);
+
+        rowEditingQuaTrinhXuLy.eq(0).find('input[type="hidden"]:eq(0)').val(getHours());
+        rowEditingQuaTrinhXuLy.eq(0).find('input[type="hidden"]:eq(1)').val(getMinutes());
+        var nhacNho = $('#EnumNhacNho').val();
+        rowEditingQuaTrinhXuLy.eq(0).find('input[type="hidden"]:eq(2)').val(nhacNho);
+
+        rowEditingQuaTrinhXuLy.eq(0).find('span:first').text(getHours());
+        rowEditingQuaTrinhXuLy.eq(0).find('span:last').text(getMinutes());
+
+        rowEditingQuaTrinhXuLy.eq(1).find('input[type="hidden"]').val(formatDate());
+        rowEditingQuaTrinhXuLy.eq(1).find('span').text(formatDate());
+
+        rowEditingQuaTrinhXuLy.eq(3).find('input[type="hidden"]').val($('#txtNguoiThemQuaTrinhXuLy').val());
+        rowEditingQuaTrinhXuLy.eq(3).find('span').text($('#txtNguoiThemQuaTrinhXuLy').val());
+
+        if (nhacNho == '3')
+            rowEditingQuaTrinhXuLy.addClass('text-danger');
+
+        if (nhacNho == '2')
+            rowEditingQuaTrinhXuLy.addClass('text-yellow');
+
+        return true;
+    };
+
+    editRowQuaTrinhXuLyAtClient = function () {
+        var noiDung = $('#txtNoiDungQuaTrinhXuLy').val();
+        rowEditingQuaTrinhXuLy.eq(2).find('input[type="hidden"]').val(noiDung);
+        rowEditingQuaTrinhXuLy.eq(2).find('span').text(noiDung);
+
+        rowEditingQuaTrinhXuLy.eq(0).find('input[type="hidden"]:eq(0)').val(getHours());
+        rowEditingQuaTrinhXuLy.eq(0).find('input[type="hidden"]:eq(1)').val(getMinutes());
+        var nhacNho = $('#EnumNhacNho').val();
+        rowEditingQuaTrinhXuLy.eq(0).find('input[type="hidden"]:eq(2)').val(nhacNho);
+
+        rowEditingQuaTrinhXuLy.eq(0).find('span:first').text(getHours());
+        rowEditingQuaTrinhXuLy.eq(0).find('span:last').text(getMinutes());
+
+        rowEditingQuaTrinhXuLy.eq(1).find('input[type="hidden"]').val(formatDate());
+        rowEditingQuaTrinhXuLy.eq(1).find('span').text(formatDate());
+
+        rowEditingQuaTrinhXuLy.eq(3).find('input[type="hidden"]').val($('#txtNguoiThemQuaTrinhXuLy').val());
+        rowEditingQuaTrinhXuLy.eq(3).find('span').text($('#txtNguoiThemQuaTrinhXuLy').val());
+
+        if (nhacNho == '3')
+            rowEditingQuaTrinhXuLy.addClass('text-danger');
+
+        if (nhacNho == '2')
+            rowEditingQuaTrinhXuLy.addClass('text-yellow');
+
+        return true;
+        return true;
+    };
+
+    addRowQuaTrinhXuLyAtClient = function () {
+        var noiDung = $('#txtNoiDungQuaTrinhXuLy').val();
+        var nguoiThem = $('#txtNguoiThemQuaTrinhXuLy').val();
+        var mucDoId = $('#EnumNhacNho').val();
+        var color = '';
+        if (mucDoId == '2')
+            color = 'text-yellow';
+        if (mucDoId == '3')
+            color = 'text-danger';
+
+        var tbody = $('#tbodyAddQuaTrinhXuLy > tr');
+        var tbody_len = (tbody.length) - 1;
+        var template = ('<tr class="' + color + '">' +
+        '<td>' +
+            '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__GioBanHanh" name="QuaTrinhXuLyViewModel[' + tbody_len + '].GioBanHanh" type="hidden" value=' + getHours() + '>' +
+            '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__PhutBanHanh" name="QuaTrinhXuLyViewModel[' + tbody_len + '].PhutBanHanh" type="hidden" value=' + getMinutes() + '>' +
+            '<span>' + getHours() + '</span>' + ':' + '<span>' + getMinutes() + '</span>' +
+        '</td>'
+        + '<td>' +
+            '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__NgayBanHanh" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NgayBanHanh" type="hidden" value=' + formatDate() + '>' +
+            '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__NhacNho" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NhacNho" type="hidden" value=' + mucDoId + '>' +
+            '<span>' + formatDate() + '</span>'
+        + '</td>'
+        + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__NoiDung" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NoiDung" type="hidden" value="' + noiDung + '">' + '<span>' + noiDung + '</span>' + '</td>'
+        + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__CoQuanId" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NguoiThem" type="hidden" value="' + nguoiThem + '">' + '<span>' + nguoiThem + '</span>' + '</td>'
+        + '<td>' + '<input type="button" value="Xóa" class="btn btn-link btnDeleteTemp" id="btnDeleteTemp_' + tbody_len + '"/>|<input type="button" value="Sửa" class="btn btn-link btnEditTemp" id="btnEditTemp_' + tbody_len + '"/>' + '</td>'
+        + '</tr>');
+
+        var row = $('tbody#tbodyAddQuaTrinhXuLy > tr:last').before(template);
+
+        resetRowTemplateQuaTrinhXuLy();
+    };
+
+    resetRowTemplateQuaTrinhXuLy = function () {
+        $('#txtNoiDungQuaTrinhXuLy').val('');
+        $('#EnumNhacNho').val(1);
+        $('#btnSaveQuaTrinhXuly').attr('disabled', true);
+    };
+
+    /*END QUA TRINH XU LY*/
+
     /*dropdown list multiple select*/
     $('#UsersPhoiHopId').multiselect({
         includeSelectAllOption: true
@@ -268,9 +446,42 @@ $(document).ready(function () {
     onDetaiComplete = function () {
         onHideLoading()
     };
-    onDetaiSuccess = function () {
-        window.location.href = '/congviec';
+    onDetaiSuccess = function (data) {
+        if (data.code == 'SB01')
+            window.location.href = '/congviec';
+        else
+            alert(message.CongViec_Edit_Error);
     };
     onDetaiFailure = function () { };
     /*END SUBMIT FORM*/
+
+    formatDate = function () {
+        var d = new Date();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+
+        var output =
+            (day < 10 ? '0' : '') + day + '/' +
+            (month < 10 ? '0' : '') + month + '/' +
+            +d.getFullYear();
+
+        return output;
+    }
+
+    getMinutes = function () {
+        var d = new Date();
+        var m = d.getMinutes();
+
+        var output = (m < 10 ? '0' : '') + m;
+
+        return output;
+    }
+
+    getHours = function () {
+        var d = new Date();
+        var h = d.getHours();
+        var output = (h < 10 ? '0' : '') + h;
+
+        return output;
+    }
 });

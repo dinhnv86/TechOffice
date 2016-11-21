@@ -315,7 +315,7 @@ namespace AnThinhPhat.Entities
                 TrangThaiCongViecInfo = entity.TrangThaiCongViec.ToDataInfo(),
                 LinhVucCongViecId = entity.LinhVucCongViecId,
                 LinhVucCongViec = entity.LinhVucCongViec.ToDataInfo(),
-                QuaTrinhXuLy = entity.QuaTrinhXuLy,
+                QuaTrinhXuLy = entity.DanhGiaCongViec,
                 UserPhuTrachId = entity.UserPhuTrachId,
                 UserPhuTrach = entity.User.ToDataInfo(),
                 UserXuLyId = entity.UserXuLyId,

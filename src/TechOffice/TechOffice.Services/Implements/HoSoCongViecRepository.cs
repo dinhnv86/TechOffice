@@ -30,7 +30,7 @@ namespace AnThinhPhat.Services.Implements
                     add.UserXuLyId = entity.UserXuLyId;
                     add.LinhVucCongViecId = entity.LinhVucCongViecId;
                     add.NoiDung = entity.NoiDung;
-                    add.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                    add.DanhGiaCongViec = entity.QuaTrinhXuLy;
                     add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                     add.IsDeleted = entity.IsDeleted;
@@ -56,7 +56,7 @@ namespace AnThinhPhat.Services.Implements
                     add.UserXuLyId = entity.UserXuLyId;
                     add.LinhVucCongViecId = entity.LinhVucCongViecId;
                     add.NoiDung = entity.NoiDung;
-                    add.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                    add.DanhGiaCongViec = entity.QuaTrinhXuLy;
                     add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                     add.IsDeleted = entity.IsDeleted;
@@ -84,7 +84,7 @@ namespace AnThinhPhat.Services.Implements
                         add.UserXuLyId = entity.UserXuLyId;
                         add.LinhVucCongViecId = entity.LinhVucCongViecId;
                         add.NoiDung = entity.NoiDung;
-                        add.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                        add.DanhGiaCongViec = entity.QuaTrinhXuLy;
                         add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                         add.IsDeleted = entity.IsDeleted;
@@ -113,7 +113,7 @@ namespace AnThinhPhat.Services.Implements
                         add.UserXuLyId = entity.UserXuLyId;
                         add.LinhVucCongViecId = entity.LinhVucCongViecId;
                         add.NoiDung = entity.NoiDung;
-                        add.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                        add.DanhGiaCongViec = entity.QuaTrinhXuLy;
                         add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                         add.IsDeleted = entity.IsDeleted;
@@ -216,7 +216,7 @@ namespace AnThinhPhat.Services.Implements
                                 LinhVucCongViecId = item.LinhVucCongViecId,
                                 LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
                                 NoiDung = item.NoiDung,
-                                QuaTrinhXuLy = item.QuaTrinhXuLy,
+                                QuaTrinhXuLy = item.DanhGiaCongViec,
                                 IsDeleted = item.IsDeleted,
                                 CreateDate = item.CreateDate,
                                 CreatedBy = item.CreatedBy,
@@ -246,7 +246,7 @@ namespace AnThinhPhat.Services.Implements
                                       LinhVucCongViecId = item.LinhVucCongViecId,
                                       LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
                                       NoiDung = item.NoiDung,
-                                      QuaTrinhXuLy = item.QuaTrinhXuLy,
+                                      QuaTrinhXuLy = item.DanhGiaCongViec,
                                       IsDeleted = item.IsDeleted,
                                       CreateDate = item.CreateDate,
                                       CreatedBy = item.CreatedBy,
@@ -292,7 +292,7 @@ namespace AnThinhPhat.Services.Implements
                                       LinhVucCongViecId = item.LinhVucCongViecId,
                                       LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
                                       NoiDung = item.NoiDung,
-                                      QuaTrinhXuLy = item.QuaTrinhXuLy,
+                                      QuaTrinhXuLy = item.DanhGiaCongViec,
                                       IsDeleted = item.IsDeleted,
                                       CreateDate = item.CreateDate,
                                       CreatedBy = item.CreatedBy,
@@ -316,7 +316,7 @@ namespace AnThinhPhat.Services.Implements
                     update.UserXuLyId = entity.UserXuLyId;
                     update.LinhVucCongViecId = entity.LinhVucCongViecId;
                     update.NoiDung = entity.NoiDung;
-                    update.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                    update.DanhGiaCongViec = entity.QuaTrinhXuLy;
 
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
@@ -342,7 +342,7 @@ namespace AnThinhPhat.Services.Implements
                     update.UserXuLyId = entity.UserXuLyId;
                     update.LinhVucCongViecId = entity.LinhVucCongViecId;
                     update.NoiDung = entity.NoiDung;
-                    update.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                    update.DanhGiaCongViec = entity.QuaTrinhXuLy;
 
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;

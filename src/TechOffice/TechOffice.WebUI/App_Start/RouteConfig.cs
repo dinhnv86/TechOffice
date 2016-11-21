@@ -65,7 +65,7 @@ namespace AnThinhPhat.WebUI
               new { id = @"\d+" });
 
             routes.MapRoute(UrlLink.LIENHE, UrlLink.LIENHE, new { controller = "Home", action = "Contact" });
-
+            routes.MapRoute(UrlLink.LOGIN, UrlLink.LOGIN, new { controller = "Account", action = "LogIn" });
             //Error
             routes.MapRoute("error", "error/internalserver",
                 new { controller = "Error", action = "InternalServer" });

@@ -3788,6 +3788,10 @@ div.btn-group > button.multiselect {
         margin-top: 8px;
     }
 
-    div.btn-group > ul{
-        width:100%;
-    }
+div.btn-group > ul {
+    width: 100%;
+}
+
+.text-yellow {
+    color: #cccc00;
+}

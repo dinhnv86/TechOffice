@@ -40,6 +40,7 @@
 
         public static string TINTUC = "tintuc";
         public static string LIENHE = "lienhe";
+        public static string LOGIN = "login";
         public static string TACNGHIEP_THONGKE = "tacnghiep/thongke";
         public static string TACNGHIEP_ADD = "tacnghiep/themmoi";
         public static string TACNGHIEP_DETAIL = "tacnghiep/{id}";

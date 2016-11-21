@@ -176,7 +176,7 @@ namespace AnThinhPhat.Services
             hoso.UserXuLyId = entity.UserXuLyId;
             hoso.LinhVucCongViecId = entity.LinhVucCongViecId;
             hoso.NoiDung = entity.NoiDung;
-            hoso.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+            hoso.DanhGiaCongViec = entity.QuaTrinhXuLy;
             hoso.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
             hoso.IsDeleted = entity.IsDeleted;

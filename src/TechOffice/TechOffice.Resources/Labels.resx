@@ -180,6 +180,9 @@
   <data name="CongViec_Add_XuLyChinh" xml:space="preserve">
     <value>Xử lý chính</value>
   </data>
+  <data name="CongViec_Edit_DanhGiaCongViec" xml:space="preserve">
+    <value>Đánh giá công việc</value>
+  </data>
   <data name="CongViec_Index_ChonNhanVien" xml:space="preserve">
     <value>Chọn nhân viên</value>
   </data>

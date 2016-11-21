@@ -182,10 +182,14 @@ $(document).ready(function () {
         var vanBan = $('#QuaTrinhXuLyViewModel_0__NoiDung').val();
         var nguoiThem = $('#QuaTrinhXuLyViewModel_0__NguoiThem').val();
         var mucDoId = $('#QuaTrinhXuLyViewModel_0__NhacNho').val();
+        if (mucDoId == '2')
+            color = 'text-yellow';
+        if (mucDoId == '3')
+            color = 'text-danger';
 
         var tbody = $('#tbodyAddQuaTrinhXuLy > tr');
         var tbody_len = (tbody.length);
-        var template = ('<tr>' +
+        var template = ('<tr class="' + color + '">' +
         '<td>' +
             '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__Gio" name="QuaTrinhXuLyViewModel[' + tbody_len + '].Gio" type="hidden" value=' + getHours() + '>' +
             '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__Phut" name="QuaTrinhXuLyViewModel[' + tbody_len + '].Phut" type="hidden" value=' + getMinutes() + '>' +

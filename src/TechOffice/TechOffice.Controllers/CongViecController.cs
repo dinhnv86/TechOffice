@@ -41,6 +41,9 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public ICongViecVanBanRepository CongViecVanBanRepository { get; set; }
 
+        [Inject]
+        public ICongViecPhoiHopRepository CongViecPhoiHopRepository { get; set; }
+
         [HttpGet]
         public ActionResult Index(int? userId, int? role, int? trangThaiCongViecId, int? linhVucCongViecId, string noiDungCongViec)
         {
@@ -181,6 +184,7 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
+        [HttpGet]
         public ActionResult Detail(int id)
         {
             var hoso = HoSoCongViecRepository.Single(id);
@@ -189,6 +193,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
             var model = new EditCongViecViewModel
             {
+                Id = id,
                 UsersInfos = init.UsersInfos,
                 LinhVucCongViecInfos = init.LinhVucCongViecInfos,
                 TrangThaiCongViecInfos = init.TrangThaiCongViecInfos,
@@ -210,12 +215,134 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [HttpPost]
+        public JsonResult Detail(int id, EditCongViecViewModel model)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                var congViec = HoSoCongViecRepository.Single(id);
+
+                //Get all van ban lien quan
+                AddOrUpdateXuLy(id, model);
+                AddOrUpdateVanBan(id, model);
+
+                if (User.IsInRole(RoleConstant.LANHDAO))
+                {
+                    congViec.NgayHetHan = model.NgayHetHan;
+                    congViec.LinhVucCongViecId = model.LinhVucCongViecId;
+                    congViec.UserPhuTrachId = model.UserPhuTrachId;
+                    congViec.UserXuLyId = model.UserXuLyChinhId;
+                    congViec.CongViecPhoiHopResult = model.UsersPhoiHopId.Select(x => new CongViecPhoiHopResult { UserId = x, HoSoCongViecId = id });
+                }
+
+                congViec.TrangThaiCongViecId = model.TrangThaiCongViecId;
+
+                AddOrUpdatePhoiHop(id, congViec.CongViecPhoiHopResult);
+
+                HoSoCongViecRepository.Update(congViec);
+
+                return new JsonResult
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { code = "SB01" }
+                };
+            });
+        }
+
+        [HttpPost]
         public JsonResult DeleteVanBanLienQuan(int vanBanLienQuanId)
         {
             return ExecuteWithErrorHandling(() =>
             {
                 return ExecuteResult(() => CongViecVanBanRepository.DeleteBy(vanBanLienQuanId));
             });
+        }
+
+        [HttpPost]
+        public JsonResult DeleteQuaTrinhXuLy(int quaTrinhXuLyId)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                return ExecuteResult(() => QuaTrinhXuLyRepository.DeleteBy(quaTrinhXuLyId));
+            });
+        }
+
+        private void AddOrUpdateVanBan(int id, EditCongViecViewModel model)
+        {
+            var vanbanUpdate = model.VanBanLienQuanViewModel.Where(x => x.Id > 0);
+            if (vanbanUpdate.Any())
+            {
+                CongViecVanBanRepository.UpdateRange(vanbanUpdate.Select(x => new CongViecVanBanResult
+                {
+                    Id = x.Id,
+                    HoSoCongViecId = id,
+                    SoVanBan = x.SoVanBan,
+                    NgayBanHanh = x.NgayBanHanh,
+                    NoiDung = x.NoiDung,
+                    CoQuanId = x.CoQuanId,
+                    LastUpdatedBy = UserName,
+                    IsDeleted = false,
+                }));
+            }
+
+            var vanBanAdd = model.VanBanLienQuanViewModel.Where(x => x.Id == 0);
+            if (vanBanAdd.Any())
+                CongViecVanBanRepository.AddRange(vanbanUpdate.Select(x => new CongViecVanBanResult
+                {
+                    HoSoCongViecId = id,
+                    SoVanBan = x.SoVanBan,
+                    NgayBanHanh = x.NgayBanHanh,
+                    NoiDung = x.NoiDung,
+                    CoQuanId = x.CoQuanId,
+                    CreatedBy = UserName,
+                    IsDeleted = false,
+                }));
+        }
+
+        private void AddOrUpdateXuLy(int id, EditCongViecViewModel model)
+        {
+            var quaTrinhUpdate = model.QuaTrinhXuLyViewModel.Where(x => x.Id > 0);
+            if (quaTrinhUpdate.Any())
+                QuaTrinhXuLyRepository.UpdateRange(quaTrinhUpdate.Select(x => new CongViecQuaTrinhXuLyResult
+                {
+                    Id = x.Id,
+                    HoSoCongViecId = model.Id,
+                    GioBanHanh = x.GioBanHanh,
+                    PhutBanHanh = x.PhutBanHanh,
+                    NgayBanHanh = x.NgayBanHanh,
+                    NoiDung = x.NoiDung,
+                    NguoiThem = x.NguoiThem,
+                    NhacNho = x.NhacNho,
+                    IsDeleted = false,
+                    LastUpdatedBy = UserName,
+                }));
+
+            var quaTrinhAdd = model.QuaTrinhXuLyViewModel.Where(x => x.Id == 0);
+            if (quaTrinhAdd.Any())
+                QuaTrinhXuLyRepository.AddRange(quaTrinhAdd.Select(x => new CongViecQuaTrinhXuLyResult
+                {
+                    HoSoCongViecId = model.Id,
+                    GioBanHanh = x.GioBanHanh,
+                    PhutBanHanh = x.PhutBanHanh,
+                    NgayBanHanh = x.NgayBanHanh,
+                    NoiDung = x.NoiDung,
+                    NguoiThem = x.NguoiThem,
+                    NhacNho = x.NhacNho,
+                    IsDeleted = false,
+                    CreatedBy = UserName,
+                }));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">Id: CongViecId</param>
+        /// <param name="model"></param>
+        private void AddOrUpdatePhoiHop(int id, IEnumerable<CongViecPhoiHopResult> model)
+        {
+            if (model.Any())
+            {
+                CongViecPhoiHopRepository.AddOrUpdate(id, model, UserName);
+            }
         }
 
         private BaseCongViecViewModel InitModel()

@@ -9,6 +9,8 @@
     + 'No' + '</button></div></div></div>',
 
     DuplicateUser: 'Người dùng này đã tồn tại trong hệ thông.',
-    CongViec_Add_Error: 'Thêm mới công việc không thành công.',
-    CongViec_Detail_Delete_VanBanLienQuan: 'Đã xảy ra lỗi trong quá trình xóa. Xin vui lòng thử lại!'
+    CongViec_Add_Error: 'Thêm mới công việc không thành công.', 
+    CongViec_Edit_Error: 'Cập nhật công việc không thành công.',
+    CongViec_Detail_Delete_VanBanLienQuan: 'Đã xảy ra lỗi trong quá trình xóa. Xin vui lòng thử lại!',
+    CongViec_Detail_Delete_QuaTrinhXuLy: 'Đã xảy ra lỗi trong quá trình xóa. Xin vui lòng thử lại!'
 };
