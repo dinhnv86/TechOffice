@@ -336,7 +336,7 @@ border:1px solid #3b3b3b !important;color:#fff}
 
  .list.list{min-width: 350px;}
 
-.container { padding-top: 20px;}
+.container { padding-top: 20px; margin-bottom:0;}
 
  .nav-collapse.collapse {height: auto !important;overflow: visible !important;}
 
@@ -351,7 +351,9 @@ border:1px solid #3b3b3b !important;color:#fff}
 .col-lg-6 { display:none
 }
 .logo_mobi {display: block;float: left;width: 100%;text-align: center;}
-.bg_header .container{background:none;}
+
+#header_bg {   background:none;}
+#header_bg a#link_home{display:none;}
 }
 
 
@@ -577,7 +579,7 @@ input.span1,
 textarea.span1,
 .uneditable-input.span1 {width: 28px;}
 
-.logo_mobi {display: block;background: url("../images/menu_ngang.jpg") no-repeat scroll left center transparent;float: left;width: 100%;text-align: center;}
+.logo_mobi {display: block;float: left;width: 100%;text-align: center;}
 
 .inf1.span12 { display:none;}
 
@@ -653,7 +655,7 @@ border-bottom: 1px solid #CCC;margin-bottom: 20px;width:100%;height:100%;float:l
 
 .inf1.span12 .dangky_nhantin{display: none;}
 
-.logo_mobi{display: block; background: url("../images/menu_ngang.jpg") repeat scroll left center transparent;}
+.logo_mobi{display: block; }
 
 .logo_mobi img{}
 
