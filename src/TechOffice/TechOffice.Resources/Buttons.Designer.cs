@@ -106,6 +106,15 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hủy.
+        /// </summary>
+        public static string CongViec_Detail_QuaTrinhXuLy_Cancel {
+            get {
+                return ResourceManager.GetString("CongViec_Detail_QuaTrinhXuLy_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xóa.
         /// </summary>
         public static string CongViec_Detail_QuaTrinhXuLy_Delete {
@@ -138,6 +147,15 @@ namespace AnThinhPhat.Resources {
         public static string CongViec_Detail_Update {
             get {
                 return ResourceManager.GetString("CongViec_Detail_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hủy.
+        /// </summary>
+        public static string CongViec_Detail_VanBanLienQuan_Cancel {
+            get {
+                return ResourceManager.GetString("CongViec_Detail_VanBanLienQuan_Cancel", resourceCulture);
             }
         }
         

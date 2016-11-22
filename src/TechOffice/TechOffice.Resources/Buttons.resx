@@ -132,6 +132,9 @@
   <data name="CongViec_Detail_Cancel" xml:space="preserve">
     <value>Hủy</value>
   </data>
+  <data name="CongViec_Detail_QuaTrinhXuLy_Cancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
   <data name="CongViec_Detail_QuaTrinhXuLy_Delete" xml:space="preserve">
     <value>Xóa</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="CongViec_Detail_Update" xml:space="preserve">
     <value>Cập nhật</value>
+  </data>
+  <data name="CongViec_Detail_VanBanLienQuan_Cancel" xml:space="preserve">
+    <value>Hủy</value>
   </data>
   <data name="CongViec_Detail_VanBanLienQuan_Delete" xml:space="preserve">
     <value>Xóa</value>

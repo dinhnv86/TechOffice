@@ -2,4 +2,85 @@
     Layout = "~/Views/Shared/_LayoutCV.cshtml";
 }
 
+<div class="bg dtapg">
+    <div class="boxr" style="width:100%">
+        <h1 class="title title_ct"><span>@Labels.CongViec_Index_Title</span></h1>
+        <div class="pading">
+            <div class="entry">
+                <div class="col-md-4">
+                    <label>Tu ngay</label>
+                    <input type="text" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label>Den ngay</label>
+                    <input type="text" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label>&nbsp;</label>
+                    <input type="button" class="btn btn-primary" value="Thong ke"/>
+                </div>
+                <div class="col-md-4">
+                    <label>@Labels.CongViec_Index_ChonNhanVien</label>
+                    @*@Html.DropDownListFor(x => Model.UserId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), htmlAttributes: new { @class = "form-control" })*@
+                </div>
+                <div class="col-md-4">
+                    <label>@Labels.CongViec_Index_VaiTroXuLy</label>
+                    @*@Html.OfficeEnumDropDownListFor(x => x.Role, htmlAttributes: new { @class = "form-control" })*@
+                    <input type="text" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label>@Labels.CongViec_Index_TinhTrang</label>
+                    <input type="text" class="form-control" />
+                    @*@Html.DropDownListFor(x => x.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })*@
+                </div>
+                <div class="col-md-4">
+                    <label>@Labels.CongViec_Index_LinhVucCongViec</label>
+                    <input type="text" class="form-control" />
+                    @*@Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })*@
+                </div>
+                <div class="col-xs-12">
+                    <label>@Labels.CongViec_Index_NoiDungCongViec</label>
+                    <input type="text" class="form-control" />
+                    @*@Html.TextBoxFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control" })*@
+                </div>
+                <div class="col-xs-4">
+                    <label>So van ban</label>
+                    <input type="text" class="form-control" />
+                    @*@Html.TextBoxFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control" })*@
+                </div>
+                <div class="col-xs-4">
+                    <label>Noi dung</label>
+                    <input type="text" class="form-control" />
+                    @*@Html.TextBoxFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control" })*@
+                </div>
+                <div class="col-xs-4">
+                    <label>Co quan</label>
+                    <input type="text" class="form-control" />
+                    @*@Html.TextBoxFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control" })*@
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-xs-4">
+                    <input type="button" class="btn btn-primary" value="Tim"/>
+                </div>
 
+                <div class="col-xs-12">
+                    <label>Chon hien thi cac cong viec</label>
+                </div>
+                <div class="col-xs-4">
+
+                </div>
+                <div class="col-xs-4"></div>
+                <div class="col-xs-4"></div>
+
+                <div class="col-xs-12" id="outer" style="padding-top:20px;">
+                    <div class="inner">
+                        <input type="submit" value='@Buttons.CongViec_Index_TimKiem' class="btn btn-primary" id="btnSearch" />
+                    </div>
+                    <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThongKe, UrlLink.CONGVIEC_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })</div>
+                    <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThemMoi, "congviec/themmoi", null, htmlAttributes: new { @class = "btn btn-primary" })</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

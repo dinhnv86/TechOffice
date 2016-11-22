@@ -12,6 +12,8 @@ namespace AnThinhPhat.Entities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class TechOfficeEntities : DbContext
     {
@@ -53,5 +55,14 @@ namespace AnThinhPhat.Entities
         public virtual DbSet<VanBan> VanBans { get; set; }
         public virtual DbSet<CongViec_VanBan> CongViec_VanBan { get; set; }
         public virtual DbSet<HoSoCongViec> HoSoCongViecs { get; set; }
+    
+        public virtual ObjectResult<Statictis_Result> Statictis(Nullable<int> noiVuId)
+        {
+            var noiVuIdParameter = noiVuId.HasValue ?
+                new ObjectParameter("NoiVuId", noiVuId) :
+                new ObjectParameter("NoiVuId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Statictis_Result>("Statictis", noiVuIdParameter);
+        }
     }
 }

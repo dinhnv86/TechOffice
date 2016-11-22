@@ -320,7 +320,7 @@ namespace AnThinhPhat.Services.Implements
 
         public SaveResult AddOrUpdate(int congViecId, IEnumerable<CongViecPhoiHopResult> entities, string userName)
         {
-            if (entities.Any())
+            if (entities != null && entities.Any())
             {
                 //get all phoi hop by hosocongviecid
                 using (var context = new TechOfficeEntities())
@@ -350,7 +350,7 @@ namespace AnThinhPhat.Services.Implements
                         add.CreatedBy = userName;
                         add.CreateDate = DateTime.Now;
                         add.IsDeleted = false;
-                        context.Entry(add).State = EntityState.Modified;
+                        context.Entry(add).State = EntityState.Added;
                     }
                     return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }

@@ -44,7 +44,7 @@ $(document).ready(function () {
     var suffixVanBan = undefined;
     var rowEditingVanBan = undefined;
 
-    $('.btnDeleteVanBanLienQuan').on('click', function () {
+    $('#tbodyEditVanBan').on('click', '.btnDeleteVanBanLienQuan', function () {
         var row = $(this).closest('tr');
         var idVanBan = row.find('input[type="hidden"]').val();
         if (idVanBan != null && idVanBan != undefined) {
@@ -72,7 +72,7 @@ $(document).ready(function () {
         }
     });
 
-    $('.btnEditVanBanLienQuan').on('click', function () {
+    $('#tbodyEditVanBan').on('click', '.btnEditVanBanLienQuan', function () {
         var tds = $(this).closest('tr').find('td');
         //var id = tds.eq(0).find('input[type="hidden"]').attr('id');
         //suffixVanBan = id.match(/\d+/);
@@ -105,6 +105,10 @@ $(document).ready(function () {
             rowEditingVanBan = undefined;
             resetRowTemplateVanBan();
         }
+    });
+
+    $('#btnCancelVanBanLienQuan').on('click', function () {
+        resetRowTemplateVanBan();
     });
 
     editRowVanBanAtServer = function () {
@@ -179,18 +183,23 @@ $(document).ready(function () {
     };
 
     $('#txtSoVanBan, #txtVanBanLienQuanNgay, #txtVanBanLienQuanNoiDung').keyup(function () {
-        if (validateValueVanBan())
-            $('#btnSaveVanBanLienQuan').attr('disabled', false);
-        else
-            $('#btnSaveVanBanLienQuan').attr('disabled', true);
+        enableOrDisableButtonVanBan();
     });
 
     $('#CoQuanIdTemp, #txtVanBanLienQuanNgay').on('change', function () {
-        if (validateValueVanBan())
-            $('#btnSaveVanBanLienQuan').attr('disabled', false);
-        else
-            $('#btnSaveVanBanLienQuan').attr('disabled', true);
+        enableOrDisableButtonVanBan();
     });
+
+    enableOrDisableButtonVanBan = function () {
+        if (validateValueVanBan()) {
+            $('#btnSaveVanBanLienQuan').attr('disabled', false);
+            $('#btnCancelVanBanLienQuan').attr('disabled', false);
+        }
+        else {
+            $('#btnSaveVanBanLienQuan').attr('disabled', true);
+            $('#btnCancelVanBanLienQuan').attr('disabled', true);
+        }
+    }
 
     validateValueVanBan = function () {
         var soVanBan = ($('#txtSoVanBan').val());
@@ -220,6 +229,7 @@ $(document).ready(function () {
         $('#CoQuanIdTemp').val('');
 
         $('#btnSaveVanBanLienQuan').attr('disabled', true);
+        $('#btnCancelVanBanLienQuan').attr('disabled', true);
     };
 
     function resetRowNumber(rowDeleted) {
@@ -266,12 +276,16 @@ $(document).ready(function () {
 
         if (noiDung == '' || noiDung == undefined) {
             $('#btnSaveQuaTrinhXuly').attr('disabled', true);
+            $('#btnCancelQuaTrinhXuly').attr('disabled', true);
             return;
         }
-        $('#btnSaveQuaTrinhXuly').attr('disabled', false);
+        else {
+            $('#btnSaveQuaTrinhXuly').attr('disabled', false);
+            $('#btnCancelQuaTrinhXuly').attr('disabled', false);
+        }
     });
 
-    $('.btnDeleteQuaTrinhXuLy').on('click', function () {
+    $('#tbodyAddQuaTrinhXuLy').on('click', '.btnDeleteQuaTrinhXuLy', function () {
         var row = $(this).closest('tr');
         var idQuaTrinhXuLy = row.find('input[type="hidden"]').val();
         if (idQuaTrinhXuLy != null && idQuaTrinhXuLy != undefined) {
@@ -301,11 +315,10 @@ $(document).ready(function () {
 
     var rowEditingQuaTrinhXuLy = undefined;
 
-    $('.btnEditQuaTrinhXuLy').on('click', function () {
+    $('#tbodyAddQuaTrinhXuLy').on('click', '.btnEditQuaTrinhXuLy', function () {
         var tds = $(this).closest('tr').find('td');
-
         $('#txtNoiDungQuaTrinhXuLy').val(tds.eq(2).find('input[type="hidden"]').val());
-        $('#EnumNhacNho').val(tds.eq(0).find('input[type="hidden"]:eq(2)').val());
+        $('#EnumNhacNho').val(tds.eq(1).find('input[type="hidden"]:eq(1)').val());
 
         rowEditingQuaTrinhXuLy = tds;
     });
@@ -331,6 +344,10 @@ $(document).ready(function () {
             rowEditingQuaTrinhXuLy = undefined;
             resetRowTemplateQuaTrinhXuLy();
         }
+    });
+
+    $('#btnCancelQuaTrinhXuly').on('click', function () {
+        resetRowTemplateQuaTrinhXuLy();
     });
 
     editRowQuaTrinhXuLyAtServer = function () {
@@ -417,7 +434,7 @@ $(document).ready(function () {
         + '</td>'
         + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__NoiDung" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NoiDung" type="hidden" value="' + noiDung + '">' + '<span>' + noiDung + '</span>' + '</td>'
         + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__CoQuanId" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NguoiThem" type="hidden" value="' + nguoiThem + '">' + '<span>' + nguoiThem + '</span>' + '</td>'
-        + '<td>' + '<input type="button" value="Xóa" class="btn btn-link btnDeleteTemp" id="btnDeleteTemp_' + tbody_len + '"/>|<input type="button" value="Sửa" class="btn btn-link btnEditTemp" id="btnEditTemp_' + tbody_len + '"/>' + '</td>'
+        + '<td>' + '<input type="button" value="Xóa" class="btn btn-link btnDeleteQuaTrinhXuLy" id="btnDeleteQuaTrinhXuLy_' + tbody_len + '"/>|<input type="button" value="Sửa" class="btn btn-link btnEditQuaTrinhXuLy" id="btnEditQuaTrinhXuLy_' + tbody_len + '"/>' + '</td>'
         + '</tr>');
 
         var row = $('tbody#tbodyAddQuaTrinhXuLy > tr:last').before(template);
@@ -429,6 +446,7 @@ $(document).ready(function () {
         $('#txtNoiDungQuaTrinhXuLy').val('');
         $('#EnumNhacNho').val(1);
         $('#btnSaveQuaTrinhXuly').attr('disabled', true);
+        $('#btnCancelQuaTrinhXuly').attr('disabled', true);
     };
 
     /*END QUA TRINH XU LY*/

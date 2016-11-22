@@ -12,5 +12,6 @@ namespace AnThinhPhat.Services.Abstracts
         IEnumerable<HoSoCongViecResult> Find(ValueSearchCongViec valueSearch);
 
         SaveResult AddCongViecWithChildren(HoSoCongViecResult entity);
+        IEnumerable<StatisticCongViec> Statistic();
     }
 }

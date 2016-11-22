@@ -8,6 +8,7 @@ using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.Entities.Searchs;
+using System.Data.SqlClient;
 
 namespace AnThinhPhat.Services.Implements
 {
@@ -30,7 +31,7 @@ namespace AnThinhPhat.Services.Implements
                     add.UserXuLyId = entity.UserXuLyId;
                     add.LinhVucCongViecId = entity.LinhVucCongViecId;
                     add.NoiDung = entity.NoiDung;
-                    add.DanhGiaCongViec = entity.QuaTrinhXuLy;
+                    add.DanhGiaCongViec = entity.DanhGiaCongViec;
                     add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                     add.IsDeleted = entity.IsDeleted;
@@ -56,7 +57,7 @@ namespace AnThinhPhat.Services.Implements
                     add.UserXuLyId = entity.UserXuLyId;
                     add.LinhVucCongViecId = entity.LinhVucCongViecId;
                     add.NoiDung = entity.NoiDung;
-                    add.DanhGiaCongViec = entity.QuaTrinhXuLy;
+                    add.DanhGiaCongViec = entity.DanhGiaCongViec;
                     add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                     add.IsDeleted = entity.IsDeleted;
@@ -84,7 +85,7 @@ namespace AnThinhPhat.Services.Implements
                         add.UserXuLyId = entity.UserXuLyId;
                         add.LinhVucCongViecId = entity.LinhVucCongViecId;
                         add.NoiDung = entity.NoiDung;
-                        add.DanhGiaCongViec = entity.QuaTrinhXuLy;
+                        add.DanhGiaCongViec = entity.DanhGiaCongViec;
                         add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                         add.IsDeleted = entity.IsDeleted;
@@ -113,7 +114,7 @@ namespace AnThinhPhat.Services.Implements
                         add.UserXuLyId = entity.UserXuLyId;
                         add.LinhVucCongViecId = entity.LinhVucCongViecId;
                         add.NoiDung = entity.NoiDung;
-                        add.DanhGiaCongViec = entity.QuaTrinhXuLy;
+                        add.DanhGiaCongViec = entity.DanhGiaCongViec;
                         add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                         add.IsDeleted = entity.IsDeleted;
@@ -216,7 +217,7 @@ namespace AnThinhPhat.Services.Implements
                                 LinhVucCongViecId = item.LinhVucCongViecId,
                                 LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
                                 NoiDung = item.NoiDung,
-                                QuaTrinhXuLy = item.DanhGiaCongViec,
+                                DanhGiaCongViec = item.DanhGiaCongViec,
                                 IsDeleted = item.IsDeleted,
                                 CreateDate = item.CreateDate,
                                 CreatedBy = item.CreatedBy,
@@ -246,7 +247,7 @@ namespace AnThinhPhat.Services.Implements
                                       LinhVucCongViecId = item.LinhVucCongViecId,
                                       LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
                                       NoiDung = item.NoiDung,
-                                      QuaTrinhXuLy = item.DanhGiaCongViec,
+                                      DanhGiaCongViec = item.DanhGiaCongViec,
                                       IsDeleted = item.IsDeleted,
                                       CreateDate = item.CreateDate,
                                       CreatedBy = item.CreatedBy,
@@ -292,7 +293,7 @@ namespace AnThinhPhat.Services.Implements
                                       LinhVucCongViecId = item.LinhVucCongViecId,
                                       LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
                                       NoiDung = item.NoiDung,
-                                      QuaTrinhXuLy = item.DanhGiaCongViec,
+                                      DanhGiaCongViec = item.DanhGiaCongViec,
                                       IsDeleted = item.IsDeleted,
                                       CreateDate = item.CreateDate,
                                       CreatedBy = item.CreatedBy,
@@ -316,7 +317,8 @@ namespace AnThinhPhat.Services.Implements
                     update.UserXuLyId = entity.UserXuLyId;
                     update.LinhVucCongViecId = entity.LinhVucCongViecId;
                     update.NoiDung = entity.NoiDung;
-                    update.DanhGiaCongViec = entity.QuaTrinhXuLy;
+                    update.DanhGiaCongViec = entity.DanhGiaCongViec;
+                    update.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
@@ -342,7 +344,7 @@ namespace AnThinhPhat.Services.Implements
                     update.UserXuLyId = entity.UserXuLyId;
                     update.LinhVucCongViecId = entity.LinhVucCongViecId;
                     update.NoiDung = entity.NoiDung;
-                    update.DanhGiaCongViec = entity.QuaTrinhXuLy;
+                    update.DanhGiaCongViec = entity.DanhGiaCongViec;
 
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
@@ -393,31 +395,15 @@ namespace AnThinhPhat.Services.Implements
                     }
 
                     if (valueSearch.TrangThaiCongViecId.HasValue)
-                    {
                         query = query.Where(x => x.TrangThaiCongViecId == valueSearch.TrangThaiCongViecId);
 
-                        //switch (valueSearch.TrangThaiCongViecId.Value)
-                        //{
-                        //    case EnumStatus.DAXULY:
-                        //        query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.DAXULY - 1));
-                        //        break;
-                        //    case EnumStatus.DANGXYLY:
-                        //        query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.DANGXYLY - 1));
-                        //        break;
-                        //    case EnumStatus.CHUAXULY:
-                        //        query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.CHUAXULY - 1));
-                        //        break;
-                        //    default:
-                        //        break;
-                        //}
-                    }
                     if (valueSearch.LinhVucCongViecId.HasValue)
                         query = query.Where(x => x.LinhVucCongViecId == valueSearch.LinhVucCongViecId.Value);
 
                     if (!string.IsNullOrEmpty(valueSearch.NoiDungCongViec))
                         query = query.Where(x => x.NoiDung.Contains(valueSearch.NoiDungCongViec));
 
-                    return query
+                    return query.OrderBy(x => x.TrangThaiCongViecId)
                     .MakeQueryToDatabase()
                     .Select(x => x.ToDataResult())
                     .ToList();
@@ -447,6 +433,16 @@ namespace AnThinhPhat.Services.Implements
                     }
                 }
             });
+        }
+
+        public IEnumerable<StatisticCongViec> Statistic()
+        {
+            using (var context = new TechOfficeEntities())
+            {
+                var items = context.Database.SqlQuery<StatisticCongViec>("Statictis @NoiVuId", new SqlParameter("NoiVuId", TechOfficeConfig.IDENTITY_PHONGNOIVU)).ToList();
+
+                return items;
+            }
         }
     }
 }

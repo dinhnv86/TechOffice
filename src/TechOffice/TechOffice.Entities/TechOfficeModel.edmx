@@ -845,6 +845,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Statictis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NoiVuId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="TechOfficeDevModelStoreContainer">
           <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CongViec_PhoiHop" EntityType="Self.CongViec_PhoiHop" Schema="dbo" store:Type="Tables" />
@@ -1199,6 +1202,9 @@
             <End Role="HoSoCongViec" EntitySet="HoSoCongViecs" />
             <End Role="TapTinCongViec" EntitySet="TapTinCongViecs" />
           </AssociationSet>
+          <FunctionImport Name="Statictis" ReturnType="Collection(TechOfficeDevModel.Statictis_Result)">
+            <Parameter Name="NoiVuId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ChucVu">
           <Key>
@@ -2111,6 +2117,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="Statictis_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="Total01" Nullable="true" />
+          <Property Type="Int32" Name="Col11" Nullable="true" />
+          <Property Type="Int32" Name="Col12" Nullable="true" />
+          <Property Type="Int32" Name="Col13" Nullable="true" />
+          <Property Type="Int32" Name="Col14" Nullable="true" />
+          <Property Type="Int32" Name="Col15" Nullable="true" />
+          <Property Type="Int32" Name="Total02" Nullable="true" />
+          <Property Type="Int32" Name="Col21" Nullable="true" />
+          <Property Type="Int32" Name="Col22" Nullable="true" />
+          <Property Type="Int32" Name="Col23" Nullable="true" />
+          <Property Type="Int32" Name="Col24" Nullable="true" />
+          <Property Type="Int32" Name="Col25" Nullable="true" />
+          <Property Type="Int32" Name="Total03" Nullable="true" />
+          <Property Type="Int32" Name="Col31" Nullable="true" />
+          <Property Type="Int32" Name="Col32" Nullable="true" />
+          <Property Type="Int32" Name="Col33" Nullable="true" />
+          <Property Type="Int32" Name="Col34" Nullable="true" />
+          <Property Type="Int32" Name="Col35" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2553,6 +2580,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Statictis" FunctionName="TechOfficeDevModel.Store.Statictis">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TechOfficeDevModel.Statictis_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Total01" ColumnName="Total01" />
+                <ScalarProperty Name="Col11" ColumnName="Col11" />
+                <ScalarProperty Name="Col12" ColumnName="Col12" />
+                <ScalarProperty Name="Col13" ColumnName="Col13" />
+                <ScalarProperty Name="Col14" ColumnName="Col14" />
+                <ScalarProperty Name="Col15" ColumnName="Col15" />
+                <ScalarProperty Name="Total02" ColumnName="Total02" />
+                <ScalarProperty Name="Col21" ColumnName="Col21" />
+                <ScalarProperty Name="Col22" ColumnName="Col22" />
+                <ScalarProperty Name="Col23" ColumnName="Col23" />
+                <ScalarProperty Name="Col24" ColumnName="Col24" />
+                <ScalarProperty Name="Col25" ColumnName="Col25" />
+                <ScalarProperty Name="Total03" ColumnName="Total03" />
+                <ScalarProperty Name="Col31" ColumnName="Col31" />
+                <ScalarProperty Name="Col32" ColumnName="Col32" />
+                <ScalarProperty Name="Col33" ColumnName="Col33" />
+                <ScalarProperty Name="Col34" ColumnName="Col34" />
+                <ScalarProperty Name="Col35" ColumnName="Col35" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

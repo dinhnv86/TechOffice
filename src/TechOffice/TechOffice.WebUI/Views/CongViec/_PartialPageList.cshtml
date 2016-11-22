@@ -52,7 +52,7 @@
                                     <span> @phoihop.UserInfo.UserName</span><br />
                                 }
                             </td>
-                            <td class="@fontColor">@item.TrangThaiCongViecInfo.Name</td>
+                            <td class="@fontColor">@item.TrangThaiCongViecInfo.IfNotNull(x => x.Name)</td>
                             <td class="@fontColor">@item.LinhVucCongViec.Name</td>
                             <td class="@fontColor">@Html.RouteLink(item.NoiDung, routeName: UrlLink.CONGVIEC_DETAIL, routeValues: new { id = item.Id })</td>
                             <td class="@fontColor">

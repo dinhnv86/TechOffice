@@ -98,6 +98,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public ActionResult Statistic()
         {
+            var items = HoSoCongViecRepository.Statistic();
             return View();
         }
 
@@ -210,6 +211,8 @@ namespace AnThinhPhat.WebUI.Controllers
                 UserPhuTrachId = hoso.UserPhuTrachId,
                 UserXuLyChinhId = hoso.UserXuLyId,
                 UsersPhoiHopId = hoso.CongViecPhoiHopResult.Select(x => x.UserId).ToArray(),
+
+                DanhGiaCongViec = hoso.DanhGiaCongViec.HasValue ? (EnumDanhGiaCongViec)hoso.DanhGiaCongViec.Value : EnumDanhGiaCongViec.LEVEL0,
             };
             return View(model);
         }
@@ -230,8 +233,9 @@ namespace AnThinhPhat.WebUI.Controllers
                     congViec.NgayHetHan = model.NgayHetHan;
                     congViec.LinhVucCongViecId = model.LinhVucCongViecId;
                     congViec.UserPhuTrachId = model.UserPhuTrachId;
+                    congViec.DanhGiaCongViec = model.DanhGiaCongViec == EnumDanhGiaCongViec.LEVEL0 ? null : (byte?)model.DanhGiaCongViec;
                     congViec.UserXuLyId = model.UserXuLyChinhId;
-                    congViec.CongViecPhoiHopResult = model.UsersPhoiHopId.Select(x => new CongViecPhoiHopResult { UserId = x, HoSoCongViecId = id });
+                    congViec.CongViecPhoiHopResult = model.UsersPhoiHopId?.Select(x => new CongViecPhoiHopResult { UserId = x, HoSoCongViecId = id });
                 }
 
                 congViec.TrangThaiCongViecId = model.TrangThaiCongViecId;
@@ -268,8 +272,8 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private void AddOrUpdateVanBan(int id, EditCongViecViewModel model)
         {
-            var vanbanUpdate = model.VanBanLienQuanViewModel.Where(x => x.Id > 0);
-            if (vanbanUpdate.Any())
+            var vanbanUpdate = model.VanBanLienQuanViewModel?.Where(x => x.Id > 0);
+            if (vanbanUpdate != null && vanbanUpdate.Any())
             {
                 CongViecVanBanRepository.UpdateRange(vanbanUpdate.Select(x => new CongViecVanBanResult
                 {
@@ -284,8 +288,8 @@ namespace AnThinhPhat.WebUI.Controllers
                 }));
             }
 
-            var vanBanAdd = model.VanBanLienQuanViewModel.Where(x => x.Id == 0);
-            if (vanBanAdd.Any())
+            var vanBanAdd = model.VanBanLienQuanViewModel?.Where(x => x.Id == 0);
+            if (vanBanAdd != null && vanBanAdd.Any())
                 CongViecVanBanRepository.AddRange(vanbanUpdate.Select(x => new CongViecVanBanResult
                 {
                     HoSoCongViecId = id,
@@ -300,8 +304,8 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private void AddOrUpdateXuLy(int id, EditCongViecViewModel model)
         {
-            var quaTrinhUpdate = model.QuaTrinhXuLyViewModel.Where(x => x.Id > 0);
-            if (quaTrinhUpdate.Any())
+            var quaTrinhUpdate = model.QuaTrinhXuLyViewModel?.Where(x => x.Id > 0);
+            if (quaTrinhUpdate != null && quaTrinhUpdate.Any())
                 QuaTrinhXuLyRepository.UpdateRange(quaTrinhUpdate.Select(x => new CongViecQuaTrinhXuLyResult
                 {
                     Id = x.Id,
@@ -316,8 +320,8 @@ namespace AnThinhPhat.WebUI.Controllers
                     LastUpdatedBy = UserName,
                 }));
 
-            var quaTrinhAdd = model.QuaTrinhXuLyViewModel.Where(x => x.Id == 0);
-            if (quaTrinhAdd.Any())
+            var quaTrinhAdd = model.QuaTrinhXuLyViewModel?.Where(x => x.Id == 0);
+            if (quaTrinhAdd != null && quaTrinhAdd.Any())
                 QuaTrinhXuLyRepository.AddRange(quaTrinhAdd.Select(x => new CongViecQuaTrinhXuLyResult
                 {
                     HoSoCongViecId = model.Id,
@@ -339,7 +343,7 @@ namespace AnThinhPhat.WebUI.Controllers
         /// <param name="model"></param>
         private void AddOrUpdatePhoiHop(int id, IEnumerable<CongViecPhoiHopResult> model)
         {
-            if (model.Any())
+            if (model != null && model.Any())
             {
                 CongViecPhoiHopRepository.AddOrUpdate(id, model, UserName);
             }
