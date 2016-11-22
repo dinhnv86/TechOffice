@@ -1,68 +1,69 @@
-﻿<div id="back-top" style="display: block;">
+﻿
+<div id="back-top" style="display: block;">
     <i class="fa fa-arrow-circle-up"></i>
 </div>
 <div id="topseo"></div>
 
 <div class="bg dtapg">
-    <div class="row" style="margin-top: 0px;">
-        <div class="col-md-8">
-            <div class="header">
-                <div class="menu_head">
-                    <div class="logo_head">
-                        <h2>PHÒNG NỘI VỤ HUYỆN PHÚ RIỀNG</h2>
-                    </div>
-                    @*<div class="search_head">
-                            <input type="text" class="form-control" />
-                            <button type="button" value="Tìm kiếm" class="btn btn-default" style="width:100px;">
-                                Tìm kiếm
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </div>*@
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            @if (Request.IsAuthenticated)
-            {
-                using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                {
-                    <ul class="nav navbar-nav navbar-right">
-                        @if (User.IsInRole("SupperAdmin") || (User.IsInRole("Admin")))
-                        {
-                            <li>
-                                <a href="@Url.RouteUrl(UrlLink.ADMIN)">
-                                    <span class="glyphicon glyphicon-lock"></span>
-                                    @Html.Raw(User.Identity.FullName())
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li><a>@Html.Raw(User.Identity.FullName())</a></li>
-                        }
-
-                        <li>
-                            <a href="javascript:document.getElementById('logoutForm').submit()">Thoát</a>
-                        </li>
-                    </ul>
-                }
-            }
-            else
-            {
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="@Url.RouteUrl(UrlLink.LOGIN)">Đăng nhập</a></li>
-                </ul>
-            }
-        </div>
-        @*<div class="logo_mobi">
-                <a href="">
-                    <img alt=" " src="Images/logo.png">
-            .Action("Index", "Admin")
+    <div id="header">
+        <div class="container">
+            <div id="header_bg">
+                <a class="visible-mobile" id="link_home" href="/">&nbsp;</a>
+                <a class="logo_mobi" href="/">
+                    <img src="/images/header-bg-mobile.jpg">
                 </a>
-            </div>*@
-    </div>
-</div>
 
+                @*<div class="row" ><div class="col-md-8">
+                        <div class="header">
+                            <div class="menu_head">
+                                <div class="logo_head">
+                                    <h2>PHÒNG NỘI VỤ HUYỆN PHÚ RIỀNG</h2>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>*@
+                @*<div class="col-md-4">
+                                    @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                {
+                                            <ul class="nav navbar-nav navbar-right">
+                                                @if (User.IsInRole("SupperAdmin") || (User.IsInRole("Admin")))
+                                            {
+                                                    <li>
+                                                        <a href="@Url.RouteUrl(UrlLink.ADMIN)">
+                                                            <span class="glyphicon glyphicon-lock"></span>
+                                                            @Html.Raw(User.Identity.FullName())
+                                                        </a>
+                                                    </li>
+                                            }
+                                            else
+                                            {
+                                                    <li><a>@Html.Raw(User.Identity.FullName())</a></li>
+                                            }
+
+                                                <li>
+                                                    <a href="javascript:document.getElementById('logoutForm').submit()">Thoát</a>
+                                                </li>
+                                            </ul>
+                                    }
+                                }
+                                else
+                                {
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li><a href="@Url.RouteUrl(UrlLink.LOGIN)">Đăng nhập</a></li>
+                                        </ul>
+                                }
+                                </div>
+                    </div>*@
+
+            </div>
+
+
+        </div>
+    </div>
+ </div>
 <nav class="navbar navbar-default menu_fixed_top" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
