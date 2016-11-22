@@ -206,6 +206,7 @@
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\style - Copy.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -259,9 +260,18 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="images\banner-phong-noi-vu-huyen-phu-rieng.jpg" />
+    <Content Include="images\banner-phong-noi-vu-huyen-phu-rieng.png" />
+    <Content Include="images\banner.png" />
+    <Content Include="images\bg_menu.png" />
     <Content Include="images\bien dao que huong_1369814865500.jpg" />
     <Content Include="images\cham-soc-khach-hang.png" />
     <Content Include="images\dathongbao.png" />
+    <Content Include="images\favicon.ico" />
+    <Content Include="images\footer.jpg" />
+    <Content Include="images\footer_bg.jpg" />
+    <Content Include="images\header-bg-mobile.jpg" />
+    <Content Include="images\header-partten.jpg" />
     <Content Include="images\hoctap_lamtheoguongbacsv.jpg" />
     <Content Include="images\hotro_tructuyen.png" />
     <Content Include="images\list_footer.png" />
@@ -269,6 +279,7 @@
     <Content Include="images\nong-thon-moi_1369815473656.jpg" />
     <Content Include="images\Skype_logo.png" />
     <Content Include="images\slider1.jpg" />
+    <Content Include="images\SourceTreeSetup_1.9.6.1.exe" />
     <Content Include="images\Tap-huan-doan.jpg" />
     <Content Include="images\tongdai.png" />
     <Content Include="Scripts\app\congviec-detail.js" />
@@ -278,6 +289,7 @@
     <Content Include="Scripts\app\message.js" />
     <Content Include="Scripts\app\modaljs.js" />
     <Content Include="Scripts\app\tacnghiep-detail.js" />
+    <Content Include="Scripts\app\templates.js" />
     <Content Include="Scripts\app\uploadfiles.js" />
     <Content Include="Scripts\app\user-update.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
@@ -288,7 +300,9 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="connectionStrings.config" />
+    <Content Include="connectionStrings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="appsettings.config" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
@@ -312,7 +326,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
