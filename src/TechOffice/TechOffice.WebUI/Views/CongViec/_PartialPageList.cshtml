@@ -1,90 +1,70 @@
-﻿
+﻿@using PagedList
+@model IPagedList<AnThinhPhat.Entities.Results.HoSoCongViecResult>
+
 <div class="clear"></div>
-<h3><span style="font-size: x-large;">Danh sách </span></h3>
-<div class="table_over">
-    <table style="width: 100%; border-collapse: collapse;" border="1" cellspacing="8" cellpadding="8">
-        <tbody>
-            <tr style="background-color: #d50100;" align="center" valign="middle">
-                <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">STT</span></span></strong></td>
-                <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Ngày tạo</span></span></strong></td>
-                <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Ngày hết hạn</span></span></strong></td>
-                <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Phụ trách</span></span></strong></td>
-                <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Xử lý chính</span></span></strong></td>
+<div class="col-xs-12">
+    <h3><span style="font-size: x-large;">@Labels.CongViec_List_Title</span></h3>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-stt">@Labels.CongViec_List_STT</th>
+                    <th class="text-center">@Labels.CongViec_List_NgayTao</th>
+                    <th class="text-center">@Labels.CongViec_List_NgayHetHan</th>
+                    <th class="text-center">@Labels.CongViec_List_PhuTrach</th>
+                    <th class="text-center">@Labels.CongViec_List_XuLyChinh</th>
+                    <th class="text-center">@Labels.CongViec_List_PhoiHop</th>
+                    <th class="text-center">@Labels.CongViec_List_TrangThai</th>
+                    <th class="text-center">@Labels.CongViec_List_LinhVuc</th>
+                    <th class="text-center">@Labels.CongViec_List_NoiDungCongViec</th>
+                    <th class="text-center">@Labels.CongViec_List_QuaTrinhXuLy</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    int i = -1;
+                    foreach (var item in Model)
+                    {
+                        i = i + 1;
+                        var fontColor = string.Empty;
+                        switch (item.TrangThaiCongViecId)
+                        {
+                            case 1:
+                                fontColor = "text-danger";
+                                break;
+                            case 2:
+                                fontColor = "text-info";
+                                break;
+                            default:
+                                break;
+                        }
 
-                <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Phối hợp</span></span></strong></td>
-                <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Trạng thái</span></span></strong></td>
-                <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Lĩnh vực</span></span></strong></td>
-                <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Nội dung công việc</span></span></strong></td>
-                <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Quá trình xử lý</span></span></strong></td>
-
-
-            </tr>
-            <tr align="center">
-                <td>1</td>
-                <td>01/10/2016</td>
-                <td>01/10/2016</td>
-                <td>Trịnh Quang Hạnh</td>
-                <td>Phạm Anh Thư</td>
-
-                <td>Nguyễn Chí Thanh<br />Nguyễn Thị Hoàng</td>
-                <td>Chưa xử lý</td>
-                <td>Cán bộ</td>
-                <td>Tiếp nhận bà Phamj Thị Thoa</td>
-                <td>14:10 01/10/2016 - <br />9:10 02/10/2016</td>
-            </tr>
-            <tr align="center">
-                <td>1</td>
-                <td>01/10/2016</td>
-                <td>01/10/2016</td>
-                <td>Trịnh Quang Hạnh</td>
-                <td>Phạm Anh Thư</td>
-
-                <td>Nguyễn Chí Thanh<br />Nguyễn Thị Hoàng</td>
-                <td>Chưa xử lý</td>
-                <td>Cán bộ</td>
-                <td>Tiếp nhận bà Phamj Thị Thoa</td>
-                <td>14:10 01/10/2016 - <br />9:10 02/10/2016</td>
-            </tr>
-            <tr align="center">
-                <td>1</td>
-                <td>01/10/2016</td>
-                <td>01/10/2016</td>
-                <td>Trịnh Quang Hạnh</td>
-                <td>Phạm Anh Thư</td>
-
-                <td>Nguyễn Chí Thanh<br />Nguyễn Thị Hoàng</td>
-                <td>Chưa xử lý</td>
-                <td>Cán bộ</td>
-                <td>Tiếp nhận bà Phamj Thị Thoa</td>
-                <td>14:10 01/10/2016 - <br />9:10 02/10/2016</td>
-            </tr>
-            <tr align="center">
-                <td>1</td>
-                <td>01/10/2016</td>
-                <td>01/10/2016</td>
-                <td>Trịnh Quang Hạnh</td>
-                <td>Phạm Anh Thư</td>
-
-                <td>Nguyễn Chí Thanh<br />Nguyễn Thị Hoàng</td>
-                <td>Chưa xử lý</td>
-                <td>Cán bộ</td>
-                <td>Tiếp nhận bà Phamj Thị Thoa</td>
-                <td>14:10 01/10/2016 - <br />9:10 02/10/2016</td>
-            </tr>
-            <tr align="center">
-                <td>1</td>
-                <td>01/10/2016</td>
-                <td>01/10/2016</td>
-                <td>Trịnh Quang Hạnh</td>
-                <td>Phạm Anh Thư</td>
-
-                <td>Nguyễn Chí Thanh<br />Nguyễn Thị Hoàng</td>
-                <td>Chưa xử lý</td>
-                <td>Cán bộ</td>
-                <td>Tiếp nhận bà Phamj Thị Thoa</td>
-                <td>14:10 01/10/2016 - <br />9:10 02/10/2016</td>
-            </tr>
-
-        </tbody>
-    </table>
+                        <tr>
+                            <td class="@fontColor">@Html.Raw(i + 1)</td>
+                            <td class="@fontColor">@Html.DisplayFor(x => item.NgayTao, "DisplayDateTime")</td>
+                            <td class="@fontColor">@Html.DisplayFor(x => item.NgayHetHan, "DisplayDateTime")</td>
+                            <td class="@fontColor">@item.UserPhuTrach.HoVaTen</td>
+                            <td class="@fontColor">@item.UserXyLy.HoVaTen</td>
+                            <td class="@fontColor">
+                                @foreach (var phoihop in item.CongViecPhoiHopResult)
+                                {
+                                    <span> @phoihop.UserInfo.UserName</span><br />
+                                }
+                            </td>
+                            <td class="@fontColor">@item.TrangThaiCongViecInfo.Name</td>
+                            <td class="@fontColor">@item.LinhVucCongViec.Name</td>
+                            <td class="@fontColor">@Html.RouteLink(item.NoiDung, routeName: UrlLink.CONGVIEC_DETAIL, routeValues: new { id = item.Id })</td>
+                            <td class="@fontColor">
+                                @foreach (var qt in item.CongViecQuaTrinhXuLyResult)
+                                {
+                                    <span>@string.Format("{0}:{1} {2} {3}: {4}", qt.GioBanHanh, qt.PhutBanHanh, qt.NgayBanHanh?.ToString("dd/MM/yyyy"), qt.NguoiThem, qt.NoiDung)</span><br />
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

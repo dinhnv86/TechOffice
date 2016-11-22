@@ -7,6 +7,7 @@ using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
+using AnThinhPhat.Entities.Searchs;
 
 namespace AnThinhPhat.Services.Implements
 {
@@ -29,7 +30,7 @@ namespace AnThinhPhat.Services.Implements
                     add.UserXuLyId = entity.UserXuLyId;
                     add.LinhVucCongViecId = entity.LinhVucCongViecId;
                     add.NoiDung = entity.NoiDung;
-                    add.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                    add.DanhGiaCongViec = entity.QuaTrinhXuLy;
                     add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                     add.IsDeleted = entity.IsDeleted;
@@ -55,7 +56,7 @@ namespace AnThinhPhat.Services.Implements
                     add.UserXuLyId = entity.UserXuLyId;
                     add.LinhVucCongViecId = entity.LinhVucCongViecId;
                     add.NoiDung = entity.NoiDung;
-                    add.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                    add.DanhGiaCongViec = entity.QuaTrinhXuLy;
                     add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                     add.IsDeleted = entity.IsDeleted;
@@ -83,7 +84,7 @@ namespace AnThinhPhat.Services.Implements
                         add.UserXuLyId = entity.UserXuLyId;
                         add.LinhVucCongViecId = entity.LinhVucCongViecId;
                         add.NoiDung = entity.NoiDung;
-                        add.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                        add.DanhGiaCongViec = entity.QuaTrinhXuLy;
                         add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                         add.IsDeleted = entity.IsDeleted;
@@ -112,7 +113,7 @@ namespace AnThinhPhat.Services.Implements
                         add.UserXuLyId = entity.UserXuLyId;
                         add.LinhVucCongViecId = entity.LinhVucCongViecId;
                         add.NoiDung = entity.NoiDung;
-                        add.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                        add.DanhGiaCongViec = entity.QuaTrinhXuLy;
                         add.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
                         add.IsDeleted = entity.IsDeleted;
@@ -203,25 +204,25 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.HoSoCongViecs
-                        where item.IsDeleted == false
-                        select new HoSoCongViecResult
-                        {
-                            Id = item.Id,
-                            NgayHetHan = item.NgayHetHan,
-                            UserPhuTrachId = item.UserPhuTrachId,
-                            UserPhuTrach = item.User.ToIfNotNullDataInfo(),
-                            UserXuLyId = item.UserXuLyId,
-                            UserXyLy = item.User1.ToIfNotNullDataInfo(),
-                            LinhVucCongViecId = item.LinhVucCongViecId,
-                            LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
-                            NoiDung = item.NoiDung,
-                            QuaTrinhXuLy = item.QuaTrinhXuLy,
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToList();
+                            where item.IsDeleted == false
+                            select new HoSoCongViecResult
+                            {
+                                Id = item.Id,
+                                NgayHetHan = item.NgayHetHan,
+                                UserPhuTrachId = item.UserPhuTrachId,
+                                UserPhuTrach = item.User.ToIfNotNullDataInfo(),
+                                UserXuLyId = item.UserXuLyId,
+                                UserXyLy = item.User1.ToIfNotNullDataInfo(),
+                                LinhVucCongViecId = item.LinhVucCongViecId,
+                                LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
+                                NoiDung = item.NoiDung,
+                                QuaTrinhXuLy = item.DanhGiaCongViec,
+                                IsDeleted = item.IsDeleted,
+                                CreateDate = item.CreateDate,
+                                CreatedBy = item.CreatedBy,
+                                LastUpdatedBy = item.LastUpdatedBy,
+                                LastUpdated = item.LastUpdated
+                            }).ToList();
                 }
             });
         }
@@ -233,25 +234,25 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.HoSoCongViecs
-                        where item.IsDeleted == false
-                        select new HoSoCongViecResult
-                        {
-                            Id = item.Id,
-                            NgayHetHan = item.NgayHetHan,
-                            UserPhuTrachId = item.UserPhuTrachId,
-                            UserPhuTrach = item.User.ToIfNotNullDataInfo(),
-                            UserXuLyId = item.UserXuLyId,
-                            UserXyLy = item.User1.ToIfNotNullDataInfo(),
-                            LinhVucCongViecId = item.LinhVucCongViecId,
-                            LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
-                            NoiDung = item.NoiDung,
-                            QuaTrinhXuLy = item.QuaTrinhXuLy,
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToListAsync();
+                                  where item.IsDeleted == false
+                                  select new HoSoCongViecResult
+                                  {
+                                      Id = item.Id,
+                                      NgayHetHan = item.NgayHetHan,
+                                      UserPhuTrachId = item.UserPhuTrachId,
+                                      UserPhuTrach = item.User.ToIfNotNullDataInfo(),
+                                      UserXuLyId = item.UserXuLyId,
+                                      UserXyLy = item.User1.ToIfNotNullDataInfo(),
+                                      LinhVucCongViecId = item.LinhVucCongViecId,
+                                      LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
+                                      NoiDung = item.NoiDung,
+                                      QuaTrinhXuLy = item.DanhGiaCongViec,
+                                      IsDeleted = item.IsDeleted,
+                                      CreateDate = item.CreateDate,
+                                      CreatedBy = item.CreatedBy,
+                                      LastUpdatedBy = item.LastUpdatedBy,
+                                      LastUpdated = item.LastUpdated
+                                  }).ToListAsync();
                 }
             });
         }
@@ -263,25 +264,11 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.HoSoCongViecs
-                        where item.IsDeleted == false && item.Id == id
-                        select new HoSoCongViecResult
-                        {
-                            Id = item.Id,
-                            NgayHetHan = item.NgayHetHan,
-                            UserPhuTrachId = item.UserPhuTrachId,
-                            UserPhuTrach = item.User.ToIfNotNullDataInfo(),
-                            UserXuLyId = item.UserXuLyId,
-                            UserXyLy = item.User1.ToIfNotNullDataInfo(),
-                            LinhVucCongViecId = item.LinhVucCongViecId,
-                            LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
-                            NoiDung = item.NoiDung,
-                            QuaTrinhXuLy = item.QuaTrinhXuLy,
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).Single();
+                            where item.IsDeleted == false && item.Id == id
+                            select item)
+                            .MakeQueryToDatabase()
+                            .Select(x => x.ToDataResult())
+                            .Single();
                 }
             });
         }
@@ -293,25 +280,25 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.HoSoCongViecs
-                        where item.IsDeleted == false && item.Id == id
-                        select new HoSoCongViecResult
-                        {
-                            Id = item.Id,
-                            NgayHetHan = item.NgayHetHan,
-                            UserPhuTrachId = item.UserPhuTrachId,
-                            UserPhuTrach = item.User.ToIfNotNullDataInfo(),
-                            UserXuLyId = item.UserXuLyId,
-                            UserXyLy = item.User1.ToIfNotNullDataInfo(),
-                            LinhVucCongViecId = item.LinhVucCongViecId,
-                            LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
-                            NoiDung = item.NoiDung,
-                            QuaTrinhXuLy = item.QuaTrinhXuLy,
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).SingleAsync();
+                                  where item.IsDeleted == false && item.Id == id
+                                  select new HoSoCongViecResult
+                                  {
+                                      Id = item.Id,
+                                      NgayHetHan = item.NgayHetHan,
+                                      UserPhuTrachId = item.UserPhuTrachId,
+                                      UserPhuTrach = item.User.ToIfNotNullDataInfo(),
+                                      UserXuLyId = item.UserXuLyId,
+                                      UserXyLy = item.User1.ToIfNotNullDataInfo(),
+                                      LinhVucCongViecId = item.LinhVucCongViecId,
+                                      LinhVucCongViec = item.LinhVucCongViec.ToIfNotNullDataInfo(),
+                                      NoiDung = item.NoiDung,
+                                      QuaTrinhXuLy = item.DanhGiaCongViec,
+                                      IsDeleted = item.IsDeleted,
+                                      CreateDate = item.CreateDate,
+                                      CreatedBy = item.CreatedBy,
+                                      LastUpdatedBy = item.LastUpdatedBy,
+                                      LastUpdated = item.LastUpdated
+                                  }).SingleAsync();
                 }
             });
         }
@@ -329,7 +316,7 @@ namespace AnThinhPhat.Services.Implements
                     update.UserXuLyId = entity.UserXuLyId;
                     update.LinhVucCongViecId = entity.LinhVucCongViecId;
                     update.NoiDung = entity.NoiDung;
-                    update.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                    update.DanhGiaCongViec = entity.QuaTrinhXuLy;
 
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
@@ -355,7 +342,7 @@ namespace AnThinhPhat.Services.Implements
                     update.UserXuLyId = entity.UserXuLyId;
                     update.LinhVucCongViecId = entity.LinhVucCongViecId;
                     update.NoiDung = entity.NoiDung;
-                    update.QuaTrinhXuLy = entity.QuaTrinhXuLy;
+                    update.DanhGiaCongViec = entity.QuaTrinhXuLy;
 
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
@@ -364,6 +351,100 @@ namespace AnThinhPhat.Services.Implements
                     context.Entry(update).State = EntityState.Modified;
 
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
+        }
+
+        public IEnumerable<HoSoCongViecResult> Find(ValueSearchCongViec valueSearch)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var query = (from item in context.HoSoCongViecs.Include(x => x.User)
+                                 where item.IsDeleted == false
+                                 select item);
+
+                    if (valueSearch.NhanVienId.HasValue)
+                    {
+                        if (valueSearch.Role.HasValue)
+                        {
+                            switch (valueSearch.Role.Value)
+                            {
+                                case EnumRoleExecute.PHOIHOP:
+                                    query = query.Where(x => x.CongViec_PhoiHop.Any(y => y.UserId == valueSearch.NhanVienId.Value));
+                                    break;
+                                case EnumRoleExecute.PHUTRACH:
+                                    query = query.Where(x => x.UserPhuTrachId == valueSearch.NhanVienId.Value);
+                                    break;
+                                case EnumRoleExecute.XULYCHINH:
+                                    query = query.Where(x => x.UserXuLyId == valueSearch.NhanVienId.Value);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            query = query.Where(x => x.CongViec_PhoiHop.Any(y => y.UserId == valueSearch.NhanVienId.Value)
+                              || x.UserPhuTrachId == valueSearch.NhanVienId.Value
+                              || x.UserXuLyId == valueSearch.NhanVienId.Value);
+                        }
+                    }
+
+                    if (valueSearch.TrangThaiCongViecId.HasValue)
+                    {
+                        query = query.Where(x => x.TrangThaiCongViecId == valueSearch.TrangThaiCongViecId);
+
+                        //switch (valueSearch.TrangThaiCongViecId.Value)
+                        //{
+                        //    case EnumStatus.DAXULY:
+                        //        query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.DAXULY - 1));
+                        //        break;
+                        //    case EnumStatus.DANGXYLY:
+                        //        query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.DANGXYLY - 1));
+                        //        break;
+                        //    case EnumStatus.CHUAXULY:
+                        //        query = query.Where(x => x.TrangThaiCongViecId == ((int)EnumStatus.CHUAXULY - 1));
+                        //        break;
+                        //    default:
+                        //        break;
+                        //}
+                    }
+                    if (valueSearch.LinhVucCongViecId.HasValue)
+                        query = query.Where(x => x.LinhVucCongViecId == valueSearch.LinhVucCongViecId.Value);
+
+                    if (!string.IsNullOrEmpty(valueSearch.NoiDungCongViec))
+                        query = query.Where(x => x.NoiDung.Contains(valueSearch.NoiDungCongViec));
+
+                    return query
+                    .MakeQueryToDatabase()
+                    .Select(x => x.ToDataResult())
+                    .ToList();
+                }
+            });
+        }
+
+        public SaveResult AddCongViecWithChildren(HoSoCongViecResult entity)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                var saveResult = SaveResult.FAILURE;
+
+                using (var context = new TechOfficeEntities())
+                {
+                    using (var transaction = context.BeginTransaction())
+                    {
+                        entity.AddWithChildrenToDb(context);
+                        var cv = context.HoSoCongViecs.Local.FirstOrDefault();
+
+                        saveResult = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                        transaction.Commit();
+
+                        entity.Id = cv != null ? cv.Id : 0;
+
+                        return saveResult;
+                    }
                 }
             });
         }

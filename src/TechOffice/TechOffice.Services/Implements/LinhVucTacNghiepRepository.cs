@@ -188,8 +188,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.LinhVucTacNghieps
-                        where item.IsDeleted == false
-                        select item)
+                            where item.IsDeleted == false
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .ToList();
@@ -204,8 +204,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.LinhVucTacNghieps
-                        where item.IsDeleted == false
-                        select item)
+                                  where item.IsDeleted == false
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()
@@ -221,9 +221,9 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.LinhVucTacNghieps
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select item)
+                            where item.IsDeleted == false && item.Id == id
+                            select item)
+                        .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .Single();
                 }
@@ -237,9 +237,9 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.LinhVucTacNghieps
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select item)
+                                  where item.IsDeleted == false &&
+                                        item.Id == id
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()

@@ -1,4 +1,5 @@
 ﻿using AnThinhPhat.Entities.Infos;
+using System;
 
 namespace AnThinhPhat.Entities.Results
 {
@@ -12,10 +13,14 @@ namespace AnThinhPhat.Entities.Results
 
         public int? MucDoHoanThanhId { get; set; }
 
+        public DateTime? NgayHoanThanh { get; set; }
+
         public CoQuanInfo CoQuanInfo { get; set; }
 
         public TacNghiepInfo TacNghiepInfo { get; set; }
 
         public MucDoHoanThanhResult MucDoHoanThanhInfo { get; set; }
+
+        public bool IsDaHoanThanh { get; set; }
     }
 }

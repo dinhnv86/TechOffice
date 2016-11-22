@@ -7,5 +7,9 @@
         public System.DateTime NgayTao { get; set; }
 
         public System.DateTime? NgayHoanThanh { get; set; }
+
+        public System.DateTime NgayHetHan { get; set; }
+
+        public LinhVucTacNghiepInfo LinhVucTacNghiepInfo { get; set; }
     }
 }

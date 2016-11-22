@@ -1,0 +1,98 @@
+﻿
+@model AnThinhPhat.ViewModel.Users.AddUserViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    AjaxOptions ajaxOption = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        OnBegin = "onBegin",
+        OnComplete = "onComplete",
+        OnSuccess = "onSuccess",
+        OnFailure = "onFailure",
+    };
+}
+<div class="col-xs-12">
+    @*BEGIN ADD REQUEST*@
+    <div class="alert alert-success" role="alert" id="success-alert" style="display:none">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>
+            @*Success*@
+            Thành công!
+        </strong>
+        @*Record have added to successfully.*@
+        Chỉnh sửa người dùng thành công
+    </div>
+
+    <div class="alert alert-danger" role="alert" id="danger-alert" style="display:none">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Thất bại!</strong>
+        Chỉnh sửa người dùng thất bại
+    </div>
+    @*END ADD REQUEST*@
+</div>
+
+<link href="~/Content/app/loading.css" rel="stylesheet" />
+
+@using (Ajax.BeginForm(ajaxOption))
+{
+    <div class="row">
+        <div class="col-sm-12 col-md-offset-2 col-md-8 ">
+            @Html.ValidationSummary()
+            <div class="has-feedback">
+                <label>Họ và tên<span class="required">*</span></label>
+                @Html.TextBoxFor(model => model.FullName, htmlAttributes: new { @class = "form-control", @id = "txtFullName", autofocus = true })
+                @Html.ValidationMessageFor(model => model.FullName)
+            </div>
+
+            <div class="has-feedback">
+                <label>Tên đăng nhập<span class="required">*</span><span class="pull-right text-danger" id="duplicateUserName"></span></label>
+                @Html.TextBoxFor(model => model.UserName, htmlAttributes: new { @class = "form-control", @id = "txtUserName" })
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+
+            <div class="has-feedback">
+                <label>Chức vụ<span class="required">*</span></label>
+                @Html.DropDownListFor(model => model.ChucVuId, new SelectList(Model.ChucVuInfos, "Id", "Name"), "--- Chọn chức vụ ---",
+                    htmlAttributes: new { @class = "form-control", @id = "txtChucVu" })
+                @Html.ValidationMessageFor(model => model.ChucVuId)
+            </div>
+
+            <div class="has-feedback">
+                <label>Cơ quan<span class="required">*</span></label>
+                @Html.DropDownListFor(model => model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "--- Chọn cơ quan ---",
+                    htmlAttributes: new { @class = "form-control", @id = "txtCoquan" })
+                @Html.ValidationMessageFor(model => model.CoQuanId)
+            </div>
+
+            <label>&nbsp;</label>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @Html.LabelFor(x => Model.RoleInfos)
+                    @Html.ValidationMessageFor(x => x.RoleInfos)
+                </div>
+                <div class="panel-body">
+                    @Html.EditorFor(x => x.RoleInfos, "RoleInfo")
+                </div>
+            </div>
+
+            <div id="outer">
+                <div class="inner"> <input type="submit" value="Cập nhật" class="btn btn-primary btn-width-md" id="btnSaveSubmit" name="saveType" /></div>
+                <div class="inner">@Html.RouteLink("Hủy bỏ", UrlLink.USERS, null, htmlAttributes: new { @class = "btn btn-default btn-width-md cancel" })</div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script src="~/Scripts/jquery-1.12.4.js"></script>
+    <script src="~/Scripts/app/modaljs.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/app/user-update.js">
+    </script>
+}

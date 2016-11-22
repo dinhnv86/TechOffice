@@ -1,123 +1,181 @@
-﻿@{
+﻿@model AnThinhPhat.ViewModel.CongViec.AddCongViecViewModel
+@{
     Layout = "~/Views/Shared/_LayoutCV.cshtml";
+
+    AjaxOptions ajaxOption = new AjaxOptions
+    {
+        Url = Url.Action("Add"),
+        HttpMethod = "POST",
+        OnBegin = "onAddBegin",
+        OnComplete = "onAddComplete",
+        OnSuccess = "onAddSuccess",
+        OnFailure = "onAddFailure",
+    };
 }
+<link href="~/Content/app/loading.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
 
-<div class="boxr" style="width:100%">
-    <h1 class="title title_ct"><span>Thêm mới công việc</span></h1>
-    <div class="pading">
-        <div class="entry">
-            <div class="col-md-4">
-                <label>Ngày khởi tạo</label>
-                <input type="text" class="control-datepicker" />
-                <label>Phụ trách</label>
-                <input type="date" />
+<h1 class="title title_ct"><span>@Labels.CongViec_Add_Title</span></h1>
+
+<div class="pading">
+    <div class="entry">
+        @using (Ajax.BeginForm(ajaxOption))
+        {
+            @Html.HiddenFor(x => Model.Guid)
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_NgayKhoiTao<span class="required">*</span></label>
+                @Html.DisplayFor(x => Model.NgayKhoiTao, "DateTime")
             </div>
-            <div class="col-md-4">
-                <label>Ngày hết hạn</label>
-                <input type="date" />
-                <label>Xử lý chính</label>
-                <select>
-                    <option>Trịnh Quang Hạnh</option>
-                    <option>Phạm Thị Thư</option>
-                </select>
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_NgayHetHan</label>
+                @Html.EditorFor(x => Model.NgayHetHan, "DateTime")
             </div>
-            <div class="col-md-4">
-                <label>Lĩnh vực</label>
-                <select>
-                    <option>Trịnh Quang Hạnh</option>
-                    <option>Phạm Thị Thư</option>
-                </select>
-                <label>Phối hợp</label>
-                <select>
-                    <option>Trịnh Quang Hạnh</option>
-                    <option>Phạm Thị Thư</option>
-                </select>
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_LinhVuc<span class="required">*</span></label>
+                @Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), "--Chọn lĩnh vực công việc--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => Model.LinhVucCongViecId)
             </div>
-            <div class="clear"></div>
-            <div class="col-md-12">
-                <label>Nội dung</label>
-                <textarea rows="2" cols="2"></textarea>
-                <label>Văn bản liên quan</label>
-                <textarea rows="2" cols="2"></textarea>
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_PhuTrach<span class="required">*</span></label>
+                @Html.DropDownListFor(x => Model.UserPhuTrachId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người phụ trách--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => Model.UserPhuTrachId)
             </div>
-            <div class="col-md-3">
-                <label>Số văn bản</label>
-                <input type="text" />
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_XuLyChinh<span class="required">*</span></label>
+                @Html.DropDownListFor(x => Model.UserXuLyChinhId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), "--Chọn người xử lý chính--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => Model.UserXuLyChinhId)
             </div>
-            <div class="col-md-3">
-                <label>Ngày</label>
-                <input type="date" />
-            </div>
-            <div class="col-md-12">
-                <label>Nội dung</label>
-                <textarea rows="2" cols="2"></textarea>
-            </div>
-            <div class="col-md-2">
-                <label>Cơ quan</label>
-                <input type="text" />
-            </div>
-            <div class="col-md-2">
-                <label></label>
-                <input type="button" value="Thêm" />
+            <div class="col-sm-4">
+                <label style="width:100%;">@Labels.CongViec_Add_PhoiHop</label>
+                @Html.ListBoxFor(x => Model.UsersPhoiHopId, new MultiSelectList(Model.UsersInfos, "Id", "HoVaTen"), htmlAttributes: new { @class = "form-control" })
             </div>
             <div class="clear"></div>
-            <div class="col-md-12">
-                <label>Quá trình xử lý</label>
-                <textarea rows="2" cols="2"></textarea>
-            </div><div class="clear"></div>
-            <div class="col-md-12">
-                <label>Nội dung</label>
-                <textarea rows="2" cols="2"></textarea>
+            <div class="col-sm-12">
+                <label>@Labels.CongViec_Add_NoiDung<span class="required">*</span></label>
+                @Html.TextAreaFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control", rows = "2" })
+                @Html.ValidationMessageFor(x => Model.NoiDungCongViec)
             </div>
-            @*<div class="col-md-1">
-                    <label></label><br />
-                    <input type="button" value="Thêm" />
-                </div>*@
-            <div class="col-md-12">
-                <label>Các tập tin đính kèm</label>
-                @using (Html.BeginForm("UploadFileCongViec", "Update", FormMethod.Post, new { enctype = "multipart/form-data", @class = "dropzone" }))
-                {
-                    <div class="fallback">
-                        <input type="file" class="form-control" multiple />
-                    </div>
-                }
+            <div class="col-sm-12">
+                <label>@Labels.CongViec_Add_VanBanLienQuan</label>
+                <table class="table table-bordered" id="tableAddVanBan">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-2 text-center">@Labels.CongViec_Add_VanBanLienQuan_SoVanBan</th>
+                            <th class="col-xs-2 text-center">@Labels.CongViec_Add_VanBanLienQuan_Ngay</th>
+                            <th class="col-4 text-center">@Labels.CongViec_Add_VanBanLienQuan_NoiDung</th>
+                            <th class="col-xs-2 text-center">@Labels.CongViec_Add_VanBanLienQuan_CoQuan</th>
+                            <th class="col-xs-2 text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyAddVanBan">
+                        @for (int i = 0; i < Model.VanBanLienQuanViewModel.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.TextBoxFor(x => Model.VanBanLienQuanViewModel[i].SoVanBan, htmlAttributes: new { @class = "form-control" })
+                                    @Html.HiddenFor(x => Model.VanBanLienQuanViewModel[i].SoVanBan)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(x => Model.VanBanLienQuanViewModel[i].Ngay)
+                                    @Html.HiddenFor(x => Model.VanBanLienQuanViewModel[i].Ngay)
+                                </td>
+                                <td>@Html.TextBoxFor(x => Model.VanBanLienQuanViewModel[i].NoiDung, htmlAttributes: new { @class = "form-control" })</td>
+                                <td>@Html.DropDownListFor(x => Model.VanBanLienQuanViewModel[i].CoQuanId, new SelectList(Model.VanBanLienQuanViewModel[i].CoQuanInfos, "Id", "Name"), "-- Chọn cơ quan --", htmlAttributes: new { @class = "form-control" }) </td>
+                                <td class="link-action">
+                                    <input type="button" value="@Buttons.CongViec_Add_VanBanLienQuan_Save" class="btn btn-link" id="btnAddVanBanLienQuan" disabled="disabled" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
 
-            <div class="col-md-12">
-                <label>Trạng thái</label>
-                <select class="form-control">
-                    <option>Chưa xử lý</option>
-                </select>
+            <div class="clear"></div>
+
+            <div class="col-sm-12">
+                <label>@Labels.CongViec_Add_QuaTrinhXuLy</label>
+                <table class="table table-bordered" id="tableAddQuaTrinhXuLy">
+                    <thead>
+                        <tr>
+                            <th class="text-center col-xs-1">@Labels.CongViec_Add_QuaTrinhXuLy_Gio</th>
+                            <th class="text-center col-xs-2">@Labels.CongViec_Add_QuaTrinhXuLy_Ngay</th>
+                            <th class="text-center col-xs-5">@Labels.CongViec_Add_QuaTrinhXuLy_NoiDung</th>
+                            <th class="text-center col-xs-2">@Labels.CongViec_Add_QuaTrinhXuLy_NguoiThem</th>
+                            <th class="text-center col-xs-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyAddQuaTrinhXuLy">
+                        @for (int i = 0; i < Model.QuaTrinhXuLyViewModel.Count; i++)
+                        {
+                            <tr>
+                                @if (User.IsInRole(RoleConstant.LANHDAO))
+                                {
+                                    <td colspan="3">@Html.TextBoxFor(x => Model.QuaTrinhXuLyViewModel[i].NoiDung, htmlAttributes: new { @class = "form-control" })</td>
+                                    <td>@Html.OfficeEnumDropDownListFor(x => Model.QuaTrinhXuLyViewModel[i].NhacNho, htmlAttributes: new { @class = "form-control" })</td>
+                                }
+                                else
+                                {
+                                    <td colspan="4">@Html.TextBoxFor(x => Model.QuaTrinhXuLyViewModel[i].NoiDung, htmlAttributes: new { @class = "form-control" })</td>
+                                }
+                                @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].Gio) : @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].Phut)
+                                @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].Ngay)
+                                @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].NguoiThem)
+                                <td class="link-action">
+                                    <input type="button" value="@Buttons.CongViec_Add_QuaTrinhXuLy_Save" class="btn btn-link" id="btnAddQuaTrinhXuLy" disabled="disabled" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            { Html.RenderPartial("_PartialPageUploadFiles", Model.Guid); }
+
+            <div class="col-sm-4">
+                <label>@Labels.CongViec_Add_TrangThai</label>
+                @Html.DropDownListFor(x => Model.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), "-- Chọn trạng thái công việc--", htmlAttributes: new { @class = "form-control" })
             </div>
             <div class="clear"></div>
-            <div class="col-md-12">
+            <div class="col-sm-12">
+                <label>&nbsp;</label>
                 <div id="outer">
                     <div class="inner">
-                        <input type="submit" class="btn btn-primary btn-width-md" value="Thêm mới" />
+                        <input type="submit" class="btn btn-primary btn-width-md" value="@Buttons.CongViec_Add_Save" />
                     </div>
-                    <div class="inner"><input type="button" class="btn btn-primary btn-width-md" value="Hủy" /></div>
+                    <div class="inner">
+                        @Html.RouteLink(Buttons.CongViec_Add_Cancel, UrlLink.CONGVIEC, null, htmlAttributes: new { @class = "btn btn-primary btn-width-md" })
+                        @*<input type="button" class="btn btn-primary btn-width-md" value="@Buttons.CongViec_Add_Cancel" />*@
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 </div>
 
 <div class="clearfix"></div>
 
 @section Scripts{
+    <script src="~/Scripts/app/modaljs.js"></script>
+    <script src="~/Scripts/bootstrap-multiselect.js"></script>
+    <script src="~/Scripts/app/congviec_add.js"></script>
+
     <script>
         $(document).ready(function () {
-            var optionCalendar =
-             {
-                 //showOn: 'both',
-                 autoSize: true,
-                 constrainInput: true,
-                 //buttonImageOnly: true,
-                 @*buttonImage: "@Url.Content("~/Content/images/calendar.png")",*@
-                 //buttonText: "Calendar",
-                 dateFormat: 'dd/mm/yy'
-             };
-            $('.control-datepicker').datepicker(optionCalendar);
+            /*BEGIN SUBMIT*/
+            onAddBegin = function () {
+                onShowLoading();
+            }
+            onAddComplete = function () {
+                onHideLoading();
+            }
+            onAddSuccess = function () {
+                window.location.href = '@Url.RouteUrl(UrlLink.CONGVIEC)';
+            }
+            onAddFailure = function () {
+                alert(message.CongViec_Add_Error)
+            }
+            /*END SUBMIT*/
+
         });
     </script>
 }

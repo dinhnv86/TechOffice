@@ -17,18 +17,17 @@ namespace AnThinhPhat.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TacNghiep()
         {
-            this.TacNghiep_CoQuanLienQuan = new HashSet<TacNghiep_CoQuanLienQuan>();
             this.TacNghiep_TinhHinhThucHien = new HashSet<TacNghiep_TinhHinhThucHien>();
             this.TacNghiep_YKienCoQuan = new HashSet<TacNghiep_YKienCoQuan>();
             this.TapTinTacNghieps = new HashSet<TapTinTacNghiep>();
         }
     
         public int Id { get; set; }
-        public int LinhVucTacNghiepId { get; set; }
         public System.DateTime NgayHetHan { get; set; }
         public Nullable<System.DateTime> NgayHoanThanh { get; set; }
         public string NoiDung { get; set; }
         public string NoiDungTraoDoi { get; set; }
+        public int LinhVucTacNghiepId { get; set; }
         public Nullable<int> MucDoHoanThanhId { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime CreateDate { get; set; }
@@ -38,14 +37,12 @@ namespace AnThinhPhat.Entities
         public System.DateTime NgayTao { get; set; }
     
         public virtual LinhVucTacNghiep LinhVucTacNghiep { get; set; }
-        public virtual MucDoHoanThanh MucDoHoanThanh { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TacNghiep_CoQuanLienQuan> TacNghiep_CoQuanLienQuan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TacNghiep_TinhHinhThucHien> TacNghiep_TinhHinhThucHien { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TacNghiep_YKienCoQuan> TacNghiep_YKienCoQuan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinTacNghiep> TapTinTacNghieps { get; set; }
+        public virtual MucDoHoanThanh MucDoHoanThanh { get; set; }
     }
 }

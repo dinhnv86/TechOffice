@@ -6,6 +6,9 @@ using AnThinhPhat.Entities.Results;
 using AnThinhPhat.ViewModel.CoQuan;
 using AnThinhPhat.ViewModel.Users;
 using AnThinhPhat.ViewModel.TacNghiep;
+using System.Security.Principal;
+using System.Security.Claims;
+using AnThinhPhat.Entities.Searchs;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -75,7 +78,7 @@ namespace AnThinhPhat.ViewModel
                     Id = entity.Id,
                     Name = entity.Ten,
                     Display = entity.Display,
-                    IsChecked = false
+                    IsChecked = entity.IsChecked
                 };
         }
 
@@ -88,7 +91,7 @@ namespace AnThinhPhat.ViewModel
                     Id = entity.Id,
                     UserName = entity.UserName,
                     ChucVuId = entity.ChucVuId,
-                    CoQuanId=entity.CoQuanId,
+                    CoQuanId = entity.CoQuanId,
                     HoVaTen = entity.FullName,
                     UserRoles = entity.RoleInfos
                         .Where(x => x.IsChecked)
@@ -119,7 +122,33 @@ namespace AnThinhPhat.ViewModel
                 NgayTao = entity.NgayTao,
                 NoiDung = entity.NoiDung,
                 NoiDungTraoDoi = entity.NoiDungYKienTraoDoi,
-                CoQuanInfos = entity.CoQuanInfos.Select(x => x.CoQuanInfo.Where(y => y.IsSelected)).Aggregate((a, b) => { return a.Concat(b); }),
+                CoQuanInfos = entity.CoQuanInfos.Select(x => x.CoQuanInfos.Where(y => y.IsSelected)).Aggregate((a, b) => { return a.Concat(b); }),
+            };
+        }
+
+        public static ValueSearchTacNghiep ToValueSearch(this ValueSearchViewModel valueSearch)
+        {
+            return new ValueSearchTacNghiep
+            {
+                CoQuanId = valueSearch.CoQuanId,
+                LinhVucTacNghiepId = valueSearch.LinhVucTacNghiepId,
+                MucDoHoanThanhId = valueSearch.MucDoHoanThanhId,
+                NamBanHanhId = valueSearch.NamBanHanhId,
+                NhomCoquanId = valueSearch.NhomCoquanId,
+                NoiDungTimKiem = valueSearch.NoiDungTimKiem,
+                SearchTypeValue = valueSearch.SearchTypeValue,
+            };
+        }
+
+        public static ValueSearchCongViec ToValueSearch(this CongViec.ValueSearchViewModel valueSearch)
+        {
+            return new ValueSearchCongViec
+            {
+                NhanVienId = valueSearch.UserId,
+                LinhVucCongViecId = valueSearch.LinhVucCongViecId,
+                NoiDungCongViec = valueSearch.NoiDungCongViec,
+                Role = valueSearch.Role,
+                TrangThaiCongViecId = valueSearch.TrangThaiCongViecId,
             };
         }
 
@@ -161,6 +190,13 @@ namespace AnThinhPhat.ViewModel
             return entity == null
                 ? string.Empty
                 : func(entity);
+        }
+
+        public static string FullName(this IIdentity identity)
+        {
+            ClaimsIdentity claims = (ClaimsIdentity)identity;
+
+            return claims.Claims.Where(x => x.Type == ClaimTypes.Surname).Select(x => x.Value).FirstOrDefault();
         }
     }
 }

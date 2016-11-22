@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnThinhPhat.WebUI", "TechOf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnThinhPhat.Controllers", "TechOffice.Controllers\AnThinhPhat.Controllers.csproj", "{FA0B5B18-D050-4A7C-915A-65E5C1E50A77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnThinhPhat.Resources", "TechOffice.Resources\AnThinhPhat.Resources.csproj", "{CF553A82-9525-4CD4-8405-AEA027F5C097}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{FA0B5B18-D050-4A7C-915A-65E5C1E50A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA0B5B18-D050-4A7C-915A-65E5C1E50A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA0B5B18-D050-4A7C-915A-65E5C1E50A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF553A82-9525-4CD4-8405-AEA027F5C097}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF553A82-9525-4CD4-8405-AEA027F5C097}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF553A82-9525-4CD4-8405-AEA027F5C097}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF553A82-9525-4CD4-8405-AEA027F5C097}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

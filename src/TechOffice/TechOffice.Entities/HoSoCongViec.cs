@@ -30,12 +30,13 @@ namespace AnThinhPhat.Entities
         public int LinhVucCongViecId { get; set; }
         public Nullable<int> TrangThaiCongViecId { get; set; }
         public string NoiDung { get; set; }
-        public string QuaTrinhXuLy { get; set; }
+        public Nullable<byte> DanhGiaCongViec { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
+        public System.DateTime NgayTao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CongViec_PhoiHop> CongViec_PhoiHop { get; set; }
@@ -45,9 +46,9 @@ namespace AnThinhPhat.Entities
         public virtual ICollection<CongViec_VanBan> CongViec_VanBan { get; set; }
         public virtual LinhVucCongViec LinhVucCongViec { get; set; }
         public virtual TrangThaiCongViec TrangThaiCongViec { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TapTinCongViec> TapTinCongViecs { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TapTinCongViec> TapTinCongViecs { get; set; }
     }
 }

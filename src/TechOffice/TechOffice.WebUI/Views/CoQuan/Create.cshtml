@@ -14,7 +14,7 @@
 {
     <div class="form-horizontal">
         <div class="form-group">
-            <label class="control-label col-sm-2">Name<span class="required">*</span> </label>
+            <label class="control-label col-sm-2">Tên<span class="required">*</span> </label>
             <div class="col-sm-10">
                 @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-control", @id = "txtName" })
                 @Html.ValidationMessageFor(model => model.Name)
@@ -28,16 +28,18 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2">  Description </label>
+            <label class="control-label col-sm-2">Mô tả</label>
             <div class="col-sm-10">
                 @Html.TextBoxFor(model => model.Description, htmlAttributes: new { @class = "form-control", @id = "txtDescription" })
                 @Html.ValidationMessageFor(model => model.Description)
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10" style="display:inline-flex;">
-                <input type="submit" value="Create" class="btn btn-primary btn-width-md" name="btnSubmit" id="btnSubmit" />
-                <button type="button" class="btn btn-default btn-width-md" name="btnCancel" id="btnCancel" data-dismiss="modal">Cancel</button>
+            <div class="col-sm-offset-2 col-sm-10" id="outer">
+                <div class="inner"> <input type="submit" value="Thêm mới" class="btn btn-primary btn-width-md" name="btnSubmit" id="btnSubmit" /></div>
+                <div class="inner">
+                    <button type="button" class="btn btn-default btn-width-md" name="btnCancel" id="btnCancel" data-dismiss="modal">Hủy</button>
+                </div>
             </div>
         </div>
     </div>

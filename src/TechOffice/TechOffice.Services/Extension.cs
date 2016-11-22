@@ -165,5 +165,72 @@ namespace AnThinhPhat.Services
 
             context.Entry(entity).State = EntityState.Modified;
         }
+
+        public static void AddWithChildrenToDb(this HoSoCongViecResult entity, TechOfficeEntities context)
+        {
+            var hoso = context.HoSoCongViecs.Create();
+
+            hoso.NgayHetHan = entity.NgayHetHan;
+            hoso.NgayTao = entity.NgayTao;
+            hoso.UserPhuTrachId = entity.UserPhuTrachId;
+            hoso.UserXuLyId = entity.UserXuLyId;
+            hoso.LinhVucCongViecId = entity.LinhVucCongViecId;
+            hoso.NoiDung = entity.NoiDung;
+            hoso.DanhGiaCongViec = entity.QuaTrinhXuLy;
+            hoso.TrangThaiCongViecId = entity.TrangThaiCongViecId;
+
+            hoso.IsDeleted = entity.IsDeleted;
+            hoso.CreatedBy = entity.CreatedBy;
+            hoso.CreateDate = DateTime.Now;
+
+            context.Entry(hoso).State = EntityState.Added;
+
+            foreach (var item in entity.CongViecPhoiHopResult)
+            {
+                var phoiHop = new CongViec_PhoiHop
+                {
+                    UserId = item.UserId,
+                    HoSoCongViecId = hoso.Id,
+                    IsDeleted = false,
+                    CreatedBy = hoso.CreatedBy,
+                    CreateDate = hoso.CreateDate,
+                };
+                context.Entry(phoiHop).State = EntityState.Added;
+            }
+
+            foreach (var item in entity.CongViecQuaTrinhXuLyResult)
+            {
+                var xuly = new CongViec_QuaTrinhXuLy
+                {
+                    GioBanHanh = item.GioBanHanh,
+                    PhutBanHanh = item.PhutBanHanh,
+                    NgayBanHanh = item.NgayBanHanh,
+                    NoiDung = item.NoiDung,
+                    NguoiThem = item.NguoiThem,
+                    NhacNho = item.NhacNho,
+                    HoSoCongViecId = hoso.Id,
+                    IsDeleted = false,
+                    CreatedBy = hoso.CreatedBy,
+                    CreateDate = hoso.CreateDate,
+                };
+                context.Entry(xuly).State = EntityState.Added;
+            }
+
+            foreach (var item in entity.CongViecVanBanResults)
+            {
+                var vanban = new CongViec_VanBan
+                {
+                    HoSoCongViecId = hoso.Id,
+                    SoVanBan = item.SoVanBan,
+                    NgayBanHanh = item.NgayBanHanh,
+                    NoiDung = item.NoiDung,
+                    CoQuanId = item.CoQuanId,
+                    IsDeleted = false,
+                    CreateDate = hoso.CreateDate,
+                    CreatedBy = hoso.CreatedBy,
+                };
+                context.Entry(vanban).State = EntityState.Added;
+            }
+        }
     }
 }

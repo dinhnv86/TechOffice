@@ -5,7 +5,7 @@
 }
 
 <div class="boxr" style="width:100%">
-    <h1 class="title title_ct"><span>Văn bản</span></h1>
+    <h1 class="title title_ct"><span>Tác nghiệp</span></h1>
 
     <div class="pading">
         <div class="entry form-horizontal">
@@ -13,9 +13,9 @@
             {
                 <div class="col-md-6">
                     <label>Chọn nhóm cơ quan</label>
-                    @Html.DropDownListFor(x => Model.NhomCoQuanId, new SelectList(Model.NhomCoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    @Html.TechDropDownListFor(x => Model.NhomCoQuanId, new SelectList(Model.NhomCoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" }, disabled: !User.IsInRole(RoleConstant.ALLOW_SELECT))
                     <label>Chọn cơ quan</label>
-                    @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    @Html.TechDropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" }, disabled: !User.IsInRole(RoleConstant.ALLOW_SELECT))
                     <label>Chọn lĩnh vực</label>
                     @Html.DropDownListFor(x => Model.LinhVucTacNghiepId, new SelectList(Model.LinhVucTacNghiepInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
                     <label>Chọn mức độ hoàn thành</label>
@@ -27,16 +27,26 @@
                     <label>Chọn thông tin tìm kiếm</label>
                     @Html.TextBoxFor(x => Model.NhapThongTinTimKiem, htmlAttributes: new { @class = "form-control" })
                     <label>Chọn tiêu chí tìm kiếm</label>
-                    @Html.TextBoxFor(x => Model.TieuChiTimKiem, htmlAttributes: new { @class = "form-control" })
+                    <div class="form-group col-xs-12">
+                        <div class="radio-inline">
+                            @Html.RadioButtonFor(x => Model.SearchTypeValue, true, htmlAttributes: new { id = "noiDungId" }) Nội dung
+                        </div>
+                        <div class="radio-inline">
+                            @Html.RadioButtonFor(x => Model.SearchTypeValue, false, htmlAttributes: new { id = "YKienId" }) Ý kiến trao đổi
+                        </div>
+                    </div>
                     <label>&nbsp;</label>
-                    <div id="outer">
+                    <div id="outer" style="padding-top:62px;">
                         <div class="inner"><input type="submit" class="btn btn-primary btn-width-md" value="Tìm kiếm" /></div>
                         <div class="inner">
                             @Html.RouteLink("Thống kê", UrlLink.TACNGHIEP_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })
                         </div>
-                        <div class="inner">
-                            @Html.RouteLink("Thêm mới", UrlLink.TACNGHIEP_ADD, null, htmlAttributes: new { @class = "btn btn-primary" })
-                        </div>
+                        @if (User.IsInRole(RoleConstant.NEW_TACNGHIEP))
+                        {
+                            <div class="inner">
+                                @Html.RouteLink("Thêm mới", UrlLink.TACNGHIEP_ADD, null, htmlAttributes: new { @class = "btn btn-primary" })
+                            </div>
+                        }
                     </div>
                 </div>
             }
@@ -45,9 +55,37 @@
 
     <div class="clear"></div>
     <div class="col-xs-12">
-        <h3><span style="font-size: x-large;">Danh sách thủ tục hành chính</span></h3>
+        <h3><span style="font-size: x-large;">Danh sách các công việc</span></h3>
         <div id="tableAdmin" class="table-responsive">
-            @{Html.RenderAction("List", UrlLink.TACNGHIEP, routeValues: new { search = Model.ValueSearch });}
+            @Html.Action("List", UrlLink.TACNGHIEP, routeValues: new { search = Model.ValueSearch })
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('#NhomCoQuanId').on('change', function () {
+                var id = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetCoQuanByNhomCoQuan", "CoQuan")',
+                    data: {
+                        nhomCoQuanId: id
+                    },
+                    success: function (data) {
+                        $('#CoQuanId')
+                          .find('option')
+                          .remove()
+                          .end()
+                          //.append('<option selected="selected" value>Tất cả</option>')
+                          .append(data)
+                        //.val('null');
+                    },
+                });
+
+            });
+        });
+    </script>
+}

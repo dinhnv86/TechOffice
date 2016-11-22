@@ -7,6 +7,8 @@ using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
+using AnThinhPhat.Utilities.Enums;
+using AnThinhPhat.Entities.Searchs;
 
 namespace AnThinhPhat.Services.Implements
 {
@@ -150,7 +152,7 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.TacNghieps
-                            .Include(i => i.TacNghiep_CoQuanLienQuan)
+                            .Include(i => i.TacNghiep_TinhHinhThucHien)
                             where item.IsDeleted == false
                             select item)
                         .MakeQueryToDatabase()
@@ -260,7 +262,7 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public SaveResult AddTacNghiepWithCoQuan(TacNghiepResult entity)
+        public SaveResult AddTacNghiepWithTinhHinhThucHien(TacNghiepResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
@@ -276,10 +278,11 @@ namespace AnThinhPhat.Services.Implements
                         {
                             foreach (var item in entity.CoQuanInfos)
                             {
-                                var co = context.TacNghiep_CoQuanLienQuan.Create();
+                                var co = context.TacNghiep_TinhHinhThucHien.Create();
 
                                 co.CoQuanId = item.Id;
                                 co.TacNghiepId = tt.Id;
+                                co.MucDoHoanThanhId = (int)EnumMucDoHoanThanh.CHUATHUHIEN;
 
                                 co.IsDeleted = tt.IsDeleted;
                                 co.CreatedBy = tt.CreatedBy;
@@ -296,6 +299,45 @@ namespace AnThinhPhat.Services.Implements
                     }
                 }
                 return result;
+            });
+        }
+
+        public IEnumerable<TacNghiepResult> Find(ValueSearchTacNghiep valueSearch)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var query = (from item in context.TacNghieps
+                                 where item.IsDeleted == false
+                                 select item);
+
+                    if (valueSearch.NhomCoquanId.HasValue)
+                        query = query.Where(x => x.TacNghiep_TinhHinhThucHien.Any(y => y.CoQuan.NhomCoQuanId == valueSearch.NhomCoquanId.Value));
+
+                    if (valueSearch.CoQuanId.HasValue)
+                        query = query.Where(x => x.TacNghiep_TinhHinhThucHien.Any(y => y.Id == valueSearch.CoQuanId.Value));
+
+                    if (valueSearch.LinhVucTacNghiepId.HasValue)
+                        query = query.Where(x => x.LinhVucTacNghiepId == valueSearch.LinhVucTacNghiepId.Value);
+
+                    if (valueSearch.MucDoHoanThanhId.HasValue)
+                        query = query.Where(x => x.TacNghiep_TinhHinhThucHien.Any(y => y.MucDoHoanThanhId == valueSearch.MucDoHoanThanhId));
+
+                    if (valueSearch.NamBanHanhId.HasValue)
+                        query = query.Where(x => x.NgayTao.Year == valueSearch.NamBanHanhId.Value);
+
+                    if (!string.IsNullOrEmpty(valueSearch.NoiDungTimKiem))
+                    {
+                        if (valueSearch.SearchTypeValue.HasValue && valueSearch.SearchTypeValue.Value)//Search by noi dung
+                            query = query.Where(x => x.NoiDung.Contains(valueSearch.NoiDungTimKiem));
+                        else//search by noi dung trao doi
+                            query = query.Where(x => x.NoiDungTraoDoi.Contains(valueSearch.NoiDungTimKiem));
+                    }
+                    return query.MakeQueryToDatabase()
+                      .Select(x => x.ToDataResult())
+                      .ToList();
+                }
             });
         }
     }

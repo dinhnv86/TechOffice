@@ -1,0 +1,14 @@
+﻿@model IEnumerable<AnThinhPhat.Entities.Results.TacNghiepCoQuanLienQuanResult>
+
+@if (Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
+            <td>
+                <input type="checkbox" value="true" checked="checked" disabled="disabled" />
+            </td>
+        </tr>
+    }
+}

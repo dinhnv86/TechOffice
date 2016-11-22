@@ -28,7 +28,7 @@ body {
     right: 100px;
     text-align: center;
     width: 35px;
-    z-index: 10000;
+    z-index: 999;
 }
 
 div#back-top > i.fa {
@@ -129,7 +129,7 @@ a {
 
 
 .navbar .nav li a {
-    background: url("../images/space_menu.png") no-repeat scroll right center transparent;
+    /*background: url("../images/space_menu.png") no-repeat scroll right center transparent;*/
     color: #FFF;
     font-size: 15px;
     padding: 31px 13px;
@@ -278,7 +278,7 @@ a {
 }
 
 .title {
-    background: url("img/h-border.png") repeat-x scroll center center transparent;
+    /*background: url("img/h-border.png") repeat-x scroll center center transparent;*/
     border-bottom: 1px solid #AAA;
     margin: 0px;
     padding: 0px 0px 3px 0px;
@@ -1355,7 +1355,7 @@ border:1px solid #3b3b3b ! important; color:#fff
 
 
     .navbar .nav li a {
-        background: url("../images/space_menu.png") no-repeat scroll right center transparent;
+        /*background: url("../images/space_menu.png") no-repeat scroll right center transparent;*/
         color: #FFF;
         font-size: 14px;
         padding: 31px 8px;
@@ -1372,7 +1372,7 @@ border:1px solid #3b3b3b ! important; color:#fff
 
 
     .navbar .nav li a {
-        background: url("../images/space_menu.png") no-repeat scroll right center transparent;
+        /*background: url("../images/space_menu.png") no-repeat scroll right center transparent;*/
         color: #FFF;
         font-size: 15px;
         padding: 31px 9px;
@@ -1912,7 +1912,7 @@ border:1px solid #3b3b3b ! important; color:#fff
     }
 
     .navbar .nav li a {
-        background: url("../images/space_menu.png") no-repeat scroll right center transparent;
+        /*background: url("../images/space_menu.png") no-repeat scroll right center transparent;*/
         color: #FFF;
         font-size: 15px;
         padding: 31px 6px;
@@ -2553,7 +2553,7 @@ border:1px solid #3b3b3b ! important; color:#fff
 .logo_head {
     float: left;
     padding: 20px;
-    width: 50%;
+    /*width: 50%;*/
 }
 
 .search_head {
@@ -3618,10 +3618,10 @@ input#phone {
     background: #2070BC;
 }
 
-.table_over {
+/*.table_over {
     overflow-x: auto;
     width: 100%;
-}
+}*/
 
 @media (max-width: 600px) {
     .span3 {
@@ -3657,7 +3657,7 @@ input#phone {
     }
 
         table tr td:first-child {
-            width: 150px;
+            /*width: 150px;*/
         }
 }
 
@@ -3769,4 +3769,29 @@ input[type="checkbox"].input-validation-error {
 
 .inner {
     display: inline-block;
+}
+
+span.multiselect-native-select > div.btn-group {
+    width: 100%;
+}
+
+div.btn-group > button.multiselect {
+    width: 100%;
+}
+
+    div.btn-group > button.multiselect > span {
+        float: left;
+    }
+
+    div.btn-group > button.multiselect > .caret {
+        float: right;
+        margin-top: 8px;
+    }
+
+div.btn-group > ul {
+    width: 100%;
+}
+
+.text-yellow {
+    color: #cccc00;
 }

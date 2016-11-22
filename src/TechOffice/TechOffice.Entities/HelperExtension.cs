@@ -4,6 +4,7 @@ using AnThinhPhat.Entities.Results;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System;
+using AnThinhPhat.Utilities.Enums;
 
 namespace AnThinhPhat.Entities
 {
@@ -138,9 +139,9 @@ namespace AnThinhPhat.Entities
             return new CongViecPhoiHopResult
             {
                 Id = entity.Id,
-                HoSoCongViec = entity.HoSoCongViec.ToDataResult().ToIfNotNullDataInfo(),
+                HoSoCongViec = entity.HoSoCongViec.ToDataInfo(),
                 HoSoCongViecId = entity.HoSoCongViecId,
-                UserInfo = entity.User.ToDataResult().ToIfNotNullDataInfo(),
+                UserInfo = entity.User.ToDataInfo(),
                 UserId = entity.UserId,
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
@@ -163,7 +164,7 @@ namespace AnThinhPhat.Entities
             return new CongViecQuaTrinhXuLyResult
             {
                 Id = entity.Id,
-                HoSoCongViec = entity.HoSoCongViec.ToDataResult().ToIfNotNullDataInfo(),
+                HoSoCongViec = entity.HoSoCongViec.ToDataInfo(),
                 HoSoCongViecId = entity.HoSoCongViecId,
                 PhutBanHanh = entity.PhutBanHanh,
                 GioBanHanh = entity.GioBanHanh,
@@ -176,6 +177,34 @@ namespace AnThinhPhat.Entities
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
                 LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
+    }
+
+    public static class CongViecVanVanLienQuanExtension
+    {
+        public static CongViecVanBanResult ToIfNotNullDataResult(this CongViec_VanBan entity)
+        {
+            return entity?.ToDataResult();
+        }
+
+        public static CongViecVanBanResult ToDataResult(this CongViec_VanBan entity)
+        {
+            return new CongViecVanBanResult
+            {
+                Id = entity.Id,
+                HoSoCongViecId = entity.HoSoCongViecId,
+                HoSoCongViec = entity.HoSoCongViec.ToDataInfo(),
+                SoVanBan = entity.SoVanBan,
+                CoQuanId = entity.CoQuanId,
+                CoQuanIfo = entity.CoQuan.ToDataInfo(),
+                NgayBanHanh = entity.NgayBanHanh,
+                NoiDung = entity.NoiDung,
+                IsDeleted = entity.IsDeleted,
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                LastUpdatedBy = entity.LastUpdatedBy,
+                LastUpdated = entity.LastUpdated
             };
         }
     }
@@ -281,8 +310,19 @@ namespace AnThinhPhat.Entities
                 Id = entity.Id,
                 NoiDung = entity.NoiDung,
                 NgayHetHan = entity.NgayHetHan,
-                TrangThai = entity.TrangThaiCongViec.ToIfNotNullDataInfo(),
-                QuaTrinhXuLy = entity.QuaTrinhXuLy,
+                NgayTao = entity.NgayTao,
+                TrangThaiCongViecId = entity.TrangThaiCongViecId,
+                TrangThaiCongViecInfo = entity.TrangThaiCongViec.ToDataInfo(),
+                LinhVucCongViecId = entity.LinhVucCongViecId,
+                LinhVucCongViec = entity.LinhVucCongViec.ToDataInfo(),
+                QuaTrinhXuLy = entity.DanhGiaCongViec,
+                UserPhuTrachId = entity.UserPhuTrachId,
+                UserPhuTrach = entity.User.ToDataInfo(),
+                UserXuLyId = entity.UserXuLyId,
+                UserXyLy = entity.User1.ToDataInfo(),
+                CongViecPhoiHopResult = entity.CongViec_PhoiHop.Where(x => !x.IsDeleted).Select(x => x.ToDataResult()).ToList(),
+                CongViecQuaTrinhXuLyResult = entity.CongViec_QuaTrinhXuLy.Where(x => !x.IsDeleted).Select(x => x.ToDataResult()).ToList(),
+                CongViecVanBanResults = entity.CongViec_VanBan.Where(x => !x.IsDeleted).Select(x => x.ToDataResult()).ToList(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -303,7 +343,7 @@ namespace AnThinhPhat.Entities
                 Id = entity.Id,
                 NgayHetHan = entity.NgayHetHan,
                 NoiDung = entity.NoiDung,
-                TrangThai = entity.TrangThai,
+                TrangThai = entity.TrangThaiCongViecInfo,
             };
         }
 
@@ -395,9 +435,9 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 UserId = entity.UserId,
-                UserInfo = entity.User.ToIfNotNullDataInfo(),
+                UserResult = entity.User.ToDataResult(),
                 RoleId = entity.RoleId,
-                RoleInfo = entity.Role.ToIfNotNullDataInfo(),
+                RoleInfo = entity.Role.ToDataInfo(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -822,30 +862,30 @@ namespace AnThinhPhat.Entities
         }
     }
 
-    public static class TacNghiepCoQuanLienQuanExtension
-    {
-        public static TacNghiepCoQuanLienQuanResult ToIfNotNullDataResult(this TacNghiep_CoQuanLienQuan entity)
-        {
-            return entity?.ToDataResult();
-        }
+    //public static class TacNghiepCoQuanLienQuanExtension
+    //{
+    //    public static TacNghiepCoQuanLienQuanResult ToIfNotNullDataResult(this TacNghiep_CoQuanLienQuan entity)
+    //    {
+    //        return entity?.ToDataResult();
+    //    }
 
-        public static TacNghiepCoQuanLienQuanResult ToDataResult(this TacNghiep_CoQuanLienQuan entity)
-        {
-            return new TacNghiepCoQuanLienQuanResult
-            {
-                Id = entity.Id,
-                CoQuanId = entity.CoQuanId,
-                CoQuanInfo = entity.CoQuan.ToIfNotNullDataInfo(),
-                TacNghiepId = entity.TacNghiepId,
-                TacNghiepInfo = entity.TacNghiep.ToIfNotNullDataInfo(),
-                CreateDate = entity.CreateDate,
-                CreatedBy = entity.CreatedBy,
-                IsDeleted = entity.IsDeleted,
-                LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy
-            };
-        }
-    }
+    //    public static TacNghiepCoQuanLienQuanResult ToDataResult(this TacNghiep_CoQuanLienQuan entity)
+    //    {
+    //        return new TacNghiepCoQuanLienQuanResult
+    //        {
+    //            Id = entity.Id,
+    //            CoQuanId = entity.CoQuanId,
+    //            CoQuanInfo = entity.CoQuan.ToIfNotNullDataInfo(),
+    //            TacNghiepId = entity.TacNghiepId,
+    //            TacNghiepInfo = entity.TacNghiep.ToIfNotNullDataInfo(),
+    //            CreateDate = entity.CreateDate,
+    //            CreatedBy = entity.CreatedBy,
+    //            IsDeleted = entity.IsDeleted,
+    //            LastUpdated = entity.LastUpdated,
+    //            LastUpdatedBy = entity.LastUpdatedBy
+    //        };
+    //    }
+    //}
 
     public static class TacNghiepExtension
     {
@@ -867,7 +907,7 @@ namespace AnThinhPhat.Entities
                 NoiDung = entity.NoiDung,
                 NoiDungTraoDoi = entity.NoiDungTraoDoi,
                 MucDoHoanThanhId = entity.MucDoHoanThanhId,
-                CoQuanInfos = entity.TacNghiep_CoQuanLienQuan.Select(x => new CoQuanInfo { Id = x.CoQuanId, Name = x.CoQuan.Ten, NhomCoQuanId = x.CoQuan.NhomCoQuanId }).ToList(),
+                CoQuanInfos = entity.TacNghiep_TinhHinhThucHien.Select(x => new CoQuanInfo { Id = x.CoQuanId, Name = x.CoQuan.Ten, NhomCoQuanId = x.CoQuan.NhomCoQuanId, MucDoHoanThanhId = x.MucDoHoanThanhId }).ToList(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -889,6 +929,8 @@ namespace AnThinhPhat.Entities
                 NoiDung = entity.NoiDung,
                 NgayTao = entity.NgayTao,
                 NgayHoanThanh = entity.NgayHoanThanh,
+                NgayHetHan = entity.NgayHetHan,
+                LinhVucTacNghiepInfo = entity.LinhVucTacNghiepInfo
             };
         }
 
@@ -905,6 +947,8 @@ namespace AnThinhPhat.Entities
                 NoiDung = entity.NoiDung,
                 NgayTao = entity.NgayTao,
                 NgayHoanThanh = entity.NgayHoanThanh,
+                NgayHetHan = entity.NgayHetHan,
+                LinhVucTacNghiepInfo = entity.LinhVucTacNghiep.ToIfNotNullDataInfo(),
             };
         }
     }
@@ -922,12 +966,14 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 MucDoHoanThanhId = entity.MucDoHoanThanhId,
+                NgayHoanThanh = entity.NgayHoanThanh,
                 MucDoHoanThanhInfo = entity.MucDoHoanThanh.ToIfNotNullDataResult(),
                 ThoiGian = entity.ThoiGian,
                 CoQuanId = entity.CoQuanId,
                 CoQuanInfo = entity.CoQuan.ToDataInfo(),
                 TacNghiepId = entity.TacNghiepId,
-                TacNghiepInfo = entity.TacNghiep.ToIfNotNullDataResult().ToDataInfo(),
+                TacNghiepInfo = entity.TacNghiep.ToDataInfo(),
+                IsDaHoanThanh = (entity.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DAHOANHTHANH && entity.NgayHoanThanh.HasValue),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,

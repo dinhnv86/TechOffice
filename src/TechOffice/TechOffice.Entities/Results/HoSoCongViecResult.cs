@@ -1,11 +1,14 @@
 ﻿using System;
 using AnThinhPhat.Entities.Infos;
+using System.Collections.Generic;
 
 namespace AnThinhPhat.Entities.Results
 {
     public class HoSoCongViecResult : BaseResult
     {
         public DateTime? NgayHetHan { get; set; }
+
+        public DateTime NgayTao { get; set; }
 
         public int UserPhuTrachId { get; set; }
 
@@ -17,7 +20,7 @@ namespace AnThinhPhat.Entities.Results
 
         public string NoiDung { get; set; }
 
-        public string QuaTrinhXuLy { get; set; }
+        public byte? QuaTrinhXuLy { get; set; }
 
         public LinhVucCongViecInfo LinhVucCongViec { get; set; }
 
@@ -25,8 +28,14 @@ namespace AnThinhPhat.Entities.Results
 
         public UserInfo UserXyLy { get; set; }
 
-        public int? TrangThaiCongViecId { get; set;}
+        public IEnumerable<CongViecPhoiHopResult> CongViecPhoiHopResult { get; set; }
 
-        public TrangThaiCongViecInfo TrangThai { get; set; }
+        public IEnumerable<CongViecQuaTrinhXuLyResult> CongViecQuaTrinhXuLyResult { get; set; }
+
+        public IEnumerable<CongViecVanBanResult> CongViecVanBanResults { get; set; }
+
+        public int? TrangThaiCongViecId { get; set; }
+
+        public TrangThaiCongViecInfo TrangThaiCongViecInfo { get; set; }
     }
 }

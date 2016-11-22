@@ -10,6 +10,6 @@ namespace AnThinhPhat.Entities.Results
 
         public RoleInfo RoleInfo { get; set; }
 
-        public UserInfo UserInfo { get; set; }
+        public UserResult UserResult { get; set; }
     }
 }

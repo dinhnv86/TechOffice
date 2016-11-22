@@ -19,13 +19,14 @@ namespace AnThinhPhat.Entities
         public string SoVanBan { get; set; }
         public Nullable<System.DateTime> NgayBanHanh { get; set; }
         public string NoiDung { get; set; }
-        public string TenCoQuan { get; set; }
+        public int CoQuanId { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime CreateDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
     
+        public virtual CoQuan CoQuan { get; set; }
         public virtual HoSoCongViec HoSoCongViec { get; set; }
     }
 }

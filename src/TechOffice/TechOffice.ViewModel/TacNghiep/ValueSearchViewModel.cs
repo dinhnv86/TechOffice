@@ -12,9 +12,9 @@
 
         public int? NamBanHanhId { get; set; }
 
-        public string NhapThongTinTimKiem { get; set; }
+        public string NoiDungTimKiem { get; set; }
 
-        public string TieuChiTimKiem { get; set; }
+        public bool? SearchTypeValue { get; set; }
 
         public int Page { get; set; }
     }

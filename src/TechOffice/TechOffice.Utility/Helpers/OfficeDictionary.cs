@@ -23,4 +23,37 @@ namespace AnThinhPhat.Utilities
 
         [Description("Đã xử lý")] DAXULY = 4
     }
+
+    public enum EnumNhacNho
+    {
+        [Description("-- Nhắc nhở --")]
+        LEVEL0 = 1,
+
+        [Description("Mức 1")]
+        LEVEL1 = 2,
+
+        [Description("Mức 2")]
+        LEVEL2 = 3,
+    }
+
+    public enum EnumDanhGiaCongViec
+    {
+        [Description("Không chọn")]
+        LEVEL0 = 0,
+
+        [Description("Mức 1")]
+        LEVEL1 = 1,
+
+        [Description("Mức 2")]
+        LEVEL2 = 2,
+
+        [Description("Mức 3")]
+        LEVEL3 = 3,
+
+        [Description("Mức 4")]
+        LEVEL4 = 4,
+
+        [Description("Mức 5")]
+        LEVEL5 = 5,
+    }
 }

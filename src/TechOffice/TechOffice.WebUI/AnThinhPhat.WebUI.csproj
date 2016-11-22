@@ -193,6 +193,7 @@
     <Content Include="Content\app\loading.css" />
     <Content Include="Content\app\plus.css" />
     <Content Include="Content\app\table.css" />
+    <Content Include="Content\bootstrap-multiselect.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -270,9 +271,16 @@
     <Content Include="images\slider1.jpg" />
     <Content Include="images\Tap-huan-doan.jpg" />
     <Content Include="images\tongdai.png" />
+    <Content Include="Scripts\app\congviec-detail.js" />
+    <Content Include="Scripts\app\congviec_add.js" />
     <Content Include="Scripts\app\datepickerjs.js" />
     <Content Include="Scripts\app\menuslidejs.js" />
+    <Content Include="Scripts\app\message.js" />
     <Content Include="Scripts\app\modaljs.js" />
+    <Content Include="Scripts\app\tacnghiep-detail.js" />
+    <Content Include="Scripts\app\uploadfiles.js" />
+    <Content Include="Scripts\app\user-update.js" />
+    <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -281,6 +289,7 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="connectionStrings.config" />
+    <Content Include="appsettings.config" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -405,6 +414,16 @@
     <Content Include="Views\TacNghiep\_PartialPageStatisticCoQuan.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageNoiDungYKienEdit.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageNoiDungYKienAdd.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\CoQuan\Edit.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CoQuanLienQuan.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GroupListBodies.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ListBodies.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ListBodies.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\GroupListBodies.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageResultThucHienCongViec.cshtml" />
+    <Content Include="Views\Shared\_PartialPageUploadFiles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -423,6 +442,10 @@
     <ProjectReference Include="..\TechOffice.Entities\AnThinhPhat.Entities.csproj">
       <Project>{98bca14e-3e24-4d33-9850-11336fd1d9cb}</Project>
       <Name>AnThinhPhat.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TechOffice.Resources\AnThinhPhat.Resources.csproj">
+      <Project>{cf553a82-9525-4cd4-8405-aea027f5c097}</Project>
+      <Name>AnThinhPhat.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\TechOffice.Services\AnThinhPhat.Services.csproj">
       <Project>{4ff29c11-f209-4868-9863-385349d6ac46}</Project>

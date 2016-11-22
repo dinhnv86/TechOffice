@@ -37,7 +37,9 @@ namespace AnThinhPhat.WebUI
                 new { controller = "TacNghiep", action = "Index" });
 
             routes.MapRoute(UrlLink.CONGVIEC, UrlLink.CONGVIEC,
-                new { controller = "CongViec", action = "Index" });
+                 new { controller = "CongViec", action = "Index" });
+            //new { controller = "CongViec", action = "Index", UserId = 0, Role = 0, TrangThaiCongViecId = -1, LinhVucCongViecId = 0, NoiDungCongViec = string.Empty },
+            //new { userId = @"\d+", role = @"\d+", trangThaiCongViecId = @"\d+", linhVucCongViecId = @"\d+", });
 
             routes.MapRoute(UrlLink.TINTUC, UrlLink.TINTUC,
                 new { controller = "Home", action = "Article" });
@@ -63,7 +65,7 @@ namespace AnThinhPhat.WebUI
               new { id = @"\d+" });
 
             routes.MapRoute(UrlLink.LIENHE, UrlLink.LIENHE, new { controller = "Home", action = "Contact" });
-
+            routes.MapRoute(UrlLink.LOGIN, UrlLink.LOGIN, new { controller = "Account", action = "LogIn" });
             //Error
             routes.MapRoute("error", "error/internalserver",
                 new { controller = "Error", action = "InternalServer" });
@@ -110,6 +112,19 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.MUCDOHOANTHANH, UrlLink.MUCDOHOANTHANH,
              new { controller = "MucDoHoanThanh", action = "Index" });
             //===========================================CRUD DATA=======================================//
+
+            routes.MapRoute(UrlLink.ADMIN, UrlLink.ADMIN,
+            new { controller = "Admin", action = "Index" });
+
+            routes.MapRoute(UrlLink.USERS, UrlLink.USERS,
+            new { controller = "Users", action = "Index" });
+
+            routes.MapRoute(UrlLink.USERS_ADD, UrlLink.USERS_ADD,
+            new { controller = "Users", action = "Create" });
+
+            routes.MapRoute(UrlLink.USERS_EDIT, UrlLink.USERS_EDIT,
+            new { controller = "Users", action = "Edit" },
+            new { id = @"\d+" });
 
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional });

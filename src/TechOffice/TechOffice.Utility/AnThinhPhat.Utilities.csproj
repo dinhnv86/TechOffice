@@ -34,6 +34,7 @@
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -49,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppCipher.cs" />
+    <Compile Include="Enums\EnumMucDoHoanThanh.cs" />
     <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Exception\DeactivateUserException.cs" />
     <Compile Include="Exception\ExistUserException.cs" />
@@ -61,7 +63,9 @@
     <Compile Include="Mail\MailAttachment.cs" />
     <Compile Include="Mail\MailType.cs" />
     <Compile Include="Mail\SmtpMailSender.cs" />
+    <Compile Include="ParseExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleConstant.cs" />
     <Compile Include="TechOfficeConfig.cs" />
     <Compile Include="UrlLink.cs" />
   </ItemGroup>

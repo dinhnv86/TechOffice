@@ -1,0 +1,35 @@
+﻿@using AnThinhPhat.ViewModel.TacNghiep;
+
+@model List<InitCoQuanCoLienQuan>
+
+<div class="col-md-12">
+    <label>Các cơ quan có liên quan</label>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="col-sm-10">Tên cơ quan</th>
+                <th class="col-sm-2">Có liên quan</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td colspan="2">
+                        @Html.HiddenFor(x => Model[i].NhomCoQuan.Id)
+                        <span class="glyphicon glyphicon-plus" data-toggle="collapse" data-target="#ncq_@Model[i].NhomCoQuan.Id">
+                        </span>
+                        @Html.Raw(Model[i].NhomCoQuan.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="hiddenRow">
+                        <div class="collapse" id="ncq_@Model[i].NhomCoQuan.Id">
+                            @Html.EditorFor(x => Model[i].CoQuanInfos, "ListBodies")
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

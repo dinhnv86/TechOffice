@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Web.Mvc;
-using AnThinhPhat.Entities;
+﻿using AnThinhPhat.Entities;
 using AnThinhPhat.Services;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
@@ -9,9 +6,12 @@ using AnThinhPhat.ViewModel;
 using AnThinhPhat.ViewModel.Users;
 using Ninject;
 using PagedList;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
+    [Authorize(Roles = RoleConstant.SUPPER_ADMIN)]
     public class UsersController : OfficeController
     {
         [Inject]
@@ -22,6 +22,9 @@ namespace AnThinhPhat.WebUI.Controllers
 
         [Inject]
         public ICoQuanRepository CoQuanRepository { get; set; }
+
+        [Inject]
+        public IUserRoleRepository UserRoleRepository { get; set; }
 
         public ActionResult Index()
         {
@@ -45,7 +48,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var cvs = ChucVuRepository.GetAll().Select(x => x.ToIfNotNullDataInfo()).ToList();
+            var cvs = ChucVuRepository.GetAll().Select(x => x.ToDataInfo()).ToList();
             var roles = RoleRepository.GetAll().Select(x => x.ToRoleViewModel()).ToList();
             var cqs = CoQuanRepository.GetAll().Select(x => x.ToDataInfo()).ToList();
 
@@ -55,8 +58,48 @@ namespace AnThinhPhat.WebUI.Controllers
                 ChucVuInfos = cvs,
                 CoQuanInfos = cqs,
             };
+
             return View(userInfo);
         }
+
+        public ActionResult Edit(int id)
+        {
+            var user = UserRepository.Single(id);
+            var chucvu = ChucVuRepository.GetAll().Select(x => x.ToDataInfo());
+            var coQuan = CoQuanRepository.GetAll().Select(x => x.ToDataInfo());
+            var userRole = UserRoleRepository.GetRolesByUserId(id);
+
+            var roles = RoleRepository.GetAll().ToList();
+            roles.ForEach(x =>
+            {
+                userRole.ToList().ForEach(y =>
+                {
+                    if (y.RoleId == x.Id)
+                    {
+                        x.IsChecked = true;
+                    }
+                });
+            });
+
+
+            AddUserViewModel model = new AddUserViewModel
+            {
+                Id = user.Id,
+                FullName = user.HoVaTen,
+                UserName = user.UserName,
+                IsLocked = user.IsLocked,
+                ChucVuId = user.ChucVuId,
+                ChucVuInfos = chucvu,
+                CoQuanId = user.CoQuanId,
+                CoQuanInfos = coQuan,
+                CreateDate = user.CreateDate,
+                CreatedBy = user.CreatedBy,
+                RoleInfos = roles.Select(x => x.ToRoleViewModel()).ToList(),
+            };
+
+            return View(model);
+        }
+
 
         [HttpPost]
         [ActionName("Create")]
@@ -76,6 +119,51 @@ namespace AnThinhPhat.WebUI.Controllers
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
                     Data = result == SaveResult.SUCCESS ? "SB01" : "SB02"
                 };
+            });
+        }
+
+        [HttpPost]
+        [ActionName("Edit")]
+        public JsonResult EditUserInfo(AddUserViewModel model)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                var result = UserRepository.EditUserWtithRoles(model.ToUseResult().Update(x =>
+                {
+                    x.LastUpdatedBy = UserName;
+                }));
+
+                return new JsonResult
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = result == SaveResult.SUCCESS ? "SB01" : "SB02"
+                };
+            });
+        }
+
+        [HttpPost]
+        public JsonResult CheckUserName(string userName)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                var userResult = UserRepository.CheckUserName(userName);
+
+                if (userResult != null)
+                {
+                    return new JsonResult
+                    {
+                        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                        Data = "1"
+                    };
+                }
+                else
+                {
+                    return new JsonResult
+                    {
+                        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                        Data = "0"
+                    };
+                }
             });
         }
     }

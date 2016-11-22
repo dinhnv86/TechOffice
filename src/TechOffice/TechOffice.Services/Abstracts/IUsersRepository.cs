@@ -108,5 +108,9 @@ namespace AnThinhPhat.Services.Abstracts
         Task<SaveResult> ResetPasswordAsync(int id, string newPassword);
 
         SaveResult AddUserWithRoles(UserResult entity);
+
+        SaveResult EditUserWtithRoles(UserResult entity);
+
+        IEnumerable<UserResult> GetUsersByCoQuanId(int coQuanId);
     }
 }

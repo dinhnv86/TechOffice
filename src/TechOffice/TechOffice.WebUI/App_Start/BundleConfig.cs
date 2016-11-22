@@ -40,7 +40,8 @@ namespace AnThinhPhat.WebUI
 
             bundles.Add(new ScriptBundle("~/bundles/tech").
                 Include("~/Scripts/app/loading.js",
-                "~/Scripts/app/menuslidejs.js"));
+                "~/Scripts/app/menuslidejs.js",
+                "~/Scripts/app/message.js"));
 
             bundles.Add(new StyleBundle("~/Content/jqueryui").
                 Include("~/Content/themes/base/*.css"));

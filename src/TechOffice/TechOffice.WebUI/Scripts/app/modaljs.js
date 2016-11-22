@@ -79,7 +79,8 @@ onEditMaster = function () {
         var url = $(this).attr('href');
 
         $('#modalEditBody').load(url);
-        $('#modalEdit').modal('show');
+        //$('#modalEdit').modal('show');
+        $('#modalEdit').modal({ backdrop: 'static', keyboard: false, show: true });
     });
 }
 
@@ -87,6 +88,7 @@ onNewMaster = function () {
     $('#lnkCreateNew').on('click', function (event) {
         event.preventDefault();
         $('#modalCreateNew').modal('show');
+        $('#modalCreateNew').modal({ backdrop: 'static', keyboard: false, show: true });
     });
 }
 

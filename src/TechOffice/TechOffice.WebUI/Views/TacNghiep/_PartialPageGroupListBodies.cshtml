@@ -12,26 +12,26 @@
             </tr>
         </thead>
         <tbody>
-            @for (int i = 0; i < Model.CoQuanInfos.Count; i++)
+            @for (int i = 0; i < Model.NhomCoQuanInfos.Count; i++)
             {
                 <tr>
                     <td colspan="2">
                         <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required."
                                id=@string.Format("{0}_{1}__NhomCoQuan_Id",Model.ParentNameSpace,i)
-                               name=@string.Format("{0}[{1}].NhomCoQuan.Id",Model.ParentNameSpace,i) type="hidden" value="@Model.CoQuanInfos[i].NhomCoQuan.Id">
-                        <span class="glyphicon glyphicon-plus" data-toggle="collapse" data-target="#ncq_@Model.CoQuanInfos[i].NhomCoQuan.Id">
+                               name=@string.Format("{0}[{1}].NhomCoQuan.Id",Model.ParentNameSpace,i) type="hidden" value="@Model.NhomCoQuanInfos[i].NhomCoQuan.Id">
+                        <span class="glyphicon glyphicon-plus" data-toggle="collapse" data-target="#ncq_@Model.NhomCoQuanInfos[i].NhomCoQuan.Id">
                         </span>
-                        @Model.CoQuanInfos[i].NhomCoQuan.Name
+                        @Model.NhomCoQuanInfos[i].NhomCoQuan.Name
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="hiddenRow">
-                        <div class="collapse" id="ncq_@Model.CoQuanInfos[i].NhomCoQuan.Id">
-                            @{ Html.RenderPartial("_PartialPageListBodies", new InitCoQuanCoLienQuanBindDataTemp { ParentNameSpace = Model.ParentNameSpace, ParentId = i.ToString(), CoQuanInfos = @Model.CoQuanInfos[i].CoQuanInfo });}
+                        <div class="collapse" id="ncq_@Model.NhomCoQuanInfos[i].NhomCoQuan.Id">
+                            @{ Html.RenderPartial("_PartialPageListBodies", new InitCoQuanCoLienQuanBindDataTemp { ParentNameSpace = Model.ParentNameSpace, ParentId = i.ToString(), CoQuanInfos = @Model.NhomCoQuanInfos[i].CoQuanInfos });}
                         </div>
                     </td>
                 </tr>
-                                }
+          }
         </tbody>
     </table>
 </div>

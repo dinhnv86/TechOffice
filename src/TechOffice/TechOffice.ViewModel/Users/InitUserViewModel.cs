@@ -7,10 +7,10 @@ namespace AnThinhPhat.ViewModel.Users
 {
     public class InitUserViewModel : BaseViewModel
     {
-        [DisplayName("Họ và tên"), Required]
+        [DisplayName("Họ và tên"), Required,MaxLength(255)]
         public string FullName { get; set; }
 
-        [DisplayName("Tài khoản"), Required]
+        [DisplayName("Tài khoản"), Required,MaxLength(255)]
         public string UserName { get; set; }
 
         [DisplayName("Mật khẩu")]

@@ -1,11 +1,12 @@
-﻿using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel.Users;
 using Ninject;
-using AnThinhPhat.Utilities;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Web.Mvc;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -46,8 +47,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 {
                     if (checkUser.IsLocked)
                     {
-                        ModelState.AddModelError("Locked",
-                            "Your account is currently locked. Please contact System Administrator!");
+                        ModelState.AddModelError("Locked", Resources.Messages.Account_Login_Locked);
                         return View(user);
                     }
 
@@ -56,26 +56,24 @@ namespace AnThinhPhat.WebUI.Controllers
                     {
                         //Get all role of current user login
                         var userRoleInfo = UserRoleRepository.GetRolesByUserId(userLogin.Id);
-                        var roles =
-                            userRoleInfo.Select(x => x.RoleInfo.Name).Aggregate((current, next) => current + ", " + next);
+
+                        var roles = GetRolesOfUser(userRoleInfo, userLogin);
+
                         var identities = new ClaimsIdentity(new[]
                         {
                             new Claim(ClaimTypes.NameIdentifier,userLogin.Id.ToString()),
                             new Claim(ClaimTypes.Name, userLogin.UserName),
-                            new Claim(ClaimTypes.Role, roles),
-                            new Claim(ClaimTypes.Email, user.UserName)
-                        }, "ApplicationCookie", ClaimTypes.Name, ClaimTypes.Role);
+                            new Claim(ClaimTypes.Surname, userLogin.HoVaTen)
+                        }.Concat(roles), "ApplicationCookie", ClaimTypes.Name, ClaimTypes.Role);
 
                         AuthenticationManager.SignIn(identities);
 
                         return Redirect(GetRedirectUrl(user.ReturnUrl));
                     }
-                    ModelState.AddModelError("",
-                        "Login data is incorrect or User is not yet allowed. Contact System Administrator!");
+                    ModelState.AddModelError("", Resources.Messages.Account_Login_Incorrect);
                     return View(user);
                 }
-                ModelState.AddModelError("",
-                    "Login data is incorrect or User is not yet allowed. Contact System Administrator!");
+                ModelState.AddModelError("", Resources.Messages.Account_Login_Incorrect);
                 return View(user);
             }
             return View();
@@ -104,16 +102,22 @@ namespace AnThinhPhat.WebUI.Controllers
             return returnUrl;
         }
 
-        #region Inject
+        private IEnumerable<Claim> GetRolesOfUser(IEnumerable<UserRoleResult> userRole, UserResult user)
+        {
+            var role = userRole.Select(x => new Claim(ClaimTypes.Role, x.RoleInfo.Name)).ToList();
 
-        /// <summary>
-        ///     Gets or sets the user repository.
-        /// </summary>
-        /// <value>
-        ///     The user repository.
-        /// </value>
-        [Inject]
-        public IUsersRepository UserRepository { get; set; }
+            //Get co quan of user
+            if (user.CoQuanId == TechOfficeConfig.IDENTITY_PHONGNOIVU)
+                role.Add(new Claim(ClaimTypes.Role, RoleConstant.PHONGNOIVU));
+
+            //Get chuc vu of user
+            if (user.ChucVuId == TechOfficeConfig.IDENTITY_LANHDAO)
+                role.Add(new Claim(ClaimTypes.Role, RoleConstant.LANHDAO));
+
+            return role;
+        }
+
+        #region Inject
 
         [Inject]
         public IUserRoleRepository UserRoleRepository { get; set; }

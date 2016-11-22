@@ -28,7 +28,7 @@ namespace AnThinhPhat.Services.Implements
                     add.NgayBanHanh = entity.NgayBanHanh;
                     add.NoiDung = entity.NoiDung;
                     add.SoVanBan = entity.SoVanBan;
-                    add.TenCoQuan = entity.TenCoQuan;
+                    add.CoQuanId = entity.CoQuanId;
 
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
@@ -53,7 +53,7 @@ namespace AnThinhPhat.Services.Implements
                     add.NgayBanHanh = entity.NgayBanHanh;
                     add.NoiDung = entity.NoiDung;
                     add.SoVanBan = entity.SoVanBan;
-                    add.TenCoQuan = entity.TenCoQuan;
+                    add.CoQuanId = entity.CoQuanId;
 
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
@@ -80,7 +80,7 @@ namespace AnThinhPhat.Services.Implements
                         add.NgayBanHanh = entity.NgayBanHanh;
                         add.NoiDung = entity.NoiDung;
                         add.SoVanBan = entity.SoVanBan;
-                        add.TenCoQuan = entity.TenCoQuan;
+                        add.CoQuanId = entity.CoQuanId;
 
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
@@ -107,7 +107,7 @@ namespace AnThinhPhat.Services.Implements
                         add.NgayBanHanh = entity.NgayBanHanh;
                         add.NoiDung = entity.NoiDung;
                         add.SoVanBan = entity.SoVanBan;
-                        add.TenCoQuan = entity.TenCoQuan;
+                        add.CoQuanId = entity.CoQuanId;
 
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
@@ -116,6 +116,33 @@ namespace AnThinhPhat.Services.Implements
                         context.Entry(add).State = EntityState.Added;
                     }
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
+        }
+
+        public SaveResult UpdateRange(IEnumerable<CongViecVanBanResult> entities)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    foreach (var entity in entities)
+                    {
+                        var update = context.CongViec_VanBan
+                          .Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                        update.SoVanBan = entity.SoVanBan;
+                        update.CoQuanId = entity.CoQuanId;
+                        update.NoiDung = entity.NoiDung;
+                        update.NgayBanHanh = entity.NgayBanHanh;
+                        update.HoSoCongViecId = entity.HoSoCongViecId;
+                        update.IsDeleted = entity.IsDeleted;
+                        update.LastUpdatedBy = entity.LastUpdatedBy;
+                        update.LastUpdated = DateTime.Now;
+
+                        context.Entry(update).State = EntityState.Modified;
+                    }
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
         }
@@ -193,22 +220,11 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.CongViec_VanBan
-                        where item.IsDeleted == false
-                        select new CongViecVanBanResult
-                        {
-                            Id = item.Id,
-                            HoSoCongViecId = item.HoSoCongViecId,
-                            HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
-                            SoVanBan = item.SoVanBan,
-                            TenCoQuan = item.TenCoQuan,
-                            NgayBanHanh = item.NgayBanHanh,
-                            NoiDung = item.NoiDung,
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToList();
+                            where item.IsDeleted == false
+                            select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .ToList();
                 }
             });
         }
@@ -220,22 +236,12 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.CongViec_VanBan
-                        where item.IsDeleted == false
-                        select new CongViecVanBanResult
-                        {
-                            Id = item.Id,
-                            HoSoCongViecId = item.HoSoCongViecId,
-                            HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
-                            SoVanBan = item.SoVanBan,
-                            TenCoQuan = item.TenCoQuan,
-                            NgayBanHanh = item.NgayBanHanh,
-                            NoiDung = item.NoiDung,
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToListAsync();
+                                  where item.IsDeleted == false
+                                  select item)
+                                  .MakeQueryToDatabase()
+                                  .Select(x => x.ToDataResult())
+                                  .AsQueryable()
+                                  .ToListAsync();
                 }
             });
         }
@@ -247,22 +253,11 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.CongViec_VanBan
-                        where item.IsDeleted == false && item.Id == id
-                        select new CongViecVanBanResult
-                        {
-                            Id = item.Id,
-                            HoSoCongViecId = item.HoSoCongViecId,
-                            HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
-                            SoVanBan = item.SoVanBan,
-                            TenCoQuan = item.TenCoQuan,
-                            NgayBanHanh = item.NgayBanHanh,
-                            NoiDung = item.NoiDung,
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).Single();
+                            where item.IsDeleted == false && item.Id == id
+                            select item)
+                            .MakeQueryToDatabase()
+                            .Select(x => x.ToDataResult())
+                            .Single();
                 }
             });
         }
@@ -274,22 +269,12 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.CongViec_VanBan
-                        where item.IsDeleted == false && item.Id == id
-                        select new CongViecVanBanResult
-                        {
-                            Id = item.Id,
-                            HoSoCongViecId = item.HoSoCongViecId,
-                            HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
-                            SoVanBan = item.SoVanBan,
-                            TenCoQuan = item.TenCoQuan,
-                            NgayBanHanh = item.NgayBanHanh,
-                            NoiDung = item.NoiDung,
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).SingleAsync();
+                                  where item.IsDeleted == false && item.Id == id
+                                  select item)
+                                  .MakeQueryToDatabase()
+                                  .Select(x => x.ToDataResult())
+                                  .AsQueryable()
+                                  .SingleAsync();
                 }
             });
         }
@@ -304,7 +289,7 @@ namespace AnThinhPhat.Services.Implements
                         .Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
                     update.SoVanBan = entity.SoVanBan;
-                    update.TenCoQuan = entity.TenCoQuan;
+                    update.CoQuanId = entity.CoQuanId;
                     update.NoiDung = entity.NoiDung;
                     update.NgayBanHanh = entity.NgayBanHanh;
                     update.HoSoCongViecId = entity.HoSoCongViecId;
@@ -329,7 +314,7 @@ namespace AnThinhPhat.Services.Implements
                         .Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
                     update.SoVanBan = entity.SoVanBan;
-                    update.TenCoQuan = entity.TenCoQuan;
+                    update.CoQuanId = entity.CoQuanId;
                     update.NoiDung = entity.NoiDung;
                     update.NgayBanHanh = entity.NgayBanHanh;
                     update.HoSoCongViecId = entity.HoSoCongViecId;

@@ -33,6 +33,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,7 +48,12 @@
     <Compile Include="BaseDataViewModel.cs" />
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="BaseLogViewModel.cs" />
-    <Compile Include="EnumMucDoHoanThanh.cs" />
+    <Compile Include="CongViec\EditCongViecViewModel.cs" />
+    <Compile Include="CongViec\AddCongViecViewModel.cs" />
+    <Compile Include="CongViec\BaseCongViecViewModel.cs" />
+    <Compile Include="CongViec\InitCongViecUserPhoiHopViewModel.cs" />
+    <Compile Include="CongViec\InitQuaTrinhXuLyViewModel.cs" />
+    <Compile Include="CongViec\InitVanBanViewModel.cs" />
     <Compile Include="Menu\InitMenuThuTucViewModel.cs" />
     <Compile Include="Menu\InitMenuVanBanViewModel.cs" />
     <Compile Include="CongViec\InitCongViecViewModel.cs" />
@@ -80,6 +89,10 @@
     <ProjectReference Include="..\TechOffice.Entities\AnThinhPhat.Entities.csproj">
       <Project>{98bca14e-3e24-4d33-9850-11336fd1d9cb}</Project>
       <Name>AnThinhPhat.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TechOffice.Resources\AnThinhPhat.Resources.csproj">
+      <Project>{cf553a82-9525-4cd4-8405-aea027f5c097}</Project>
+      <Name>AnThinhPhat.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\TechOffice.Utility\AnThinhPhat.Utilities.csproj">
       <Project>{4CADC24B-02F4-480E-B206-8076B4ED173B}</Project>

@@ -8,8 +8,12 @@ namespace AnThinhPhat.ViewModel.CongViec
 
         public EnumRoleExecute? Role { get; set; }
 
-        public EnumStatus? Status { get; set; }
+        public int? TrangThaiCongViecId { get; set; }
 
         public int? LinhVucCongViecId { get; set; }
+
+        public string NoiDungCongViec { get; set; }
+
+        public int Page { get; set; }
     }
 }
