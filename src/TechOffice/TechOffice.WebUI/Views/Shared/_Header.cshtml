@@ -14,50 +14,20 @@
                 </a>
 
                 @*<div class="row" ><div class="col-md-8">
-                        <div class="header">
-                            <div class="menu_head">
-                                <div class="logo_head">
-                                    <h2>PHÒNG NỘI VỤ HUYỆN PHÚ RIỀNG</h2>
-                                </div>
-
-                            </div>
+                <div class="header">
+                    <div class="menu_head">
+                        <div class="logo_head">
+                            <h2>PHÒNG NỘI VỤ HUYỆN PHÚ RIỀNG</h2>
                         </div>
-                    </div>*@
-                @*<div class="col-md-4">
-                                    @if (Request.IsAuthenticated)
-                            {
-                                using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                                {
-                                            <ul class="nav navbar-nav navbar-right">
-                                                @if (User.IsInRole("SupperAdmin") || (User.IsInRole("Admin")))
-                                            {
-                                                    <li>
-                                                        <a href="@Url.RouteUrl(UrlLink.ADMIN)">
-                                                            <span class="glyphicon glyphicon-lock"></span>
-                                                            @Html.Raw(User.Identity.FullName())
-                                                        </a>
-                                                    </li>
-                                            }
-                                            else
-                                            {
-                                                    <li><a>@Html.Raw(User.Identity.FullName())</a></li>
-                                            }
 
-                                                <li>
-                                                    <a href="javascript:document.getElementById('logoutForm').submit()">Thoát</a>
-                                                </li>
-                                            </ul>
-                                    }
-                                }
-                                else
-                                {
-                                        <ul class="nav navbar-nav navbar-right">
-                                            <li><a href="@Url.RouteUrl(UrlLink.LOGIN)">Đăng nhập</a></li>
-                                        </ul>
-                                }
-                                </div>
-                    </div>*@
-
+                    </div>
+                </div>
+            </div><div class="col-md-4">*@
+               
+               
+                
+               
+            @*</div></div>*@
             </div>
 
 
@@ -114,8 +84,41 @@
                 </li>
             </ul>
         </div>
+
+        @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "" }))
+                {
+                <ul class="nav navbar-nav ">
+                    @if (User.IsInRole("SupperAdmin") || (User.IsInRole("Admin")))
+                    {
+                        <li>
+                            <a href="@Url.RouteUrl(UrlLink.ADMIN)">
+                                <span class="glyphicon glyphicon-lock"></span>
+                                @Html.Raw(User.Identity.FullName())
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li><a>@Html.Raw(User.Identity.FullName())</a></li>
+                    }
+
+                    <li>
+                        <a href="javascript:document.getElementById('logoutForm').submit()">Thoát</a>
+                    </li>
+                </ul>
+            }
+        }
+        @*else
+        {
+            <ul class="nav navbar-nav ">
+                <li><a href="@Url.RouteUrl(UrlLink.LOGIN)">Đăng nhập</a></li>
+            </ul>
+        }*@
     </div>
 
 </nav>
 
 <div class="slide"></div>
+
