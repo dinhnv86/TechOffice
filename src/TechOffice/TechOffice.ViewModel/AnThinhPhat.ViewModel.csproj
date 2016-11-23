@@ -53,6 +53,7 @@
     <Compile Include="CongViec\BaseCongViecViewModel.cs" />
     <Compile Include="CongViec\InitCongViecUserPhoiHopViewModel.cs" />
     <Compile Include="CongViec\InitQuaTrinhXuLyViewModel.cs" />
+    <Compile Include="CongViec\InitValueStatictisSearch.cs" />
     <Compile Include="CongViec\InitVanBanViewModel.cs" />
     <Compile Include="Menu\InitMenuThuTucViewModel.cs" />
     <Compile Include="Menu\InitMenuVanBanViewModel.cs" />

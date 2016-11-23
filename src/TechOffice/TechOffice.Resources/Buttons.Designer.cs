@@ -214,6 +214,33 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thống kê.
+        /// </summary>
+        public static string CongViec_Statistic_ThongKe {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_ThongKe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thống kê công việc.
+        /// </summary>
+        public static string CongViec_Statistic_ThongKeCongViec {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_ThongKeCongViec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tìm.
+        /// </summary>
+        public static string CongViec_Statistic_Tim {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_Tim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload.
         /// </summary>
         public static string UploadFiles_Upload {

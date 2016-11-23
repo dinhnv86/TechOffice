@@ -98,8 +98,21 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public ActionResult Statistic()
         {
-            var items = HoSoCongViecRepository.Statistic();
-            return View();
+            //var items = HoSoCongViecRepository.Statistic();
+            //get list users belong phongnoivu
+            var users = UserRepository.GetUsersByCoQuanId(TechOfficeConfig.IDENTITY_PHONGNOIVU).Select(x => x.ToDataInfo());
+            var linhVucs = LinhVucCongViecRepository.GetAll().Select(x => x.ToDataInfo());
+            var coquan = CoQuanRepository.GetAll().Select(x => x.ToDataInfo());
+
+            var model = new InitValueStatictisSearchViewModel
+            {
+                From = DateTime.Now.AddMonths(-1),
+                To = DateTime.Now,
+                UserInfoNoiVu = users,
+                LinhVucCongViecInfos = linhVucs,
+                CoQuanInfos = coquan,
+            };
+            return View(model);
         }
 
         [HttpGet]

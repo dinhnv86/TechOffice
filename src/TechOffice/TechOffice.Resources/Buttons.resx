@@ -168,6 +168,15 @@
   <data name="CongViec_Index_TimKiem" xml:space="preserve">
     <value>Tìm kiếm</value>
   </data>
+  <data name="CongViec_Statistic_ThongKe" xml:space="preserve">
+    <value>Thống kê</value>
+  </data>
+  <data name="CongViec_Statistic_ThongKeCongViec" xml:space="preserve">
+    <value>Thống kê công việc</value>
+  </data>
+  <data name="CongViec_Statistic_Tim" xml:space="preserve">
+    <value>Tìm</value>
+  </data>
   <data name="UploadFiles_Upload" xml:space="preserve">
     <value>Upload</value>
   </data>
