@@ -1346,3 +1346,73 @@ h1.title_ct {
 .color_tl{color:red; margin-top:30px;}
 .nright h4{margin:0;padding:0;}
 .content ul{list-style:inherit}
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.message-box {
+    text-align: center;
+    padding: 5px;
+    color: #545454;
+    width: 80%;
+    margin: 5px auto;
+}
+
+.clean {
+    background-color: #efefef;
+    border-top: 2px solid #dedede;
+    border-bottom: 2px solid #dedede;
+}
+
+.info {
+    background-color: #f7fafd;
+    border-top: 2px solid #b5d3ff;
+    border-bottom: 2px solid #b5d3ff;
+}
+
+.ok {
+    background-color: #d7f7c4;
+    border-top: 2px solid #82cb2f;
+    border-bottom: 2px solid #82cb2f;
+}
+
+.alert {
+    background-color: #fef5be;
+    border-top: 2px solid #fdd425;
+    border-bottom: 2px solid #fdd425;
+    color: #e10c0c;
+}
+
+.error {
+    background-color: #ffcdd1;
+    border-top: 2px solid #e10c0c;
+    border-bottom: 2px solid #e10c0c;
+}
+
+.required {
+    color: red;
+    font-size: 15px;
+    text-align: center;
+    vertical-align: middle;
+}

@@ -11,6 +11,7 @@ using AnThinhPhat.ViewModel;
 using PagedList;
 using System;
 using System.IO;
+using Microsoft.Reporting.WebForms;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -45,7 +46,9 @@ namespace AnThinhPhat.WebUI.Controllers
         public ICongViecPhoiHopRepository CongViecPhoiHopRepository { get; set; }
 
         [HttpGet]
-        public ActionResult Index(int? userId, int? role, int? trangThaiCongViecId, int? linhVucCongViecId, string noiDungCongViec)
+        public ActionResult Index(DateTime? from, DateTime? to, int? userId, int? role,
+            int? trangThaiCongViecId, int? linhVucCongViecId, string noiDungCongViec,
+            string soVanBan, string noiDungVanBan, int? coQuanId)
         {
             var init = InitModel();
 
@@ -58,6 +61,12 @@ namespace AnThinhPhat.WebUI.Controllers
 
             if (model.ValueSearch == null)
                 model.ValueSearch = new ValueSearchViewModel();
+
+            if (from != null && to != null)
+            {
+                model.ValueSearch.From = from;
+                model.ValueSearch.To = to;
+            }
 
             if (userId == null)
             {
@@ -74,8 +83,15 @@ namespace AnThinhPhat.WebUI.Controllers
 
             if (trangThaiCongViecId != null)
                 model.ValueSearch.TrangThaiCongViecId = trangThaiCongViecId;
-            //else
-            //    model.ValueSearch.TrangThaiCongViecId = EnumStatus.TATCA;
+
+            if (!string.IsNullOrEmpty(soVanBan))
+                model.ValueSearch.SoVanBan = soVanBan;
+
+            if (!string.IsNullOrEmpty(noiDungVanBan))
+                model.ValueSearch.NoiDungVanBan = noiDungVanBan;
+
+            if (coQuanId.HasValue)
+                model.ValueSearch.CoQuanId = coQuanId;
 
             model.ValueSearch.LinhVucCongViecId = linhVucCongViecId;
             model.ValueSearch.NoiDungCongViec = noiDungCongViec;
@@ -96,7 +112,7 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Statistic()
+        public ActionResult StatisticAndSearch()
         {
             //var items = HoSoCongViecRepository.Statistic();
             //get list users belong phongnoivu
@@ -113,6 +129,54 @@ namespace AnThinhPhat.WebUI.Controllers
                 CoQuanInfos = coquan,
             };
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult StatisticAndSearch(string buttonType, InitValueStatictisSearchViewModel model)
+        {
+            switch (buttonType)
+            {
+                case "THONGKE":
+                    return RedirectToRoute(UrlLink.CONGVIEC_THONGKE, new { From = model.From, To = model.To });
+                case "SEARCH":
+                    return RedirectToRoute(UrlLink.CONGVIEC, new
+                    {
+                        From = model.From,
+                        To = model.To,
+                        UserId = model.UserId,
+                        Role = (int?)model.VaiTroXuLy,
+                        TrangThaiCongViecId = (int?)model.Status,
+                        LinhVucCongViecId = model.LinhVucCongViecId,
+                        NoiDungCongViec = model.NoiDungCongViec,
+                        SoVanBan = model.SoVanBan,
+                        NoiDungVanBan = model.NoiDungVanBan,
+                        CoQuanId = model.CoQuanId,
+                    });
+                case "THONGKECONGVIEC":
+                    break;
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Statistic(DateTime From, DateTime To)
+        {
+            var reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\rptCorporation.rdlc";
+            var results = HoSoCongViecRepository.Statistic(From, To);
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("dsViewModel", results));
+            ViewBag.ReportViewer = reportViewer;
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult SearchResult()
+        {
+            return View();
         }
 
         [HttpGet]

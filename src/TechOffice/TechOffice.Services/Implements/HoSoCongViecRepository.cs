@@ -367,6 +367,9 @@ namespace AnThinhPhat.Services.Implements
                                  where item.IsDeleted == false
                                  select item);
 
+                    if (valueSearch.From.HasValue && valueSearch.To.HasValue)
+                        query = query.Where(x => x.NgayTao >= valueSearch.From.Value && x.NgayTao <= valueSearch.To.Value);
+
                     if (valueSearch.NhanVienId.HasValue)
                     {
                         if (valueSearch.Role.HasValue)
@@ -403,6 +406,15 @@ namespace AnThinhPhat.Services.Implements
                     if (!string.IsNullOrEmpty(valueSearch.NoiDungCongViec))
                         query = query.Where(x => x.NoiDung.Contains(valueSearch.NoiDungCongViec));
 
+                    if (!string.IsNullOrEmpty(valueSearch.SoVanBan))
+                        query = query.Where(x => x.CongViec_VanBan.Any(y => y.SoVanBan.Contains(valueSearch.SoVanBan)));
+
+                    if (!string.IsNullOrEmpty(valueSearch.NoiDungVanBan))
+                        query = query.Where(x => x.CongViec_VanBan.Any(y => y.NoiDung.Contains(valueSearch.NoiDungVanBan)));
+
+                    if (valueSearch.CoQuanId.HasValue)
+                        query = query.Where(x => x.CongViec_VanBan.Any(y => y.CoQuanId == valueSearch.CoQuanId.Value));
+
                     return query.OrderBy(x => x.TrangThaiCongViecId)
                     .MakeQueryToDatabase()
                     .Select(x => x.ToDataResult())
@@ -435,11 +447,14 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public IEnumerable<StatisticCongViec> Statistic()
+        public IEnumerable<StatisticCongViec> Statistic(DateTime from, DateTime to)
         {
             using (var context = new TechOfficeEntities())
             {
-                var items = context.Database.SqlQuery<StatisticCongViec>("Statictis @NoiVuId", new SqlParameter("NoiVuId", TechOfficeConfig.IDENTITY_PHONGNOIVU)).ToList();
+                var items = context.Database.SqlQuery<StatisticCongViec>("Statictis @NoiVuId, @From, @To",
+                    new SqlParameter("NoiVuId", TechOfficeConfig.IDENTITY_PHONGNOIVU),
+                    new SqlParameter("From", from),
+                    new SqlParameter("To", to)).ToList();
 
                 return items;
             }

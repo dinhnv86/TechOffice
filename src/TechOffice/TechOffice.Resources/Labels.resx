@@ -276,6 +276,9 @@
   <data name="Page_Title" xml:space="preserve">
     <value>Phòng nội vụ huyện Phú Riềng</value>
   </data>
+  <data name="TacNghiep_Add_NgayTao" xml:space="preserve">
+    <value>Ngày tạo</value>
+  </data>
   <data name="TacNghiep_TinhHinhThucHien_DaHoanThanh" xml:space="preserve">
     <value>Đã hoàn thành</value>
   </data>

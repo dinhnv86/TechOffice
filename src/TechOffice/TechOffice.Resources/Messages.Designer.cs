@@ -113,5 +113,23 @@ namespace AnThinhPhat.Resources {
                 return ResourceManager.GetString("CongViec_Add_UserXuLy", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập ngày.
+        /// </summary>
+        public static string CongViec_Statistic_From {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập ngày.
+        /// </summary>
+        public static string CongViec_Statistic_To {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_To", resourceCulture);
+            }
+        }
     }
 }

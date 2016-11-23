@@ -538,6 +538,15 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ngày tạo.
+        /// </summary>
+        public static string TacNghiep_Add_NgayTao {
+            get {
+                return ResourceManager.GetString("TacNghiep_Add_NgayTao", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Đã hoàn thành.
         /// </summary>
         public static string TacNghiep_TinhHinhThucHien_DaHoanThanh {

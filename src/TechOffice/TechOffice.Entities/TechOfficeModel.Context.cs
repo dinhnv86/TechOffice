@@ -56,13 +56,21 @@ namespace AnThinhPhat.Entities
         public virtual DbSet<CongViec_VanBan> CongViec_VanBan { get; set; }
         public virtual DbSet<HoSoCongViec> HoSoCongViecs { get; set; }
     
-        public virtual ObjectResult<Statictis_Result> Statictis(Nullable<int> noiVuId)
+        public virtual ObjectResult<Statictis_Result> Statictis(Nullable<int> noiVuId, Nullable<System.DateTime> from, Nullable<System.DateTime> to)
         {
             var noiVuIdParameter = noiVuId.HasValue ?
                 new ObjectParameter("NoiVuId", noiVuId) :
                 new ObjectParameter("NoiVuId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Statictis_Result>("Statictis", noiVuIdParameter);
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("From", from) :
+                new ObjectParameter("From", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("To", to) :
+                new ObjectParameter("To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Statictis_Result>("Statictis", noiVuIdParameter, fromParameter, toParameter);
         }
     }
 }

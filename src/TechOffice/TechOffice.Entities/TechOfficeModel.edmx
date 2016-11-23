@@ -847,6 +847,8 @@
         </Association>
         <Function Name="Statictis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NoiVuId" Type="int" Mode="In" />
+          <Parameter Name="From" Type="datetime" Mode="In" />
+          <Parameter Name="To" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="TechOfficeDevModelStoreContainer">
           <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
@@ -1203,7 +1205,9 @@
             <End Role="TapTinCongViec" EntitySet="TapTinCongViecs" />
           </AssociationSet>
           <FunctionImport Name="Statictis" ReturnType="Collection(TechOfficeDevModel.Statictis_Result)">
-            <Parameter Name="NoiVuId" Mode="In" Type="Int32" />
+          <Parameter Name="NoiVuId" Mode="In" Type="Int32" />
+            <Parameter Name="From" Mode="In" Type="DateTime" />
+            <Parameter Name="To" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="ChucVu">
