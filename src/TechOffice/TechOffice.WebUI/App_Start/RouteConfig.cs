@@ -54,8 +54,14 @@ namespace AnThinhPhat.WebUI
             new { controller = "TacNghiep", action = "Detail" },
             new { id = @"\d+" });
 
+            routes.MapRoute(UrlLink.CONGVIEC_THONGKE_TIMKIEM, UrlLink.CONGVIEC_THONGKE_TIMKIEM,
+             new { controller = "CongViec", action = "StatisticAndSearch" });
+
             routes.MapRoute(UrlLink.CONGVIEC_THONGKE, UrlLink.CONGVIEC_THONGKE,
-             new { controller = "CongViec", action = "Statistic" });
+            new { controller = "CongViec", action = "Statistic" });
+
+            routes.MapRoute(UrlLink.CONGVIEC_TIMKIEM, UrlLink.CONGVIEC_TIMKIEM,
+            new { controller = "CongViec", action = " Search" });
 
             routes.MapRoute(UrlLink.CONGVIEC_ADD, UrlLink.CONGVIEC_ADD,
               new { controller = "CongViec", action = "Add" });
@@ -65,7 +71,7 @@ namespace AnThinhPhat.WebUI
               new { id = @"\d+" });
 
             routes.MapRoute(UrlLink.LIENHE, UrlLink.LIENHE, new { controller = "Home", action = "Contact" });
-
+            routes.MapRoute(UrlLink.LOGIN, UrlLink.LOGIN, new { controller = "Account", action = "LogIn" });
             //Error
             routes.MapRoute("error", "error/internalserver",
                 new { controller = "Error", action = "InternalServer" });

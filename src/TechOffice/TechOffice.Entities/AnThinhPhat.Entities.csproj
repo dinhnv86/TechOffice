@@ -122,6 +122,7 @@
     <Compile Include="Results\CongViecPhoiHopResult.cs" />
     <Compile Include="Results\CongViecQuaTrinhXuLyResult.cs" />
     <Compile Include="Results\CongViecVanBanResult.cs" />
+    <Compile Include="Results\StatisticCongViec.cs" />
     <Compile Include="Results\TrangThaiCongViecResult.cs" />
     <Compile Include="Results\CoQuanResult.cs" />
     <Compile Include="DataResult.cs" />
@@ -152,6 +153,9 @@
     </Compile>
     <Compile Include="Searchs\ValueSearchCongViec.cs" />
     <Compile Include="Searchs\ValueSearchTacNghiep.cs" />
+    <Compile Include="Statictis_Result.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TacNghiep.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>

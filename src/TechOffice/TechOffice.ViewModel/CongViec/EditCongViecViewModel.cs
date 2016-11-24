@@ -1,5 +1,6 @@
 ﻿using AnThinhPhat.Entities.Infos;
 using AnThinhPhat.Entities.Results;
+using AnThinhPhat.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +9,8 @@ namespace AnThinhPhat.ViewModel.CongViec
 {
     public class EditCongViecViewModel : BaseCongViecViewModel
     {
+        public int Id { get; set; }
+
         public DateTime NgayKhoiTao { get; set; } = DateTime.Now;
 
         public DateTime? NgayHetHan { get; set; }
@@ -41,5 +44,9 @@ namespace AnThinhPhat.ViewModel.CongViec
         public IEnumerable<CoQuanInfo> CoQuanInfos { get; set; }
 
         public int? CoQuanIdTemp { get; set; }
+
+        public EnumNhacNho EnumNhacNho { get; set; }
+
+        public EnumDanhGiaCongViec DanhGiaCongViec { get; set; }
     }
 }

@@ -180,6 +180,9 @@
   <data name="CongViec_Add_XuLyChinh" xml:space="preserve">
     <value>Xử lý chính</value>
   </data>
+  <data name="CongViec_Edit_DanhGiaCongViec" xml:space="preserve">
+    <value>Đánh giá công việc</value>
+  </data>
   <data name="CongViec_Index_ChonNhanVien" xml:space="preserve">
     <value>Chọn nhân viên</value>
   </data>
@@ -234,8 +237,47 @@
   <data name="CongViec_List_XuLyChinh" xml:space="preserve">
     <value>Xử lý chính</value>
   </data>
+  <data name="CongViec_Statistic_ChonNhanVien" xml:space="preserve">
+    <value>Nhân viên</value>
+  </data>
+  <data name="CongViec_Statistic_CoQuan" xml:space="preserve">
+    <value>Cơ quan</value>
+  </data>
+  <data name="CongViec_Statistic_From" xml:space="preserve">
+    <value>Từ ngày</value>
+  </data>
+  <data name="CongViec_Statistic_LinhVucCongViec" xml:space="preserve">
+    <value>Lĩnh vực</value>
+  </data>
+  <data name="CongViec_Statistic_NoiDungCongViec" xml:space="preserve">
+    <value>Nội dung công việc</value>
+  </data>
+  <data name="CongViec_Statistic_NoiDungVanBan" xml:space="preserve">
+    <value>Nội dung</value>
+  </data>
+  <data name="CongViec_Statistic_OrderShow" xml:space="preserve">
+    <value>Chọn thứ tự hiển thị các công việc</value>
+  </data>
+  <data name="CongViec_Statistic_SoVanBan" xml:space="preserve">
+    <value>Số văn bản</value>
+  </data>
+  <data name="CongViec_Statistic_Title" xml:space="preserve">
+    <value>Thống kê, tìm kiếm công việc</value>
+  </data>
+  <data name="CongViec_Statistic_To" xml:space="preserve">
+    <value>Đến ngày</value>
+  </data>
+  <data name="CongViec_Statistic_TrangThaiXuLy" xml:space="preserve">
+    <value>Trạng thái xử lý</value>
+  </data>
+  <data name="CongViec_Statistic_VaiTroXuLy" xml:space="preserve">
+    <value>Vai trò xử lý</value>
+  </data>
   <data name="Page_Title" xml:space="preserve">
     <value>Phòng nội vụ huyện Phú Riềng</value>
+  </data>
+  <data name="TacNghiep_Add_NgayTao" xml:space="preserve">
+    <value>Ngày tạo</value>
   </data>
   <data name="TacNghiep_TinhHinhThucHien_DaHoanThanh" xml:space="preserve">
     <value>Đã hoàn thành</value>

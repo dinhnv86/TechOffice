@@ -250,6 +250,15 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Đánh giá công việc.
+        /// </summary>
+        public static string CongViec_Edit_DanhGiaCongViec {
+            get {
+                return ResourceManager.GetString("CongViec_Edit_DanhGiaCongViec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chọn nhân viên.
         /// </summary>
         public static string CongViec_Index_ChonNhanVien {
@@ -412,11 +421,128 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nhân viên.
+        /// </summary>
+        public static string CongViec_Statistic_ChonNhanVien {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_ChonNhanVien", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cơ quan.
+        /// </summary>
+        public static string CongViec_Statistic_CoQuan {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_CoQuan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Từ ngày.
+        /// </summary>
+        public static string CongViec_Statistic_From {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lĩnh vực.
+        /// </summary>
+        public static string CongViec_Statistic_LinhVucCongViec {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_LinhVucCongViec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nội dung công việc.
+        /// </summary>
+        public static string CongViec_Statistic_NoiDungCongViec {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_NoiDungCongViec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nội dung.
+        /// </summary>
+        public static string CongViec_Statistic_NoiDungVanBan {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_NoiDungVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chọn thứ tự hiển thị các công việc.
+        /// </summary>
+        public static string CongViec_Statistic_OrderShow {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_OrderShow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số văn bản.
+        /// </summary>
+        public static string CongViec_Statistic_SoVanBan {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_SoVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thống kê, tìm kiếm công việc.
+        /// </summary>
+        public static string CongViec_Statistic_Title {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đến ngày.
+        /// </summary>
+        public static string CongViec_Statistic_To {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trạng thái xử lý.
+        /// </summary>
+        public static string CongViec_Statistic_TrangThaiXuLy {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_TrangThaiXuLy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vai trò xử lý.
+        /// </summary>
+        public static string CongViec_Statistic_VaiTroXuLy {
+            get {
+                return ResourceManager.GetString("CongViec_Statistic_VaiTroXuLy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phòng nội vụ huyện Phú Riềng.
         /// </summary>
         public static string Page_Title {
             get {
                 return ResourceManager.GetString("Page_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ngày tạo.
+        /// </summary>
+        public static string TacNghiep_Add_NgayTao {
+            get {
+                return ResourceManager.GetString("TacNghiep_Add_NgayTao", resourceCulture);
             }
         }
         

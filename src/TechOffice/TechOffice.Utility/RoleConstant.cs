@@ -25,6 +25,6 @@
         /// <summary>
         /// User is Lanh dao
         /// </summary>
-        public const string LANHDAO = "LANHDAO";
+        public const string LANHDAO = "LanhDao";
     }
 }

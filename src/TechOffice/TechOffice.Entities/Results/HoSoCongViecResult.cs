@@ -20,7 +20,7 @@ namespace AnThinhPhat.Entities.Results
 
         public string NoiDung { get; set; }
 
-        public string QuaTrinhXuLy { get; set; }
+        public byte? DanhGiaCongViec { get; set; }
 
         public LinhVucCongViecInfo LinhVucCongViec { get; set; }
 

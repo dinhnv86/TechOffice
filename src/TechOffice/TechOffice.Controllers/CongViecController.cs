@@ -11,6 +11,7 @@ using AnThinhPhat.ViewModel;
 using PagedList;
 using System;
 using System.IO;
+using Microsoft.Reporting.WebForms;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -41,8 +42,13 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public ICongViecVanBanRepository CongViecVanBanRepository { get; set; }
 
+        [Inject]
+        public ICongViecPhoiHopRepository CongViecPhoiHopRepository { get; set; }
+
         [HttpGet]
-        public ActionResult Index(int? userId, int? role, int? trangThaiCongViecId, int? linhVucCongViecId, string noiDungCongViec)
+        public ActionResult Index(DateTime? from, DateTime? to, int? userId, int? role,
+            int? trangThaiCongViecId, int? linhVucCongViecId, string noiDungCongViec,
+            string soVanBan, string noiDungVanBan, int? coQuanId)
         {
             var init = InitModel();
 
@@ -55,6 +61,12 @@ namespace AnThinhPhat.WebUI.Controllers
 
             if (model.ValueSearch == null)
                 model.ValueSearch = new ValueSearchViewModel();
+
+            if (from != null && to != null)
+            {
+                model.ValueSearch.From = from;
+                model.ValueSearch.To = to;
+            }
 
             if (userId == null)
             {
@@ -71,8 +83,15 @@ namespace AnThinhPhat.WebUI.Controllers
 
             if (trangThaiCongViecId != null)
                 model.ValueSearch.TrangThaiCongViecId = trangThaiCongViecId;
-            //else
-            //    model.ValueSearch.TrangThaiCongViecId = EnumStatus.TATCA;
+
+            if (!string.IsNullOrEmpty(soVanBan))
+                model.ValueSearch.SoVanBan = soVanBan;
+
+            if (!string.IsNullOrEmpty(noiDungVanBan))
+                model.ValueSearch.NoiDungVanBan = noiDungVanBan;
+
+            if (coQuanId.HasValue)
+                model.ValueSearch.CoQuanId = coQuanId;
 
             model.ValueSearch.LinhVucCongViecId = linhVucCongViecId;
             model.ValueSearch.NoiDungCongViec = noiDungCongViec;
@@ -93,7 +112,69 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Statistic()
+        public ActionResult StatisticAndSearch()
+        {
+            //var items = HoSoCongViecRepository.Statistic();
+            //get list users belong phongnoivu
+            var users = UserRepository.GetUsersByCoQuanId(TechOfficeConfig.IDENTITY_PHONGNOIVU).Select(x => x.ToDataInfo());
+            var linhVucs = LinhVucCongViecRepository.GetAll().Select(x => x.ToDataInfo());
+            var coquan = CoQuanRepository.GetAll().Select(x => x.ToDataInfo());
+
+            var model = new InitValueStatictisSearchViewModel
+            {
+                From = DateTime.Now.AddMonths(-1),
+                To = DateTime.Now,
+                UserInfoNoiVu = users,
+                LinhVucCongViecInfos = linhVucs,
+                CoQuanInfos = coquan,
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult StatisticAndSearch(string buttonType, InitValueStatictisSearchViewModel model)
+        {
+            switch (buttonType)
+            {
+                case "THONGKE":
+                    return RedirectToRoute(UrlLink.CONGVIEC_THONGKE, new { From = model.From, To = model.To });
+                case "SEARCH":
+                    return RedirectToRoute(UrlLink.CONGVIEC, new
+                    {
+                        From = model.From,
+                        To = model.To,
+                        UserId = model.UserId,
+                        Role = (int?)model.VaiTroXuLy,
+                        TrangThaiCongViecId = (int?)model.Status,
+                        LinhVucCongViecId = model.LinhVucCongViecId,
+                        NoiDungCongViec = model.NoiDungCongViec,
+                        SoVanBan = model.SoVanBan,
+                        NoiDungVanBan = model.NoiDungVanBan,
+                        CoQuanId = model.CoQuanId,
+                    });
+                case "THONGKECONGVIEC":
+                    break;
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Statistic(DateTime From, DateTime To)
+        {
+            var reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\rptCorporation.rdlc";
+            var results = HoSoCongViecRepository.Statistic(From, To);
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("dsViewModel", results));
+            ViewBag.ReportViewer = reportViewer;
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult SearchResult()
         {
             return View();
         }
@@ -181,6 +262,7 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
+        [HttpGet]
         public ActionResult Detail(int id)
         {
             var hoso = HoSoCongViecRepository.Single(id);
@@ -189,6 +271,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
             var model = new EditCongViecViewModel
             {
+                Id = id,
                 UsersInfos = init.UsersInfos,
                 LinhVucCongViecInfos = init.LinhVucCongViecInfos,
                 TrangThaiCongViecInfos = init.TrangThaiCongViecInfos,
@@ -205,8 +288,45 @@ namespace AnThinhPhat.WebUI.Controllers
                 UserPhuTrachId = hoso.UserPhuTrachId,
                 UserXuLyChinhId = hoso.UserXuLyId,
                 UsersPhoiHopId = hoso.CongViecPhoiHopResult.Select(x => x.UserId).ToArray(),
+
+                DanhGiaCongViec = hoso.DanhGiaCongViec.HasValue ? (EnumDanhGiaCongViec)hoso.DanhGiaCongViec.Value : EnumDanhGiaCongViec.LEVEL0,
             };
             return View(model);
+        }
+
+        [HttpPost]
+        public JsonResult Detail(int id, EditCongViecViewModel model)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                var congViec = HoSoCongViecRepository.Single(id);
+
+                //Get all van ban lien quan
+                AddOrUpdateXuLy(id, model);
+                AddOrUpdateVanBan(id, model);
+
+                if (User.IsInRole(RoleConstant.LANHDAO))
+                {
+                    congViec.NgayHetHan = model.NgayHetHan;
+                    congViec.LinhVucCongViecId = model.LinhVucCongViecId;
+                    congViec.UserPhuTrachId = model.UserPhuTrachId;
+                    congViec.DanhGiaCongViec = model.DanhGiaCongViec == EnumDanhGiaCongViec.LEVEL0 ? null : (byte?)model.DanhGiaCongViec;
+                    congViec.UserXuLyId = model.UserXuLyChinhId;
+                    congViec.CongViecPhoiHopResult = model.UsersPhoiHopId?.Select(x => new CongViecPhoiHopResult { UserId = x, HoSoCongViecId = id });
+                }
+
+                congViec.TrangThaiCongViecId = model.TrangThaiCongViecId;
+
+                AddOrUpdatePhoiHop(id, congViec.CongViecPhoiHopResult);
+
+                HoSoCongViecRepository.Update(congViec);
+
+                return new JsonResult
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new { code = "SB01" }
+                };
+            });
         }
 
         [HttpPost]
@@ -216,6 +336,94 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 return ExecuteResult(() => CongViecVanBanRepository.DeleteBy(vanBanLienQuanId));
             });
+        }
+
+        [HttpPost]
+        public JsonResult DeleteQuaTrinhXuLy(int quaTrinhXuLyId)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                return ExecuteResult(() => QuaTrinhXuLyRepository.DeleteBy(quaTrinhXuLyId));
+            });
+        }
+
+        private void AddOrUpdateVanBan(int id, EditCongViecViewModel model)
+        {
+            var vanbanUpdate = model.VanBanLienQuanViewModel?.Where(x => x.Id > 0);
+            if (vanbanUpdate != null && vanbanUpdate.Any())
+            {
+                CongViecVanBanRepository.UpdateRange(vanbanUpdate.Select(x => new CongViecVanBanResult
+                {
+                    Id = x.Id,
+                    HoSoCongViecId = id,
+                    SoVanBan = x.SoVanBan,
+                    NgayBanHanh = x.NgayBanHanh,
+                    NoiDung = x.NoiDung,
+                    CoQuanId = x.CoQuanId,
+                    LastUpdatedBy = UserName,
+                    IsDeleted = false,
+                }));
+            }
+
+            var vanBanAdd = model.VanBanLienQuanViewModel?.Where(x => x.Id == 0);
+            if (vanBanAdd != null && vanBanAdd.Any())
+                CongViecVanBanRepository.AddRange(vanbanUpdate.Select(x => new CongViecVanBanResult
+                {
+                    HoSoCongViecId = id,
+                    SoVanBan = x.SoVanBan,
+                    NgayBanHanh = x.NgayBanHanh,
+                    NoiDung = x.NoiDung,
+                    CoQuanId = x.CoQuanId,
+                    CreatedBy = UserName,
+                    IsDeleted = false,
+                }));
+        }
+
+        private void AddOrUpdateXuLy(int id, EditCongViecViewModel model)
+        {
+            var quaTrinhUpdate = model.QuaTrinhXuLyViewModel?.Where(x => x.Id > 0);
+            if (quaTrinhUpdate != null && quaTrinhUpdate.Any())
+                QuaTrinhXuLyRepository.UpdateRange(quaTrinhUpdate.Select(x => new CongViecQuaTrinhXuLyResult
+                {
+                    Id = x.Id,
+                    HoSoCongViecId = model.Id,
+                    GioBanHanh = x.GioBanHanh,
+                    PhutBanHanh = x.PhutBanHanh,
+                    NgayBanHanh = x.NgayBanHanh,
+                    NoiDung = x.NoiDung,
+                    NguoiThem = x.NguoiThem,
+                    NhacNho = x.NhacNho,
+                    IsDeleted = false,
+                    LastUpdatedBy = UserName,
+                }));
+
+            var quaTrinhAdd = model.QuaTrinhXuLyViewModel?.Where(x => x.Id == 0);
+            if (quaTrinhAdd != null && quaTrinhAdd.Any())
+                QuaTrinhXuLyRepository.AddRange(quaTrinhAdd.Select(x => new CongViecQuaTrinhXuLyResult
+                {
+                    HoSoCongViecId = model.Id,
+                    GioBanHanh = x.GioBanHanh,
+                    PhutBanHanh = x.PhutBanHanh,
+                    NgayBanHanh = x.NgayBanHanh,
+                    NoiDung = x.NoiDung,
+                    NguoiThem = x.NguoiThem,
+                    NhacNho = x.NhacNho,
+                    IsDeleted = false,
+                    CreatedBy = UserName,
+                }));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">Id: CongViecId</param>
+        /// <param name="model"></param>
+        private void AddOrUpdatePhoiHop(int id, IEnumerable<CongViecPhoiHopResult> model)
+        {
+            if (model != null && model.Any())
+            {
+                CongViecPhoiHopRepository.AddOrUpdate(id, model, UserName);
+            }
         }
 
         private BaseCongViecViewModel InitModel()

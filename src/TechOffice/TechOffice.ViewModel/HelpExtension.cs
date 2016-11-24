@@ -144,11 +144,16 @@ namespace AnThinhPhat.ViewModel
         {
             return new ValueSearchCongViec
             {
+                From = valueSearch.From,
+                To = valueSearch.To,
                 NhanVienId = valueSearch.UserId,
                 LinhVucCongViecId = valueSearch.LinhVucCongViecId,
                 NoiDungCongViec = valueSearch.NoiDungCongViec,
                 Role = valueSearch.Role,
                 TrangThaiCongViecId = valueSearch.TrangThaiCongViecId,
+                SoVanBan = valueSearch.SoVanBan,
+                NoiDungVanBan = valueSearch.NoiDungVanBan,
+                CoQuanId = valueSearch.CoQuanId,
             };
         }
 

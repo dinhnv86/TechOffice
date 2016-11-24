@@ -4,7 +4,7 @@
 
     AjaxOptions ajaxOption = new AjaxOptions
     {
-        Url = Url.Action("Detail"),
+        Url = Url.Action("Detail", routeValues: new { id = Model.Id }),
         HttpMethod = "POST",
         OnBegin = "onDetailBegin",
         OnComplete = "onDetaiComplete",
@@ -124,6 +124,7 @@
                             </td>
                             <td class="link-action">
                                 <input type="button" value="@Buttons.CongViec_Detail_VanBanLienQuan_Save" class="btn btn-link" id="btnSaveVanBanLienQuan" disabled="disabled" />
+                                <input type="button" value="@Buttons.CongViec_Detail_VanBanLienQuan_Cancel" class="btn btn-link" id="btnCancelVanBanLienQuan" disabled="disabled" />
                             </td>
                         </tr>
                     </tbody>
@@ -147,27 +148,67 @@
                     <tbody id="tbodyAddQuaTrinhXuLy">
                         @for (int i = 0; i < Model.QuaTrinhXuLyViewModel.Count; i++)
                         {
-                            <tr>
+                            var color = string.Empty;
+                            if (Model.QuaTrinhXuLyViewModel[i].NhacNho.HasValue)
+                            {
+                                switch (Model.QuaTrinhXuLyViewModel[i].NhacNho.Value)
+                                {
+                                    case 2:
+                                        color = "text-yellow";
+                                        break;
+                                    case 3:
+                                        color = "text-danger";
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            <tr class="@color">
                                 @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].Id)
                                 <td>
-                                    @Html.Raw(Model.QuaTrinhXuLyViewModel[i].GioBanHanh) : @Html.Raw(Model.QuaTrinhXuLyViewModel[i].PhutBanHanh)
+                                    @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].GioBanHanh)
+                                    @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].PhutBanHanh)
+                                    @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].NhacNho)
+                                    <span>@Html.Raw(Model.QuaTrinhXuLyViewModel[i].GioBanHanh)</span> :<span> @Html.Raw(Model.QuaTrinhXuLyViewModel[i].PhutBanHanh)</span>
                                 </td>
-                                <td>@Model.QuaTrinhXuLyViewModel[i].NgayBanHanh</td>
-                                <td>@Model.QuaTrinhXuLyViewModel[i].NoiDung</td>
-                                <td>@Model.QuaTrinhXuLyViewModel[i].NguoiThem</td>
-                                @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].NhacNho)
+                                <td>
+                                    @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].NgayBanHanh)
+                                    <span>@Html.DisplayFor(x => Model.QuaTrinhXuLyViewModel[i].NgayBanHanh, "DisplayDateTime")</span>
+                                </td>
+                                <td>
+                                    <span>@Model.QuaTrinhXuLyViewModel[i].NoiDung</span>
+                                    @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].NoiDung)
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(x => Model.QuaTrinhXuLyViewModel[i].NguoiThem)
+                                    <span>@Model.QuaTrinhXuLyViewModel[i].NguoiThem</span>
+                                </td>
                                 <td class="link-action">
-                                    <input type="button" value="@Buttons.CongViec_Detail_QuaTrinhXuLy_Delete" class="btn btn-link" id="btnDeleteQuaTrinhXuLy" />
-                                    <input type="button" value="@Buttons.CongViec_Detail_QuaTrinhXuLy_Edit" class="btn btn-link" id="btnEditQuaTrinhXuLy" />
+                                    <input type="button" value="@Buttons.CongViec_Detail_QuaTrinhXuLy_Delete" class="btn btn-link btnDeleteQuaTrinhXuLy" id="btnDeleteQuaTrinhXuLy" />
+                                    <input type="button" value="@Buttons.CongViec_Detail_QuaTrinhXuLy_Edit" class="btn btn-link btnEditQuaTrinhXuLy" id="btnEditQuaTrinhXuLy" />
                                 </td>
                             </tr>
                         }
                         <tr>
-                            <td colspan="4">
-                                <input type="text" class="form-control" />
-                            </td>
+                            @if (User.IsInRole(RoleConstant.LANHDAO))
+                            {
+                                <td colspan="3">
+                                    <input type="text" class="form-control" id="txtNoiDungQuaTrinhXuLy" />
+                                    <input type="hidden" id="txtNguoiThemQuaTrinhXuLy" value="@User.Identity.Name" />
+                                </td>
+                                <td>
+                                    @Html.OfficeEnumDropDownListFor(x => Model.EnumNhacNho, htmlAttributes: new { @class = "form-control" })
+                                </td>
+                            }
+                            else
+                            {
+                                <td colspan="4">
+                                    <input type="text" class="form-control" id="txtNoiDungQuaTrinhXuLy" />
+                                </td>
+                            }
                             <td class="link-action">
-                                <input type="button" value="@Buttons.CongViec_Detail_QuaTrinhXuLy_Save" class="btn btn-link" id="btnSaveVanBanLienQuan" disabled="disabled" />
+                                <input type="button" value="@Buttons.CongViec_Detail_QuaTrinhXuLy_Save" class="btn btn-link" id="btnSaveQuaTrinhXuly" disabled="disabled" />
+                                <input type="button" value="@Buttons.CongViec_Detail_QuaTrinhXuLy_Cancel" class="btn btn-link" id="btnCancelQuaTrinhXuly" disabled="disabled" />
                             </td>
                         </tr>
                     </tbody>
@@ -180,6 +221,13 @@
                 <label>@Labels.CongViec_Add_TrangThai</label>
                 @Html.DropDownListFor(x => Model.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), "-- Chọn trạng thái công việc--", htmlAttributes: new { @class = "form-control" })
             </div>
+            if (User.IsInRole(RoleConstant.LANHDAO))
+            {
+                <div class="col-sm-4">
+                    <label>@Labels.CongViec_Edit_DanhGiaCongViec</label>
+                    @Html.OfficeEnumDropDownListFor(x => Model.DanhGiaCongViec, htmlAttributes: new { @class = "form-control" })
+                </div>
+            }
             <div class="clear"></div>
             <div class="col-sm-12">
                 <label>&nbsp;</label>

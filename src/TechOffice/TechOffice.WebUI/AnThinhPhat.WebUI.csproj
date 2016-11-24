@@ -108,6 +108,22 @@
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Assemblies\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.ReportViewer.ProcessingObjectModel\10.0.0.0__b03f5f7f11d50a3a\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Assemblies\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.0\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -135,6 +151,9 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="ReportViewerForMvc">
+      <HintPath>..\..\Assemblies\ReportViewerForMvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -259,9 +278,18 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="images\banner-phong-noi-vu-huyen-phu-rieng.jpg" />
+    <Content Include="images\banner-phong-noi-vu-huyen-phu-rieng.png" />
+    <Content Include="images\banner.png" />
+    <Content Include="images\bg_menu.png" />
     <Content Include="images\bien dao que huong_1369814865500.jpg" />
     <Content Include="images\cham-soc-khach-hang.png" />
     <Content Include="images\dathongbao.png" />
+    <Content Include="images\favicon.ico" />
+    <Content Include="images\footer.jpg" />
+    <Content Include="images\footer_bg.jpg" />
+    <Content Include="images\header-bg-mobile.jpg" />
+    <Content Include="images\header-partten.jpg" />
     <Content Include="images\hoctap_lamtheoguongbacsv.jpg" />
     <Content Include="images\hotro_tructuyen.png" />
     <Content Include="images\list_footer.png" />
@@ -269,15 +297,19 @@
     <Content Include="images\nong-thon-moi_1369815473656.jpg" />
     <Content Include="images\Skype_logo.png" />
     <Content Include="images\slider1.jpg" />
+    <Content Include="images\SourceTreeSetup_1.9.6.1.exe" />
     <Content Include="images\Tap-huan-doan.jpg" />
     <Content Include="images\tongdai.png" />
+    <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\app\congviec-detail.js" />
+    <Content Include="Scripts\app\congviec-statistic.js" />
     <Content Include="Scripts\app\congviec_add.js" />
     <Content Include="Scripts\app\datepickerjs.js" />
     <Content Include="Scripts\app\menuslidejs.js" />
     <Content Include="Scripts\app\message.js" />
     <Content Include="Scripts\app\modaljs.js" />
     <Content Include="Scripts\app\tacnghiep-detail.js" />
+    <Content Include="Scripts\app\templates.js" />
     <Content Include="Scripts\app\uploadfiles.js" />
     <Content Include="Scripts\app\user-update.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
@@ -288,8 +320,11 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="connectionStrings.config" />
+    <Content Include="connectionStrings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="appsettings.config" />
+    <Content Include="Reports\rptCorporation.rdlc" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -312,7 +347,11 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial110.dll" />
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial110.dll" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -390,7 +429,7 @@
     <Content Include="Views\Shared\_LayoutCV.cshtml" />
     <Content Include="Views\CongViec\Detail.cshtml" />
     <Content Include="Views\CongViec\Add.cshtml" />
-    <Content Include="Views\CongViec\Statistic.cshtml" />
+    <Content Include="Views\CongViec\StatisticAndSearch.cshtml" />
     <Content Include="Views\CongViec\_PartialPageList.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageList.cshtml" />
     <Content Include="Views\Shared\_LayoutThuTuc.cshtml" />
@@ -424,6 +463,8 @@
     <Content Include="Views\Shared\DisplayTemplates\GroupListBodies.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageResultThucHienCongViec.cshtml" />
     <Content Include="Views\Shared\_PartialPageUploadFiles.cshtml" />
+    <Content Include="Views\CongViec\Statistic.cshtml" />
+    <Content Include="Views\CongViec\SearchResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

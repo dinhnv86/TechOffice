@@ -120,6 +120,33 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
+        public SaveResult UpdateRange(IEnumerable<CongViecVanBanResult> entities)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    foreach (var entity in entities)
+                    {
+                        var update = context.CongViec_VanBan
+                          .Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                        update.SoVanBan = entity.SoVanBan;
+                        update.CoQuanId = entity.CoQuanId;
+                        update.NoiDung = entity.NoiDung;
+                        update.NgayBanHanh = entity.NgayBanHanh;
+                        update.HoSoCongViecId = entity.HoSoCongViecId;
+                        update.IsDeleted = entity.IsDeleted;
+                        update.LastUpdatedBy = entity.LastUpdatedBy;
+                        update.LastUpdated = DateTime.Now;
+
+                        context.Entry(update).State = EntityState.Modified;
+                    }
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
+        }
+
         public SaveResult Delete(CongViecVanBanResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>

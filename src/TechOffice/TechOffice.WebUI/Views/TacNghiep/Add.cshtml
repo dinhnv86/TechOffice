@@ -19,7 +19,6 @@
 
 @{Html.RenderPartial("_PartialPageAlert");}
 
-<link href="~/Content/app/plus.css" rel="stylesheet" />
 <style>
     .hiddenRow {
         padding: 0px !important;
@@ -36,7 +35,7 @@
     @Html.HiddenFor(x => x.Guid)
 
     <div class="col-sm-6">
-        <label>@Labels.CongViec_Add_NgayTao<span class="required">*</span></label>
+        <label>@Labels.TacNghiep_Add_NgayTao<span class="required">*</span></label>
         @Html.EditorFor(x => x.NgayTao, "DateTime")
         @Html.ValidationMessageFor(x => x.NgayTao)
     </div>

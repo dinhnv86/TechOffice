@@ -181,20 +181,20 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.CongViec_PhoiHop
-                        where item.IsDeleted == false
-                        select new CongViecPhoiHopResult
-                        {
-                            Id = item.Id,
-                            HoSoCongViecId = item.HoSoCongViecId,
-                            HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
-                            UserId = item.UserId,
-                            UserInfo = item.User.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToList();
+                            where item.IsDeleted == false
+                            select new CongViecPhoiHopResult
+                            {
+                                Id = item.Id,
+                                HoSoCongViecId = item.HoSoCongViecId,
+                                HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
+                                UserId = item.UserId,
+                                UserInfo = item.User.ToIfNotNullDataInfo(),
+                                IsDeleted = item.IsDeleted,
+                                CreateDate = item.CreateDate,
+                                CreatedBy = item.CreatedBy,
+                                LastUpdatedBy = item.LastUpdatedBy,
+                                LastUpdated = item.LastUpdated
+                            }).ToList();
                 }
             });
         }
@@ -206,20 +206,20 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.CongViec_PhoiHop
-                        where item.IsDeleted == false
-                        select new CongViecPhoiHopResult
-                        {
-                            Id = item.Id,
-                            HoSoCongViecId = item.HoSoCongViecId,
-                            HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
-                            UserId = item.UserId,
-                            UserInfo = item.User.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).ToListAsync();
+                                  where item.IsDeleted == false
+                                  select new CongViecPhoiHopResult
+                                  {
+                                      Id = item.Id,
+                                      HoSoCongViecId = item.HoSoCongViecId,
+                                      HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
+                                      UserId = item.UserId,
+                                      UserInfo = item.User.ToIfNotNullDataInfo(),
+                                      IsDeleted = item.IsDeleted,
+                                      CreateDate = item.CreateDate,
+                                      CreatedBy = item.CreatedBy,
+                                      LastUpdatedBy = item.LastUpdatedBy,
+                                      LastUpdated = item.LastUpdated
+                                  }).ToListAsync();
                 }
             });
         }
@@ -231,20 +231,20 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.CongViec_PhoiHop
-                        where item.IsDeleted == false
-                        select new CongViecPhoiHopResult
-                        {
-                            Id = item.Id,
-                            HoSoCongViecId = item.HoSoCongViecId,
-                            HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
-                            UserId = item.UserId,
-                            UserInfo = item.User.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).Single();
+                            where item.IsDeleted == false
+                            select new CongViecPhoiHopResult
+                            {
+                                Id = item.Id,
+                                HoSoCongViecId = item.HoSoCongViecId,
+                                HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
+                                UserId = item.UserId,
+                                UserInfo = item.User.ToIfNotNullDataInfo(),
+                                IsDeleted = item.IsDeleted,
+                                CreateDate = item.CreateDate,
+                                CreatedBy = item.CreatedBy,
+                                LastUpdatedBy = item.LastUpdatedBy,
+                                LastUpdated = item.LastUpdated
+                            }).Single();
                 }
             });
         }
@@ -256,20 +256,20 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.CongViec_PhoiHop
-                        where item.IsDeleted == false && item.Id == id
-                        select new CongViecPhoiHopResult
-                        {
-                            Id = item.Id,
-                            HoSoCongViecId = item.HoSoCongViecId,
-                            HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
-                            UserId = item.UserId,
-                            UserInfo = item.User.ToIfNotNullDataInfo(),
-                            IsDeleted = item.IsDeleted,
-                            CreateDate = item.CreateDate,
-                            CreatedBy = item.CreatedBy,
-                            LastUpdatedBy = item.LastUpdatedBy,
-                            LastUpdated = item.LastUpdated
-                        }).SingleAsync();
+                                  where item.IsDeleted == false && item.Id == id
+                                  select new CongViecPhoiHopResult
+                                  {
+                                      Id = item.Id,
+                                      HoSoCongViecId = item.HoSoCongViecId,
+                                      HoSoCongViec = item.HoSoCongViec.ToIfNotNullDataInfo(),
+                                      UserId = item.UserId,
+                                      UserInfo = item.User.ToIfNotNullDataInfo(),
+                                      IsDeleted = item.IsDeleted,
+                                      CreateDate = item.CreateDate,
+                                      CreatedBy = item.CreatedBy,
+                                      LastUpdatedBy = item.LastUpdatedBy,
+                                      LastUpdated = item.LastUpdated
+                                  }).SingleAsync();
                 }
             });
         }
@@ -316,6 +316,46 @@ namespace AnThinhPhat.Services.Implements
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
+        }
+
+        public SaveResult AddOrUpdate(int congViecId, IEnumerable<CongViecPhoiHopResult> entities, string userName)
+        {
+            if (entities != null && entities.Any())
+            {
+                //get all phoi hop by hosocongviecid
+                using (var context = new TechOfficeEntities())
+                {
+                    var listPhoihop = context.CongViec_PhoiHop.Where(x => x.HoSoCongViecId == congViecId).Select(x => new { x.UserId, x.HoSoCongViecId }).ToList();
+                    var listEntities = entities.Select(x => new { x.UserId, x.HoSoCongViecId });
+                    //cac phan tu ton tai trong listPhoiHop nhun ko ton tai trong entites
+                    var left = listPhoihop.Except(listEntities);
+                    //lay ra cac phan tu ton tain trong entities nhung ko ton tai trong listPhoihop
+                    var right = listEntities.Except(listPhoihop);
+                    foreach (var item in left)
+                    {
+                        //remove
+                        var remove = context.CongViec_PhoiHop.Where(x => x.HoSoCongViecId == item.HoSoCongViecId && x.UserId == item.UserId).Single();
+                        remove.IsDeleted = true;
+                        remove.LastUpdated = DateTime.Now;
+                        remove.LastUpdatedBy = userName;
+                        context.Entry(remove).State = EntityState.Modified;
+                    }
+
+                    foreach (var item in right)
+                    {
+                        //add
+                        var add = context.CongViec_PhoiHop.Create();
+                        add.HoSoCongViecId = item.HoSoCongViecId;
+                        add.UserId = item.UserId;
+                        add.CreatedBy = userName;
+                        add.CreateDate = DateTime.Now;
+                        add.IsDeleted = false;
+                        context.Entry(add).State = EntityState.Added;
+                    }
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            }
+            return SaveResult.SUCCESS;
         }
     }
 }
