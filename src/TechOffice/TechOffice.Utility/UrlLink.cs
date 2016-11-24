@@ -46,6 +46,7 @@
         public static string TACNGHIEP_DETAIL = "tacnghiep/{id}";
 
         public static string CONGVIEC_THONGKE_TIMKIEM = "congviec/thongke-timkiem";
+        public static string CONGVIEC_THONGKE_TONGHOP = "congviec/thongke-tonghop";
         public static string CONGVIEC_THONGKE = "congviec/thongke";
         public static string CONGVIEC_TIMKIEM = "congviec/timkiem";
         public static string CONGVIEC_ADD = "congviec/themmoi";

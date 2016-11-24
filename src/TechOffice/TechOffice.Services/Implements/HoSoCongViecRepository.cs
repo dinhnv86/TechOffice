@@ -459,5 +459,18 @@ namespace AnThinhPhat.Services.Implements
                 return items;
             }
         }
+
+        public IEnumerable<SummariesViewModel> Summaries(DateTime from, DateTime to)
+        {
+            using (var context = new TechOfficeEntities())
+            {
+                var items = context.Database.SqlQuery<SummariesViewModel>("Summaries @NoiVuId, @From, @To",
+                    new SqlParameter("NoiVuId", TechOfficeConfig.IDENTITY_PHONGNOIVU),
+                    new SqlParameter("From", from),
+                    new SqlParameter("To", to)).ToList();
+
+                return items;
+            }
+        }
     }
 }

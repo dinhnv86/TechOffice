@@ -123,6 +123,7 @@
     <Compile Include="Results\CongViecQuaTrinhXuLyResult.cs" />
     <Compile Include="Results\CongViecVanBanResult.cs" />
     <Compile Include="Results\StatisticCongViec.cs" />
+    <Compile Include="Results\SummariesCongViecResult.cs" />
     <Compile Include="Results\TrangThaiCongViecResult.cs" />
     <Compile Include="Results\CoQuanResult.cs" />
     <Compile Include="DataResult.cs" />

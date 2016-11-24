@@ -15,5 +15,7 @@ namespace AnThinhPhat.Services.Abstracts
         SaveResult AddCongViecWithChildren(HoSoCongViecResult entity);
 
         IEnumerable<StatisticCongViec> Statistic(DateTime from, DateTime to);
+
+        IEnumerable<SummariesViewModel> Summaries(DateTime from, DateTime to);
     }
 }

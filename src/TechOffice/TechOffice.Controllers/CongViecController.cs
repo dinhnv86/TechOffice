@@ -119,6 +119,7 @@ namespace AnThinhPhat.WebUI.Controllers
             var users = UserRepository.GetUsersByCoQuanId(TechOfficeConfig.IDENTITY_PHONGNOIVU).Select(x => x.ToDataInfo());
             var linhVucs = LinhVucCongViecRepository.GetAll().Select(x => x.ToDataInfo());
             var coquan = CoQuanRepository.GetAll().Select(x => x.ToDataInfo());
+            var trangThaiCongViecs = TrangThaiCongViecRepository.GetAll().Select(x => x.ToDataInfo());
 
             var model = new InitValueStatictisSearchViewModel
             {
@@ -127,6 +128,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 UserInfoNoiVu = users,
                 LinhVucCongViecInfos = linhVucs,
                 CoQuanInfos = coquan,
+                TrangThaiCongViecInfos = trangThaiCongViecs,
             };
             return View(model);
         }
@@ -145,7 +147,7 @@ namespace AnThinhPhat.WebUI.Controllers
                         To = model.To,
                         UserId = model.UserId,
                         Role = (int?)model.VaiTroXuLy,
-                        TrangThaiCongViecId = (int?)model.Status,
+                        TrangThaiCongViecId = (int?)model.TrangThaiCongViecId,
                         LinhVucCongViecId = model.LinhVucCongViecId,
                         NoiDungCongViec = model.NoiDungCongViec,
                         SoVanBan = model.SoVanBan,
@@ -153,7 +155,7 @@ namespace AnThinhPhat.WebUI.Controllers
                         CoQuanId = model.CoQuanId,
                     });
                 case "THONGKECONGVIEC":
-                    break;
+                    return RedirectToRoute(UrlLink.CONGVIEC_THONGKE_TONGHOP, model);
             }
 
             return View();
@@ -167,15 +169,54 @@ namespace AnThinhPhat.WebUI.Controllers
 
             reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\rptCorporation.rdlc";
             var results = HoSoCongViecRepository.Statistic(From, To);
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("dsViewModel", results));
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("dsStatistic", results));
             ViewBag.ReportViewer = reportViewer;
 
             return View();
         }
 
         [HttpGet]
-        public ActionResult SearchResult()
+        public ActionResult Summaries(InitValueStatictisSearchViewModel model)
         {
+            var reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            var finds = HoSoCongViecRepository.Find(new Entities.Searchs.ValueSearchCongViec
+            {
+                From = model.From,
+                To = model.To,
+                LinhVucCongViecId = model.LinhVucCongViecId,
+                NoiDungCongViec = model.NoiDungCongViec,
+                NoiDungVanBan = model.NoiDungVanBan,
+                Role = model.VaiTroXuLy,
+                SoVanBan = model.SoVanBan,
+                TrangThaiCongViecId = model.TrangThaiCongViecId,
+                NhanVienId = model.UserId,
+                CoQuanId = model.CoQuanId,
+            });
+
+            var results = new List<SummariesViewModel>();
+            if (finds != null && finds.Any())
+            {
+                finds.ToList().ForEach(x =>
+                {
+                    results.Add(new SummariesViewModel
+                    {
+                        NgayTao = x.NgayTao.ToString("dd/MM/yyyy"),
+                        NgayHetHan = x.NgayHetHan?.ToString("dd/MM/yyyy"),
+                        LinhVuc = x.LinhVucCongViec.Name,
+                        XuLyChinh = x.UserXyLy.HoVaTen,
+                        PhuTrach = x.UserPhuTrach.HoVaTen,
+                        TrangThai = x.TrangThaiCongViecInfo.Name,
+                        PhoiHop = x.CongViecPhoiHopResult.Select(y => y.UserInfo.HoVaTen).Aggregate((a, b) => (a + ", " + b)),
+                    });
+                });
+            }
+
+            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\rptSummaries.rdlc";
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("dsLocalSummaries", results));
+
+            ViewBag.ReportViewer = reportViewer;
+
             return View();
         }
 
