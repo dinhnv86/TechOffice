@@ -60,6 +60,9 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.CONGVIEC_THONGKE, UrlLink.CONGVIEC_THONGKE,
             new { controller = "CongViec", action = "Statistic" });
 
+            routes.MapRoute(UrlLink.CONGVIEC_THONGKE_TONGHOP, UrlLink.CONGVIEC_THONGKE_TONGHOP,
+            new { controller = "CongViec", action = "Summaries" });
+
             routes.MapRoute(UrlLink.CONGVIEC_TIMKIEM, UrlLink.CONGVIEC_TIMKIEM,
             new { controller = "CongViec", action = " Search" });
 
