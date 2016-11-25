@@ -119,5 +119,91 @@ namespace AnThinhPhat.Utilities
         public static string FOLDER_UPLOAD_TT = FOLDER_UPLOAD + "/TT";//thu tuc
         public static string FOLDER_UPLOAD_CONGVIEC = FOLDER_UPLOAD + "/ CV";//cong viec
         public static string FOLDER_UPLOAD_VB = FOLDER_UPLOAD + "/ VB";//van ban
+
+        private const int _PORT = 25;
+        private const string _HOST = "smtp.gmail.com";
+        private const string _FROM = "phongnoivu.phurieng@gmail.com";
+        private const string _USERNAME = "Phong Noi Vu Phu Rieng";
+        private const string _PASSWORD = "phu@rieng";
+        public static int PORT
+        {
+            get
+            {
+                AppSettingsReader settingsReader = new AppSettingsReader();
+                int port = _PORT;
+                try
+                {
+                    port = (int)settingsReader.GetValue("PORT", typeof(int));
+                }
+                catch { port = _PORT; }
+
+                return port;
+            }
+        }
+
+        public static string HOST
+        {
+            get
+            {
+                AppSettingsReader settingsReader = new AppSettingsReader();
+                string host = _HOST;
+                try
+                {
+                    host = (string)settingsReader.GetValue("HOST", typeof(string));
+                }
+                catch { host = _HOST; }
+
+                return host;
+            }
+        }
+
+        public static string FROM
+        {
+            get
+            {
+                AppSettingsReader settingsReader = new AppSettingsReader();
+                string from = _FROM;
+                try
+                {
+                    from = (string)settingsReader.GetValue("FROM", typeof(string));
+                }
+                catch { from = _FROM; }
+
+                return from;
+            }
+        }
+
+        public static string USERNAME
+        {
+            get
+            {
+                AppSettingsReader settingsReader = new AppSettingsReader();
+                string userName = _USERNAME;
+                try
+                {
+                    userName = (string)settingsReader.GetValue("USERNAME", typeof(string));
+                }
+                catch { userName = _USERNAME; }
+
+                return userName;
+            }
+        }
+
+        public static string PASSWORD
+        {
+            get
+            {
+                AppSettingsReader settingsReader = new AppSettingsReader();
+                string pass = _PASSWORD;
+                try
+                {
+                    pass = (string)settingsReader.GetValue("PASSWORD", typeof(string));
+                }
+                catch { pass = _PASSWORD; }
+
+                return pass;
+            }
+        }
+
     }
 }

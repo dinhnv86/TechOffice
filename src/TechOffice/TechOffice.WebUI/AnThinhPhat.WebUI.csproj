@@ -160,8 +160,9 @@
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ReportViewerForMvc">
-      <HintPath>..\..\Assemblies\ReportViewerForMvc.dll</HintPath>
+    <Reference Include="ReportViewerForMvc, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Assemblies\ReportViewerForMvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -332,8 +333,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="appsettings.config" />
-    <Content Include="Reports\rptCorporation.rdlc" />
-    <Content Include="Reports\rptSummaries.rdlc" />
+    <EmbeddedResource Include="Reports\rptCorporation.rdlc" />
+    <EmbeddedResource Include="Reports\rptSummaries.rdlc" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -356,8 +357,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial110.dll" />
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial110.dll" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

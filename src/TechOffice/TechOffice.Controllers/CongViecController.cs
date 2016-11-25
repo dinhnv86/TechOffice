@@ -164,22 +164,14 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public ActionResult Statistic(DateTime From, DateTime To)
         {
-            var reportViewer = new ReportViewer();
-            reportViewer.ProcessingMode = ProcessingMode.Local;
-
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\rptCorporation.rdlc";
             var results = HoSoCongViecRepository.Statistic(From, To);
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("dsStatistic", results));
-            ViewBag.ReportViewer = reportViewer;
 
-            return View();
+            return View(results);
         }
 
         [HttpGet]
         public ActionResult Summaries(InitValueStatictisSearchViewModel model)
         {
-            var reportViewer = new ReportViewer();
-            reportViewer.ProcessingMode = ProcessingMode.Local;
             var finds = HoSoCongViecRepository.Find(new Entities.Searchs.ValueSearchCongViec
             {
                 From = model.From,
@@ -212,12 +204,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 });
             }
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\rptSummaries.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("dsLocalSummaries", results));
-
-            ViewBag.ReportViewer = reportViewer;
-
-            return View();
+            return View(results);
         }
 
         [HttpGet]

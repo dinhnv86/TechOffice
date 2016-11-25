@@ -33,6 +33,13 @@ namespace AnThinhPhat.Utilities
             MediaType = MediaTypeNames.Application.Octet;
         }
 
+        public MailAttachment(MemoryStream stream, string filename)
+        {
+            Stream = stream;
+            Filename = filename;
+            MediaType = MediaTypeNames.Application.Octet;
+        }
+
         /// <summary>
         ///     Construct a mail attachment from a string
         /// </summary>

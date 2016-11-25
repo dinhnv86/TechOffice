@@ -36,6 +36,8 @@ namespace AnThinhPhat.Utilities
         /// <summary>
         ///     The recover pass
         /// </summary>
-        RecoverPass = 2
+        RecoverPass = 2,
+
+        Feedback = 3,
     }
 }
