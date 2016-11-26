@@ -111,25 +111,25 @@
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.Common, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Assemblies\Microsoft.ReportViewer.Common.dll</HintPath>
+      <HintPath>..\..\..\..\Assemblies\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Assemblies\Microsoft.ReportViewer.DataVisualization.DLL</HintPath>
+      <HintPath>..\..\..\..\Assemblies\Microsoft.ReportViewer.DataVisualization.DLL</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Assemblies\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+      <HintPath>..\..\..\..\Assemblies\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Assemblies\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <HintPath>..\..\..\..\Assemblies\Microsoft.ReportViewer.WebForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.SqlServer.Types, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Assemblies\Microsoft.SqlServer.Types.dll</HintPath>
+      <HintPath>..\..\..\..\Assemblies\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -312,6 +312,7 @@
     <Content Include="Scripts\app\congviec-statistic.js" />
     <Content Include="Scripts\app\congviec_add.js" />
     <Content Include="Scripts\app\datepickerjs.js" />
+    <Content Include="Scripts\app\format-datetime.js" />
     <Content Include="Scripts\app\menuslidejs.js" />
     <Content Include="Scripts\app\message.js" />
     <Content Include="Scripts\app\modaljs.js" />
@@ -319,6 +320,7 @@
     <Content Include="Scripts\app\templates.js" />
     <Content Include="Scripts\app\uploadfiles.js" />
     <Content Include="Scripts\app\user-update.js" />
+    <Content Include="Scripts\app\vanban-add.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -471,6 +473,12 @@
     <Content Include="Views\Shared\_PartialPageUploadFiles.cshtml" />
     <Content Include="Views\CongViec\Statistic.cshtml" />
     <Content Include="Views\CongViec\Summaries.cshtml" />
+    <Content Include="Views\VanBan\Add.cshtml" />
+    <Content Include="Views\CoQuanBanHanhVanBan\Index.cshtml" />
+    <Content Include="Views\CoQuanBanHanhVanBan\List.cshtml" />
+    <Content Include="Views\VanBan\Edit.cshtml" />
+    <Content Include="Views\ThuTuc\Add.cshtml" />
+    <Content Include="Views\ThuTuc\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

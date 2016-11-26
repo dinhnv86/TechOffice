@@ -115,10 +115,13 @@ namespace AnThinhPhat.Utilities
         public const string SEPARATE_CHAR = ", ";
 
         public static string FOLDER_UPLOAD = "~/Uploads";//folder upload;
+        public static string FOLDER_VB = "/VB";//van ban
+        public static string FOLDER_TT = "/TT";//van ban
         public static string FOLDER_UPLOAD_TACNGHIEP = FOLDER_UPLOAD + "/TN";//tac nghiep
-        public static string FOLDER_UPLOAD_TT = FOLDER_UPLOAD + "/TT";//thu tuc
-        public static string FOLDER_UPLOAD_CONGVIEC = FOLDER_UPLOAD + "/ CV";//cong viec
-        public static string FOLDER_UPLOAD_VB = FOLDER_UPLOAD + "/ VB";//van ban
+        public static string FOLDER_UPLOAD_TT = FOLDER_UPLOAD + FOLDER_TT;//thu tuc
+        public static string FOLDER_UPLOAD_CONGVIEC = FOLDER_UPLOAD + "/CV";//cong viec
+        public static string FOLDER_UPLOAD_VB = FOLDER_UPLOAD + FOLDER_VB;//van ban
+
 
         private const int _PORT = 25;
         private const string _HOST = "smtp.gmail.com";

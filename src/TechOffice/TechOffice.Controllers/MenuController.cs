@@ -13,7 +13,7 @@ namespace AnThinhPhat.WebUI.Controllers
         public ILoaiVanBanRepository LoaiVanBanRepository { get; set; }
 
         [Inject]
-        public ILinhVucVanBanRepository LinhVucVanBanRepository { get; set; }
+        public ICoQuanBanHanhVanBanRepository CoQuanBanHanhVanBanRepository { get; set; }
 
         [Inject]
         public ILinhVucThuTucRepository LinhVucThuTucRepository { get; set; }
@@ -21,7 +21,7 @@ namespace AnThinhPhat.WebUI.Controllers
         public PartialViewResult MenuVanBan()
         {
             var model = new InitMenuVanBanViewModel();
-            model.LinhVucVanBanInfos = LinhVucVanBanRepository.GetAll().Select(x => x.ToDataInfo());
+            model.CoQuanBanHanhVanBanInfos = CoQuanBanHanhVanBanRepository.GetAll().Select(x => x.ToDataInfo());
             model.LoaiVanBanInfos = LoaiVanBanRepository.GetAll().Select(x => x.ToDataInfo());
 
             return PartialView("_PartialMenuLeftVanBan", model);

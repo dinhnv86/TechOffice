@@ -5,8 +5,8 @@
 }
 
 <div class="col-sm-6">
-    <label>Số ký hiệu</label>
-    @Html.TextBoxFor(x => Model.MaThuTuc, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+    <label>Tên thủ tục</label>
+    @Html.TextBoxFor(x => Model.TenThuTuc, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
 </div>
 <div class="col-sm-6">
     <label>Ngày ban hành</label>
@@ -14,7 +14,7 @@
 </div>
 <div class="col-sm-6">
     <label>Tên thủ tục</label>
-    @Html.TextAreaFor(x => Model.TenThuTuc, htmlAttributes: new { @class = "form-control", @readonly = "readonly", rows = 5 })
+    @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", @readonly = "readonly", rows = 5 })
 </div>
 <div class="col-sm-6">
     <label>Cơ quan thực hiện</label>

@@ -4,7 +4,9 @@
     {
         public int? LoaiVanBanId { get; set; }
 
-        public int? CoQuanId { get; set; }
+        public int? LinhVucVanBanId { get; set; }
+
+        public int? CoQuanBanHanhVanBanId { get; set; }
 
         public int? NamBanHanhId { get; set; }
 

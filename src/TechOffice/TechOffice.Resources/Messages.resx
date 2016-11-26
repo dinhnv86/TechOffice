@@ -192,4 +192,49 @@
   <data name="TacNgiep_AddTacNghiepViewModel_NoiDung" xml:space="preserve">
     <value>Xin vui lòng nhập nội dung</value>
   </data>
+  <data name="VanBan_AddVanBan_CoQuanBanHanhVanBan" xml:space="preserve">
+    <value>Xin vui lòng chọn cơ quan ban hành văn bản</value>
+  </data>
+  <data name="VanBan_AddVanBan_LinhVucVanBan" xml:space="preserve">
+    <value>Xin vui lòng chọn lĩnh vực văn bản</value>
+  </data>
+  <data name="VanBan_AddVanBan_LoaiVanBan" xml:space="preserve">
+    <value>Xin vui lòng chọn loại văn bản</value>
+  </data>
+  <data name="VanBan_AddVanBan_NgayBanHanh" xml:space="preserve">
+    <value>Xin vui lòng nhập ngày ban hành</value>
+  </data>
+  <data name="VanBan_AddVanBan_NoiDungVanBan" xml:space="preserve">
+    <value>Xin vui lòng nhập nội dung văn bản</value>
+  </data>
+  <data name="VanBan_AddVanBan_SoVanBan" xml:space="preserve">
+    <value>Xin vui lòng nhập số văn bản</value>
+  </data>
+  <data name="VanBan_AddVanBan_TrichYeuVanBan" xml:space="preserve">
+    <value>Xin vui lòng nhập trích yếu văn bản</value>
+  </data>
+  <data name="VanBan_AddVanBan_TrichYeuVanBan_MaxLength" xml:space="preserve">
+    <value>Chiều dài tối đa của trích yếu là 1024 ký tự</value>
+  </data>
+  <data name="ThuTuc_AddThuTuc_CoQuanThucHien" xml:space="preserve">
+    <value>Xin vui lòng chọn cơ quan thực hiện</value>
+  </data>
+  <data name="ThuTuc_AddThuTuc_LinhVucThuTuc" xml:space="preserve">
+    <value>Xin vui lòng chọn lĩnh vực thủ tục</value>
+  </data>
+  <data name="ThuTuc_AddThuTuc_NoiDung" xml:space="preserve">
+    <value>Xin vui lòng nhập nội dung thủ tục</value>
+  </data>
+  <data name="ThuTuc_AddThuTuc_NoiDung_MaxLength" xml:space="preserve">
+    <value>Chiều dài tối đa mã thủ tục là 1024 ký tự</value>
+  </data>
+  <data name="ThuTuc_AddThuTuc_NgayBanHanh" xml:space="preserve">
+    <value>Xin vui lòng nhập ngày ban hành</value>
+  </data>
+  <data name="ThuTuc_AddThuTuc_TenThuTuc" xml:space="preserve">
+    <value>Xin vui lòng nhập tên thủ tục</value>
+  </data>
+  <data name="ThuTuc_AddThuTuc_TenThuTuc_MaxLength" xml:space="preserve">
+    <value>Chiều dài tối đa mã thủ tục là 1024 ký tự</value>
+  </data>
 </root>

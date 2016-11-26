@@ -20,11 +20,17 @@ namespace AnThinhPhat.Services.Implements
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
+                var result = SaveResult.FAILURE;
+
                 using (var context = new TechOfficeEntities())
                 {
-                    entity.AddToDb(context);
+                    var data = entity.AddToDb(context);
 
-                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+
+                    entity.Id = data.Id;
+
+                    return result;
                 }
             });
         }

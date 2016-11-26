@@ -9,15 +9,20 @@ namespace AnThinhPhat.ViewModel.VanBan
         private IEnumerable<NamBanHanh> _namBanHanh;
 
         private IEnumerable<PageNumberic> _pagingNumberic;
-        public int? CoQuanId { get; set; }
 
-        public IEnumerable<LinhVucVanBanInfo> CoQuanBanHanhInfos { get; set; }
+        public int? CoQuanBanHanhVanBanId { get; set; }
+
+        public IEnumerable<CoQuanBanHanhVanBanInfo> CoQuanBanHanhVanBanInfos { get; set; }
+
+        public int? LinhVucVanBanId { get; set; }
+
+        public IEnumerable<LinhVucVanBanInfo> LinhVucVanBanInfos { get; set; }
 
         public int? LoaiVanBanId { get; set; }
 
         public IEnumerable<LoaiVanBanInfo> LoaiVanBanInfos { get; set; }
 
-        public int? NamBanHnahId { get; set; }
+        public int? NamBanHanhId { get; set; }
 
         public IEnumerable<NamBanHanh> NamBanHanhInfo
         {
@@ -45,10 +50,11 @@ namespace AnThinhPhat.ViewModel.VanBan
         {
             for (var i = 0; i < 10; i++)
             {
+                int year = DateTime.Now.AddYears(-i).Year;
                 yield return new NamBanHanh
                 {
-                    Id = i + 1,
-                    Name = DateTime.Now.AddYears(-i).Year
+                    Id = year,
+                    Name = year,
                 };
             }
         }

@@ -250,6 +250,69 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn cơ quan thực hiện.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_CoQuanThucHien {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_CoQuanThucHien", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn lĩnh vực thủ tục.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_LinhVucThuTuc {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_LinhVucThuTuc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập ngày ban hành.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_NgayBanHanh {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_NgayBanHanh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập nội dung thủ tục.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_NoiDung {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_NoiDung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối đa mã thủ tục là 1024 ký tự.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_NoiDung_MaxLength {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_NoiDung_MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập tên thủ tục.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_TenThuTuc {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_TenThuTuc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối đa mã thủ tục là 1024 ký tự.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_TenThuTuc_MaxLength {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_TenThuTuc_MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xin vui lòng nhập mật khẩu.
         /// </summary>
         public static string Users_LoginViewModel_Password {
@@ -282,6 +345,78 @@ namespace AnThinhPhat.Resources {
         public static string Users_LoginViewModel_UserName {
             get {
                 return ResourceManager.GetString("Users_LoginViewModel_UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn cơ quan ban hành văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_CoQuanBanHanhVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_CoQuanBanHanhVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn lĩnh vực văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_LinhVucVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_LinhVucVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn loại văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_LoaiVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_LoaiVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập ngày ban hành.
+        /// </summary>
+        public static string VanBan_AddVanBan_NgayBanHanh {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_NgayBanHanh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập nội dung văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_NoiDungVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_NoiDungVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập số văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_SoVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_SoVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập trích yếu văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_TrichYeuVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_TrichYeuVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối đa của trích yếu là 1024 ký tự.
+        /// </summary>
+        public static string VanBan_AddVanBan_TrichYeuVanBan_MaxLength {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_TrichYeuVanBan_MaxLength", resourceCulture);
             }
         }
     }

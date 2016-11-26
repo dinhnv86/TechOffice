@@ -48,13 +48,14 @@ namespace AnThinhPhat.Entities
         public virtual DbSet<TapTinThuTuc> TapTinThuTucs { get; set; }
         public virtual DbSet<TapTinVanBan> TapTinVanBans { get; set; }
         public virtual DbSet<TapTinYKienCoQuan> TapTinYKienCoQuans { get; set; }
-        public virtual DbSet<ThuTuc> ThuTucs { get; set; }
         public virtual DbSet<TrangThaiCongViec> TrangThaiCongViecs { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<VanBan> VanBans { get; set; }
         public virtual DbSet<CongViec_VanBan> CongViec_VanBan { get; set; }
         public virtual DbSet<HoSoCongViec> HoSoCongViecs { get; set; }
+        public virtual DbSet<CoQuanBanHanhVanBan> CoQuanBanHanhVanBans { get; set; }
+        public virtual DbSet<ThuTuc> ThuTucs { get; set; }
     
         public virtual ObjectResult<Statictis_Result> Statictis(Nullable<int> noiVuId, Nullable<System.DateTime> from, Nullable<System.DateTime> to)
         {

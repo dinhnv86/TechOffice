@@ -80,6 +80,19 @@
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="CoQuanBanHanhVanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MoTa" Type="ntext" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="HoSoCongViec">
           <Key>
             <PropertyRef Name="Id" />
@@ -340,7 +353,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaThuTuc" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="NoiDung" Type="ntext" Nullable="false" />
           <Property Name="NgayBanHanh" Type="datetime" />
           <Property Name="TenThuTuc" Type="nvarchar" MaxLength="1024" Nullable="false" />
           <Property Name="CoQuanThucHienId" Type="int" Nullable="false" />
@@ -797,11 +810,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VanBan_CoQuan">
-          <End Role="CoQuan" Type="Self.CoQuan" Multiplicity="1" />
+        <Association Name="FK_VanBan_CoQuanBanHanhVanBan">
+          <End Role="CoQuanBanHanhVanBan" Type="Self.CoQuanBanHanhVanBan" Multiplicity="1" />
           <End Role="VanBan" Type="Self.VanBan" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CoQuan">
+            <Principal Role="CoQuanBanHanhVanBan">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="VanBan">
@@ -856,6 +869,7 @@
           <EntitySet Name="CongViec_QuaTrinhXuLy" EntityType="Self.CongViec_QuaTrinhXuLy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CongViec_VanBan" EntityType="Self.CongViec_VanBan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoQuan" EntityType="Self.CoQuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoQuanBanHanhVanBan" EntityType="Self.CoQuanBanHanhVanBan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoSoCongViec" EntityType="Self.HoSoCongViec" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LinhVucCongViec" EntityType="Self.LinhVucCongViec" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LinhVucTacNghiep" EntityType="Self.LinhVucTacNghiep" Schema="dbo" store:Type="Tables" />
@@ -1007,8 +1021,8 @@
             <End Role="User" EntitySet="User" />
             <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
-          <AssociationSet Name="FK_VanBan_CoQuan" Association="Self.FK_VanBan_CoQuan">
-            <End Role="CoQuan" EntitySet="CoQuan" />
+          <AssociationSet Name="FK_VanBan_CoQuanBanHanhVanBan" Association="Self.FK_VanBan_CoQuanBanHanhVanBan">
+            <End Role="CoQuanBanHanhVanBan" EntitySet="CoQuanBanHanhVanBan" />
             <End Role="VanBan" EntitySet="VanBan" />
           </AssociationSet>
           <AssociationSet Name="FK_VanBan_LinhVucVanBan" Association="Self.FK_VanBan_LinhVucVanBan">
@@ -1053,7 +1067,6 @@
           <EntitySet Name="TapTinThuTucs" EntityType="TechOfficeDevModel.TapTinThuTuc" />
           <EntitySet Name="TapTinVanBans" EntityType="TechOfficeDevModel.TapTinVanBan" />
           <EntitySet Name="TapTinYKienCoQuans" EntityType="TechOfficeDevModel.TapTinYKienCoQuan" />
-          <EntitySet Name="ThuTucs" EntityType="TechOfficeDevModel.ThuTuc" />
           <EntitySet Name="TrangThaiCongViecs" EntityType="TechOfficeDevModel.TrangThaiCongViec" />
           <EntitySet Name="Users" EntityType="TechOfficeDevModel.User" />
           <EntitySet Name="UserRoles" EntityType="TechOfficeDevModel.UserRole" />
@@ -1078,10 +1091,6 @@
             <End Role="CoQuan" EntitySet="CoQuans" />
             <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
           </AssociationSet>
-          <AssociationSet Name="FK_ThuTuc_CoQuan" Association="TechOfficeDevModel.FK_ThuTuc_CoQuan">
-            <End Role="CoQuan" EntitySet="CoQuans" />
-            <End Role="ThuTuc" EntitySet="ThuTucs" />
-          </AssociationSet>
           <AssociationSet Name="FK_User_CoQuan" Association="TechOfficeDevModel.FK_User_CoQuan">
             <End Role="CoQuan" EntitySet="CoQuans" />
             <End Role="User" EntitySet="Users" />
@@ -1093,10 +1102,6 @@
           <AssociationSet Name="FK_TacNghiep_LinhVucTacNghiep" Association="TechOfficeDevModel.FK_TacNghiep_LinhVucTacNghiep">
             <End Role="LinhVucTacNghiep" EntitySet="LinhVucTacNghieps" />
             <End Role="TacNghiep" EntitySet="TacNghieps" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ThuTuc_LinhVucThuTuc" Association="TechOfficeDevModel.FK_ThuTuc_LinhVucThuTuc">
-            <End Role="LinhVucThuTuc" EntitySet="LinhVucThuTucs" />
-            <End Role="ThuTuc" EntitySet="ThuTucs" />
           </AssociationSet>
           <AssociationSet Name="FK_VanBan_LinhVucVanBan" Association="TechOfficeDevModel.FK_VanBan_LinhVucVanBan">
             <End Role="LinhVucVanBan" EntitySet="LinhVucVanBans" />
@@ -1137,10 +1142,6 @@
           <AssociationSet Name="FK_TapTinTacNghiep_User" Association="TechOfficeDevModel.FK_TapTinTacNghiep_User">
             <End Role="User" EntitySet="Users" />
             <End Role="TapTinTacNghiep" EntitySet="TapTinTacNghieps" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TapTinThuTuc_ThuTuc" Association="TechOfficeDevModel.FK_TapTinThuTuc_ThuTuc">
-            <End Role="ThuTuc" EntitySet="ThuTucs" />
-            <End Role="TapTinThuTuc" EntitySet="TapTinThuTucs" />
           </AssociationSet>
           <AssociationSet Name="FK_TapTinThuTuc_User" Association="TechOfficeDevModel.FK_TapTinThuTuc_User">
             <End Role="User" EntitySet="Users" />
@@ -1205,10 +1206,28 @@
             <End Role="TapTinCongViec" EntitySet="TapTinCongViecs" />
           </AssociationSet>
           <FunctionImport Name="Statictis" ReturnType="Collection(TechOfficeDevModel.Statictis_Result)">
-          <Parameter Name="NoiVuId" Mode="In" Type="Int32" />
+            <Parameter Name="NoiVuId" Mode="In" Type="Int32" />
             <Parameter Name="From" Mode="In" Type="DateTime" />
             <Parameter Name="To" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="CoQuanBanHanhVanBans" EntityType="TechOfficeDevModel.CoQuanBanHanhVanBan" />
+          <AssociationSet Name="FK_VanBan_CoQuanBanHanhVanBan" Association="TechOfficeDevModel.FK_VanBan_CoQuanBanHanhVanBan">
+            <End Role="CoQuanBanHanhVanBan" EntitySet="CoQuanBanHanhVanBans" />
+            <End Role="VanBan" EntitySet="VanBans" />
+          </AssociationSet>
+          <EntitySet Name="ThuTucs" EntityType="TechOfficeDevModel.ThuTuc" />
+          <AssociationSet Name="FK_ThuTuc_CoQuan" Association="TechOfficeDevModel.FK_ThuTuc_CoQuan">
+            <End Role="CoQuan" EntitySet="CoQuans" />
+            <End Role="ThuTuc" EntitySet="ThuTucs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThuTuc_LinhVucThuTuc" Association="TechOfficeDevModel.FK_ThuTuc_LinhVucThuTuc">
+            <End Role="LinhVucThuTuc" EntitySet="LinhVucThuTucs" />
+            <End Role="ThuTuc" EntitySet="ThuTucs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TapTinThuTuc_ThuTuc" Association="TechOfficeDevModel.FK_TapTinThuTuc_ThuTuc">
+            <End Role="ThuTuc" EntitySet="ThuTucs" />
+            <End Role="TapTinThuTuc" EntitySet="TapTinThuTucs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ChucVu">
           <Key>
@@ -1274,10 +1293,10 @@
           <NavigationProperty Name="NhomCoQuan" Relationship="TechOfficeDevModel.FK_CoQuan_NhomCoQuan" FromRole="CoQuan" ToRole="NhomCoQuan" />
           <NavigationProperty Name="TacNghiep_TinhHinhThucHien" Relationship="TechOfficeDevModel.FK_TacNghiep_TinhHinhThucHien_CoQuan" FromRole="CoQuan" ToRole="TacNghiep_TinhHinhThucHien" />
           <NavigationProperty Name="TacNghiep_YKienCoQuan" Relationship="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_CoQuan" FromRole="CoQuan" ToRole="TacNghiep_YKienCoQuan" />
-          <NavigationProperty Name="ThuTucs" Relationship="TechOfficeDevModel.FK_ThuTuc_CoQuan" FromRole="CoQuan" ToRole="ThuTuc" />
           <NavigationProperty Name="Users" Relationship="TechOfficeDevModel.FK_User_CoQuan" FromRole="CoQuan" ToRole="User" />
           <NavigationProperty Name="VanBans" Relationship="TechOfficeDevModel.FK_VanBan_CoQuan" FromRole="CoQuan" ToRole="VanBan" />
           <NavigationProperty Name="CongViec_VanBan" Relationship="TechOfficeDevModel.PK_CoQuan_CongViecVanBan" FromRole="CoQuan" ToRole="CongViec_VanBan" />
+          <NavigationProperty Name="ThuTucs" Relationship="TechOfficeDevModel.FK_ThuTuc_CoQuan" FromRole="CoQuan" ToRole="ThuTuc" />
         </EntityType>
         <EntityType Name="LinhVucCongViec">
           <Key>
@@ -1510,8 +1529,8 @@
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ThuTuc" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_ThuTuc" FromRole="TapTinThuTuc" ToRole="ThuTuc" />
           <NavigationProperty Name="User" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_User" FromRole="TapTinThuTuc" ToRole="User" />
+          <NavigationProperty Name="ThuTuc" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_ThuTuc" FromRole="TapTinThuTuc" ToRole="ThuTuc" />
         </EntityType>
         <EntityType Name="TapTinVanBan">
           <Key>
@@ -1544,25 +1563,6 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TacNghiep_YKienCoQuan" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" FromRole="TapTinYKienCoQuan" ToRole="TacNghiep_YKienCoQuan" />
           <NavigationProperty Name="User" Relationship="TechOfficeDevModel.FK_TapTinYKienCoQuan_User" FromRole="TapTinYKienCoQuan" ToRole="User" />
-        </EntityType>
-        <EntityType Name="ThuTuc">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaThuTuc" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="NgayBanHanh" Type="DateTime" Precision="3" />
-          <Property Name="TenThuTuc" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <Property Name="CoQuanThucHienId" Type="Int32" Nullable="false" />
-          <Property Name="LoaiThuTucId" Type="Int32" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CoQuan" Relationship="TechOfficeDevModel.FK_ThuTuc_CoQuan" FromRole="ThuTuc" ToRole="CoQuan" />
-          <NavigationProperty Name="LinhVucThuTuc" Relationship="TechOfficeDevModel.FK_ThuTuc_LinhVucThuTuc" FromRole="ThuTuc" ToRole="LinhVucThuTuc" />
-          <NavigationProperty Name="TapTinThuTucs" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_ThuTuc" FromRole="ThuTuc" ToRole="TapTinThuTuc" />
         </EntityType>
         <EntityType Name="TrangThaiCongViec">
           <Key>
@@ -1643,6 +1643,7 @@
           <NavigationProperty Name="LinhVucVanBan" Relationship="TechOfficeDevModel.FK_VanBan_LinhVucVanBan" FromRole="VanBan" ToRole="LinhVucVanBan" />
           <NavigationProperty Name="LoaiVanBan" Relationship="TechOfficeDevModel.FK_VanBan_LoaiVanBan" FromRole="VanBan" ToRole="LoaiVanBan" />
           <NavigationProperty Name="TapTinVanBans" Relationship="TechOfficeDevModel.FK_TapTinVanBan_VanBan" FromRole="VanBan" ToRole="TapTinVanBan" />
+          <NavigationProperty Name="CoQuanBanHanhVanBan" Relationship="TechOfficeDevModel.FK_VanBan_CoQuanBanHanhVanBan" FromRole="VanBan" ToRole="CoQuanBanHanhVanBan" />
         </EntityType>
         <Association Name="FK_User_ChucVu">
           <End Type="TechOfficeDevModel.ChucVu" Role="ChucVu" Multiplicity="1" />
@@ -1704,18 +1705,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ThuTuc_CoQuan">
-          <End Type="TechOfficeDevModel.CoQuan" Role="CoQuan" Multiplicity="1" />
-          <End Type="TechOfficeDevModel.ThuTuc" Role="ThuTuc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CoQuan">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ThuTuc">
-              <PropertyRef Name="CoQuanThucHienId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_CoQuan">
           <End Type="TechOfficeDevModel.CoQuan" Role="CoQuan" Multiplicity="1" />
           <End Type="TechOfficeDevModel.User" Role="User" Multiplicity="*" />
@@ -1749,18 +1738,6 @@
             </Principal>
             <Dependent Role="TacNghiep">
               <PropertyRef Name="LinhVucTacNghiepId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ThuTuc_LinhVucThuTuc">
-          <End Type="TechOfficeDevModel.LinhVucThuTuc" Role="LinhVucThuTuc" Multiplicity="1" />
-          <End Type="TechOfficeDevModel.ThuTuc" Role="ThuTuc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LinhVucThuTuc">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ThuTuc">
-              <PropertyRef Name="LoaiThuTucId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1881,18 +1858,6 @@
             </Principal>
             <Dependent Role="TapTinTacNghiep">
               <PropertyRef Name="UserUploadId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TapTinThuTuc_ThuTuc">
-          <End Type="TechOfficeDevModel.ThuTuc" Role="ThuTuc" Multiplicity="1" />
-          <End Type="TechOfficeDevModel.TapTinThuTuc" Role="TapTinThuTuc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ThuTuc">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TapTinThuTuc">
-              <PropertyRef Name="ThuTucId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2142,6 +2107,87 @@
           <Property Type="Int32" Name="Col34" Nullable="true" />
           <Property Type="Int32" Name="Col35" Nullable="true" />
         </ComplexType>
+        <EntityType Name="CoQuanBanHanhVanBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VanBans" Relationship="TechOfficeDevModel.FK_VanBan_CoQuanBanHanhVanBan" FromRole="CoQuanBanHanhVanBan" ToRole="VanBan" />
+        </EntityType>
+        <Association Name="FK_VanBan_CoQuanBanHanhVanBan">
+          <End Type="TechOfficeDevModel.CoQuanBanHanhVanBan" Role="CoQuanBanHanhVanBan" Multiplicity="1" />
+          <End Type="TechOfficeDevModel.VanBan" Role="VanBan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuanBanHanhVanBan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VanBan">
+              <PropertyRef Name="CoQuanBanHanhId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ThuTuc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoiDung" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayBanHanh" Type="DateTime" Precision="3" />
+          <Property Name="TenThuTuc" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="CoQuanThucHienId" Type="Int32" Nullable="false" />
+          <Property Name="LoaiThuTucId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CoQuan" Relationship="TechOfficeDevModel.FK_ThuTuc_CoQuan" FromRole="ThuTuc" ToRole="CoQuan" />
+          <NavigationProperty Name="LinhVucThuTuc" Relationship="TechOfficeDevModel.FK_ThuTuc_LinhVucThuTuc" FromRole="ThuTuc" ToRole="LinhVucThuTuc" />
+          <NavigationProperty Name="TapTinThuTucs" Relationship="TechOfficeDevModel.FK_TapTinThuTuc_ThuTuc" FromRole="ThuTuc" ToRole="TapTinThuTuc" />
+        </EntityType>
+        <Association Name="FK_ThuTuc_CoQuan">
+          <End Type="TechOfficeDevModel.CoQuan" Role="CoQuan" Multiplicity="1" />
+          <End Type="TechOfficeDevModel.ThuTuc" Role="ThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoQuan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThuTuc">
+              <PropertyRef Name="CoQuanThucHienId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThuTuc_LinhVucThuTuc">
+          <End Type="TechOfficeDevModel.LinhVucThuTuc" Role="LinhVucThuTuc" Multiplicity="1" />
+          <End Type="TechOfficeDevModel.ThuTuc" Role="ThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LinhVucThuTuc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThuTuc">
+              <PropertyRef Name="LoaiThuTucId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TapTinThuTuc_ThuTuc">
+          <End Type="TechOfficeDevModel.ThuTuc" Role="ThuTuc" Multiplicity="1" />
+          <End Type="TechOfficeDevModel.TapTinThuTuc" Role="TapTinThuTuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThuTuc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TapTinThuTuc">
+              <PropertyRef Name="ThuTucId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2464,23 +2510,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ThuTucs">
-            <EntityTypeMapping TypeName="TechOfficeDevModel.ThuTuc">
-              <MappingFragment StoreEntitySet="ThuTuc">
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="LoaiThuTucId" ColumnName="LoaiThuTucId" />
-                <ScalarProperty Name="CoQuanThucHienId" ColumnName="CoQuanThucHienId" />
-                <ScalarProperty Name="TenThuTuc" ColumnName="TenThuTuc" />
-                <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
-                <ScalarProperty Name="MaThuTuc" ColumnName="MaThuTuc" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TrangThaiCongViecs">
             <EntityTypeMapping TypeName="TechOfficeDevModel.TrangThaiCongViec">
               <MappingFragment StoreEntitySet="TrangThaiCongViec">
@@ -2609,6 +2638,37 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CoQuanBanHanhVanBans">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.CoQuanBanHanhVanBan">
+              <MappingFragment StoreEntitySet="CoQuanBanHanhVanBan">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThuTucs">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.ThuTuc">
+              <MappingFragment StoreEntitySet="ThuTuc">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LoaiThuTucId" ColumnName="LoaiThuTucId" />
+                <ScalarProperty Name="CoQuanThucHienId" ColumnName="CoQuanThucHienId" />
+                <ScalarProperty Name="TenThuTuc" ColumnName="TenThuTuc" />
+                <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

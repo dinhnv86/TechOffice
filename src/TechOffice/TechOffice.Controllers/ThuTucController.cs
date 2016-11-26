@@ -7,6 +7,10 @@ using Ninject;
 using PagedList;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.Entities.Results;
+using System.Collections.Generic;
+using System.Web;
+using System.IO;
+using System;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -21,6 +25,9 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public IThuTucRepository ThuTucRepository { get; set; }
 
+        [Inject]
+        public ITapTinThuTucRepository FilesRepository { get; set; }
+
         [HttpGet]
         public ActionResult Index(string thuTucCongViec, int? coQuanId, int? linhVucThuTucId)
         {
@@ -29,6 +36,80 @@ namespace AnThinhPhat.WebUI.Controllers
                 var model = CreateVanBanModel(thuTucCongViec, coQuanId, linhVucThuTucId);
                 return View(model);
             });
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult Add()
+        {
+            var init = IniViewModel();
+            var model = new AddThuTucViewModel
+            {
+                CoQuanInfos = init.CoQuanInfos,
+                LinhVucThuTucInfo = init.LinhVucThuTucInfo,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Add(AddThuTucViewModel model)
+        {
+            var dataSave = new ThuTucResult
+            {
+                NoiDung = model.NoiDung,
+                TenThuTuc = model.TenThuTuc,
+                NgayBanHanh = model.NgayBanHanh,
+                LoaiThuTucId = model.LinhVucThuTucId,
+                CoQuanThucHienId = model.CoQuanThucHienId,
+                CreatedBy = UserName,
+            };
+
+            var result = ThuTucRepository.Add(dataSave);
+
+            if (result == Services.SaveResult.SUCCESS && dataSave.Id > 0)
+                SaveFiles(dataSave.Id, model.Files);
+
+            return RedirectToRoute(UrlLink.THUTUC_EDIT, new { tenthutuc = dataSave.TenThuTuc.RejectMarks(), id = dataSave.Id });
+        }
+
+        [HttpGet, Authorize]
+        public ActionResult Edit(int id)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                var data = ThuTucRepository.Single(id);
+                var init = IniViewModel();
+                var model = new EditThuTucViewModel
+                {
+                    CoQuanThucHienId = data.CoQuanThucHienId,
+                    LinhVucThuTucId = data.LoaiThuTucId,
+                    NgayBanHanh = data.NgayBanHanh,
+                    MaThuTuc = data.NoiDung,
+                    TenThuTuc = data.TenThuTuc,
+                    TapTinThuTucResults = data.Files,
+                };
+                return View(model);
+            });
+        }
+
+        [HttpPost, Authorize]
+        public ActionResult Edit(int id, EditThuTucViewModel model)
+        {
+            var data = ThuTucRepository.Single(id);
+            data.LoaiThuTucId = model.LinhVucThuTucId;
+            data.CoQuanThucHienId = model.CoQuanThucHienId;
+            data.NoiDung = model.MaThuTuc;
+            data.NgayBanHanh = data.NgayBanHanh;
+            data.TenThuTuc = model.TenThuTuc;
+            data.LastUpdatedBy = UserName;
+
+            var result = ThuTucRepository.Update(data);
+            if (result == Services.SaveResult.SUCCESS)
+                SaveFiles(id, model.Files);
+
+            return RedirectToRoute(UrlLink.VANBAN);
         }
 
         public ActionResult List(ValueSearchViewModel search)
@@ -54,8 +135,8 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             var model = new InitThuTucViewModel
             {
-                LinhVucThuTucInfo = LinhVucThuTucRepository.GetAll().Select(x => x.ToIfNotNullDataInfo()),
-                CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo()),
+                LinhVucThuTucInfo = LinhVucThuTucRepository.GetAll().Select(x => x.ToDataInfo()),
+                CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToDataInfo()),
                 ValueSearch = new ValueSearchViewModel
                 {
                     ThuTucCongViec = thuTucCongViec,
@@ -81,6 +162,77 @@ namespace AnThinhPhat.WebUI.Controllers
                 seachAll = seachAll.Where(x => x.LoaiThuTucId == model.LinhVucThuTucId);
 
             return seachAll.ToPagedList(model.Page, TechOfficeConfig.PAGESIZE);
+        }
+
+        private ThuTucViewModel IniViewModel()
+        {
+            var data = new ThuTucViewModel
+            {
+                CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToDataInfo()),
+                LinhVucThuTucInfo = LinhVucThuTucRepository.GetAll().Select(x => x.ToDataInfo()),
+            };
+
+            return data;
+        }
+
+        private void SaveFiles(int id, IEnumerable<HttpPostedFileBase> files)
+        {
+            ExecuteTryLogException(() =>
+            {
+                foreach (var file in files)
+                {
+                    var path = SaveFilesVanBan(file, id);
+                    FilesRepository.Add(new TapTinThuTucResult
+                    {
+                        ThuTucId = id,
+                        CreatedBy = UserName,
+                        UserUploadId = UserId,
+                        Url = Path.Combine(TechOfficeConfig.FOLDER_TT, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR), file.FileName),
+                    });
+                }
+            });
+        }
+
+        private string SaveFilesVanBan(HttpPostedFileBase file, int vanBanId)
+        {
+            var folderVanBan = EnsureFolderThuTuc(vanBanId);
+            string savedFileName = Path.Combine(folderVanBan, Path.GetFileName(file.FileName));
+            try
+            {
+                file.SaveAs(savedFileName); // Save the file
+            }
+            catch (Exception ex)
+            {
+                LogService.Error(string.Format("Has error in while save file {0}", file.FileName), ex);
+            }
+
+            return folderVanBan;
+        }
+
+        private string EnsureFolderThuTuc(int id)
+        {
+            try
+            {
+                //1. Get folder upload
+                string folderUpload = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_TT);
+                EnsureFolder(folderUpload);
+
+                string folderVanBan = Path.Combine(folderUpload, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
+                EnsureFolder(folderVanBan);
+
+                return folderVanBan;
+            }
+            catch (Exception ex)
+            {
+                LogService.Error("Has error in while create new Temp folder upload", ex);
+                throw;
+            }
+        }
+
+        private void EnsureFolder(string folder)
+        {
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
         }
     }
 }

@@ -202,6 +202,5 @@ namespace AnThinhPhat.WebUI.Controllers
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
         }
-
     }
 }

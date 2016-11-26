@@ -15,7 +15,17 @@
         /// <summary>
         /// 
         /// </summary>
-        public static string VANBAN_DETAIL = "vanban/{id}";
+        public static string VANBAN_ADD = "vanban/add";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string VANBAN_DETAIL = "vanban/{sovanban}-{id}";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string VANBAN_EDIT = "vanban/edit/{sovanban}-{id}";
 
         /// <summary>
         /// 
@@ -25,7 +35,17 @@
         /// <summary>
         /// 
         /// </summary>
-        public static string THUTUC_DETAIL = "thutuc/{id}";
+        public static string THUTUC_ADD = "thutuc/add";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string THUTUC_DETAIL = "thutuc/{tenthutuc}-{id}";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string THUTUC_EDIT = "thutuc/{tenthutuc}-{id}";
 
         /// <summary>
         /// 
@@ -65,6 +85,7 @@
         public static string LINHVUCTACNGHIEP = "linhvuctacnghiep";
         public static string LOAIVANBAN = "loaivanban";
         public static string MUCDOHOANTHANH = "mucdohoanthanh";
+        public static string COQUANBANHANHVANBAN = "coquan-banhanh-vanban";
         //===================== MASTER URL ==========================//
 
         public static string ADMIN = "admin";
