@@ -832,7 +832,7 @@ ul.charttabs li{font-size:14px;padding:5px;}
 .navbar .nav li.dropdown > a:hover .caret, .navbar .nav li.dropdown > a:focus .caret,.navbar .nav li.dropdown > .dropdown-toggle .caret,.navbar .nav li.dropdown.open > .dropdown-toggle .caret, .navbar .nav li.dropdown.active > .dropdown-toggle .caret, .navbar .nav li.dropdown.open.active > .dropdown-toggle .caret{    border-top-color: #fff;
     border-bottom-color: #fff;}
 	.navbar .nav .dropdown-toggle .caret{margin-top:0px;}
-	.navbar-default .navbar-nav>li>a:hover,.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{color:#FAB03B !important;}
+	.navbar-default .navbar-nav>li>a:hover,.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{}
 	
 .cskh2,.cskh1,.hotline, .cskh{ padding:10px 24px 10px 33px; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; -o-box-sizing: border-box; -ms-box-sizing: border-box;}
 .cskh2{float:left}
