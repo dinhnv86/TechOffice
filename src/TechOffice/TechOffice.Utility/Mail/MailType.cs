@@ -16,7 +16,7 @@
 /// The Utilities namespace.
 /// </summary>
 
-namespace AnThinhPhat.Utilities
+namespace AnThinhPhat.Utilities.Mail
 {
     /// <summary>
     ///     Enum MailType

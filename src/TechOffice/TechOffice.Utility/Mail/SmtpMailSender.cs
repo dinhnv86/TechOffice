@@ -4,11 +4,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 
-/// <summary>
-/// 
-/// </summary>
-
-namespace AnThinhPhat.Utilities
+namespace AnThinhPhat.Utilities.Mail
 {
     /// <summary>
     /// </summary>
@@ -17,7 +13,7 @@ namespace AnThinhPhat.Utilities
         /// <summary>
         ///     Sends and email
         /// </summary>
-        /// <param name="to">Message to address</param>
+        /// <param name="toAddress"></param>
         /// <param name="body">Text of message to send</param>
         /// <param name="subject">Subject line of message</param>
         /// <param name="fromAddress">Message from address</param>
@@ -25,6 +21,11 @@ namespace AnThinhPhat.Utilities
         /// <param name="credentialUser">User whose credentials are used for message send</param>
         /// <param name="credentialPassword">User password used for message send</param>
         /// <param name="attachments">Optional attachments for message</param>
+        /// <param name="linkConfirm"></param>
+        /// <param name="passPlainText"></param>
+        /// <param name="mailType"></param>
+        /// <param name="mailPriority"></param>
+        /// <param name="mailServerAddress"></param>
         public static void Email(string mailServerAddress,
             string toAddress,
             string body,
@@ -43,7 +44,7 @@ namespace AnThinhPhat.Utilities
             body = UpgradeEmailFormat(body, linkConfirm, passPlainText, mailType);
             try
             {
-                var mail = new MailMessage { Body = body, IsBodyHtml = true };
+                var mail = new MailMessage {Body = body, IsBodyHtml = true};
 
                 var toArray = toAddress.Split(';');
 
@@ -67,7 +68,7 @@ namespace AnThinhPhat.Utilities
                     smtp.Send(mail);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 var sb = new StringBuilder(1024);
                 sb.Append("\\nTo:" + toAddress);
@@ -116,7 +117,7 @@ namespace AnThinhPhat.Utilities
             body = UpgradeEmailFormat(body, linkConfirm, passPlainText, mailType);
             try
             {
-                var mail = new MailMessage { Body = body, IsBodyHtml = true };
+                var mail = new MailMessage {Body = body, IsBodyHtml = true};
 
                 var toArray = toAddress.Split(';');
 
@@ -162,7 +163,8 @@ namespace AnThinhPhat.Utilities
         /// <param name="passPlainText">The pass plain text.</param>
         /// <param name="mailType">Type of the mail.</param>
         /// <returns></returns>
-        private static string UpgradeEmailFormat(string body, string linkConfirm, string passPlainText, MailType mailType)
+        private static string UpgradeEmailFormat(string body, string linkConfirm, string passPlainText,
+            MailType mailType)
         {
             var ebody = body;
             // This has to be implemented as needed. Currently doing nothing!

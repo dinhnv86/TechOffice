@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AnThinhPhat.Resources;
 
 namespace AnThinhPhat.ViewModel.TacNghiep
 {
@@ -10,7 +11,8 @@ namespace AnThinhPhat.ViewModel.TacNghiep
 
         public string Guid { get; set; }
 
-        [Required(ErrorMessage = "Xin vui lòng nhập nôi dung phản hồi")]
+        [Required(ErrorMessageResourceType = typeof (Messages),
+            ErrorMessageResourceName = "TacNghiep_EditNoiDungYKienCuaCoQuan_NoiDung")]
         public string NoiDung { get; set; }
     }
 }

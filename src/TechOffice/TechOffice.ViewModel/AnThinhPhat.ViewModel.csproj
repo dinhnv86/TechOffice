@@ -60,7 +60,6 @@
     <Compile Include="Menu\InitMenuThuTucViewModel.cs" />
     <Compile Include="Menu\InitMenuVanBanViewModel.cs" />
     <Compile Include="CongViec\InitCongViecViewModel.cs" />
-    <Compile Include="CongViec\ResultSearchViewModel.cs" />
     <Compile Include="CongViec\ValueSearchViewModel.cs" />
     <Compile Include="CoQuan\CoQuanViewModel.cs" />
     <Compile Include="HelpExtension.cs" />
@@ -75,7 +74,6 @@
     <Compile Include="TacNghiep\InitNoiDungYKienCuaCacCoQuanViewModel.cs" />
     <Compile Include="TacNghiep\InitTacNghiepThongKeViewModel.cs" />
     <Compile Include="TacNghiep\InitTacNghiepViewModel.cs" />
-    <Compile Include="TacNghiep\ResultSearchViewModel.cs" />
     <Compile Include="TacNghiep\ResultStatisticByCoQuanViewModel.cs" />
     <Compile Include="TacNghiep\ResultStatisticByCongViecViewModel.cs" />
     <Compile Include="TacNghiep\ValueSearchStatisticViewModel.cs" />

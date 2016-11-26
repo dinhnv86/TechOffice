@@ -17,7 +17,7 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
 
-namespace AnThinhPhat.Utilities
+namespace AnThinhPhat.Utilities.Mail
 {
     public class MailAttachment
     {

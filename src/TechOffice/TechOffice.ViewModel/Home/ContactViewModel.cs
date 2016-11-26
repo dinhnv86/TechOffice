@@ -5,19 +5,19 @@ namespace AnThinhPhat.ViewModel.Home
 {
     public class ContactViewModel
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Messages), ErrorMessageResourceName = "Home_Contact_FullName")]
         public string FullName { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Messages), ErrorMessageResourceName = "Home_Contact_Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Messages), ErrorMessageResourceName = "Home_Contact_Title")]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Messages), ErrorMessageResourceName = "Home_Contact_NoiDung")]
         public string NoiDung { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Messages), ErrorMessageResourceName = "Home_Contact_MaXacNhan")]
         public string CaptchaInputText { get; set; }
     }
 }

@@ -581,5 +581,23 @@ namespace AnThinhPhat.Resources {
                 return ResourceManager.GetString("UploadFiles_Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vai trò.
+        /// </summary>
+        public static string Users_AddUserViewModel_Role {
+            get {
+                return ResourceManager.GetString("Users_AddUserViewModel_Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu.
+        /// </summary>
+        public static string Users_LoginViewModel_Password {
+            get {
+                return ResourceManager.GetString("Users_LoginViewModel_Password", resourceCulture);
+            }
+        }
     }
 }

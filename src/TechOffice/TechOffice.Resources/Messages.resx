@@ -118,10 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Account_Login_Incorrect" xml:space="preserve">
-    <value>Tài khoản người dùng không hợ lệ</value>
+    <value>Tài khoản người dùng không hợp lệ</value>
   </data>
   <data name="Account_Login_Locked" xml:space="preserve">
     <value>Tài khoản của bạn hiện tại đang bị khóa. Xin vui lòng liên hệ với quản trị hệ thống</value>
+  </data>
+  <data name="BaseDataViewModel_Name" xml:space="preserve">
+    <value>Xin vui lòng nhập tên</value>
+  </data>
+  <data name="BaseDataViewModel_Name_MaxLength" xml:space="preserve">
+    <value>Chiều dài tối đa là 255 ký tự</value>
   </data>
   <data name="CongViec_Add_LinhVucCongViec" xml:space="preserve">
     <value>Xin vui lòng chọn lĩnh vực công việc</value>
@@ -140,5 +146,50 @@
   </data>
   <data name="CongViec_Statistic_To" xml:space="preserve">
     <value>Xin vui lòng nhập ngày</value>
+  </data>
+  <data name="CoQuan_CoQuanViewModel_CoQuanId" xml:space="preserve">
+    <value>Xin vui lòng chọn nhóm cơ quan</value>
+  </data>
+  <data name="Home_Contact_Email" xml:space="preserve">
+    <value>Xin vui lòng nhập email</value>
+  </data>
+  <data name="Home_Contact_FullName" xml:space="preserve">
+    <value>Xin vui lòng nhập họ tên</value>
+  </data>
+  <data name="Home_Contact_MaXacNhan" xml:space="preserve">
+    <value>Xin vui lòng nhập mã xác nhận</value>
+  </data>
+  <data name="Home_Contact_NoiDung" xml:space="preserve">
+    <value>Xin vui lòng nhập nội dung</value>
+  </data>
+  <data name="Home_Contact_Title" xml:space="preserve">
+    <value>Xin vui lòng nhập tiêu đề</value>
+  </data>
+  <data name="Users_LoginViewModel_Password" xml:space="preserve">
+    <value>Xin vui lòng nhập mật khẩu</value>
+  </data>
+  <data name="Users_LoginViewModel_Password_MaxLength" xml:space="preserve">
+    <value>Chiều dài tối thiểu của mật khẩu là 20 ký tự</value>
+  </data>
+  <data name="Users_LoginViewModel_Password_MinLength" xml:space="preserve">
+    <value>Chiều dài tối thiểu của mật khẩu là 6 ký tự</value>
+  </data>
+  <data name="Users_LoginViewModel_UserName" xml:space="preserve">
+    <value>Xin vui lòng nhập tên đăng nhập</value>
+  </data>
+  <data name="TacNghiep_EditNoiDungYKienCuaCoQuan_NoiDung" xml:space="preserve">
+    <value>Xin vui lòng nhập nôi dung phản hồi</value>
+  </data>
+  <data name="TacNgiep_AddTacNghiepViewModel_LinhVucTacNghiep" xml:space="preserve">
+    <value>Xin vui lòng chọn lĩnh vực tác nghiệp</value>
+  </data>
+  <data name="TacNgiep_AddTacNghiepViewModel_NgayHetHan" xml:space="preserve">
+    <value>Xin vui lòng nhập ngày hết hạn</value>
+  </data>
+  <data name="TacNgiep_AddTacNghiepViewModel_NgayTao" xml:space="preserve">
+    <value>Xin vui lòng nhập ngày tạo</value>
+  </data>
+  <data name="TacNgiep_AddTacNghiepViewModel_NoiDung" xml:space="preserve">
+    <value>Xin vui lòng nhập nội dung</value>
   </data>
 </root>
