@@ -1,0 +1,99 @@
+﻿@model AnThinhPhat.ViewModel.CongViec.InitValueStatictisSearchViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutCV.cshtml";
+}
+
+<div class="bg dtapg">
+    <div class="boxr" style="width:100%">
+        <h1 class="title title_ct"><span>@Labels.CongViec_Statistic_Title</span></h1>
+        <div class="pading">
+            <div class="entry">
+                @using (Html.BeginRouteForm(UrlLink.CONGVIEC_THONGKE_TIMKIEM))
+                {
+                    <div class="col-md-6">
+                        <label>@Labels.CongViec_Statistic_From</label>
+                        @Html.EditorFor(x => Model.From, "DateTime")
+                        @Html.ValidationMessageFor(x => Model.From)
+                    </div>
+                    <div class="col-md-6">
+                        <label>@Labels.CongViec_Statistic_To</label>
+                        @Html.EditorFor(x => Model.To, "DateTime")
+                        @Html.ValidationMessageFor(x => Model.To)
+                    </div>
+                    <div class="clearfix" style="padding-bottom:15px"></div>
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-primary" value="THONGKE" name="ButtonType" id="btnThongKe">@Buttons.CongViec_Statistic_ThongKe</button>
+                    </div>
+                    <div class="clearfix" style="padding-bottom:15px"></div>
+                    <div class="clearfix" style="padding-bottom:15px;"></div>
+
+                    <div class="col-md-6">
+                        <label>@Labels.CongViec_Statistic_ChonNhanVien</label>
+                        @Html.DropDownListFor(x => Model.UserId, new SelectList(Model.UserInfoNoiVu, "Id", "HoVaTen"), "-- Chọn nhân viên --", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        <label>@Labels.CongViec_Statistic_VaiTroXuLy</label>
+                        @Html.OfficeEnumDropDownListFor(x => Model.VaiTroXuLy, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        <label>@Labels.CongViec_Statistic_TrangThaiXuLy</label>
+                        @Html.DropDownListFor(x => Model.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>@Labels.CongViec_Statistic_LinhVucCongViec</label>
+                        @Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="clearfix" style="padding-bottom:15px;"></div>
+                    <div class="col-xs-12">
+                        <label>@Labels.CongViec_Statistic_NoiDungCongViec</label>
+                        @Html.TextBoxFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="clearfix" style="padding-bottom:15px;"></div>
+                    <div class="col-md-4">
+                        <label>@Labels.CongViec_Statistic_SoVanBan</label>
+                        @Html.TextBoxFor(x => Model.SoVanBan, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>@Labels.CongViec_Statistic_NoiDungVanBan</label>
+                        @Html.TextBoxFor(x => Model.NoiDungVanBan, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>@Labels.CongViec_Statistic_CoQuan</label>
+                        @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "-- Chọn cơ quan --", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="clearfix" style="padding-bottom:15px;"></div>
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary" value="SEARCH" style="min-width:100px;" name="buttonType" id="btnSearch">@Buttons.CongViec_Statistic_Tim</button>
+                    </div>
+                    <div class="clearfix" style="padding-bottom:15px;"></div>
+                    <div class="clearfix" style="padding-bottom:15px;"></div>
+                    <div class="col-xs-12">
+                        <label>@Labels.CongViec_Statistic_OrderShow</label>
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.OfficeEnumDropDownListFor(x => Model.OrderRole, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.OfficeEnumDropDownListFor(x => Model.OrderStatus, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.DropDownListFor(x => Model.OrderLinhVucCongViec, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), "Không chọn", htmlAttributes: new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-xs-12" id="outer" style="padding-top:20px;">
+                        <div class="inner">
+                            <button type="submit" value='THONGKECONGVIEC' class="btn btn-primary" name="buttonType" id="btnThongKeCongViec">@Buttons.CongViec_Statistic_ThongKeCongViec</button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/app/congviec-statistic.js"></script>
+}
