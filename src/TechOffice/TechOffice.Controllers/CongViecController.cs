@@ -186,12 +186,12 @@ namespace AnThinhPhat.WebUI.Controllers
                 CoQuanId = model.CoQuanId,
             });
 
-            var results = new List<SummariesViewModel>();
+            var results = new List<SummariesCongViecResult>();
             if (finds != null && finds.Any())
             {
                 finds.ToList().ForEach(x =>
                 {
-                    results.Add(new SummariesViewModel
+                    results.Add(new SummariesCongViecResult
                     {
                         NgayTao = x.NgayTao.ToString("dd/MM/yyyy"),
                         NgayHetHan = x.NgayHetHan?.ToString("dd/MM/yyyy"),
