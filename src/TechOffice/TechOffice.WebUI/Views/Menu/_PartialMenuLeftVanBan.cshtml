@@ -10,20 +10,20 @@
     <div class="menu_products">
         <ul id="menu_left">
             <li>
-                @Html.RouteLink("Tất cả văn bản", AnThinhPhat.Utilities.UrlLink.VANBAN)
+                @Html.RouteLink("Tất cả văn bản", UrlLink.VANBAN)
             </li>
-            <li>@Html.RouteLink("Cơ quan ban hành", AnThinhPhat.Utilities.UrlLink.VANBAN)</li>
-            @foreach (var item in Model.LinhVucVanBanInfos)
+            <li>@Html.RouteLink("Cơ quan ban hành", UrlLink.VANBAN)</li>
+            @foreach (var item in Model.CoQuanBanHanhVanBanInfos)
             {
                 <li style="list-style:none; padding-left:30px;">
-                    @Html.RouteLink(item.Name, AnThinhPhat.Utilities.UrlLink.VANBAN, routeValues: new { coQuanId = item.Id })
+                    @Html.RouteLink(item.Name, UrlLink.VANBAN, routeValues: new { coQuanBanHanhVanBanId = item.Id })
                 </li>
             }
-            <li>@Html.RouteLink("Loại văn bản", AnThinhPhat.Utilities.UrlLink.VANBAN)</li>
+            <li>@Html.RouteLink("Loại văn bản", UrlLink.VANBAN)</li>
             @foreach (var item in Model.LoaiVanBanInfos)
             {
                 <li style="list-style:none; padding-left:30px;">
-                    @Html.RouteLink(item.Name, AnThinhPhat.Utilities.UrlLink.VANBAN, routeValues: new { loaiVanBanId = item.Id })
+                    @Html.RouteLink(item.Name, UrlLink.VANBAN, routeValues: new { loaiVanBanId = item.Id })
                 </li>
             }
         </ul>

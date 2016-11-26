@@ -21,7 +21,7 @@ namespace AnThinhPhat.Entities
         }
     
         public int Id { get; set; }
-        public string MaThuTuc { get; set; }
+        public string NoiDung { get; set; }
         public Nullable<System.DateTime> NgayBanHanh { get; set; }
         public string TenThuTuc { get; set; }
         public int CoQuanThucHienId { get; set; }

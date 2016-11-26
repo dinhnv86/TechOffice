@@ -1,6 +1,5 @@
-﻿using System;
-using AnThinhPhat.Entities.Infos;
-using System.Collections;
+﻿using AnThinhPhat.Entities.Infos;
+using System;
 using System.Collections.Generic;
 
 namespace AnThinhPhat.Entities.Results
@@ -23,7 +22,7 @@ namespace AnThinhPhat.Entities.Results
 
         public int LinhVucVanBanId { get; set; }
 
-        public CoQuanInfo CoQuanInfo { get; set; }
+        public CoQuanBanHanhVanBanInfo CoQuanBanHanhVanBanInfo { get; set; }
 
         public LoaiVanBanInfo LoaiVanBanInfo { get; set; }
 

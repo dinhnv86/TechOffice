@@ -34,7 +34,7 @@
                         <div class="inner">
                             <input type="submit" value='@Buttons.CongViec_Index_TimKiem' class="btn btn-primary" id="btnSearch" />
                         </div>
-                        <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThongKe, UrlLink.CONGVIEC_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })</div>
+                        <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThongKe, UrlLink.CONGVIEC_THONGKE_TIMKIEM, null, htmlAttributes: new { @class = "btn btn-primary" })</div>
                         <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThemMoi, "congviec/themmoi", null, htmlAttributes: new { @class = "btn btn-primary" })</div>
                     </div>
                 }
@@ -46,9 +46,3 @@
         </div>
     </div>
 </div>
-@section Scripts{
-    <script>
-        $(document).ready(function () {
-        });
-    </script>
-}

@@ -22,12 +22,22 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.VANBAN, UrlLink.VANBAN,
                 new { controller = "VanBan", action = "Index" });
 
+            routes.MapRoute(UrlLink.VANBAN_ADD, UrlLink.VANBAN_ADD,
+              new { controller = "VanBan", action = "Add" });
+
             routes.MapRoute(UrlLink.VANBAN_DETAIL, UrlLink.VANBAN_DETAIL,
               new { controller = "VanBan", action = "Detail" },
               new { id = @"\d+" });
 
+            routes.MapRoute(UrlLink.VANBAN_EDIT, UrlLink.VANBAN_EDIT,
+             new { controller = "VanBan", action = "Edit" },
+             new { id = @"\d+" });
+
             routes.MapRoute(UrlLink.THUTUC, UrlLink.THUTUC,
                 new { controller = "ThuTuc", action = "Index" });
+
+            routes.MapRoute(UrlLink.THUTUC_ADD, UrlLink.THUTUC_ADD,
+               new { controller = "ThuTuc", action = "Add" });
 
             routes.MapRoute(UrlLink.THUTUC_DETAIL, UrlLink.THUTUC_DETAIL,
               new { controller = "ThuTuc", action = "Detail" },
@@ -54,8 +64,17 @@ namespace AnThinhPhat.WebUI
             new { controller = "TacNghiep", action = "Detail" },
             new { id = @"\d+" });
 
+            routes.MapRoute(UrlLink.CONGVIEC_THONGKE_TIMKIEM, UrlLink.CONGVIEC_THONGKE_TIMKIEM,
+             new { controller = "CongViec", action = "StatisticAndSearch" });
+
             routes.MapRoute(UrlLink.CONGVIEC_THONGKE, UrlLink.CONGVIEC_THONGKE,
-             new { controller = "CongViec", action = "Statistic" });
+            new { controller = "CongViec", action = "Statistic" });
+
+            routes.MapRoute(UrlLink.CONGVIEC_THONGKE_TONGHOP, UrlLink.CONGVIEC_THONGKE_TONGHOP,
+            new { controller = "CongViec", action = "Summaries" });
+
+            routes.MapRoute(UrlLink.CONGVIEC_TIMKIEM, UrlLink.CONGVIEC_TIMKIEM,
+            new { controller = "CongViec", action = " Search" });
 
             routes.MapRoute(UrlLink.CONGVIEC_ADD, UrlLink.CONGVIEC_ADD,
               new { controller = "CongViec", action = "Add" });
@@ -111,6 +130,9 @@ namespace AnThinhPhat.WebUI
 
             routes.MapRoute(UrlLink.MUCDOHOANTHANH, UrlLink.MUCDOHOANTHANH,
              new { controller = "MucDoHoanThanh", action = "Index" });
+
+            routes.MapRoute(UrlLink.COQUANBANHANHVANBAN, UrlLink.COQUANBANHANHVANBAN,
+            new { controller = "CoQuanBanHanhVanBan", action = "Index" });
             //===========================================CRUD DATA=======================================//
 
             routes.MapRoute(UrlLink.ADMIN, UrlLink.ADMIN,

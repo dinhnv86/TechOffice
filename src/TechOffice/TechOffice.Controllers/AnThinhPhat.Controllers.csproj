@@ -30,11 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CaptchaMvc">
+      <HintPath>..\..\..\Assemblies\CaptchaMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Assemblies\Microsoft.ReportViewer.WebForms.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
@@ -66,6 +73,7 @@
     <Compile Include="MenuController.cs" />
     <Compile Include="LinhVucTacNghiepController.cs" />
     <Compile Include="LinhVucVanBanController.cs" />
+    <Compile Include="CoQuanBanHanhVanBanController.cs" />
     <Compile Include="TacNghiepTinhHinhThucHienController.cs" />
     <Compile Include="UsersController.cs" />
     <Compile Include="MucDoHoanThanhController.cs" />

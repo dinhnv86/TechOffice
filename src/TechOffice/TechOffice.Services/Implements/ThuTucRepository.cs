@@ -22,8 +22,12 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    entity.AddToDb(context);
-                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    var add = entity.AddToDb(context);
+                    var result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+
+                    entity.Id = add.Id;
+
+                    return result;
                 }
             });
         }

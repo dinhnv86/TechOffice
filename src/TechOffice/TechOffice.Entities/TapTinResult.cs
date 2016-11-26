@@ -9,5 +9,9 @@ namespace AnThinhPhat.Entities
         public string Url { get; set; }
 
         public UserInfo UserInfo { get; set; }
+
+        public string Path { get; set; }
+
+        public string FileName { get; set; }
     }
 }

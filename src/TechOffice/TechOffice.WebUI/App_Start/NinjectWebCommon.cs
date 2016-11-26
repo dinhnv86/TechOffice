@@ -85,7 +85,7 @@ namespace AnThinhPhat.WebUI
             kernel.Bind<IMucTinRepository>().To<MucTinRepository>().WithConstructorArgument(logService);
             kernel.Bind<INhomCoQuanRepository>().To<NhomCoQuanRepository>().WithConstructorArgument(logService);
             kernel.Bind<IRoleRepository>().To<RolesRepository>().WithConstructorArgument(logService);
-            //kernel.Bind<ITacNghiepCoQuanLienQuanRepository>().To<TacNghiepCoQuanLienQuanRepository>().WithConstructorArgument(logService);
+            kernel.Bind<ICoQuanBanHanhVanBanRepository>().To<CoQuanBanHanhVanBanRepository>().WithConstructorArgument(logService);
             kernel.Bind<ITacNghiepRepository>().To<TacNghiepRepository>().WithConstructorArgument(logService);
             kernel.Bind<ITacNghiepTinhHinhThucHienRepository>().To<TacNghiepTinhHinhThucHienRepository>().WithConstructorArgument(logService);
             kernel.Bind<ITacNghiepYKienCoQuanRepository>().To<TacNghiepYKienCoQuanRepository>().WithConstructorArgument(logService);

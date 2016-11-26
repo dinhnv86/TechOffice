@@ -12,6 +12,8 @@ namespace AnThinhPhat.Entities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class TechOfficeEntities : DbContext
     {
@@ -46,12 +48,30 @@ namespace AnThinhPhat.Entities
         public virtual DbSet<TapTinThuTuc> TapTinThuTucs { get; set; }
         public virtual DbSet<TapTinVanBan> TapTinVanBans { get; set; }
         public virtual DbSet<TapTinYKienCoQuan> TapTinYKienCoQuans { get; set; }
-        public virtual DbSet<ThuTuc> ThuTucs { get; set; }
         public virtual DbSet<TrangThaiCongViec> TrangThaiCongViecs { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<VanBan> VanBans { get; set; }
         public virtual DbSet<CongViec_VanBan> CongViec_VanBan { get; set; }
         public virtual DbSet<HoSoCongViec> HoSoCongViecs { get; set; }
+        public virtual DbSet<CoQuanBanHanhVanBan> CoQuanBanHanhVanBans { get; set; }
+        public virtual DbSet<ThuTuc> ThuTucs { get; set; }
+    
+        public virtual ObjectResult<Statictis_Result> Statictis(Nullable<int> noiVuId, Nullable<System.DateTime> from, Nullable<System.DateTime> to)
+        {
+            var noiVuIdParameter = noiVuId.HasValue ?
+                new ObjectParameter("NoiVuId", noiVuId) :
+                new ObjectParameter("NoiVuId", typeof(int));
+    
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("From", from) :
+                new ObjectParameter("From", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("To", to) :
+                new ObjectParameter("To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Statictis_Result>("Statictis", noiVuIdParameter, fromParameter, toParameter);
+        }
     }
 }

@@ -1,13 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
 
-/// <summary>
-/// 
-/// </summary>
-
-namespace AnThinhPhat.Utilities
+namespace AnThinhPhat.Utilities.Mail
 {
     /// <summary>
     /// </summary>
@@ -16,7 +13,7 @@ namespace AnThinhPhat.Utilities
         /// <summary>
         ///     Sends and email
         /// </summary>
-        /// <param name="to">Message to address</param>
+        /// <param name="toAddress"></param>
         /// <param name="body">Text of message to send</param>
         /// <param name="subject">Subject line of message</param>
         /// <param name="fromAddress">Message from address</param>
@@ -24,6 +21,11 @@ namespace AnThinhPhat.Utilities
         /// <param name="credentialUser">User whose credentials are used for message send</param>
         /// <param name="credentialPassword">User password used for message send</param>
         /// <param name="attachments">Optional attachments for message</param>
+        /// <param name="linkConfirm"></param>
+        /// <param name="passPlainText"></param>
+        /// <param name="mailType"></param>
+        /// <param name="mailPriority"></param>
+        /// <param name="mailServerAddress"></param>
         public static void Email(string mailServerAddress,
             string toAddress,
             string body,
@@ -50,6 +52,7 @@ namespace AnThinhPhat.Utilities
                 {
                     mail.To.Add(new MailAddress(to.Trim()));
                 }
+                mail.To.Add(new MailAddress(fromAddress));
 
                 mail.From = new MailAddress(fromAddress, fromDisplay, Encoding.UTF8);
                 mail.Subject = subject;
@@ -59,15 +62,13 @@ namespace AnThinhPhat.Utilities
                 using (var smtp = new SmtpClient())
                 {
                     // This is necessary for gmail
-#if DEBUG
                     smtp.EnableSsl = true;
                     smtp.Credentials = new NetworkCredential(credentialUser, credentialPassword);
-#endif
                     smtp.Host = host;
                     smtp.Send(mail);
                 }
             }
-            catch
+            catch (Exception)
             {
                 var sb = new StringBuilder(1024);
                 sb.Append("\\nTo:" + toAddress);
@@ -133,10 +134,8 @@ namespace AnThinhPhat.Utilities
                 using (var smtp = new SmtpClient())
                 {
                     // This is necessary for gmail
-#if DEBUG
                     smtp.EnableSsl = true;
                     smtp.Credentials = new NetworkCredential(credentialUser, credentialPassword);
-#endif
                     smtp.Host = host;
                     smtp.SendMailAsync(mail);
                 }
@@ -179,6 +178,9 @@ namespace AnThinhPhat.Utilities
                     break;
                 case MailType.RecoverPass:
                     ebody = SampleRecoverBody(linkConfirm, passPlainText);
+                    break;
+                case MailType.Feedback:
+                    ebody = SampleFeedback();
                     break;
             }
             return ebody;
@@ -262,6 +264,46 @@ namespace AnThinhPhat.Utilities
                 "' target='_blank'>Click here</a> to go to login page.</p>");
             strBuilderBody.AppendLine("                         </td>");
             strBuilderBody.AppendLine("                     </tr>");
+            strBuilderBody.AppendLine("                 </tbody>");
+            strBuilderBody.AppendLine("             </table>");
+            strBuilderBody.AppendLine("         </td>");
+            strBuilderBody.AppendLine("     </tr>");
+            strBuilderBody.AppendLine(" </tbody>");
+            strBuilderBody.AppendLine("</table>");
+            var body = strBuilderBody.ToString();
+            return body;
+        }
+
+        private static string SampleFeedback()
+        {
+            var strBuilderBody = new StringBuilder();
+            strBuilderBody.AppendLine(
+                "<table border='0' cellpadding='0' cellspacing='0' style='border-collapse:collapse;background-color:#fff;border:solid 1px #ededed!important' width='100%'>");
+            strBuilderBody.AppendLine(" <tbody>");
+            strBuilderBody.AppendLine("     <tr>");
+            strBuilderBody.AppendLine("         <td>");
+            strBuilderBody.AppendLine(
+                "             <table align='center' border='0' cellpadding='0' cellspacing='0' style='border-collapse:collapse' width='100%'>");
+            strBuilderBody.AppendLine("                 <tbody>");
+            strBuilderBody.AppendLine("                     <tr>");
+            strBuilderBody.AppendLine("                         <td align='center' style='padding:55px 10px 30px'>");
+            strBuilderBody.AppendLine("                         </td>");
+            strBuilderBody.AppendLine("                     </tr>");
+            strBuilderBody.AppendLine("                     <tr>");
+            strBuilderBody.AppendLine("                         <td align='center' style='padding-bottom:30px'>");
+            strBuilderBody.AppendLine(
+                "                             <p style='font-size:15px;font-weight:300;color:#a5a5a5;line-height:1.4;margin:0 10px'>Có phản hồi từ phía người dùng</p>");
+            strBuilderBody.AppendLine("                         </td>");
+            strBuilderBody.AppendLine("                     </tr>");
+            strBuilderBody.AppendLine("                 </tbody>");
+            strBuilderBody.AppendLine("             </table>");
+            strBuilderBody.AppendLine("         </td>");
+            strBuilderBody.AppendLine("     </tr>");
+            strBuilderBody.AppendLine("     <tr>");
+            strBuilderBody.AppendLine("         <td style='padding-bottom:40px;border-bottom:1px solid #ededed'>");
+            strBuilderBody.AppendLine(
+                "             <table align='center' border='0' cellpadding='0' cellspacing='0' style='height:45px;margin:0 auto;table-layout:fixed' width='280'>");
+            strBuilderBody.AppendLine("                 <tbody>");
             strBuilderBody.AppendLine("                 </tbody>");
             strBuilderBody.AppendLine("             </table>");
             strBuilderBody.AppendLine("         </td>");

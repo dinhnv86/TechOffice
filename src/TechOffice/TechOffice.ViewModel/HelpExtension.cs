@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Infos;
 using AnThinhPhat.Entities.Results;
-using AnThinhPhat.ViewModel.CoQuan;
-using AnThinhPhat.ViewModel.Users;
-using AnThinhPhat.ViewModel.TacNghiep;
-using System.Security.Principal;
-using System.Security.Claims;
 using AnThinhPhat.Entities.Searchs;
+using AnThinhPhat.ViewModel.CoQuan;
+using AnThinhPhat.ViewModel.TacNghiep;
+using AnThinhPhat.ViewModel.Users;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -122,7 +122,9 @@ namespace AnThinhPhat.ViewModel
                 NgayTao = entity.NgayTao,
                 NoiDung = entity.NoiDung,
                 NoiDungTraoDoi = entity.NoiDungYKienTraoDoi,
-                CoQuanInfos = entity.CoQuanInfos.Select(x => x.CoQuanInfos.Where(y => y.IsSelected)).Aggregate((a, b) => { return a.Concat(b); }),
+                CoQuanInfos =
+                    entity.CoQuanInfos.Select(x => x.CoQuanInfos.Where(y => y.IsSelected))
+                        .Aggregate((a, b) => { return a.Concat(b); })
             };
         }
 
@@ -136,7 +138,7 @@ namespace AnThinhPhat.ViewModel
                 NamBanHanhId = valueSearch.NamBanHanhId,
                 NhomCoquanId = valueSearch.NhomCoquanId,
                 NoiDungTimKiem = valueSearch.NoiDungTimKiem,
-                SearchTypeValue = valueSearch.SearchTypeValue,
+                SearchTypeValue = valueSearch.SearchTypeValue
             };
         }
 
@@ -144,20 +146,25 @@ namespace AnThinhPhat.ViewModel
         {
             return new ValueSearchCongViec
             {
+                From = valueSearch.From,
+                To = valueSearch.To,
                 NhanVienId = valueSearch.UserId,
                 LinhVucCongViecId = valueSearch.LinhVucCongViecId,
                 NoiDungCongViec = valueSearch.NoiDungCongViec,
                 Role = valueSearch.Role,
                 TrangThaiCongViecId = valueSearch.TrangThaiCongViecId,
+                SoVanBan = valueSearch.SoVanBan,
+                NoiDungVanBan = valueSearch.NoiDungVanBan,
+                CoQuanId = valueSearch.CoQuanId
             };
         }
 
         public static TResult ToDataResult<TResult>(this BaseDataViewModel entity) where TResult : DataResult
         {
-            var type = typeof(TResult);
-            var result = (TResult)Activator.CreateInstance(type);
+            var type = typeof (TResult);
+            var result = (TResult) Activator.CreateInstance(type);
 
-            var proInfoFirsts = typeof(TResult).GetProperties();
+            var proInfoFirsts = typeof (TResult).GetProperties();
 
             foreach (var info in proInfoFirsts)
             {
@@ -194,7 +201,7 @@ namespace AnThinhPhat.ViewModel
 
         public static string FullName(this IIdentity identity)
         {
-            ClaimsIdentity claims = (ClaimsIdentity)identity;
+            var claims = (ClaimsIdentity) identity;
 
             return claims.Claims.Where(x => x.Type == ClaimTypes.Surname).Select(x => x.Value).FirstOrDefault();
         }

@@ -1,6 +1,6 @@
-﻿using AnThinhPhat.Entities.Results;
+﻿using System.Collections.Generic;
+using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Utilities;
-using System.Collections.Generic;
 
 namespace AnThinhPhat.ViewModel.CongViec
 {
@@ -13,8 +13,6 @@ namespace AnThinhPhat.ViewModel.CongViec
         public int? LinhVucCongViecId { get; set; }
 
         public int? TrangThaiCongViecId { get; set; }
-
-        //public EnumStatus Status { get; set; }
 
         public EnumRoleExecute Role { get; set; }
 

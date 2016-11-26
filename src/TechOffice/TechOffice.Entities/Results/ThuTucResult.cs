@@ -6,7 +6,7 @@ namespace AnThinhPhat.Entities.Results
 {
     public class ThuTucResult : BaseResult
     {
-        public string MaThuTuc { get; set; }
+        public string NoiDung { get; set; }
 
         public DateTime? NgayBanHanh { get; set; }
 

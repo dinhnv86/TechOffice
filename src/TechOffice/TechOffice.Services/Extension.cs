@@ -25,12 +25,14 @@ namespace AnThinhPhat.Services
             return context.OpenConnection().BeginTransaction();
         }
 
-        public static void AddToDb(this VanBanResult entity, TechOfficeEntities context)
+        public static VanBan AddToDb(this VanBanResult entity, TechOfficeEntities context)
         {
             var add = context.VanBans.Create();
 
             add.TenVanBan = entity.TenVanBan;
             add.SoVanBan = entity.SoVanBan;
+            add.NoiDung = entity.NoiDung;
+            add.TrichYeu = entity.TrichYeu;
             add.NgayBanHanh = entity.NgayBanHanh;
             add.CoQuanBanHanhId = entity.CoQuanBanHanhId;
             add.LoaiVanBanId = entity.LoaiVanBanId;
@@ -41,6 +43,8 @@ namespace AnThinhPhat.Services
             add.CreateDate = DateTime.Now;
 
             context.Entry(add).State = EntityState.Added;
+
+            return add;
         }
 
         public static void DeleteToDb(this VanBan entity, DbContext context, string userName = null)
@@ -70,7 +74,7 @@ namespace AnThinhPhat.Services
 
         }
 
-        public static void AddToDb(this ThuTucResult entity, TechOfficeEntities context)
+        public static ThuTuc AddToDb(this ThuTucResult entity, TechOfficeEntities context)
         {
             var add = context.ThuTucs.Create();
 
@@ -78,13 +82,15 @@ namespace AnThinhPhat.Services
             add.LoaiThuTucId = entity.LoaiThuTucId;
             add.NgayBanHanh = entity.NgayBanHanh;
             add.TenThuTuc = entity.TenThuTuc;
-            add.MaThuTuc = entity.MaThuTuc;
+            add.NoiDung = entity.NoiDung;
 
             add.IsDeleted = false;
             add.CreatedBy = entity.CreatedBy;
             add.CreateDate = DateTime.Now;
 
             context.Entry(add).State = EntityState.Added;
+
+            return add;
         }
 
         public static void DeleteToDb(this ThuTuc entity, DbContext context, string userName = null)
@@ -103,7 +109,7 @@ namespace AnThinhPhat.Services
             entity.LoaiThuTucId = data.LoaiThuTucId;
             entity.NgayBanHanh = data.NgayBanHanh;
             entity.TenThuTuc = data.TenThuTuc;
-            entity.MaThuTuc = data.MaThuTuc;
+            entity.NoiDung = data.NoiDung;
 
             entity.IsDeleted = data.IsDeleted;
             entity.LastUpdatedBy = data.LastUpdatedBy;
@@ -176,7 +182,7 @@ namespace AnThinhPhat.Services
             hoso.UserXuLyId = entity.UserXuLyId;
             hoso.LinhVucCongViecId = entity.LinhVucCongViecId;
             hoso.NoiDung = entity.NoiDung;
-            hoso.DanhGiaCongViec = entity.QuaTrinhXuLy;
+            hoso.DanhGiaCongViec = entity.DanhGiaCongViec;
             hoso.TrangThaiCongViecId = entity.TrangThaiCongViecId;
 
             hoso.IsDeleted = entity.IsDeleted;

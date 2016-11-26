@@ -48,6 +48,9 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CaptchaMvc">
+      <HintPath>..\..\..\Assemblies\CaptchaMvc.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -108,6 +111,26 @@
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Assemblies\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Assemblies\Microsoft.ReportViewer.DataVisualization.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Assemblies\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Assemblies\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=13.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Assemblies\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -135,6 +158,9 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="ReportViewerForMvc">
+      <HintPath>..\..\..\Assemblies\ReportViewerForMvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -206,7 +232,6 @@
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="Content\style - Copy.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -282,9 +307,12 @@
     <Content Include="images\SourceTreeSetup_1.9.6.1.exe" />
     <Content Include="images\Tap-huan-doan.jpg" />
     <Content Include="images\tongdai.png" />
+    <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\app\congviec-detail.js" />
+    <Content Include="Scripts\app\congviec-statistic.js" />
     <Content Include="Scripts\app\congviec_add.js" />
     <Content Include="Scripts\app\datepickerjs.js" />
+    <Content Include="Scripts\app\format-datetime.js" />
     <Content Include="Scripts\app\menuslidejs.js" />
     <Content Include="Scripts\app\message.js" />
     <Content Include="Scripts\app\modaljs.js" />
@@ -292,6 +320,7 @@
     <Content Include="Scripts\app\templates.js" />
     <Content Include="Scripts\app\uploadfiles.js" />
     <Content Include="Scripts\app\user-update.js" />
+    <Content Include="Scripts\app\vanban-add.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -304,6 +333,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="appsettings.config" />
+    <EmbeddedResource Include="Reports\rptCorporation.rdlc" />
+    <EmbeddedResource Include="Reports\rptSummaries.rdlc" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -406,7 +437,7 @@
     <Content Include="Views\Shared\_LayoutCV.cshtml" />
     <Content Include="Views\CongViec\Detail.cshtml" />
     <Content Include="Views\CongViec\Add.cshtml" />
-    <Content Include="Views\CongViec\Statistic.cshtml" />
+    <Content Include="Views\CongViec\StatisticAndSearch.cshtml" />
     <Content Include="Views\CongViec\_PartialPageList.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageList.cshtml" />
     <Content Include="Views\Shared\_LayoutThuTuc.cshtml" />
@@ -440,6 +471,14 @@
     <Content Include="Views\Shared\DisplayTemplates\GroupListBodies.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageResultThucHienCongViec.cshtml" />
     <Content Include="Views\Shared\_PartialPageUploadFiles.cshtml" />
+    <Content Include="Views\CongViec\Statistic.cshtml" />
+    <Content Include="Views\CongViec\Summaries.cshtml" />
+    <Content Include="Views\VanBan\Add.cshtml" />
+    <Content Include="Views\CoQuanBanHanhVanBan\Index.cshtml" />
+    <Content Include="Views\CoQuanBanHanhVanBan\List.cshtml" />
+    <Content Include="Views\VanBan\Edit.cshtml" />
+    <Content Include="Views\ThuTuc\Add.cshtml" />
+    <Content Include="Views\ThuTuc\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

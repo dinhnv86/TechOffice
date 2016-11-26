@@ -4,7 +4,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
-[assembly: OwinStartup(typeof (Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
 namespace AnThinhPhat.WebUI
 {
@@ -16,7 +16,7 @@ namespace AnThinhPhat.WebUI
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "ApplicationCookie",
-                LoginPath = new PathString("/Account/LogIn"),
+                LoginPath = new PathString("/login"),
                 SlidingExpiration = false,
                 ExpireTimeSpan = TimeSpan.FromDays(7)
             });

@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -53,11 +54,12 @@
     <Compile Include="CongViec\BaseCongViecViewModel.cs" />
     <Compile Include="CongViec\InitCongViecUserPhoiHopViewModel.cs" />
     <Compile Include="CongViec\InitQuaTrinhXuLyViewModel.cs" />
+    <Compile Include="CongViec\InitValueStatictisSearch.cs" />
     <Compile Include="CongViec\InitVanBanViewModel.cs" />
+    <Compile Include="Home\ContactViewModel.cs" />
     <Compile Include="Menu\InitMenuThuTucViewModel.cs" />
     <Compile Include="Menu\InitMenuVanBanViewModel.cs" />
     <Compile Include="CongViec\InitCongViecViewModel.cs" />
-    <Compile Include="CongViec\ResultSearchViewModel.cs" />
     <Compile Include="CongViec\ValueSearchViewModel.cs" />
     <Compile Include="CoQuan\CoQuanViewModel.cs" />
     <Compile Include="HelpExtension.cs" />
@@ -72,16 +74,20 @@
     <Compile Include="TacNghiep\InitNoiDungYKienCuaCacCoQuanViewModel.cs" />
     <Compile Include="TacNghiep\InitTacNghiepThongKeViewModel.cs" />
     <Compile Include="TacNghiep\InitTacNghiepViewModel.cs" />
-    <Compile Include="TacNghiep\ResultSearchViewModel.cs" />
     <Compile Include="TacNghiep\ResultStatisticByCoQuanViewModel.cs" />
     <Compile Include="TacNghiep\ResultStatisticByCongViecViewModel.cs" />
     <Compile Include="TacNghiep\ValueSearchStatisticViewModel.cs" />
     <Compile Include="TacNghiep\ValueSearchViewModel.cs" />
+    <Compile Include="ThuTuc\EditThuTucViewModel.cs" />
+    <Compile Include="ThuTuc\AddThuTucViewModel.cs" />
     <Compile Include="ThuTuc\InitThuTucViewModel.cs" />
+    <Compile Include="ThuTuc\ThuTucViewModel.cs" />
     <Compile Include="ThuTuc\ValueSearchViewModel.cs" />
     <Compile Include="Users\AddUserViewModel.cs" />
     <Compile Include="Users\InitUserViewModel.cs" />
     <Compile Include="Users\UserLoginViewModel.cs" />
+    <Compile Include="VanBan\EditVanBanViewModel.cs" />
+    <Compile Include="VanBan\AddVanBanViewModel.cs" />
     <Compile Include="VanBan\InitVanBanViewModel.cs" />
     <Compile Include="VanBan\ValueSearchViewModel.cs" />
   </ItemGroup>

@@ -1,8 +1,7 @@
-﻿using AnThinhPhat.Entities.Infos;
-using AnThinhPhat.Entities.Results;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using AnThinhPhat.Entities.Infos;
+using AnThinhPhat.Entities.Results;
 
 namespace AnThinhPhat.ViewModel.TacNghiep
 {
