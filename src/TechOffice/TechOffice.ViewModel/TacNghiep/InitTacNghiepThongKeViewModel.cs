@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AnThinhPhat.Entities.Infos;
 using AnThinhPhat.Entities.Results;
+using System.ComponentModel.DataAnnotations;
 
 namespace AnThinhPhat.ViewModel.TacNghiep
 {
@@ -23,9 +24,9 @@ namespace AnThinhPhat.ViewModel.TacNghiep
 
         public IEnumerable<MucDoHoanThanhResult> MucDoHoanThanhInfo { get; set; }
 
-        public DateTime From { get; set; } = DateTime.Now;
+        public string From { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
 
-        public DateTime To { get; set; } = DateTime.Now;
+        public string To { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
 
         public bool IsShowResult { get; set; } = false;
 

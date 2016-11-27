@@ -322,6 +322,15 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Các file đính kèm.
+        /// </summary>
+        public static string CongViec_List_CacFileDinhKem {
+            get {
+                return ResourceManager.GetString("CongViec_List_CacFileDinhKem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lĩnh vực.
         /// </summary>
         public static string CongViec_List_LinhVuc {

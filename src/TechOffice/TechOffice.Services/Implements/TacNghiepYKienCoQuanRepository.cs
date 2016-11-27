@@ -7,6 +7,7 @@ using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
+using AnThinhPhat.Entities.Infos;
 
 namespace AnThinhPhat.Services.Implements
 {
@@ -299,6 +300,61 @@ namespace AnThinhPhat.Services.Implements
                     context.Entry(update).State = EntityState.Modified;
 
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
+        }
+
+        public IEnumerable<TacNghiepYKienCoQuanResult> GetByTacNghiepId(int tacNghiepId)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.TacNghiep_YKienCoQuan
+                            where item.IsDeleted == false && item.TacNghiepId == tacNghiepId
+                            select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .ToList();
+                }
+            });
+        }
+
+        public SaveResult ReplyYKien(NoiDungTraLoiInfo reply)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var update = context.TacNghiep_YKienCoQuan.Single(x => x.Id == reply.Id && x.IsDeleted == false);
+
+                    update.NoiDungTraLoi = reply.NoiDung;
+                    update.UserIdTraLoi = reply.UserId;
+
+                    context.Entry(update).State = EntityState.Modified;
+
+                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                }
+            });
+        }
+
+        public NoiDungTraLoiInfo GetReplyYKien(int id)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.TacNghiep_YKienCoQuan
+                            where item.IsDeleted == false &&
+                                  item.Id == id
+                            select new NoiDungTraLoiInfo
+                            {
+                                Id = id,
+                                CoQuanId = item.CoQuanId,
+                                TacNghiepId = item.TacNghiepId,
+                                NoiDung = item.NoiDungTraLoi,
+                                UserId = item.UserIdTraLoi.HasValue ? item.UserIdTraLoi.Value : 0,
+                            }).Single();
                 }
             });
         }

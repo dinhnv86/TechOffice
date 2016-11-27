@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="TechOfficeDevModel.Role" Width="1.5" PointX="11.25" PointY="8.125" />
         <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep" Width="1.5" PointX="8.25" PointY="1.5" />
         <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_TinhHinhThucHien" Width="1.5" PointX="8.25" PointY="18.75" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_YKienCoQuan" Width="1.5" PointX="5.25" PointY="24" />
         <EntityTypeShape EntityType="TechOfficeDevModel.TapTinCongViec" Width="1.5" PointX="15.75" PointY="15.625" />
         <EntityTypeShape EntityType="TechOfficeDevModel.TapTinTacNghiep" Width="1.5" PointX="10.5" PointY="18" />
         <EntityTypeShape EntityType="TechOfficeDevModel.TapTinThuTuc" Width="1.5" PointX="10.5" PointY="27.125" />
@@ -34,7 +33,6 @@
         <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_PhoiHop_User" />
         <AssociationConnector Association="TechOfficeDevModel.FK_CoQuan_NhomCoQuan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_TinhHinhThucHien_CoQuan" />
-        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_CoQuan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_User_CoQuan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_VanBan_CoQuan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_LinhVucTacNghiep" />
@@ -43,9 +41,7 @@
         <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_TinhHinhThucHien_MucDoHoanThanh" />
         <AssociationConnector Association="TechOfficeDevModel.FK_UserRole_Role" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_TinhHinhThucHien_TacNghiep" />
-        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_TacNghiep" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinTacNghiep_TacNghiep" />
-        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinCongViec_User" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinTacNghiep_User" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinThuTuc_User" />
@@ -71,6 +67,11 @@
         <AssociationConnector Association="TechOfficeDevModel.FK_ThuTuc_CoQuan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_ThuTuc_LinhVucThuTuc" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinThuTuc_ThuTuc" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.TacNghiep_YKienCoQuan" Width="1.5" PointX="13.5" PointY="12.625" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_CoQuan" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_TacNghiep" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_User" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_TacNghiep_YKienCoQuan" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

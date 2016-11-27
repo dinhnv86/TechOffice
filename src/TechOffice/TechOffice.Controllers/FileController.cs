@@ -149,7 +149,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             string folderTN = EnsureFolderTacNghiep(tacNghiepId);
 
-            string folderCQ = Path.Combine(folderTN, coQuanId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
+            string folderCQ = Path.Combine(folderTN, coQuanId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
             EnsureFolder(folderCQ);
 
             return folderCQ;
@@ -180,7 +180,7 @@ namespace AnThinhPhat.WebUI.Controllers
             string folderParentTN = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_TACNGHIEP);
             EnsureFolder(folderParentTN);
 
-            string folderTN = Path.Combine(folderParentTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
+            string folderTN = Path.Combine(folderParentTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
             EnsureFolder(folderTN);
 
             return folderTN;

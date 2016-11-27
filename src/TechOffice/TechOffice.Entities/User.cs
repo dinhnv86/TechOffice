@@ -26,6 +26,7 @@ namespace AnThinhPhat.Entities
             this.UserRoles = new HashSet<UserRole>();
             this.HoSoCongViecs = new HashSet<HoSoCongViec>();
             this.HoSoCongViecs1 = new HashSet<HoSoCongViec>();
+            this.TacNghiep_YKienCoQuan = new HashSet<TacNghiep_YKienCoQuan>();
         }
     
         public int Id { get; set; }
@@ -61,5 +62,7 @@ namespace AnThinhPhat.Entities
         public virtual ICollection<HoSoCongViec> HoSoCongViecs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoSoCongViec> HoSoCongViecs1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TacNghiep_YKienCoQuan> TacNghiep_YKienCoQuan { get; set; }
     }
 }

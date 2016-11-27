@@ -1,0 +1,40 @@
+﻿<div class="supp">
+    <h3 class="sbar">
+        <a href="">Lượt truy cập</a>
+        <div class="btn_down btn_down_sp">
+            <i class="fa fa-chevron-down"></i>
+        </div>
+    </h3>
+    <div class="menu_products">
+        <ul id="menu_left">
+            <li>
+                <div>Đang online: <span id="numberUserOnline"></span> </div>
+            </li>
+            <li>
+                <div>Hôm qua: <span id="numberUserToday"></span></div>
+            </li>
+            <li><div>Trong tuần: <span id="numberUseInWeek"></span></div></li>
+            <li>
+                <div>Tổng: <span id="numberUseTotal"></span> </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<script src="~/signalr/hubs"></script>
+<script>
+    $(function () {
+        var counterHub = $.connection.counterHub;
+        $.connection.hub.start().done(function () {
+
+        });
+
+        counterHub.client.UpdateCount = function (result) {
+            $('#numberUserOnline').text(result.online);
+            $('#numberUserToday').text(result.today);
+            $('#numberUseInWeek').text(result.week);
+            $('#numberUseTotal').text(result.online);
+        };
+    });
+</script>

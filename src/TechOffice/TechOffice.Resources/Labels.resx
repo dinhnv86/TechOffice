@@ -204,6 +204,9 @@
   <data name="CongViec_Index_VaiTroXuLy" xml:space="preserve">
     <value>Vai trò xử lý</value>
   </data>
+  <data name="CongViec_List_CacFileDinhKem" xml:space="preserve">
+    <value>Các file đính kèm</value>
+  </data>
   <data name="CongViec_List_LinhVuc" xml:space="preserve">
     <value>Lĩnh vực</value>
   </data>

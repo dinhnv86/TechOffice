@@ -79,7 +79,7 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tạo mới.
+        ///   Looks up a localized string similar to Thêm mới.
         /// </summary>
         public static string CongViec_Add_Save {
             get {
