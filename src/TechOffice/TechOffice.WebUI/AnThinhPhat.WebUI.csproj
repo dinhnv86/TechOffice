@@ -316,6 +316,7 @@
     <Content Include="Scripts\app\menuslidejs.js" />
     <Content Include="Scripts\app\message.js" />
     <Content Include="Scripts\app\modaljs.js" />
+    <Content Include="Scripts\app\popup-detail.js" />
     <Content Include="Scripts\app\tacnghiep-detail.js" />
     <Content Include="Scripts\app\templates.js" />
     <Content Include="Scripts\app\uploadfiles.js" />
@@ -448,9 +449,9 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutVanBan.cshtml" />
     <Content Include="Views\Shared\_PartialPageMenuSubLeft.cshtml" />
-    <Content Include="Views\VanBan\Detail.cshtml" />
+    <Content Include="Views\VanBan\_PartialPageDetail.cshtml" />
     <Content Include="Views\Shared\_PartialPageFiles.cshtml" />
-    <Content Include="Views\ThuTuc\Detail.cshtml" />
+    <Content Include="Views\ThuTuc\_PartialPageDetail.cshtml" />
     <Content Include="Views\ThuTuc\_PartialPageList.cshtml" />
     <Content Include="Views\VanBan\_PartialPageList.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageGroupListBodies.cshtml" />
@@ -479,6 +480,7 @@
     <Content Include="Views\VanBan\Edit.cshtml" />
     <Content Include="Views\ThuTuc\Add.cshtml" />
     <Content Include="Views\ThuTuc\Edit.cshtml" />
+    <Content Include="Views\Shared\_PartialPagePopupDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

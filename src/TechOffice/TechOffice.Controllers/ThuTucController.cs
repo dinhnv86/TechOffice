@@ -122,13 +122,10 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Detail(int id)
+        public PartialViewResult Detail(int id)
         {
-            return ExecuteWithErrorHandling(() =>
-            {
-                var model = ThuTucRepository.Single(id);
-                return View(model);
-            });
+            var model = ThuTucRepository.Single(id);
+            return PartialView("_PartialPageDetail", model);
         }
 
         private InitThuTucViewModel CreateVanBanModel(string thuTucCongViec, int? coQuanId, int? linhVucCongViecId)

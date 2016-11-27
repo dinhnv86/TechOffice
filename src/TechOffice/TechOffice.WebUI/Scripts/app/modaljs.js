@@ -79,7 +79,6 @@ onEditMaster = function () {
         var url = $(this).attr('href');
 
         $('#modalEditBody').load(url);
-        //$('#modalEdit').modal('show');
         $('#modalEdit').modal({ backdrop: 'static', keyboard: false, show: true });
     });
 }

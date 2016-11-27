@@ -57,13 +57,10 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
-        public ActionResult Detail(string soVanBan, int id)
+        public PartialViewResult Detail(int id)
         {
-            return ExecuteWithErrorHandling(() =>
-            {
-                var model = VanBanRepository.Single(id);
-                return View(model);
-            });
+            var model = VanBanRepository.Single(id);
+            return PartialView("_PartialPageDetail", model);
         }
 
         [HttpGet, Authorize]

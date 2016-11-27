@@ -1,33 +1,26 @@
 ﻿@model  AnThinhPhat.Entities.Results.VanBanResult
 
-@{
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-}
 <style>
     .col-sm-6, .col-sm-12 {
         padding-bottom: 15px;
     }
 </style>
-<div class="col-sm-6">
+<div class="col-sm-12">
     <label>Số ký hiệu</label>
     @Html.TextBoxFor(x => Model.SoVanBan, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
 </div>
-<div class="col-sm-6">
+<div class="col-sm-12">
     <label>Ngày ban hành</label>
     @Html.DisplayFor(x => Model.NgayBanHanh, "DateTime")
 </div>
-<div class="col-sm-6">
+<div class="col-sm-12">
     <label>Lĩnh vực</label>
     @Html.TextBoxFor(x => Model.LoaiVanBanInfo.Name, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
 </div>
-<div class="col-sm-6">
+<div class="col-sm-12">
     <label>Cơ quan ban hành</label>
     @Html.TextBoxFor(x => Model.CoQuanBanHanhVanBanInfo.Name, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
 </div>
-@*<div class="col-sm-6">
-        <label>Tên văn bản</label>
-        @Html.TextBoxFor(x => Model.TenVanBan, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
-    </div>*@
 <div class="col-sm-12">
     <label>Trích yếu</label>
     @Html.TextAreaFor(x => Model.TrichYeu, htmlAttributes: new { @class = "form-control", rows = "5", @readonly = "readonly" })
@@ -41,8 +34,4 @@
     <label>Danh sách các tập tin</label>
     <br />
     @{ Html.RenderPartial("_PartialPageFiles", Model.Files);}
-</div>
-
-<div class="col-sm-12">
-    @Html.RouteLink("Trở về", UrlLink.VANBAN, null, htmlAttributes: new { @class = "btn btn-primary btn-width-md" })
 </div>
