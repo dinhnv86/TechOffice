@@ -34,32 +34,30 @@
                 </div>
                 <div class="col-md-6">
                     <label>Từ</label>
-                    @Html.EditorFor(x => x.From, "DateTime")
-
+                    @Html.TextBoxFor(x => x.From, htmlAttributes: new { @class = "form-control control-datepicker" })
+                    @Html.ValidationMessageFor(x => x.From)
                 </div>
                 <div class="col-md-6">
                     <label>Đến</label>
-                    @Html.EditorFor(x => x.To, "DateTime")
+                    @Html.TextBoxFor(x => x.To, htmlAttributes: new { @class = "form-control control-datepicker" })
+                    @Html.ValidationMessageFor(x => x.To)
                 </div>
+
                 <div class="col-md-6">
                     <label>&nbsp;</label>
                     <div id="outer">
                         <div class="inner">
-                            @*<input type="submit" class="btn btn-primary" value="Thống kê theo công việc" name="Submit" />*@
                             <button type="submit" name="Submit" value="SB01" class="btn btn-primary">Thống kê theo công việc</button>
-                            @*@Html.RouteLink("Thống kê theo công việc", UrlLink.TACNGHIEP_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })*@
                         </div>
                         <div class="inner">
-                            @*<input type="submit" class="btn btn-primary" value="Thống kê theo cơ quan" name="Submit" />*@
                             <button type="submit" name="Submit" value="SB02" class="btn btn-primary">Thống kê theo cơ quan</button>
-                            @*@Html.RouteLink("Thống kê theo cơ quan", UrlLink.TACNGHIEP_ADD, null, htmlAttributes: new { @class = "btn btn-primary" })*@
                         </div>
                     </div>
                 </div>
             }
         </div>
     </div>
-
+    <div class="clearfix" style="padding-bottom:15px;"></div>
     <div class="col-xs-12">
         @if (Model.IsShowResult)
             {
@@ -74,19 +72,17 @@
             }
     </div>
 </div>
-
 @section Scripts{
-    @*<script src="~/Scripts/app/datepickerjs.js"></script>*@
     <script>
         $(document).ready(function () {
             var optionCalendar =
-           {
-               autoSize: true,
-               constrainInput: true,
-               dateFormat: 'dd/mm/yy',
-               setDate: new Date(),
-               maxDate: new Date(),
-           };
+            {
+                autoSize: true,
+                constrainInput: true,
+                dateFormat: 'dd/mm/yy',
+                //setDate: new Date(),
+                maxDate: 0,
+            };
             $('.control-datepicker').datepicker(optionCalendar);
 
             $.validator.addMethod('date',

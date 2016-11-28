@@ -15,7 +15,17 @@
         /// <summary>
         /// 
         /// </summary>
-        public static string VANBAN_DETAIL = "vanban/{id}";
+        public static string VANBAN_ADD = "vanban/add";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string VANBAN_DETAIL = "vanban/{sovanban}-{id}";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string VANBAN_EDIT = "vanban/edit/{sovanban}-{id}";
 
         /// <summary>
         /// 
@@ -25,7 +35,17 @@
         /// <summary>
         /// 
         /// </summary>
-        public static string THUTUC_DETAIL = "thutuc/{id}";
+        public static string THUTUC_ADD = "thutuc/add";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string THUTUC_DETAIL = "thutuc/{tenthutuc}-{id}";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string THUTUC_EDIT = "thutuc/{tenthutuc}-{id}";
 
         /// <summary>
         /// 
@@ -43,14 +63,14 @@
         public static string LOGIN = "login";
         public static string TACNGHIEP_THONGKE = "tacnghiep/thongke";
         public static string TACNGHIEP_ADD = "tacnghiep/themmoi";
-        public static string TACNGHIEP_DETAIL = "tacnghiep/{id}";
+        public static string TACNGHIEP_DETAIL = "tacnghiep/{guid1}-{id}-{guid2}";
 
         public static string CONGVIEC_THONGKE_TIMKIEM = "congviec/thongke-timkiem";
         public static string CONGVIEC_THONGKE_TONGHOP = "congviec/thongke-tonghop";
         public static string CONGVIEC_THONGKE = "congviec/thongke";
         public static string CONGVIEC_TIMKIEM = "congviec/timkiem";
         public static string CONGVIEC_ADD = "congviec/themmoi";
-        public static string CONGVIEC_DETAIL = "congviec/{id}";
+        public static string CONGVIEC_DETAIL = "congviec/{guid1}-{id}-{guid2}";
 
         public static string HISTORY = "history";
         public static string CHART = "organization-chart";
@@ -65,6 +85,7 @@
         public static string LINHVUCTACNGHIEP = "linhvuctacnghiep";
         public static string LOAIVANBAN = "loaivanban";
         public static string MUCDOHOANTHANH = "mucdohoanthanh";
+        public static string COQUANBANHANHVANBAN = "coquan-banhanh-vanban";
         //===================== MASTER URL ==========================//
 
         public static string ADMIN = "admin";

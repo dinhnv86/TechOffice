@@ -48,5 +48,7 @@ namespace AnThinhPhat.ViewModel.CongViec
         public EnumNhacNho EnumNhacNho { get; set; }
 
         public EnumDanhGiaCongViec DanhGiaCongViec { get; set; }
+
+        public string JsonFiles { get; set; }
     }
 }

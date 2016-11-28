@@ -40,5 +40,6 @@ namespace AnThinhPhat.Entities
         public virtual LoaiVanBan LoaiVanBan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinVanBan> TapTinVanBans { get; set; }
+        public virtual CoQuanBanHanhVanBan CoQuanBanHanhVanBan { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace AnThinhPhat.ViewModel.TacNghiep
     public class ResultCoQuanThucHien
     {
         public string Name { get; set; }
+
         public DateTime? NgayHoanThanh { get; set; }
     }
 }

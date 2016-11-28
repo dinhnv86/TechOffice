@@ -1,22 +1,30 @@
 ﻿@using PagedList
+@using PagedList.Mvc
+
 @model IPagedList<AnThinhPhat.Entities.Results.HoSoCongViecResult>
 
+@{
+    AjaxOptions ajaxPaging = new AjaxOptions()
+    {
+        UpdateTargetId = "tableAdmin",
+        HttpMethod = "GET",
+    };
+}
 <div class="clear"></div>
 <div class="col-xs-12">
-    <h3><span style="font-size: x-large;">@Labels.CongViec_List_Title</span></h3>
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th class="col-stt">@Labels.CongViec_List_STT</th>
-                    <th class="text-center">@Labels.CongViec_List_NgayTao</th>
-                    <th class="text-center">@Labels.CongViec_List_NgayHetHan</th>
+                    <th class="text-center">@Labels.CongViec_List_NgayTao <br />@Labels.CongViec_List_NgayHetHan</th>
                     <th class="text-center">@Labels.CongViec_List_PhuTrach</th>
                     <th class="text-center">@Labels.CongViec_List_XuLyChinh</th>
                     <th class="text-center">@Labels.CongViec_List_PhoiHop</th>
                     <th class="text-center">@Labels.CongViec_List_TrangThai</th>
                     <th class="text-center">@Labels.CongViec_List_LinhVuc</th>
                     <th class="text-center">@Labels.CongViec_List_NoiDungCongViec</th>
+                    <th class="text-center">@Labels.CongViec_List_CacFileDinhKem</th>
                     <th class="text-center">@Labels.CongViec_List_QuaTrinhXuLy</th>
                 </tr>
             </thead>
@@ -42,8 +50,11 @@
 
                         <tr>
                             <td class="@fontColor">@Html.Raw(i + 1)</td>
-                            <td class="@fontColor">@Html.DisplayFor(x => item.NgayTao, "DisplayDateTime")</td>
-                            <td class="@fontColor">@Html.DisplayFor(x => item.NgayHetHan, "DisplayDateTime")</td>
+                            <td class="@fontColor">
+                                @Html.DisplayFor(x => item.NgayTao, "DisplayDateTime") <br />
+                                @Html.DisplayFor(x => item.NgayHetHan, "DisplayDateTime")
+                            </td>
+
                             <td class="@fontColor">@item.UserPhuTrach.HoVaTen</td>
                             <td class="@fontColor">@item.UserXyLy.HoVaTen</td>
                             <td class="@fontColor">
@@ -54,7 +65,12 @@
                             </td>
                             <td class="@fontColor">@item.TrangThaiCongViecInfo.IfNotNull(x => x.Name)</td>
                             <td class="@fontColor">@item.LinhVucCongViec.Name</td>
-                            <td class="@fontColor">@Html.RouteLink(item.NoiDung, routeName: UrlLink.CONGVIEC_DETAIL, routeValues: new { id = item.Id })</td>
+                            <td class="@fontColor">
+                                @Html.RouteLink(item.NoiDung,
+                                                  routeName: UrlLink.CONGVIEC_DETAIL,
+                                                  routeValues: new { guid1 = Guid.NewGuid().ToString("N"), id = item.Id, guid2 = Guid.NewGuid().ToString("N") })
+                            </td>
+                            <td class="@fontColor">@Html.Raw(item.JsonFiles)</td>
                             <td class="@fontColor">
                                 @foreach (var qt in item.CongViecQuaTrinhXuLyResult)
                                 {
@@ -65,6 +81,31 @@
                     }
                 }
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="10">
+                        <div id="contentPager" class="pull-right">
+                            @{
+                                AnThinhPhat.ViewModel.CongViec.ValueSearchViewModel ValueSearch = new AnThinhPhat.ViewModel.CongViec.ValueSearchViewModel();
+                            }
+                            @if (ViewBag.ValueSearch != null)
+                            {
+                                ValueSearch = (AnThinhPhat.ViewModel.CongViec.ValueSearchViewModel)ViewBag.ValueSearch;
+                            }
+                            @Html.PagedListPager(Model, page => Url.Action("List", "CongViec", new
+                       {
+                           Page = page,
+                           UserId = ValueSearch.UserId,
+                           Role = ValueSearch.Role,
+                           TrangThaiCongViecId = ValueSearch.TrangThaiCongViecId,
+                           LinhVucCongViecId = ValueSearch.LinhVucCongViecId,
+                           NoiDungCongViec = ValueSearch.NoiDungCongViec,
+                       }),
+                           PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxPaging))
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AnThinhPhat.Entities.Results.SummariesCongViecResult>
+
+@using ReportViewerForMvc
+
+@{
+    Layout = "~/Views/Shared/_LayoutCV.cshtml";
+}
+
+@*@Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)*@
+
+@Html.ReportViewer(
+    new { ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local },
+    new { ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\rptSummaries.rdlc" },
+    null,
+    new { Name = "dsLocalSummaries", Value = Model },
+    null)
+
+@section Scripts{
+    <script>
+        jQuery(document).ready(function () {
+            var height = $(window).height();
+            var width = $(window).width();
+            //$('iframe').css({ 'height': height * 0.9 | 0, 'width': Math.max(1170, width * 0.9) | 0 });
+
+            $('iframe #ReportViewer1').css({ 'height': 100, width: 100 });
+            $('iframe #ReportViewer1_ctl09').css({ 'overflow': 'visible' });
+
+            //console.log($('iframe > #VisibleReportContentReportViewer1_ctl09 > div > table > tbody > tr:eq(0) > td:eq(0) > table > tbody > tr:eq(0) > td:eq(0) > table > tbody > tr:eq(3)'))
+            var widthContainer = $('div.container > div.row').width();
+            $('iframe').width(widthContainer);
+
+            //console.log($('iframe > #VisibleReportContentReportViewer1_ctl09'));
+        });
+    </script>
+}

@@ -6,39 +6,36 @@ namespace AnThinhPhat.ViewModel.VanBan
 {
     public class InitVanBanViewModel
     {
-        private IEnumerable<NamBanHanh> namBanHanh;
-        private IEnumerable<PageNumberic> pagingNumberic;
-        public int? CoQuanId { get; set; }
+        private IEnumerable<NamBanHanh> _namBanHanh;
 
-        public IEnumerable<LinhVucVanBanInfo> CoQuanBanHanhInfos { get; set; }
+        private IEnumerable<PageNumberic> _pagingNumberic;
+
+        public int? CoQuanBanHanhVanBanId { get; set; }
+
+        public IEnumerable<CoQuanBanHanhVanBanInfo> CoQuanBanHanhVanBanInfos { get; set; }
+
+        public int? LinhVucVanBanId { get; set; }
+
+        public IEnumerable<LinhVucVanBanInfo> LinhVucVanBanInfos { get; set; }
 
         public int? LoaiVanBanId { get; set; }
+
         public IEnumerable<LoaiVanBanInfo> LoaiVanBanInfos { get; set; }
 
-        public int? NamBanHnahId { get; set; }
+        public int? NamBanHanhId { get; set; }
 
         public IEnumerable<NamBanHanh> NamBanHanhInfo
         {
-            get
-            {
-                if (namBanHanh == null)
-                    namBanHanh = CreateNam();
-                return namBanHanh;
-            }
-            private set { namBanHanh = value; }
+            get { return _namBanHanh ?? (_namBanHanh = CreateNam()); }
+            internal set { _namBanHanh = value; }
         }
 
         public int PagingNumberId { get; set; } = 2;
 
         public IEnumerable<PageNumberic> PagingNumberInfo
         {
-            get
-            {
-                if (pagingNumberic == null)
-                    pagingNumberic = CreatePaging();
-                return pagingNumberic;
-            }
-            private set { pagingNumberic = value; }
+            get { return _pagingNumberic ?? (_pagingNumberic = CreatePaging()); }
+            internal set { _pagingNumberic = value; }
         }
 
         public string TenVanBan { get; set; }
@@ -49,19 +46,20 @@ namespace AnThinhPhat.ViewModel.VanBan
 
         public bool TimTrongNoiDung { get; set; } = false;
 
-        private IEnumerable<NamBanHanh> CreateNam()
+        private static IEnumerable<NamBanHanh> CreateNam()
         {
             for (var i = 0; i < 10; i++)
             {
+                int year = DateTime.Now.AddYears(-i).Year;
                 yield return new NamBanHanh
                 {
-                    Id = i + 1,
-                    Name = DateTime.Now.AddYears(-i).Year
+                    Id = year,
+                    Name = year,
                 };
             }
         }
 
-        private IEnumerable<PageNumberic> CreatePaging()
+        private static IEnumerable<PageNumberic> CreatePaging()
         {
             for (var i = 1; i < 4; i++)
             {

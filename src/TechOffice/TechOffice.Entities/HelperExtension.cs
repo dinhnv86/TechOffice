@@ -223,14 +223,16 @@ namespace AnThinhPhat.Entities
                 Id = entity.Id,
                 SoVanBan = entity.SoVanBan,
                 TenVanBan = entity.TenVanBan,
+                NoiDung = entity.NoiDung,
+                TrichYeu = entity.TrichYeu,
                 NgayBanHanh = entity.NgayBanHanh,
                 CoQuanBanHanhId = entity.CoQuanBanHanhId,
-                CoQuanInfo = entity.CoQuan.ToDataResult().ToDataInfo(),
+                CoQuanBanHanhVanBanInfo = entity.CoQuanBanHanhVanBan.ToDataInfo(),
                 LinhVucVanBanId = entity.LinhVucVanBanId,
-                LinhVucVanBanInfo = entity.LinhVucVanBan.ToDataResult().ToDataInfo(),
+                LinhVucVanBanInfo = entity.LinhVucVanBan.ToDataInfo(),
                 LoaiVanBanId = entity.LoaiVanBanId,
-                LoaiVanBanInfo = entity.LoaiVanBan.ToDataResult().ToDataInfo(),
-                Files = entity.TapTinVanBans.Select(x => x.ToDataResult()),
+                LoaiVanBanInfo = entity.LoaiVanBan.ToDataInfo(),
+                Files = entity.TapTinVanBans.Select(x => x.ToDataResult()).ToList(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -285,6 +287,8 @@ namespace AnThinhPhat.Entities
                 VanBanId = entity.VanBanId,
                 VanBanInfo = entity.VanBan.ToIfNotNullDataInfo(),
                 Url = entity.Url,
+                FileName = System.IO.Path.GetFileName(entity.Url),
+                Path = System.IO.Path.GetDirectoryName(entity.Url),
                 UserUploadId = entity.UserUploadId,
                 UserInfo = entity.User.ToIfNotNullDataInfo(),
                 CreateDate = entity.CreateDate,
@@ -490,6 +494,20 @@ namespace AnThinhPhat.Entities
         }
 
         public static LinhVucVanBanInfo ToDataInfo(this LinhVucVanBanResult entity)
+        {
+            return new LinhVucVanBanInfo
+            {
+                Id = entity.Id,
+                Name = entity.Ten
+            };
+        }
+
+        public static LinhVucVanBanInfo ToIfNotNullDataInfo(this LinhVucVanBan entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static LinhVucVanBanInfo ToDataInfo(this LinhVucVanBan entity)
         {
             return new LinhVucVanBanInfo
             {
@@ -724,6 +742,20 @@ namespace AnThinhPhat.Entities
                 Name = entity.Ten
             };
         }
+
+        public static LoaiVanBanInfo ToIfNotNullDataInfo(this LoaiVanBan entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static LoaiVanBanInfo ToDataInfo(this LoaiVanBan entity)
+        {
+            return new LoaiVanBanInfo
+            {
+                Id = entity.Id,
+                Name = entity.Ten
+            };
+        }
     }
 
     public static class MucDoHoanThanhExtension
@@ -803,6 +835,57 @@ namespace AnThinhPhat.Entities
         public static NhomCoQuanInfo ToDataInfo(this NhomCoQuanResult entity)
         {
             return new NhomCoQuanInfo
+            {
+                Id = entity.Id,
+                Name = entity.Ten
+            };
+        }
+    }
+
+    public static class CoQuanBanHanhVanBanExtension
+    {
+        public static CoQuanBanHanhVanBanResult ToIfNotNullDataResult(this CoQuanBanHanhVanBan entity)
+        {
+            return entity?.ToDataResult();
+        }
+
+        public static CoQuanBanHanhVanBanResult ToDataResult(this CoQuanBanHanhVanBan entity)
+        {
+            return new CoQuanBanHanhVanBanResult
+            {
+                Id = entity.Id,
+                Ten = entity.Ten,
+                MoTa = entity.MoTa,
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
+
+        public static CoQuanBanHanhVanBanInfo ToIfNotNullDataInfo(this CoQuanBanHanhVanBanResult entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static CoQuanBanHanhVanBanInfo ToDataInfo(this CoQuanBanHanhVanBanResult entity)
+        {
+            return new CoQuanBanHanhVanBanInfo
+            {
+                Id = entity.Id,
+                Name = entity.Ten
+            };
+        }
+
+        public static CoQuanBanHanhVanBanInfo ToIfNotNullDataInfo(this CoQuanBanHanhVanBan entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static CoQuanBanHanhVanBanInfo ToDataInfo(this CoQuanBanHanhVanBan entity)
+        {
+            return new CoQuanBanHanhVanBanInfo
             {
                 Id = entity.Id,
                 Name = entity.Ten
@@ -996,6 +1079,8 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 NoiDung = entity.NoiDung,
+                NoiDungTraLoi = entity.NoiDungTraLoi,
+                UserIdTraLoi = entity.UserIdTraLoi,
                 CoQuanId = entity.CoQuanId,
                 CoQuanInfo = entity.CoQuan.ToDataInfo(),
                 TacNghiepId = entity.TacNghiepId,
@@ -1144,7 +1229,7 @@ namespace AnThinhPhat.Entities
                 CoQuanInfo = entity.CoQuan.ToIfNotNullDataResult().ToDataInfo(),
                 LoaiThuTucId = entity.LoaiThuTucId,
                 LinhVucThuTucInfo = entity.LinhVucThuTuc.ToIfNotNullDataResult().ToDataInfo(),
-                MaThuTuc = entity.MaThuTuc,
+                NoiDung = entity.NoiDung,
                 NgayBanHanh = entity.NgayBanHanh,
                 TenThuTuc = entity.TenThuTuc,
                 Files = entity.TapTinThuTucs.Select(x => x.ToDataResult()),
@@ -1166,7 +1251,7 @@ namespace AnThinhPhat.Entities
             return new ThuTucInfo
             {
                 Id = entity.Id,
-                MaThuTuc = entity.MaThuTuc,
+                MaThuTuc = entity.NoiDung,
                 TenThuTuc = entity.TenThuTuc,
                 NgayBanHanh = entity.NgayBanHanh
             };
@@ -1182,7 +1267,7 @@ namespace AnThinhPhat.Entities
             return new ThuTucInfo
             {
                 Id = entity.Id,
-                MaThuTuc = entity.MaThuTuc,
+                MaThuTuc = entity.NoiDung,
                 TenThuTuc = entity.TenThuTuc,
                 NgayBanHanh = entity.NgayBanHanh
             };

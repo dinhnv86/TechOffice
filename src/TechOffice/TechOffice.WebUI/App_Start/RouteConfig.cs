@@ -22,12 +22,22 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.VANBAN, UrlLink.VANBAN,
                 new { controller = "VanBan", action = "Index" });
 
+            routes.MapRoute(UrlLink.VANBAN_ADD, UrlLink.VANBAN_ADD,
+              new { controller = "VanBan", action = "Add" });
+
             routes.MapRoute(UrlLink.VANBAN_DETAIL, UrlLink.VANBAN_DETAIL,
               new { controller = "VanBan", action = "Detail" },
               new { id = @"\d+" });
 
+            routes.MapRoute(UrlLink.VANBAN_EDIT, UrlLink.VANBAN_EDIT,
+             new { controller = "VanBan", action = "Edit" },
+             new { id = @"\d+" });
+
             routes.MapRoute(UrlLink.THUTUC, UrlLink.THUTUC,
                 new { controller = "ThuTuc", action = "Index" });
+
+            routes.MapRoute(UrlLink.THUTUC_ADD, UrlLink.THUTUC_ADD,
+               new { controller = "ThuTuc", action = "Add" });
 
             routes.MapRoute(UrlLink.THUTUC_DETAIL, UrlLink.THUTUC_DETAIL,
               new { controller = "ThuTuc", action = "Detail" },
@@ -120,6 +130,9 @@ namespace AnThinhPhat.WebUI
 
             routes.MapRoute(UrlLink.MUCDOHOANTHANH, UrlLink.MUCDOHOANTHANH,
              new { controller = "MucDoHoanThanh", action = "Index" });
+
+            routes.MapRoute(UrlLink.COQUANBANHANHVANBAN, UrlLink.COQUANBANHANHVANBAN,
+            new { controller = "CoQuanBanHanhVanBan", action = "Index" });
             //===========================================CRUD DATA=======================================//
 
             routes.MapRoute(UrlLink.ADMIN, UrlLink.ADMIN,

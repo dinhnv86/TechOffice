@@ -16,6 +16,6 @@ namespace AnThinhPhat.Services.Abstracts
 
         IEnumerable<StatisticCongViec> Statistic(DateTime from, DateTime to);
 
-        IEnumerable<SummariesViewModel> Summaries(DateTime from, DateTime to);
+        IEnumerable<SummariesCongViecResult> Summaries(DateTime from, DateTime to);
     }
 }

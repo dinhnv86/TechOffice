@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Infos;
 using AnThinhPhat.Entities.Results;
-using AnThinhPhat.ViewModel.CoQuan;
-using AnThinhPhat.ViewModel.Users;
-using AnThinhPhat.ViewModel.TacNghiep;
-using System.Security.Principal;
-using System.Security.Claims;
 using AnThinhPhat.Entities.Searchs;
+using AnThinhPhat.ViewModel.CoQuan;
+using AnThinhPhat.ViewModel.TacNghiep;
+using AnThinhPhat.ViewModel.Users;
+using System.Collections.Generic;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -122,7 +123,9 @@ namespace AnThinhPhat.ViewModel
                 NgayTao = entity.NgayTao,
                 NoiDung = entity.NoiDung,
                 NoiDungTraoDoi = entity.NoiDungYKienTraoDoi,
-                CoQuanInfos = entity.CoQuanInfos.Select(x => x.CoQuanInfos.Where(y => y.IsSelected)).Aggregate((a, b) => { return a.Concat(b); }),
+                CoQuanInfos =
+                    entity.CoQuanInfos.Select(x => x.CoQuanInfos.Where(y => y.IsSelected))
+                        .Aggregate((a, b) => { return a.Concat(b); })
             };
         }
 
@@ -136,7 +139,7 @@ namespace AnThinhPhat.ViewModel
                 NamBanHanhId = valueSearch.NamBanHanhId,
                 NhomCoquanId = valueSearch.NhomCoquanId,
                 NoiDungTimKiem = valueSearch.NoiDungTimKiem,
-                SearchTypeValue = valueSearch.SearchTypeValue,
+                SearchTypeValue = valueSearch.SearchTypeValue
             };
         }
 
@@ -153,7 +156,7 @@ namespace AnThinhPhat.ViewModel
                 TrangThaiCongViecId = valueSearch.TrangThaiCongViecId,
                 SoVanBan = valueSearch.SoVanBan,
                 NoiDungVanBan = valueSearch.NoiDungVanBan,
-                CoQuanId = valueSearch.CoQuanId,
+                CoQuanId = valueSearch.CoQuanId
             };
         }
 
@@ -199,9 +202,16 @@ namespace AnThinhPhat.ViewModel
 
         public static string FullName(this IIdentity identity)
         {
-            ClaimsIdentity claims = (ClaimsIdentity)identity;
+            var claims = (ClaimsIdentity)identity;
 
             return claims.Claims.Where(x => x.Type == ClaimTypes.Surname).Select(x => x.Value).FirstOrDefault();
+        }
+
+        public static string ToAggregate(this IEnumerable<string> data)
+        {
+            return data != null && data.Any() ?
+                  data.Aggregate((a, b) => (a + ", " + b)) :
+                  string.Empty;
         }
     }
 }

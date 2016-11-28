@@ -32,10 +32,11 @@
                     </td>
                     <td>
                         <strong>
-                            @Html.RouteLink(item.TenThuTuc, UrlLink.THUTUC_DETAIL, routeValues: new { id = item.Id }, htmlAttributes: new { @class = "btn-link", target = "_blank" })
+                            @*@Html.RouteLink(item.TenThuTuc, UrlLink.THUTUC_DETAIL, routeValues: new { tenthutuc = item.TenThuTuc.RejectMarks(), id = item.Id }, htmlAttributes: new { @class = "btn-link", target = "_blank" })*@
+                            @Html.RouteLink(item.TenThuTuc, UrlLink.THUTUC_DETAIL, routeValues: new { tenthutuc = item.TenThuTuc.RejectMarks(), id = item.Id }, htmlAttributes: new { @class = "btn-link" })
                         </strong>
                     </td>
-                    <td>@Html.DisplayFor(x => item.NgayBanHanh, "DisplayDateTime")</td>
+                    <td>@item.LinhVucThuTucInfo.IfNotNull(x => x.Name)</td>
                     <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
                 </tr>
             }
@@ -56,3 +57,4 @@
         </tr>
     </tfoot>
 </table>
+

@@ -61,7 +61,7 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tài khoản người dùng không hợ lệ.
+        ///   Looks up a localized string similar to Tài khoản người dùng không hợp lệ.
         /// </summary>
         public static string Account_Login_Incorrect {
             get {
@@ -75,6 +75,24 @@ namespace AnThinhPhat.Resources {
         public static string Account_Login_Locked {
             get {
                 return ResourceManager.GetString("Account_Login_Locked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập tên.
+        /// </summary>
+        public static string BaseDataViewModel_Name {
+            get {
+                return ResourceManager.GetString("BaseDataViewModel_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối đa là 255 ký tự.
+        /// </summary>
+        public static string BaseDataViewModel_Name_MaxLength {
+            get {
+                return ResourceManager.GetString("BaseDataViewModel_Name_MaxLength", resourceCulture);
             }
         }
         
@@ -129,6 +147,276 @@ namespace AnThinhPhat.Resources {
         public static string CongViec_Statistic_To {
             get {
                 return ResourceManager.GetString("CongViec_Statistic_To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn nhóm cơ quan.
+        /// </summary>
+        public static string CoQuan_CoQuanViewModel_CoQuanId {
+            get {
+                return ResourceManager.GetString("CoQuan_CoQuanViewModel_CoQuanId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập email.
+        /// </summary>
+        public static string Home_Contact_Email {
+            get {
+                return ResourceManager.GetString("Home_Contact_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập họ tên.
+        /// </summary>
+        public static string Home_Contact_FullName {
+            get {
+                return ResourceManager.GetString("Home_Contact_FullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập mã xác nhận.
+        /// </summary>
+        public static string Home_Contact_MaXacNhan {
+            get {
+                return ResourceManager.GetString("Home_Contact_MaXacNhan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập nội dung.
+        /// </summary>
+        public static string Home_Contact_NoiDung {
+            get {
+                return ResourceManager.GetString("Home_Contact_NoiDung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập tiêu đề.
+        /// </summary>
+        public static string Home_Contact_Title {
+            get {
+                return ResourceManager.GetString("Home_Contact_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập nôi dung phản hồi.
+        /// </summary>
+        public static string TacNghiep_EditNoiDungYKienCuaCoQuan_NoiDung {
+            get {
+                return ResourceManager.GetString("TacNghiep_EditNoiDungYKienCuaCoQuan_NoiDung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn lĩnh vực tác nghiệp.
+        /// </summary>
+        public static string TacNgiep_AddTacNghiepViewModel_LinhVucTacNghiep {
+            get {
+                return ResourceManager.GetString("TacNgiep_AddTacNghiepViewModel_LinhVucTacNghiep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập ngày hết hạn.
+        /// </summary>
+        public static string TacNgiep_AddTacNghiepViewModel_NgayHetHan {
+            get {
+                return ResourceManager.GetString("TacNgiep_AddTacNghiepViewModel_NgayHetHan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập ngày tạo.
+        /// </summary>
+        public static string TacNgiep_AddTacNghiepViewModel_NgayTao {
+            get {
+                return ResourceManager.GetString("TacNgiep_AddTacNghiepViewModel_NgayTao", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập nội dung.
+        /// </summary>
+        public static string TacNgiep_AddTacNghiepViewModel_NoiDung {
+            get {
+                return ResourceManager.GetString("TacNgiep_AddTacNghiepViewModel_NoiDung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn cơ quan thực hiện.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_CoQuanThucHien {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_CoQuanThucHien", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn lĩnh vực thủ tục.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_LinhVucThuTuc {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_LinhVucThuTuc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập ngày ban hành.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_NgayBanHanh {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_NgayBanHanh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập nội dung thủ tục.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_NoiDung {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_NoiDung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối đa mã thủ tục là 1024 ký tự.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_NoiDung_MaxLength {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_NoiDung_MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập tên thủ tục.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_TenThuTuc {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_TenThuTuc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối đa mã thủ tục là 1024 ký tự.
+        /// </summary>
+        public static string ThuTuc_AddThuTuc_TenThuTuc_MaxLength {
+            get {
+                return ResourceManager.GetString("ThuTuc_AddThuTuc_TenThuTuc_MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập mật khẩu.
+        /// </summary>
+        public static string Users_LoginViewModel_Password {
+            get {
+                return ResourceManager.GetString("Users_LoginViewModel_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối thiểu của mật khẩu là 20 ký tự.
+        /// </summary>
+        public static string Users_LoginViewModel_Password_MaxLength {
+            get {
+                return ResourceManager.GetString("Users_LoginViewModel_Password_MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối thiểu của mật khẩu là 6 ký tự.
+        /// </summary>
+        public static string Users_LoginViewModel_Password_MinLength {
+            get {
+                return ResourceManager.GetString("Users_LoginViewModel_Password_MinLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập tên đăng nhập.
+        /// </summary>
+        public static string Users_LoginViewModel_UserName {
+            get {
+                return ResourceManager.GetString("Users_LoginViewModel_UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn cơ quan ban hành văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_CoQuanBanHanhVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_CoQuanBanHanhVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn lĩnh vực văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_LinhVucVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_LinhVucVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn loại văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_LoaiVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_LoaiVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập ngày ban hành.
+        /// </summary>
+        public static string VanBan_AddVanBan_NgayBanHanh {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_NgayBanHanh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập nội dung văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_NoiDungVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_NoiDungVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập số văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_SoVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_SoVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập trích yếu văn bản.
+        /// </summary>
+        public static string VanBan_AddVanBan_TrichYeuVanBan {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_TrichYeuVanBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối đa của trích yếu là 1024 ký tự.
+        /// </summary>
+        public static string VanBan_AddVanBan_TrichYeuVanBan_MaxLength {
+            get {
+                return ResourceManager.GetString("VanBan_AddVanBan_TrichYeuVanBan_MaxLength", resourceCulture);
             }
         }
     }

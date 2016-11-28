@@ -42,19 +42,20 @@ namespace AnThinhPhat.Entities
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<TacNghiep> TacNghieps { get; set; }
         public virtual DbSet<TacNghiep_TinhHinhThucHien> TacNghiep_TinhHinhThucHien { get; set; }
-        public virtual DbSet<TacNghiep_YKienCoQuan> TacNghiep_YKienCoQuan { get; set; }
         public virtual DbSet<TapTinCongViec> TapTinCongViecs { get; set; }
         public virtual DbSet<TapTinTacNghiep> TapTinTacNghieps { get; set; }
         public virtual DbSet<TapTinThuTuc> TapTinThuTucs { get; set; }
         public virtual DbSet<TapTinVanBan> TapTinVanBans { get; set; }
         public virtual DbSet<TapTinYKienCoQuan> TapTinYKienCoQuans { get; set; }
-        public virtual DbSet<ThuTuc> ThuTucs { get; set; }
         public virtual DbSet<TrangThaiCongViec> TrangThaiCongViecs { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<VanBan> VanBans { get; set; }
         public virtual DbSet<CongViec_VanBan> CongViec_VanBan { get; set; }
         public virtual DbSet<HoSoCongViec> HoSoCongViecs { get; set; }
+        public virtual DbSet<CoQuanBanHanhVanBan> CoQuanBanHanhVanBans { get; set; }
+        public virtual DbSet<ThuTuc> ThuTucs { get; set; }
+        public virtual DbSet<TacNghiep_YKienCoQuan> TacNghiep_YKienCoQuan { get; set; }
     
         public virtual ObjectResult<Statictis_Result> Statictis(Nullable<int> noiVuId, Nullable<System.DateTime> from, Nullable<System.DateTime> to)
         {

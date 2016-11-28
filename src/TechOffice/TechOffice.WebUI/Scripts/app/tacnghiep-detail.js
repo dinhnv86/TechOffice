@@ -25,14 +25,22 @@
         return ok;
     });
 
-    $('#modalEditBody').height(260);
+    $('#modalEditYKienCoQuan').on('show.bs.modal', function () {
+        $(this).find('.modal-body').css({
+            width: 'auto', //probably not needed
+            height: 'auto', //probably not needed
+            'overflow-y': 'auto',
+            'max-height': '100%'
+        });
+    });
 
-    $('#formYKienCoQuan').on('click', '.btn-edit', function (event) {
+    $('#formYKienCoQuan').on('click', '.btn-edit, .btn-reply', function (event) {
         event.preventDefault();
         var url = $(this).attr('href');
 
-        $('#modalEditBody').load(url);
-        $('#modalEditYKienCoQuan').modal({ backdrop: 'static', keyboard: false, show: true });
+        $('#modalEditBody').load(url, function () {
+            $('#modalEditYKienCoQuan').modal({ backdrop: 'static', keyboard: false, show: true });
+        });
     });
 
     onEditYKienBegin = function () {

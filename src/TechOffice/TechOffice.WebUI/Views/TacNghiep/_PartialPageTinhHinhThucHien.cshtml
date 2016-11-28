@@ -3,9 +3,8 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th class="col-sm-3">@Labels.TacNghiep_TinhHinhThucHien_TenCoQuan</th>
-            <th class="col-sm-6">@Labels.TacNghiep_TinhHinhThucHien_MucDoHoanThanh</th>
-            @*<th class="col-sm-3">Thời gian</th>*@
+            <th class="col-sm-3 text-center">@Labels.TacNghiep_TinhHinhThucHien_TenCoQuan</th>
+            <th class="col-sm-6 text-center">@Labels.TacNghiep_TinhHinhThucHien_MucDoHoanThanh</th>
             @if (User.IsInRole(RoleConstant.SUPPER_ADMIN) || User.IsInRole(RoleConstant.ADMIN))
             {
                 <th class="col-sm-3">@Labels.TacNghiep_TinhHinhThucHien_DaHoanThanh</th>

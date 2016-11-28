@@ -322,6 +322,15 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Các file đính kèm.
+        /// </summary>
+        public static string CongViec_List_CacFileDinhKem {
+            get {
+                return ResourceManager.GetString("CongViec_List_CacFileDinhKem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lĩnh vực.
         /// </summary>
         public static string CongViec_List_LinhVuc {
@@ -579,6 +588,24 @@ namespace AnThinhPhat.Resources {
         public static string UploadFiles_Title {
             get {
                 return ResourceManager.GetString("UploadFiles_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vai trò.
+        /// </summary>
+        public static string Users_AddUserViewModel_Role {
+            get {
+                return ResourceManager.GetString("Users_AddUserViewModel_Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu.
+        /// </summary>
+        public static string Users_LoginViewModel_Password {
+            get {
+                return ResourceManager.GetString("Users_LoginViewModel_Password", resourceCulture);
             }
         }
     }

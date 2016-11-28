@@ -29,9 +29,12 @@ namespace AnThinhPhat.Entities
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
+        public string NoiDungTraLoi { get; set; }
+        public Nullable<int> UserIdTraLoi { get; set; }
     
         public virtual CoQuan CoQuan { get; set; }
         public virtual TacNghiep TacNghiep { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinYKienCoQuan> TapTinYKienCoQuans { get; set; }
     }

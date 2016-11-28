@@ -26,41 +26,25 @@ namespace AnThinhPhat.ViewModel.CongViec
 
         public int? TrangThaiCongViecId { get; set; }
 
-        //public ValueSearchViewModel ValueSearch { get; set; }
-
-        private List<InitVanBanViewModel> vanBanLienQuan;
+        private List<InitVanBanViewModel> _vanBanLienQuan;
         public List<InitVanBanViewModel> VanBanLienQuanViewModel
         {
-            get
-            {
-                if (vanBanLienQuan == null)
-                    vanBanLienQuan = new List<InitVanBanViewModel>();
-
-                return vanBanLienQuan;
-            }
+            get { return _vanBanLienQuan ?? (_vanBanLienQuan = new List<InitVanBanViewModel>()); }
             set
             {
-                vanBanLienQuan = value;
+                _vanBanLienQuan = value;
             }
         }
 
-        private List<InitQuaTrinhXuLyViewModel> quanTringXuLyViewModel;
+        private List<InitQuaTrinhXuLyViewModel> _quanTringXuLyViewModel;
         public List<InitQuaTrinhXuLyViewModel> QuaTrinhXuLyViewModel
         {
-            get
-            {
-                if (quanTringXuLyViewModel == null)
-                    quanTringXuLyViewModel = new List<InitQuaTrinhXuLyViewModel>();
-
-                return quanTringXuLyViewModel;
-            }
+            get { return _quanTringXuLyViewModel ?? (_quanTringXuLyViewModel = new List<InitQuaTrinhXuLyViewModel>()); }
             set
             {
-                quanTringXuLyViewModel = value;
+                _quanTringXuLyViewModel = value;
             }
         }
-
-        //public InitVanBanViewModel VanBanViewModel { get; set; }
 
         public string Guid { get; set; }
     }

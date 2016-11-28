@@ -48,9 +48,8 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Assemblies\CaptchaMvc.dll</HintPath>
+    <Reference Include="CaptchaMvc">
+      <HintPath>..\..\..\Assemblies\CaptchaMvc.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -89,6 +88,14 @@
     </Reference>
     <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -132,8 +139,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Assemblies\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
@@ -161,7 +168,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="ReportViewerForMvc">
-      <HintPath>..\..\Assemblies\ReportViewerForMvc.dll</HintPath>
+      <HintPath>..\..\..\Assemblies\ReportViewerForMvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -313,13 +320,16 @@
     <Content Include="Scripts\app\congviec-statistic.js" />
     <Content Include="Scripts\app\congviec_add.js" />
     <Content Include="Scripts\app\datepickerjs.js" />
+    <Content Include="Scripts\app\format-datetime.js" />
     <Content Include="Scripts\app\menuslidejs.js" />
     <Content Include="Scripts\app\message.js" />
     <Content Include="Scripts\app\modaljs.js" />
+    <Content Include="Scripts\app\popup-detail.js" />
     <Content Include="Scripts\app\tacnghiep-detail.js" />
     <Content Include="Scripts\app\templates.js" />
     <Content Include="Scripts\app\uploadfiles.js" />
     <Content Include="Scripts\app\user-update.js" />
+    <Content Include="Scripts\app\vanban-add.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -332,8 +342,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="appsettings.config" />
-    <Content Include="Reports\rptCorporation.rdlc" />
-    <Content Include="Reports\rptSummaries.rdlc" />
+    <EmbeddedResource Include="Reports\rptCorporation.rdlc" />
+    <EmbeddedResource Include="Reports\rptSummaries.rdlc" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -341,6 +351,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="Scripts\jquery.ui.core.js" />
     <Content Include="Scripts\jquery.ui.core.min.js" />
     <Content Include="Scripts\jquery.ui.datepicker.js" />
@@ -356,8 +368,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial110.dll" />
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial110.dll" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -369,6 +379,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\CounterHub.cs" />
+    <None Include="Hubs\counter.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -449,9 +463,9 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutVanBan.cshtml" />
     <Content Include="Views\Shared\_PartialPageMenuSubLeft.cshtml" />
-    <Content Include="Views\VanBan\Detail.cshtml" />
+    <Content Include="Views\VanBan\_PartialPageDetail.cshtml" />
     <Content Include="Views\Shared\_PartialPageFiles.cshtml" />
-    <Content Include="Views\ThuTuc\Detail.cshtml" />
+    <Content Include="Views\ThuTuc\_PartialPageDetail.cshtml" />
     <Content Include="Views\ThuTuc\_PartialPageList.cshtml" />
     <Content Include="Views\VanBan\_PartialPageList.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageGroupListBodies.cshtml" />
@@ -474,6 +488,15 @@
     <Content Include="Views\Shared\_PartialPageUploadFiles.cshtml" />
     <Content Include="Views\CongViec\Statistic.cshtml" />
     <Content Include="Views\CongViec\Summaries.cshtml" />
+    <Content Include="Views\VanBan\Add.cshtml" />
+    <Content Include="Views\CoQuanBanHanhVanBan\Index.cshtml" />
+    <Content Include="Views\CoQuanBanHanhVanBan\List.cshtml" />
+    <Content Include="Views\VanBan\Edit.cshtml" />
+    <Content Include="Views\ThuTuc\Add.cshtml" />
+    <Content Include="Views\ThuTuc\Edit.cshtml" />
+    <Content Include="Views\Shared\_PartialPagePopupDetail.cshtml" />
+    <Content Include="Views\TacNghiep\_PartialPageNoiDungYKienReply.cshtml" />
+    <Content Include="Views\Shared\_PartialPageCounterUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

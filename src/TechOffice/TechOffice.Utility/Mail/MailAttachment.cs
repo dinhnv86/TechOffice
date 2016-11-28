@@ -17,7 +17,7 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
 
-namespace AnThinhPhat.Utilities
+namespace AnThinhPhat.Utilities.Mail
 {
     public class MailAttachment
     {
@@ -29,6 +29,13 @@ namespace AnThinhPhat.Utilities
         public MailAttachment(byte[] data, string filename)
         {
             Stream = new MemoryStream(data);
+            Filename = filename;
+            MediaType = MediaTypeNames.Application.Octet;
+        }
+
+        public MailAttachment(MemoryStream stream, string filename)
+        {
+            Stream = stream;
             Filename = filename;
             MediaType = MediaTypeNames.Application.Octet;
         }

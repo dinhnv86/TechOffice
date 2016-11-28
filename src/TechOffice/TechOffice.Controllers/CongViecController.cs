@@ -106,8 +106,8 @@ namespace AnThinhPhat.WebUI.Controllers
                 //Get current UserId
                 model.UserId = UserId;
 
-            var result = Find(model);
-
+            var result = SearchAll(model);
+            ViewBag.ValueSearch = model;
             return View("_PartialPageList", result);
         }
 
@@ -164,22 +164,14 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public ActionResult Statistic(DateTime From, DateTime To)
         {
-            var reportViewer = new ReportViewer();
-            reportViewer.ProcessingMode = ProcessingMode.Local;
-
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\rptCorporation.rdlc";
             var results = HoSoCongViecRepository.Statistic(From, To);
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("dsStatistic", results));
-            ViewBag.ReportViewer = reportViewer;
 
-            return View();
+            return View(results);
         }
 
         [HttpGet]
         public ActionResult Summaries(InitValueStatictisSearchViewModel model)
         {
-            var reportViewer = new ReportViewer();
-            reportViewer.ProcessingMode = ProcessingMode.Local;
             var finds = HoSoCongViecRepository.Find(new Entities.Searchs.ValueSearchCongViec
             {
                 From = model.From,
@@ -194,30 +186,26 @@ namespace AnThinhPhat.WebUI.Controllers
                 CoQuanId = model.CoQuanId,
             });
 
-            var results = new List<SummariesViewModel>();
+            var results = new List<SummariesCongViecResult>();
             if (finds != null && finds.Any())
             {
                 finds.ToList().ForEach(x =>
                 {
-                    results.Add(new SummariesViewModel
+                    results.Add(new SummariesCongViecResult
                     {
                         NgayTao = x.NgayTao.ToString("dd/MM/yyyy"),
                         NgayHetHan = x.NgayHetHan?.ToString("dd/MM/yyyy"),
                         LinhVuc = x.LinhVucCongViec.Name,
                         XuLyChinh = x.UserXyLy.HoVaTen,
                         PhuTrach = x.UserPhuTrach.HoVaTen,
-                        TrangThai = x.TrangThaiCongViecInfo.Name,
-                        PhoiHop = x.CongViecPhoiHopResult.Select(y => y.UserInfo.HoVaTen).Aggregate((a, b) => (a + ", " + b)),
+                        TrangThai = x.TrangThaiCongViecInfo.IfNotNull(y => y.Name),
+                        PhoiHop = x.CongViecPhoiHopResult
+                        .Select(y => y.UserInfo != null ? y.UserInfo.HoVaTen : string.Empty).ToAggregate(),
                     });
                 });
             }
 
-            reportViewer.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"Reports\rptSummaries.rdlc";
-            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("dsLocalSummaries", results));
-
-            ViewBag.ReportViewer = reportViewer;
-
-            return View();
+            return View(results);
         }
 
         [HttpGet]
@@ -331,6 +319,8 @@ namespace AnThinhPhat.WebUI.Controllers
                 UsersPhoiHopId = hoso.CongViecPhoiHopResult.Select(x => x.UserId).ToArray(),
 
                 DanhGiaCongViec = hoso.DanhGiaCongViec.HasValue ? (EnumDanhGiaCongViec)hoso.DanhGiaCongViec.Value : EnumDanhGiaCongViec.LEVEL0,
+
+                JsonFiles = GetPathFiles(EnsureFolderCongViec(id)),
             };
             return View(model);
         }
@@ -479,9 +469,14 @@ namespace AnThinhPhat.WebUI.Controllers
             return model;
         }
 
-        private IPagedList<HoSoCongViecResult> Find(ValueSearchViewModel model)
+        private IPagedList<HoSoCongViecResult> SearchAll(ValueSearchViewModel model)
         {
             var query = HoSoCongViecRepository.Find(model.ToValueSearch());
+            query.ToList().ForEach(x =>
+            {
+                string folderCongViec = EnsureFolderCongViec(x.Id);
+                x.JsonFiles = GetPathFiles(folderCongViec);
+            });
             return query.ToPagedList(model.Page, TechOfficeConfig.PAGESIZE);
         }
 
@@ -526,7 +521,7 @@ namespace AnThinhPhat.WebUI.Controllers
             string folderParentCV = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_CONGVIEC);
             EnsureFolder(folderParentCV);
 
-            string folderCV = Path.Combine(folderParentCV, congViecId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
+            string folderCV = Path.Combine(folderParentCV, congViecId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
             EnsureFolder(folderCV);
 
             return folderCV;

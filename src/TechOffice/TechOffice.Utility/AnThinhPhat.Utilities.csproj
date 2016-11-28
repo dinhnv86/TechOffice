@@ -61,6 +61,7 @@
     <Compile Include="LogServices\ILogService.cs" />
     <Compile Include="LogServices\LogService.cs" />
     <Compile Include="Mail\MailAttachment.cs" />
+    <Compile Include="Mail\MailSender.cs" />
     <Compile Include="Mail\MailType.cs" />
     <Compile Include="Mail\SmtpMailSender.cs" />
     <Compile Include="ParseExtension.cs" />

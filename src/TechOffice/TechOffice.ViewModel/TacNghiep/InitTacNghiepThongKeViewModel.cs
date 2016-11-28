@@ -1,13 +1,15 @@
-﻿using AnThinhPhat.Entities.Infos;
-using AnThinhPhat.Entities.Results;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using AnThinhPhat.Entities.Infos;
+using AnThinhPhat.Entities.Results;
+using System.ComponentModel.DataAnnotations;
 
 namespace AnThinhPhat.ViewModel.TacNghiep
 {
     public class InitTacNghiepThongKeViewModel
     {
         public int? NhomCoQuanId { get; set; }
+
         public IEnumerable<NhomCoQuanInfo> NhomCoQuanInfos { get; set; }
 
         public int? CoQuanId { get; set; }
@@ -22,15 +24,15 @@ namespace AnThinhPhat.ViewModel.TacNghiep
 
         public IEnumerable<MucDoHoanThanhResult> MucDoHoanThanhInfo { get; set; }
 
-        public DateTime From { get; set; } = DateTime.Now;
+        public string From { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
 
-        public DateTime To { get; set; } = DateTime.Now;
+        public string To { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");
 
         public bool IsShowResult { get; set; } = false;
 
         /// <summary>
-        /// T01: thong ke theo cong viec
-        /// T02: thong ke theo co quan
+        ///     T01: thong ke theo cong viec
+        ///     T02: thong ke theo co quan
         /// </summary>
         public string TypeStatistic { get; set; }
 

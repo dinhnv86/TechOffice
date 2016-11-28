@@ -84,7 +84,7 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Statistic(int? nhomCoQuanId, int? coQuanId, int? linhVucTacNghiepId, int? mucDoHoanThanhId, DateTime? from, DateTime? to, string submit)
+        public ActionResult Statistic(int? nhomCoQuanId, int? coQuanId, int? linhVucTacNghiepId, int? mucDoHoanThanhId, string from, string to, string submit)
         {
             var dataBind = CreateTacNghiepModel(nhomCoQuanId);
             var model = new InitTacNghiepThongKeViewModel
@@ -113,8 +113,8 @@ namespace AnThinhPhat.WebUI.Controllers
                     NhomCoquanId = nhomCoQuanId,
                     LinhVucTacNghiepId = linhVucTacNghiepId,
                     MucDoHoanThanhId = mucDoHoanThanhId,
-                    From = from,
-                    To = to
+                    From = from.ParseDate(),
+                    To = to.ParseDate(),
                 };
             }
             else
@@ -137,7 +137,8 @@ namespace AnThinhPhat.WebUI.Controllers
                   {
                       NgayTao = a.NgayTao,
                       Name = a.NoiDung,
-                      NotExecuteResults = b.Where(w => w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.CHUATHUHIEN).Select(s => new ResultCoQuanThucHien
+                      NotExecuteResults = b.Where(w => (w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.CHUATHUHIEN
+                      || w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DAXEM)).Select(s => new ResultCoQuanThucHien
                       {
                           Name = s.CoQuanInfo.Name,
                       }),
@@ -145,7 +146,8 @@ namespace AnThinhPhat.WebUI.Controllers
                       {
                           Name = s.CoQuanInfo.Name,
                       }),
-                      ExecutedResults = b.Where(w => w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DATHUCHIEN).Select(s => new ResultCoQuanThucHien
+                      ExecutedResults = b.Where(w => w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DATHUCHIEN
+                      || w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DAHOANHTHANH).Select(s => new ResultCoQuanThucHien
                       {
                           Name = s.CoQuanInfo.Name,
                           NgayHoanThanh = a.NgayHoanThanh,
@@ -188,7 +190,8 @@ namespace AnThinhPhat.WebUI.Controllers
                          NgayHetHan = s.TacNghiepInfo.NgayHetHan,
                          TrangThai = "Đang thực hiện",
                      }),
-                     ExecutedResults = b.Where(w => w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DATHUCHIEN && w.NgayHoanThanh <= w.TacNghiepInfo.NgayHoanThanh).Select(s => new ResultCongViecThucHien
+                     ExecutedResults = b.Where(w => (w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DATHUCHIEN || w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DAHOANHTHANH)
+                     && w.NgayHoanThanh.CompareDate(w.TacNghiepInfo.NgayHetHan)).Select(s => new ResultCongViecThucHien
                      {
                          LinhVucString = s.TacNghiepInfo.LinhVucTacNghiepInfo.Name,
                          VanBan = GetPathFiles(EnsureFolderTacNghiep(s.TacNghiepId)),
@@ -198,7 +201,8 @@ namespace AnThinhPhat.WebUI.Controllers
                          NgayHetHan = s.TacNghiepInfo.NgayHetHan,
                          TrangThai = "Đã thực hiện/đúng hạn",
                      }),
-                     ExecutedOverResults = b.Where(w => w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DATHUCHIEN && w.NgayHoanThanh > w.TacNghiepInfo.NgayHoanThanh).Select(s => new ResultCongViecThucHien
+                     ExecutedOverResults = b.Where(w => (w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DATHUCHIEN || w.MucDoHoanThanhId == (int)EnumMucDoHoanThanh.DAHOANHTHANH)
+                     && !w.NgayHoanThanh.CompareDate(w.TacNghiepInfo.NgayHetHan)).Select(s => new ResultCongViecThucHien
                      {
                          LinhVucString = s.TacNghiepInfo.LinhVucTacNghiepInfo.Name,
                          VanBan = GetPathFiles(EnsureFolderTacNghiep(s.TacNghiepId)),
@@ -337,10 +341,10 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult NoiDungYKienCuaCacCoQuan(int id)//TacNghiepId
         {
-            var result = YKienCoQuanRepository.GetAll().Where(x => x.TacNghiepId == id);
+            var result = YKienCoQuanRepository.GetByTacNghiepId(id);
             var user = AuthInfo();
 
-            if (!User.IsInRole(RoleConstant.ADMIN) || !User.IsInRole(RoleConstant.SUPPER_ADMIN))
+            if ((!User.IsInRole(RoleConstant.ADMIN) || !User.IsInRole(RoleConstant.SUPPER_ADMIN)) && !User.IsInRole(RoleConstant.PHONGNOIVU))
             {
                 result = result.Where(x => x.CoQuanId == user.CoQuanId);
 
@@ -460,6 +464,30 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
+        [HttpGet]
+        public PartialViewResult ReplyYKien(int id)//id y kien co quan
+        {
+            var model = YKienCoQuanRepository.GetReplyYKien(id);
+            return PartialView("_PartialPageNoiDungYKienReply", model);
+        }
+
+        [HttpPost]
+        public JsonResult ReplyYKien(int id, string noiDung)//id y kien co quan
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                return ExecuteResult(() =>
+                {
+                    return YKienCoQuanRepository.ReplyYKien(new NoiDungTraLoiInfo
+                    {
+                        Id = id,
+                        NoiDung = noiDung,
+                        UserId = UserId,
+                    });
+                });
+            });
+        }
+
         [NonAction]
         private InitTacNghiepViewModel CreateTacNghiepModel(int? nhomCoQuanId)
         {
@@ -503,7 +531,7 @@ namespace AnThinhPhat.WebUI.Controllers
             var all = TacNghiepRepository.GetAll();
 
             if (model.CoQuanId.HasValue)
-                all.ToList().ForEach(a => { a.CoQuanInfos = a.CoQuanInfos.Where(x => x.Id == model.CoQuanId.Value); });
+                all = all.Where(x => x.CoQuanInfos.Any(y => y.Id == model.CoQuanId.Value));
 
             if (model.LinhVucTacNghiepId.HasValue)
                 all = all.Where(x => x.LinhVucTacNghiepId == model.LinhVucTacNghiepId.Value);
@@ -596,7 +624,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             string folderTT = EnsureFolderTacNghiep(tacNghiepId);
 
-            string folderUser = Path.Combine(folderTT, UserId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
+            string folderUser = Path.Combine(folderTT, UserId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
             EnsureFolder(folderUser);
 
             return folderUser;
@@ -606,7 +634,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             string folderTT = EnsureFolderTacNghiep(tacNghiepId);
 
-            string folderCoQuan = Path.Combine(folderTT, yKienCoQuanId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
+            string folderCoQuan = Path.Combine(folderTT, yKienCoQuanId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
             EnsureFolder(folderCoQuan);
 
             return folderCoQuan;
@@ -617,7 +645,7 @@ namespace AnThinhPhat.WebUI.Controllers
             string folderParentTN = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_TACNGHIEP);
             EnsureFolder(folderParentTN);
 
-            string folderTN = Path.Combine(folderParentTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
+            string folderTN = Path.Combine(folderParentTN, tacNghiepId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
             EnsureFolder(folderTN);
 
             return folderTN;
@@ -627,17 +655,6 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
-        }
-
-        private string GetPathFiles(string path)
-        {
-            var files = Directory.GetFiles(path);
-            string json = string.Empty;
-            foreach (string file in files)
-            {
-                json += "<a href=" + Url.Action("DownloadFile", "File", new { path = path, file = Path.GetFileName(file) }) + ">" + Path.GetFileName(file) + "</a>" + "<br/>";
-            }
-            return json;
         }
     }
 }

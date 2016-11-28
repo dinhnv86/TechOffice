@@ -66,6 +66,9 @@
     <Compile Include="CoQuan.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CoQuanBanHanhVanBan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="HelperExtension.cs" />
     <Compile Include="DataInfo.cs" />
     <Compile Include="HoSoCongViec.cs">
@@ -79,6 +82,7 @@
     <Compile Include="Infos\LinhVucCongViecInfo.cs" />
     <Compile Include="Infos\LinhVucVanBanInfo.cs" />
     <Compile Include="Infos\LoaiVanBanInfo.cs" />
+    <Compile Include="Infos\CoQuanBanHanhVanBanInfo.cs" />
     <Compile Include="Infos\TacNghiepYKienCoQuanInfo.cs" />
     <Compile Include="Infos\TrangThaiCongViecInfo.cs" />
     <Compile Include="Infos\NhomCoQuanInfo.cs" />
@@ -115,6 +119,7 @@
     <Compile Include="NhomCoQuan.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Infos\NoiDungTraLoiInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseResult.cs" />
     <Compile Include="BaseInfo.cs" />
@@ -122,6 +127,7 @@
     <Compile Include="Results\CongViecPhoiHopResult.cs" />
     <Compile Include="Results\CongViecQuaTrinhXuLyResult.cs" />
     <Compile Include="Results\CongViecVanBanResult.cs" />
+    <Compile Include="Results\CoQuanBanHanhVanBanResult.cs" />
     <Compile Include="Results\StatisticCongViec.cs" />
     <Compile Include="Results\SummariesCongViecResult.cs" />
     <Compile Include="Results\TrangThaiCongViecResult.cs" />
