@@ -37,5 +37,7 @@ namespace AnThinhPhat.Entities.Results
         public int? TrangThaiCongViecId { get; set; }
 
         public TrangThaiCongViecInfo TrangThaiCongViecInfo { get; set; }
+
+        public string JsonFiles { get; set; }
     }
 }

@@ -22,6 +22,8 @@
         <label>Nội dung</label>
         @Html.TextAreaFor(x => x.NoiDung, htmlAttributes: new { @class = "form-control", rows = 5 })
     </div>
+    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <label class="col-sm-12">Các tập tin đính kèm</label>
     <div class="col-xs-12">
         <input type="file" id="filesUploadYKien" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />
         <button type="button" class="btn btn-primary" id="btnUploadFilesYKien" value="Upload" disabled="disabled" style="width:100px;">
@@ -31,11 +33,10 @@
     </div>
 
     <span class="col-xs-12" id="spanUploadYKien"></span>
-
     <div class="col-xs-12" id="filesNameYKien">
     </div>
-
-    <div class="col-sm-6" id="outer">
+    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="col-xs-12" id="outer">
         <div class="inner"> <input type="submit" value="Lưu" class="btn btn-primary btn-width-md col-sm-2" name="btnAdd" id="btnAdd" /></div>
         <div class="inner">
             <button type="button" class="btn btn-default btn-width-md col-sm-2" name="btnCancel" id="btnCancel" data-dismiss="modal">Hủy</button>

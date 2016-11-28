@@ -1079,6 +1079,8 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 NoiDung = entity.NoiDung,
+                NoiDungTraLoi = entity.NoiDungTraLoi,
+                UserIdTraLoi = entity.UserIdTraLoi,
                 CoQuanId = entity.CoQuanId,
                 CoQuanInfo = entity.CoQuan.ToDataInfo(),
                 TacNghiepId = entity.TacNghiepId,

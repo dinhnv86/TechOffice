@@ -312,11 +312,8 @@ namespace AnThinhPhat.Services.Implements
                                  where item.IsDeleted == false
                                  select item);
 
-                    if (valueSearch.NhomCoquanId.HasValue)
-                        query = query.Where(x => x.TacNghiep_TinhHinhThucHien.Any(y => y.CoQuan.NhomCoQuanId == valueSearch.NhomCoquanId.Value));
-
                     if (valueSearch.CoQuanId.HasValue)
-                        query = query.Where(x => x.TacNghiep_TinhHinhThucHien.Any(y => y.Id == valueSearch.CoQuanId.Value));
+                        query = query.Where(x => x.TacNghiep_TinhHinhThucHien.Any(y => y.CoQuanId == valueSearch.CoQuanId.Value));
 
                     if (valueSearch.LinhVucTacNghiepId.HasValue)
                         query = query.Where(x => x.LinhVucTacNghiepId == valueSearch.LinhVucTacNghiepId.Value);

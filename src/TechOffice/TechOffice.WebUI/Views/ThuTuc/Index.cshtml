@@ -1,7 +1,6 @@
 ﻿@model AnThinhPhat.ViewModel.ThuTuc.InitThuTucViewModel
 @{
     Layout = "~/Views/Shared/_LayoutThuTuc.cshtml";
-
 }
 
 <style>
@@ -44,27 +43,8 @@
     @{Html.RenderAction("List", "ThuTuc", routeValues: new { search = Model.ValueSearch });}
 </div>
 
-<div class="modal fade in" id="modalDetail">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Modal title</h4>
-
-            </div>
-            <div class="modal-body">
-                <div class="te"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="popupDetail"></div>
+@{Html.RenderPartial("_PartialPagePopupDetail", "Chi tiết thủ tục");}
 
 @section Scripts{
-    @*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
-    <script>
-        $(document).ready(function () {
-        });
-    </script>
+    <script src="~/Scripts/app/popup-detail.js"></script>
 }

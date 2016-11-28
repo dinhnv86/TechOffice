@@ -3107,7 +3107,7 @@ input.txs {
 
 nav.navbar.navbar-default {
     width: 100%;
-    z-index: 10000;
+    z-index: 1000;
 }
 
     nav.navbar.navbar-default.menu_top_fix {

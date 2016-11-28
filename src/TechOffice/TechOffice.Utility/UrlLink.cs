@@ -63,14 +63,14 @@
         public static string LOGIN = "login";
         public static string TACNGHIEP_THONGKE = "tacnghiep/thongke";
         public static string TACNGHIEP_ADD = "tacnghiep/themmoi";
-        public static string TACNGHIEP_DETAIL = "tacnghiep/{id}";
+        public static string TACNGHIEP_DETAIL = "tacnghiep/{guid1}-{id}-{guid2}";
 
         public static string CONGVIEC_THONGKE_TIMKIEM = "congviec/thongke-timkiem";
         public static string CONGVIEC_THONGKE_TONGHOP = "congviec/thongke-tonghop";
         public static string CONGVIEC_THONGKE = "congviec/thongke";
         public static string CONGVIEC_TIMKIEM = "congviec/timkiem";
         public static string CONGVIEC_ADD = "congviec/themmoi";
-        public static string CONGVIEC_DETAIL = "congviec/{id}";
+        public static string CONGVIEC_DETAIL = "congviec/{guid1}-{id}-{guid2}";
 
         public static string HISTORY = "history";
         public static string CHART = "organization-chart";

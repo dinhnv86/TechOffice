@@ -24,7 +24,7 @@ namespace AnThinhPhat.Entities
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
     
-        public virtual TacNghiep_YKienCoQuan TacNghiep_YKienCoQuan { get; set; }
         public virtual User User { get; set; }
+        public virtual TacNghiep_YKienCoQuan TacNghiep_YKienCoQuan { get; set; }
     }
 }

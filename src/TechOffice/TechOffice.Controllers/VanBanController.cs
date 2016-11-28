@@ -57,13 +57,10 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
-        public ActionResult Detail(string soVanBan, int id)
+        public PartialViewResult Detail(int id)
         {
-            return ExecuteWithErrorHandling(() =>
-            {
-                var model = VanBanRepository.Single(id);
-                return View(model);
-            });
+            var model = VanBanRepository.Single(id);
+            return PartialView("_PartialPageDetail", model);
         }
 
         [HttpGet, Authorize]
@@ -233,7 +230,7 @@ namespace AnThinhPhat.WebUI.Controllers
                         VanBanId = id,
                         CreatedBy = UserName,
                         UserUploadId = UserId,
-                        Url = Path.Combine(TechOfficeConfig.FOLDER_VB, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR), file.FileName),
+                        Url = Path.Combine(TechOfficeConfig.FOLDER_VB, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR), file.FileName),
                     });
                 }
             });
@@ -263,7 +260,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 string folderUpload = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_VB);
                 EnsureFolder(folderUpload);
 
-                string folderVanBan = Path.Combine(folderUpload, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
+                string folderVanBan = Path.Combine(folderUpload, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
                 EnsureFolder(folderVanBan);
 
                 return folderVanBan;

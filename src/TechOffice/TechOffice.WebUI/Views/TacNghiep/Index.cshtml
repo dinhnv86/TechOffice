@@ -35,8 +35,8 @@
                             @Html.RadioButtonFor(x => Model.SearchTypeValue, false, htmlAttributes: new { id = "YKienId" }) Ý kiến trao đổi
                         </div>
                     </div>
-                   
-                    <div id="outer" >
+                    <div class="clearfix"></div>
+                    <div id="outer">
                         <div class="inner"><input type="submit" class="btn btn-primary btn-width-md" value="Tìm kiếm" /></div>
                         <div class="inner">
                             @Html.RouteLink("Thống kê", UrlLink.TACNGHIEP_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })
@@ -79,9 +79,7 @@
                           .find('option')
                           .remove()
                           .end()
-                          //.append('<option selected="selected" value>Tất cả</option>')
                           .append(data)
-                        //.val('null');
                     },
                 });
 

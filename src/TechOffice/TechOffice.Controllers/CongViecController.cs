@@ -106,8 +106,8 @@ namespace AnThinhPhat.WebUI.Controllers
                 //Get current UserId
                 model.UserId = UserId;
 
-            var result = Find(model);
-
+            var result = SearchAll(model);
+            ViewBag.ValueSearch = model;
             return View("_PartialPageList", result);
         }
 
@@ -198,8 +198,9 @@ namespace AnThinhPhat.WebUI.Controllers
                         LinhVuc = x.LinhVucCongViec.Name,
                         XuLyChinh = x.UserXyLy.HoVaTen,
                         PhuTrach = x.UserPhuTrach.HoVaTen,
-                        TrangThai = x.TrangThaiCongViecInfo.Name,
-                        PhoiHop = x.CongViecPhoiHopResult.Select(y => y.UserInfo.HoVaTen).Aggregate((a, b) => (a + ", " + b)),
+                        TrangThai = x.TrangThaiCongViecInfo.IfNotNull(y => y.Name),
+                        PhoiHop = x.CongViecPhoiHopResult
+                        .Select(y => y.UserInfo != null ? y.UserInfo.HoVaTen : string.Empty).ToAggregate(),
                     });
                 });
             }
@@ -318,6 +319,8 @@ namespace AnThinhPhat.WebUI.Controllers
                 UsersPhoiHopId = hoso.CongViecPhoiHopResult.Select(x => x.UserId).ToArray(),
 
                 DanhGiaCongViec = hoso.DanhGiaCongViec.HasValue ? (EnumDanhGiaCongViec)hoso.DanhGiaCongViec.Value : EnumDanhGiaCongViec.LEVEL0,
+
+                JsonFiles = GetPathFiles(EnsureFolderCongViec(id)),
             };
             return View(model);
         }
@@ -466,9 +469,14 @@ namespace AnThinhPhat.WebUI.Controllers
             return model;
         }
 
-        private IPagedList<HoSoCongViecResult> Find(ValueSearchViewModel model)
+        private IPagedList<HoSoCongViecResult> SearchAll(ValueSearchViewModel model)
         {
             var query = HoSoCongViecRepository.Find(model.ToValueSearch());
+            query.ToList().ForEach(x =>
+            {
+                string folderCongViec = EnsureFolderCongViec(x.Id);
+                x.JsonFiles = GetPathFiles(folderCongViec);
+            });
             return query.ToPagedList(model.Page, TechOfficeConfig.PAGESIZE);
         }
 
@@ -513,7 +521,7 @@ namespace AnThinhPhat.WebUI.Controllers
             string folderParentCV = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_CONGVIEC);
             EnsureFolder(folderParentCV);
 
-            string folderCV = Path.Combine(folderParentCV, congViecId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PADDING_CHAR));
+            string folderCV = Path.Combine(folderParentCV, congViecId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
             EnsureFolder(folderCV);
 
             return folderCV;

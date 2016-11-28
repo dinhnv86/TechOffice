@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace AnThinhPhat.Utilities
@@ -62,6 +63,38 @@ namespace AnThinhPhat.Utilities
                 }
             }
             return text.StringUrl();
+        }
+
+        /// <summary>
+        /// Compare Date (yyyy,MM,dd)
+        /// If first is greater or equal then return true, otherwise then false
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns></returns>
+        public static bool CompareDate(this DateTime? first, DateTime? second)
+        {
+            if (first == null || second == null)
+                return false;
+
+            return CompareDate(first, second);
+        }
+
+        public static bool CompareDate(this DateTime first, DateTime second)
+        {
+            var result = DateTime.Compare(
+                  new DateTime(first.Year, first.Month, first.Day, 0, 0, 0),
+                  new DateTime(second.Year, second.Month, second.Day));
+
+            return result >= 0 ? true : false;
+        }
+
+        public static DateTime? ParseDate(this string date)
+        {
+            if (!string.IsNullOrEmpty(date))
+                return DateTime.Parse(date, new CultureInfo("vi-VN"));
+
+            return null;
         }
     }
 }

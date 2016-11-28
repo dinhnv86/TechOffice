@@ -29,57 +29,61 @@
     }
 </style>
 
-@using (Ajax.BeginForm(ajaxOption))
-{
-    //Id temp
-    @Html.HiddenFor(x => x.Guid)
+<div class="col-xs-12">
+    @using (Ajax.BeginForm(ajaxOption))
+    {
+        //Id temp
+        @Html.HiddenFor(x => x.Guid)
 
-    <div class="col-sm-6">
-        <label>@Labels.TacNghiep_Add_NgayTao<span class="required">*</span></label>
-        @Html.EditorFor(x => x.NgayTao, "DateTime")
-        @Html.ValidationMessageFor(x => x.NgayTao)
-    </div>
-
-    <div class="col-sm-6">
-        <label>@Labels.CongViec_Add_NgayHetHan<span class="required">*</span></label>
-        @Html.EditorFor(x => x.NgayHetHan, "DateTime")
-        @Html.ValidationMessageFor(x => x.NgayHetHan)
-    </div>
-
-    <div class="col-sm-6">
-        <label>@Labels.CongViec_Add_NgayHoanThanh</label>
-        @Html.EditorFor(x => x.NgayHoanThanh, "DateTime")
-    </div>
-
-    <div class="col-sm-6">
-        <label>Lĩnh vực<span class="required">*</span></label>
-        @Html.DropDownListFor(x => x.LinhVucId, new SelectList(Model.LinhVucInfos, "Id", "Name"), "---Chọn lĩnh vực---", htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.LinhVucId)
-    </div>
-
-    <div class="col-md-12">
-        <label>@Labels.CongViec_Add_NoiDung</label>
-        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 3 })
-        @Html.ValidationMessageFor(x => x.NoiDung)
-    </div>
-
-    @Html.EditorFor(x => Model.CoQuanInfos, "GroupListBodies")
-
-    <div class="col-md-12">
-        <label>@Labels.CongViec_Add_NoiDungTraoDoi</label>
-        @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 })
-    </div>
-
-    { Html.RenderPartial("_PartialPageUploadFiles", Model.Guid); }
-
-    <div class="col-sm-6" id="outer">
-        <div class="inner"><input type="submit" value=@Buttons.CongViec_Add_Save class="btn btn-primary btn-width-md col-sm-2" name="btnAdd" id="btnAdd" /></div>
-        <div class="inner">
-            <button type="button" class="btn btn-default btn-width-md col-sm-2" name="btnCancel" id="btnCancel" data-dismiss="modal">@Buttons.CongViec_Add_Cancel</button>
+        <div class="col-sm-6">
+            <label>@Labels.TacNghiep_Add_NgayTao<span class="required">*</span></label>
+            @Html.EditorFor(x => x.NgayTao, "DateTime")
+            @Html.ValidationMessageFor(x => x.NgayTao)
         </div>
-    </div>
-}
 
+        <div class="col-sm-6">
+            <label>@Labels.CongViec_Add_NgayHetHan<span class="required">*</span></label>
+            @Html.EditorFor(x => x.NgayHetHan, "DateTime")
+            @Html.ValidationMessageFor(x => x.NgayHetHan)
+        </div>
+
+        <div class="col-sm-6">
+            <label>@Labels.CongViec_Add_NgayHoanThanh</label>
+            @Html.EditorFor(x => x.NgayHoanThanh, "DateTime")
+        </div>
+
+        <div class="col-sm-6">
+            <label>Lĩnh vực<span class="required">*</span></label>
+            @Html.DropDownListFor(x => x.LinhVucId, new SelectList(Model.LinhVucInfos, "Id", "Name"), "---Chọn lĩnh vực---", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.LinhVucId)
+        </div>
+
+        <div class="col-md-12">
+            <label>@Labels.CongViec_Add_NoiDung</label>
+            @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 3 })
+            @Html.ValidationMessageFor(x => x.NoiDung)
+        </div>
+
+        @Html.EditorFor(x => Model.CoQuanInfos, "GroupListBodies")
+
+        <div class="col-md-12">
+            <label>@Labels.CongViec_Add_NoiDungTraoDoi</label>
+            @Html.TextAreaFor(x => Model.NoiDungYKienTraoDoi, htmlAttributes: new { @class = "form-control", rows = 10 })
+        </div>
+
+        { Html.RenderPartial("_PartialPageUploadFiles", Model.Guid); }
+
+        <div class="col-sm-6" id="outer">
+            <div class="inner">
+                <input type="submit" value='@Buttons.CongViec_Add_Save' class="btn btn-primary btn-width-md col-sm-2" name="btnAdd" id="btnAdd" />
+            </div>
+            <div class="inner">
+                @Html.RouteLink(Buttons.CongViec_Add_Cancel, UrlLink.TACNGHIEP, null, htmlAttributes: new { @class = "btn btn-default btn-width-md col-sm-2" })
+                @*<button type="button" class="btn btn-default btn-width-md col-sm-2" name="btnCancel" id="btnCancel" data-dismiss="modal">@Buttons.CongViec_Add_Cancel</button>*@
+            </div>
+        </div>
+    }
+</div>
 @section Scripts{
     <script src="~/Scripts/app/modaljs.js"></script>
 
@@ -109,54 +113,6 @@
                 }
                 return ok;
             });
-
-            /*begin upload*/
-            @*$('input[type="file"]').change(function (e) {
-                $('#spanUpload').text('');
-                var files = e.originalEvent.target.files;
-                if (files.length > 0) {
-                    $(this).next().removeAttr('disabled');
-                }
-                else {
-                    $(this).next().attr('disabled', 'disabled');
-                }
-            });
-
-            $('#btnUpload').on('click', function (e) {
-                if (window.FormData !== undefined) {
-                    var ajaxRequest = $.ajax({
-                        type: "POST",
-                        processData: false,
-                        contentType: false,
-                        url: '@Url.Action("FilesAttach", "File")' + '?guid=' + '@Model.Guid' + '&type=1',
-                        data: function () {
-                            var formData = new FormData();
-                            var files = $('#filesUpload').get(0).files;
-                            if (files.length > 0) {
-                                for (var i = 0; i < files.length; i++) {
-                                    formData.append("file" + i, files[i]);
-                                }
-                            }
-                            return formData;
-                        }()
-                    });
-
-                    ajaxRequest.success(function (e, data) {
-                        $('#filesName').html(e);
-                        $('#btnUpload').attr('disabled', 'disabled');
-                        $('#spanUpload').text('Upload file successfully');
-                    });
-                    ajaxRequest.error(function () {
-                        alert('Has Error in while upload file');
-                    });
-                    ajaxRequest.always(function () {
-                    });
-                }
-                else {
-                    alert("This browser doesn't support HTML5 file uploads!");
-                }
-            });*@
-            /*end upload*/
 
             onAddBegin = function () {
                 onShowLoading();

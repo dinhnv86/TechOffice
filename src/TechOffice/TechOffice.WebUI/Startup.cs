@@ -20,6 +20,8 @@ namespace AnThinhPhat.WebUI
                 SlidingExpiration = false,
                 ExpireTimeSpan = TimeSpan.FromDays(7)
             });
+
+            app.MapSignalR();
         }
     }
 }
