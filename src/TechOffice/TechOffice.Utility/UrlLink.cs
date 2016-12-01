@@ -45,7 +45,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public static string THUTUC_EDIT = "thutuc/{tenthutuc}-{id}";
+        public static string THUTUC_EDIT = "thutuc/edit/{tenthutuc}-{id}";
 
         /// <summary>
         /// 
@@ -56,7 +56,6 @@
         /// 
         /// </summary>
         public static string CONGVIEC = "congviec";
-        //public static string CONGVIEC = "{controller}/{action}/{UserId}/{Role}/{TrangThaiCongViecId}/{LinhVucCongViecId}/{noiDungCongViec}"; /*UserId=&Role=1&TrangThaiCongViecId=&LinhVucCongViecId=*/
 
         public static string TINTUC = "tintuc";
         public static string LIENHE = "lienhe";

@@ -86,9 +86,11 @@ namespace AnThinhPhat.WebUI.Controllers
                     CoQuanThucHienId = data.CoQuanThucHienId,
                     LinhVucThuTucId = data.LoaiThuTucId,
                     NgayBanHanh = data.NgayBanHanh,
-                    MaThuTuc = data.NoiDung,
+                    NoiDung = data.NoiDung,
                     TenThuTuc = data.TenThuTuc,
                     TapTinThuTucResults = data.Files,
+                    CoQuanInfos = init.CoQuanInfos,
+                    LinhVucThuTucInfo = init.LinhVucThuTucInfo,
                 };
                 return View(model);
             });
@@ -100,7 +102,7 @@ namespace AnThinhPhat.WebUI.Controllers
             var data = ThuTucRepository.Single(id);
             data.LoaiThuTucId = model.LinhVucThuTucId;
             data.CoQuanThucHienId = model.CoQuanThucHienId;
-            data.NoiDung = model.MaThuTuc;
+            data.NoiDung = model.NoiDung;
             data.NgayBanHanh = data.NgayBanHanh;
             data.TenThuTuc = model.TenThuTuc;
             data.LastUpdatedBy = UserName;
@@ -178,7 +180,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 foreach (var file in files)
                 {
-                    var path = SaveFilesVanBan(file, id);
+                    var path = SaveFilesThuTuc(file, id);
                     FilesRepository.Add(new TapTinThuTucResult
                     {
                         ThuTucId = id,
@@ -190,7 +192,7 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
-        private string SaveFilesVanBan(HttpPostedFileBase file, int vanBanId)
+        private string SaveFilesThuTuc(HttpPostedFileBase file, int vanBanId)
         {
             var folderVanBan = EnsureFolderThuTuc(vanBanId);
             string savedFileName = Path.Combine(folderVanBan, Path.GetFileName(file.FileName));
@@ -214,10 +216,10 @@ namespace AnThinhPhat.WebUI.Controllers
                 string folderUpload = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_TT);
                 EnsureFolder(folderUpload);
 
-                string folderVanBan = Path.Combine(folderUpload, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
-                EnsureFolder(folderVanBan);
+                string folderThuTuc = Path.Combine(folderUpload, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
+                EnsureFolder(folderThuTuc);
 
-                return folderVanBan;
+                return folderThuTuc;
             }
             catch (Exception ex)
             {

@@ -12,7 +12,7 @@ namespace AnThinhPhat.ViewModel.ThuTuc
         public string NoiDung { get; set; }
 
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_NgayBanHanh"), ErrorMessageResourceType = typeof(Resources.Messages))]
-        public DateTime? NgayBanHanh { get; set; }
+        public DateTime NgayBanHanh { get; set; } = DateTime.Now;
 
         [MaxLength(1024, ErrorMessageResourceType = typeof(Resources.Messages), ErrorMessageResourceName = "ThuTuc_AddThuTuc_TenThuTuc_MaxLength")]
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_TenThuTuc"), ErrorMessageResourceType = typeof(Resources.Messages))]
