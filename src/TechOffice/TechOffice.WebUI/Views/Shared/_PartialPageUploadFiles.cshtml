@@ -51,6 +51,7 @@
                     $('#filesName').html(e);
                     $('#btnUpload').attr('disabled', 'disabled');
                     $('#spanUpload').text('Upload file successfully');
+                    $('#jsonFiles').remove();
                 });
                 ajaxRequest.error(function () {
                     alert('Has Error in while upload file');

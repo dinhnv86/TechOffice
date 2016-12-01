@@ -48,27 +48,21 @@
     <label class="col-sm-12">Các tập tin đính kèm</label>
     <div class="col-sm-12">
         @Html.TextBoxFor(x => x.Files, htmlAttributes: new { type = "file", multiple = "true", @class = "form-control btn btn-info pull-left", style = "max-width:300px;" })
-        @*<input type="file" id="filesUpload" name="files" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />*@
-        @*<button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
-                <span class="glyphicon glyphicon-upload"></span>
-                @Buttons.UploadFiles_Upload
-            </button>*@
     </div>
     <div class="col-sm-12">
         @{ Html.RenderPartial("_PartialPageFiles", Model.TapTinVanBanResults); }
     </div>
 
     <div class="clearfix" style="padding-bottom:15px;"></div>
-        <div id="outer" class="col-xs-12">
-            <div class="inner">
-                <input type="submit" class="btn btn-primary btn-width-md" value="Cập nhật" />
-            </div>
-            <div class="inner">
-                @*<input type="button" class="btn btn-primary btn-width-md" value="Hủy" />*@
-                @Html.RouteLink("Hủy", UrlLink.VANBAN, htmlAttributes: new { @class = "btn btn-primary btn-width-md" })
-            </div>
+    <div id="outer" class="col-xs-12">
+        <div class="inner">
+            <input type="submit" class="btn btn-primary btn-width-md" value="Cập nhật" />
         </div>
-}
+        <div class="inner">
+            @Html.RouteLink("Hủy", UrlLink.VANBAN, htmlAttributes: new { @class = "btn btn-primary btn-width-md" })
+        </div>
+    </div>
+            }
 
 @section Scripts{
     <script src="~/Scripts/app/format-datetime.js"></script>

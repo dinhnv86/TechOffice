@@ -59,6 +59,7 @@ namespace AnThinhPhat.Services
 
         public static void UpdateToDb(this VanBan entity, VanBanResult data, DbContext context)
         {
+            entity.TrichYeu = data.TrichYeu;
             entity.TenVanBan = data.TenVanBan;
             entity.SoVanBan = data.SoVanBan;
             entity.CoQuanBanHanhId = data.CoQuanBanHanhId;

@@ -39,14 +39,15 @@
         @Html.TextBoxFor(x => x.Files, htmlAttributes: new { type = "file", multiple = "true", @class = "form-control btn btn-info pull-left", style = "max-width:300px;" })
     </div>
     <div class="clearfix" style="padding-bottom:15px;"></div>
-        <div id="outer" class="col-xs-12">
-            <div class="inner">
-                <input type="submit" class="btn btn-primary btn-width-md" value="Thêm mới" />
-            </div>
-            <div class="inner">
-                <input type="button" class="btn btn-primary btn-width-md" value="Hủy" />
-            </div>
+    <div id="outer" class="col-xs-12">
+        <div class="inner">
+            <input type="submit" class="btn btn-primary btn-width-md" value="Thêm mới" />
         </div>
+        <div class="inner">
+            @*<input type="button" class="btn btn-primary btn-width-md" value="Hủy" />*@
+            @Html.RouteLink("Hủy", UrlLink.THUTUC, null, htmlAttributes: new { @class = "btn btn-primary btn-width-md" })
+        </div>
+    </div>
 }
 
 @section Scripts{
