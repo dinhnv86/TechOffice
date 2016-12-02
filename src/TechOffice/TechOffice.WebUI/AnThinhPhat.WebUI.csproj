@@ -497,6 +497,10 @@
     <Content Include="Views\Shared\_PartialPagePopupDetail.cshtml" />
     <Content Include="Views\TacNghiep\_PartialPageNoiDungYKienReply.cshtml" />
     <Content Include="Views\Shared\_PartialPageCounterUser.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\Menu\Top.cshtml" />
+    <Content Include="Views\Shared\Menu\Auth.cshtml" />
+    <Content Include="Views\Shared\Menu\MenuMain.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -248,5 +248,14 @@ namespace AnThinhPhat.Resources {
                 return ResourceManager.GetString("UploadFiles_Upload", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lưu.
+        /// </summary>
+        public static string User_ChangePassword_Save {
+            get {
+                return ResourceManager.GetString("User_ChangePassword_Save", resourceCulture);
+            }
+        }
     }
 }
