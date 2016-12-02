@@ -592,6 +592,42 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu hiện tại.
+        /// </summary>
+        public static string User_ChangePassword_CurrentPassword {
+            get {
+                return ResourceManager.GetString("User_ChangePassword_CurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xác nhận mật khẩu.
+        /// </summary>
+        public static string User_ChangePassword_NewConfirmPassword {
+            get {
+                return ResourceManager.GetString("User_ChangePassword_NewConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu mới.
+        /// </summary>
+        public static string User_ChangePassword_NewPassword {
+            get {
+                return ResourceManager.GetString("User_ChangePassword_NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tài khoản.
+        /// </summary>
+        public static string User_ChangePassword_UserName {
+            get {
+                return ResourceManager.GetString("User_ChangePassword_UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vai trò.
         /// </summary>
         public static string Users_AddUserViewModel_Role {

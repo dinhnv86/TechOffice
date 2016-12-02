@@ -84,6 +84,7 @@
     <Compile Include="ThuTuc\ThuTucViewModel.cs" />
     <Compile Include="ThuTuc\ValueSearchViewModel.cs" />
     <Compile Include="Users\AddUserViewModel.cs" />
+    <Compile Include="Users\ChangePasswordViewModel.cs" />
     <Compile Include="Users\InitUserViewModel.cs" />
     <Compile Include="Users\UserLoginViewModel.cs" />
     <Compile Include="VanBan\EditVanBanViewModel.cs" />
