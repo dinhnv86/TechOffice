@@ -83,6 +83,8 @@
     <Compile Include="ThuTuc\InitThuTucViewModel.cs" />
     <Compile Include="ThuTuc\ThuTucViewModel.cs" />
     <Compile Include="ThuTuc\ValueSearchViewModel.cs" />
+    <Compile Include="TinTuc\BaiVietModel.cs" />
+    <Compile Include="TinTuc\DanhMucBaiVietModel.cs" />
     <Compile Include="Users\AddUserViewModel.cs" />
     <Compile Include="Users\ChangePasswordViewModel.cs" />
     <Compile Include="Users\InitUserViewModel.cs" />
