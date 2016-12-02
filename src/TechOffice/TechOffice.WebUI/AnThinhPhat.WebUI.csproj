@@ -501,6 +501,7 @@
     <Content Include="Views\Shared\Menu\Top.cshtml" />
     <Content Include="Views\Shared\Menu\Auth.cshtml" />
     <Content Include="Views\Shared\Menu\MenuMain.cshtml" />
+    <Content Include="Views\Shared\Menu\MenuAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
