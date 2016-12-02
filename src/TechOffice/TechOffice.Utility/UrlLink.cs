@@ -91,6 +91,7 @@
         public static string USERS = "users";
         public static string USERS_ADD = "users/add";
         public static string USERS_EDIT = "users/{id}";
+        public static string ACCOUNT_CHANGEPASSWORD = "account/changepassword";
 
         public static string ERROR_NOTFOUND404 = "ErrorNotFound404";
         public static string ERROR_NOTFOUND405 = "ErrorNotFound405";

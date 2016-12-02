@@ -180,4 +180,7 @@
   <data name="UploadFiles_Upload" xml:space="preserve">
     <value>Upload</value>
   </data>
+  <data name="User_ChangePassword_Save" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
 </root>
