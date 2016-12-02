@@ -12,27 +12,30 @@ namespace AnThinhPhat.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class MucDoHoanThanh
+    public partial class DanhMucBaiViet
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MucDoHoanThanh()
+        public DanhMucBaiViet()
         {
-            this.TacNghieps = new HashSet<TacNghiep>();
-            this.TacNghiep_TinhHinhThucHien = new HashSet<TacNghiep_TinhHinhThucHien>();
+            this.BaiViets = new HashSet<BaiViet>();
         }
     
-        public int Id { get; set; }
-        public string Ten { get; set; }
+        public int MaDanhMuc { get; set; }
+        public int IdParent { get; set; }
+        public string TenDanhMuc { get; set; }
         public string MoTa { get; set; }
-        public bool IsDeleted { get; set; }
-        public System.DateTime CreateDate { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> LastUpdated { get; set; }
-        public string LastUpdatedBy { get; set; }
+        public string HinhAnh { get; set; }
+        public string Meta_TieuDe { get; set; }
+        public string Meta_TuKhoa { get; set; }
+        public string Meta_MoTa { get; set; }
+        public System.DateTime NgayTao { get; set; }
+        public System.DateTime NgayCapNhat { get; set; }
+        public string Url { get; set; }
+        public bool TrangThai { get; set; }
+        public string NoiDung { get; set; }
+        public bool HienThiTrangChu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TacNghiep> TacNghieps { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TacNghiep_TinhHinhThucHien> TacNghiep_TinhHinhThucHien { get; set; }
+        public virtual ICollection<BaiViet> BaiViets { get; set; }
     }
 }

@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaiViet.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ChucVu.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
@@ -67,6 +70,9 @@
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CoQuanBanHanhVanBan.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DanhMucBaiViet.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="HelperExtension.cs" />
@@ -123,11 +129,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseResult.cs" />
     <Compile Include="BaseInfo.cs" />
+    <Compile Include="Results\BaiVietResult.cs" />
     <Compile Include="Results\ChucVuResult.cs" />
     <Compile Include="Results\CongViecPhoiHopResult.cs" />
     <Compile Include="Results\CongViecQuaTrinhXuLyResult.cs" />
     <Compile Include="Results\CongViecVanBanResult.cs" />
     <Compile Include="Results\CoQuanBanHanhVanBanResult.cs" />
+    <Compile Include="Results\DanhMucBaiVietResult.cs" />
     <Compile Include="Results\StatisticCongViec.cs" />
     <Compile Include="Results\SummariesCongViecResult.cs" />
     <Compile Include="Results\TrangThaiCongViecResult.cs" />
