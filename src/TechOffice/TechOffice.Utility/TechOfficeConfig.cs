@@ -118,7 +118,7 @@ namespace AnThinhPhat.Utilities
         public static string FOLDER_VB = "VB";//van ban
         public static string FOLDER_TT = "TT";//thu tuc
         public static string FOLDER_CV = "CV";//cong viec
-        public static string FOLDER_TN = "/TN";//cong viec
+        public static string FOLDER_TN = "/TN";//tac nghiep
         public static string FOLDER_NEWS = "NEWS";//tin tuc/su kien
         public static string FOLDER_UPLOAD_TACNGHIEP = FOLDER_UPLOAD + FOLDER_TN;//tac nghiep
         public static string FOLDER_UPLOAD_TT = System.IO.Path.Combine(FOLDER_UPLOAD, FOLDER_TT);//thu tuc

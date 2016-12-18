@@ -34,7 +34,6 @@ namespace AnThinhPhat.WebUI.Controllers
                 x.UrlImage = file.FileName;
             });
 
-
             var result = NewsRepository.Add(entity);
             if (result == Services.SaveResult.SUCCESS)
             {
@@ -65,7 +64,6 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpPost]
         public ActionResult Edit(AddNewsViewModel model, HttpPostedFileBase file)
         {
-
             var entity = model.ToNewsResult()
             .Update(x =>
             {
@@ -77,11 +75,6 @@ namespace AnThinhPhat.WebUI.Controllers
             });
 
             var result = NewsRepository.Update(entity);
-
-
-            var newsCategory = NewsCategoryRepository.GetAll().Select(x => x.ToDataViewModel());
-            model.NewsCategory = newsCategory;
-
             if (result == Services.SaveResult.SUCCESS)
             {
                 EnsureFolderNews(model.Id);
@@ -91,12 +84,17 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 ViewBag.HasError = true;
             }
+
+            var newsCategory = NewsCategoryRepository.GetAll().Select(x => x.ToDataViewModel());
+            model.NewsCategory = newsCategory;
+
+
             return View(model);
         }
 
         private void SaveFile(int newsId, HttpPostedFileBase file)
         {
-            if (file == null)
+            if (file == null || string.IsNullOrEmpty(file.FileName))
                 return;
 
             var folderNews = EnsureFolderNews(newsId);

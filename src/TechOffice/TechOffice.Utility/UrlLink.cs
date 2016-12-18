@@ -88,6 +88,8 @@
         public static string NEWS_ADD = "tintuc/themmoi";
         public static string NEWS_EDIT = "tintuc/{id}";
         public static string NEWSCATEGORY = "loaitintuc/themmoi";
+
+        public static string NEWS = "trangchu/{title}-{id}";
         //===================== MASTER URL ==========================//
 
         public static string ADMIN = "admin";

@@ -144,6 +144,9 @@ namespace AnThinhPhat.WebUI
             new { controller = "News", action = "Edit" },
             new { id = @"\d+" });
 
+            routes.MapRoute(UrlLink.NEWS, UrlLink.NEWS,
+            new { controller = "Home", action = "News" },
+            new { id = @"\d+" });
             //===========================================CRUD DATA=======================================//
 
             routes.MapRoute(UrlLink.ADMIN, UrlLink.ADMIN,
@@ -161,7 +164,7 @@ namespace AnThinhPhat.WebUI
 
             routes.MapRoute(UrlLink.ACCOUNT_CHANGEPASSWORD, UrlLink.ACCOUNT_CHANGEPASSWORD,
           new { controller = "Account", action = "ChangePassword" });
-            
+
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }

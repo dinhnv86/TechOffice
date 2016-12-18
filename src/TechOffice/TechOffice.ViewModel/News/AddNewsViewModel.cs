@@ -1,6 +1,7 @@
 ﻿using AnThinhPhat.Entities.Infos;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace AnThinhPhat.ViewModel.News
 {
@@ -10,6 +11,8 @@ namespace AnThinhPhat.ViewModel.News
         [MaxLength(1025, ErrorMessageResourceName = "News_AddNews_Title_MaxLength", ErrorMessageResourceType = typeof(Resources.Messages))]
         public string Title { get; set; }
 
+        [AllowHtml]
+        [UIHint("tinymce_full_compressed")]
         [Required(ErrorMessageResourceType = typeof(Resources.Messages), ErrorMessageResourceName = "News_AddNews_Content")]
         public string Content { get; set; }
 

@@ -1,9 +1,18 @@
-﻿using AnThinhPhat.Utilities.Mail;
+﻿using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Utilities.Mail;
+using AnThinhPhat.ViewModel;
 using AnThinhPhat.ViewModel.Home;
 using CaptchaMvc.HtmlHelpers;
+using Ninject;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq;
+using System.Collections;
+using AnThinhPhat.ViewModel.News;
+using PagedList;
+using System.Collections.Generic;
+using AnThinhPhat.Utilities;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -29,7 +38,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 ModelState.AddModelError("", "Mã xác nhận không hợp lệ");
             }
-            MailSender.SendFeedback(model.Email, model.Title,model.NoiDung, new MailAttachment[]
+            MailSender.SendFeedback(model.Email, model.Title, model.NoiDung, new MailAttachment[]
             {
                 new MailAttachment(ReadFully(files.InputStream), files.FileName)
             });
@@ -40,6 +49,18 @@ namespace AnThinhPhat.WebUI.Controllers
         public ActionResult Article()
         {
             return View();
+        }
+
+        public PartialViewResult News(int? newsCategoryId, int? page)
+        {
+            IEnumerable<AddNewsViewModel> items;
+
+            if (newsCategoryId != null)
+                items = NewsRepository.GetAllByNewsCategoryId(newsCategoryId.Value).Select(x => x.ToViewModel());
+            else
+                items = NewsRepository.GetAll().Select(x => x.ToViewModel());
+
+            return PartialView("~/Views/Home/_News.cshtml",items.ToPagedList(page ?? 1, TechOfficeConfig.PAGESIZE));
         }
 
         public static MemoryStream ReadFully(Stream input)
@@ -55,5 +76,8 @@ namespace AnThinhPhat.WebUI.Controllers
                 return ms;
             }
         }
+
+        [Inject]
+        public INewsRepository NewsRepository { get; set; }
     }
 }
