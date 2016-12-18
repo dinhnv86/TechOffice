@@ -5,14 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5c6428e035ac49cb8dc559da828939dc" Name="Diagram1">
-        <EntityTypeShape EntityType="TechOfficeDevModel.BaiViet" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="TechOfficeDevModel.ChucVu" Width="1.5" PointX="3" PointY="26.625" />
         <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_PhoiHop" Width="1.5" PointX="12.75" PointY="26" />
         <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_QuaTrinhXuLy" Width="1.5" PointX="12.75" PointY="30.25" />
         <EntityTypeShape EntityType="TechOfficeDevModel.CongViec_VanBan" Width="1.5" PointX="8.25" PointY="21.25" />
         <EntityTypeShape EntityType="TechOfficeDevModel.CoQuan" Width="1.5" PointX="3" PointY="21.125" />
         <EntityTypeShape EntityType="TechOfficeDevModel.CoQuanBanHanhVanBan" Width="1.5" PointX="9" PointY="3.125" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.DanhMucBaiViet" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="TechOfficeDevModel.HoSoCongViec" Width="1.5" PointX="10.5" PointY="23.375" />
         <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucCongViec" Width="1.5" PointX="8.25" PointY="30.875" />
         <EntityTypeShape EntityType="TechOfficeDevModel.LinhVucTacNghiep" Width="1.5" PointX="0.75" PointY="13.875" />
@@ -36,7 +34,6 @@
         <EntityTypeShape EntityType="TechOfficeDevModel.User" Width="1.5" PointX="5.25" PointY="20.375" />
         <EntityTypeShape EntityType="TechOfficeDevModel.UserRole" Width="1.5" PointX="13.5" PointY="21.625" />
         <EntityTypeShape EntityType="TechOfficeDevModel.VanBan" Width="1.5" PointX="11.25" PointY="5.75" />
-        <AssociationConnector Association="TechOfficeDevModel.FK__BaiViet__MaDanhM__02084FDA" />
         <AssociationConnector Association="TechOfficeDevModel.FK_User_ChucVu" />
         <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_PhoiHop_HoSoCongViec" />
         <AssociationConnector Association="TechOfficeDevModel.FK_CongViec_PhoiHop_User" />
@@ -73,6 +70,10 @@
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinVanBan_VanBan" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_User" />
         <AssociationConnector Association="TechOfficeDevModel.FK_UserRole_User" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.News" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.NewsCategory" Width="1.5" PointX="0.75" PointY="6.125" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_News_NewsCategory" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

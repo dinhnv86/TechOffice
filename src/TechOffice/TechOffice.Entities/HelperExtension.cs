@@ -1275,4 +1275,59 @@ namespace AnThinhPhat.Entities
             };
         }
     }
+
+    public static class NewsExtension
+    {
+        public static NewsCategoryResult ToDataResult(this NewsCategory news)
+        {
+            return news == null ? null : new NewsCategoryResult
+            {
+                Id = news.Id,
+                CreateDate = news.CreateDate,
+                CreatedBy = news.CreatedBy,
+                IsDeleted = news.IsDeleted,
+                LastUpdated = news.LastUpdated,
+                LastUpdatedBy = news.LastUpdatedBy,
+                MoTa = news.MoTa,
+                Ten = news.Title,
+            };
+        }
+
+        public static NewsResult ToIfNotNullDataResult(this News news)
+        {
+            return news?.ToDataResult();
+        }
+        public static NewsResult ToDataResult(this News news)
+        {
+            return news == null ? null : new NewsResult
+            {
+                Id = news.Id,
+                CreateDate = news.CreateDate,
+                CreatedBy = news.CreatedBy,
+                IsDeleted = news.IsDeleted,
+                LastUpdated = news.LastUpdated,
+                LastUpdatedBy = news.LastUpdatedBy,
+                Content = news.Content,
+                Summary = news.Summary,
+                NewsCategoryId = news.NewsCategoryId,
+                Title = news.Title,
+                UrlImage = news.UrlImage,
+                NewsCategory = news.NewsCategory.ToDataResult(),
+            };
+        }
+
+        public static NewsCategoryInfo ToIfNotNullDataInfo(this NewsCategory entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static NewsCategoryInfo ToDataInfo(this NewsCategory entity)
+        {
+            return new NewsCategoryInfo
+            {
+                Id = entity.Id,
+                Name = entity.Title,
+            };
+        }
+    }
 }

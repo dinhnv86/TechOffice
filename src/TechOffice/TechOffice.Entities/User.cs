@@ -26,6 +26,7 @@ namespace AnThinhPhat.Entities
             this.TapTinVanBans = new HashSet<TapTinVanBan>();
             this.TapTinYKienCoQuans = new HashSet<TapTinYKienCoQuan>();
             this.UserRoles = new HashSet<UserRole>();
+            this.TacNghiep_YKienCoQuan = new HashSet<TacNghiep_YKienCoQuan>();
         }
     
         public int Id { get; set; }
@@ -61,5 +62,7 @@ namespace AnThinhPhat.Entities
         public virtual ICollection<TapTinYKienCoQuan> TapTinYKienCoQuans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TacNghiep_YKienCoQuan> TacNghiep_YKienCoQuan { get; set; }
     }
 }

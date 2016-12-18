@@ -39,5 +39,9 @@
     @Scripts.Render("~/bundles/unobtrusive")
     @Scripts.Render("~/bundles/tech")
     @RenderSection("scripts", false)
+
+    @section scripts{
+        <script src="~/Scripts/app/templates.js"></script>
+    }
 </body>
 </html>

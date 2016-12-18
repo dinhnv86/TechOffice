@@ -69,6 +69,8 @@
   <ItemGroup>
     <Compile Include="AccountController.cs" />
     <Compile Include="AdminController.cs" />
+    <Compile Include="NewsCategoryController.cs" />
+    <Compile Include="NewsController.cs" />
     <Compile Include="FileController.cs" />
     <Compile Include="MenuController.cs" />
     <Compile Include="LinhVucTacNghiepController.cs" />

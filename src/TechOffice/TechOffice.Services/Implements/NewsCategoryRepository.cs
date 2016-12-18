@@ -10,27 +10,23 @@ using AnThinhPhat.Utilities;
 
 namespace AnThinhPhat.Services.Implements
 {
-    public class CoQuanRepository : DbExecute, ICoQuanRepository
+    public class NewsCategoryRepository : DbExecute, INewsCategoryRepository
     {
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ChucVuRepository" /> class.
-        /// </summary>
-        /// <param name="logService">The log service.</param>
-        public CoQuanRepository(ILogService logService) : base(logService)
+        public NewsCategoryRepository(ILogService logService) : base(logService)
         {
         }
 
-        public SaveResult Add(CoQuanResult entity)
+        public SaveResult Add(NewsCategoryResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var add = context.CoQuans.Create();
+                    var add = context.NewsCategories.Create();
 
-                    add.Ten = entity.Ten;
+                    add.Title = entity.Ten;
                     add.MoTa = entity.MoTa;
-                    add.NhomCoQuanId = entity.NhomCoQuanId;
+
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
                     add.CreateDate = DateTime.Now;
@@ -41,17 +37,17 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public async Task<SaveResult> AddAsync(CoQuanResult entity)
+        public async Task<SaveResult> AddAsync(NewsCategoryResult entity)
         {
             return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var add = context.CoQuans.Create();
+                    var add = context.NewsCategories.Create();
 
-                    add.Ten = entity.Ten;
+                    add.Title = entity.Ten;
                     add.MoTa = entity.MoTa;
-                    add.NhomCoQuanId = entity.NhomCoQuanId;
+
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
                     add.CreateDate = DateTime.Now;
@@ -62,7 +58,7 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public SaveResult AddRange(IEnumerable<CoQuanResult> entities)
+        public SaveResult AddRange(IEnumerable<NewsCategoryResult> entities)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
@@ -70,11 +66,11 @@ namespace AnThinhPhat.Services.Implements
                 {
                     foreach (var entity in entities)
                     {
-                        var add = context.CoQuans.Create();
+                        var add = context.NewsCategories.Create();
 
-                        add.Ten = entity.Ten;
+                        add.Title = entity.Ten;
                         add.MoTa = entity.MoTa;
-                        add.NhomCoQuanId = entity.NhomCoQuanId;
+
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
                         add.CreateDate = DateTime.Now;
@@ -87,7 +83,7 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public async Task<SaveResult> AddRangeAsync(IEnumerable<CoQuanResult> entities)
+        public async Task<SaveResult> AddRangeAsync(IEnumerable<NewsCategoryResult> entities)
         {
             return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
@@ -95,11 +91,11 @@ namespace AnThinhPhat.Services.Implements
                 {
                     foreach (var entity in entities)
                     {
-                        var add = context.CoQuans.Create();
+                        var add = context.NewsCategories.Create();
 
-                        add.Ten = entity.Ten;
+                        add.Title = entity.Ten;
                         add.MoTa = entity.MoTa;
-                        add.NhomCoQuanId = entity.NhomCoQuanId;
+
                         add.IsDeleted = entity.IsDeleted;
                         add.CreatedBy = entity.CreatedBy;
                         add.CreateDate = DateTime.Now;
@@ -112,37 +108,38 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public SaveResult Delete(CoQuanResult entity)
+        public SaveResult Delete(NewsCategoryResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var cq = context.CoQuans.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+                    var cv = context.NewsCategories.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
-                    cq.IsDeleted = true;
-                    cq.LastUpdatedBy = entity.LastUpdatedBy;
-                    cq.LastUpdated = DateTime.Now;
+                    cv.IsDeleted = true;
+                    cv.LastUpdatedBy = entity.LastUpdatedBy;
+                    cv.LastUpdated = DateTime.Now;
 
-                    context.Entry(cq).State = EntityState.Modified;
+                    context.Entry(cv).State = EntityState.Modified;
                     return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
         }
 
-        public async Task<SaveResult> DeleteAsync(CoQuanResult entity)
+        public async Task<SaveResult> DeleteAsync(NewsCategoryResult entity)
         {
             return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var cq = context.CoQuans.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+                    var cv = context.NewsCategories.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
-                    cq.IsDeleted = true;
-                    cq.LastUpdatedBy = entity.LastUpdatedBy;
-                    cq.LastUpdated = DateTime.Now;
+                    cv.IsDeleted = true;
+                    cv.LastUpdatedBy = entity.LastUpdatedBy;
+                    cv.LastUpdated = DateTime.Now;
 
-                    context.Entry(cq).State = EntityState.Modified;
+                    context.Entry(cv).State = EntityState.Modified;
+
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
@@ -154,12 +151,13 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var cq = context.CoQuans.Single(x => x.Id == id && x.IsDeleted == false);
+                    var cv = context.NewsCategories.Single(x => x.Id == id && x.IsDeleted == false);
 
-                    cq.IsDeleted = true;
-                    cq.LastUpdated = DateTime.Now;
+                    cv.IsDeleted = true;
+                    cv.LastUpdated = DateTime.Now;
 
-                    context.Entry(cq).State = EntityState.Modified;
+                    context.Entry(cv).State = EntityState.Modified;
+
                     return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
@@ -167,30 +165,28 @@ namespace AnThinhPhat.Services.Implements
 
         public async Task<SaveResult> DeleteByAsync(int id)
         {
-            return await ExecuteDbWithHandle(_logService, async () =>
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var cq = context.CoQuans.Single(x => x.Id == id && x.IsDeleted == false);
+                    var cv = context.NewsCategories.Single(x => x.Id == id && x.IsDeleted == false);
+                    cv.IsDeleted = true;
 
-                    cq.IsDeleted = true;
-                    cq.LastUpdated = DateTime.Now;
+                    context.Entry(cv).State = EntityState.Modified;
 
-                    context.Entry(cq).State = EntityState.Modified;
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
         }
 
-        public IEnumerable<CoQuanResult> GetAll()
+        public IEnumerable<NewsCategoryResult> GetAll()
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    return (from item in context.CoQuans
+                    return (from item in context.NewsCategories
                             where item.IsDeleted == false
-                            orderby item.Ten
                             select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
@@ -199,77 +195,83 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public async Task<IEnumerable<CoQuanResult>> GetAllAsync()
+        public async Task<IEnumerable<NewsCategoryResult>> GetAllAsync()
         {
             return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    return await (from item in context.CoQuans
+                    return await (from item in context.NewsCategories
                                   where item.IsDeleted == false
-                                  select new CoQuanResult
-                                  {
-                                      Id = item.Id,
-                                      Ten = item.Ten,
-                                      MoTa = item.MoTa,
-                                      IsDeleted = item.IsDeleted,
-                                      LastUpdatedBy = item.LastUpdatedBy,
-                                      LastUpdated = item.LastUpdated
-                                  }).ToListAsync();
+                                  select item)
+                                  .MakeQueryToDatabase()
+                                  .Select(x => x.ToDataResult())
+                                  .AsQueryable()
+                                  .ToListAsync();
                 }
             });
         }
 
-        public CoQuanResult Single(int id)
+        public IEnumerable<NewsCategoryResult> GetAllWithChildren()
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    return (from item in context.CoQuans
-                            where item.IsDeleted == false &&
-                                  item.Id == id
+                    return (from item in context.NewsCategories.Include(x => x.News)
+                            where item.IsDeleted == false
                             select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
-                        .Single();
+                        .ToList();
                 }
             });
         }
 
-        public async Task<CoQuanResult> SingleAsync(int id)
-        {
-            return await ExecuteDbWithHandleAsync(_logService, async () =>
-            {
-                using (var context = new TechOfficeEntities())
-                {
-                    return await (from item in context.CoQuans
-                                  where item.IsDeleted == false &&
-                                        item.Id == id
-                                  select new CoQuanResult
-                                  {
-                                      Id = item.Id,
-                                      Ten = item.Ten,
-                                      MoTa = item.MoTa,
-                                      IsDeleted = item.IsDeleted,
-                                      LastUpdatedBy = item.LastUpdatedBy,
-                                      LastUpdated = item.LastUpdated
-                                  }).SingleAsync();
-                }
-            });
-        }
-
-        public SaveResult Update(CoQuanResult entity)
+        public NewsCategoryResult Single(int id)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var update = context.CoQuans.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+                    return (from item in context.NewsCategories
+                            where item.IsDeleted == false &&
+                                  item.Id == id
+                            select item)
+                            .MakeQueryToDatabase()
+                            .Single().ToDataResult();
+                }
+            });
+        }
 
-                    update.Ten = entity.Ten;
+        public async Task<NewsCategoryResult> SingleAsync(int id)
+        {
+            return await ExecuteDbWithHandleAsync(_logService, async () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return await (from item in context.NewsCategories
+                                  where item.IsDeleted == false &&
+                                        item.Id == id
+                                  select item)
+                                  .MakeQueryToDatabase()
+                                  .Select(x => x.ToDataResult())
+                                  .AsQueryable()
+                                  .SingleAsync();
+                }
+            });
+        }
+
+        public SaveResult Update(NewsCategoryResult entity)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var update = context.NewsCategories.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    update.Title = entity.Ten;
                     update.MoTa = entity.MoTa;
-                    update.NhomCoQuanId = entity.NhomCoQuanId;
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
                     update.LastUpdated = DateTime.Now;
@@ -281,17 +283,16 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
-        public async Task<SaveResult> UpdateAsync(CoQuanResult entity)
+        public async Task<SaveResult> UpdateAsync(NewsCategoryResult entity)
         {
             return await ExecuteDbWithHandleAsync(_logService, async () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var update = context.CoQuans.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+                    var update = context.NewsCategories.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
-                    update.Ten = entity.Ten;
+                    update.Title = entity.Ten;
                     update.MoTa = entity.MoTa;
-                    update.NhomCoQuanId = entity.NhomCoQuanId;
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
                     update.LastUpdated = DateTime.Now;
@@ -299,24 +300,6 @@ namespace AnThinhPhat.Services.Implements
                     context.Entry(update).State = EntityState.Modified;
 
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
-                }
-            });
-        }
-
-        public IEnumerable<CoQuanResult> GetAllByNhomCoQuanId(int nhomCoQuanId)
-        {
-            return ExecuteDbWithHandle(_logService, () =>
-            {
-                using (var context = new TechOfficeEntities())
-                {
-                    return (from item in context.CoQuans
-                            where item.IsDeleted == false
-                            && item.NhomCoQuanId == nhomCoQuanId
-                            orderby item.Ten
-                            select item)
-                        .MakeQueryToDatabase()
-                        .Select(x => x.ToDataResult())
-                        .ToList();
                 }
             });
         }

@@ -133,6 +133,17 @@ namespace AnThinhPhat.WebUI
 
             routes.MapRoute(UrlLink.COQUANBANHANHVANBAN, UrlLink.COQUANBANHANHVANBAN,
             new { controller = "CoQuanBanHanhVanBan", action = "Index" });
+
+            routes.MapRoute(UrlLink.NEWSCATEGORY, UrlLink.NEWSCATEGORY,
+            new { controller = "NewsCategory", action = "Index" });
+
+            routes.MapRoute(UrlLink.NEWS_ADD, UrlLink.NEWS_ADD,
+            new { controller = "News", action = "Add" });
+
+            routes.MapRoute(UrlLink.NEWS_EDIT, UrlLink.NEWS_EDIT,
+            new { controller = "News", action = "Edit" },
+            new { id = @"\d+" });
+
             //===========================================CRUD DATA=======================================//
 
             routes.MapRoute(UrlLink.ADMIN, UrlLink.ADMIN,

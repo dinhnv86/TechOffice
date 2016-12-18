@@ -63,6 +63,7 @@
     <Compile Include="CongViec\ValueSearchViewModel.cs" />
     <Compile Include="CoQuan\CoQuanViewModel.cs" />
     <Compile Include="HelpExtension.cs" />
+    <Compile Include="News\AddNewsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TacNghiep\DetailTacNghiepViewModel.cs" />
     <Compile Include="TacNghiep\AddTacNghiepViewModel.cs" />
