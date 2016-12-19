@@ -787,7 +787,7 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var update = context.Users.Single(x => x.Id == id && x.IsDeleted == false);
+                    var update = context.Users.Single(x => x.Id == id && x.IsDeleted == false && x.IsLocked == false);
 
                     update.Password = AppCipher.EncryptCipher(newPassword);
 

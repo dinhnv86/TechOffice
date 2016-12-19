@@ -285,12 +285,12 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 VanBanId = entity.VanBanId,
-                VanBanInfo = entity.VanBan.ToIfNotNullDataInfo(),
+                VanBanInfo = entity.VanBan.ToDataInfo(),
                 Url = entity.Url,
                 FileName = System.IO.Path.GetFileName(entity.Url),
                 Path = System.IO.Path.GetDirectoryName(entity.Url),
                 UserUploadId = entity.UserUploadId,
-                UserInfo = entity.User.ToIfNotNullDataInfo(),
+                UserInfo = entity.User.ToDataInfo(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -1200,10 +1200,12 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 ThuTucId = entity.ThuTucId,
-                ThuTucInfo = entity.ThuTuc.ToIfNotNullDataInfo(),
+                ThuTucInfo = entity.ThuTuc.ToDataInfo(),
                 Url = entity.Url,
+                FileName = System.IO.Path.GetFileName(entity.Url),
+                Path = System.IO.Path.GetDirectoryName(entity.Url),
                 UserUploadId = entity.UserUploadId,
-                UserInfo = entity.User.ToIfNotNullDataInfo(),
+                UserInfo = entity.User.ToDataInfo(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -1232,7 +1234,7 @@ namespace AnThinhPhat.Entities
                 NoiDung = entity.NoiDung,
                 NgayBanHanh = entity.NgayBanHanh,
                 TenThuTuc = entity.TenThuTuc,
-                Files = entity.TapTinThuTucs.Select(x => x.ToDataResult()),
+                Files = entity.TapTinThuTucs.Select(x => x.ToDataResult()).ToList(),
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -1270,6 +1272,61 @@ namespace AnThinhPhat.Entities
                 MaThuTuc = entity.NoiDung,
                 TenThuTuc = entity.TenThuTuc,
                 NgayBanHanh = entity.NgayBanHanh
+            };
+        }
+    }
+
+    public static class NewsExtension
+    {
+        public static NewsCategoryResult ToDataResult(this NewsCategory news)
+        {
+            return news == null ? null : new NewsCategoryResult
+            {
+                Id = news.Id,
+                CreateDate = news.CreateDate,
+                CreatedBy = news.CreatedBy,
+                IsDeleted = news.IsDeleted,
+                LastUpdated = news.LastUpdated,
+                LastUpdatedBy = news.LastUpdatedBy,
+                MoTa = news.MoTa,
+                Ten = news.Title,
+            };
+        }
+
+        public static NewsResult ToIfNotNullDataResult(this News news)
+        {
+            return news?.ToDataResult();
+        }
+        public static NewsResult ToDataResult(this News news)
+        {
+            return news == null ? null : new NewsResult
+            {
+                Id = news.Id,
+                CreateDate = news.CreateDate,
+                CreatedBy = news.CreatedBy,
+                IsDeleted = news.IsDeleted,
+                LastUpdated = news.LastUpdated,
+                LastUpdatedBy = news.LastUpdatedBy,
+                Content = news.Content,
+                Summary = news.Summary,
+                NewsCategoryId = news.NewsCategoryId,
+                Title = news.Title,
+                UrlImage = news.UrlImage,
+                NewsCategory = news.NewsCategory.ToDataResult(),
+            };
+        }
+
+        public static NewsCategoryInfo ToIfNotNullDataInfo(this NewsCategory entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static NewsCategoryInfo ToDataInfo(this NewsCategory entity)
+        {
+            return new NewsCategoryInfo
+            {
+                Id = entity.Id,
+                Name = entity.Title,
             };
         }
     }

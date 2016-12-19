@@ -269,6 +269,7 @@ namespace AnThinhPhat.Services.Implements
 
                     update.Ten = entity.Ten;
                     update.MoTa = entity.MoTa;
+                    update.NhomCoQuanId = entity.NhomCoQuanId;
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
                     update.LastUpdated = DateTime.Now;
@@ -290,6 +291,7 @@ namespace AnThinhPhat.Services.Implements
 
                     update.Ten = entity.Ten;
                     update.MoTa = entity.MoTa;
+                    update.NhomCoQuanId = entity.NhomCoQuanId;
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
                     update.LastUpdated = DateTime.Now;

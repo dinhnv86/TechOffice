@@ -1,0 +1,62 @@
+﻿@model AnThinhPhat.ViewModel.ThuTuc.EditThuTucViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutVanBan.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "ThuTuc", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="col-sm-6">
+        <label>Ngày ban hành<span class="required">*</span></label>
+        @Html.EditorFor(x => Model.NgayBanHanh, "DateTime")
+        @Html.ValidationMessageFor(x => x.NgayBanHanh)
+    </div>
+    <div class="col-sm-6">
+        <label>Ngày ban hành<span class="required">*</span></label>
+        @Html.EditorFor(x => Model.NgayBanHanh, "DateTime")
+        @Html.ValidationMessageFor(x => x.NgayBanHanh)
+    </div>
+    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="col-sm-12">
+        <label>Tên thủ tục<span class="required">*</span></label>
+        @Html.TextBoxFor(x => Model.TenThuTuc, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.TenThuTuc)
+    </div>
+    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="col-sm-12">
+        <label>Nội dung thủ tục<span class="required">*</span></label>
+        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 5 })
+        @Html.ValidationMessageFor(x => x.NoiDung)
+    </div>
+    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="col-sm-4">
+        <label>Cơ quan thực hiện<span class="required">*</span></label>
+        @Html.DropDownListFor(x => Model.CoQuanThucHienId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Chọn cơ quan thực hiện", htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CoQuanThucHienId)
+    </div>
+    <div class="col-sm-6">
+        <label>Lĩnh vực thủ tục<span class="required">*</span></label>
+        @Html.DropDownListFor(x => Model.LinhVucThuTucId, new SelectList(Model.LinhVucThuTucInfo, "Id", "Name"), "Chọn lĩnh vực thủ tục", htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.LinhVucThuTucId)
+    </div>
+    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <label class="col-sm-12">Các tập tin đính kèm</label>
+    <div class="col-sm-12">
+        @{ Html.RenderPartial("_PartialPageFiles", Model.TapTinThuTucResults); }
+    </div>
+
+    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div id="outer" class="col-xs-12">
+        <div class="inner">
+            <input type="submit" class="btn btn-primary btn-width-md" value="Cập nhật" />
+        </div>
+        <div class="inner">
+            @Html.RouteLink("Hủy", UrlLink.THUTUC, null, htmlAttributes: new { @class = "btn btn-primary btn-width-md" })
+        </div>
+    </div>
+            }
+
+@section Scripts{
+    <script src="~/Scripts/app/format-datetime.js"></script>
+    <script src="~/Scripts/app/vanban-add.js"></script>
+}

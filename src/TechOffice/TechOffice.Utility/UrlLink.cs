@@ -45,7 +45,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public static string THUTUC_EDIT = "thutuc/{tenthutuc}-{id}";
+        public static string THUTUC_EDIT = "thutuc/edit/{tenthutuc}-{id}";
 
         /// <summary>
         /// 
@@ -56,7 +56,6 @@
         /// 
         /// </summary>
         public static string CONGVIEC = "congviec";
-        //public static string CONGVIEC = "{controller}/{action}/{UserId}/{Role}/{TrangThaiCongViecId}/{LinhVucCongViecId}/{noiDungCongViec}"; /*UserId=&Role=1&TrangThaiCongViecId=&LinhVucCongViecId=*/
 
         public static string TINTUC = "tintuc";
         public static string LIENHE = "lienhe";
@@ -86,12 +85,18 @@
         public static string LOAIVANBAN = "loaivanban";
         public static string MUCDOHOANTHANH = "mucdohoanthanh";
         public static string COQUANBANHANHVANBAN = "coquan-banhanh-vanban";
+        public static string NEWS_ADD = "tintuc/themmoi";
+        public static string NEWS_EDIT = "tintuc/{id}";
+        public static string NEWSCATEGORY = "loaitintuc/themmoi";
+
+        public static string NEWS = "trangchu/{title}-{id}";
         //===================== MASTER URL ==========================//
 
         public static string ADMIN = "admin";
         public static string USERS = "users";
         public static string USERS_ADD = "users/add";
         public static string USERS_EDIT = "users/{id}";
+        public static string ACCOUNT_CHANGEPASSWORD = "account/changepassword";
 
         public static string ERROR_NOTFOUND404 = "ErrorNotFound404";
         public static string ERROR_NOTFOUND405 = "ErrorNotFound405";

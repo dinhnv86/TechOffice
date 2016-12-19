@@ -216,7 +216,9 @@
             </div>
 
             { Html.RenderPartial("_PartialPageUploadFiles", TechOfficeConfig.FOLDER_CV + "/" + Model.Id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR)); }
-
+            <div class="col-xs-12" id="jsonFiles">
+                @Html.Raw(Model.JsonFiles)
+            </div>
             <div class="clearfix" style="padding-bottom:15px;"></div>
             <div class="col-sm-4">
                 <label>@Labels.CongViec_Add_TrangThai</label>

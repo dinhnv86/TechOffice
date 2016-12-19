@@ -86,6 +86,59 @@ namespace AnThinhPhat.WebUI.Controllers
 
             return RedirectToRoute(UrlLink.TRANGCHU);
         }
+
+        /// <summary>
+        /// Changes the password.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        [HttpGet, Authorize]
+        public ActionResult ChangePassword()
+        {
+            var cp = new ChangePasswordViewModel
+            {
+                UserName = UserName,
+                NewPassword = string.Empty,
+                NewConfirmPassword = string.Empty,
+                PasswordCurrent = string.Empty,
+            };
+
+            return View(cp);
+        }
+
+        /// <summary>
+        /// Changes the password.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="viewmodel">The view model.</param>
+        /// <returns></returns>
+        [HttpPost, Authorize]
+        public ActionResult ChangePassword(ChangePasswordViewModel viewmodel)
+        {
+            TempData["Result"] = null;
+
+            if (!ModelState.IsValid)
+                return View(viewmodel);
+
+            var user = UserRepository.Login(viewmodel.UserName, viewmodel.PasswordCurrent);
+            if (user == null)
+                TempData["Result"] = Resources.Messages.InvalidPassword;
+
+            var result = UserRepository.ResetPassword(user.Id, viewmodel.NewConfirmPassword);
+            if (result == Services.SaveResult.SUCCESS)
+            {
+                //User logout and Login
+                AuthenticationManager.SignOut("ApplicationCookie");
+                return RedirectToAction("LogIn");
+            }
+            else
+            {
+                TempData["Result"] = Resources.Messages.FailPassword;
+            }
+
+            return View(viewmodel);
+        }
+
         /// <summary>
         ///     Gets the redirect URL.
         /// </summary>

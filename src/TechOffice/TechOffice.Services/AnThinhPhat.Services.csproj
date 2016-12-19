@@ -48,11 +48,13 @@
     <Compile Include="Abstracts\ICongViecPhoiHopRepository.cs" />
     <Compile Include="Abstracts\ICongViecQuaTrinhXuLyRepository.cs" />
     <Compile Include="Abstracts\ICongViecVanBanRepository.cs" />
+    <Compile Include="Abstracts\INewsRepository.cs" />
     <Compile Include="Abstracts\ICoQuanRepository.cs" />
     <Compile Include="Abstracts\IHoSoCongViecRepository.cs" />
     <Compile Include="Abstracts\ILinhVucTacNghiepRepository.cs" />
     <Compile Include="Abstracts\ILinhVucCongViecRepository.cs" />
     <Compile Include="Abstracts\ICoQuanBanHanhVanBanRepository.cs" />
+    <Compile Include="Abstracts\INewsCategoryRepository.cs" />
     <Compile Include="Abstracts\ITapTinYKienCoQuanRepository.cs" />
     <Compile Include="Abstracts\IThuTucRepository.cs" />
     <Compile Include="Abstracts\ILinhVucVanBanRepository.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Implements\CongViecPhoiHopRepository.cs" />
     <Compile Include="Implements\CongViecQuaTrinhXuLyRepository.cs" />
     <Compile Include="Implements\CongViecVanBanRepository.cs" />
+    <Compile Include="Implements\NewsRepository.cs" />
     <Compile Include="Implements\CoQuanRepository.cs" />
     <Compile Include="Implements\HoSoCongViecRepository.cs" />
     <Compile Include="Implements\LinhVucTacNghiepRepository.cs" />
@@ -86,6 +89,7 @@
     <Compile Include="Implements\LinhVucThuTucRepository.cs" />
     <Compile Include="Implements\LinhVucVanBanRepository.cs" />
     <Compile Include="Implements\CoQuanBanHanhVanBanRepository.cs" />
+    <Compile Include="Implements\NewsCategoryRepository.cs" />
     <Compile Include="Implements\TapTinYKienCoQuanRepository.cs" />
     <Compile Include="Implements\ThuTucRepository.cs" />
     <Compile Include="Implements\LoaiVanBanRepository.cs" />

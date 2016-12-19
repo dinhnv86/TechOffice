@@ -18,14 +18,14 @@ namespace AnThinhPhat.Entities
         public User()
         {
             this.CongViec_PhoiHop = new HashSet<CongViec_PhoiHop>();
+            this.HoSoCongViecs = new HashSet<HoSoCongViec>();
+            this.HoSoCongViecs1 = new HashSet<HoSoCongViec>();
             this.TapTinCongViecs = new HashSet<TapTinCongViec>();
             this.TapTinTacNghieps = new HashSet<TapTinTacNghiep>();
             this.TapTinThuTucs = new HashSet<TapTinThuTuc>();
             this.TapTinVanBans = new HashSet<TapTinVanBan>();
             this.TapTinYKienCoQuans = new HashSet<TapTinYKienCoQuan>();
             this.UserRoles = new HashSet<UserRole>();
-            this.HoSoCongViecs = new HashSet<HoSoCongViec>();
-            this.HoSoCongViecs1 = new HashSet<HoSoCongViec>();
             this.TacNghiep_YKienCoQuan = new HashSet<TacNghiep_YKienCoQuan>();
         }
     
@@ -47,6 +47,10 @@ namespace AnThinhPhat.Entities
         public virtual ICollection<CongViec_PhoiHop> CongViec_PhoiHop { get; set; }
         public virtual CoQuan CoQuan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HoSoCongViec> HoSoCongViecs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HoSoCongViec> HoSoCongViecs1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinCongViec> TapTinCongViecs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinTacNghiep> TapTinTacNghieps { get; set; }
@@ -58,10 +62,6 @@ namespace AnThinhPhat.Entities
         public virtual ICollection<TapTinYKienCoQuan> TapTinYKienCoQuans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRoles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoSoCongViec> HoSoCongViecs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoSoCongViec> HoSoCongViecs1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TacNghiep_YKienCoQuan> TacNghiep_YKienCoQuan { get; set; }
     }

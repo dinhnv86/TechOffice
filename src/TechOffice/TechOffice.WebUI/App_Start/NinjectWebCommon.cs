@@ -98,6 +98,8 @@ namespace AnThinhPhat.WebUI
             kernel.Bind<IUserRoleRepository>().To<UserRoleRepository>().WithConstructorArgument(logService);
             kernel.Bind<IUsersRepository>().To<UsersRepository>().WithConstructorArgument(logService);
             kernel.Bind<ITapTinYKienCoQuanRepository>().To<TapTinYKienCoQuanRepository>().WithConstructorArgument(logService);
+            kernel.Bind<INewsCategoryRepository>().To<NewsCategoryRepository>().WithConstructorArgument(logService);
+            kernel.Bind<INewsRepository>().To<NewsRepository>().WithConstructorArgument(logService);
         }
     }
 }

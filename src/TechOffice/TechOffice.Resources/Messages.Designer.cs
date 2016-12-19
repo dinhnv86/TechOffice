@@ -160,6 +160,15 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thay đổi mật khẩu không thành công.
+        /// </summary>
+        public static string FailPassword {
+            get {
+                return ResourceManager.GetString("FailPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xin vui lòng nhập email.
         /// </summary>
         public static string Home_Contact_Email {
@@ -201,6 +210,60 @@ namespace AnThinhPhat.Resources {
         public static string Home_Contact_Title {
             get {
                 return ResourceManager.GetString("Home_Contact_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu không phù hợp.
+        /// </summary>
+        public static string InvalidPassword {
+            get {
+                return ResourceManager.GetString("InvalidPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập nội dung tin tức.
+        /// </summary>
+        public static string News_AddNews_Content {
+            get {
+                return ResourceManager.GetString("News_AddNews_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn loại tin tức.
+        /// </summary>
+        public static string News_AddNews_NewCategoryId {
+            get {
+                return ResourceManager.GetString("News_AddNews_NewCategoryId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập nội dung tóm tắt.
+        /// </summary>
+        public static string News_AddNews_Summary {
+            get {
+                return ResourceManager.GetString("News_AddNews_Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập tiêu đề tin tức.
+        /// </summary>
+        public static string News_AddNews_Title {
+            get {
+                return ResourceManager.GetString("News_AddNews_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối đa là 1025 ký tự.
+        /// </summary>
+        public static string News_AddNews_Title_MaxLength {
+            get {
+                return ResourceManager.GetString("News_AddNews_Title_MaxLength", resourceCulture);
             }
         }
         
@@ -313,6 +376,24 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu và mật khẩu xác nhận không hợp với nhau. .
+        /// </summary>
+        public static string User_ChangePassword_ConfirmNewPassword {
+            get {
+                return ResourceManager.GetString("User_ChangePassword_ConfirmNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài mật khẩu tối thiểu {2} ký tự..
+        /// </summary>
+        public static string User_ChangePassword_Length {
+            get {
+                return ResourceManager.GetString("User_ChangePassword_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xin vui lòng nhập mật khẩu.
         /// </summary>
         public static string Users_LoginViewModel_Password {
@@ -322,7 +403,7 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chiều dài tối thiểu của mật khẩu là 20 ký tự.
+        ///   Looks up a localized string similar to Chiều dài tối đa của mật khẩu là 20 ký tự.
         /// </summary>
         public static string Users_LoginViewModel_Password_MaxLength {
             get {

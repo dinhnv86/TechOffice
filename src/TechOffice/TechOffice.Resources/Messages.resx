@@ -169,7 +169,7 @@
     <value>Xin vui lòng nhập mật khẩu</value>
   </data>
   <data name="Users_LoginViewModel_Password_MaxLength" xml:space="preserve">
-    <value>Chiều dài tối thiểu của mật khẩu là 20 ký tự</value>
+    <value>Chiều dài tối đa của mật khẩu là 20 ký tự</value>
   </data>
   <data name="Users_LoginViewModel_Password_MinLength" xml:space="preserve">
     <value>Chiều dài tối thiểu của mật khẩu là 6 ký tự</value>
@@ -236,5 +236,32 @@
   </data>
   <data name="ThuTuc_AddThuTuc_TenThuTuc_MaxLength" xml:space="preserve">
     <value>Chiều dài tối đa mã thủ tục là 1024 ký tự</value>
+  </data>
+  <data name="User_ChangePassword_ConfirmNewPassword" xml:space="preserve">
+    <value>Mật khẩu và mật khẩu xác nhận không hợp với nhau. </value>
+  </data>
+  <data name="User_ChangePassword_Length" xml:space="preserve">
+    <value>Chiều dài mật khẩu tối thiểu {2} ký tự.</value>
+  </data>
+  <data name="FailPassword" xml:space="preserve">
+    <value>Thay đổi mật khẩu không thành công</value>
+  </data>
+  <data name="InvalidPassword" xml:space="preserve">
+    <value>Mật khẩu không phù hợp</value>
+  </data>
+  <data name="News_AddNews_Content" xml:space="preserve">
+    <value>Xin vui lòng nhập nội dung tin tức</value>
+  </data>
+  <data name="News_AddNews_NewCategoryId" xml:space="preserve">
+    <value>Xin vui lòng chọn loại tin tức</value>
+  </data>
+  <data name="News_AddNews_Title" xml:space="preserve">
+    <value>Xin vui lòng nhập tiêu đề tin tức</value>
+  </data>
+  <data name="News_AddNews_Title_MaxLength" xml:space="preserve">
+    <value>Chiều dài tối đa là 1025 ký tự</value>
+  </data>
+  <data name="News_AddNews_Summary" xml:space="preserve">
+    <value>Xin vui lòng nhập nội dung tóm tắt</value>
   </data>
 </root>

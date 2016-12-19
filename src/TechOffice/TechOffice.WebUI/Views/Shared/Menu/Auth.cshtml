@@ -1,0 +1,32 @@
+﻿@if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "" }))
+                {
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="">@Html.Encode(User.Identity.FullName())<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    @if (User.IsInRole("SupperAdmin") || (User.IsInRole("Admin")))
+                    {
+                        <li>
+                            <a href="@Url.RouteUrl(UrlLink.ADMIN)"> Quản trị </a>
+                        </li>
+                        //Html.RenderPartial("~/Views/Shared/Menu/MenuAdmin.cshtml");
+                    }
+                    else
+                    {
+                        <li><a>@Html.Raw(User.Identity.FullName())</a></li>
+                    }
+                    <li>
+                        <a href="@Url.RouteUrl(UrlLink.ACCOUNT_CHANGEPASSWORD)">
+                            Đổi mật khẩu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:document.getElementById('logoutForm').submit()">Thoát</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    }
+}

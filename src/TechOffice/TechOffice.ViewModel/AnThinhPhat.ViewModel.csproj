@@ -63,6 +63,7 @@
     <Compile Include="CongViec\ValueSearchViewModel.cs" />
     <Compile Include="CoQuan\CoQuanViewModel.cs" />
     <Compile Include="HelpExtension.cs" />
+    <Compile Include="News\AddNewsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TacNghiep\DetailTacNghiepViewModel.cs" />
     <Compile Include="TacNghiep\AddTacNghiepViewModel.cs" />
@@ -83,7 +84,10 @@
     <Compile Include="ThuTuc\InitThuTucViewModel.cs" />
     <Compile Include="ThuTuc\ThuTucViewModel.cs" />
     <Compile Include="ThuTuc\ValueSearchViewModel.cs" />
+    <Compile Include="TinTuc\BaiVietModel.cs" />
+    <Compile Include="TinTuc\DanhMucBaiVietModel.cs" />
     <Compile Include="Users\AddUserViewModel.cs" />
+    <Compile Include="Users\ChangePasswordViewModel.cs" />
     <Compile Include="Users\InitUserViewModel.cs" />
     <Compile Include="Users\UserLoginViewModel.cs" />
     <Compile Include="VanBan\EditVanBanViewModel.cs" />

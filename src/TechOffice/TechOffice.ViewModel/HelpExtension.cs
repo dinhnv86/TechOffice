@@ -10,6 +10,7 @@ using AnThinhPhat.ViewModel.CoQuan;
 using AnThinhPhat.ViewModel.TacNghiep;
 using AnThinhPhat.ViewModel.Users;
 using System.Collections.Generic;
+using AnThinhPhat.ViewModel.News;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -157,6 +158,42 @@ namespace AnThinhPhat.ViewModel
                 SoVanBan = valueSearch.SoVanBan,
                 NoiDungVanBan = valueSearch.NoiDungVanBan,
                 CoQuanId = valueSearch.CoQuanId
+            };
+        }
+
+        public static NewsResult ToNewsResult(this AddNewsViewModel model)
+        {
+            return model == null ? null : new NewsResult
+            {
+                Id = model.Id,
+                CreateDate = model.CreateDate,
+                CreatedBy = model.CreatedBy,
+                IsDeleted = model.IsDeleted,
+                LastUpdated = model.LastUpdated,
+                LastUpdatedBy = model.LastUpdatedBy,
+                Content = model.Content,
+                Summary = model.Summary,
+                NewsCategoryId = model.NewsCategoryId,
+                Title = model.Title,
+                UrlImage = model.UrlImage,
+            };
+        }
+
+        public static AddNewsViewModel ToViewModel(this NewsResult entity)
+        {
+            return entity == null ? null : new AddNewsViewModel
+            {
+                Id = entity.Id,
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy,
+                Content = entity.Content,
+                Summary = entity.Summary,
+                NewsCategoryId = entity.NewsCategoryId,
+                Title = entity.Title,
+                UrlImage = entity.UrlImage,
             };
         }
 
