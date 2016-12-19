@@ -22,7 +22,7 @@
 
                     <div class="nleft">
                         <div class="image">
-                            <a href="@Url.RouteUrl(UrlLink.NEWS, routeValues: new { title = item.Title.RejectMarks(), id = item.Id }, protocol: "GET")">
+                            <a href="@Url.RouteUrl(UrlLink.NEWS, routeValues: new { title = item.Title.RejectMarks(), id = item.Id })">
                                 <img src="@Url.Content(Path.Combine(TechOfficeConfig.FOLDER_UPLOAD_NEWS, item.Id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR) ,item.UrlImage))" alt="image" width="200" height="200">
                             </a>
                         </div>
@@ -31,7 +31,8 @@
 
                 <div @styleRight>
                     <h4>
-                        <a href="postsingle.html">@item.Title</a>
+                        @*<a href="postsingle.html">@item.Title</a>*@
+                        @Html.RouteLink(item.Title,UrlLink.NEWS, routeValues: new { title = item.Title.RejectMarks(), id = item.Id })
                     </h4>
                     @item.Summary
                 </div>

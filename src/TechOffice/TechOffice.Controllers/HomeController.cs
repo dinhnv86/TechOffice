@@ -19,9 +19,9 @@ namespace AnThinhPhat.WebUI.Controllers
     [AllowAnonymous]
     public class HomeController : OfficeController
     {
-        public ActionResult Index()
+        public ActionResult Index(int? newsCategoryId)
         {
-            return View();
+            return View(newsCategoryId);
         }
 
         [HttpGet]
@@ -51,6 +51,12 @@ namespace AnThinhPhat.WebUI.Controllers
             return View();
         }
 
+        public ActionResult ReadNews(int id)
+        {
+            var model = NewsRepository.Single(id).ToViewModel();
+            return View(model);
+        }
+
         public PartialViewResult News(int? newsCategoryId, int? page)
         {
             IEnumerable<AddNewsViewModel> items;
@@ -60,7 +66,13 @@ namespace AnThinhPhat.WebUI.Controllers
             else
                 items = NewsRepository.GetAll().Select(x => x.ToViewModel());
 
-            return PartialView("~/Views/Home/_News.cshtml",items.ToPagedList(page ?? 1, TechOfficeConfig.PAGESIZE));
+            return PartialView("~/Views/Home/_News.cshtml", items.ToPagedList(page ?? 1, TechOfficeConfig.PAGESIZE));
+        }
+
+        public PartialViewResult MenuDanhMuc()
+        {
+            var model = NewsCategoryRepository.GetAll().Select(x=>x.ToDataViewModel());
+            return PartialView("~/Views/Shared/Menu/_MenuDanhMuc.cshtml", model);
         }
 
         public static MemoryStream ReadFully(Stream input)
@@ -79,5 +91,8 @@ namespace AnThinhPhat.WebUI.Controllers
 
         [Inject]
         public INewsRepository NewsRepository { get; set; }
+
+        [Inject]
+        public INewsCategoryRepository NewsCategoryRepository { get; set; }
     }
 }
