@@ -9,9 +9,8 @@ namespace AnThinhPhat.ViewModel.ThuTuc
 {
     public class EditThuTucViewModel : ThuTucViewModel
     {
-        [MaxLength(255, ErrorMessageResourceType = typeof(Resources.Messages), ErrorMessageResourceName = "ThuTuc_AddThuTuc_MaThuTuc_MaxLength")]
-        [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_MaThuTuc"), ErrorMessageResourceType = typeof(Resources.Messages))]
-        public string MaThuTuc { get; set; }
+        [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_NoiDung"), ErrorMessageResourceType = typeof(Resources.Messages))]
+        public string NoiDung { get; set; }
 
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_NgayBanHanh"), ErrorMessageResourceType = typeof(Resources.Messages))]
         public DateTime? NgayBanHanh { get; set; }

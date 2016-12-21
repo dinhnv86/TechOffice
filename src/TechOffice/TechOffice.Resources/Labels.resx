@@ -300,4 +300,16 @@
   <data name="Users_LoginViewModel_Password" xml:space="preserve">
     <value>Mật khẩu</value>
   </data>
+  <data name="User_ChangePassword_CurrentPassword" xml:space="preserve">
+    <value>Mật khẩu hiện tại</value>
+  </data>
+  <data name="User_ChangePassword_NewConfirmPassword" xml:space="preserve">
+    <value>Xác nhận mật khẩu</value>
+  </data>
+  <data name="User_ChangePassword_NewPassword" xml:space="preserve">
+    <value>Mật khẩu mới</value>
+  </data>
+  <data name="User_ChangePassword_UserName" xml:space="preserve">
+    <value>Tài khoản</value>
+  </data>
 </root>

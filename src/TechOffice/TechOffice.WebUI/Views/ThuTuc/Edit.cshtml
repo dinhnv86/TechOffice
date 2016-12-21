@@ -1,10 +1,10 @@
-﻿@model AnThinhPhat.ViewModel.VanBan.EditVanBanViewModel
+﻿@model AnThinhPhat.ViewModel.ThuTuc.EditThuTucViewModel
 
 @{
     Layout = "~/Views/Shared/_LayoutVanBan.cshtml";
 }
 
-@using (Html.BeginForm("Edit", "VanBan", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "ThuTuc", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="col-sm-6">
         <label>Ngày ban hành<span class="required">*</span></label>
@@ -12,63 +12,49 @@
         @Html.ValidationMessageFor(x => x.NgayBanHanh)
     </div>
     <div class="col-sm-6">
-        <label>Số ký hiệu<span class="required">*</span></label>
-        @Html.TextBoxFor(x => Model.SoVanBan, htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.SoVanBan)
+        <label>Ngày ban hành<span class="required">*</span></label>
+        @Html.EditorFor(x => Model.NgayBanHanh, "DateTime")
+        @Html.ValidationMessageFor(x => x.NgayBanHanh)
     </div>
     <div class="clearfix" style="padding-bottom:15px;"></div>
     <div class="col-sm-12">
-        <label>Nội dung văn bản<span class="required">*</span></label>
-        @Html.TextAreaFor(x => Model.NoiDungVanBan, htmlAttributes: new { @class = "form-control", rows = 10 })
-        @Html.ValidationMessageFor(x => x.NoiDungVanBan)
+        <label>Tên thủ tục<span class="required">*</span></label>
+        @Html.TextBoxFor(x => Model.TenThuTuc, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.TenThuTuc)
     </div>
     <div class="clearfix" style="padding-bottom:15px;"></div>
     <div class="col-sm-12">
-        <label>Trích yếu văn bản<span class="required">*</span></label>
-        @Html.TextAreaFor(x => Model.TrichYeuVanBan, htmlAttributes: new { @class = "form-control", rows = 5 })
-        @Html.ValidationMessageFor(x => x.TrichYeuVanBan)
+        <label>Nội dung thủ tục<span class="required">*</span></label>
+        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 5 })
+        @Html.ValidationMessageFor(x => x.NoiDung)
     </div>
     <div class="clearfix" style="padding-bottom:15px;"></div>
     <div class="col-sm-4">
-        <label>Cơ quan ban hành</label>
-        @Html.DropDownListFor(x => Model.CoQuanBanhHanhVanBanId, new SelectList(Model.CoQuanBanHanhVanBanInfos, "Id", "Name"), "Chọn cơ quan ban hành", htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.CoQuanBanhHanhVanBanId)
+        <label>Cơ quan thực hiện<span class="required">*</span></label>
+        @Html.DropDownListFor(x => Model.CoQuanThucHienId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Chọn cơ quan thực hiện", htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CoQuanThucHienId)
     </div>
-    <div class="col-sm-4">
-        <label>Loại văn bản</label>
-        @Html.DropDownListFor(x => Model.LoaiVanBanId, new SelectList(Model.LoaiVanBanInfos, "Id", "Name"), "Chọn loại văn bản", htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.LoaiVanBanId)
-    </div>
-    <div class="col-sm-4">
-        <label>Lĩnh vực văn bản</label>
-        @Html.DropDownListFor(x => Model.LinhVucVanBanId, new SelectList(Model.LinhVucVanBanInfos, "Id", "Name"), "Chọn lĩnh vực văn bản", htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.LinhVucVanBanId)
+    <div class="col-sm-6">
+        <label>Lĩnh vực thủ tục<span class="required">*</span></label>
+        @Html.DropDownListFor(x => Model.LinhVucThuTucId, new SelectList(Model.LinhVucThuTucInfo, "Id", "Name"), "Chọn lĩnh vực thủ tục", htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.LinhVucThuTucId)
     </div>
     <div class="clearfix" style="padding-bottom:15px;"></div>
     <label class="col-sm-12">Các tập tin đính kèm</label>
     <div class="col-sm-12">
-        @Html.TextBoxFor(x => x.Files, htmlAttributes: new { type = "file", multiple = "true", @class = "form-control btn btn-info pull-left", style = "max-width:300px;" })
-        @*<input type="file" id="filesUpload" name="files" multiple class="form-control btn btn-info pull-left" style="max-width:300px;" />*@
-        @*<button type="button" class="btn btn-primary" id="btnUpload" value="Upload" disabled="disabled" style="width:100px;">
-                <span class="glyphicon glyphicon-upload"></span>
-                @Buttons.UploadFiles_Upload
-            </button>*@
-    </div>
-    <div class="col-sm-12">
-        @{ Html.RenderPartial("_PartialPageFiles", Model.TapTinVanBanResults); }
+        @{ Html.RenderPartial("_PartialPageFiles", Model.TapTinThuTucResults); }
     </div>
 
     <div class="clearfix" style="padding-bottom:15px;"></div>
-        <div id="outer" class="col-xs-12">
-            <div class="inner">
-                <input type="submit" class="btn btn-primary btn-width-md" value="Cập nhật" />
-            </div>
-            <div class="inner">
-                @*<input type="button" class="btn btn-primary btn-width-md" value="Hủy" />*@
-                @Html.RouteLink("Hủy", UrlLink.VANBAN, htmlAttributes: new { @class = "btn btn-primary btn-width-md" })
-            </div>
+    <div id="outer" class="col-xs-12">
+        <div class="inner">
+            <input type="submit" class="btn btn-primary btn-width-md" value="Cập nhật" />
         </div>
-}
+        <div class="inner">
+            @Html.RouteLink("Hủy", UrlLink.THUTUC, null, htmlAttributes: new { @class = "btn btn-primary btn-width-md" })
+        </div>
+    </div>
+            }
 
 @section Scripts{
     <script src="~/Scripts/app/format-datetime.js"></script>

@@ -194,6 +194,8 @@ namespace AnThinhPhat.WebUI.Controllers
         protected string GetPathFiles(string path)
         {
             var files = Directory.GetFiles(path);
+            var serverPath = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD) + "\\";
+            path = path.Replace(serverPath, string.Empty);
             string json = string.Empty;
             foreach (string file in files)
             {
