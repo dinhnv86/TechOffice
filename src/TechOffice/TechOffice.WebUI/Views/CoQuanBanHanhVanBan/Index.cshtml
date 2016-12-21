@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Index";
+    Html.RenderPartial("_PartialPageBaseDataIndex", "DANH SÁCH CƠ QUAN BAN HÀNH VĂN BẢN");
+}
+
+<link href="~/Content/app/loading.css" rel="stylesheet" />
+
+@section Scripts{
+
+    <script src="~/Scripts/app/modaljs.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        onAddMSTSuccess = function (res) {
+            //Show Success
+            if (res.code == "SB01") {
+                loadTableMST();
+            }
+        };
+
+        onEditMSTSuccess = function (res) {
+            //Show Success
+            if (res.code == "SB01") {
+                loadTableMST();
+            }
+        };
+
+        loadTableMST = function () {
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+                $("#success-alert").css('display', 'none');
+            });
+            $('#tblMST').load('@Url.Action("List")');
+        }
+
+        $(document).ready(function () {
+            var url = '';
+            var idButtonDelete = '';
+
+            $('#tblMST').on('click', 'a[id*="lnkDelete"]', function () {
+                url = $(this).attr('data-url');
+                idButtonDelete = $(this).attr('id');
+                //Register popover
+                $(this).popover({
+                    trigger: 'focus',
+                    placement: 'left',
+                    title: message.AreYouSure,
+                    html: true,
+                    template: message.TemplatePopover,
+                });
+
+                $(this).popover('show');
+            });
+
+            $('#tblMST').on('click', '#btnDeleteYes', function () {
+                //Hide popover
+                $('#' + idButtonDelete).popover('destroy');
+
+                //show loading
+                onEditMSTBegin();
+                //Excute delete using ajax
+                var ajaxRequest = $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: url,
+                });
+
+                ajaxRequest.success(function (e) {
+                    $('#tblMST').load('@Url.Action("List")');
+                });
+
+                ajaxRequest.error(function (e) {
+                    alert(message.ErrorDelete);
+                });
+
+                ajaxRequest.always(function () {
+                    onEditMSTComplete();
+                });
+            });
+
+            $('#tblMST').on('click', '#btnDeleteNo', function () {
+                $('#' + idButtonDelete).popover('destroy');
+            });
+        });
+
+    </script>
+
+}

@@ -5,8 +5,8 @@
         <tr>
             <th class="text-center col-sm-2">Trạng thái</th>
             <th class="text-center col-xs-2">Ngày tạo <br />Ngày hết hạn</th>
-            <th class="text-center col-sm-2">Lĩnh vực</th>
-            <th class="text-center col-sm-3">Nội dung</th>
+            <th class="text-center col-sm-1">Lĩnh vực</th>
+            <th class="text-center col-sm-4">Nội dung</th>
             <th class="text-center col-xs-2">Các văn bản liên quan</th>
             <th class="text-center col-xs-1">Ngày hoàn thành</th>
         </tr>
@@ -19,57 +19,13 @@
                     foreach (var item in Model)
                     {
                         <label>@item.TenCoQuan</label>
-
                         <table class="table">
                             @{ Html.RenderPartial("_PartialPageResultThucHienCongViec", item.NotExecuteResults);}
                             @{ Html.RenderPartial("_PartialPageResultThucHienCongViec", item.ExecutingResults);}
+                            @{ Html.RenderPartial("_PartialPageResultThucHienCongViec", item.ExecutedResults);}
+                            @{ Html.RenderPartial("_PartialPageResultThucHienCongViec", item.ExecutedOverResults);}
                         </table>
 
-                        @*<table class="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            @foreach (var exe in item.NotExecuteResults)
-                                            {
-                                                <p>@exe.Name</p>
-                                            }
-                                        </td>
-                                        <td>
-                                            @foreach (var exe in item.ExecutingResults)
-                                            {
-                                                <p>@exe.Name</p>
-                                            }
-                                        </td>
-                                        <td>
-                                            @foreach (var exe in item.ExecutedResults)
-                                            {
-                                                <p>@exe.Name</p>
-                                            }
-                                        </td>
-                                        <td>
-                                            @foreach (var exe in item.ExecutedResults)
-                                            {
-                                                <p>@exe.NgayHoanThanh</p>
-                                            }
-                                        </td>
-                                        <td>
-                                            @foreach (var exe in item.ExecutedOverResults)
-                                            {
-                                                <p>@exe.Name</p>
-                                            }
-                                        </td>
-                                        <td>
-                                            @foreach (var exe in item.ExecutedOverResults)
-                                            {
-                                                <p>@exe.NgayHoanThanh</p>
-                                            }
-                                        </td>
-                                    </tr>
-                                    <tr>
-
-                                    </tr>
-                                </tbody>
-                            </table>*@
                                     }
                                 }
             </td>

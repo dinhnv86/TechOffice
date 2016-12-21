@@ -3,18 +3,19 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th class="col-sm-2">Tên cơ quan</th>
-            <th class="col-sm-6">Nội dung</th>
-            <th class="col-sm-3">Các tập tin đính kèm</th>
-            <th class="col-sm-1">
-                @if (!Model.CacYKienCuaCoQuanResult.Any())
+            <th class="col-sm-2 text-center">Tên cơ quan</th>
+            <th class="col-sm-3 text-center">Nội dung</th>
+            <th class="col-sm-3 text-center">Nội dung trả lời</th>
+            <th class="col-sm-3 text-center">Các tập tin đính kèm</th>
+            <th class="col-sm-1 text-center">
+                @if (Model != null && Model.CacYKienCuaCoQuanResult != null && !Model.CacYKienCuaCoQuanResult.Any())
                 {
                     @Html.ActionLink("Thêm", "AddYKien", "TacNghiep", new { tacNghiepId = Model.TacNghiepId, coQuanId = Model.CoQuanId }, new { @class = "btn-edit" })
                 }
             </th>
         </tr>
     </thead>
-    @if (Model.CacYKienCuaCoQuanResult.Any())
+    @if (Model != null && Model.CacYKienCuaCoQuanResult != null && Model.CacYKienCuaCoQuanResult.Any())
     {
         <tbody>
             @foreach (var item in Model.CacYKienCuaCoQuanResult)
@@ -22,8 +23,15 @@
                 <tr>
                     <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
                     <td class="content">@Html.DisplayFor(x => item.NoiDung)</td>
+                    <td class="content">@Html.DisplayFor(x => item.NoiDungTraLoi)</td>
                     <td>@Html.Raw(item.JsonFiles)</td>
-                    <td>@Html.ActionLink("Chỉnh sửa", "EditYKien", "TacNghiep", new { id = item.Id }, new { @class = "btn-edit" })</td>
+                    <td>
+                        @Html.ActionLink("Chỉnh sửa", "EditYKien", "TacNghiep", new { id = item.Id }, new { @class = "btn-edit" })
+                        @if (User.IsInRole(RoleConstant.PHONGNOIVU))
+                        {
+                            @Html.ActionLink("Trả lời", "ReplyYKien", "TacNghiep", new { id = item.Id }, new { @class = "btn-reply" })
+                        }
+                    </td>
                 </tr>
             }
         </tbody>

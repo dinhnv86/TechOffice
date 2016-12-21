@@ -15,5 +15,9 @@ namespace AnThinhPhat.Entities.Results
         public TacNghiepInfo TacNghiepInfo { get; set; }
 
         public string JsonFiles { get; set; }
+
+        public string NoiDungTraLoi { get; set; }
+
+        public int? UserIdTraLoi { get; set; }
     }
 }

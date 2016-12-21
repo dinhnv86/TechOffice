@@ -38,11 +38,12 @@
                         <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThemMoi, "congviec/themmoi", null, htmlAttributes: new { @class = "btn btn-primary" })</div>
                     </div>
                 }
-
-                @{Html.RenderAction("List", "CongViec", Model.ValueSearch);}
-
+                <div class="clearfix" style="padding:15px 0;"></div>
+                <h3><span class="col-xs-12" style="font-size: x-large;">@Labels.CongViec_List_Title</span></h3>
+                <div id="tableAdmin">
+                    @{Html.RenderAction("List", "CongViec", Model.ValueSearch);}
+                </div>
             </div>
-
         </div>
     </div>
 </div>

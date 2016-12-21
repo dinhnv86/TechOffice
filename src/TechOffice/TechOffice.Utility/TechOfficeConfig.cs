@@ -111,15 +111,17 @@ namespace AnThinhPhat.Utilities
         }
 
         public static int LENGTHFOLDER = 10;
-        public static char PADDING_CHAR = '0';
+        public static char PAD_CHAR = '0';
         public const string SEPARATE_CHAR = ", ";
 
         public static string FOLDER_UPLOAD = "~/Uploads";//folder upload;
         public static string FOLDER_VB = "/VB";//van ban
-        public static string FOLDER_TT = "/TT";//van ban
-        public static string FOLDER_UPLOAD_TACNGHIEP = FOLDER_UPLOAD + "/TN";//tac nghiep
+        public static string FOLDER_TT = "/TT";//thu tuc
+        public static string FOLDER_CV = "CV";//cong viec
+        public static string FOLDER_TN = "/TN";//cong viec
+        public static string FOLDER_UPLOAD_TACNGHIEP = FOLDER_UPLOAD + FOLDER_TN;//tac nghiep
         public static string FOLDER_UPLOAD_TT = FOLDER_UPLOAD + FOLDER_TT;//thu tuc
-        public static string FOLDER_UPLOAD_CONGVIEC = FOLDER_UPLOAD + "/CV";//cong viec
+        public static string FOLDER_UPLOAD_CONGVIEC = System.IO.Path.Combine(FOLDER_UPLOAD, FOLDER_CV);//cong viec
         public static string FOLDER_UPLOAD_VB = FOLDER_UPLOAD + FOLDER_VB;//van ban
 
 

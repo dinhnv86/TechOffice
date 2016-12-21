@@ -119,6 +119,7 @@
     <Compile Include="NhomCoQuan.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Infos\NoiDungTraLoiInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseResult.cs" />
     <Compile Include="BaseInfo.cs" />

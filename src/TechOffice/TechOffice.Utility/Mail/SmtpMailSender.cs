@@ -44,7 +44,7 @@ namespace AnThinhPhat.Utilities.Mail
             body = UpgradeEmailFormat(body, linkConfirm, passPlainText, mailType);
             try
             {
-                var mail = new MailMessage {Body = body, IsBodyHtml = true};
+                var mail = new MailMessage { Body = body, IsBodyHtml = true };
 
                 var toArray = toAddress.Split(';');
 
@@ -117,7 +117,7 @@ namespace AnThinhPhat.Utilities.Mail
             body = UpgradeEmailFormat(body, linkConfirm, passPlainText, mailType);
             try
             {
-                var mail = new MailMessage {Body = body, IsBodyHtml = true};
+                var mail = new MailMessage { Body = body, IsBodyHtml = true };
 
                 var toArray = toAddress.Split(';');
 
@@ -180,7 +180,7 @@ namespace AnThinhPhat.Utilities.Mail
                     ebody = SampleRecoverBody(linkConfirm, passPlainText);
                     break;
                 case MailType.Feedback:
-                    ebody = SampleFeedback();
+                    ebody = SampleFeedback(body);
                     break;
             }
             return ebody;
@@ -274,7 +274,7 @@ namespace AnThinhPhat.Utilities.Mail
             return body;
         }
 
-        private static string SampleFeedback()
+        private static string SampleFeedback(string content)
         {
             var strBuilderBody = new StringBuilder();
             strBuilderBody.AppendLine(
@@ -287,12 +287,13 @@ namespace AnThinhPhat.Utilities.Mail
             strBuilderBody.AppendLine("                 <tbody>");
             strBuilderBody.AppendLine("                     <tr>");
             strBuilderBody.AppendLine("                         <td align='center' style='padding:55px 10px 30px'>");
+            strBuilderBody.AppendLine("                             Chúng tôi đã nhận được ý kiến phản hồi của quý khách. Chúng tôi sẽ liên lạc với quý khách trong thời gian sơm nhất.");
             strBuilderBody.AppendLine("                         </td>");
             strBuilderBody.AppendLine("                     </tr>");
             strBuilderBody.AppendLine("                     <tr>");
             strBuilderBody.AppendLine("                         <td align='center' style='padding-bottom:30px'>");
             strBuilderBody.AppendLine(
-                "                             <p style='font-size:15px;font-weight:300;color:#a5a5a5;line-height:1.4;margin:0 10px'>Có phản hồi từ phía người dùng</p>");
+                "                             <p style='font-size:15px;font-weight:300;color:#a5a5a5;line-height:1.4;margin:0 10px'>" + content + "</p>");
             strBuilderBody.AppendLine("                         </td>");
             strBuilderBody.AppendLine("                     </tr>");
             strBuilderBody.AppendLine("                 </tbody>");

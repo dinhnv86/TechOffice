@@ -9,6 +9,7 @@ using AnThinhPhat.Entities.Searchs;
 using AnThinhPhat.ViewModel.CoQuan;
 using AnThinhPhat.ViewModel.TacNghiep;
 using AnThinhPhat.ViewModel.Users;
+using System.Collections.Generic;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -161,10 +162,10 @@ namespace AnThinhPhat.ViewModel
 
         public static TResult ToDataResult<TResult>(this BaseDataViewModel entity) where TResult : DataResult
         {
-            var type = typeof (TResult);
-            var result = (TResult) Activator.CreateInstance(type);
+            var type = typeof(TResult);
+            var result = (TResult)Activator.CreateInstance(type);
 
-            var proInfoFirsts = typeof (TResult).GetProperties();
+            var proInfoFirsts = typeof(TResult).GetProperties();
 
             foreach (var info in proInfoFirsts)
             {
@@ -201,9 +202,16 @@ namespace AnThinhPhat.ViewModel
 
         public static string FullName(this IIdentity identity)
         {
-            var claims = (ClaimsIdentity) identity;
+            var claims = (ClaimsIdentity)identity;
 
             return claims.Claims.Where(x => x.Type == ClaimTypes.Surname).Select(x => x.Value).FirstOrDefault();
+        }
+
+        public static string ToAggregate(this IEnumerable<string> data)
+        {
+            return data != null && data.Any() ?
+                  data.Aggregate((a, b) => (a + ", " + b)) :
+                  string.Empty;
         }
     }
 }

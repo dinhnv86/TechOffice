@@ -32,7 +32,8 @@
                     </td>
                     <td>
                         <strong>
-                            @Html.RouteLink(item.TenThuTuc, UrlLink.THUTUC_DETAIL, routeValues: new { tenthutuc = item.TenThuTuc.RejectMarks(), id = item.Id }, htmlAttributes: new { @class = "btn-link", target = "_blank" })
+                            @*@Html.RouteLink(item.TenThuTuc, UrlLink.THUTUC_DETAIL, routeValues: new { tenthutuc = item.TenThuTuc.RejectMarks(), id = item.Id }, htmlAttributes: new { @class = "btn-link", target = "_blank" })*@
+                            @Html.RouteLink(item.TenThuTuc, UrlLink.THUTUC_DETAIL, routeValues: new { tenthutuc = item.TenThuTuc.RejectMarks(), id = item.Id }, htmlAttributes: new { @class = "btn-link" })
                         </strong>
                     </td>
                     <td>@item.LinhVucThuTucInfo.IfNotNull(x => x.Name)</td>

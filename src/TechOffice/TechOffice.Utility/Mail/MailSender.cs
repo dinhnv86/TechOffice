@@ -15,7 +15,7 @@ namespace AnThinhPhat.Utilities.Mail
             SmtpMailSender.Email(host, email, "", subject, from, "Phong Noi Vu Huyen Phu Rieng", user, pass, null, linkConfirm, null, MailType.Register, MailPriority.High);
         }
 
-        public static void SendFeedback(string email, string subject, MailAttachment[] files)
+        public static void SendFeedback(string email, string subject,string content, MailAttachment[] files)
         {
             int port = TechOfficeConfig.PORT;
             string host = TechOfficeConfig.HOST;
@@ -23,8 +23,10 @@ namespace AnThinhPhat.Utilities.Mail
             string user = TechOfficeConfig.USERNAME;
             string pass = TechOfficeConfig.PASSWORD;
 
-            SmtpMailSender.Email(host, email, "", subject, from, "Phong Noi Vu Huyen Phu Rieng", user, pass, files, "", null, MailType.Feedback, MailPriority.High);
+            SmtpMailSender.Email(host, email, content, subject, from, "Phong Noi Vu Huyen Phu Rieng", user, pass, files, "", null, MailType.Feedback, MailPriority.Normal);
         }
+
+        public static void SendRemind() { }
 
         public static void SendRecoverPassword(string email, string subject, string linkConfirm, string plainText)
         {

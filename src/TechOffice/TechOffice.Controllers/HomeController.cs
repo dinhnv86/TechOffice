@@ -29,7 +29,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 ModelState.AddModelError("", "Mã xác nhận không hợp lệ");
             }
-            MailSender.SendFeedback(model.Email, model.Title, new MailAttachment[]
+            MailSender.SendFeedback(model.Email, model.Title,model.NoiDung, new MailAttachment[]
             {
                 new MailAttachment(ReadFully(files.InputStream), files.FileName)
             });

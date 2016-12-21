@@ -37,6 +37,7 @@
         </ul>
     </div>
 </div>
+
 <div class="clearfix"></div>
 
 <div class="supp">
@@ -58,25 +59,6 @@
     </div>
 </div>
 
-<div class="supp">
-    <h3 class="sbar">
-        <a href="" style="color: #000">Lượt truy cập</a>
-        <div class="btn_down btn_down_sp">
-            <i class="fa fa-chevron-down"></i>
-        </div>
-    </h3>
-    <div class="menu_products">
-        <ul id="menu_left">
-            <li>
-                <a href="#">Đang online: 10 </a>
-            </li>
-            <li>
-                <a href="#">Hôm qua: 50</a>
-            </li>
-            <li>
-                <a href="#">Tổng: 100 </a>
-            </li>
-        </ul>
-    </div>
-</div>
+@{Html.RenderPartial("_PartialPageCounterUser"); }
+
 <div class="clearfix"></div>

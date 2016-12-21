@@ -5,6 +5,7 @@ using AnThinhPhat.Utilities;
 using Microsoft.Owin.Security;
 using Ninject;
 using System;
+using System.IO;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -188,6 +189,17 @@ namespace AnThinhPhat.WebUI.Controllers
         protected UserResult AuthInfo()
         {
             return UserRepository.Single(UserId);
+        }
+
+        protected string GetPathFiles(string path)
+        {
+            var files = Directory.GetFiles(path);
+            string json = string.Empty;
+            foreach (string file in files)
+            {
+                json += "<a href=" + Url.Action("DownloadFile", "File", new { path = path, file = Path.GetFileName(file) }) + ">" + Path.GetFileName(file) + "</a>" + "<br/>";
+            }
+            return json;
         }
 
         private void CheckModelState()
