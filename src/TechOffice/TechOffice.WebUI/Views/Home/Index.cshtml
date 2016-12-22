@@ -32,7 +32,7 @@
         <h1 class="title">
             <span style="color: #fff">Tin tức - sự kiện</span>
         </h1>
-        @Html.Action("News", "Home", routeValues: new { newsCategoryId = Model });
+        @{Html.RenderAction("News", "Home", routeValues: new { newsCategoryId = Model });}
         <!--end:body-->
     </div>
     <!-------------------End 26082015------------------>
