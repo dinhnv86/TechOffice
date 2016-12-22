@@ -1,0 +1,14 @@
+﻿@model AnThinhPhat.ViewModel.News.AddNewsViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@Model.Title</h3>
+
+<div class="text-info">
+    @Model.Summary
+</div>
+
+<div>
+    @Html.Raw(Model.Content)
+</div>

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model int?
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!--start:body-->
@@ -6,21 +7,21 @@
 <div class="content">
 
     @*<p>
-        QUỐC HỘI THÔNG QUA NGHỊ QUYẾT VỀ KẾ HOẠCH PHÁT TRIỂN KT-XH 2017 Tin mới
+            QUỐC HỘI THÔNG QUA NGHỊ QUYẾT VỀ KẾ HOẠCH PHÁT TRIỂN KT-XH 2017 Tin mới
 
-        Theo chương trình, ngày 7/11, Quốc hội sẽ họp phiên toàn thể tại Hội trường, nghe báo cáo và thảo luận về một số dự án Luật và thông qua Nghị quyết về kế hoạch phát triển kinh tế-xã hội năm...
-    </p>
+            Theo chương trình, ngày 7/11, Quốc hội sẽ họp phiên toàn thể tại Hội trường, nghe báo cáo và thảo luận về một số dự án Luật và thông qua Nghị quyết về kế hoạch phát triển kinh tế-xã hội năm...
+        </p>
 
-    <p>
-        QUỐC HỘI THÔNG QUA NGHỊ QUYẾT VỀ KẾ HOẠCH PHÁT TRIỂN KT-XH 2017 Tin mới
+        <p>
+            QUỐC HỘI THÔNG QUA NGHỊ QUYẾT VỀ KẾ HOẠCH PHÁT TRIỂN KT-XH 2017 Tin mới
 
-        Theo chương trình, ngày 7/11, Quốc hội sẽ họp phiên toàn thể tại Hội trường, nghe báo cáo và thảo luận về một số dự án Luật và thông qua Nghị quyết về kế hoạch phát triển kinh tế-xã hội năm...
-    </p>
-    <p>
-        QUỐC HỘI THÔNG QUA NGHỊ QUYẾT VỀ KẾ HOẠCH PHÁT TRIỂN KT-XH 2017 Tin mới
+            Theo chương trình, ngày 7/11, Quốc hội sẽ họp phiên toàn thể tại Hội trường, nghe báo cáo và thảo luận về một số dự án Luật và thông qua Nghị quyết về kế hoạch phát triển kinh tế-xã hội năm...
+        </p>
+        <p>
+            QUỐC HỘI THÔNG QUA NGHỊ QUYẾT VỀ KẾ HOẠCH PHÁT TRIỂN KT-XH 2017 Tin mới
 
-        Theo chương trình, ngày 7/11, Quốc hội sẽ họp phiên toàn thể tại Hội trường, nghe báo cáo và thảo luận về một số dự án Luật và thông qua Nghị quyết về kế hoạch phát triển kinh tế-xã hội năm...
-    </p>*@
+            Theo chương trình, ngày 7/11, Quốc hội sẽ họp phiên toàn thể tại Hội trường, nghe báo cáo và thảo luận về một số dự án Luật và thông qua Nghị quyết về kế hoạch phát triển kinh tế-xã hội năm...
+        </p>*@
 
     <div class="clearfix"></div>
     <!-------------------26082015------------------>
@@ -31,7 +32,7 @@
         <h1 class="title">
             <span style="color: #fff">Tin tức - sự kiện</span>
         </h1>
-        @Html.Action("News", "Home");
+        @Html.Action("News", "Home", routeValues: new { newsCategoryId = Model });
         <!--end:body-->
     </div>
     <!-------------------End 26082015------------------>

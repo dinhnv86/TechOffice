@@ -1,0 +1,49 @@
+﻿
+@using PagedList.Mvc
+@model PagedList.IPagedList<AnThinhPhat.ViewModel.News.AddNewsViewModel>
+@{
+    var ajaxPaging = new AjaxOptions
+    {
+        UpdateTargetId = "tblNews",
+        HttpMethod = "GET"
+    };
+}
+
+<div class="content" id="tblNews">
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            var styleRight = string.Empty;
+            <div class="news2">
+                @if (!string.IsNullOrEmpty(item.UrlImage))
+                {
+                    styleRight = "class='nright'" + "style=width:auto";
+
+                    <div class="nleft">
+                        <div class="image">
+                            <a href="@Url.RouteUrl(UrlLink.NEWS, routeValues: new { title = item.Title.RejectMarks(), id = item.Id })">
+                                <img src="@Url.Content(Path.Combine(TechOfficeConfig.FOLDER_UPLOAD_NEWS, item.Id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR) ,item.UrlImage))" alt="image" width="200" height="200">
+                            </a>
+                        </div>
+                    </div>
+                }
+
+                <div @styleRight>
+                    <h4>
+                        @*<a href="postsingle.html">@item.Title</a>*@
+                        @Html.RouteLink(item.Title,UrlLink.NEWS, routeValues: new { title = item.Title.RejectMarks(), id = item.Id })
+                    </h4>
+                    @item.Summary
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clr"></div>
+        }
+
+        <div id="contentPager" class="pull-right">
+            @Html.PagedListPager(Model, page => Url.Action("News", new { newsCategoryId = ViewBag.NewsCategoryId, page = page }),
+                            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxPaging))
+        </div>
+    }
+</div>

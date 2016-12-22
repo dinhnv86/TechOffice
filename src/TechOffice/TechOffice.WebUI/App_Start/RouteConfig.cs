@@ -145,7 +145,7 @@ namespace AnThinhPhat.WebUI
             new { id = @"\d+" });
 
             routes.MapRoute(UrlLink.NEWS, UrlLink.NEWS,
-            new { controller = "Home", action = "News" },
+            new { controller = "Home", action = "ReadNews" },
             new { id = @"\d+" });
             //===========================================CRUD DATA=======================================//
 
