@@ -1,6 +1,7 @@
 ﻿
 @using PagedList.Mvc
 @model PagedList.IPagedList<AnThinhPhat.ViewModel.News.AddNewsViewModel>
+
 @{
     var ajaxPaging = new AjaxOptions
     {
@@ -31,7 +32,6 @@
 
                 <div @styleRight>
                     <h4>
-                        @*<a href="postsingle.html">@item.Title</a>*@
                         @Html.RouteLink(item.Title,UrlLink.NEWS, routeValues: new { title = item.Title.RejectMarks(), id = item.Id })
                     </h4>
                     @item.Summary
