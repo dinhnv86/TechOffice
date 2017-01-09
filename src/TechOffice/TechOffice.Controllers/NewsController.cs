@@ -18,8 +18,7 @@ namespace AnThinhPhat.WebUI.Controllers
         public ActionResult Add()
         {
             var newsCategory = NewsCategoryRepository.GetAll().Select(x => x.ToDataViewModel());
-            var model = new AddNewsViewModel();
-            model.NewsCategory = newsCategory;
+            var model = new AddNewsViewModel {NewsCategory = newsCategory};
 
             return View(model);
         }
@@ -98,23 +97,23 @@ namespace AnThinhPhat.WebUI.Controllers
                 return;
 
             var folderNews = EnsureFolderNews(newsId);
-            string savedFileName = Path.Combine(folderNews, Path.GetFileName(file.FileName));
+            var savedFileName = Path.Combine(folderNews, Path.GetFileName(file.FileName));
             try
             {
                 file.SaveAs(savedFileName); // Save the file
             }
             catch (Exception ex)
             {
-                LogService.Error(string.Format("Has error in while save file {0}", file.FileName), ex);
+                LogService.Error($"Has error in while save file {file.FileName}", ex);
             }
         }
 
         private string EnsureFolderNews(int newsId)
         {
-            string folderParentNews = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_NEWS);
+            var folderParentNews = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_NEWS);
             EnsureFolder(folderParentNews);
 
-            string folderNews = Path.Combine(folderParentNews, newsId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
+            var folderNews = Path.Combine(folderParentNews, newsId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
             EnsureFolder(folderNews);
 
             return folderNews;
@@ -128,7 +127,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private void DeleteAllFilesInFolderNews(int id)
         {
-            string folder = EnsureFolderNews(id);
+            var folder = EnsureFolderNews(id);
             if (Directory.Exists(folder))
                 Directory.Delete(folder);
         }
