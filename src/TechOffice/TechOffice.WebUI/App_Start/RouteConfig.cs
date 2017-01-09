@@ -137,6 +137,9 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.NEWSCATEGORY, UrlLink.NEWSCATEGORY,
             new { controller = "NewsCategory", action = "Index" });
 
+            routes.MapRoute(UrlLink.NEWS_LIST, UrlLink.NEWS_LIST,
+            new { controller = "News", action = "Index" });
+
             routes.MapRoute(UrlLink.NEWS_ADD, UrlLink.NEWS_ADD,
             new { controller = "News", action = "Add" });
 

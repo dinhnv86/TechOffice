@@ -1,24 +1,27 @@
-﻿using AnThinhPhat.Services.Abstracts;
+﻿using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Utilities;
 using AnThinhPhat.Utilities.Mail;
 using AnThinhPhat.ViewModel;
 using AnThinhPhat.ViewModel.Home;
 using CaptchaMvc.HtmlHelpers;
 using Ninject;
-using System.IO;
-using System.Web;
-using System.Web.Mvc;
-using System.Linq;
-using System.Collections;
-using AnThinhPhat.ViewModel.News;
 using PagedList;
-using System.Collections.Generic;
-using AnThinhPhat.Utilities;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
     [AllowAnonymous]
     public class HomeController : OfficeController
     {
+        [Inject]
+        public INewsRepository NewsRepository { get; set; }
+
+        [Inject]
+        public INewsCategoryRepository NewsCategoryRepository { get; set; }
+
         public ActionResult Index(int? newsCategoryId)
         {
             return View(newsCategoryId);
@@ -33,12 +36,12 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpPost]
         public ActionResult Contact(ContactViewModel model, HttpPostedFileBase files)
         {
-            bool xacNhan = this.IsCaptchaValid("Mã xác nhận không hợp lệ");
+            var xacNhan = this.IsCaptchaValid("Mã xác nhận không hợp lệ");
             if (!xacNhan)
             {
                 ModelState.AddModelError("", "Mã xác nhận không hợp lệ");
             }
-            MailSender.SendFeedback(model.Email, model.Title, model.NoiDung, new MailAttachment[]
+            MailSender.SendFeedback(model.Email, model.Title, model.NoiDung, new[]
             {
                 new MailAttachment(ReadFully(files.InputStream), files.FileName)
             });
@@ -59,26 +62,23 @@ namespace AnThinhPhat.WebUI.Controllers
 
         public PartialViewResult News(int? newsCategoryId, int? page)
         {
-            IEnumerable<AddNewsViewModel> items;
-
-            if (newsCategoryId != null)
-                items = NewsRepository.GetAllByNewsCategoryId(newsCategoryId.Value).Select(x => x.ToViewModel());
-            else
-                items = NewsRepository.GetAll().Select(x => x.ToViewModel());
+            var items = newsCategoryId != null
+                ? NewsRepository.GetAllByNewsCategoryId(newsCategoryId.Value).Select(x => x.ToViewModel())
+                : NewsRepository.GetAll().Where(x => !x.IsDeleted).Select(x => x.ToViewModel());
 
             return PartialView("~/Views/Home/_News.cshtml", items.ToPagedList(page ?? 1, TechOfficeConfig.PAGESIZE));
         }
 
         public PartialViewResult MenuDanhMuc()
         {
-            var model = NewsCategoryRepository.GetAll().Select(x=>x.ToDataViewModel());
+            var model = NewsCategoryRepository.GetAll().Select(x => x.ToDataViewModel());
             return PartialView("~/Views/Shared/Menu/_MenuDanhMuc.cshtml", model);
         }
 
         public static MemoryStream ReadFully(Stream input)
         {
-            byte[] buffer = new byte[16 * 1024];
-            using (MemoryStream ms = new MemoryStream())
+            var buffer = new byte[16*1024];
+            using (var ms = new MemoryStream())
             {
                 int read;
                 while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
@@ -88,11 +88,5 @@ namespace AnThinhPhat.WebUI.Controllers
                 return ms;
             }
         }
-
-        [Inject]
-        public INewsRepository NewsRepository { get; set; }
-
-        [Inject]
-        public INewsCategoryRepository NewsCategoryRepository { get; set; }
     }
 }

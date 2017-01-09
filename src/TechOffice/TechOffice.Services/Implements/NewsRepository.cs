@@ -22,7 +22,6 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    SaveResult result;
                     var add = context.News.Create();
 
                     add.Title = entity.Title;
@@ -36,7 +35,7 @@ namespace AnThinhPhat.Services.Implements
 
                     context.Entry(add).State = EntityState.Added;
 
-                    result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    var result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                     entity.Id = add.Id;
 
                     return result;
@@ -198,7 +197,6 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.News
-                            where item.IsDeleted == false
                             orderby item.CreateDate
                             select item)
                         .MakeQueryToDatabase()
@@ -233,8 +231,7 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.News
-                            where item.IsDeleted == false &&
-                                  item.Id == id
+                            where item.Id == id
                             select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
@@ -261,13 +258,32 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
+        public NewsResult GetById(int id)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.News
+                            where item.Id == id
+                            select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .FirstOrDefault();
+                }
+            });
+        }
+
         public SaveResult Update(NewsResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var update = context.News.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+                    var update = context.News.FirstOrDefault(x => x.Id == entity.Id);
+
+                    if (update == null)
+                        return SaveResult.FAILURE;
 
                     update.Title = entity.Title;
                     update.Content = entity.Content;

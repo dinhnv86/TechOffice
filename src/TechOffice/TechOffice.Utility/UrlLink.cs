@@ -85,6 +85,7 @@
         public static string LOAIVANBAN = "loaivanban";
         public static string MUCDOHOANTHANH = "mucdohoanthanh";
         public static string COQUANBANHANHVANBAN = "coquan-banhanh-vanban";
+        public static string NEWS_LIST = "tintuc-sukien";
         public static string NEWS_ADD = "tintuc/themmoi";
         public static string NEWS_EDIT = "tintuc/{id}";
         public static string NEWSCATEGORY = "loaitintuc/themmoi";

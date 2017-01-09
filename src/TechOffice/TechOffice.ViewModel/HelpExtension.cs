@@ -18,7 +18,7 @@ namespace AnThinhPhat.ViewModel
     {
         public static BaseDataViewModel ToIfNotNullDataViewModel(this DataResult entity)
         {
-            return entity == null ? null : entity.ToDataViewModel();
+            return entity?.ToDataViewModel();
         }
 
         public static BaseDataViewModel ToDataViewModel(this DataResult entity)

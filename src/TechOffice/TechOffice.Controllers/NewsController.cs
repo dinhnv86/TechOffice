@@ -1,19 +1,33 @@
-﻿using AnThinhPhat.Services.Abstracts;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using AnThinhPhat.Services;
+using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel;
 using AnThinhPhat.ViewModel.News;
 using Ninject;
-using System.Web.Mvc;
-using System.Linq;
-using System.Web;
-using System.IO;
-using System;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
     [Authorize(Roles = RoleConstant.SUPPER_ADMIN + TechOfficeConfig.SEPARATE_CHAR + RoleConstant.ADMIN)]
     public class NewsController : OfficeController
     {
+        [Inject]
+        public INewsRepository NewsRepository { get; set; }
+
+        [Inject]
+        public INewsCategoryRepository NewsCategoryRepository { get; set; }
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            var all = NewsRepository.GetAll();
+            return View(all);
+        }
+
         [HttpGet]
         public ActionResult Add()
         {
@@ -27,33 +41,31 @@ namespace AnThinhPhat.WebUI.Controllers
         public ActionResult Add(AddNewsViewModel model, HttpPostedFileBase file)
         {
             var entity = model.ToNewsResult()
-            .Update(x =>
-            {
-                x.CreatedBy = UserName;
-                x.UrlImage = file.FileName;
-            });
+                .Update(x =>
+                {
+                    x.CreatedBy = UserName;
+                    x.IsDeleted = !model.IsDeleted;
+                    x.UrlImage = file.FileName;
+                });
 
             var result = NewsRepository.Add(entity);
-            if (result == Services.SaveResult.SUCCESS)
+            if (result == SaveResult.SUCCESS)
             {
                 SaveFile(entity.Id, file);
 
-                return RedirectToRoute(UrlLink.NEWS_EDIT, new { id = entity.Id });
+                return RedirectToRoute(UrlLink.NEWS_EDIT, new {id = entity.Id});
             }
-            else
-            {
-                ViewBag.HasError = true;
-                var newsCategory = NewsCategoryRepository.GetAll().Select(x => x.ToDataViewModel());
-                model.NewsCategory = newsCategory;
-                return View();
-            }
+            ViewBag.HasError = true;
+            var newsCategory = NewsCategoryRepository.GetAll().Select(x => x.ToDataViewModel());
+            model.NewsCategory = newsCategory;
+            return View();
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
             var newsCategory = NewsCategoryRepository.GetAll().Select(x => x.ToDataViewModel());
-            var news = NewsRepository.Single(id).ToViewModel();
+            var news = NewsRepository.GetById(id).ToViewModel();
 
             news.NewsCategory = newsCategory;
 
@@ -64,17 +76,18 @@ namespace AnThinhPhat.WebUI.Controllers
         public ActionResult Edit(AddNewsViewModel model, HttpPostedFileBase file)
         {
             var entity = model.ToNewsResult()
-            .Update(x =>
-            {
-                x.LastUpdatedBy = UserName;
-                if (file != null && !string.IsNullOrEmpty(file.FileName))
+                .Update(x =>
                 {
-                    x.UrlImage = file.FileName;
-                }
-            });
+                    x.LastUpdatedBy = UserName;
+                    x.IsDeleted = !model.IsDeleted;
+                    if (!string.IsNullOrEmpty(file?.FileName))
+                    {
+                        x.UrlImage = file.FileName;
+                    }
+                });
 
             var result = NewsRepository.Update(entity);
-            if (result == Services.SaveResult.SUCCESS)
+            if (result == SaveResult.SUCCESS)
             {
                 EnsureFolderNews(model.Id);
                 SaveFile(model.Id, file);
@@ -93,7 +106,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private void SaveFile(int newsId, HttpPostedFileBase file)
         {
-            if (file == null || string.IsNullOrEmpty(file.FileName))
+            if (string.IsNullOrEmpty(file?.FileName))
                 return;
 
             var folderNews = EnsureFolderNews(newsId);
@@ -113,7 +126,8 @@ namespace AnThinhPhat.WebUI.Controllers
             var folderParentNews = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_NEWS);
             EnsureFolder(folderParentNews);
 
-            var folderNews = Path.Combine(folderParentNews, newsId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
+            var folderNews = Path.Combine(folderParentNews,
+                newsId.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
             EnsureFolder(folderNews);
 
             return folderNews;
@@ -124,18 +138,5 @@ namespace AnThinhPhat.WebUI.Controllers
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
         }
-
-        private void DeleteAllFilesInFolderNews(int id)
-        {
-            var folder = EnsureFolderNews(id);
-            if (Directory.Exists(folder))
-                Directory.Delete(folder);
-        }
-
-        [Inject]
-        public INewsRepository NewsRepository { get; set; }
-
-        [Inject]
-        public INewsCategoryRepository NewsCategoryRepository { get; set; }
     }
 }

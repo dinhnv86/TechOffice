@@ -1,0 +1,36 @@
+﻿@model IEnumerable<AnThinhPhat.Entities.Results.NewsResult>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.ActionLink("Thêm mới", "Add", "News", null, new { @class = "btn btn - link text - right" })
+
+<table class="table table-bordered">
+    <thead class="header">
+        <tr>
+            <th class="col-xs-3">Tiêu đề</th>
+            <th class="col-xs-2">Lĩnh vực tin tức</th>
+            <th>Tóm tắt</th>
+            <th>Ngày tạo</th>
+            <th>Cho phép hiển thị</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Title, "Edit", "News", new { id = item.Id }, new { @class = "btn btn - link text - right" })
+                    </td>
+                    <td>@item.NewsCategory.Ten</td>
+                    <td>@item.Summary</td>
+                    <td>@Html.DisplayFor(x => item.CreateDate, "DisplayDateTime")</td>
+                    <th>@Html.CheckBox("IsDeleted", !item.IsDeleted, new { disabled = "disabled", @class="checkbox" })</th>
+            </tr>
+            }
+        }
+    </tbody>
+</table>

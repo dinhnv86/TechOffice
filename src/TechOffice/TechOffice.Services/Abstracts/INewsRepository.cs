@@ -9,5 +9,7 @@ namespace AnThinhPhat.Services.Abstracts
     public interface INewsRepository : IRepository<NewsResult>
     {
         IEnumerable<NewsResult> GetAllByNewsCategoryId(int id);
+
+        NewsResult GetById(int id);
     }
 }
