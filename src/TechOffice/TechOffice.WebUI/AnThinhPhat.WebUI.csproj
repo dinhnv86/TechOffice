@@ -312,7 +312,6 @@
     <Content Include="images\nong-thon-moi_1369815473656.jpg" />
     <Content Include="images\Skype_logo.png" />
     <Content Include="images\slider1.jpg" />
-    <Content Include="images\SourceTreeSetup_1.9.6.1.exe" />
     <Content Include="images\Tap-huan-doan.jpg" />
     <Content Include="images\tongdai.png" />
     <Content Include="ReportViewerWebForm.aspx" />
@@ -344,6 +343,7 @@
     <Content Include="appsettings.config" />
     <EmbeddedResource Include="Reports\rptCorporation.rdlc" />
     <EmbeddedResource Include="Reports\rptSummaries.rdlc" />
+    <None Include="Properties\PublishProfiles\TechOffice.pubxml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -769,6 +769,7 @@
     <Content Include="Views\Shared\Menu\NewsHighlight.cshtml" />
     <Content Include="Views\Shared\Menu\MenuSearch.cshtml" />
     <Content Include="Views\Shared\Menu\MenuPhoto.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
