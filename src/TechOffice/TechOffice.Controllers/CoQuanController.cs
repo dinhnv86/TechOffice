@@ -42,7 +42,7 @@ namespace AnThinhPhat.WebUI.Controllers
             var items = CoQuanRepository.GetAll().Select(x => x.ToDataViewModel().Update(u =>
             {
                 u.NhomCoQuanInfos = nhom;
-                u.NhomCoQuanInfo = NhomCoQuanRepository.Single(x.NhomCoQuanId).ToDataInfo();
+                u.NhomCoQuanInfo = NhomCoQuanRepository.GetById(x.NhomCoQuanId).ToDataInfo();
             })).ToList();
 
             var pageNumber = page ?? 1;

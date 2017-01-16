@@ -9,5 +9,7 @@ namespace AnThinhPhat.Services.Abstracts
     public interface INhomCoQuanRepository : IRepository<NhomCoQuanResult>
     {
         IEnumerable<NhomCoQuanResult> GetAllWithChildren();
+
+        NhomCoQuanResult GetById(int id);
     }
 }
