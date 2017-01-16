@@ -111,7 +111,7 @@ namespace AnThinhPhat.WebUI.Controllers
             if (result == Services.SaveResult.SUCCESS)
                 SaveFiles(id, model.Files);
 
-            return RedirectToRoute(UrlLink.VANBAN);
+            return RedirectToRoute(UrlLink.THUTUC);
         }
 
         public ActionResult List(ValueSearchViewModel search)
@@ -180,7 +180,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 foreach (var file in files)
                 {
-                    var path = SaveFilesThuTuc(file, id);
+                    SaveFilesThuTuc(file, id);
                     FilesRepository.Add(new TapTinThuTucResult
                     {
                         ThuTucId = id,
@@ -192,20 +192,21 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
-        private string SaveFilesThuTuc(HttpPostedFileBase file, int vanBanId)
+        private void SaveFilesThuTuc(HttpPostedFileBase file, int vanBanId)
         {
             var folderVanBan = EnsureFolderThuTuc(vanBanId);
-            string savedFileName = Path.Combine(folderVanBan, Path.GetFileName(file.FileName));
-            try
+            if (file.FileName != null)
             {
-                file.SaveAs(savedFileName); // Save the file
+                var savedFileName = Path.Combine(folderVanBan, Path.GetFileName(file.FileName));
+                try
+                {
+                    file.SaveAs(savedFileName); // Save the file
+                }
+                catch (Exception ex)
+                {
+                    LogService.Error($"Has error in while save file {file.FileName}", ex);
+                }
             }
-            catch (Exception ex)
-            {
-                LogService.Error(string.Format("Has error in while save file {0}", file.FileName), ex);
-            }
-
-            return folderVanBan;
         }
 
         private string EnsureFolderThuTuc(int id)
@@ -213,10 +214,10 @@ namespace AnThinhPhat.WebUI.Controllers
             try
             {
                 //1. Get folder upload
-                string folderUpload = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_TT);
+                var folderUpload = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_TT);
                 EnsureFolder(folderUpload);
 
-                string folderThuTuc = Path.Combine(folderUpload, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
+                var folderThuTuc = Path.Combine(folderUpload, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
                 EnsureFolder(folderThuTuc);
 
                 return folderThuTuc;

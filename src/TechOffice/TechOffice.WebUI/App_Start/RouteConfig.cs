@@ -39,6 +39,10 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.THUTUC_ADD, UrlLink.THUTUC_ADD,
                new { controller = "ThuTuc", action = "Add" });
 
+            routes.MapRoute(UrlLink.THUTUC_EDIT, UrlLink.THUTUC_EDIT,
+             new { controller = "ThuTuc", action = "Edit" },
+             new { id = @"\d+" });
+
             routes.MapRoute(UrlLink.THUTUC_DETAIL, UrlLink.THUTUC_DETAIL,
               new { controller = "ThuTuc", action = "Detail" },
               new { id = @"\d+" });

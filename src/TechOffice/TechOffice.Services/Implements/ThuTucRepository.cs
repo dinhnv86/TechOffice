@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -143,11 +142,11 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.ThuTucs
-                            where item.IsDeleted == false
-                            select item)
-                            .MakeQueryToDatabase()
-                            .Select(x => x.ToDataResult())
-                            .ToList();
+                        where item.IsDeleted == false
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .ToList();
                 }
             });
         }
@@ -159,12 +158,12 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.ThuTucs
-                                  where item.IsDeleted == false
-                                  select item)
-                                  .MakeQueryToDatabase()
-                                  .Select(x => x.ToDataResult())
-                                  .AsQueryable()
-                                  .ToListAsync();
+                        where item.IsDeleted == false
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .ToListAsync();
                 }
             });
         }
@@ -176,12 +175,12 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.ThuTucs
-                            .Include(x => x.TapTinThuTucs)
-                            where item.IsDeleted == false && item.Id == id
-                            select item)
-                            .MakeQueryToDatabase()
-                            .Select(x => x.ToDataResult())
-                            .Single();
+                        .Include(x => x.TapTinThuTucs)
+                        where item.IsDeleted == false && item.Id == id
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .Single();
                 }
             });
         }
@@ -193,13 +192,13 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.ThuTucs
-                                   .Include(x => x.TapTinThuTucs)
-                                  where item.IsDeleted == false && item.Id == id
-                                  select item)
-                                  .MakeQueryToDatabase()
-                                  .Select(x => x.ToDataResult())
-                                  .AsQueryable()
-                                  .SingleAsync();
+                        .Include(x => x.TapTinThuTucs)
+                        where item.IsDeleted == false && item.Id == id
+                        select item)
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .SingleAsync();
                 }
             });
         }
