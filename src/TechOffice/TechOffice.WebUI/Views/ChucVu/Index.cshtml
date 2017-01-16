@@ -13,14 +13,14 @@
     <script type="text/javascript">
         onAddMSTSuccess = function (res) {
             //Show Success
-            if (res.code == "SB01") {
+            if (res.code === "SB01") {
                 loadTableMST();
             }
         };
 
         onEditMSTSuccess = function (res) {
             //Show Success
-            if (res.code == "SB01") {
+            if (res.code === "SB01") {
                 loadTableMST();
             }
         };
@@ -45,7 +45,7 @@
                     placement: 'left',
                     title: message.AreYouSure,
                     html: true,
-                    template: message.TemplatePopover,
+                    template: message.TemplatePopover
                 });
 
                 $(this).popover('show');
@@ -61,14 +61,14 @@
                 var ajaxRequest = $.ajax({
                     type: 'POST',
                     cache: false,
-                    url: url,
+                    url: url
                 });
 
-                ajaxRequest.success(function (e) {
+                ajaxRequest.success(function () {
                     $('#tblMST').load('@Url.Action("List")');
                 });
 
-                ajaxRequest.error(function (e) {
+                ajaxRequest.error(function () {
                     alert(message.ErrorDelete);
                 });
 
