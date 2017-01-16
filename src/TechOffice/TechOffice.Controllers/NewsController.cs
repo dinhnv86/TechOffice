@@ -100,7 +100,6 @@ namespace AnThinhPhat.WebUI.Controllers
             var newsCategory = NewsCategoryRepository.GetAll().Select(x => x.ToDataViewModel());
             model.NewsCategory = newsCategory;
 
-
             return View(model);
         }
 
