@@ -14,23 +14,36 @@
         onAddMSTSuccess = function (res) {
             //Show Success
             if (res.code === "SB01") {
-                loadTableMST();
+                loadTableMST("add");
             }
         };
 
         onEditMSTSuccess = function (res) {
             //Show Success
             if (res.code === "SB01") {
-                loadTableMST();
+                loadTableMST("edit");
             }
         };
 
-        loadTableMST = function () {
-            $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
-                $("#success-alert").css('display', 'none');
-            });
+        loadTableMST = function (type) {
+            showAlertSuccess(type);
             $('#tblMST').load('@Url.Action("List")');
         }
+
+        /*
+       type: add or edit
+       */
+        showAlertSuccess = function (type) {
+            if (type === "add") {
+                $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#success-alert").css('display', 'none');
+                });
+            } else {
+                $("#success-alert-edit").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#success-alert-edit").css('display', 'none');
+                });
+            }
+        };
 
         $(document).ready(function () {
             var url = '';
