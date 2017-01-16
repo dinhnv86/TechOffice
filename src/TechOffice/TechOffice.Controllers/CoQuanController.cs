@@ -25,7 +25,7 @@ namespace AnThinhPhat.WebUI.Controllers
         public ActionResult Index()
         {
             var nhom = NhomCoQuanRepository.GetAll().Select(x => x.ToIfNotNullDataInfo());
-            var model = new CoQuanViewModel { NhomCoQuanInfos = nhom };
+            var model = new CoQuanViewModel {NhomCoQuanInfos = nhom};
 
             return View(model);
         }
@@ -68,21 +68,19 @@ namespace AnThinhPhat.WebUI.Controllers
         public PartialViewResult Edit(int id)
         {
             var nhom = NhomCoQuanRepository.GetAll().Select(x => x.ToDataInfo());
-            var data = CoQuanRepository.Single(id).ToDataViewModel().Update(u =>
-            {
-                u.NhomCoQuanInfos = nhom;
-            });
+            var data = CoQuanRepository.Single(id).ToDataViewModel().Update(u => { u.NhomCoQuanInfos = nhom; });
 
             return PartialView("Edit", data);
         }
 
-        public async Task<JsonResult> Edit(int id, BaseDataViewModel model)
+        public async Task<JsonResult> Edit(int id, CoQuanViewModel model)
         {
             return await ExecuteWithErrorHandling(async () =>
             {
                 var cv = model.ToDataResult<CoQuanResult>().Update(u =>
                 {
                     u.Id = id;
+                    u.NhomCoQuanId = model.NhomCoQuanId;
                     u.LastUpdatedBy = UserName;
                 });
 
@@ -97,7 +95,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 if (id == 0)
                 {
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    Response.StatusCode = (int) HttpStatusCode.BadRequest;
                     return Json("Bad Request", JsonRequestBehavior.AllowGet);
                 }
 
@@ -110,17 +108,13 @@ namespace AnThinhPhat.WebUI.Controllers
             return ExecuteWithErrorHandling(() =>
             {
                 var result = CoQuanRepository.GetAllByNhomCoQuanId(nhomCoQuanId);
-                var jsonResult = "<option selected='selected' value>Tất cả</option>";
-
-                foreach (var item in result)
-                {
-                    jsonResult += string.Format("<option value={0}>{1}</option>", item.Id, item.Ten);
-                }
+                var jsonResult = result.Aggregate("<option selected='selected' value>Tất cả</option>",
+                    (current, item) => current + $"<option value={item.Id}>{item.Ten}</option>");
 
                 return new JsonResult
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = jsonResult,
+                    Data = jsonResult
                 };
             });
         }

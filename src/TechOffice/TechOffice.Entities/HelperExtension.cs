@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System;
 using AnThinhPhat.Utilities.Enums;
+using AnThinhPhat.Entities;
 
 namespace AnThinhPhat.Entities
 {
