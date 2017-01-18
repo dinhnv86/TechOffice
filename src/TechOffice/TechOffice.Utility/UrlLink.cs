@@ -15,6 +15,11 @@
         /// <summary>
         /// 
         /// </summary>
+        public static string VANBAN_VIEW = "vanban/view";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string VANBAN_ADD = "vanban/add";
 
         /// <summary>

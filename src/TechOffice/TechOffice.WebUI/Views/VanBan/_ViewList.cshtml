@@ -1,0 +1,59 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<AnThinhPhat.Entities.Results.VanBanResult>
+
+@{
+    var ajaxPaging = new AjaxOptions()
+    {
+        UpdateTargetId = "tableAdmin",
+        HttpMethod = "GET",
+    };
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center col-sm-2 col-action">Số ký hiệu</th>
+            <th class="text-center col-sm-2">Ngày ban hành</th>
+            <th class="text-center col-sm-7">Trích yếu</th>
+            <th class="col-sm-1"></th>
+        </tr>
+    </thead>
+    @if (Model.Any())
+    {
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <strong>
+                            @Html.RouteLink(item.SoVanBan, UrlLink.VANBAN_DETAIL, routeValues: new { sovanban = item.SoVanBan.RejectMarks(), id = item.Id }, htmlAttributes: new { @class = "btn-link", target = "_blank" })
+                        </strong>
+                    </td>
+                    <td>@Html.DisplayFor(x => item.NgayBanHanh, "DisplayDateTime")</td>
+                    <td>@item.TrichYeu</td>
+                    <td class="link-action">
+                        @Html.RouteLink("Sửa", UrlLink.VANBAN_EDIT, routeValues: new { sovanban = item.SoVanBan.RejectMarks(), id = item.Id }, htmlAttributes: new { @class = "btn-edit" })|
+                        @*).ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn-edit" }) |*@
+                        <a href="#" data-url='@Url.Action("Delete", new {id = item.Id})' id="lnkDelete_@item.Id" data-toggle="popover">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+    else
+    {
+        <tr><td colspan="4">No rows found.</td></tr>
+    }
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                <div id="contentPager" class="pull-right">
+                    @Html.PagedListPager(Model, page => Url.Action("ViewList", "VanBan", new { page }),
+                           PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxPaging))
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>

@@ -22,6 +22,9 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.VANBAN, UrlLink.VANBAN,
                 new { controller = "VanBan", action = "Index" });
 
+            routes.MapRoute(UrlLink.VANBAN_VIEW, UrlLink.VANBAN_VIEW,
+               new { controller = "VanBan", action = "ViewVanBan" });
+
             routes.MapRoute(UrlLink.VANBAN_ADD, UrlLink.VANBAN_ADD,
               new { controller = "VanBan", action = "Add" });
 

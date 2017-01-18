@@ -57,6 +57,25 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
+        [Authorize]
+        public ActionResult ViewVanBan()
+        {
+            return View();
+        }
+
+        public ActionResult ViewList(int? page)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                var model = Find(new ValueSearchViewModel
+                {
+                    Page = page ?? 1,
+                    PagingNumberId = 5,
+                });
+                return PartialView("_ViewList", model);
+            });
+        }
+
         public PartialViewResult Detail(int id)
         {
             var model = VanBanRepository.Single(id);
