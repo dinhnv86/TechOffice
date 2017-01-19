@@ -1,40 +1,32 @@
-﻿@{
+﻿
+@{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    ViewBag.Title = "Index";
-    Html.RenderPartial("_PartialPageBaseDataIndex", "DANH SÁCH LĨNH VỰC VĂN BẢN");
+    ViewBag.Title = "View";
 }
 
 <link href="~/Content/app/loading.css" rel="stylesheet" />
 
-@section Scripts{
+<div class="boxr" style="width:100%">
+    <h1 class="title title_ct"><span>Văn bản</span></h1>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3><span style="font-size: x-large;">Danh sách văn bản</span></h3>
+            @Html.RouteLink("Thêm mới", UrlLink.VANBAN_ADD, null, new { @class = "btn btn-link" })
 
-    <script src="~/Scripts/app/modaljs.js" type="text/javascript"></script>
+            <div id="tblMST" class="table-responsive">
+                @Html.Action("ViewList", "VanBan")
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="@Url.Content("~/Scripts/app/modaljs.js")" type="text/javascript"></script>
 
     <script type="text/javascript">
-        onAddMSTSuccess = function (res) {
-            //Show Success
-            if (res.code === "SB01") {
-                loadTableMST();
-            }
-        };
-
-        onEditMSTSuccess = function (res) {
-            //Show Success
-            if (res.code === "SB01") {
-                loadTableMST();
-            }
-        };
-
-        loadTableMST = function () {
-            $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
-                $("#success-alert").css('display', 'none');
-            });
-            $('#tblMST').load('@Url.Action("List")');
-        }
-
         $(document).ready(function () {
-            var url = '';
-            var idButtonDelete = '';
+            var url = "";
+            var idButtonDelete = "";
 
             $('#tblMST').on('click', 'a[id*="lnkDelete"]', function () {
                 url = $(this).attr('data-url');
@@ -54,7 +46,6 @@
             $('#tblMST').on('click', '#btnDeleteYes', function () {
                 //Hide popover
                 $('#' + idButtonDelete).popover('destroy');
-
                 //show loading
                 onEditMSTBegin();
                 //Excute delete using ajax
@@ -65,7 +56,7 @@
                 });
 
                 ajaxRequest.success(function () {
-                    $('#tblMST').load('@Url.Action("List")');
+                    $('#tblMST').load('@Url.Action("ViewList")');
                 });
 
                 ajaxRequest.error(function () {
@@ -82,5 +73,4 @@
             });
         });
     </script>
-
 }

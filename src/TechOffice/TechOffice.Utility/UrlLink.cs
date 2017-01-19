@@ -15,6 +15,11 @@
         /// <summary>
         /// 
         /// </summary>
+        public static string VANBAN_VIEW = "vanban/view";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string VANBAN_ADD = "vanban/add";
 
         /// <summary>
@@ -31,6 +36,11 @@
         /// 
         /// </summary>
         public static string THUTUC = "thutuc";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string THUTUC_VIEW = "thutuc/view";
 
         /// <summary>
         /// 

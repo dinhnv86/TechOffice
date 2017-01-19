@@ -11,6 +11,8 @@ using System.Web;
 using System.IO;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -57,6 +59,24 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
+        [Authorize]
+        public ActionResult ViewVanBan()
+        {
+            return View();
+        }
+
+        public ActionResult ViewList(int? page)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                var model = Find(new ValueSearchViewModel
+                {
+                    Page = page ?? 1
+                });
+                return PartialView("_ViewList", model);
+            });
+        }
+
         public PartialViewResult Detail(int id)
         {
             var model = VanBanRepository.Single(id);
@@ -99,7 +119,7 @@ namespace AnThinhPhat.WebUI.Controllers
             return RedirectToRoute(UrlLink.VANBAN_EDIT, new { sovanban = dataSave.SoVanBan.RejectMarks(), id = dataSave.Id });
         }
 
-        [HttpGet]
+        [Authorize, HttpGet]
         public ActionResult Edit(int id)
         {
             return ExecuteWithErrorHandling(() =>
@@ -124,7 +144,7 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
-        [HttpPost]
+        [Authorize, HttpPost]
         public ActionResult Edit(int id, EditVanBanViewModel model)
         {
             var data = VanBanRepository.Single(id);
@@ -142,6 +162,21 @@ namespace AnThinhPhat.WebUI.Controllers
                 SaveFiles(id, model.Files);
 
             return RedirectToRoute(UrlLink.VANBAN);
+        }
+
+        [Authorize, HttpPost, ActionName("Delete")]
+        public async Task<JsonResult> DeleteConfirmed(int id)
+        {
+            return await ExecuteWithErrorHandling(async () =>
+            {
+                if (id == 0)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json("Bad Request", JsonRequestBehavior.AllowGet);
+                }
+
+                return await ExecuteResultAsync(async () => await VanBanRepository.DeleteByAsync(id));
+            });
         }
 
         private InitVanBanViewModel CreateVanBanModel(int? linhVucVanBanId = null,
@@ -215,7 +250,7 @@ namespace AnThinhPhat.WebUI.Controllers
                     seachAll = seachAll.Where(x => x.TrichYeu.Contains(model.TenVanBan));
             }
 
-            return seachAll.ToPagedList(model.Page, model.PagingNumberId);
+            return seachAll.ToPagedList(model.Page, TechOfficeConfig.PAGESIZE);
         }
 
         private void SaveFiles(int id, IEnumerable<HttpPostedFileBase> files)
@@ -224,7 +259,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 foreach (var file in files)
                 {
-                    var path = SaveFilesVanBan(file, id);
+                    SaveFilesVanBan(file, id);
                     FilesRepository.Add(new TapTinVanBanResult
                     {
                         VanBanId = id,
@@ -236,20 +271,18 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
-        private string SaveFilesVanBan(HttpPostedFileBase file, int vanBanId)
+        private void SaveFilesVanBan(HttpPostedFileBase file, int vanBanId)
         {
             var folderVanBan = EnsureFolderVanBan(vanBanId);
-            string savedFileName = Path.Combine(folderVanBan, Path.GetFileName(file.FileName));
+            var savedFileName = Path.Combine(folderVanBan, Path.GetFileName(file.FileName));
             try
             {
                 file.SaveAs(savedFileName); // Save the file
             }
             catch (Exception ex)
             {
-                LogService.Error(string.Format("Has error in while save file {0}", file.FileName), ex);
+                LogService.Error($"Has error in while save file {file.FileName}", ex);
             }
-
-            return folderVanBan;
         }
 
         private string EnsureFolderVanBan(int id)

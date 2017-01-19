@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AnThinhPhat.Entities.Results;
 
 namespace AnThinhPhat.Services.Abstracts
@@ -26,5 +27,9 @@ namespace AnThinhPhat.Services.Abstracts
         /// <param name="id"></param>
         /// <returns></returns>
         UserRoleResult GetUserRoleById(int id);
+
+        Task<SaveResult> LockUser(int userId);
+
+        Task<SaveResult> UnlockUser(int userId);
     }
 }

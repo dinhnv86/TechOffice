@@ -22,6 +22,9 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.VANBAN, UrlLink.VANBAN,
                 new { controller = "VanBan", action = "Index" });
 
+            routes.MapRoute(UrlLink.VANBAN_VIEW, UrlLink.VANBAN_VIEW,
+               new { controller = "VanBan", action = "ViewVanBan" });
+
             routes.MapRoute(UrlLink.VANBAN_ADD, UrlLink.VANBAN_ADD,
               new { controller = "VanBan", action = "Add" });
 
@@ -35,6 +38,9 @@ namespace AnThinhPhat.WebUI
 
             routes.MapRoute(UrlLink.THUTUC, UrlLink.THUTUC,
                 new { controller = "ThuTuc", action = "Index" });
+
+            routes.MapRoute(UrlLink.THUTUC_VIEW, UrlLink.THUTUC_VIEW,
+               new { controller = "ThuTuc", action = "ViewThuTuc" });
 
             routes.MapRoute(UrlLink.THUTUC_ADD, UrlLink.THUTUC_ADD,
                new { controller = "ThuTuc", action = "Add" });
