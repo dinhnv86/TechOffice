@@ -40,6 +40,11 @@
         /// <summary>
         /// 
         /// </summary>
+        public static string THUTUC_VIEW = "thutuc/view";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string THUTUC_ADD = "thutuc/add";
 
         /// <summary>

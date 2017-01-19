@@ -1,5 +1,5 @@
-﻿var url = '';
-var idButtonDelete = '';
+﻿var url = "";
+var idButtonDelete = "";
 
 $(document).ready(function () {
 
@@ -31,7 +31,7 @@ onAddMSTBegin = function () {
 };
 onAddMSTFailure = function () {
     //Show Failure
-    if (res.code == "SB02") {
+    if (res.code === "SB02") {
         $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
             $("#danger-alert").css('display', 'none');
         });
@@ -48,7 +48,7 @@ onEditMSTBegin = function () {
 
 onEditMSTFailure = function () {
     //Show Failure
-    if (res.code == "SB02") {
+    if (res.code === "SB02") {
         $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
             $("#danger-alert").css('display', 'none');
         });

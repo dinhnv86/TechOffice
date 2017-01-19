@@ -32,7 +32,8 @@
         @Html.RouteLink("Lĩnh vực thủ tục", UrlLink.LINHVUCTHUTUC, null, new {@class = "btn btn-link"})
     </li>
     <li>
-        @Html.RouteLink("Thêm mới thủ tục", UrlLink.THUTUC_ADD, null, new {@class = "btn btn-link"})
+        @*@Html.RouteLink("Thêm mới thủ tục", UrlLink.THUTUC_ADD, null, new { @class = "btn btn-link" })*@
+        @Html.RouteLink("Thủ tục", UrlLink.THUTUC_VIEW, null, new {@class = "btn btn-link"})
     </li>
     <li>
         @Html.RouteLink("Lĩnh vực tác nghiệp", UrlLink.LINHVUCTACNGHIEP, null, new {@class = "btn btn-link"})

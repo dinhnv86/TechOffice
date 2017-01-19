@@ -772,6 +772,8 @@
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\VanBan\ViewVanBan.cshtml" />
     <Content Include="Views\VanBan\_ViewList.cshtml" />
+    <Content Include="Views\ThuTuc\ViewThuTuc.cshtml" />
+    <Content Include="Views\ThuTuc\_ViewList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

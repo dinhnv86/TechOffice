@@ -6,7 +6,7 @@
 @{
     var ajaxPaging = new AjaxOptions()
     {
-        UpdateTargetId = "tableAdmin",
+        UpdateTargetId = "tblMST",
         HttpMethod = "GET",
     };
 }
@@ -20,7 +20,7 @@
             <th class="col-sm-1"></th>
         </tr>
     </thead>
-    @if (Model.Any())
+    @if (Model != null && Model.Any())
     {
         <tbody>
             @foreach (var item in Model)
@@ -28,14 +28,13 @@
                 <tr>
                     <td>
                         <strong>
-                            @Html.RouteLink(item.SoVanBan, UrlLink.VANBAN_DETAIL, routeValues: new { sovanban = item.SoVanBan.RejectMarks(), id = item.Id }, htmlAttributes: new { @class = "btn-link", target = "_blank" })
+                            @item.SoVanBan
                         </strong>
                     </td>
                     <td>@Html.DisplayFor(x => item.NgayBanHanh, "DisplayDateTime")</td>
                     <td>@item.TrichYeu</td>
                     <td class="link-action">
-                        @Html.RouteLink("Sửa", UrlLink.VANBAN_EDIT, routeValues: new { sovanban = item.SoVanBan.RejectMarks(), id = item.Id }, htmlAttributes: new { @class = "btn-edit" })|
-                        @*).ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn-edit" }) |*@
+                        @Html.RouteLink("Sửa", UrlLink.VANBAN_EDIT, new { sovanban = item.SoVanBan.RejectMarks(), id = item.Id }) |
                         <a href="#" data-url='@Url.Action("Delete", new {id = item.Id})' id="lnkDelete_@item.Id" data-toggle="popover">Xóa</a>
                     </td>
                 </tr>

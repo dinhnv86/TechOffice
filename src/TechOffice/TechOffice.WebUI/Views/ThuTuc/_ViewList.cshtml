@@ -1,0 +1,61 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<AnThinhPhat.Entities.Results.ThuTucResult>
+
+@{
+    var ajaxPaging = new AjaxOptions()
+    {
+        UpdateTargetId = "tblMST",
+        HttpMethod = "GET",
+    };
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="text-center col-xs-1">STT</th>
+            <th class="text-center col-xs-4">Thủ tục</th>
+            <th class="text-center col-xs-3">Lĩnh vực</th>
+            <th class="text-center col-xs-3">Cơ quan thực hiện</th>
+            <th class="col-xs-1"></th>
+        </tr>
+    </thead>
+    @if (Model != null && Model.Any())
+    {
+        <tbody>
+            @{ int i = 1; }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.Raw((i++).ToString())
+                    </td>
+                    <td><strong>@item.TenThuTuc</strong>
+                    </td>
+                    <td>@item.LinhVucThuTucInfo.IfNotNull(x => x.Name)</td>
+                    <td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>
+                    <td class="link-action">
+                        @Html.RouteLink("Sửa", UrlLink.THUTUC_EDIT, new { tenthutuc = item.TenThuTuc.RejectMarks(), id = item.Id }) |
+                        <a href="#" data-url='@Url.Action("Delete", new {id = item.Id})' id="lnkDelete_@item.Id" data-toggle="popover">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+                }
+                else
+                {
+                    <tr><td colspan="5">No rows found.</td></tr>
+                }
+    <tfoot>
+        <tr>
+            <td colspan="5">
+                <div id="contentPager" class="pull-right">
+                    @Html.PagedListPager(Model, page => Url.Action("ViewList", "ThuTuc", new { page }),
+                           PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxPaging))
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+

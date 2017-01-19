@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Web;
 using System.IO;
 using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -120,6 +122,39 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 var model = Find(search);
                 return PartialView("_PartialPageList", model);
+            });
+        }
+
+        [Authorize]
+        public ActionResult ViewThuTuc()
+        {
+            return View();
+        }
+
+        public ActionResult ViewList(int? page)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                var model = Find(new ValueSearchViewModel
+                {
+                    Page = page ?? 1
+                });
+                return PartialView("_ViewList", model);
+            });
+        }
+
+        [Authorize, HttpPost, ActionName("Delete")]
+        public async Task<JsonResult> DeleteConfirmed(int id)
+        {
+            return await ExecuteWithErrorHandling(async () =>
+            {
+                if (id == 0)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json("Bad Request", JsonRequestBehavior.AllowGet);
+                }
+
+                return await ExecuteResultAsync(async () => await ThuTucRepository.DeleteByAsync(id));
             });
         }
 

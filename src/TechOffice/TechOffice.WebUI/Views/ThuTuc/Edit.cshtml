@@ -12,16 +12,19 @@
         @Html.ValidationMessageFor(x => x.NgayBanHanh)
     </div>
     <div class="col-sm-6">
-        <label>Ngày ban hành<span class="required">*</span></label>
+        @*<label>Ngày ban hành<span class="required">*</span></label>
         @Html.EditorFor(x => Model.NgayBanHanh, "DateTime")
-        @Html.ValidationMessageFor(x => x.NgayBanHanh)
-    </div>
-    <div class="clearfix" style="padding-bottom:15px;"></div>
-    <div class="col-sm-12">
+        @Html.ValidationMessageFor(x => x.NgayBanHanh)*@
         <label>Tên thủ tục<span class="required">*</span></label>
         @Html.TextBoxFor(x => Model.TenThuTuc, htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.TenThuTuc)
     </div>
+    @*<div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="col-sm-12">
+        <label>Tên thủ tục<span class="required">*</span></label>
+        @Html.TextBoxFor(x => Model.TenThuTuc, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.TenThuTuc)
+    </div>*@
     <div class="clearfix" style="padding-bottom:15px;"></div>
     <div class="col-sm-12">
         <label>Nội dung thủ tục<span class="required">*</span></label>
