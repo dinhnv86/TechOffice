@@ -87,11 +87,6 @@ namespace AnThinhPhat.WebUI.Controllers
             return RedirectToRoute(UrlLink.TRANGCHU);
         }
 
-        /// <summary>
-        /// Changes the password.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
         [HttpGet, Authorize]
         public ActionResult ChangePassword()
         {
@@ -109,7 +104,6 @@ namespace AnThinhPhat.WebUI.Controllers
         /// <summary>
         /// Changes the password.
         /// </summary>
-        /// <param name="id">The identifier.</param>
         /// <param name="viewmodel">The view model.</param>
         /// <returns></returns>
         [HttpPost, Authorize]
@@ -148,7 +142,6 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
             {
-                var user = User;
                 return Url.Action("Index", "Home");
             }
 

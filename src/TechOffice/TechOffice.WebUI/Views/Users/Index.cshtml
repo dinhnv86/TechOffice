@@ -7,5 +7,65 @@
 
     @Html.RouteLink("Thêm tài khoản", UrlLink.USERS_ADD, null, htmlAttributes: new { @class = "btn btn-link" })
 
-    @Html.Action("List")
+    @{ Html.RenderAction("List"); }
 </div>
+
+<link href="~/Content/app/loading.css" rel="stylesheet" />
+
+@section Scripts{
+
+    <script src="~/Scripts/app/modaljs.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var url = "";
+            var idButtonDelete = "";
+
+            $('#tblMST').on('click', 'a[id*="lnkLock"]', function () {
+                url = $(this).attr('data-url');
+                idButtonDelete = $(this).attr('id');
+                //Register popover
+                $(this).popover({
+                    trigger: 'focus',
+                    placement: 'left',
+                    title: message.AreYouSure,
+                    html: true,
+                    template: message.TemplatePopover
+                });
+
+                $(this).popover('show');
+            });
+
+            $('#tblMST').on('click', '#btnDeleteYes', function () {
+                //Hide popover
+                $('#' + idButtonDelete).popover('destroy');
+
+                //show loading
+                onEditMSTBegin();
+                //Excute delete using ajax
+                var ajaxRequest = $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: url
+                });
+
+                ajaxRequest.success(function () {
+                    $('#tblMST').load('@Url.Action("List")');
+                });
+
+                ajaxRequest.error(function () {
+                    alert(message.ErrorDelete);
+                });
+
+                ajaxRequest.always(function () {
+                    onEditMSTComplete();
+                });
+            });
+
+            $('#tblMST').on('click', '#btnDeleteNo', function () {
+                $('#' + idButtonDelete).popover('destroy');
+            });
+        });
+
+    </script>
+}

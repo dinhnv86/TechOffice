@@ -7,6 +7,8 @@ using AnThinhPhat.ViewModel.Users;
 using Ninject;
 using PagedList;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace AnThinhPhat.WebUI.Controllers
@@ -164,6 +166,36 @@ namespace AnThinhPhat.WebUI.Controllers
                         Data = "0"
                     };
                 }
+            });
+        }
+
+        [HttpPost, ActionName("Unlock")]
+        public async Task<JsonResult> UnlockConfirmed(int id)
+        {
+            return await ExecuteWithErrorHandling(async () =>
+            {
+                if (id == 0)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json("Bad Request", JsonRequestBehavior.AllowGet);
+                }
+
+                return await ExecuteResultAsync(async () => await UserRoleRepository.UnlockUser(id));
+            });
+        }
+
+        [HttpPost, ActionName("Lock")]
+        public async Task<JsonResult> LockConfirmed(int id)
+        {
+            return await ExecuteWithErrorHandling(async () =>
+            {
+                if (id == 0)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json("Bad Request", JsonRequestBehavior.AllowGet);
+                }
+
+                return await ExecuteResultAsync(async () => await UserRoleRepository.LockUser(id));
             });
         }
     }
