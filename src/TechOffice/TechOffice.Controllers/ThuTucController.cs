@@ -41,7 +41,9 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [HttpGet]
+        [ValidateInput(false)]
         [Authorize]
+        
         public ActionResult Add()
         {
             var init = IniViewModel();
@@ -55,7 +57,9 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         [Authorize]
+       
         public ActionResult Add(AddThuTucViewModel model)
         {
             var dataSave = new ThuTucResult
@@ -77,6 +81,7 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [HttpGet, Authorize]
+       
         public ActionResult Edit(int id)
         {
             return ExecuteWithErrorHandling(() =>
@@ -99,6 +104,7 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [HttpPost, Authorize]
+        [ValidateInput(false)]
         public ActionResult Edit(int id, EditThuTucViewModel model)
         {
             var data = ThuTucRepository.Single(id);

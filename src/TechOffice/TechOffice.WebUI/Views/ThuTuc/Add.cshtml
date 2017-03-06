@@ -19,9 +19,9 @@
     <div class="clearfix"></div>
     <div class="col-sm-12">
         <label>Nội dung<span class="required">*</span></label>
-        @Html.EditorFor(x => Model.NoiDung)
-        @*@Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 5 })
-        @Html.ValidationMessageFor(x => x.NoiDung)*@
+       
+        @Html.TextAreaFor(x => Model.NoiDung, new { @id = "ckeContent" })
+       
     </div>
     <div class="clearfix"></div>
     <div class="col-sm-6">
@@ -55,4 +55,8 @@
 
 @section Scripts{
     <script src="~/Scripts/app/format-datetime.js"></script>
-}
+}<script src="~/Plugin/ckeditor/ckeditor.js"></script>
+<script src="~/Plugin/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript">
+    CKEDITOR.replace("ckeContent");
+</script>

@@ -10,7 +10,8 @@
 </div>
 <div class="col-sm-12">
     <label>Nội dung thủ tục</label>
-    @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", @readonly = "readonly", rows = 5 })
+    @*@Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", @readonly = "readonly", rows = 5 })*@
+    @Html.Raw(Model.NoiDung)
 </div>
 <div class="col-sm-12">
     <label>Cơ quan thực hiện</label>
