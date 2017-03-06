@@ -1,11 +1,11 @@
 ﻿
         $(document).ready(function () {
             $(".btn_down_sp").click(function () {
-                $(".menu_products").slideToggle();
+                $(".btn_down_spshow").slideToggle();
             });
 
             $(".btn_down_httt").click(function () {
-                $(".sup").slideToggle();
+                $(".btn_down_htttshow").slideToggle();
             });
 
 

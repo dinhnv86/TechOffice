@@ -2,12 +2,12 @@
 
 <div class="supp">
     <h3 class="sbar">
-        <a href="" style="color: #000">Danh mục</a>
+        <a href="">Danh mục</a>
         <div class="btn_down btn_down_sp">
             <i class="fa fa-chevron-down"></i>
         </div>
     </h3>
-    <div class="menu_products">
+    <div class="menu_products btn_down_spshow">
         <ul id="menu_left">
             @foreach (var item in Model.LinhVucThuTucInfos)
             {
@@ -19,4 +19,4 @@
     </div>
 </div>
 
-@{Html.RenderPartial("_PartialPageMenuSubLeft");}
+@*@{Html.RenderPartial("_PartialPageMenuSubLeft");}*@

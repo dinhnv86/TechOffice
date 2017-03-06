@@ -16,19 +16,19 @@
         @Html.TextBoxFor(x => Model.SoVanBan, htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.SoVanBan)
     </div>
-    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="clearfix"></div>
     <div class="col-sm-12">
         <label>Nội dung văn bản<span class="required">*</span></label>
         @Html.TextAreaFor(x => Model.NoiDungVanBan, htmlAttributes: new { @class = "form-control", rows = 10 })
         @Html.ValidationMessageFor(x => x.NoiDungVanBan)
     </div>
-    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="clearfix"></div>
     <div class="col-sm-12">
         <label>Trích yếu văn bản<span class="required">*</span></label>
         @Html.TextAreaFor(x => Model.TrichYeuVanBan, htmlAttributes: new { @class = "form-control", rows = 5 })
         @Html.ValidationMessageFor(x => x.TrichYeuVanBan)
     </div>
-    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="clearfix"></div>
     <div class="col-sm-4">
         <label>Cơ quan ban hành<span class="required">*</span></label>
         @Html.DropDownListFor(x => Model.CoQuanBanhHanhVanBanId, new SelectList(Model.CoQuanBanHanhVanBanInfos, "Id", "Name"), "Chọn cơ quan ban hành", htmlAttributes: new { @class = "form-control" })
@@ -44,7 +44,7 @@
         @Html.DropDownListFor(x => Model.LinhVucVanBanId, new SelectList(Model.LinhVucVanBanInfos, "Id", "Name"), "Chọn lĩnh vực văn bản", htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.LinhVucVanBanId)
     </div>
-    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="clearfix" ></div>
     <label class="col-sm-12">Các tập tin đính kèm</label>
     <div class="col-sm-12">
         @Html.TextBoxFor(x => x.Files, htmlAttributes: new { type = "file", multiple = "true", @class = "form-control btn btn-info pull-left", style = "max-width:300px;" })
@@ -53,7 +53,7 @@
         @{ Html.RenderPartial("_PartialPageFiles", Model.TapTinVanBanResults); }
     </div>
 
-    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="clearfix" ></div>
     <div id="outer" class="col-xs-12">
         <div class="inner">
             <input type="submit" class="btn btn-primary btn-width-md" value="Cập nhật" />

@@ -16,13 +16,14 @@
         @Html.TextBoxFor(x => Model.TenThuTuc, htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.TenThuTuc)
     </div>
-    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="clearfix"></div>
     <div class="col-sm-12">
         <label>Nội dung<span class="required">*</span></label>
-        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 5 })
-        @Html.ValidationMessageFor(x => x.NoiDung)
+        @Html.EditorFor(x => Model.NoiDung)
+        @*@Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 5 })
+        @Html.ValidationMessageFor(x => x.NoiDung)*@
     </div>
-    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="clearfix"></div>
     <div class="col-sm-6">
         <label>Cơ quan thực hiện<span class="required">*</span></label>
         @Html.DropDownListFor(x => Model.CoQuanThucHienId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Chọn cơ quan thực hiện", htmlAttributes: new { @class = "form-control" })
@@ -33,12 +34,14 @@
         @Html.DropDownListFor(x => Model.LinhVucThuTucId, new SelectList(Model.LinhVucThuTucInfo, "Id", "Name"), "Chọn lĩnh vực thủ tục", htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.LinhVucThuTucId)
     </div>
-    <div class="clearfix" style="padding-bottom:15px;"></div>
+    <div class="clearfix"></div>
     <label class="col-sm-12">Các tập tin đính kèm</label>
     <div class="col-sm-12">
         @Html.TextBoxFor(x => x.Files, htmlAttributes: new { type = "file", multiple = "true", @class = "form-control btn btn-info pull-left", style = "max-width:300px;" })
     </div>
-    <div class="clearfix" style="padding-bottom:15px;"></div>
+
+    
+    <div class="clearfix"></div>
     <div id="outer" class="col-xs-12">
         <div class="inner">
             <input type="submit" class="btn btn-primary btn-width-md" value="Thêm mới" />

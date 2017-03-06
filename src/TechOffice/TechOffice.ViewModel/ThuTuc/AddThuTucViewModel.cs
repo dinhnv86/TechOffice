@@ -3,11 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AnThinhPhat.ViewModel.ThuTuc
 {
     public class AddThuTucViewModel: ThuTucViewModel
     {
+        [AllowHtml]
+        [UIHint("tinymce_full_compressed")]
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_NoiDung"), ErrorMessageResourceType = typeof(Resources.Messages))]
         public string NoiDung { get; set; }
 
