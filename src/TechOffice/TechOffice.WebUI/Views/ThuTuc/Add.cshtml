@@ -19,9 +19,7 @@
     <div class="clearfix"></div>
     <div class="col-sm-12">
         <label>Nội dung<span class="required">*</span></label>
-       
         @Html.TextAreaFor(x => Model.NoiDung, new { @id = "ckeContent" })
-       
     </div>
     <div class="clearfix"></div>
     <div class="col-sm-6">
@@ -40,14 +38,13 @@
         @Html.TextBoxFor(x => x.Files, htmlAttributes: new { type = "file", multiple = "true", @class = "form-control btn btn-info pull-left", style = "max-width:300px;" })
     </div>
 
-    
+
     <div class="clearfix"></div>
     <div id="outer" class="col-xs-12">
         <div class="inner">
             <input type="submit" class="btn btn-primary btn-width-md" value="Thêm mới" />
         </div>
         <div class="inner">
-            @*<input type="button" class="btn btn-primary btn-width-md" value="Hủy" />*@
             @Html.RouteLink("Hủy", UrlLink.THUTUC, null, htmlAttributes: new { @class = "btn btn-primary btn-width-md" })
         </div>
     </div>
@@ -55,8 +52,9 @@
 
 @section Scripts{
     <script src="~/Scripts/app/format-datetime.js"></script>
-}<script src="~/Plugin/ckeditor/ckeditor.js"></script>
-<script src="~/Plugin/ckeditor/adapters/jquery.js"></script>
-<script type="text/javascript">
-    CKEDITOR.replace("ckeContent");
-</script>
+    <script src="~/Plugin/ckeditor/ckeditor.js"></script>
+    <script src="~/Plugin/ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace("ckeContent");
+    </script>
+}

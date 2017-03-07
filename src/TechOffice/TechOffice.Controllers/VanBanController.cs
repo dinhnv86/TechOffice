@@ -33,15 +33,33 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public ITapTinVanBanRepository FilesRepository { get; set; }
 
-        public ActionResult Index(int? linhVucVanBanId, int? coQuanBanHanhVanBanId, int? namBanHanhId, int pagingNumberId = 20,
-            string tenVanBan = "",
-            bool timTrongSoHieu = false,
-            bool timTrongTrichYeu = false,
-            bool timTrongNoiDung = false)
+        //public ActionResult Index(int? linhVucVanBanId, int? loaiVanBan, int? coQuanBanHanhVanBanId, int? namBanHanhId, int pagingNumberId = 20,
+        //    string tenVanBan = "",
+        //    bool timTrongSoHieu = false,
+        //    bool timTrongTrichYeu = false,
+        //    bool timTrongNoiDung = false)
+        //{
+        //    var model = CreateVanBanModel(linhVucVanBanId,
+        //        loaiVanBan,
+        //        coQuanBanHanhVanBanId,
+        //        namBanHanhId,
+        //        pagingNumberId,
+        //        tenVanBan,
+        //        timTrongSoHieu,
+        //        timTrongTrichYeu,
+        //        timTrongNoiDung);
+        //    return View(model);
+        //}
+        public ActionResult Index(int?[] linhVucVanBanIds, int?[] loaiVanBanIds, int?[] coQuanBanHanhVanBanIds, int?[] namBanHanhIds, int pagingNumberId = 20,
+           string tenVanBan = "",
+           bool timTrongSoHieu = false,
+           bool timTrongTrichYeu = false,
+           bool timTrongNoiDung = false)
         {
-            var model = CreateVanBanModel(linhVucVanBanId,
-                coQuanBanHanhVanBanId,
-                namBanHanhId,
+            var model = CreateVanBanModel(linhVucVanBanIds,
+                loaiVanBanIds,
+                coQuanBanHanhVanBanIds,
+                namBanHanhIds,
                 pagingNumberId,
                 tenVanBan,
                 timTrongSoHieu,
@@ -179,25 +197,65 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
-        private InitVanBanViewModel CreateVanBanModel(int? linhVucVanBanId = null,
-            int? coQuanBanHanhVanBanId = null,
-            int? namBanHanhId = null,
-            int pagingNumberId = 20,
-            string tenVanBan = "",
-            bool timTrongSoHieu = false,
-            bool timTrongTrichYeu = false,
-            bool timTrongNoiDung = false)
+        //private InitVanBanViewModel CreateVanBanModel(int? linhVucVanBanId = null,
+        //    int? loaiVanBan = null,
+        //    int? coQuanBanHanhVanBanId = null,
+        //    int? namBanHanhId = null,
+        //    int pagingNumberId = 20,
+        //    string tenVanBan = "",
+        //    bool timTrongSoHieu = false,
+        //    bool timTrongTrichYeu = false,
+        //    bool timTrongNoiDung = false)
+        //{
+        //    var model = new InitVanBanViewModel
+        //    {
+        //        CoQuanBanHanhVanBanInfos = CoQuanBanHanhVanBanRepository.GetAll().Select(x => x.ToDataInfo()),
+        //        LinhVucVanBanInfos = LinhVucVanRepository.GetAll().Select(x => x.ToDataInfo()),
+        //        LoaiVanBanInfos = LoaiVanBanRepository.GetAll().Select(x => x.ToDataInfo()),
+
+        //        ValueSearch = new ValueSearchViewModel
+        //        {
+        //            LinhVucVanBanId = linhVucVanBanId,
+        //            LoaiVanBanId = loaiVanBan,
+        //            CoQuanBanHanhVanBanId = coQuanBanHanhVanBanId,
+        //            NamBanHanhId = namBanHanhId,
+        //            PagingNumberId = pagingNumberId,
+        //            TenVanBan = tenVanBan,
+        //            TimTrongNoiDung = timTrongNoiDung,
+        //            TimTrongSoHieu = timTrongSoHieu,
+        //            TimTrongTrichYeu = timTrongTrichYeu,
+        //            Page = 1,
+        //        },
+        //        CoQuanBanHanhVanBanId = coQuanBanHanhVanBanId,
+        //        LinhVucVanBanId = linhVucVanBanId,
+        //    };
+
+        //    return model;
+        //}
+
+
+        private InitVanBanViewModel CreateVanBanModel(int?[] linhVucVanBanIds = null,
+           int?[] loaiVanBans = null,
+           int?[] coQuanBanHanhVanBanIds = null,
+           int?[] namBanHanhIds = null,
+           int pagingNumberId = 20,
+           string tenVanBan = "",
+           bool timTrongSoHieu = false,
+           bool timTrongTrichYeu = false,
+           bool timTrongNoiDung = false)
         {
             var model = new InitVanBanViewModel
             {
                 CoQuanBanHanhVanBanInfos = CoQuanBanHanhVanBanRepository.GetAll().Select(x => x.ToDataInfo()),
                 LinhVucVanBanInfos = LinhVucVanRepository.GetAll().Select(x => x.ToDataInfo()),
+                LoaiVanBanInfos = LoaiVanBanRepository.GetAll().Select(x => x.ToDataInfo()),
 
                 ValueSearch = new ValueSearchViewModel
                 {
-                    LinhVucVanBanId = linhVucVanBanId,
-                    CoQuanBanHanhVanBanId = coQuanBanHanhVanBanId,
-                    NamBanHanhId = namBanHanhId,
+                    LinhVucVanBanIds = linhVucVanBanIds,
+                    LoaiVanBanIds = loaiVanBans,
+                    CoQuanBanHanhVanBanIds = coQuanBanHanhVanBanIds,
+                    NamBanHanhIds = namBanHanhIds,
                     PagingNumberId = pagingNumberId,
                     TenVanBan = tenVanBan,
                     TimTrongNoiDung = timTrongNoiDung,
@@ -205,8 +263,8 @@ namespace AnThinhPhat.WebUI.Controllers
                     TimTrongTrichYeu = timTrongTrichYeu,
                     Page = 1,
                 },
-                CoQuanBanHanhVanBanId = coQuanBanHanhVanBanId,
-                LinhVucVanBanId = linhVucVanBanId,
+                CoQuanBanHanhVanBanIds = coQuanBanHanhVanBanIds,
+                LinhVucVanBanIds = linhVucVanBanIds,
             };
 
             return model;
@@ -226,17 +284,29 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             var seachAll = VanBanRepository.GetAll();
 
-            if (model.CoQuanBanHanhVanBanId.HasValue)
-                seachAll = seachAll.Where(x => x.CoQuanBanHanhId == model.CoQuanBanHanhVanBanId);
+            //if (model.CoQuanBanHanhVanBanId.HasValue)
+            //    seachAll = seachAll.Where(x => x.CoQuanBanHanhId == model.CoQuanBanHanhVanBanId);
 
-            if (model.LoaiVanBanId.HasValue)
-                seachAll = seachAll.Where(x => x.LoaiVanBanId == model.LoaiVanBanId);
+            //if (model.LoaiVanBanId.HasValue)
+            //    seachAll = seachAll.Where(x => x.LoaiVanBanId == model.LoaiVanBanId);
 
-            if (model.LinhVucVanBanId.HasValue)
-                seachAll = seachAll.Where(x => x.LinhVucVanBanId == model.LinhVucVanBanId);
+            //if (model.LinhVucVanBanId.HasValue)
+            //    seachAll = seachAll.Where(x => x.LinhVucVanBanId == model.LinhVucVanBanId);
 
-            if (model.NamBanHanhId.HasValue)
-                seachAll = seachAll.Where(x => x.NgayBanHanh.Year == model.NamBanHanhId);
+            //if (model.NamBanHanhId.HasValue)
+            //    seachAll = seachAll.Where(x => x.NgayBanHanh.Year == model.NamBanHanhId);
+
+            if (model.CoQuanBanHanhVanBanIds != null && model.CoQuanBanHanhVanBanIds.Any())
+                seachAll = seachAll.Where(x => model.CoQuanBanHanhVanBanIds.Any(y => y == x.CoQuanBanHanhId));
+
+            if (model.LoaiVanBanIds != null && model.LoaiVanBanIds.Any())
+                seachAll = seachAll.Where(x => model.LoaiVanBanIds.Any(y => y == x.LoaiVanBanId));
+
+            if (model.LinhVucVanBanIds != null && model.LinhVucVanBanIds.Any())
+                seachAll = seachAll.Where(x => model.LinhVucVanBanIds.Any(y => y == x.LinhVucVanBanId));
+
+            if (model.NamBanHanhIds != null && model.NamBanHanhIds.Any())
+                seachAll = seachAll.Where(x => model.NamBanHanhIds.Any(y => y == x.NgayBanHanh.Year));
 
             if (!string.IsNullOrEmpty(model.TenVanBan))
             {

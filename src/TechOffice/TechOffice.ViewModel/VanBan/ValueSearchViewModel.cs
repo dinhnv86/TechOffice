@@ -4,11 +4,19 @@
     {
         public int? LoaiVanBanId { get; set; }
 
+        public int?[] LoaiVanBanIds { get; set; }
+
         public int? LinhVucVanBanId { get; set; }
+
+        public int?[] LinhVucVanBanIds { get; set; }
 
         public int? CoQuanBanHanhVanBanId { get; set; }
 
+        public int?[] CoQuanBanHanhVanBanIds { get; set; }
+
         public int? NamBanHanhId { get; set; }
+
+        public int?[] NamBanHanhIds { get; set; }
 
         public int PagingNumberId { get; set; } = 20;
 
