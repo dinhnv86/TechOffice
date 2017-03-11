@@ -108,7 +108,7 @@ a {
 }
 
 .navbar {
-    border-radius: 0 !important;
+    border-radius: 0 !important;margin-bottom:0px;min-height:30px;
 }
 
 .menu_top li {
@@ -127,7 +127,7 @@ a {
     padding: 0;
     height: 83px;
 }
-
+.navbar-toggle{margin-bottom:0px; margin-top:0px;}
 
 
 .dropdown .dropdown-menu .dropdown a {
@@ -146,6 +146,8 @@ a {
     text-shadow: none;
     background: url("../images/space_menu.png") no-repeat scroll right center transparent;
     font-size: 15px;
+    padding-top: 10px;
+padding-bottom: 10px;
 }
 
 
@@ -299,7 +301,7 @@ a {
     .title span {
         background: none repeat scroll 0% 0% #e13333;
         color: #fff;
-        padding: 5px 22px 5px 5px;
+        padding: 13px 15px 5px 15px;
         border-radius: 5px 5px 0px 0px;
         font-size: 13px;
     }
@@ -821,6 +823,7 @@ table.tblprice {
 
 .clearfix:after {
     clear: both;
+    margin-bottom:10px;
 }
 
 .inf1 h3 {
@@ -909,9 +912,9 @@ table.tblprice {
                 margin: 0px 0px 0px 10px;
                 line-height: 19px;
             }
-
+/*
 border:1px solid #3b3b3b !important;color:#fff
-}
+}*/
 
 .lin {
     border-top: 1px solid #c5c5c5;
@@ -1067,7 +1070,10 @@ border:1px solid #3b3b3b !important;color:#fff
     }
 
     .container {
-        padding-top: 20px;
+       /* padding-top: 20px;*/       
+    }
+    #header .container {
+         margin-bottom:0px;       
     }
 
     .nav-collapse.collapse {
@@ -1099,7 +1105,7 @@ border:1px solid #3b3b3b !important;color:#fff
     }
 
     .logo_mobi {
-        display: block;
+        display: none;
         float: left;
         width: 100%;
         text-align: center;
@@ -1436,9 +1442,11 @@ border:1px solid #3b3b3b !important;color:#fff
 .search_head input[type=text]{float:left; width:70%; }
 .search_head input[type=button]{float:left; width:30%; padding:0;   }
 
+
 @media (max-width:1200px)
 {
 	.bg_menu{width:900px;}
+    
 }
 
 @media (max-width:1024px)
@@ -1891,10 +1899,8 @@ border:1px solid #3b3b3b !important;color:#fff
     .uneditable-input.span1 {
         width: 28px;
     }
-
+    #header_bg a#link_home{display:none;}
     .logo_mobi {
-        display: block;
-        background: url("../images/menu_ngang.jpg") no-repeat scroll left center transparent;
         float: left;
         width: 100%;
         text-align: center;
@@ -2083,18 +2089,12 @@ border:1px solid #3b3b3b !important;color:#fff
             display: none;
         }
 
-    .logo_mobi {
-        display: block;
-        background: url("../images/menu_ngang.jpg") repeat scroll left center transparent;
-    }
+    
 
-        .logo_mobi img {
-        }
+        
 
     .navbar {
         position: relative;
-        min-height: 50px;
-        margin-bottom: 20px;
         border: 1px solid transparent;
         background: none repeat scroll 0% 0% transparent;
     }
@@ -3155,7 +3155,6 @@ nav.navbar.navbar-default {
     }
 
     .sbar {
-        background: #f2f2f2;
         border: 1px solid #ccc;
         border-bottom: 0px solid #ccc;
         box-sizing: border-box;
@@ -3429,7 +3428,9 @@ nav.navbar.navbar-default {
 .clear {
     clear: both;
 }
-
+.form-control{height:26px; padding:4px 10px}
+label{margin-bottom:0px;}
+.btn{padding:4px;}
 input, select, textarea {
     -ms-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -3444,6 +3445,7 @@ input, select, textarea {
     input[type="text"] {
         border: solid 1px #dcdcdc;
         transition: box-shadow 0.3s, border 0.3s;
+        
     }
 
         input[type="text"]:focus,

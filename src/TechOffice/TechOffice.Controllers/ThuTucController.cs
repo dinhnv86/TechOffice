@@ -1,21 +1,25 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using AnThinhPhat.Entities;
+﻿using AnThinhPhat.Entities;
+using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
+using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel.ThuTuc;
 using Ninject;
 using PagedList;
-using AnThinhPhat.Utilities;
-using AnThinhPhat.Entities.Results;
-using System.Collections.Generic;
-using System.Web;
-using System.IO;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
     public class ThuTucController : OfficeController
     {
+        private IEnumerable<LinhVucThuTucResult> _listLinhVucThuTuc;
+
         [Inject]
         public ILinhVucThuTucRepository LinhVucThuTucRepository { get; set; }
 
@@ -38,8 +42,7 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
-        [HttpGet]
-        [Authorize]
+        [HttpGet, Authorize]
         public ActionResult Add()
         {
             var init = IniViewModel();
@@ -52,8 +55,7 @@ namespace AnThinhPhat.WebUI.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [Authorize]
+        [HttpPost, Authorize]
         public ActionResult Add(AddThuTucViewModel model)
         {
             var dataSave = new ThuTucResult
@@ -62,7 +64,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 TenThuTuc = model.TenThuTuc,
                 NgayBanHanh = model.NgayBanHanh,
                 LoaiThuTucId = model.LinhVucThuTucId,
-                CoQuanThucHienId = model.CoQuanThucHienId,
+                CoQuanThucHienIds = model.CoQuanThucHienIds,
                 CreatedBy = UserName,
             };
 
@@ -83,7 +85,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 var init = IniViewModel();
                 var model = new EditThuTucViewModel
                 {
-                    CoQuanThucHienId = data.CoQuanThucHienId,
+                    CoQuanThucHienIds = data.CoQuanThucHienIds,
                     LinhVucThuTucId = data.LoaiThuTucId,
                     NgayBanHanh = data.NgayBanHanh,
                     NoiDung = data.NoiDung,
@@ -101,7 +103,7 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             var data = ThuTucRepository.Single(id);
             data.LoaiThuTucId = model.LinhVucThuTucId;
-            data.CoQuanThucHienId = model.CoQuanThucHienId;
+            data.CoQuanThucHienIds = model.CoQuanThucHienIds;
             data.NoiDung = model.NoiDung;
             data.NgayBanHanh = data.NgayBanHanh;
             data.TenThuTuc = model.TenThuTuc;
@@ -111,15 +113,56 @@ namespace AnThinhPhat.WebUI.Controllers
             if (result == Services.SaveResult.SUCCESS)
                 SaveFiles(id, model.Files);
 
-            return RedirectToRoute(UrlLink.VANBAN);
+            return RedirectToRoute(UrlLink.THUTUC);
         }
 
         public ActionResult List(ValueSearchViewModel search)
         {
+            if (search.CoQuanId != null)
+            {
+                search.CoQuanThucHienIds = new int?[]
+                {
+                search.CoQuanId,
+                };
+            }
+
             return ExecuteWithErrorHandling(() =>
             {
                 var model = Find(search);
                 return PartialView("_PartialPageList", model);
+            });
+        }
+
+        [Authorize]
+        public ActionResult ViewThuTuc()
+        {
+            return View();
+        }
+
+        public ActionResult ViewList(int? page)
+        {
+            return ExecuteWithErrorHandling(() =>
+            {
+                var model = Find(new ValueSearchViewModel
+                {
+                    Page = page ?? 1
+                });
+                return PartialView("_ViewList", model);
+            });
+        }
+
+        [Authorize, HttpPost, ActionName("Delete")]
+        public async Task<JsonResult> DeleteConfirmed(int id)
+        {
+            return await ExecuteWithErrorHandling(async () =>
+            {
+                if (id == 0)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json("Bad Request", JsonRequestBehavior.AllowGet);
+                }
+
+                return await ExecuteResultAsync(async () => await ThuTucRepository.DeleteByAsync(id));
             });
         }
 
@@ -154,8 +197,8 @@ namespace AnThinhPhat.WebUI.Controllers
             if (!string.IsNullOrEmpty(model.ThuTucCongViec))
                 seachAll = seachAll.Where(x => x.TenThuTuc.Contains(model.ThuTucCongViec));
 
-            if (model.CoQuanId.HasValue)
-                seachAll = seachAll.Where(x => x.CoQuanThucHienId == model.CoQuanId);
+            if (model.CoQuanThucHienIds != null && model.CoQuanThucHienIds.Any())
+                seachAll = seachAll.Where(x => x.CoQuanThucHienIds.Any(y => y == model.CoQuanId));
 
             if (model.LinhVucThuTucId.HasValue)
                 seachAll = seachAll.Where(x => x.LoaiThuTucId == model.LinhVucThuTucId);
@@ -165,10 +208,16 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private ThuTucViewModel IniViewModel()
         {
+            _listLinhVucThuTuc = LinhVucThuTucRepository.GetAll().OrderByDescending(x => x.Id);
+            _listLinhVucThuTuc.ToList().ForEach(x =>
+            {
+                x.Ten = string.Format("{0}{1}", GetNameMultiple(x), x.Ten);
+            });
+
             var data = new ThuTucViewModel
             {
                 CoQuanInfos = CoQuanRepository.GetAll().Select(x => x.ToDataInfo()),
-                LinhVucThuTucInfo = LinhVucThuTucRepository.GetAll().Select(x => x.ToDataInfo()),
+                LinhVucThuTucInfo = _listLinhVucThuTuc.OrderBy(x=>x.Id).Select(x => x.ToDataInfo()),
             };
 
             return data;
@@ -180,7 +229,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 foreach (var file in files)
                 {
-                    var path = SaveFilesThuTuc(file, id);
+                    SaveFilesThuTuc(file, id);
                     FilesRepository.Add(new TapTinThuTucResult
                     {
                         ThuTucId = id,
@@ -192,20 +241,21 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
-        private string SaveFilesThuTuc(HttpPostedFileBase file, int vanBanId)
+        private void SaveFilesThuTuc(HttpPostedFileBase file, int vanBanId)
         {
             var folderVanBan = EnsureFolderThuTuc(vanBanId);
-            string savedFileName = Path.Combine(folderVanBan, Path.GetFileName(file.FileName));
-            try
+            if (file.FileName != null)
             {
-                file.SaveAs(savedFileName); // Save the file
+                var savedFileName = Path.Combine(folderVanBan, Path.GetFileName(file.FileName));
+                try
+                {
+                    file.SaveAs(savedFileName); // Save the file
+                }
+                catch (Exception ex)
+                {
+                    LogService.Error($"Has error in while save file {file.FileName}", ex);
+                }
             }
-            catch (Exception ex)
-            {
-                LogService.Error(string.Format("Has error in while save file {0}", file.FileName), ex);
-            }
-
-            return folderVanBan;
         }
 
         private string EnsureFolderThuTuc(int id)
@@ -213,10 +263,10 @@ namespace AnThinhPhat.WebUI.Controllers
             try
             {
                 //1. Get folder upload
-                string folderUpload = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_TT);
+                var folderUpload = Server.MapPath(TechOfficeConfig.FOLDER_UPLOAD_TT);
                 EnsureFolder(folderUpload);
 
-                string folderThuTuc = Path.Combine(folderUpload, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
+                var folderThuTuc = Path.Combine(folderUpload, id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR));
                 EnsureFolder(folderThuTuc);
 
                 return folderThuTuc;
@@ -232,6 +282,23 @@ namespace AnThinhPhat.WebUI.Controllers
         {
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
+        }
+
+        private string GetNameMultiple(LinhVucThuTucResult thutuc)
+        {
+            var result = string.Empty;
+
+            if (thutuc == null)
+                return string.Empty;
+
+            if (thutuc.ParentId == 0)
+                return result;
+
+            var temp = _listLinhVucThuTuc.Where(x => x.Id == thutuc.ParentId).SingleOrDefault();
+
+            result = GetNameMultiple(temp) + String.Format("{0}", "\xA0\xA0\xA0\xA0\xA0");
+
+            return result;
         }
     }
 }

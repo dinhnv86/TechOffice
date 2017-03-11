@@ -12,7 +12,6 @@
         HttpMethod = "GET"
     };
 }
-<link href="~/Content/main.css" rel="stylesheet" />
 
 <div id="tblMST" class="table-responsive">
     <table class="table table-bordered">
@@ -24,7 +23,7 @@
                 <th class="text-center col-xs-2">Chức vụ</th>
                 <th class="text-center col-xs-2">Người tạo</th>
                 <th class="text-center col-xs-2">Ngày tạo</th>
-                <th class="text-center col-action"></th>
+                <th></th>
             </tr>
         </thead>
         @if (Model.Count > 0)
@@ -50,19 +49,19 @@
                             }
                         </td>
                         <td>
-                            @if (item.LastUpdated.HasValue)
-                            {
-                                @Html.DisplayFor(x => item.LastUpdated, "DisplayDateTime")
-                            }
-                            else
-                            {
-                                @Html.DisplayFor(x => item.CreateDate, "DisplayDateTime")
-                            }
+                            @(item.LastUpdated.HasValue ? Html.DisplayFor(x => item.LastUpdated, "DisplayDate") : Html.DisplayFor(x => item.CreateDate, "DisplayDate"))
                         </td>
                         <td class="link-action">
                             @Html.RouteLink("Sửa", UrlLink.USERS_EDIT, routeValues: new { id = item.Id }, htmlAttributes: new { @class = "btn-edit" })
-                            @*|
-                                <a href="#" data-url='@Url.Action("Delete", new {id = item.Id})' id="lnkDelete_@item.Id" data-toggle="popover">Delete</a>*@
+                            |
+                            @if (item.IsLocked)
+                            {
+                                <a href="#" data-url='@Url.Action("Unlock", new {id = item.Id})' id="lnkLock_@item.Id" data-toggle="popover">Unlock</a>
+                            }
+                            else
+                            {
+                                <a href="#" data-url='@Url.Action("Lock", new {id = item.Id})' id="lnkLock_@item.Id" data-toggle="popover">Lock</a>
+                            }
                         </td>
                     </tr>
                 }

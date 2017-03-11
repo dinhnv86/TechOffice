@@ -1,100 +1,12 @@
-﻿<div class="supp">
+﻿@*@{ Html.RenderPartial("~/Views/Shared/Menu/MenuSearch.cshtml");}*@
 
-    <h3 class="sbar">
-        <a href="">Tìm kiếm</a>
-        <div class="btn_down btn_down_sp"><i class="fa fa-chevron-down"></i></div>
-    </h3>
-    <div class="menu_products bgsitebar1">
-        <div class="search_head">
-            <input type="text" id="dbb" /><input type="button" value="Tìm kiếm" />
-            <div class="clear"></div>
-        </div>
-    </div>
-</div>
+@{ Html.RenderAction("MenuDanhMuc", "Home"); }
 
-<div class="supp">
-    <h3 class="sbar">
-        <a href="" class="title_sbar">Danh mục</a>
-        <div class="btn_down btn_down_sp">
-            <i class="fa fa-chevron-down"></i>
-        </div>
-    </h3>
-    <div class="menu_products">
-        <ul id="menu_left">
-            <li>
-                <a href="#">Đào tạo</a>
-            </li>
-            <li>
-                <a href="#">Khen thưởng</a>
-            </li>
-            <li>
-                <a href="#">Thanh tra</a>
-            </li>
-            <li>
-                <a href="#">Tôn giáo</a>
-            </li>
-        </ul>
-    </div>
-</div>
+@*@{ Html.RenderPartial("~/Views/Shared/Menu/NewsHighlight.cshtml");}*@
 
-<div class="supp hidemobile">
-    <h3 class="sbar">
-        <a href="tin-tuc">Thông báo</a>
-        <div class="btn_down btn_down_news">
-            <i class="fa fa-chevron-down"></i>
-        </div>
-    </h3>
-    <div class="bgsitebar1 news_new">
-        <ul id="menu_dl">
-
-            <li style="height: auto;">
-                <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
-                <span style="float: left; width: 68px;">2016-07-25</span>
-                <a style="width: 148px;" href="#">Phòng nội vụ </a>
-                <div class="clear"></div>
-            </li>
-            <li style="height: auto;">
-                <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
-                <span style="float: left; width: 68px;">2016-07-25</span>
-                <a style="width: 148px;" href="#">Phòng nội vụ </a>
-                <div class="clear"></div>
-            </li>
-            <li style="height: auto;">
-                <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
-                <span style="float: left; width: 68px;">2016-07-25</span>
-                <a style="width: 148px;" href="#">Phòng nội vụ </a>
-                <div class="clear"></div>
-            </li>
-            <li style="height: auto;">
-                <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
-                <span style="float: left; width: 68px;">2016-07-25</span>
-                <a style="width: 148px;" href="#">Phòng nội vụ </a>
-                <div class="clear"></div>
-            </li>
-
-        </ul>
-    </div>
-</div>
 <div class="clearfix"></div>
 
-<div class="supp">
-    <div class="bgsitebar">
-        <img src="~/images/hoctap_lamtheoguongbacsv.jpg" alt="Hỗ trợ Phòng nội vụ">
-    </div>
-
-</div>
-
-<div class="supp">
-    <div class="bgsitebar">
-        <img src="~/images/bien dao que huong_1369814865500.jpg" alt="Hỗ trợ Phòng nội vụ">
-    </div>
-</div>
-
-<div class="supp">
-    <div class="bgsitebar">
-        <img src="~/images/nong-thon-moi_1369815473656.jpg" alt="Hỗ trợ Phòng nội vụ">
-    </div>
-</div>
+@{ Html.RenderPartial("~/Views/Shared/Menu/MenuPhoto.cshtml");}
 
 @{Html.RenderPartial("_PartialPageCounterUser"); }
 

@@ -7,7 +7,6 @@
     AjaxOptions ajaxOption = new AjaxOptions
     {
         HttpMethod = "POST",
-        //Url = Url.Action("Contact"),
         OnBegin = "onFeedbackBegin",
         OnComplete = "onFeedbackComplete",
         OnSuccess = "onFeedbackiSuccess",
@@ -48,7 +47,7 @@
                 <label>Tiêu đề<span class="required">*</span></label>
                 <div>
                     @Html.TextBoxFor(x => Model.Title, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => Model.Email)
+                    @Html.ValidationMessageFor(x => Model.Title)
                 </div>
             </div>
 

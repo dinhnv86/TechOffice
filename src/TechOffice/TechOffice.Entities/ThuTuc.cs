@@ -18,13 +18,13 @@ namespace AnThinhPhat.Entities
         public ThuTuc()
         {
             this.TapTinThuTucs = new HashSet<TapTinThuTuc>();
+            this.ThuTuc_CoQuanThucHien = new HashSet<ThuTuc_CoQuanThucHien>();
         }
     
         public int Id { get; set; }
         public string NoiDung { get; set; }
         public Nullable<System.DateTime> NgayBanHanh { get; set; }
         public string TenThuTuc { get; set; }
-        public int CoQuanThucHienId { get; set; }
         public int LoaiThuTucId { get; set; }
         public bool IsDeleted { get; set; }
         public System.DateTime CreateDate { get; set; }
@@ -32,9 +32,10 @@ namespace AnThinhPhat.Entities
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
     
-        public virtual CoQuan CoQuan { get; set; }
         public virtual LinhVucThuTuc LinhVucThuTuc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TapTinThuTuc> TapTinThuTucs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThuTuc_CoQuanThucHien> ThuTuc_CoQuanThucHien { get; set; }
     }
 }

@@ -77,7 +77,7 @@ namespace AnThinhPhat.Utilities
             if (first == null || second == null)
                 return false;
 
-            return CompareDate(first, second);
+            return CompareDate(first.Value, second.Value);
         }
 
         public static bool CompareDate(this DateTime first, DateTime second)

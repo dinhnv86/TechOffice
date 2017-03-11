@@ -8,6 +8,8 @@
 
         public int? CoQuanId { get; set; }
 
+        public int?[] CoQuanThucHienIds { get; set; }
+
         public int? LinhVucThuTucId { get; set; }
     }
 }

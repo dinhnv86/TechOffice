@@ -49,11 +49,11 @@
                         <td>
                             @if (item.LastUpdated.HasValue)
                             {
-                                @Html.DisplayFor(x => item.LastUpdated, "DisplayDateTime")
+                                @Html.DisplayFor(x => item.LastUpdated, "DisplayDate")
                             }
                             else
                             {
-                                @Html.DisplayFor(x => item.CreateDate, "DisplayDateTime")
+                                @Html.DisplayFor(x => item.CreateDate, "DisplayDate")
                             }
                         </td>
                         <td class="link-action">

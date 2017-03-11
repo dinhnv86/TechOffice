@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Thêm mới</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
   <data name="CongViec_Add_Cancel" xml:space="preserve">
     <value>Hủy</value>
   </data>
@@ -176,6 +182,9 @@
   </data>
   <data name="CongViec_Statistic_Tim" xml:space="preserve">
     <value>Tìm</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Lưu</value>
   </data>
   <data name="UploadFiles_Upload" xml:space="preserve">
     <value>Upload</value>

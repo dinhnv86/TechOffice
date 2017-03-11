@@ -1,8 +1,10 @@
 ﻿@model AnThinhPhat.ViewModel.ThuTuc.EditThuTucViewModel
 
 @{
-    Layout = "~/Views/Shared/_LayoutVanBan.cshtml";
+    Layout = "~/Views/Shared/_LayoutThuTuc.cshtml";
 }
+
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
 
 @using (Html.BeginForm("Edit", "ThuTuc", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -12,12 +14,6 @@
         @Html.ValidationMessageFor(x => x.NgayBanHanh)
     </div>
     <div class="col-sm-6">
-        <label>Ngày ban hành<span class="required">*</span></label>
-        @Html.EditorFor(x => Model.NgayBanHanh, "DateTime")
-        @Html.ValidationMessageFor(x => x.NgayBanHanh)
-    </div>
-    <div class="clearfix" style="padding-bottom:15px;"></div>
-    <div class="col-sm-12">
         <label>Tên thủ tục<span class="required">*</span></label>
         @Html.TextBoxFor(x => Model.TenThuTuc, htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.TenThuTuc)
@@ -25,14 +21,14 @@
     <div class="clearfix" style="padding-bottom:15px;"></div>
     <div class="col-sm-12">
         <label>Nội dung thủ tục<span class="required">*</span></label>
-        @Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", rows = 5 })
-        @Html.ValidationMessageFor(x => x.NoiDung)
+        @Html.EditorFor(x => Model.NoiDung, "RichEditor")
     </div>
     <div class="clearfix" style="padding-bottom:15px;"></div>
-    <div class="col-sm-4">
+    <div class="col-sm-6">
         <label>Cơ quan thực hiện<span class="required">*</span></label>
-        @Html.DropDownListFor(x => Model.CoQuanThucHienId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Chọn cơ quan thực hiện", htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.CoQuanThucHienId)
+        @*@Html.DropDownListFor(x => Model.CoQuanThucHienId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Chọn cơ quan thực hiện", htmlAttributes: new { @class = "form-control" })*@
+        @Html.ListBoxFor(x => Model.CoQuanThucHienIds, new MultiSelectList(Model.CoQuanInfos, "Id", "Name"), htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CoQuanThucHienIds)
     </div>
     <div class="col-sm-6">
         <label>Lĩnh vực thủ tục<span class="required">*</span></label>
@@ -59,4 +55,14 @@
 @section Scripts{
     <script src="~/Scripts/app/format-datetime.js"></script>
     <script src="~/Scripts/app/vanban-add.js"></script>
+    <script src="~/Scripts/bootstrap-multiselect.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#CoQuanThucHienIds').multiselect({
+                includeSelectAllOption: true
+            });
+            $('.btn-group').css("width", "100%");
+            $('.btn-group > button, .btn-group > ul').css("width", "100%");
+        });
+    </script>
 }

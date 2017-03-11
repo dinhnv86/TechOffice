@@ -9,10 +9,9 @@
                     @if (User.IsInRole("SupperAdmin") || (User.IsInRole("Admin")))
                     {
                         <li>
-                            <a href="@Url.RouteUrl(UrlLink.ADMIN)">
-                                Quản trị
-                            </a>
+                            <a href="@Url.RouteUrl(UrlLink.ADMIN)"> Quản trị </a>
                         </li>
+                        //Html.RenderPartial("~/Views/Shared/Menu/MenuAdmin.cshtml");
                     }
                     else
                     {
