@@ -22,7 +22,7 @@ namespace AnThinhPhat.ViewModel.ThuTuc
         public string TenThuTuc { get; set; }
 
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_CoQuanThucHien"), ErrorMessageResourceType = typeof(Resources.Messages))]
-        public int CoQuanThucHienId { get; set; }
+        public int[] CoQuanThucHienIds { get; set; }
 
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_LinhVucThuTuc"), ErrorMessageResourceType = typeof(Resources.Messages))]
         public int LinhVucThuTucId { get; set; }

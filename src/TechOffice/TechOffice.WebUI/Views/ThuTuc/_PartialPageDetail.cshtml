@@ -10,12 +10,22 @@
 </div>
 <div class="col-sm-12">
     <label>Nội dung thủ tục</label>
-    @*@Html.TextAreaFor(x => Model.NoiDung, htmlAttributes: new { @class = "form-control", @readonly = "readonly", rows = 5 })*@
-    @Html.Raw(Model.NoiDung)
+    @Html.EditorFor(x => Model.NoiDung, "RichEditor")
 </div>
 <div class="col-sm-12">
     <label>Cơ quan thực hiện</label>
-    @Html.TextBoxFor(x => Model.CoQuanInfo.Name, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+    @if (Model.CoQuanThucHienIds.Any())
+    {
+        @Html.TextBoxFor(x => Model.CoQuanThucHienIds, Model.CoQuanInfos.Select(x => x.Name).Aggregate((a, b) =>
+{
+    return a + ", " + b;
+}), htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+    }
+    else
+    {
+        <input type="text" class="form-control" readonly="readonly" />
+    }
+
 </div>
 <div class="col-sm-12">
     <label>Lĩnh vực thủ tục</label>

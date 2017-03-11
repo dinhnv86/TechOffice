@@ -77,21 +77,34 @@ namespace AnThinhPhat.Services
 
         public static ThuTuc AddToDb(this ThuTucResult entity, TechOfficeEntities context)
         {
-            var add = context.ThuTucs.Create();
+            var thutuc = context.ThuTucs.Create();
 
-            add.CoQuanThucHienId = entity.CoQuanThucHienId;
-            add.LoaiThuTucId = entity.LoaiThuTucId;
-            add.NgayBanHanh = entity.NgayBanHanh;
-            add.TenThuTuc = entity.TenThuTuc;
-            add.NoiDung = entity.NoiDung;
+            thutuc.LoaiThuTucId = entity.LoaiThuTucId;
+            thutuc.NgayBanHanh = entity.NgayBanHanh;
+            thutuc.TenThuTuc = entity.TenThuTuc;
+            thutuc.NoiDung = entity.NoiDung;
 
-            add.IsDeleted = false;
-            add.CreatedBy = entity.CreatedBy;
-            add.CreateDate = DateTime.Now;
+            thutuc.IsDeleted = false;
+            thutuc.CreatedBy = entity.CreatedBy;
+            thutuc.CreateDate = DateTime.Now;
 
-            context.Entry(add).State = EntityState.Added;
+            context.Entry(thutuc).State = EntityState.Added;
 
-            return add;
+            foreach (var item in entity.CoQuanThucHienIds)
+            {
+                var thuchien = new ThuTuc_CoQuanThucHien
+                {
+                    CoQuanId = item,
+                    ThuTucId = thutuc.Id,
+                    IsDeleted = false,
+                    CreatedBy = thutuc.CreatedBy,
+                    CreateDate = thutuc.CreateDate,
+                };
+
+                context.Entry(thuchien).State = EntityState.Added;
+            }
+
+            return thutuc;
         }
 
         public static void DeleteToDb(this ThuTuc entity, DbContext context, string userName = null)
@@ -106,7 +119,6 @@ namespace AnThinhPhat.Services
 
         public static void UpdateToDb(this ThuTuc entity, ThuTucResult data, DbContext context)
         {
-            entity.CoQuanThucHienId = data.CoQuanThucHienId;
             entity.LoaiThuTucId = data.LoaiThuTucId;
             entity.NgayBanHanh = data.NgayBanHanh;
             entity.TenThuTuc = data.TenThuTuc;
@@ -144,6 +156,7 @@ namespace AnThinhPhat.Services
 
             add.Ten = entity.Ten;
             add.MoTa = entity.MoTa;
+            add.ParentId = entity.ParentId;
 
             add.IsDeleted = entity.IsDeleted;
             add.CreatedBy = entity.CreatedBy;
@@ -166,6 +179,8 @@ namespace AnThinhPhat.Services
         {
             entity.Ten = data.Ten;
             entity.MoTa = data.MoTa;
+            entity.ParentId = data.ParentId;
+
             entity.IsDeleted = data.IsDeleted;
             entity.LastUpdatedBy = data.LastUpdatedBy;
             entity.LastUpdated = DateTime.Now;

@@ -73,6 +73,7 @@ namespace AnThinhPhat.WebUI.Controllers
             return PartialView("Edit", data);
         }
 
+        [HttpPost]
         public async Task<JsonResult> Edit(int id, CoQuanViewModel model)
         {
             return await ExecuteWithErrorHandling(async () =>

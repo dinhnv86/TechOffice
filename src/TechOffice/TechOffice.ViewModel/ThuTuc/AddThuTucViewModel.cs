@@ -10,7 +10,6 @@ namespace AnThinhPhat.ViewModel.ThuTuc
     public class AddThuTucViewModel: ThuTucViewModel
     {
         [AllowHtml]
-        [UIHint("tinymce_full_compressed")]
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_NoiDung"), ErrorMessageResourceType = typeof(Resources.Messages))]
         public string NoiDung { get; set; }
 
@@ -23,6 +22,9 @@ namespace AnThinhPhat.ViewModel.ThuTuc
 
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_CoQuanThucHien"), ErrorMessageResourceType = typeof(Resources.Messages))]
         public int CoQuanThucHienId { get; set; }
+
+        [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_CoQuanThucHien"), ErrorMessageResourceType = typeof(Resources.Messages))]
+        public int[] CoQuanThucHienIds { get; set; }
 
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_LinhVucThuTuc"), ErrorMessageResourceType = typeof(Resources.Messages))]
         public int LinhVucThuTucId { get; set; }

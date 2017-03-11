@@ -28,6 +28,7 @@ namespace AnThinhPhat.Entities
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public string LastUpdatedBy { get; set; }
+        public int ParentId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThuTuc> ThuTucs { get; set; }

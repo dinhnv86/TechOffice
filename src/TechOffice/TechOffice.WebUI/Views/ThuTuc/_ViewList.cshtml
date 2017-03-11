@@ -17,7 +17,7 @@
             <th class="text-center col-xs-1">STT</th>
             <th class="text-center col-xs-4">Thủ tục</th>
             <th class="text-center col-xs-3">Lĩnh vực</th>
-            @*<th class="text-center col-xs-3">Cơ quan thực hiện</th>*@
+            <th class="text-center col-xs-3">Các cơ quan thực hiện</th>
             <th class="col-xs-1"></th>
         </tr>
     </thead>
@@ -31,10 +31,20 @@
                     <td>
                         @Html.Raw((i++).ToString())
                     </td>
-                    <td><strong>@item.TenThuTuc</strong>
+                    <td>
+                        <strong>@item.TenThuTuc</strong>
                     </td>
                     <td>@item.LinhVucThuTucInfo.IfNotNull(x => x.Name)</td>
                     @*<td>@item.CoQuanInfo.IfNotNull(x => x.Name)</td>*@
+                    <td>
+                        @if (item.CoQuanInfos != null && item.CoQuanInfos.Any())
+                        {
+                            @item.CoQuanInfos.Select(x => x.Name).Aggregate((a, b) =>
+                               {
+                                   return a + ", " + b;
+                               })
+                        }
+                    </td>
                     <td class="link-action">
                         @Html.RouteLink("Sửa", UrlLink.THUTUC_EDIT, new { tenthutuc = item.TenThuTuc.RejectMarks(), id = item.Id }) |
                         <a href="#" data-url='@Url.Action("Delete", new {id = item.Id})' id="lnkDelete_@item.Id" data-toggle="popover">Xóa</a>

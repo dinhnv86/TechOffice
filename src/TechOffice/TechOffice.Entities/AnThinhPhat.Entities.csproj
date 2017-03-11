@@ -215,6 +215,9 @@
     <Compile Include="ThuTuc.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ThuTuc_CoQuanThucHien.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TrangThaiCongViec.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>

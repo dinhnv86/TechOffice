@@ -12,7 +12,7 @@ namespace AnThinhPhat.ViewModel.News
         public string Title { get; set; }
 
         [AllowHtml]
-        [UIHint("tinymce_full_compressed")]
+        [UIHint("tinymce_full")]
         [Required(ErrorMessageResourceType = typeof(Resources.Messages), ErrorMessageResourceName = "News_AddNews_Content")]
         public string Content { get; set; }
 

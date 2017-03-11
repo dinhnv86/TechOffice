@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/_LayoutThuTuc.cshtml";
 }
 
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
+
 @using (Html.BeginForm("Add", "ThuTuc", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="col-sm-6">
@@ -19,13 +21,14 @@
     <div class="clearfix"></div>
     <div class="col-sm-12">
         <label>Nội dung<span class="required">*</span></label>
-        @Html.TextAreaFor(x => Model.NoiDung, new { @id = "ckeContent" })
+        @Html.EditorFor(x => Model.NoiDung, "RichEditor")
     </div>
     <div class="clearfix"></div>
     <div class="col-sm-6">
         <label>Cơ quan thực hiện<span class="required">*</span></label>
-        @Html.DropDownListFor(x => Model.CoQuanThucHienId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Chọn cơ quan thực hiện", htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.CoQuanThucHienId)
+        @*@Html.DropDownListFor(x => Model.CoQuanThucHienId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Chọn cơ quan thực hiện", htmlAttributes: new { @class = "form-control" })*@
+        @Html.ListBoxFor(x => Model.CoQuanThucHienIds, new MultiSelectList(Model.CoQuanInfos, "Id", "Name"), htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CoQuanThucHienIds)
     </div>
     <div class="col-sm-6">
         <label>Lĩnh vực thủ tục<span class="required">*</span></label>
@@ -37,7 +40,6 @@
     <div class="col-sm-12">
         @Html.TextBoxFor(x => x.Files, htmlAttributes: new { type = "file", multiple = "true", @class = "form-control btn btn-info pull-left", style = "max-width:300px;" })
     </div>
-
 
     <div class="clearfix"></div>
     <div id="outer" class="col-xs-12">
@@ -52,9 +54,15 @@
 
 @section Scripts{
     <script src="~/Scripts/app/format-datetime.js"></script>
-    <script src="~/Plugin/ckeditor/ckeditor.js"></script>
-    <script src="~/Plugin/ckeditor/adapters/jquery.js"></script>
+    <script src="~/Scripts/bootstrap-multiselect.js"></script>
+
     <script type="text/javascript">
-        CKEDITOR.replace("ckeContent");
+        $(document).ready(function () {
+            $('#CoQuanThucHienIds').multiselect({
+                includeSelectAllOption: true
+            });
+            $('.btn-group').css("width", "100%");
+            $('.btn-group > button, .btn-group > ul').css("width", "100%");
+        });
     </script>
 }

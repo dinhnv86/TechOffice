@@ -33,7 +33,7 @@
                     </td>
                     <td>@item.NewsCategory.Ten</td>
                     <td>@item.Summary</td>
-                    <td>@Html.DisplayFor(x => item.CreateDate, "DisplayDateTime")</td>
+                    <td>@Html.DisplayFor(x => item.CreateDate, "DisplayDate")</td>
                     <th>@Html.CheckBox("IsDeleted", !item.IsDeleted, new { disabled = "disabled", @class = "checkbox" })</th>
                 </tr>
             }

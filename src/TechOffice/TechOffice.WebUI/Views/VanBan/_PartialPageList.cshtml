@@ -33,7 +33,7 @@
                             @Html.RouteLink(item.SoVanBan, UrlLink.VANBAN_DETAIL, routeValues: new { sovanban = item.SoVanBan.RejectMarks(), id = item.Id }, htmlAttributes: new { @class = "btn-link", target = "_blank" })
                         </strong>
                     </td>
-                    <td>@Html.DisplayFor(x => item.NgayBanHanh, "DisplayDateTime")</td>
+                    <td>@Html.DisplayFor(x => item.NgayBanHanh, "DisplayDate")</td>
                     <td>@item.TrichYeu</td>
                     <td>@item.CoQuanBanHanhVanBanInfo.IfNotNull(x=>x.Name)</td>
                     <td>@item.LoaiVanBanInfo.IfNotNull(x=>x.Name)</td>
