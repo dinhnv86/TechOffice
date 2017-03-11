@@ -913,6 +913,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\uploaded\" />
     <Folder Include="Content\Roxy_Fileman\tmp\" />
   </ItemGroup>
   <ItemGroup>
