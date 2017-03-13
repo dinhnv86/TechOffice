@@ -22,6 +22,9 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.VANBAN, UrlLink.VANBAN,
                 new { controller = "VanBan", action = "Index" });
 
+            routes.MapRoute(UrlLink.VANBAN_VIEW, UrlLink.VANBAN_VIEW,
+               new { controller = "VanBan", action = "ViewVanBan" });
+
             routes.MapRoute(UrlLink.VANBAN_ADD, UrlLink.VANBAN_ADD,
               new { controller = "VanBan", action = "Add" });
 
@@ -36,8 +39,15 @@ namespace AnThinhPhat.WebUI
             routes.MapRoute(UrlLink.THUTUC, UrlLink.THUTUC,
                 new { controller = "ThuTuc", action = "Index" });
 
+            routes.MapRoute(UrlLink.THUTUC_VIEW, UrlLink.THUTUC_VIEW,
+               new { controller = "ThuTuc", action = "ViewThuTuc" });
+
             routes.MapRoute(UrlLink.THUTUC_ADD, UrlLink.THUTUC_ADD,
                new { controller = "ThuTuc", action = "Add" });
+
+            routes.MapRoute(UrlLink.THUTUC_EDIT, UrlLink.THUTUC_EDIT,
+             new { controller = "ThuTuc", action = "Edit" },
+             new { id = @"\d+" });
 
             routes.MapRoute(UrlLink.THUTUC_DETAIL, UrlLink.THUTUC_DETAIL,
               new { controller = "ThuTuc", action = "Detail" },
@@ -133,6 +143,23 @@ namespace AnThinhPhat.WebUI
 
             routes.MapRoute(UrlLink.COQUANBANHANHVANBAN, UrlLink.COQUANBANHANHVANBAN,
             new { controller = "CoQuanBanHanhVanBan", action = "Index" });
+
+            routes.MapRoute(UrlLink.NEWSCATEGORY, UrlLink.NEWSCATEGORY,
+            new { controller = "NewsCategory", action = "Index" });
+
+            routes.MapRoute(UrlLink.NEWS_LIST, UrlLink.NEWS_LIST,
+            new { controller = "News", action = "Index" });
+
+            routes.MapRoute(UrlLink.NEWS_ADD, UrlLink.NEWS_ADD,
+            new { controller = "News", action = "Add" });
+
+            routes.MapRoute(UrlLink.NEWS_EDIT, UrlLink.NEWS_EDIT,
+            new { controller = "News", action = "Edit" },
+            new { id = @"\d+" });
+
+            routes.MapRoute(UrlLink.NEWS, UrlLink.NEWS,
+            new { controller = "Home", action = "ReadNews" },
+            new { id = @"\d+" });
             //===========================================CRUD DATA=======================================//
 
             routes.MapRoute(UrlLink.ADMIN, UrlLink.ADMIN,
@@ -150,7 +177,7 @@ namespace AnThinhPhat.WebUI
 
             routes.MapRoute(UrlLink.ACCOUNT_CHANGEPASSWORD, UrlLink.ACCOUNT_CHANGEPASSWORD,
           new { controller = "Account", action = "ChangePassword" });
-            
+
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }

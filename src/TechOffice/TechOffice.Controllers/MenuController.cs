@@ -30,7 +30,7 @@ namespace AnThinhPhat.WebUI.Controllers
         public PartialViewResult MenuThuTuc()
         {
             var model = new InitMenuThuTucViewModel();
-            model.LinhVucThuTucInfos = LinhVucThuTucRepository.GetAll().Select(x => x.ToDataInfo());
+            model.LinhVucThuTucResults = LinhVucThuTucRepository.GetAll();
 
             return PartialView("_PartialMenuLeftThuTuc", model);
         }

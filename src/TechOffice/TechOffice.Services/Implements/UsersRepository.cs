@@ -530,7 +530,7 @@ namespace AnThinhPhat.Services.Implements
                             select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
-                        .Single();
+                        .SingleOrDefault();
                 }
             });
         }

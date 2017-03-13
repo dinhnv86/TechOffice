@@ -269,6 +269,7 @@ namespace AnThinhPhat.Services.Implements
 
                     update.Ten = entity.Ten;
                     update.MoTa = entity.MoTa;
+                    update.NhomCoQuanId = entity.NhomCoQuanId;
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
                     update.LastUpdated = DateTime.Now;
@@ -286,10 +287,14 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var update = context.CoQuans.Single(x => x.Id == entity.Id && x.IsDeleted == false);
+                    var update = context.CoQuans.FirstOrDefault(x => x.Id == entity.Id && x.IsDeleted == false);
+
+                    if (update == null)
+                        return SaveResult.FAILURE;
 
                     update.Ten = entity.Ten;
                     update.MoTa = entity.MoTa;
+                    update.NhomCoQuanId = entity.NhomCoQuanId;
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
                     update.LastUpdated = DateTime.Now;

@@ -61,6 +61,24 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thêm mới.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hủy.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hủy.
         /// </summary>
         public static string CongViec_Add_Cancel {
@@ -237,6 +255,15 @@ namespace AnThinhPhat.Resources {
         public static string CongViec_Statistic_Tim {
             get {
                 return ResourceManager.GetString("CongViec_Statistic_Tim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lưu.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         

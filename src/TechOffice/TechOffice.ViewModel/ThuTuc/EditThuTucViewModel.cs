@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AnThinhPhat.ViewModel.ThuTuc
 {
     public class EditThuTucViewModel : ThuTucViewModel
     {
+        [AllowHtml]
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_NoiDung"), ErrorMessageResourceType = typeof(Resources.Messages))]
         public string NoiDung { get; set; }
 
@@ -20,7 +22,7 @@ namespace AnThinhPhat.ViewModel.ThuTuc
         public string TenThuTuc { get; set; }
 
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_CoQuanThucHien"), ErrorMessageResourceType = typeof(Resources.Messages))]
-        public int CoQuanThucHienId { get; set; }
+        public int[] CoQuanThucHienIds { get; set; }
 
         [Required(ErrorMessageResourceName = ("ThuTuc_AddThuTuc_LinhVucThuTuc"), ErrorMessageResourceType = typeof(Resources.Messages))]
         public int LinhVucThuTucId { get; set; }

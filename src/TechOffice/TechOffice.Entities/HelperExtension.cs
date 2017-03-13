@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using System;
 using AnThinhPhat.Utilities.Enums;
+using AnThinhPhat.Entities;
 
 namespace AnThinhPhat.Entities
 {
@@ -633,6 +634,7 @@ namespace AnThinhPhat.Entities
                 Id = entity.Id,
                 Ten = entity.Ten,
                 MoTa = entity.MoTa,
+                ParentId = entity.ParentId,
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,
@@ -945,31 +947,6 @@ namespace AnThinhPhat.Entities
         }
     }
 
-    //public static class TacNghiepCoQuanLienQuanExtension
-    //{
-    //    public static TacNghiepCoQuanLienQuanResult ToIfNotNullDataResult(this TacNghiep_CoQuanLienQuan entity)
-    //    {
-    //        return entity?.ToDataResult();
-    //    }
-
-    //    public static TacNghiepCoQuanLienQuanResult ToDataResult(this TacNghiep_CoQuanLienQuan entity)
-    //    {
-    //        return new TacNghiepCoQuanLienQuanResult
-    //        {
-    //            Id = entity.Id,
-    //            CoQuanId = entity.CoQuanId,
-    //            CoQuanInfo = entity.CoQuan.ToIfNotNullDataInfo(),
-    //            TacNghiepId = entity.TacNghiepId,
-    //            TacNghiepInfo = entity.TacNghiep.ToIfNotNullDataInfo(),
-    //            CreateDate = entity.CreateDate,
-    //            CreatedBy = entity.CreatedBy,
-    //            IsDeleted = entity.IsDeleted,
-    //            LastUpdated = entity.LastUpdated,
-    //            LastUpdatedBy = entity.LastUpdatedBy
-    //        };
-    //    }
-    //}
-
     public static class TacNghiepExtension
     {
         public static TacNghiepResult ToIfNotNullDataResult(this TacNghiep entity)
@@ -1227,8 +1204,8 @@ namespace AnThinhPhat.Entities
             return new ThuTucResult
             {
                 Id = entity.Id,
-                CoQuanThucHienId = entity.CoQuanThucHienId,
-                CoQuanInfo = entity.CoQuan.ToIfNotNullDataResult().ToDataInfo(),
+                CoQuanThucHienIds = entity.ThuTuc_CoQuanThucHien.Select(x => x.CoQuanId).ToArray(),
+                CoQuanInfos = entity.ThuTuc_CoQuanThucHien.Select(x => x.CoQuan.ToDataInfo()).ToList(),
                 LoaiThuTucId = entity.LoaiThuTucId,
                 LinhVucThuTucInfo = entity.LinhVucThuTuc.ToIfNotNullDataResult().ToDataInfo(),
                 NoiDung = entity.NoiDung,
@@ -1272,6 +1249,61 @@ namespace AnThinhPhat.Entities
                 MaThuTuc = entity.NoiDung,
                 TenThuTuc = entity.TenThuTuc,
                 NgayBanHanh = entity.NgayBanHanh
+            };
+        }
+    }
+
+    public static class NewsExtension
+    {
+        public static NewsCategoryResult ToDataResult(this NewsCategory news)
+        {
+            return news == null ? null : new NewsCategoryResult
+            {
+                Id = news.Id,
+                CreateDate = news.CreateDate,
+                CreatedBy = news.CreatedBy,
+                IsDeleted = news.IsDeleted,
+                LastUpdated = news.LastUpdated,
+                LastUpdatedBy = news.LastUpdatedBy,
+                MoTa = news.MoTa,
+                Ten = news.Title,
+            };
+        }
+
+        public static NewsResult ToIfNotNullDataResult(this News news)
+        {
+            return news?.ToDataResult();
+        }
+        public static NewsResult ToDataResult(this News news)
+        {
+            return news == null ? null : new NewsResult
+            {
+                Id = news.Id,
+                CreateDate = news.CreateDate,
+                CreatedBy = news.CreatedBy,
+                IsDeleted = news.IsDeleted,
+                LastUpdated = news.LastUpdated,
+                LastUpdatedBy = news.LastUpdatedBy,
+                Content = news.Content,
+                Summary = news.Summary,
+                NewsCategoryId = news.NewsCategoryId,
+                Title = news.Title,
+                UrlImage = news.UrlImage,
+                NewsCategory = news.NewsCategory.ToDataResult(),
+            };
+        }
+
+        public static NewsCategoryInfo ToIfNotNullDataInfo(this NewsCategory entity)
+        {
+            return entity?.ToDataInfo();
+        }
+
+        public static NewsCategoryInfo ToDataInfo(this NewsCategory entity)
+        {
+            return new NewsCategoryInfo
+            {
+                Id = entity.Id,
+                Name = entity.Title,
             };
         }
     }

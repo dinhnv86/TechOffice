@@ -10,6 +10,8 @@ using AnThinhPhat.ViewModel.CoQuan;
 using AnThinhPhat.ViewModel.TacNghiep;
 using AnThinhPhat.ViewModel.Users;
 using System.Collections.Generic;
+using AnThinhPhat.ViewModel.News;
+using AnThinhPhat.ViewModel.ThuTuc;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -17,7 +19,7 @@ namespace AnThinhPhat.ViewModel
     {
         public static BaseDataViewModel ToIfNotNullDataViewModel(this DataResult entity)
         {
-            return entity == null ? null : entity.ToDataViewModel();
+            return entity?.ToDataViewModel();
         }
 
         public static BaseDataViewModel ToDataViewModel(this DataResult entity)
@@ -129,7 +131,7 @@ namespace AnThinhPhat.ViewModel
             };
         }
 
-        public static ValueSearchTacNghiep ToValueSearch(this ValueSearchViewModel valueSearch)
+        public static ValueSearchTacNghiep ToValueSearch(this TacNghiep.ValueSearchViewModel valueSearch)
         {
             return new ValueSearchTacNghiep
             {
@@ -160,12 +162,71 @@ namespace AnThinhPhat.ViewModel
             };
         }
 
+        public static NewsResult ToNewsResult(this AddNewsViewModel model)
+        {
+            return model == null ? null : new NewsResult
+            {
+                Id = model.Id,
+                CreateDate = model.CreateDate,
+                CreatedBy = model.CreatedBy,
+                IsDeleted = model.IsDeleted,
+                LastUpdated = model.LastUpdated,
+                LastUpdatedBy = model.LastUpdatedBy,
+                Content = model.Content,
+                Summary = model.Summary,
+                NewsCategoryId = model.NewsCategoryId,
+                Title = model.Title,
+                UrlImage = model.UrlImage,
+            };
+        }
+
+        public static AddNewsViewModel ToViewModel(this NewsResult entity)
+        {
+            return entity == null ? null : new AddNewsViewModel
+            {
+                Id = entity.Id,
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy,
+                Content = entity.Content,
+                Summary = entity.Summary,
+                NewsCategoryId = entity.NewsCategoryId,
+                Title = entity.Title,
+                UrlImage = entity.UrlImage,
+            };
+        }
+
+        public static LinhVucThuTucViewModel ToIfNotNullDataViewModel(this LinhVucThuTucResult entity)
+        {
+            return entity?.ToDataViewModel();
+        }
+
+        public static LinhVucThuTucViewModel ToDataViewModel(this LinhVucThuTucResult entity)
+        {
+            return new LinhVucThuTucViewModel
+            {
+                Id = entity.Id,
+                Name = entity.Ten,
+                ParentId = entity.ParentId,
+                Description = entity.MoTa,
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
+
         public static TResult ToDataResult<TResult>(this BaseDataViewModel entity) where TResult : DataResult
         {
             var type = typeof(TResult);
             var result = (TResult)Activator.CreateInstance(type);
 
-            var proInfoFirsts = typeof(TResult).GetProperties();
+            var proInfoFirsts = typeof(TResult).GetProperties().Where(x => x.Name.Equals("Id", StringComparison.OrdinalIgnoreCase) ||
+            x.Name.Equals("Ten", StringComparison.OrdinalIgnoreCase) ||
+            x.Name.Equals("MoTa", StringComparison.OrdinalIgnoreCase));
 
             foreach (var info in proInfoFirsts)
             {

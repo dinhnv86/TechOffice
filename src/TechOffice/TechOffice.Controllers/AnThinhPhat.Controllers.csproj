@@ -54,6 +54,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -69,11 +71,14 @@
   <ItemGroup>
     <Compile Include="AccountController.cs" />
     <Compile Include="AdminController.cs" />
+    <Compile Include="NewsCategoryController.cs" />
+    <Compile Include="NewsController.cs" />
     <Compile Include="FileController.cs" />
     <Compile Include="MenuController.cs" />
     <Compile Include="LinhVucTacNghiepController.cs" />
     <Compile Include="LinhVucVanBanController.cs" />
     <Compile Include="CoQuanBanHanhVanBanController.cs" />
+    <Compile Include="RoxyFilemanController.cs" />
     <Compile Include="TacNghiepTinhHinhThucHienController.cs" />
     <Compile Include="UsersController.cs" />
     <Compile Include="MucDoHoanThanhController.cs" />

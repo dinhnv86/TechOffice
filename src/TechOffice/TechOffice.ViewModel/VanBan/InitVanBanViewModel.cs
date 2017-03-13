@@ -12,17 +12,25 @@ namespace AnThinhPhat.ViewModel.VanBan
 
         public int? CoQuanBanHanhVanBanId { get; set; }
 
+        public int?[] CoQuanBanHanhVanBanIds { get; set; }
+
         public IEnumerable<CoQuanBanHanhVanBanInfo> CoQuanBanHanhVanBanInfos { get; set; }
 
         public int? LinhVucVanBanId { get; set; }
+
+        public int?[] LinhVucVanBanIds { get; set; }
 
         public IEnumerable<LinhVucVanBanInfo> LinhVucVanBanInfos { get; set; }
 
         public int? LoaiVanBanId { get; set; }
 
+        public int?[] LoaiVanBanIds { get; set; }
+
         public IEnumerable<LoaiVanBanInfo> LoaiVanBanInfos { get; set; }
 
         public int? NamBanHanhId { get; set; }
+
+        public int?[] NamBanHanhIds { get; set; }
 
         public IEnumerable<NamBanHanh> NamBanHanhInfo
         {

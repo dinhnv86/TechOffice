@@ -15,6 +15,11 @@
         /// <summary>
         /// 
         /// </summary>
+        public static string VANBAN_VIEW = "vanban/view";
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static string VANBAN_ADD = "vanban/add";
 
         /// <summary>
@@ -31,6 +36,11 @@
         /// 
         /// </summary>
         public static string THUTUC = "thutuc";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string THUTUC_VIEW = "thutuc/view";
 
         /// <summary>
         /// 
@@ -85,6 +95,12 @@
         public static string LOAIVANBAN = "loaivanban";
         public static string MUCDOHOANTHANH = "mucdohoanthanh";
         public static string COQUANBANHANHVANBAN = "coquan-banhanh-vanban";
+        public static string NEWS_LIST = "tintuc-sukien";
+        public static string NEWS_ADD = "tintuc/themmoi";
+        public static string NEWS_EDIT = "tintuc/{id}";
+        public static string NEWSCATEGORY = "loaitintuc/themmoi";
+
+        public static string NEWS = "trangchu/{title}-{id}";
         //===================== MASTER URL ==========================//
 
         public static string ADMIN = "admin";

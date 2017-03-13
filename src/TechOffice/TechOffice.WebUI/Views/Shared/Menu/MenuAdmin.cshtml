@@ -1,46 +1,120 @@
-﻿<ul class="nav navbar-nav">
-    <li>
-        @Html.RouteLink("Tài khoản người dùng", UrlLink.USERS, null, htmlAttributes: new { @class = "btn btn-link" })
-    </li>
-    <li>
-        @Html.RouteLink("Chức vụ", UrlLink.CHUCVU, null, htmlAttributes: new { @class = "btn btn-link" })
-    </li>
-    <li class="dropdown">
-        <a href="" class="dropdown-toggle" data-toggle="dropdown">Cơ quan<b class="caret"></b> </a>
-        <ul class="dropdown-menu">
-            <li>
-                @Html.RouteLink("Nhóm cơ quan", UrlLink.NHOMCOQUAN, null, htmlAttributes: new { @class = "btn btn-link" })
-            </li>
-            <li>
-                @Html.RouteLink("Cơ quan", UrlLink.COQUAN, null, htmlAttributes: new { @class = "btn btn-link" })
-            </li>
-        </ul>
-    </li>
-    <li>
-        @Html.RouteLink("Lĩnh vực văn bản", UrlLink.LINHVUCVANBAN, null, htmlAttributes: new { @class = "btn btn-link" })
-    </li>
-    <li>
-        @Html.RouteLink("Cơ quan ban hành văn bản", UrlLink.COQUANBANHANHVANBAN, null, htmlAttributes: new { @class = "btn btn-link" })
-    </li>
-    <li>
-        @Html.RouteLink("Thêm mới văn bản", UrlLink.VANBAN_ADD, null, htmlAttributes: new { @class = "btn btn-link" })
-    </li>
-    <li>
-        @Html.RouteLink("Lĩnh vực công việc", UrlLink.LINHVUCCONGVIEC, null, htmlAttributes: new { @class = "btn btn-link" })
-    </li>
-    <li>
-        @Html.RouteLink("Lĩnh vực thủ tục", UrlLink.LINHVUCTHUTUC, null, htmlAttributes: new { @class = "btn btn-link" })
-    </li>
-    <li>
-        @Html.RouteLink("Thêm mới thủ tục", UrlLink.THUTUC_ADD, null, htmlAttributes: new { @class = "btn btn-link" })
-    </li>
-    <li>
-        @Html.RouteLink("Lĩnh vực tác nghiệp", UrlLink.LINHVUCTACNGHIEP, null, htmlAttributes: new { @class = "btn btn-link" })
-    </li>
-    <li>
-        @Html.RouteLink("Lĩnh vực loại văn bản", UrlLink.LOAIVANBAN, null, htmlAttributes: new { @class = "btn btn-link" })
-    </li>
-    <li>
-        @Html.RouteLink("Mức độ hoàn thành", UrlLink.MUCDOHOANTHANH, null, htmlAttributes: new { @class = "btn btn-link" })
-    </li>
-</ul>l>
+﻿<style>
+    @@media (min-width: 767px) {
+        .navbar-nav .dropdown-menu .caret {
+            transform: rotate(-90deg);
+        }
+    }
+</style>
+@*<ul class="nav navbar-nav">
+        <li>
+            @Html.RouteLink("Tài khoản người dùng", UrlLink.USERS, null, htmlAttributes: new { @class = "btn btn-link" })
+        </li>
+        <li>
+            @Html.RouteLink("Chức vụ", UrlLink.CHUCVU, null, htmlAttributes: new { @class = "btn btn-link" })
+        </li>
+        <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">Cơ quan<b class="caret"></b> </a>
+            <ul class="dropdown-menu">
+                <li>
+                    @Html.RouteLink("Nhóm cơ quan", UrlLink.NHOMCOQUAN, null, htmlAttributes: new { @class = "btn btn-link" })
+                </li>
+                <li>
+                    @Html.RouteLink("Cơ quan", UrlLink.COQUAN, null, htmlAttributes: new { @class = "btn btn-link" })
+                </li>
+            </ul>
+        </li>
+        <li>
+            @Html.RouteLink("Lĩnh vực văn bản", UrlLink.LINHVUCVANBAN, null, htmlAttributes: new { @class = "btn btn-link" })
+        </li>
+        <li>
+            @Html.RouteLink("Cơ quan ban hành văn bản", UrlLink.COQUANBANHANHVANBAN, null, htmlAttributes: new { @class = "btn btn-link" })
+        </li>
+        <li>
+            @Html.RouteLink("Thêm mới văn bản", UrlLink.VANBAN_ADD, null, htmlAttributes: new { @class = "btn btn-link" })
+        </li>
+        <li>
+            @Html.RouteLink("Lĩnh vực công việc", UrlLink.LINHVUCCONGVIEC, null, htmlAttributes: new { @class = "btn btn-link" })
+        </li>
+        <li>
+            @Html.RouteLink("Lĩnh vực thủ tục", UrlLink.LINHVUCTHUTUC, null, htmlAttributes: new { @class = "btn btn-link" })
+        </li>
+        <li>
+            @Html.RouteLink("Thêm mới thủ tục", UrlLink.THUTUC_ADD, null, htmlAttributes: new { @class = "btn btn-link" })
+        </li>
+        <li>
+            @Html.RouteLink("Lĩnh vực tác nghiệp", UrlLink.LINHVUCTACNGHIEP, null, htmlAttributes: new { @class = "btn btn-link" })
+        </li>
+        <li>
+            @Html.RouteLink("Lĩnh vực loại văn bản", UrlLink.LOAIVANBAN, null, htmlAttributes: new { @class = "btn btn-link" })
+        </li>
+        <li>
+            @Html.RouteLink("Mức độ hoàn thành", UrlLink.MUCDOHOANTHANH, null, htmlAttributes: new { @class = "btn btn-link" })
+        </li>
+    </ul>*@
+
+<li>
+    <a href="@Url.RouteUrl(UrlLink.USERS)">Tài khoản người dùng</a>
+    @*@Html.RouteLink("Tài khoản người dùng", UrlLink.USERS, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a href="@Url.RouteUrl(UrlLink.CHUCVU)">Chức vụ</a>
+    @*@Html.RouteLink("Chức vụ", UrlLink.CHUCVU, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a data-toggle="dropdown" class="dropdown-toggle" href="">Cơ quan<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="@Url.RouteUrl(UrlLink.NHOMCOQUAN)">Nhóm cơ quan</a>
+            @*@Html.RouteLink("Nhóm cơ quan", UrlLink.NHOMCOQUAN, null, htmlAttributes: new { @class = "btn btn-link" })*@
+        </li>
+        <li>
+            <a href="@Url.RouteUrl(UrlLink.COQUAN)">Cơ quan</a>
+            @*@Html.RouteLink("Cơ quan", UrlLink.COQUAN, null, htmlAttributes: new { @class = "btn btn-link" })*@
+        </li>
+    </ul>
+</li>
+
+<li>
+    <a href="@Url.RouteUrl(UrlLink.LINHVUCVANBAN)">Lĩnh vực văn bản</a>
+    @*@Html.RouteLink("Lĩnh vực văn bản", UrlLink.LINHVUCVANBAN, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a href="@Url.RouteUrl(UrlLink.COQUANBANHANHVANBAN)">Cơ quan ban hành văn bản</a>
+    @*@Html.RouteLink("Cơ quan ban hành văn bản", UrlLink.COQUANBANHANHVANBAN, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a href="@Url.RouteUrl(UrlLink.VANBAN_ADD)">Thêm mới văn bản</a>
+    @*@Html.RouteLink("Thêm mới văn bản", UrlLink.VANBAN_ADD, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a href="@Url.RouteUrl(UrlLink.LINHVUCCONGVIEC)">Lĩnh vực công việc</a>
+    @*@Html.RouteLink("Lĩnh vực công việc", UrlLink.LINHVUCCONGVIEC, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a href="@Url.RouteUrl(UrlLink.LINHVUCTHUTUC)">Lĩnh vực thủ tục</a>
+    @*@Html.RouteLink("Lĩnh vực thủ tục", UrlLink.LINHVUCTHUTUC, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a href="@Url.RouteUrl(UrlLink.THUTUC_ADD)">Thêm mới thủ tục</a>
+    @*@Html.RouteLink("Thêm mới thủ tục", UrlLink.THUTUC_ADD, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a href="@Url.RouteUrl(UrlLink.LINHVUCTACNGHIEP)">Lĩnh vực tác nghiệp</a>
+    @*@Html.RouteLink("Lĩnh vực tác nghiệp", UrlLink.LINHVUCTACNGHIEP, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a href="@Url.RouteUrl(UrlLink.LOAIVANBAN)">Lĩnh vực loại văn bản</a>
+    @*@Html.RouteLink("Lĩnh vực loại văn bản", UrlLink.LOAIVANBAN, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a href="@Url.RouteUrl(UrlLink.MUCDOHOANTHANH)">Mức độ hoàn thành</a>
+    @*@Html.RouteLink("Mức độ hoàn thành", UrlLink.MUCDOHOANTHANH, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a href="@Url.RouteUrl(UrlLink.NEWSCATEGORY)">Lĩnh vực Tin tức/sự kiện</a>
+    @*@Html.RouteLink("Lĩnh vực Tin tức/sự kiện", UrlLink.NEWSCATEGORY, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>
+<li>
+    <a href="@Url.RouteUrl(UrlLink.NEWS_ADD)">Thêm mới tin tức/sự kiện</a>
+    @*@Html.RouteLink("Tin tức/sự kiện", UrlLink.NEWS, null, htmlAttributes: new { @class = "btn btn-link" })*@
+</li>

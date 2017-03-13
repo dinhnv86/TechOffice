@@ -251,6 +251,27 @@ namespace AnThinhPhat.Services.Implements
                                 IsDeleted = item.IsDeleted,
                                 LastUpdatedBy = item.LastUpdatedBy,
                                 LastUpdated = item.LastUpdated
+                            }).FirstOrDefault();
+                }
+            });
+        }
+
+        public NhomCoQuanResult GetById(int id)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    return (from item in context.NhomCoQuans
+                            where item.Id == id
+                            select new NhomCoQuanResult
+                            {
+                                Id = item.Id,
+                                Ten = item.Ten,
+                                MoTa = item.MoTa,
+                                IsDeleted = item.IsDeleted,
+                                LastUpdatedBy = item.LastUpdatedBy,
+                                LastUpdated = item.LastUpdated
                             }).Single();
                 }
             });

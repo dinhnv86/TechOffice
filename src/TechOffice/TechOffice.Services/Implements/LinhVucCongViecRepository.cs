@@ -171,7 +171,11 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var cv = context.LinhVucCongViecs.Single(x => x.Id == id && x.IsDeleted == false);
+                    var cv = context.LinhVucCongViecs.FirstOrDefault(x => x.Id == id && x.IsDeleted == false);
+
+                    if (cv == null)
+                        return SaveResult.FAILURE;
+
                     cv.IsDeleted = true;
 
                     context.Entry(cv).State = EntityState.Modified;
@@ -188,8 +192,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.LinhVucCongViecs
-                        where item.IsDeleted == false
-                        select item)
+                            where item.IsDeleted == false
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .ToList();
@@ -204,8 +208,8 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.LinhVucCongViecs
-                        where item.IsDeleted == false
-                        select item).MakeQueryToDatabase()
+                                  where item.IsDeleted == false
+                                  select item).MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()
                         .ToListAsync();
@@ -220,9 +224,9 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.LinhVucCongViecs
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select item)
+                            where item.IsDeleted == false &&
+                                  item.Id == id
+                            select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .Single();
@@ -237,9 +241,9 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.LinhVucCongViecs
-                        where item.IsDeleted == false &&
-                              item.Id == id
-                        select item)
+                                  where item.IsDeleted == false &&
+                                        item.Id == id
+                                  select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
                         .AsQueryable()

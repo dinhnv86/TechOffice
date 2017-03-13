@@ -12,11 +12,13 @@ namespace AnThinhPhat.Entities.Results
 
         public string TenThuTuc { get; set; }
 
-        public int CoQuanThucHienId { get; set; }
+        //public int CoQuanThucHienId { get; set; }
+
+        public int[] CoQuanThucHienIds { get; set; }
 
         public int LoaiThuTucId { get; set; }
 
-        public CoQuanInfo CoQuanInfo { get; set; }
+        public IEnumerable<CoQuanInfo> CoQuanInfos { get; set; }
 
         public LinhVucThuTucInfo LinhVucThuTucInfo { get; set; }
 

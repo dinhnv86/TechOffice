@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +6,7 @@ using AnThinhPhat.Entities;
 using AnThinhPhat.Entities.Results;
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
+using System.Data;
 
 namespace AnThinhPhat.Services.Implements
 {
@@ -22,12 +22,17 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    var add = entity.AddToDb(context);
-                    var result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    using (var transaction = context.BeginTransaction())
+                    {
+                        var add = entity.AddToDb(context);
+                        var result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
 
-                    entity.Id = add.Id;
+                        transaction.Commit();
 
-                    return result;
+                        entity.Id = add.Id;
+
+                        return result;
+                    }
                 }
             });
         }
@@ -38,8 +43,15 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    entity.AddToDb(context);
-                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                    using (var transaction = context.BeginTransaction())
+                    {
+                        entity.AddToDb(context);
+                        var result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+
+                        transaction.Commit();
+
+                        return result;
+                    }
                 }
             });
         }
@@ -50,12 +62,19 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    foreach (var entity in entities)
+                    using (var transaction = context.BeginTransaction())
                     {
-                        entity.AddToDb(context);
-                    }
+                        foreach (var entity in entities)
+                        {
+                            entity.AddToDb(context);
+                        }
 
-                    return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                        var result = context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+
+                        transaction.Commit();
+
+                        return result;
+                    }
                 }
             });
         }
@@ -66,12 +85,19 @@ namespace AnThinhPhat.Services.Implements
             {
                 using (var context = new TechOfficeEntities())
                 {
-                    foreach (var entity in entities)
+                    using (var transaction = context.BeginTransaction())
                     {
-                        entity.AddToDb(context);
-                    }
+                        foreach (var entity in entities)
+                        {
+                            entity.AddToDb(context);
+                        }
 
-                    return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+                        var result = await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
+
+                        transaction.Commit();
+
+                        return result;
+                    }
                 }
             });
         }
@@ -145,9 +171,9 @@ namespace AnThinhPhat.Services.Implements
                     return (from item in context.ThuTucs
                             where item.IsDeleted == false
                             select item)
-                            .MakeQueryToDatabase()
-                            .Select(x => x.ToDataResult())
-                            .ToList();
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .ToList();
                 }
             });
         }
@@ -161,10 +187,10 @@ namespace AnThinhPhat.Services.Implements
                     return await (from item in context.ThuTucs
                                   where item.IsDeleted == false
                                   select item)
-                                  .MakeQueryToDatabase()
-                                  .Select(x => x.ToDataResult())
-                                  .AsQueryable()
-                                  .ToListAsync();
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .ToListAsync();
                 }
             });
         }
@@ -176,12 +202,12 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return (from item in context.ThuTucs
-                            .Include(x => x.TapTinThuTucs)
+                        .Include(x => x.TapTinThuTucs)
                             where item.IsDeleted == false && item.Id == id
                             select item)
-                            .MakeQueryToDatabase()
-                            .Select(x => x.ToDataResult())
-                            .Single();
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .Single();
                 }
             });
         }
@@ -193,13 +219,13 @@ namespace AnThinhPhat.Services.Implements
                 using (var context = new TechOfficeEntities())
                 {
                     return await (from item in context.ThuTucs
-                                   .Include(x => x.TapTinThuTucs)
+                        .Include(x => x.TapTinThuTucs)
                                   where item.IsDeleted == false && item.Id == id
                                   select item)
-                                  .MakeQueryToDatabase()
-                                  .Select(x => x.ToDataResult())
-                                  .AsQueryable()
-                                  .SingleAsync();
+                        .MakeQueryToDatabase()
+                        .Select(x => x.ToDataResult())
+                        .AsQueryable()
+                        .SingleAsync();
                 }
             });
         }
@@ -213,6 +239,8 @@ namespace AnThinhPhat.Services.Implements
                     var update = context.ThuTucs.Single(x => x.Id == entity.Id && x.IsDeleted == false);
 
                     update.UpdateToDb(entity, context);
+
+                    InsertOrDeleteThuTucCoQuanThucHien(entity, context);
 
                     return context.SaveChanges() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
@@ -229,9 +257,44 @@ namespace AnThinhPhat.Services.Implements
 
                     update.UpdateToDb(entity, context);
 
+                    InsertOrDeleteThuTucCoQuanThucHien(entity, context);
+
                     return await context.SaveChangesAsync() > 0 ? SaveResult.SUCCESS : SaveResult.FAILURE;
                 }
             });
+        }
+
+        private void InsertOrDeleteThuTucCoQuanThucHien(ThuTucResult entity, TechOfficeEntities context)
+        {
+            if (entity.CoQuanThucHienIds != null && entity.CoQuanThucHienIds.Count() > 0)
+            {
+                //search all thutuc_coquanthuchien by thutucId
+                var searchAll = context.ThuTuc_CoQuanThucHien.Where(x => x.ThuTucId == entity.Id);
+
+                searchAll.ToList().ForEach(x =>
+                {
+                    if (!entity.CoQuanThucHienIds.Contains(x.CoQuanId))
+                    {
+                        context.Entry(x).State = EntityState.Deleted;
+                    }
+                });
+
+                entity.CoQuanThucHienIds.ToList().ForEach(x =>
+                {
+                    if (!searchAll.Select(y => y.CoQuanId).Contains(x))//not exists
+                    {
+                        //then insert a record
+                        var insert = context.ThuTuc_CoQuanThucHien.Create();
+                        insert.ThuTucId = entity.Id;
+                        insert.CoQuanId = x;
+                        insert.IsDeleted = false;
+                        insert.CreateDate = entity.CreateDate;
+                        insert.CreatedBy = entity.CreatedBy;
+
+                        context.Entry(insert).State = EntityState.Added;
+                    }
+                });
+            }
         }
     }
 }

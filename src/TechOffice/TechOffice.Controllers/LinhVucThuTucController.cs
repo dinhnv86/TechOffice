@@ -8,6 +8,8 @@ using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel;
 using Ninject;
 using PagedList;
+using AnThinhPhat.ViewModel.ThuTuc;
+using System.Collections.Generic;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -17,9 +19,19 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public ILinhVucThuTucRepository ThuTucRepository { get; set; }
 
+        private IEnumerable<LinhVucThuTucResult> _listLinhVucThuTuc;
+
         public ActionResult Index()
         {
-            return View();
+            _listLinhVucThuTuc = ThuTucRepository.GetAll();
+            _listLinhVucThuTuc.OrderByDescending(x => x.Id).ToList().ForEach(x =>
+              {
+                  x.Ten = GetNameMultiple(x);
+              });
+
+            var model = new LinhVucThuTucViewModel { LinhVucThuTuces = _listLinhVucThuTuc };
+
+            return View(model);
         }
 
         /// <summary>
@@ -37,11 +49,15 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Create(BaseDataViewModel model)
+        public async Task<JsonResult> Create(LinhVucThuTucViewModel model)
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var result = model.ToDataResult<LinhVucThuTucResult>().Update(u => { u.CreatedBy = UserName; });
+                var result = model.ToDataResult<LinhVucThuTucResult>().Update(u =>
+                {
+                    u.ParentId = model.ParentId ?? 0;
+                    u.CreatedBy = UserName;
+                });
 
                 return await ExecuteResultAsync(async () => await ThuTucRepository.AddAsync(result));
             });
@@ -50,9 +66,16 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult Edit(int id)
         {
-            var data = ThuTucRepository.Single(id).ToDataViewModel();
+            _listLinhVucThuTuc = ThuTucRepository.GetAll();
+            _listLinhVucThuTuc.ToList().ForEach(x =>
+            {
+                x.Ten = GetNameMultiple(x);
+            });
 
-            return PartialView("_PartialPageBaseDataEdit", data);
+            var data = ThuTucRepository.Single(id).ToDataViewModel().
+                Update(x => x.LinhVucThuTuces = _listLinhVucThuTuc);
+
+            return PartialView("_PartialPageEdit", data);
         }
 
         public async Task<JsonResult> Edit(int id, BaseDataViewModel model)
@@ -76,12 +99,29 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 if (id == 0)
                 {
-                    Response.StatusCode = (int) HttpStatusCode.BadRequest;
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     return Json("Bad Request", JsonRequestBehavior.AllowGet);
                 }
 
                 return await ExecuteResultAsync(async () => await ThuTucRepository.DeleteByAsync(id));
             });
+        }
+
+        private string GetNameMultiple(LinhVucThuTucResult thutuc)
+        {
+            if (thutuc == null)
+                return string.Empty;
+
+            var result = thutuc.Ten;
+
+            if (thutuc.ParentId == 0)
+                return result;
+
+            var temp = _listLinhVucThuTuc.Where(x => x.Id == thutuc.ParentId).SingleOrDefault();
+
+            result = GetNameMultiple(temp) + " >> " + thutuc.Ten;
+
+            return result;
         }
     };
 }

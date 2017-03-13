@@ -5,7 +5,7 @@
 {
     foreach (var item in Model)
     {
-        <label>@Html.DisplayFor(x => item.NgayTao, "DisplayDateTime") -  @item.Name</label>
+        <label>@Html.DisplayFor(x => item.NgayTao, "DisplayDate") -  @item.Name</label>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -32,7 +32,7 @@
                         @foreach (var exe in item.ExecutedResults)
                         {
                             <p>
-                                <span>@exe.Name</span>-@Html.DisplayFor(x => exe.NgayHoanThanh, "DisplayDateTime")
+                                <span>@exe.Name</span>-@Html.DisplayFor(x => exe.NgayHoanThanh, "DisplayDate")
                             </p>
                         }
                     </td>

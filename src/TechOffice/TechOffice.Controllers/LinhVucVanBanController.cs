@@ -43,7 +43,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 var result = model.ToDataResult<LinhVucVanBanResult>().Update(u => { u.CreatedBy = UserName; });
 
-                return await ExecuteResultAsync(async () => { return await VanBanRepository.AddAsync(result); });
+                return await ExecuteResultAsync(async () => await VanBanRepository.AddAsync(result));
             });
         }
 
@@ -65,7 +65,7 @@ namespace AnThinhPhat.WebUI.Controllers
                     u.LastUpdatedBy = UserName;
                 });
 
-                return await ExecuteResultAsync(async () => { return await VanBanRepository.UpdateAsync(cv); });
+                return await ExecuteResultAsync(async () => await VanBanRepository.UpdateAsync(cv));
             });
         }
 
@@ -80,7 +80,7 @@ namespace AnThinhPhat.WebUI.Controllers
                     return Json("Bad Request", JsonRequestBehavior.AllowGet);
                 }
 
-                return await ExecuteResultAsync(async () => { return await VanBanRepository.DeleteByAsync(id); });
+                return await ExecuteResultAsync(async () => await VanBanRepository.DeleteByAsync(id));
             });
         }
     };

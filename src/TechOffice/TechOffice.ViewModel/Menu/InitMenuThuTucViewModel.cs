@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using AnThinhPhat.Entities.Infos;
+﻿using AnThinhPhat.Entities.Results;
+using System.Collections.Generic;
 
 namespace AnThinhPhat.ViewModel.Menu
 {
     public class InitMenuThuTucViewModel
     {
-        public IEnumerable<LinhVucThuTucInfo> LinhVucThuTucInfos { get; set; }
+        public IEnumerable<LinhVucThuTucResult> LinhVucThuTucResults { get; set; }
     }
 }

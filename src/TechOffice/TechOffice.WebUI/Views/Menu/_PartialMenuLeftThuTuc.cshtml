@@ -1,22 +1,60 @@
 ﻿@model AnThinhPhat.ViewModel.Menu.InitMenuThuTucViewModel
 
+@{
+    var rootCategory = Model.LinhVucThuTucResults.Where(x => x.ParentId == 0);
+}
+<style>
+    .menu_products #menu_left li {
+        list-style: none;
+    }
+</style>
+
+@helper RenderMenuLine(AnThinhPhat.Entities.Results.LinhVucThuTucResult category, int level = 0)
+{
+    <li>
+        @{
+            var numSpace = string.Empty;
+            for (int i = 0; i < level; i++)
+            {
+                numSpace += "\xA0\xA0\xA0";
+            }
+        }
+        @*@Html.RouteLink(category.Ten, UrlLink.THUTUC, routeValues: new { linhVucThuTucId = category.Id })*@
+        <a href="/thutuc?linhvucThuTucId=@category.Id">
+            @numSpace
+            <span class="glyphicon glyphicon-th-large"></span>
+            @category.Ten
+        </a>
+        @{
+
+            //subcategories
+            var subCategories = Model.LinhVucThuTucResults.Where(x => x.ParentId == category.Id).ToList();
+
+            if (subCategories != null && subCategories.Any())
+            {
+                foreach (var subCategory in subCategories)
+                {
+                    @RenderMenuLine(subCategory, level + 1)
+                }
+            }
+        }
+    </li>
+}
+
 <div class="supp">
     <h3 class="sbar">
-        <a href="" style="color: #000">Danh mục</a>
+        <a href="">Danh mục</a>
         <div class="btn_down btn_down_sp">
             <i class="fa fa-chevron-down"></i>
         </div>
     </h3>
-    <div class="menu_products">
+    <div class="menu_products btn_down_spshow">
         <ul id="menu_left">
-            @foreach (var item in Model.LinhVucThuTucInfos)
+
+            @foreach (var item in rootCategory)
             {
-                <li>
-                    @Html.RouteLink(item.Name, AnThinhPhat.Utilities.UrlLink.THUTUC, routeValues: new { linhVucThuTucId = item.Id })
-                </li>
+                @RenderMenuLine(item, 0)
             }
         </ul>
     </div>
 </div>
-
-@{Html.RenderPartial("_PartialPageMenuSubLeft");}
