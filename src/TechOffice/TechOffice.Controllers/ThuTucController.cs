@@ -241,12 +241,12 @@ namespace AnThinhPhat.WebUI.Controllers
             });
         }
 
-        private void SaveFilesThuTuc(HttpPostedFileBase file, int vanBanId)
+        private void SaveFilesThuTuc(HttpPostedFileBase file, int thuTucId)
         {
-            var folderVanBan = EnsureFolderThuTuc(vanBanId);
+            var folderThuTuc = EnsureFolderThuTuc(thuTucId);
             if (file.FileName != null)
             {
-                var savedFileName = Path.Combine(folderVanBan, Path.GetFileName(file.FileName));
+                var savedFileName = Path.Combine(folderThuTuc, Path.GetFileName(file.FileName));
                 try
                 {
                     file.SaveAs(savedFileName); // Save the file
@@ -276,12 +276,6 @@ namespace AnThinhPhat.WebUI.Controllers
                 LogService.Error("Has error in while create new Temp folder upload", ex);
                 throw;
             }
-        }
-
-        private void EnsureFolder(string folder)
-        {
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
         }
 
         private string GetNameMultiple(LinhVucThuTucResult thutuc)

@@ -175,6 +175,18 @@ namespace AnThinhPhat.WebUI
             new { controller = "Users", action = "Edit" },
             new { id = @"\d+" });
 
+            #region PageReference
+            routes.MapRoute(UrlLink.PAGE_REFERENCE, UrlLink.PAGE_REFERENCE,
+           new { controller = "PageReference", action = "Index" });
+
+            routes.MapRoute(UrlLink.PAGE_REFERENCE_NEW, UrlLink.PAGE_REFERENCE_NEW,
+           new { controller = "PageReference", action = "Add" });
+
+            routes.MapRoute(UrlLink.PAGE_REFERENCE_EDIT, UrlLink.PAGE_REFERENCE_EDIT,
+           new { controller = "PageReference", action = "Edit" },
+           new { id = @"\d+" });
+            #endregion PageReference
+
             routes.MapRoute(UrlLink.ACCOUNT_CHANGEPASSWORD, UrlLink.ACCOUNT_CHANGEPASSWORD,
           new { controller = "Account", action = "ChangePassword" });
 

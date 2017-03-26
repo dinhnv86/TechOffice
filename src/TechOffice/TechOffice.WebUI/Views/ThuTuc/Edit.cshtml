@@ -26,7 +26,6 @@
     <div class="clearfix" style="padding-bottom:15px;"></div>
     <div class="col-sm-6">
         <label>Cơ quan thực hiện<span class="required">*</span></label>
-        @*@Html.DropDownListFor(x => Model.CoQuanThucHienId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Chọn cơ quan thực hiện", htmlAttributes: new { @class = "form-control" })*@
         @Html.ListBoxFor(x => Model.CoQuanThucHienIds, new MultiSelectList(Model.CoQuanInfos, "Id", "Name"), htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.CoQuanThucHienIds)
     </div>

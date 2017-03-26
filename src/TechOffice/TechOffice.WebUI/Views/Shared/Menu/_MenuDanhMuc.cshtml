@@ -1,4 +1,43 @@
-﻿@model IEnumerable<BaseDataViewModel>
+﻿
+@model AnThinhPhat.ViewModel.Menu.InitMenuNewsCategoryViewModel
+
+@{
+    var rootCategory = Model.NewsCategories.OrderBy(x => x.Position).Where(x => x.ParentId == 0);
+}
+<style>
+    .menu_products #menu_left li {
+        list-style: none;
+    }
+</style>
+@helper RenderMenuLine(AnThinhPhat.Entities.Results.NewsCategoryResult category, int level = 0)
+{
+    <li>
+        @{
+            var numSpace = string.Empty;
+            for (int i = 0; i < level; i++)
+            {
+                numSpace += "\xA0\xA0\xA0";
+            }
+        }
+        <a href="/home/index?newsCategoryId=@category.Id">
+            @numSpace
+            <span class="glyphicon glyphicon-th-large"></span>
+            @category.Ten
+        </a>
+        @{
+            //subcategories
+            var subCategories = Model.NewsCategories.OrderBy(x => x.Position).Where(x => x.ParentId == category.Id).ToList();
+
+            if (subCategories != null && subCategories.Any())
+            {
+                foreach (var subCategory in subCategories)
+                {
+        @RenderMenuLine(subCategory, level + 1)
+                }
+            }
+        }
+    </li>
+}
 
 <div class="supp">
     <h3 class="sbar">
@@ -9,14 +48,9 @@
     </h3>
     <div class="btn_down_spshow menu_products">
         <ul id="menu_left">
-            @if (Model.Any())
+            @foreach (var item in rootCategory)
             {
-                foreach (var item in Model)
-                {
-                    <li>
-                        @Html.ActionLink(item.Name, "Index", "Home", routeValues: new { newsCategoryId = item.Id },htmlAttributes:new { })
-                    </li>
-                }
+                @RenderMenuLine(item, 0)
             }
         </ul>
     </div>

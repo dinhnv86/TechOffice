@@ -28,7 +28,7 @@
         <div class="form-group">
             <label>Nội dung<span class="required">*</span></label>
             <div>
-                @Html.EditorFor(x => Model.Content)
+                @Html.EditorFor(x => Model.Content, "RichEditor")
             </div>
         </div>
         <div class="form-group">
@@ -49,7 +49,7 @@
         <div class="form-group">
             <label>Chọn hình ảnh</label>
             <div>
-                <input type="file" id="filesUpload" class="form-control btn btn-info pull-left" style="max-width: 300px;" name="file"/>
+                <input type="file" id="filesUpload" class="btn btn-info pull-left" style="max-width: 300px;" name="file" />
             </div>
         </div>
         <div class="form-group">

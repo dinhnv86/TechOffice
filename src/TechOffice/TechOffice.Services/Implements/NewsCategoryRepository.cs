@@ -47,6 +47,8 @@ namespace AnThinhPhat.Services.Implements
 
                     add.Title = entity.Ten;
                     add.MoTa = entity.MoTa;
+                    add.ParentId = entity.ParentId;
+                    add.Position = entity.Position;
 
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
@@ -187,6 +189,7 @@ namespace AnThinhPhat.Services.Implements
                 {
                     return (from item in context.NewsCategories
                             where item.IsDeleted == false
+                            orderby item.Position
                             select item)
                         .MakeQueryToDatabase()
                         .Select(x => x.ToDataResult())
@@ -293,6 +296,9 @@ namespace AnThinhPhat.Services.Implements
 
                     update.Title = entity.Ten;
                     update.MoTa = entity.MoTa;
+                    update.ParentId = entity.ParentId;
+                    update.Position = entity.Position;
+
                     update.IsDeleted = entity.IsDeleted;
                     update.LastUpdatedBy = entity.LastUpdatedBy;
                     update.LastUpdated = DateTime.Now;

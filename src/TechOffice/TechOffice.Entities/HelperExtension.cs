@@ -1267,6 +1267,8 @@ namespace AnThinhPhat.Entities
                 LastUpdatedBy = news.LastUpdatedBy,
                 MoTa = news.MoTa,
                 Ten = news.Title,
+                ParentId = news.ParentId,
+                Position = news.Position
             };
         }
 
@@ -1274,6 +1276,7 @@ namespace AnThinhPhat.Entities
         {
             return news?.ToDataResult();
         }
+
         public static NewsResult ToDataResult(this News news)
         {
             return news == null ? null : new NewsResult
@@ -1304,6 +1307,27 @@ namespace AnThinhPhat.Entities
             {
                 Id = entity.Id,
                 Name = entity.Title,
+            };
+        }
+    }
+
+    public static class PageReferenceExtension
+    {
+        public static PageReferenceResult ToDataResult(this PageReference page)
+        {
+            return page == null ? null : new PageReferenceResult
+            {
+                Id = page.Id,
+                Alt = page.Alt,
+                UrlImage = page.UrlImage,
+                UrlLink = page.UrlLink,
+                IsNewPage = page.IsNewPage,
+
+                CreateDate = page.CreateDate,
+                CreatedBy = page.CreatedBy,
+                IsDeleted = page.IsDeleted,
+                LastUpdated = page.LastUpdated,
+                LastUpdatedBy = page.LastUpdatedBy,
             };
         }
     }

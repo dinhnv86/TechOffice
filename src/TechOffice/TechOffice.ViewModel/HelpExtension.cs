@@ -12,6 +12,8 @@ using AnThinhPhat.ViewModel.Users;
 using System.Collections.Generic;
 using AnThinhPhat.ViewModel.News;
 using AnThinhPhat.ViewModel.ThuTuc;
+using AnThinhPhat.ViewModel.NewsCategories;
+using AnThinhPhat.ViewModel.Menu;
 
 namespace AnThinhPhat.ViewModel
 {
@@ -216,6 +218,59 @@ namespace AnThinhPhat.ViewModel
                 IsDeleted = entity.IsDeleted,
                 LastUpdated = entity.LastUpdated,
                 LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
+
+        public static NewsCategoryViewModel ToDataViewModel(this NewsCategoryResult entity)
+        {
+            return new NewsCategoryViewModel
+            {
+                Id = entity.Id,
+                Name = entity.Ten,
+                ParentId = entity.ParentId,
+                Position = entity.Position,
+                Description = entity.MoTa,
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy
+            };
+        }
+
+        public static PageReferenceResult ToDataResult(this PageReferenceViewModel model)
+        {
+            return model == null ? null : new PageReferenceResult
+            {
+                Id = model.Id,
+                UrlLink = model.UrlLink,
+                IsNewPage = model.IsNewPage,
+                Alt = model.Alt,
+                UrlImage = model.UrlImage,
+
+                CreateDate = model.CreateDate,
+                CreatedBy = model.CreatedBy,
+                IsDeleted = model.IsDeleted,
+                LastUpdated = model.LastUpdated,
+                LastUpdatedBy = model.LastUpdatedBy,
+            };
+        }
+
+        public static PageReferenceViewModel ToDataViewModel(this PageReferenceResult entity)
+        {
+            return entity == null ? null : new PageReferenceViewModel
+            {
+                Id = entity.Id,
+                UrlLink = entity.UrlLink,
+                IsNewPage = entity.IsNewPage,
+                Alt = entity.Alt,
+                UrlImage = entity.UrlImage,
+
+                CreateDate = entity.CreateDate,
+                CreatedBy = entity.CreatedBy,
+                IsDeleted = entity.IsDeleted,
+                LastUpdated = entity.LastUpdated,
+                LastUpdatedBy = entity.LastUpdatedBy,
             };
         }
 

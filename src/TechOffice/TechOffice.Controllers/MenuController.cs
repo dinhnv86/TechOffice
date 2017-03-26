@@ -18,6 +18,12 @@ namespace AnThinhPhat.WebUI.Controllers
         [Inject]
         public ILinhVucThuTucRepository LinhVucThuTucRepository { get; set; }
 
+        [Inject]
+        public INewsCategoryRepository NewsCategoryRepository { get; set; }
+
+        [Inject]
+        public IPageReferenceRepository PageReferenceRepository { get; set; }
+
         public PartialViewResult MenuVanBan()
         {
             var model = new InitMenuVanBanViewModel();
@@ -33,6 +39,26 @@ namespace AnThinhPhat.WebUI.Controllers
             model.LinhVucThuTucResults = LinhVucThuTucRepository.GetAll();
 
             return PartialView("_PartialMenuLeftThuTuc", model);
+        }
+
+        public PartialViewResult MenuDanhMuc()
+        {
+            var model = new InitMenuNewsCategoryViewModel()
+            {
+                NewsCategories = NewsCategoryRepository.GetAll()
+            };
+
+            return PartialView("~/Views/Shared/Menu/_MenuDanhMuc.cshtml", model);
+        }
+
+        public PartialViewResult MenuPhoto()
+        {
+            var model = new InitMenuPageReferenceViewModel()
+            {
+                PageReferenceResults = PageReferenceRepository.GetAll()
+            };
+
+            return PartialView("~/Views/Shared/Menu/MenuPhoto.cshtml", model);
         }
     }
 }

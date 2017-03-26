@@ -268,6 +268,42 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối đa mô tả là 255 ký tự.
+        /// </summary>
+        public static string Page_Add_Alt_MaxLength {
+            get {
+                return ResourceManager.GetString("Page_Add_Alt_MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chiều dài tối đa của trang liên kết là 255 ký tự.
+        /// </summary>
+        public static string Page_Add_UrlLink_MaxLength {
+            get {
+                return ResourceManager.GetString("Page_Add_UrlLink_MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng chọn image đại diện trang liên kết.
+        /// </summary>
+        public static string PageRef_Add_Image {
+            get {
+                return ResourceManager.GetString("PageRef_Add_Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xin vui lòng nhập trang liên kết.
+        /// </summary>
+        public static string PageRef_Add_UrlLink {
+            get {
+                return ResourceManager.GetString("PageRef_Add_UrlLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xin vui lòng nhập nôi dung phản hồi.
         /// </summary>
         public static string TacNghiep_EditNoiDungYKienCuaCoQuan_NoiDung {

@@ -1,8 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using AnThinhPhat.Services.Abstracts;
+﻿using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.Utilities.Mail;
 using AnThinhPhat.ViewModel;
@@ -10,6 +6,10 @@ using AnThinhPhat.ViewModel.Home;
 using CaptchaMvc.HtmlHelpers;
 using Ninject;
 using PagedList;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -18,9 +18,6 @@ namespace AnThinhPhat.WebUI.Controllers
     {
         [Inject]
         public INewsRepository NewsRepository { get; set; }
-
-        [Inject]
-        public INewsCategoryRepository NewsCategoryRepository { get; set; }
 
         public ActionResult Index(int? newsCategoryId)
         {
@@ -69,15 +66,9 @@ namespace AnThinhPhat.WebUI.Controllers
             return PartialView("~/Views/Home/_News.cshtml", items.ToPagedList(page ?? 1, TechOfficeConfig.PAGESIZE));
         }
 
-        public PartialViewResult MenuDanhMuc()
-        {
-            var model = NewsCategoryRepository.GetAll().Select(x => x.ToDataViewModel());
-            return PartialView("~/Views/Shared/Menu/_MenuDanhMuc.cshtml", model);
-        }
-
         public static MemoryStream ReadFully(Stream input)
         {
-            var buffer = new byte[16*1024];
+            var buffer = new byte[16 * 1024];
             using (var ms = new MemoryStream())
             {
                 int read;

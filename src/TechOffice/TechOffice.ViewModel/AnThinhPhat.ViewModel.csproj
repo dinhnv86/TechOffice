@@ -57,12 +57,16 @@
     <Compile Include="CongViec\InitValueStatictisSearch.cs" />
     <Compile Include="CongViec\InitVanBanViewModel.cs" />
     <Compile Include="Home\ContactViewModel.cs" />
+    <Compile Include="Menu\InitMenuNewsCategoryViewModel.cs" />
+    <Compile Include="Menu\InitMenuPageReferenceViewModel.cs" />
     <Compile Include="Menu\InitMenuThuTucViewModel.cs" />
     <Compile Include="Menu\InitMenuVanBanViewModel.cs" />
     <Compile Include="CongViec\InitCongViecViewModel.cs" />
     <Compile Include="CongViec\ValueSearchViewModel.cs" />
     <Compile Include="CoQuan\CoQuanViewModel.cs" />
     <Compile Include="HelpExtension.cs" />
+    <Compile Include="Menu\PageReferenceViewModel.cs" />
+    <Compile Include="NewsCategories\NewsCategoryViewModel.cs" />
     <Compile Include="News\AddNewsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TacNghiep\DetailTacNghiepViewModel.cs" />

@@ -66,8 +66,6 @@
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinYKienCoQuan_User" />
         <AssociationConnector Association="TechOfficeDevModel.FK_UserRole_User" />
         <EntityTypeShape EntityType="TechOfficeDevModel.News" Width="1.5" PointX="3" PointY="6" />
-        <EntityTypeShape EntityType="TechOfficeDevModel.NewsCategory" Width="1.5" PointX="0.75" PointY="6.125" />
-        <AssociationConnector Association="TechOfficeDevModel.FK_News_NewsCategory" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_User" />
         <EntityTypeShape EntityType="TechOfficeDevModel.ThuTuc_CoQuanThucHien" Width="1.5" PointX="10.5" PointY="30.125" />
         <AssociationConnector Association="TechOfficeDevModel.FK_ThuTuc_CoQuanThucHien_CoQuan" />
@@ -76,6 +74,9 @@
         <AssociationConnector Association="TechOfficeDevModel.FK_ThuTuc_LinhVucThuTuc" />
         <AssociationConnector Association="TechOfficeDevModel.FK_TapTinThuTuc_ThuTuc" />
         <AssociationConnector Association="TechOfficeDevModel.FK_ThuTuc_CoQuanThucHien_ThuTuc" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.NewsCategory" Width="1.5" PointX="0.75" PointY="6.125" />
+        <AssociationConnector Association="TechOfficeDevModel.FK_News_NewsCategory" />
+        <EntityTypeShape EntityType="TechOfficeDevModel.PageReference" Width="1.5" PointX="0.75" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

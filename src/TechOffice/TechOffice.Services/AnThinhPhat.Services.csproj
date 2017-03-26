@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstracts\IPageReferenceRepository.cs" />
     <Compile Include="Abstracts\IChucVuRepository.cs" />
     <Compile Include="Abstracts\ICongViecPhoiHopRepository.cs" />
     <Compile Include="Abstracts\ICongViecQuaTrinhXuLyRepository.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Abstracts\IUsersRepository.cs" />
     <Compile Include="DbExecute.cs" />
     <Compile Include="Extension.cs" />
+    <Compile Include="Implements\PageReferenceRepository.cs" />
     <Compile Include="Implements\ChucVuRepository.cs" />
     <Compile Include="Implements\CongViecPhoiHopRepository.cs" />
     <Compile Include="Implements\CongViecQuaTrinhXuLyRepository.cs" />

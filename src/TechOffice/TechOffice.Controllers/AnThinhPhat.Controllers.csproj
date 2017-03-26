@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="AccountController.cs" />
     <Compile Include="AdminController.cs" />
+    <Compile Include="PageReferenceController.cs" />
     <Compile Include="NewsCategoryController.cs" />
     <Compile Include="NewsController.cs" />
     <Compile Include="FileController.cs" />

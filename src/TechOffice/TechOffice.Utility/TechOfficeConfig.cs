@@ -120,11 +120,13 @@ namespace AnThinhPhat.Utilities
         public static string FOLDER_CV = "CV";//cong viec
         public static string FOLDER_TN = "/TN";//tac nghiep
         public static string FOLDER_NEWS = "NEWS";//tin tuc/su kien
+        public static string FOLDER_PAGEREFERENCE = "PHOTO";//Photo
         public static string FOLDER_UPLOAD_TACNGHIEP = FOLDER_UPLOAD + FOLDER_TN;//tac nghiep
         public static string FOLDER_UPLOAD_TT = System.IO.Path.Combine(FOLDER_UPLOAD, FOLDER_TT);//thu tuc
         public static string FOLDER_UPLOAD_CONGVIEC = System.IO.Path.Combine(FOLDER_UPLOAD, FOLDER_CV);//cong viec
         public static string FOLDER_UPLOAD_VB = System.IO.Path.Combine(FOLDER_UPLOAD, FOLDER_VB);//van ban
         public static string FOLDER_UPLOAD_NEWS = System.IO.Path.Combine(FOLDER_UPLOAD, FOLDER_NEWS);//tin tuc/su kien
+        public static string FOLDER_UPLOAD_PAGEREFERENCE = System.IO.Path.Combine(FOLDER_UPLOAD, FOLDER_PAGEREFERENCE);//contains some there images
 
         private const int _PORT = 25;
         private const string _HOST = "smtp.gmail.com";

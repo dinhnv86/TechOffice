@@ -1,0 +1,54 @@
+﻿@model AnThinhPhat.ViewModel.Menu.PageReferenceViewModel
+@{
+    AjaxOptions ajaxOption = new AjaxOptions
+    {
+        Url = Url.Action("Edit"),
+        HttpMethod = "POST",
+        OnBegin = "onEditMSTBegin",
+        OnComplete = "onEditMSTComplete",
+        OnSuccess = "onEditMSTSuccess",
+        OnFailure = "onEditMSTFailure",
+    };
+}
+
+@using (Ajax.BeginForm(ajaxOption))
+{
+    <div class="form-horizontal">
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            <label class="control-label col-sm-2">Link<span class="required">*</span></label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.UrlLink, htmlAttributes: new { @class = "form-control", @id = "txtNameEdit" })
+                @Html.ValidationMessageFor(model => model.UrlLink)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Image<span class="required">*</span> </label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.UrlImage, htmlAttributes: new { type = "file", @class = "form-control", @id = "txtNameEdit" })
+                @Html.ValidationMessageFor(model => model.UrlImage)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Mô tả</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.Alt, htmlAttributes: new { @class = "form-control", @id = "txtDescriptionEdit" })
+                @Html.ValidationMessageFor(model => model.Alt)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Cho phép mở trang mới</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.IsNewPage, htmlAttributes: new { @class = "form-control", @id = "txtDescription" })
+                @Html.ValidationMessageFor(model => model.IsNewPage)
+            </div>
+        </div>
+        <div class="form-group">
+            <div id="outer" class="col-sm-offset-2 col-sm-10">
+                <div class="inner"><input type="submit" value="Lưu" class="btn btn-primary btn-width-md col-sm-2" name="btnEdit" id="btnEdit" /></div>
+                <div class="inner"><button type="button" class="btn btn-default btn-width-md col-sm-2" name="btnCancel" id="btnCancel" data-dismiss="modal">Hủy</button></div>
+            </div>
+        </div>
+    </div>
+}
+

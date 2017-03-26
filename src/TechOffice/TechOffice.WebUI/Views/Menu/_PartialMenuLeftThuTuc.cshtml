@@ -26,7 +26,6 @@
             @category.Ten
         </a>
         @{
-
             //subcategories
             var subCategories = Model.LinhVucThuTucResults.Where(x => x.ParentId == category.Id).ToList();
 

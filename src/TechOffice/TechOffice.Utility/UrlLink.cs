@@ -101,6 +101,10 @@
         public static string NEWSCATEGORY = "loaitintuc/themmoi";
 
         public static string NEWS = "trangchu/{title}-{id}";
+
+        public static string PAGE_REFERENCE = "tranglienket";
+        public static string PAGE_REFERENCE_EDIT = "tranglienket/edit/{id}";
+        public static string PAGE_REFERENCE_NEW = "tranglienket/themmoi";
         //===================== MASTER URL ==========================//
 
         public static string ADMIN = "admin";

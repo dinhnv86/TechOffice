@@ -100,6 +100,7 @@ namespace AnThinhPhat.WebUI
             kernel.Bind<ITapTinYKienCoQuanRepository>().To<TapTinYKienCoQuanRepository>().WithConstructorArgument(logService);
             kernel.Bind<INewsCategoryRepository>().To<NewsCategoryRepository>().WithConstructorArgument(logService);
             kernel.Bind<INewsRepository>().To<NewsRepository>().WithConstructorArgument(logService);
+            kernel.Bind<IPageReferenceRepository>().To<PageReferenceRepository>().WithConstructorArgument(logService);
         }
     }
 }

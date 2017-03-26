@@ -1,12 +1,10 @@
-﻿@*@{ Html.RenderPartial("~/Views/Shared/Menu/MenuSearch.cshtml");}*@
-
-@{ Html.RenderAction("MenuDanhMuc", "Home"); }
-
-@*@{ Html.RenderPartial("~/Views/Shared/Menu/NewsHighlight.cshtml");}*@
+﻿
+@{ Html.RenderAction("MenuDanhMuc", "Menu"); }
 
 <div class="clearfix"></div>
 
-@{ Html.RenderPartial("~/Views/Shared/Menu/MenuPhoto.cshtml");}
+@*@{ Html.RenderPartial("~/Views/Shared/Menu/MenuPhoto.cshtml");}*@
+@{ Html.RenderAction("MenuPhoto", "Menu");}
 
 @{Html.RenderPartial("_PartialPageCounterUser"); }
 

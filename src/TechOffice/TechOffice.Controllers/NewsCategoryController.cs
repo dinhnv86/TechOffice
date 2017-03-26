@@ -2,8 +2,10 @@
 using AnThinhPhat.Services.Abstracts;
 using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel;
+using AnThinhPhat.ViewModel.NewsCategories;
 using Ninject;
 using PagedList;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -14,10 +16,16 @@ namespace AnThinhPhat.WebUI.Controllers
     [Authorize(Roles = RoleConstant.SUPPER_ADMIN + TechOfficeConfig.SEPARATE_CHAR + RoleConstant.ADMIN)]
     public class NewsCategoryController : OfficeController
     {
+        private IEnumerable<NewsCategoryResult> _listNewsCategories;
+
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            GetAndUpdateName();
+
+            var model = new NewsCategoryViewModel { NewsCategories = _listNewsCategories };
+
+            return View(model);
         }
 
         /// <summary>
@@ -35,11 +43,16 @@ namespace AnThinhPhat.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Create(BaseDataViewModel model)
+        public async Task<JsonResult> Create(NewsCategoryViewModel model)
         {
             return await ExecuteWithErrorHandling(async () =>
             {
-                var result = model.ToDataResult<NewsCategoryResult>().Update(u => { u.CreatedBy = UserName; });
+                var result = model.ToDataResult<NewsCategoryResult>().Update(u =>
+                {
+                    u.CreatedBy = UserName;
+                    u.ParentId = model.ParentId ?? 0;
+                    u.Position = model.Position ?? 0;
+                });
 
                 return await ExecuteResultAsync(async () => await NewsCategoryRepository.AddAsync(result));
             });
@@ -48,18 +61,23 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult Edit(int id)
         {
-            var data = NewsCategoryRepository.Single(id).ToDataViewModel();
+            GetAndUpdateName();
 
-            return PartialView("_PartialPageBaseDataEdit", data);
+            var data = NewsCategoryRepository.Single(id).ToDataViewModel().
+              Update(x => x.NewsCategories = _listNewsCategories);
+
+            return PartialView("_PartialPageEdit", data);
         }
 
-        public async Task<JsonResult> Edit(int id, BaseDataViewModel model)
+        public async Task<JsonResult> Edit(int id, NewsCategoryViewModel model)
         {
             return await ExecuteWithErrorHandling(async () =>
             {
                 var cv = model.ToDataResult<NewsCategoryResult>().Update(u =>
                 {
                     u.Id = id;
+                    u.ParentId = model.ParentId ?? 0;
+                    u.Position = model.Position ?? 0;
                     u.LastUpdatedBy = UserName;
                 });
 
@@ -79,6 +97,32 @@ namespace AnThinhPhat.WebUI.Controllers
                 }
 
                 return await ExecuteResultAsync(async () => await NewsCategoryRepository.DeleteByAsync(id));
+            });
+        }
+
+        private string GetNameMultiple(NewsCategoryResult news)
+        {
+            if (news == null)
+                return string.Empty;
+
+            var result = news.Ten;
+
+            if (news.ParentId == 0)
+                return result;
+
+            var temp = _listNewsCategories.Where(x => x.Id == news.ParentId).SingleOrDefault();
+
+            result = GetNameMultiple(temp) + " >> " + news.Ten;
+
+            return result;
+        }
+
+        private void GetAndUpdateName()
+        {
+            _listNewsCategories = NewsCategoryRepository.GetAll();
+            _listNewsCategories.OrderByDescending(x => x.Id).ToList().ForEach(x =>
+            {
+                x.Ten = GetNameMultiple(x);
             });
         }
 

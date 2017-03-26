@@ -211,5 +211,11 @@ namespace AnThinhPhat.WebUI.Controllers
                 throw new ArgumentException();
             }
         }
+
+        protected void EnsureFolder(string folder)
+        {
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+        }
     }
 }

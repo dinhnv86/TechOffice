@@ -9,6 +9,8 @@ using AnThinhPhat.Utilities;
 using AnThinhPhat.ViewModel;
 using AnThinhPhat.ViewModel.News;
 using Ninject;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -32,7 +34,7 @@ namespace AnThinhPhat.WebUI.Controllers
         public ActionResult Add()
         {
             var newsCategory = NewsCategoryRepository.GetAll().Select(x => x.ToDataViewModel());
-            var model = new AddNewsViewModel {NewsCategory = newsCategory};
+            var model = new AddNewsViewModel { NewsCategory = newsCategory };
 
             return View(model);
         }
@@ -53,7 +55,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 SaveFile(entity.Id, file);
 
-                return RedirectToRoute(UrlLink.NEWS_EDIT, new {id = entity.Id});
+                return RedirectToRoute(UrlLink.NEWS_EDIT, new { id = entity.Id });
             }
             ViewBag.HasError = true;
             var newsCategory = NewsCategoryRepository.GetAll().Select(x => x.ToDataViewModel());
@@ -103,6 +105,22 @@ namespace AnThinhPhat.WebUI.Controllers
             return View(model);
         }
 
+        [HttpPost, ActionName("Delete")]
+        public async Task<JsonResult> DeleteConfirmed(int id)
+        {
+            return await ExecuteWithErrorHandling(async () =>
+            {
+                if (id == 0)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json("Bad Request", JsonRequestBehavior.AllowGet);
+                }
+
+                return await ExecuteResultAsync(async () => await NewsRepository.DeleteByAsync(id));
+            });
+        }
+
+
         private void SaveFile(int newsId, HttpPostedFileBase file)
         {
             if (string.IsNullOrEmpty(file?.FileName))
@@ -130,12 +148,6 @@ namespace AnThinhPhat.WebUI.Controllers
             EnsureFolder(folderNews);
 
             return folderNews;
-        }
-
-        private void EnsureFolder(string folder)
-        {
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
         }
     }
 }

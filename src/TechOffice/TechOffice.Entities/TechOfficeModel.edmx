@@ -232,6 +232,8 @@
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="NhomCoQuan">
           <Key>
@@ -240,6 +242,21 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ten" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="MoTa" Type="ntext" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="PageReference">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrlImage" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="UrlLink" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Alt" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsNewPage" Type="bit" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -961,6 +978,7 @@
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsCategory" EntityType="Self.NewsCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NhomCoQuan" EntityType="Self.NhomCoQuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PageReference" EntityType="Self.PageReference" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TacNghiep" EntityType="Self.TacNghiep" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TacNghiep_TinhHinhThucHien" EntityType="Self.TacNghiep_TinhHinhThucHien" Schema="dbo" store:Type="Tables" />
@@ -1306,11 +1324,6 @@
             <End Role="UserRole" EntitySet="UserRoles" />
           </AssociationSet>
           <EntitySet Name="News" EntityType="TechOfficeDevModel.News" />
-          <EntitySet Name="NewsCategories" EntityType="TechOfficeDevModel.NewsCategory" />
-          <AssociationSet Name="FK_News_NewsCategory" Association="TechOfficeDevModel.FK_News_NewsCategory">
-            <End Role="NewsCategory" EntitySet="NewsCategories" />
-            <End Role="News" EntitySet="News" />
-          </AssociationSet>
           <AssociationSet Name="FK_TacNghiep_YKienCoQuan_User" Association="TechOfficeDevModel.FK_TacNghiep_YKienCoQuan_User">
             <End Role="User" EntitySet="Users" />
             <End Role="TacNghiep_YKienCoQuan" EntitySet="TacNghiep_YKienCoQuan" />
@@ -1334,6 +1347,12 @@
             <End Role="ThuTuc" EntitySet="ThuTucs" />
             <End Role="ThuTuc_CoQuanThucHien" EntitySet="ThuTuc_CoQuanThucHien" />
           </AssociationSet>
+          <EntitySet Name="NewsCategories" EntityType="TechOfficeDevModel.NewsCategory" />
+          <AssociationSet Name="FK_News_NewsCategory" Association="TechOfficeDevModel.FK_News_NewsCategory">
+            <End Role="NewsCategory" EntitySet="NewsCategories" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <EntitySet Name="PageReferences" EntityType="TechOfficeDevModel.PageReference" />
           </EntityContainer>
         <ComplexType Name="Statictis_Result">
           <Property Type="String" Name="Name" Nullable="false" MaxLength="255" />
@@ -2229,35 +2248,9 @@
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="NewsCategory" Relationship="TechOfficeDevModel.FK_News_NewsCategory" FromRole="News" ToRole="NewsCategory" />
           <Property Name="Summary" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NewsCategory" Relationship="TechOfficeDevModel.FK_News_NewsCategory" FromRole="News" ToRole="NewsCategory" />
         </EntityType>
-        <EntityType Name="NewsCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="News" Relationship="TechOfficeDevModel.FK_News_NewsCategory" FromRole="NewsCategory" ToRole="News" />
-        </EntityType>
-        <Association Name="FK_News_NewsCategory">
-          <End Type="TechOfficeDevModel.NewsCategory" Role="NewsCategory" Multiplicity="1" />
-          <End Type="TechOfficeDevModel.News" Role="News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NewsCategory">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="News">
-              <PropertyRef Name="NewsCategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TacNghiep_YKienCoQuan_User">
           <End Type="TechOfficeDevModel.User" Role="User" Multiplicity="0..1" />
           <End Type="TechOfficeDevModel.TacNghiep_YKienCoQuan" Role="TacNghiep_YKienCoQuan" Multiplicity="*" />
@@ -2366,6 +2359,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="NewsCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="News" Relationship="TechOfficeDevModel.FK_News_NewsCategory" FromRole="NewsCategory" ToRole="News" />
+        </EntityType>
+        <Association Name="FK_News_NewsCategory">
+          <End Type="TechOfficeDevModel.NewsCategory" Role="NewsCategory" Multiplicity="1" />
+          <End Type="TechOfficeDevModel.News" Role="News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="NewsCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PageReference">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrlImage" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UrlLink" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Alt" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsNewPage" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2835,20 +2871,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NewsCategories">
-            <EntityTypeMapping TypeName="TechOfficeDevModel.NewsCategory">
-              <MappingFragment StoreEntitySet="NewsCategory">
-                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ThuTuc_CoQuanThucHien">
             <EntityTypeMapping TypeName="TechOfficeDevModel.ThuTuc_CoQuanThucHien">
               <MappingFragment StoreEntitySet="ThuTuc_CoQuanThucHien">
@@ -2890,6 +2912,38 @@
                 <ScalarProperty Name="TenThuTuc" ColumnName="TenThuTuc" />
                 <ScalarProperty Name="NgayBanHanh" ColumnName="NgayBanHanh" />
                 <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsCategories">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.NewsCategory">
+              <MappingFragment StoreEntitySet="NewsCategory">
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PageReferences">
+            <EntityTypeMapping TypeName="TechOfficeDevModel.PageReference">
+              <MappingFragment StoreEntitySet="PageReference">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsNewPage" ColumnName="IsNewPage" />
+                <ScalarProperty Name="Alt" ColumnName="Alt" />
+                <ScalarProperty Name="UrlLink" ColumnName="UrlLink" />
+                <ScalarProperty Name="UrlImage" ColumnName="UrlImage" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

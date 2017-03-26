@@ -15,6 +15,10 @@
 
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/jqueryui")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
 </head>
 <body>
     @{ Html.RenderPartial("_Header"); }
@@ -22,7 +26,9 @@
     <div class="bg dtapg">
         <div class="container">
             <div class="row">
-                @RenderBody()
+                <div class="col-xs-12">
+                    @RenderBody()
+                </div>
             </div>
         </div>
     </div>
@@ -32,10 +38,10 @@
     <footer>
         @{ Html.RenderPartial("_Footer"); }
     </footer>
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/jqueryui")
+    @*@Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/jqueryui")*@
     @Scripts.Render("~/bundles/unobtrusive")
     @Scripts.Render("~/bundles/tech")
     @RenderSection("scripts", false)

@@ -24,7 +24,7 @@
                 <th class="text-center col-action"></th>
             </tr>
         </thead>
-        @if (Model.Any())
+        @if (Model != null && Model.Any())
             {
                 var iCount = 0;
             <tbody>

@@ -1,0 +1,98 @@
+﻿
+@using PagedList.Mvc
+@using AnThinhPhat.ViewModel
+
+@model PagedList.IPagedList<AnThinhPhat.ViewModel.Menu.PageReferenceViewModel>
+@{
+    var ajaxPaging = new AjaxOptions
+    {
+        UpdateTargetId = "tblMST",
+        HttpMethod = "GET"
+    };
+}
+
+@helper GeneratorImage(int id, string name)
+{
+var url = System.IO.Path.Combine("/Uploads/PHOTO",
+     id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR),
+     name);
+
+    <img src="@url" width="50" height="50" />
+}
+
+<div id="tblMST">
+    <table class="table table-bordered">
+        <thead class="header">
+            <tr>
+                <th class="text-center col-stt">STT</th>
+                <th class="text-center col-xs-2">Link</th>
+                <th class="text-center col-xs-1">Image</th>
+                <th class="text-center col-xs-3">Mô tả</th>
+                <th class="text-center col-xs-2">Người cập nhật</th>
+                <th class="text-center col-xs-1">Ngày cập nhật </th>
+                <th class="text-center col-action"></th>
+            </tr>
+        </thead>
+        @if (Model != null && Model.Any())
+            {
+                var iCount = 0;
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    iCount++;
+                    <tr>
+                        <td class="text-center">@iCount</td>
+                        <td>@item.UrlLink</td>
+                        <td>
+                            @GeneratorImage(item.Id, item.UrlImage)
+                        </td>
+                        <td>@item.Alt</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.LastUpdatedBy))
+                            {
+                                @Html.Raw(item.LastUpdatedBy);
+                            }
+                            else
+                            {
+                                @Html.Raw(item.CreatedBy);
+                            }
+                        </td>
+                        <td>
+                            @if (item.LastUpdated.HasValue)
+                            {
+                                @Html.DisplayFor(x => item.LastUpdated, "DisplayDate")
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(x => item.CreateDate, "DisplayDate")
+                            }
+                        </td>
+                        <td class="link-action">
+                            @*@Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn-edit" }) |*@
+                            @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                            <a href="#" data-url='@Url.Action("Delete", new {id = item.Id})' id="lnkDelete_@item.Id" data-toggle="popover">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7">
+                        <div id="contentPager" class="pull-right">
+                            @Html.PagedListPager(Model, page => Url.Action("List", new { page }),
+                            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxPaging))
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        }
+        else
+        {
+            <tr>
+                <td colspan="7">
+                    No rows found
+                </td>
+            </tr>
+        }
+    </table>
+</div>

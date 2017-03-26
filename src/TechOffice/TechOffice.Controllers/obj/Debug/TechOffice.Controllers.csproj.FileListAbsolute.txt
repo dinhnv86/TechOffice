@@ -1,0 +1,7 @@
+E:\Projects\TechOffice\TechOffice\src\TechOffice\TechOffice.Controllers\bin\Debug\TechOffice.Controllers.dll
+E:\Projects\TechOffice\TechOffice\src\TechOffice\TechOffice.Controllers\bin\Debug\TechOffice.Controllers.pdb
+E:\Projects\TechOffice\TechOffice\src\TechOffice\TechOffice.Controllers\bin\Debug\System.Web.Mvc.dll
+E:\Projects\TechOffice\TechOffice\src\TechOffice\TechOffice.Controllers\bin\Debug\System.Web.Mvc.xml
+E:\Projects\TechOffice\TechOffice\src\TechOffice\TechOffice.Controllers\obj\Debug\TechOffice.Controllers.csprojResolveAssemblyReference.cache
+E:\Projects\TechOffice\TechOffice\src\TechOffice\TechOffice.Controllers\obj\Debug\TechOffice.Controllers.dll
+E:\Projects\TechOffice\TechOffice\src\TechOffice\TechOffice.Controllers\obj\Debug\TechOffice.Controllers.pdb

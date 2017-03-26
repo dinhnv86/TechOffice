@@ -1,0 +1,139 @@
+﻿@model AnThinhPhat.ViewModel.CoQuan.CoQuanViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/app/loading.css" rel="stylesheet" />
+
+<div class="col-xs-12">
+    <h2>Danh sách các trang liên kết</h2>
+    @*<input type="button" class="btn btn-link" value="Thêm mới" />*@
+    @Html.RouteLink(linkText: "Thêm mới", routeName: UrlLink.PAGE_REFERENCE_NEW, routeValues: null, htmlAttributes: new { @class = "btn btn-link" })
+
+    @{ Html.RenderPartial("_PartialPageAlert"); }
+
+    @Html.Action("List")
+
+    <div class="modal fade in" id="modalCreateNew">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm mới trang liên kết</h4>
+                </div>
+                <div class="modal-body">
+                    @{ Html.RenderPartial("_PartialPageCreate", Model); }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade in" id="modalEdit">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Chỉnh sửa trang liên kết</h4>
+                </div>
+                <div class="modal-body" id="modalEditBody">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/Scripts/app/modaljs.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        onAddMSTSuccess = function (res) {
+            //Show Success
+            if (res.code === "SB01") {
+                loadTableMST("add");
+            }
+        };
+
+        onEditMSTSuccess = function (res) {
+            //Show Success
+            if (res.code === "SB01") {
+                loadTableMST("edit");
+            }
+        };
+
+        loadTableMST = function (type) {
+            showAlertSuccess(type);
+            $('#tblMST').load('@Url.Action("List")');
+        };
+
+        /*
+        type: add or edit
+        */
+        showAlertSuccess = function (type) {
+            if (type === "add") {
+                $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#success-alert").css('display', 'none');
+                });
+            } else {
+                $("#success-alert-edit").fadeTo(2000, 500).slideUp(500, function () {
+                    $("#success-alert-edit").css('display', 'none');
+                });
+            }
+        };
+
+        $(document).ready(function () {
+            var url = '';
+            var idButtonDelete = '';
+
+            $('#tblMST').on('click', 'a[id*="lnkDelete"]', function () {
+                url = $(this).attr('data-url');
+                idButtonDelete = $(this).attr('id');
+                //Register popover
+                $(this).popover({
+                    trigger: 'focus',
+                    placement: 'left',
+                    title: message.AreYouSure,
+                    html: true,
+                    template: message.TemplatePopover
+                });
+
+                $(this).popover('show');
+            });
+
+            $('#tblMST').on('click', '#btnDeleteYes', function () {
+                //Hide popover
+                $('#' + idButtonDelete).popover('destroy');
+
+                //show loading
+                onEditMSTBegin();
+                //Excute delete using ajax
+                var ajaxRequest = $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: url
+                });
+
+                ajaxRequest.success(function () {
+                    $('#tblMST').load('@Url.Action("List")');
+                });
+
+                ajaxRequest.error(function () {
+                    alert(message.ErrorDelete);
+                });
+
+                ajaxRequest.always(function () {
+                    onEditMSTComplete();
+                });
+            });
+
+            $('#tblMST').on('click', '#btnDeleteNo', function () {
+                $('#' + idButtonDelete).popover('destroy');
+            });
+        });
+
+    </script>
+
+}

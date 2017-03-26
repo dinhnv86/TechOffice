@@ -1,18 +1,19 @@
-﻿<div class="supp">
-    <div class="bgsitebar">
-        <a href="#"><img src="~/images/hoctap_lamtheoguongbacsv.jpg" alt="Hỗ trợ Phòng nội vụ"></a>
-    </div>
+﻿@model AnThinhPhat.ViewModel.Menu.InitMenuPageReferenceViewModel
 
-</div>
+@if (Model != null && Model.PageReferenceResults != null && Model.PageReferenceResults.Any())
+{
+    foreach (var item in Model.PageReferenceResults)
+    {
+        var srcImage = Path.Combine(TechOfficeConfig.FOLDER_UPLOAD_PAGEREFERENCE.Replace("~", ""),
+       item.Id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR),
+       item.UrlImage);
+        var target = item.IsNewPage ? "_blank" : "";
 
-<div class="supp">
-    <div class="bgsitebar">
-        <a href="#"><img src="~/images/bien dao que huong_1369814865500.jpg" alt="Hỗ trợ Phòng nội vụ"></a>
-    </div>
-</div>
+        <div class="supp">
+            <div class="bgsitebar">
+                <a href="@item.UrlLink" target="@target"><img src="@srcImage" alt="@item.Alt"></a>
+            </div>
 
-<div class="supp">
-    <div class="bgsitebar">
-        <a href="#"><img src="~/images/nong-thon-moi_1369815473656.jpg" alt="Hỗ trợ Phòng nội vụ"></a>
-    </div>
-</div>
+        </div>
+    }
+}

@@ -127,6 +127,9 @@
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Infos\NoiDungTraLoiInfo.cs" />
+    <Compile Include="PageReference.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseResult.cs" />
     <Compile Include="BaseInfo.cs" />
@@ -137,6 +140,7 @@
     <Compile Include="Results\CongViecVanBanResult.cs" />
     <Compile Include="Results\CoQuanBanHanhVanBanResult.cs" />
     <Compile Include="Results\NewsCategoryResult.cs" />
+    <Compile Include="Results\PageReferenceResult.cs" />
     <Compile Include="Results\StatisticCongViec.cs" />
     <Compile Include="Results\SummariesCongViecResult.cs" />
     <Compile Include="Results\TrangThaiCongViecResult.cs" />

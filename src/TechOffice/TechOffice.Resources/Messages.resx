@@ -264,4 +264,16 @@
   <data name="News_AddNews_Summary" xml:space="preserve">
     <value>Xin vui lòng nhập nội dung tóm tắt</value>
   </data>
+  <data name="PageRef_Add_Image" xml:space="preserve">
+    <value>Xin vui lòng chọn image đại diện trang liên kết</value>
+  </data>
+  <data name="PageRef_Add_UrlLink" xml:space="preserve">
+    <value>Xin vui lòng nhập trang liên kết</value>
+  </data>
+  <data name="Page_Add_Alt_MaxLength" xml:space="preserve">
+    <value>Chiều dài tối đa mô tả là 255 ký tự</value>
+  </data>
+  <data name="Page_Add_UrlLink_MaxLength" xml:space="preserve">
+    <value>Chiều dài tối đa của trang liên kết là 255 ký tự</value>
+  </data>
 </root>

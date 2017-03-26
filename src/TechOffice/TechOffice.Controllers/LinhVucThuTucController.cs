@@ -23,11 +23,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
         public ActionResult Index()
         {
-            _listLinhVucThuTuc = ThuTucRepository.GetAll();
-            _listLinhVucThuTuc.OrderByDescending(x => x.Id).ToList().ForEach(x =>
-              {
-                  x.Ten = GetNameMultiple(x);
-              });
+            GetAndUpdateName();
 
             var model = new LinhVucThuTucViewModel { LinhVucThuTuces = _listLinhVucThuTuc };
 
@@ -66,11 +62,7 @@ namespace AnThinhPhat.WebUI.Controllers
         [HttpGet]
         public PartialViewResult Edit(int id)
         {
-            _listLinhVucThuTuc = ThuTucRepository.GetAll();
-            _listLinhVucThuTuc.ToList().ForEach(x =>
-            {
-                x.Ten = GetNameMultiple(x);
-            });
+            GetAndUpdateName();
 
             var data = ThuTucRepository.Single(id).ToDataViewModel().
                 Update(x => x.LinhVucThuTuces = _listLinhVucThuTuc);
@@ -78,13 +70,14 @@ namespace AnThinhPhat.WebUI.Controllers
             return PartialView("_PartialPageEdit", data);
         }
 
-        public async Task<JsonResult> Edit(int id, BaseDataViewModel model)
+        public async Task<JsonResult> Edit(int id, LinhVucThuTucViewModel model)
         {
             return await ExecuteWithErrorHandling(async () =>
             {
                 var cv = model.ToDataResult<LinhVucThuTucResult>().Update(u =>
                 {
                     u.Id = id;
+                    u.ParentId = model.ParentId ?? 0;
                     u.LastUpdatedBy = UserName;
                 });
 
@@ -122,6 +115,16 @@ namespace AnThinhPhat.WebUI.Controllers
             result = GetNameMultiple(temp) + " >> " + thutuc.Ten;
 
             return result;
+        }
+
+        private void GetAndUpdateName()
+        {
+            _listLinhVucThuTuc = ThuTucRepository.GetAll();
+
+            _listLinhVucThuTuc.OrderByDescending(x => x.Id).ToList().ForEach(x =>
+            {
+                x.Ten = GetNameMultiple(x);
+            });
         }
     };
 }

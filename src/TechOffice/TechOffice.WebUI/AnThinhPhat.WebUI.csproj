@@ -904,6 +904,14 @@
     <Content Include="Views\Shared\DisplayTemplates\DisplayDate.cshtml" />
     <Content Include="Views\LinhVucThuTuc\_PartialPageCreate.cshtml" />
     <Content Include="Views\LinhVucThuTuc\_PartialPageEdit.cshtml" />
+    <Content Include="Views\NewsCategory\_PartialPageCreate.cshtml" />
+    <Content Include="Views\NewsCategory\_PartialPageEdit.cshtml" />
+    <Content Include="Views\PageReference\_PartialPageCreate.cshtml" />
+    <Content Include="Views\PageReference\_PartialPageEdit.cshtml" />
+    <Content Include="Views\PageReference\Index.cshtml" />
+    <Content Include="Views\PageReference\List.cshtml" />
+    <Content Include="Views\PageReference\Add.cshtml" />
+    <Content Include="Views\PageReference\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

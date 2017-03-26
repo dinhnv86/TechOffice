@@ -55,10 +55,11 @@ namespace AnThinhPhat.Entities
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<VanBan> VanBans { get; set; }
         public virtual DbSet<News> News { get; set; }
-        public virtual DbSet<NewsCategory> NewsCategories { get; set; }
         public virtual DbSet<ThuTuc_CoQuanThucHien> ThuTuc_CoQuanThucHien { get; set; }
         public virtual DbSet<LinhVucThuTuc> LinhVucThuTucs { get; set; }
         public virtual DbSet<ThuTuc> ThuTucs { get; set; }
+        public virtual DbSet<NewsCategory> NewsCategories { get; set; }
+        public virtual DbSet<PageReference> PageReferences { get; set; }
     
         public virtual ObjectResult<Statictis_Result> Statictis(Nullable<int> noiVuId, Nullable<System.DateTime> from, Nullable<System.DateTime> to)
         {
