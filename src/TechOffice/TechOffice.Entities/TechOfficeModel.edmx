@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TechOfficeDevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TechOfficeDevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BaiViet">
           <Key>
             <PropertyRef Name="MaBaiViet" />
@@ -188,6 +188,7 @@
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="ParentId" Type="int" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="LinhVucVanBan">
           <Key>
@@ -1257,8 +1258,7 @@
             <End Role="CongViec_VanBan" EntitySet="CongViec_VanBan" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TechOfficeDevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1472,6 +1472,7 @@
           <Property Name="LastUpdatedBy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ParentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ThuTucs" Relationship="Self.FK_ThuTuc_LinhVucThuTuc" FromRole="LinhVucThuTuc" ToRole="ThuTuc" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="LinhVucVanBan">
           <Key>
@@ -2818,6 +2819,7 @@
           <EntitySetMapping Name="LinhVucThuTucs">
             <EntityTypeMapping TypeName="TechOfficeDevModel.LinhVucThuTuc">
               <MappingFragment StoreEntitySet="LinhVucThuTuc">
+                <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="MoTa" ColumnName="MoTa" />

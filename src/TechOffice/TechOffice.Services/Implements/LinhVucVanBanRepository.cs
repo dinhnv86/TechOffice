@@ -26,7 +26,7 @@ namespace AnThinhPhat.Services.Implements
 
                     add.Ten = entity.Ten;
                     add.MoTa = entity.MoTa;
-
+                    
                     add.IsDeleted = entity.IsDeleted;
                     add.CreatedBy = entity.CreatedBy;
                     add.CreateDate = DateTime.Now;

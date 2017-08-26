@@ -635,6 +635,7 @@ namespace AnThinhPhat.Entities
                 Ten = entity.Ten,
                 MoTa = entity.MoTa,
                 ParentId = entity.ParentId,
+                Position = entity.Position,
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,
                 IsDeleted = entity.IsDeleted,

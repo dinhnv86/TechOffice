@@ -158,6 +158,7 @@ namespace AnThinhPhat.Services
             add.Ten = entity.Ten;
             add.MoTa = entity.MoTa;
             add.ParentId = entity.ParentId;
+            add.Position = entity.Position;
 
             add.IsDeleted = entity.IsDeleted;
             add.CreatedBy = entity.CreatedBy;
@@ -181,6 +182,7 @@ namespace AnThinhPhat.Services
             entity.Ten = data.Ten;
             entity.MoTa = data.MoTa;
             entity.ParentId = data.ParentId;
+            entity.Position = data.Position;
 
             entity.IsDeleted = data.IsDeleted;
             entity.LastUpdatedBy = data.LastUpdatedBy;

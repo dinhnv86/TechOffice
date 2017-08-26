@@ -63,6 +63,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 var result = model.ToDataResult<LinhVucThuTucResult>().Update(u =>
                 {
                     u.ParentId = model.ParentId ?? 0;
+                    u.Position = model.Position ?? 0;
                     u.CreatedBy = UserName;
                 });
 
@@ -120,6 +121,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 {
                     u.Id = id;
                     u.ParentId = model.ParentId ?? 0;
+                    u.Position = model.Position ?? 0;
                     u.LastUpdatedBy = UserName;
                 });
 

@@ -212,6 +212,7 @@ namespace AnThinhPhat.ViewModel
                 Id = entity.Id,
                 Name = entity.Ten,
                 ParentId = entity.ParentId,
+                Position  =entity.Position,
                 Description = entity.MoTa,
                 CreateDate = entity.CreateDate,
                 CreatedBy = entity.CreatedBy,

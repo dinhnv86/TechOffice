@@ -27,7 +27,7 @@
         </a>
         @{
             //subcategories
-            var subCategories = Model.LinhVucThuTucResults.Where(x => x.ParentId == category.Id).ToList();
+            var subCategories = Model.LinhVucThuTucResults.OrderBy(o => o.Position).Where(x => x.ParentId == category.Id).ToList();
 
             if (subCategories != null && subCategories.Any())
             {
