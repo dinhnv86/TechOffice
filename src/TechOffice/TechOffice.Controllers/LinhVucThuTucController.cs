@@ -21,18 +21,18 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private IEnumerable<LinhVucThuTucResult> _listLinhVucThuTuc;
 
-        public ActionResult Index()
-        {
-            _listLinhVucThuTuc = ThuTucRepository.GetAll();
-            _listLinhVucThuTuc.OrderByDescending(x => x.Id).ToList().ForEach(x =>
-              {
-                  x.Ten = GetNameMultiple(x);
-              });
+        //public ActionResult Index()
+        //{
+        //    _listLinhVucThuTuc = ThuTucRepository.GetAll();
+        //    _listLinhVucThuTuc.OrderByDescending(x => x.Id).ToList().ForEach(x =>
+        //      {
+        //          x.Ten = GetNameMultiple(x);
+        //      });
 
-            var model = new LinhVucThuTucViewModel { LinhVucThuTuces = _listLinhVucThuTuc };
+        //    var model = new LinhVucThuTucViewModel { LinhVucThuTuces = _listLinhVucThuTuc };
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         /// <summary>
         ///     Lists the specified page.
@@ -48,35 +48,35 @@ namespace AnThinhPhat.WebUI.Controllers
             return PartialView(items.ToPagedList(pageNumber, TechOfficeConfig.PAGESIZE));
         }
 
-        [HttpPost]
-        public async Task<JsonResult> Create(LinhVucThuTucViewModel model)
-        {
-            return await ExecuteWithErrorHandling(async () =>
-            {
-                var result = model.ToDataResult<LinhVucThuTucResult>().Update(u =>
-                {
-                    u.ParentId = model.ParentId ?? 0;
-                    u.CreatedBy = UserName;
-                });
+        //[HttpPost]
+        //public async Task<JsonResult> Create(LinhVucThuTucViewModel model)
+        //{
+        //    return await ExecuteWithErrorHandling(async () =>
+        //    {
+        //        var result = model.ToDataResult<LinhVucThuTucResult>().Update(u =>
+        //        {
+        //            u.ParentId = model.ParentId ?? 0;
+        //            u.CreatedBy = UserName;
+        //        });
 
-                return await ExecuteResultAsync(async () => await ThuTucRepository.AddAsync(result));
-            });
-        }
+        //        return await ExecuteResultAsync(async () => await ThuTucRepository.AddAsync(result));
+        //    });
+        //}
 
-        [HttpGet]
-        public PartialViewResult Edit(int id)
-        {
-            _listLinhVucThuTuc = ThuTucRepository.GetAll();
-            _listLinhVucThuTuc.ToList().ForEach(x =>
-            {
-                x.Ten = GetNameMultiple(x);
-            });
+        //[HttpGet]
+        //public PartialViewResult Edit(int id)
+        //{
+        //    _listLinhVucThuTuc = ThuTucRepository.GetAll();
+        //    _listLinhVucThuTuc.ToList().ForEach(x =>
+        //    {
+        //        x.Ten = GetNameMultiple(x);
+        //    });
 
-            var data = ThuTucRepository.Single(id).ToDataViewModel().
-                Update(x => x.LinhVucThuTuces = _listLinhVucThuTuc);
+        //    var data = ThuTucRepository.Single(id).ToDataViewModel().
+        //        Update(x => x.LinhVucThuTuces = _listLinhVucThuTuc);
 
-            return PartialView("_PartialPageEdit", data);
-        }
+        //    return PartialView("_PartialPageEdit", data);
+        //}
 
         public async Task<JsonResult> Edit(int id, BaseDataViewModel model)
         {

@@ -11,7 +11,7 @@
     };
 }
 <div class="clear"></div>
-<div class="col-xs-12">
+<div class="">
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -51,8 +51,12 @@
                         <tr>
                             <td class="@fontColor">@Html.Raw(i + 1)</td>
                             <td class="@fontColor">
-                                @Html.DisplayFor(x => item.NgayTao, "DisplayDate") <br />
-                                @Html.DisplayFor(x => item.NgayHetHan, "DisplayDate")
+                                @item.NgayTao.ToString("dd/MM/yyyy") <br />
+                                @if (item.NgayHetHan != null)
+                                {
+                                 @(((DateTime)(item.NgayHetHan)).ToString("dd/MM/yyyy"))
+                                }
+                                @*@Html.DisplayFor(x => item.NgayHetHan, "DisplayDate")*@
                             </td>
 
                             <td class="@fontColor">@item.UserPhuTrach.HoVaTen</td>

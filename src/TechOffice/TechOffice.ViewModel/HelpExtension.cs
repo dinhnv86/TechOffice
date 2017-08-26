@@ -198,26 +198,26 @@ namespace AnThinhPhat.ViewModel
             };
         }
 
-        public static LinhVucThuTucViewModel ToIfNotNullDataViewModel(this LinhVucThuTucResult entity)
-        {
-            return entity?.ToDataViewModel();
-        }
+        //public static LinhVucThuTucViewModel ToIfNotNullDataViewModel(this LinhVucThuTucResult entity)
+        //{
+        //    return entity?.ToDataViewModel();
+        //}
 
-        public static LinhVucThuTucViewModel ToDataViewModel(this LinhVucThuTucResult entity)
-        {
-            return new LinhVucThuTucViewModel
-            {
-                Id = entity.Id,
-                Name = entity.Ten,
-                ParentId = entity.ParentId,
-                Description = entity.MoTa,
-                CreateDate = entity.CreateDate,
-                CreatedBy = entity.CreatedBy,
-                IsDeleted = entity.IsDeleted,
-                LastUpdated = entity.LastUpdated,
-                LastUpdatedBy = entity.LastUpdatedBy
-            };
-        }
+        //public static LinhVucThuTucViewModel ToDataViewModel(this LinhVucThuTucResult entity)
+        //{
+        //    return new LinhVucThuTucViewModel
+        //    {
+        //        Id = entity.Id,
+        //        Name = entity.Ten,
+        //        ParentId = entity.ParentId,
+        //        Description = entity.MoTa,
+        //        CreateDate = entity.CreateDate,
+        //        CreatedBy = entity.CreatedBy,
+        //        IsDeleted = entity.IsDeleted,
+        //        LastUpdated = entity.LastUpdated,
+        //        LastUpdatedBy = entity.LastUpdatedBy
+        //    };
+        //}
 
         public static TResult ToDataResult<TResult>(this BaseDataViewModel entity) where TResult : DataResult
         {

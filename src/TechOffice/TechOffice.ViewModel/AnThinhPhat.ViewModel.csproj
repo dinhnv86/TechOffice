@@ -82,7 +82,6 @@
     <Compile Include="ThuTuc\EditThuTucViewModel.cs" />
     <Compile Include="ThuTuc\AddThuTucViewModel.cs" />
     <Compile Include="ThuTuc\InitThuTucViewModel.cs" />
-    <Compile Include="ThuTuc\LinhVucThuTucViewModel.cs" />
     <Compile Include="ThuTuc\ThuTucViewModel.cs" />
     <Compile Include="ThuTuc\ValueSearchViewModel.cs" />
     <Compile Include="TinTuc\BaiVietModel.cs" />

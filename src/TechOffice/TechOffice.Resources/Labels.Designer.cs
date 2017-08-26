@@ -250,11 +250,29 @@ namespace AnThinhPhat.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chi tiết công việc.
+        /// </summary>
+        public static string CongViec_Detail_Title {
+            get {
+                return ResourceManager.GetString("CongViec_Detail_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Đánh giá công việc.
         /// </summary>
         public static string CongViec_Edit_DanhGiaCongViec {
             get {
                 return ResourceManager.GetString("CongViec_Edit_DanhGiaCongViec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sửa công việc.
+        /// </summary>
+        public static string CongViec_Edit_Title {
+            get {
+                return ResourceManager.GetString("CongViec_Edit_Title", resourceCulture);
             }
         }
         

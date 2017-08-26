@@ -320,7 +320,7 @@ namespace AnThinhPhat.WebUI.Controllers
                     seachAll = seachAll.Where(x => x.TrichYeu.Contains(model.TenVanBan));
             }
 
-            return seachAll.ToPagedList(model.Page, TechOfficeConfig.PAGESIZE);
+            return seachAll.OrderByDescending(o=>o.CreateDate).ToPagedList(model.Page, TechOfficeConfig.PAGESIZE);
         }
 
         private void SaveFiles(int id, IEnumerable<HttpPostedFileBase> files)

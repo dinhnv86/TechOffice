@@ -14,8 +14,8 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th class="text-center col-sm-2 col-action">Số ký hiệu</th>
-            <th class="text-center col-sm-1">Ngày ban hành</th>
+            <th class="text-center col-sm-2">Số ký hiệu</th>
+            <th class="text-center col-sm-2">Ngày ban hành</th>
             <th class="text-center col-sm-3">Trích yếu</th>
             <th class="text-center col-sm-2">Cơ quan ban hành</th>
             <th class="text-center col-sm-2">Loại văn bản</th>
@@ -33,7 +33,7 @@
                             @Html.RouteLink(item.SoVanBan, UrlLink.VANBAN_DETAIL, routeValues: new { sovanban = item.SoVanBan.RejectMarks(), id = item.Id }, htmlAttributes: new { @class = "btn-link", target = "_blank" })
                         </strong>
                     </td>
-                    <td>@Html.DisplayFor(x => item.NgayBanHanh, "DisplayDate")</td>
+                    <td>@item.NgayBanHanh.ToString("dd/MM/yyyy")</td>
                     <td>@item.TrichYeu</td>
                     <td>@item.CoQuanBanHanhVanBanInfo.IfNotNull(x=>x.Name)</td>
                     <td>@item.LoaiVanBanInfo.IfNotNull(x=>x.Name)</td>
