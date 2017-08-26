@@ -60,7 +60,7 @@ namespace AnThinhPhat.WebUI.Controllers
             if (result == Services.SaveResult.SUCCESS)
                 SaveFiles(dataSave.Id, fileName, model.Image);
 
-            return RedirectToRoute(UrlLink.PAGE_REFERENCE_EDIT, new { id = dataSave.Id });
+            return RedirectToRoute(UrlLink.PAGE_REFERENCE);
         }
 
         [HttpGet]

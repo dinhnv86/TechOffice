@@ -4,10 +4,10 @@
 {
     foreach (var item in Model.PageReferenceResults)
     {
-        var srcImage = Path.Combine(TechOfficeConfig.FOLDER_UPLOAD_PAGEREFERENCE.Replace("~", ""),
+        var srcImage = Path.Combine(TechOfficeConfig.FOLDER_UPLOAD_PAGEREFERENCE.Replace("~", string.Empty),
        item.Id.ToString().PadLeft(TechOfficeConfig.LENGTHFOLDER, TechOfficeConfig.PAD_CHAR),
        item.UrlImage);
-        var target = item.IsNewPage ? "_blank" : "";
+        var target = item.IsNewPage ? "_blank" : string.Empty;
 
         <div class="supp">
             <div class="bgsitebar">
