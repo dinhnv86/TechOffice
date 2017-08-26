@@ -17,10 +17,16 @@
 <link href="~/Content/app/loading.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
 
-<h1 class="title title_ct"><span>@Labels.CongViec_Add_Title</span></h1>
+
 
 <div class="pading">
     <div class="entry">
+
+        <h1 class="title title_ct">
+            <span>               @Labels.CongViec_Detail_Title
+
+            </span>
+        </h1>
         @using (Ajax.BeginForm(ajaxOption))
         {
             <div class="col-sm-4">

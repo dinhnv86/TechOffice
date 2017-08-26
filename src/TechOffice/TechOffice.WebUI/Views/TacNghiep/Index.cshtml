@@ -4,58 +4,61 @@
 
 }
 
-<div class="boxr" style="width:100%">
-    <h1 class="title title_ct"><span>Tác nghiệp</span></h1>
-
-    <div class="pading">
-        <div class="entry form-horizontal">
-            @using (Html.BeginForm("Index", "TacNghiep", FormMethod.Get))
-            {
-                <div class="col-md-6">
-                    <label>Chọn nhóm cơ quan</label>
-                    @Html.TechDropDownListFor(x => Model.NhomCoQuanId, new SelectList(Model.NhomCoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" }, disabled: !User.IsInRole(RoleConstant.ALLOW_SELECT))
-                    <label>Chọn cơ quan</label>
-                    @Html.TechDropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" }, disabled: !User.IsInRole(RoleConstant.ALLOW_SELECT))
-                    <label>Chọn lĩnh vực</label>
-                    @Html.DropDownListFor(x => Model.LinhVucTacNghiepId, new SelectList(Model.LinhVucTacNghiepInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
-                    <label>Chọn mức độ hoàn thành</label>
-                    @Html.DropDownListFor(x => Model.MucDoHoanThanhId, new SelectList(Model.MucDoHoanThanhInfo, "Id", "Ten"), "Tất cả", htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="col-md-6">
-                    <label>Chọn năm</label>
-                    @Html.DropDownListFor(x => Model.NamBanHanhId, new SelectList(Model.NamBanHanhInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
-                    <label>Chọn thông tin tìm kiếm</label>
-                    @Html.TextBoxFor(x => Model.NhapThongTinTimKiem, htmlAttributes: new { @class = "form-control" })
-                    <label>Chọn tiêu chí tìm kiếm</label>
-                    <div class="form-group col-xs-12">
-                        <div class="radio-inline">
-                            @Html.RadioButtonFor(x => Model.SearchTypeValue, true, htmlAttributes: new { id = "noiDungId" }) Nội dung
-                        </div>
-                        <div class="radio-inline">
-                            @Html.RadioButtonFor(x => Model.SearchTypeValue, false, htmlAttributes: new { id = "YKienId" }) Ý kiến trao đổi
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div id="outer">
-                        <div class="inner"><input type="submit" class="btn btn-primary btn-width-md" value="Tìm kiếm" /></div>
-                        <div class="inner">
-                            @Html.RouteLink("Thống kê", UrlLink.TACNGHIEP_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })
-                        </div>
-                        @if (User.IsInRole(RoleConstant.NEW_TACNGHIEP))
-                        {
-                            <div class="inner">
-                                @Html.RouteLink("Thêm mới", UrlLink.TACNGHIEP_ADD, null, htmlAttributes: new { @class = "btn btn-primary" })
-                            </div>
-                        }
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-
-    <div class="clear"></div>
+<div class="boxr" >
     <div class="col-xs-12">
-        <h3><span style="font-size: x-large;">Danh sách các công việc</span></h3>
+        <h1 class="title title_ct"><span>Tác nghiệp</span></h1>
+
+        <div class="pading">
+            <div class="entry form-horizontal">
+                <div class="frmbox">
+                    @using (Html.BeginForm("Index", "TacNghiep", FormMethod.Get))
+            {
+                        <div class="col-md-6">
+                            <label>Chọn nhóm cơ quan</label>
+                            @Html.TechDropDownListFor(x => Model.NhomCoQuanId, new SelectList(Model.NhomCoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" }, disabled: !User.IsInRole(RoleConstant.ALLOW_SELECT))
+                            <label>Chọn cơ quan</label>
+                            @Html.TechDropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" }, disabled: !User.IsInRole(RoleConstant.ALLOW_SELECT))
+                            <label>Chọn lĩnh vực</label>
+                            @Html.DropDownListFor(x => Model.LinhVucTacNghiepId, new SelectList(Model.LinhVucTacNghiepInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                            <label>Chọn mức độ hoàn thành</label>
+                            @Html.DropDownListFor(x => Model.MucDoHoanThanhId, new SelectList(Model.MucDoHoanThanhInfo, "Id", "Ten"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6">
+                            <label>Chọn năm</label>
+                            @Html.DropDownListFor(x => Model.NamBanHanhId, new SelectList(Model.NamBanHanhInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                            <label>Chọn thông tin tìm kiếm</label>
+                            @Html.TextBoxFor(x => Model.NhapThongTinTimKiem, htmlAttributes: new { @class = "form-control" })
+                            <label>Chọn tiêu chí tìm kiếm</label>
+                            <div class="col-xs-12">
+                                <div class="radio-inline">
+                                    @Html.RadioButtonFor(x => Model.SearchTypeValue, true, htmlAttributes: new { id = "noiDungId" }) Nội dung
+                                </div>
+                                <div class="radio-inline">
+                                    @Html.RadioButtonFor(x => Model.SearchTypeValue, false, htmlAttributes: new { id = "YKienId" }) Ý kiến trao đổi
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div id="outer">
+                                <div class="inner"><input type="submit" class="btn btn-primary" value="Tìm kiếm" /></div>
+                                <div class="inner">
+                                    @Html.RouteLink("Thống kê", UrlLink.TACNGHIEP_THONGKE, null, htmlAttributes: new { @class = "btn btn-primary" })
+                                </div>
+                                @if (User.IsInRole(RoleConstant.NEW_TACNGHIEP))
+                            {
+                                    <div class="inner">
+                                        @Html.RouteLink("Thêm mới", UrlLink.TACNGHIEP_ADD, null, htmlAttributes: new { @class = "btn btn-primary" })
+                                    </div>
+                            }
+                            </div>
+                        </div>
+                }
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+
         <div id="tableAdmin" class="table-responsive">
             @Html.Action("List", UrlLink.TACNGHIEP, routeValues: new { search = Model.ValueSearch })
         </div>

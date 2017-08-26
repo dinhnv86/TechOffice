@@ -79,7 +79,6 @@
     <Compile Include="LinhVucTacNghiepController.cs" />
     <Compile Include="LinhVucVanBanController.cs" />
     <Compile Include="CoQuanBanHanhVanBanController.cs" />
-    <Compile Include="RoxyFilemanController.cs" />
     <Compile Include="TacNghiepTinhHinhThucHienController.cs" />
     <Compile Include="UsersController.cs" />
     <Compile Include="MucDoHoanThanhController.cs" />

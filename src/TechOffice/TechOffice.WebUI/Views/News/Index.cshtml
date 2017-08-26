@@ -9,18 +9,31 @@
 </div>
 
 <h3><span style="font-size: x-large;">Danh sách Tin tức/sự kiện</span></h3>
+@*<<<<<<< HEAD
 
-@Html.ActionLink("Thêm mới", "Add", "News", null, new { @class = "btn btn-link text-right" })
+    @Html.ActionLink("Thêm mới", "Add", "News", null, new { @class = "btn btn-link text-right" })
+    =======*@
+@Html.ActionLink("Thêm mới", "Add", "News", null, new { @class = "btn btn - link text - right" })
+@*>>>>>>> 26082017*@
+
 
 <table class="table table-bordered">
     <thead class="header">
         <tr>
-            <th class="col-xs-2">Tiêu đề</th>
-            <th class="col-xs-1">Lĩnh vực tin tức</th>
-            <th class="col-xs-4">Tóm tắt</th>
-            <th class="col-xs-1">Người đăng</th>
-            <th class="col-xs-1">Ngày đăng</th>
-            <th class="col-xs-1">Cho phép hiển thị</th>
+            @*<<<<<<< HEAD
+                            <th class="col-xs-2">Tiêu đề</th>
+                            <th class="col-xs-1">Lĩnh vực tin tức</th>
+                            <th class="col-xs-4">Tóm tắt</th>
+                            <th class="col-xs-1">Người đăng</th>
+                            <th class="col-xs-1">Ngày đăng</th>
+                            <th class="col-xs-1">Cho phép hiển thị</th>
+                =======*@
+            <th class="col-xs-1">Tiêu đề</th>
+            <th class="col-xs-2">Lĩnh vực tin tức</th>
+            <th class="col-xs-3">Tóm tắt</th>
+            <th class="col-xs-2">Ngày tạo</th>
+            <th>Cho phép hiển thị</th>
+            @*>>>>>>> 26082017*@
         </tr>
     </thead>
     <tbody>
@@ -28,22 +41,16 @@
             {
                 foreach (var item in Model)
                 {
-        <tr>
-            <td>
-                @*@Html.ActionLink(item.Title, "Edit", "News", new { id = item.Id }, new { @class = "btn btn - link text - right" })*@
-                @item.Title
-            </td>
-            <td>@item.NewsCategory.Ten</td>
-            <td>@item.Summary</td>
-            <td>@item.CreatedBy</td>
-            <td>@Html.DisplayFor(x => item.CreateDate, "DisplayDateTime")</td>
-            <th>
-                @Html.ActionLink("Sửa", "Edit", "News", new { id = item.Id }, new { @class = "btn btn-link text-right" })|
-                @*@Html.ActionLink("Xóa","Edit", "News", new { id = item.Id }, new { @class = "btn btn-link text-right" })*@
-                <a href="#" data-url='@Url.Action("Delete", new {id = item.Id})' id="lnkDelete_@item.Id" data-toggle="popover">Xóa</a>
-                @*@Html.CheckBox("IsDeleted", !item.IsDeleted, new { disabled = "disabled", @class = "checkbox" })*@
-            </th>
-        </tr>
+                <tr>
+                    <td class="col-xs-1">
+                        @Html.ActionLink(item.Title, "Edit", "News", new { id = item.Id }, new { @class = "btn btn - link text - right" })
+                    </td>
+                    <td>@item.NewsCategory.Ten</td>
+                    <td>@item.Summary</td>
+                    <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
+                    <th>@Html.CheckBox("IsDeleted", !item.IsDeleted, new { disabled = "disabled", @class = "checkbox" })</th>
+                </tr>
+                //>>>>>>> 26082017
             }
         }
     </tbody>

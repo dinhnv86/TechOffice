@@ -42,14 +42,14 @@
                             }
                         </td>
                         <td>
-                            @if (item.LastUpdated.HasValue)
-                            {
-                                @Html.DisplayFor(x => item.LastUpdated, "DisplayDate")
-                            }
-                            else
-                            {
-                                @Html.DisplayFor(x => item.CreateDate, "DisplayDate")
-                            }
+                          @if (item.LastUpdated.HasValue)
+                          {
+                            @(((DateTime)(item.LastUpdated)).ToString("dd/MM/yyyy"))
+                          }
+                          else
+                          {
+                            @item.CreateDate.ToString("dd/MM/yyyy")
+                          }
                         </td>
                         <td class="link-action">
                             @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn-edit" }) |

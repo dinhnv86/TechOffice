@@ -8,33 +8,34 @@
 <h1 class="title title_ct"><span>Thủ tục</span></h1>
 <div class="pading">
     <div class="entry form-horizontal">
-        @using (Html.BeginForm("Index", "ThuTuc", FormMethod.Get))
-        {
-            <div class="row">
-                <div class="col-sm-6">
-                    <label>Thủ tục/công việc</label>
-                    @Html.TextBoxFor(x => Model.ThuTucCongViec, htmlAttributes: new { @class = "form-control" })
-                </div>
-                @*<div class="col-sm-6">
-                    <label>Lĩnh vực</label>
-                    @Html.DropDownListFor(x => Model.LinhVucThuTucId, new SelectList(Model.LinhVucThuTucInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
-                </div>*@
-                <div class="col-sm-6">
-                    <label>Đơn vị thực hiện</label>
-                    @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-md-6">
-                   
-                    <input type="submit" class="btn btn-primary btn-width-md" value="Tìm kiếm" />
-                </div>
+        <div class="frmbox">
+            @using (Html.BeginForm("Index", "ThuTuc", FormMethod.Get))
+            {
+               
+                    <div class="col-sm-5">
+                        <label>Thủ tục/công việc</label>
+                        @Html.TextBoxFor(x => Model.ThuTucCongViec, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    @*<div class="col-sm-6">
+                        <label>Lĩnh vực</label>
+                        @Html.DropDownListFor(x => Model.LinhVucThuTucId, new SelectList(Model.LinhVucThuTucInfo, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    </div>*@
+                    <div class="col-sm-5">
+                        <label>Đơn vị thực hiện</label>
+                        @Html.DropDownListFor(x => Model.CoQuanId, new SelectList(Model.CoQuanInfos, "Id", "Name"), "Tất cả", htmlAttributes: new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="submit" class="btn btn-primary btn-width-md margin-btn" value="Tìm kiếm" />
+                    </div>
+                    <div class="clearfix"></div>
+               
+            }
             </div>
-        }
-    </div>
+        </div>
 </div>
 
-<h3><span style="font-size: x-large;">Danh sách thủ tục hành chính</span></h3>
-
+<div class="clearfix"></div>
 <div id="tableAdmin" class="table-responsive">
     @{Html.RenderAction("List", "ThuTuc", routeValues: new { search = Model.ValueSearch });}
 </div>

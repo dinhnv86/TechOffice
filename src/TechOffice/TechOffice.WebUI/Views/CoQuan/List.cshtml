@@ -20,7 +20,7 @@
                 <th class="text-center col-xs-2">Trực thuộc</th>
                 <th class="text-center col-xs-3">Mô tả</th>
                 <th class="text-center col-xs-2">Người cập nhật</th>
-                <th class="text-center col-xs-1">Ngày cập nhật </th>
+                <th class="text-center col-xs-1 ">Ngày cập nhật </th>
                 <th class="text-center col-action"></th>
             </tr>
         </thead>
@@ -49,11 +49,11 @@
                         <td>
                             @if (item.LastUpdated.HasValue)
                             {
-                                @Html.DisplayFor(x => item.LastUpdated, "DisplayDate")
+                               @(((DateTime)(item.LastUpdated)).ToString("dd/MM/yyyy"))
                             }
                             else
                             {
-                                @Html.DisplayFor(x => item.CreateDate, "DisplayDate")
+                                @item.CreateDate.ToString("dd/MM/yyyy")
                             }
                         </td>
                         <td class="link-action">

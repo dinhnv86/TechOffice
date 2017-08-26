@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaiViet.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ChucVu.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
@@ -69,6 +72,9 @@
     <Compile Include="CoQuanBanHanhVanBan.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DanhMucBaiViet.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="HelperExtension.cs" />
     <Compile Include="DataInfo.cs" />
     <Compile Include="HoSoCongViec.cs">
@@ -84,6 +90,7 @@
     <Compile Include="Infos\LinhVucVanBanInfo.cs" />
     <Compile Include="Infos\LoaiVanBanInfo.cs" />
     <Compile Include="Infos\CoQuanBanHanhVanBanInfo.cs" />
+    <Compile Include="Infos\NoiDungTraLoiInfo.cs" />
     <Compile Include="Infos\TacNghiepYKienCoQuanInfo.cs" />
     <Compile Include="Infos\TrangThaiCongViecInfo.cs" />
     <Compile Include="Infos\NhomCoQuanInfo.cs" />
@@ -126,7 +133,6 @@
     <Compile Include="NhomCoQuan.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Infos\NoiDungTraLoiInfo.cs" />
     <Compile Include="PageReference.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
@@ -176,7 +182,13 @@
     <Compile Include="Statictis_Result.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Summaries_Result.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TacNghiep.cs">
+      <DependentUpon>TechOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TacNghiep_CoQuanLienQuan.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TacNghiep_TinhHinhThucHien.cs">
@@ -236,17 +248,26 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
     <EntityDeploy Include="TechOfficeModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TechOfficeModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="packages.config" />
     <None Include="TechOfficeModel.edmx.diagram">
       <DependentUpon>TechOfficeModel.edmx</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TechOffice.Utility\AnThinhPhat.Utilities.csproj">
+      <Project>{4CADC24B-02F4-480E-B206-8076B4ED173B}</Project>
+      <Name>AnThinhPhat.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="TechOfficeModel.Context.tt">
@@ -259,15 +280,6 @@
       <DependentUpon>TechOfficeModel.edmx</DependentUpon>
       <LastGenOutput>TechOfficeModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TechOffice.Utility\AnThinhPhat.Utilities.csproj">
-      <Project>{4CADC24B-02F4-480E-B206-8076B4ED173B}</Project>
-      <Name>AnThinhPhat.Utilities</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,7 +10,7 @@
         HttpMethod = "GET",
     };
 }
-
+<div class="clearfix"></div>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -29,20 +29,25 @@
             {
                 if (item.NgayHetHan < new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0))
                 {
-                    @Html.Raw("<tr class='bg-danger'>")
+                    @Html.Raw("<tr>")
                 }
                 else
                 {
                     @Html.Raw("<tr>")
                 }
             <td>
-                @Html.DisplayFor(x => item.NgayTao, "DisplayDate")
+                @item.NgayTao.ToString("dd/MM/yyyy")
             </td>
             <td>
                 @Html.RouteLink(item.NoiDung, UrlLink.TACNGHIEP_DETAIL, routeValues: new { guid1 = Guid.NewGuid().ToString("N"), id = item.Id, guid2 = Guid.NewGuid().ToString("N") }, htmlAttributes: new { @class = "btn-link", target = "_blank" })
             </td>
-            <td>@Html.DisplayFor(x => item.NgayHetHan, "DisplayDate")</td>
-            <td>@Html.DisplayFor(x => item.NgayHoanThanh, "DisplayDate")</td>
+            <td>@item.NgayHetHan.ToString("dd/MM/yyyy")</td>
+            <td>
+                @if (item.NgayHoanThanh != null)
+                {
+                    @(((DateTime)(item.NgayHoanThanh)).ToString("dd/MM/yyyy"))
+                }
+                </td>
                     <td>@item.NoiDungTraoDoi</td>
                     <td>@item.LinhVucTacNghiepInfo.IfNotNull(x => x.Name)</td>
                     @Html.Raw("</tr>")

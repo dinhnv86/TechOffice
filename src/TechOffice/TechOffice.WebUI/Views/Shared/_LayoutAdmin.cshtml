@@ -23,7 +23,7 @@
 <body>
     @{ Html.RenderPartial("_Header"); }
 
-    <div class="bg dtapg">
+    @*<div class="bg dtapg">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
@@ -31,8 +31,19 @@
                 </div>
             </div>
         </div>
+    </div>*@
+    <div class="bg dtapg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    @{ Html.RenderPartial("_PartialMenuLeftAdmin"); }
+                </div>
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
     </div>
-
     @{Html.RenderPartial("_PartialPageLoading");}
 
     <footer>
@@ -46,8 +57,9 @@
     @Scripts.Render("~/bundles/tech")
     @RenderSection("scripts", false)
 
-    @section scripts{
-        <script src="~/Scripts/app/templates.js"></script>
-    }
+    @*@section scripts{
+       
+    }*@
+    <script src="~/Scripts/app/templates.js"></script>
 </body>
 </html>

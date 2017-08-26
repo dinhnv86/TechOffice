@@ -22,7 +22,7 @@
             <th class="text-center col-sm-1">Lĩnh vực</th>
             <th class="text-center col-sm-1">Ngày đăng</th>
             <th class="text-center col-sm-1">Người đăng</th>
-            <th class="col-sm-1"></th>
+            <th class="col-sm-2"></th>
         </tr>
     </thead>
     @if (Model != null && Model.Any())
@@ -36,12 +36,12 @@
                             @item.SoVanBan
                         </strong>
                     </td>
-                    <td>@Html.DisplayFor(x => item.NgayBanHanh, "DisplayDate")</td>
+                    <td>@item.NgayBanHanh.ToString("dd/MM/yyyy")</td>
                     <td>@item.TrichYeu</td>
                     <td>@item.CoQuanBanHanhVanBanInfo.Name</td>
                     <td>@item.LoaiVanBanInfo.Name</td>
                     <td>@item.LinhVucVanBanInfo.Name</td>
-                    <td> @Html.DisplayFor(x => item.CreateDate, "DisplayDateTime")</td>
+                    <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
                     <td>@item.CreatedBy</td>
                     <td class="link-action text-center">
                         @Html.RouteLink("Sửa", UrlLink.VANBAN_EDIT, new { sovanban = item.SoVanBan.RejectMarks(), id = item.Id }) |

@@ -809,8 +809,6 @@
     <Content Include="Views\NhomCoQuan\List.cshtml" />
     <Content Include="Views\LinhVucCongViec\Index.cshtml" />
     <Content Include="Views\LinhVucCongViec\List.cshtml" />
-    <Content Include="Views\LinhVucThuTuc\Index.cshtml" />
-    <Content Include="Views\LinhVucThuTuc\List.cshtml" />
     <Content Include="Views\LoaiVanBan\Index.cshtml" />
     <Content Include="Views\LoaiVanBan\List.cshtml" />
     <Content Include="Views\MucDoHoanThanh\Index.cshtml" />
@@ -860,7 +858,6 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\CoQuan\Edit.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\CoQuanLienQuan.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\GroupListBodies.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ListBodies.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ListBodies.cshtml" />
@@ -912,6 +909,8 @@
     <Content Include="Views\PageReference\List.cshtml" />
     <Content Include="Views\PageReference\Add.cshtml" />
     <Content Include="Views\PageReference\Edit.cshtml" />
+    <Content Include="Views\Shared\_PartialMenuLeftAdmin.cshtml" />
+    <Content Include="Views\Shared\_HeaderCV.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -159,6 +159,12 @@
   <data name="CongViec_Add_Title" xml:space="preserve">
     <value>Thêm mới công việc</value>
   </data>
+  <data name="CongViec_Edit_Title" xml:space="preserve">
+    <value>Sửa công việc</value>
+  </data>
+  <data name="CongViec_Detail_Title" xml:space="preserve">
+    <value>Chi tiết công việc</value>
+  </data>
   <data name="CongViec_Add_TrangThai" xml:space="preserve">
     <value>Trạng thái</value>
   </data>

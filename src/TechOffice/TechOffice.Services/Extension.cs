@@ -62,6 +62,7 @@ namespace AnThinhPhat.Services
             entity.TrichYeu = data.TrichYeu;
             entity.TenVanBan = data.TenVanBan;
             entity.SoVanBan = data.SoVanBan;
+            entity.NoiDung = data.NoiDung;
             entity.CoQuanBanHanhId = data.CoQuanBanHanhId;
             entity.LoaiVanBanId = data.LoaiVanBanId;
             entity.LinhVucVanBanId = data.LinhVucVanBanId;
