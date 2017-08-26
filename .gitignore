@@ -1,0 +1,8 @@
+doc/DeAnGiaiPhapCongTac_2016.doc
+doc/DesignDB.xlsx
+*.txt
+src/TechOffice/TechOffice.WebUI/obj/
+src/TechOffice/packages/
+src/TechOffice/TechOffice.WebUI/Plugin_bak/
+src/TechOffice/TechOffice.WebUI/Uploads/TN/0000000006/0000000008/DataboundLabel.cs
+src/TechOffice/TechOffice.WebUI/Uploads/

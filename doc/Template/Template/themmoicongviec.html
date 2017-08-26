@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0024) -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="content-language" content="vi">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phòng nội vụ huyện Phú Riềng</title>
+
+    <link href="Content/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link href="Content/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="Content/style.css" type="text/css" rel="stylesheet">
+
+    <script type="text/javascript" src="Scripts/jquery.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.js"></script>
+
+    <!--[if IE 8]>
+        <link href="template/Default/css/ie8.css" type="text/css" rel="stylesheet">
+    <![endif]-->
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet">
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".btn_down_sp").click(function () {
+                $(".menu_products").slideToggle();
+            });
+
+            $(".btn_down_httt").click(function () {
+                $(".sup").slideToggle();
+            });
+
+
+            $(".btn_down_dl").click(function () {
+                $(".download").slideToggle();
+            });
+
+            $(".btn_down_news").click(function () {
+                $(".news_new").slideToggle();
+            });
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('.navbar').css({ position: 'static' });
+            window.onscroll = function () {
+                if (window.pageYOffset >= 61) {
+                    $('.navbar').css({ position: 'fixed', top: '0' });
+                    $('.navbar').addClass("menu_top_fix");
+                }
+
+                else {
+                    $('.navbar').css({ position: 'static' });
+                    $('.navbar').removeClass("menu_top_fix");
+                }
+            }
+        });
+        $(document).on("mobileinit", function () {
+            $.mobile.ignoreContentEnabled = true;
+        });
+    </script>
+    <script>
+        jQuery(function () {
+            jQuery('#back-top').hide();
+            jQuery(window).scroll(function () {
+                if (jQuery(this).scrollTop() > 200) {
+                    jQuery('#back-top').fadeIn();
+                } else {
+                    jQuery('#back-top').fadeOut();
+                }
+            });
+
+            // scroll body to 0px on click
+            jQuery('#back-top').click(function () {
+                jQuery('body,html').stop(false, false).animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div id="back-top" style="display: block;">
+        <i class="fa fa-arrow-circle-up"></i>
+    </div>
+    <div id="topseo"></div>
+    <div class="bg dtapg">
+        <div class="container">
+            <div class="row" style="margin-top: 0px;">
+                <div class="span12">
+                    <div class="header">
+                        <div class="menu_head">
+                            <div class="logo_head"><h2>PHÒNG NỘI VỤ HUYỆN PHÚ RIỀNG</h2></div>
+                            <div class="search_head">
+                                <input type="text" /><input type="button" value="Tìm kiếm" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="logo_mobi"><a href=""><img alt=" " src="Images/logo.png"></a></div>-->
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default menu_top_fix" role="navigation" style="position: fixed; top: 0px;">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                <span class="sr-only">Home</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <div class="bg_menu">
+
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">TRANG CHỦ</a></li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"> Giới thiệu <b class="caret"></b> </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Lịch sử hình thành</a></li>
+                            <li><a href="#">Sơ đồ tổ chức</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="vanban.html">Văn bản</a></li>
+                    <li><a href="thutuc.html">Thủ tục</a></li>
+                    <li><a href="tacnghiep.html">Tác nghiệp</a></li>
+                    <li><a href="quanlycongviec.html">Quản lý công việc</a></li>
+                    <li><a href="tintuc.html">Tin tức</a></li>
+                    <li class="last"><a href="contact.html">LIÊN HỆ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="slide"></div>
+    <div class="bg dtapg">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+
+
+                    <!--start:body-->
+                    <div class="boxr" style="width:100%">
+                        <h1 class="title title_ct"><span>Thêm mới công việc</span></h1>
+                        <div class="pading">
+                            <div class="entry">
+                                <div class="span3">
+                                    <label>Ngày khởi tạo</label>
+                                    <input type="date"  />
+                                    <label>Phụ trách</label>
+                                    <input type="date" />
+                                </div>
+                                <div class="span3">
+                                    <label>Ngày hết hạn</label>
+                                    <input type="date" />
+                                    <label>Xử lý chính</label>
+                                    <select>
+                                        <option>Trịnh Quang Hạnh</option>
+                                        <option>Phạm Thị Thư</option>
+                                    </select>
+                                </div>
+                                <div class="span3">
+                                    <label>Lĩnh vực</label>
+                                    <select>
+                                        <option>Trịnh Quang Hạnh</option>
+                                        <option>Phạm Thị Thư</option>
+                                    </select>
+                                    <label>Phối hợp</label>
+                                    <select>
+                                        <option>Trịnh Quang Hạnh</option>
+                                        <option>Phạm Thị Thư</option>
+                                    </select>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="span12">
+                                    <label>Nội dung</label>
+                                    <textarea rows="2" cols="2"></textarea>
+                                    <label>Văn bản liên quan</label>
+                                    <textarea rows="2" cols="2"></textarea>
+                                </div>
+                                <div class="span3">
+                                    <label>Số văn bản</label>
+                                    <input type="text" />
+                                </div>
+                                <div class="span3">
+                                    <label>Ngày</label>
+                                    <input type="date" />
+                                </div>
+                                <div class="span3">
+                                    <label>Nội dung</label>
+                                    <textarea rows="2" cols="2"></textarea>
+                                </div>
+                                <div class="span2">
+                                    <label>Cơ quan</label>
+                                    <input type="text" />
+                                </div>
+                                <div class="span2">
+                                    <label></label>
+                                    <input type="button" value="Thêm"/>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="span12">
+                                    <label>Quá trình xử lý</label>
+                                    <textarea rows="2" cols="2"></textarea>
+                                    
+                                </div><div class="clear"></div>
+                                <div class="span3">
+                                    <label>Nội dung</label>
+                                    <textarea rows="2" cols="2"></textarea>
+                                    
+                                </div>
+                                
+                                <div class="span1">
+                                    <label></label><br />
+                                    <input type="button" value="Thêm" />
+                                </div>
+                                <div class="span3">
+                                    <label>Các tập tin đính kèm</label>
+                                    <input type="text" />
+                                    
+                                </div>
+                                <div class="span1">
+                                    <label></label><br />
+                                    <input type="button" value="Thêm" />
+                                </div>
+                                <div class="span2">
+                                    <label>Trạng thái</label>
+                                    <select>
+                                        <option>Chưa xử lý</option>
+                                    </select>
+                                </div>
+                                <div class="clear"></div>
+                               <input type="button" value="Thêm mới" />
+                                <input type="button"  value="Hủy"/>
+
+                            </div>
+
+                        </div>
+                      
+                     </div>
+                    <!--end:body-->
+
+
+
+
+
+                    <div class="clearfix"></div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="footer_bg">
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+
+                            <div class="add_col">
+                                <p><span style="font-size: medium;">PHÒNG NỘI VỤ HUYỆN PHÚ RIỀNG</span></p>
+                                <p>
+                                    <span style="font-size: medium;">
+                                        <span><strong>Địa chỉ</strong>: Đường ĐT 741, xã  Phú Riềng, huyện Phú Riềng </span>
+
+                                        <br><strong>Tel</strong>: (0651) 39 39 007 &nbsp; Fax : (0651) 39 39 117
+                                    </span>
+                                </p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>

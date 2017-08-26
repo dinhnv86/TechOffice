@@ -1,0 +1,406 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0024) -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="content-language" content="vi">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phòng nội vụ huyện Phú Riềng</title>
+
+    <link href="Content/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link href="Content/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="Content/style.css" type="text/css" rel="stylesheet">
+
+    <script type="text/javascript" src="Scripts/jquery.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.js"></script>
+
+    <!--[if IE 8]>
+        <link href="template/Default/css/ie8.css" type="text/css" rel="stylesheet">
+    <![endif]-->
+    
+    <link href="Content/bootstrap.min.css" rel="stylesheet">
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".btn_down_sp").click(function () {
+                $(".menu_products").slideToggle();
+            });
+
+            $(".btn_down_httt").click(function () {
+                $(".sup").slideToggle();
+            });
+
+
+            $(".btn_down_dl").click(function () {
+                $(".download").slideToggle();
+            });
+
+            $(".btn_down_news").click(function () {
+                $(".news_new").slideToggle();
+            });
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('.navbar').css({ position: 'static' });
+            window.onscroll = function () {
+                if (window.pageYOffset >= 61) {
+                    $('.navbar').css({ position: 'fixed', top: '0' });
+                    $('.navbar').addClass("menu_top_fix");
+                }
+
+                else {
+                    $('.navbar').css({ position: 'static' });
+                    $('.navbar').removeClass("menu_top_fix");
+                }
+            }
+        });
+        $(document).on("mobileinit", function () {
+            $.mobile.ignoreContentEnabled = true;
+        });
+    </script>
+    <script>
+        jQuery(function () {
+            jQuery('#back-top').hide();
+            jQuery(window).scroll(function () {
+                if (jQuery(this).scrollTop() > 200) {
+                    jQuery('#back-top').fadeIn();
+                } else {
+                    jQuery('#back-top').fadeOut();
+                }
+            });
+
+            // scroll body to 0px on click
+            jQuery('#back-top').click(function () {
+                jQuery('body,html').stop(false, false).animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+        });
+    </script>
+   
+</head>
+<body>
+    <div id="back-top" style="display: block;">
+        <i class="fa fa-arrow-circle-up"></i>
+    </div>
+    <div id="topseo"></div>
+    <div class="bg dtapg">
+        <div class="container">
+            <div class="row" style="margin-top: 0px;">
+                <div class="span12">
+                    <div class="header">
+                        <div class="menu_head">
+                            <div class="logo_head"><h2>PHÒNG NỘI VỤ HUYỆN PHÚ RIỀNG</h2></div>
+                            <div class="search_head">
+                                <input type="text" /><input type="button" value="Tìm kiếm" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="logo_mobi"><a href=""><img alt=" " src="Images/logo.png"></a></div>-->
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default menu_top_fix" role="navigation" style="position: fixed; top: 0px;">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                <span class="sr-only">Home</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <div class="bg_menu">
+
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">TRANG CHỦ</a></li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"> Giới thiệu <b class="caret"></b> </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Lịch sử hình thành</a></li>
+                            <li><a href="#">Sơ đồ tổ chức</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="vanban.html">Văn bản</a></li>
+                    <li><a href="thutuc.html">Thủ tục</a></li>
+                    <li><a href="tacnghiep.html">Tác nghiệp</a></li>
+                    <li><a href="quanlycongviec.html">Quản lý công việc</a></li>
+                    <li><a href="tintuc.html">Tin tức</a></li>
+                    <li class="last"><a href="contact.html">LIÊN HỆ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="slide"></div>
+    <div class="bg dtapg">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="span9">
+                        <h1 class="title">Liên hệ</h1>
+                        <!--start:body-->
+                        <div class="boxr">
+
+                            <div class="pading">
+                                <script>
+                                    function LienHe(doc) {
+                                        $("#lamonchoty").html("Làm ơn chờ một chút. Yêu cầu của Quý khách đang được xử lý và gửi đi trong vài giây nữa <img src='./images/loading.gif' width='60px'>");
+                                        document.getElementById('sub').disabled = 'disabled';
+                                        $.post('./lien-he.html/', $(doc).serialize(), function (data) {
+                                            $("#lamonchoty").html(data);
+                                        })
+                                        return false;
+                                    }
+                                </script>
+                                <!--<div class="bando">
+                                    <div class="info_map">
+
+                                    </div>
+                                    <div class="map_in">
+                                        <iframe src="./contact_files/embed.html" width="600" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                                    </div>
+
+                                </div>-->
+                                <div class="clear"></div>
+                                <form action="#" method="post" class="form_contact02" name="Form1" onsubmit="return LienHe(this)">
+                                    <table border="0" class="table_form">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2">Điền đầy đủ các thông tin phía dưới cảm ơn bạn đã ghé thăm</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Họ tên:</td>
+                                                <td>
+                                                    <input type="text" name="txtHoTen" id="txtHoTen" style=" height:30px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Địa chỉ:</td>
+
+                                                <td>
+                                                    <input type="text" name="txtDiaChi" id="txtDiaChi" style=" height:30px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Điện thoại:</td>
+                                                <td>
+                                                    <input type="text" onkeypress="return checkIt(event)" name="txtDienThoai" id="txtDienThoai" style=" height:30px;">
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Email:</td>
+                                                <td>
+                                                    <input type="text" name="txtEmail" id="txtEmail" style=" height:30px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nội dung:</td>
+                                                <td>
+
+                                                    <textarea name="txtNoiDung" id="txtNoiDung" style=" height:120px;"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                                <td align="left" colspan="2">
+                                                    <input type="submit" class="btn btn-success" id="sub" onclick="return KiemTra();" name="btnSubmit" value="Gửi yêu cầu" style="width:100px; height:30px; font-size:13px;">
+                                                    <div id="lamonchoty"></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                            <script>
+                                function checkIt(evt) {
+                                    evt = (evt) ? evt : window.event;
+                                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                                    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                                        alert("Số điện thoại phải là các con số.");
+                                        return false;
+                                    }
+                                    return true;
+                                }
+                                function isWhiteSpace(argWhiteSpace) {
+                                    argWs = argWhiteSpace.toString()
+                                    for (var intI = 0; intI < argWs.length; intI++)
+                                        if (argWs.charAt(intI) != ' ' && argWs.charAt(intI) != '\t')
+                                            return false
+                                    return true
+                                }
+                            </script>
+                            <script>
+                                function KiemTra() {
+                                    var x = document.Form1;
+                                    var y = isWhiteSpace(x.txtHoTen.value);
+                                    var dc = isWhiteSpace(x.txtDiaChi.value);
+                                    if (y == true || x.txtHoTen.value == "") {
+                                        alert("Họ tên không được để trống!");
+                                        x.txtHoTen.focus();
+                                        x.txtHoTen.value = '';
+                                        return false;
+                                    }
+                                    if (dc == true || x.txtDiaChi.value.length == "") {
+                                        alert("Địa chỉ không được để trống!");
+                                        x.txtDiaChi.focus();
+                                        x.txtDiaChi.value = '';
+                                        return false;
+                                    }
+                                    if (x.txtDienThoai.value.length < 8 || x.txtDienThoai.value.length > 11) {
+                                        alert("Điện thoại > 7 và < 12 ký tự!");
+                                        x.txtDienThoai.focus();
+                                        return false;
+                                    }
+                                    var n = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                                    var xx = x.txtEmail.value;
+                                    if (!xx.match(n)) {
+                                        window.alert("Email không hợp lệ");
+                                        x.txtEmail.focus();
+                                        return false;
+
+                                    }
+                                    return true;
+                                }
+                            </script>
+                        </div>
+                        <!--end:body-->
+
+                    </div>
+
+                    <div class="span3">
+                        <div class="supp">
+
+                            <h3 class="sbar">
+                                <a href="" style="color:#000">Danh mục</a>
+                                <div class="btn_down btn_down_sp"><i class="fa fa-chevron-down"></i></div>
+                            </h3>
+                            <div class="menu_products">
+                                <ul id="menu_left">
+                                    <li><a href="#">Đào tạo</a></li>
+                                    <li><a href="#">Khen thưởng</a></li>
+                                    <li><a href="#">Thanh tra</a></li>
+                                    <li><a href="#">Tôn giáo</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="supp hidemobile">
+                            <h3 class="sbar">
+                                <a href="tin-tuc" style="color:#000">Thông báo</a>
+                                <div class="btn_down btn_down_news"><i class="fa fa-chevron-down"></i></div>
+                            </h3>
+                            <div class="bgsitebar1 news_new">
+                                <ul id="menu_dl">
+
+                                    <li style="height: auto;">
+                                        <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
+                                        <span style="width: 68px;float: left;">2016-07-25</span>
+                                        <a style="width: 148px;" href="#">Phòng nội vụ </a>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <li style="height: auto;">
+                                        <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
+                                        <span style="width: 68px;float: left;">2016-07-25</span>
+                                        <a style="width: 148px;" href="#">Phòng nội vụ </a>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <li style="height: auto;">
+                                        <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
+                                        <span style="width: 68px;float: left;">2016-07-25</span>
+                                        <a style="width: 148px;" href="#">Phòng nội vụ </a>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <li style="height: auto;">
+                                        <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
+                                        <span style="width: 68px;float: left;">2016-07-25</span>
+                                        <a style="width: 148px;" href="#">Phòng nội vụ </a>
+                                        <div class="clear"></div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+
+                        <div class="supp">
+                            <div class="bgsitebar">
+                                <img src="Images/hoctap_lamtheoguongbacsv.jpg" alt="Hỗ trợ Phòng nội vụ">
+                            </div>
+
+                        </div>
+                        <div class="supp">
+                            <div class="bgsitebar">
+                                <img src="Images/bien dao que huong_1369814865500.jpg" alt="Hỗ trợ Phòng nội vụ">
+                            </div>
+                        </div>
+                        <div class="supp">
+                            <div class="bgsitebar">
+                                <img src="Images/nong-thon-moi_1369815473656.jpg" alt="Hỗ trợ Phòng nội vụ">
+                            </div>
+                        </div>
+
+                        <div class="supp">
+                            <h3 class="sbar">
+                                <a href="" style="color:#000">Lượt truy cập</a>
+                                <div class="btn_down btn_down_sp"><i class="fa fa-chevron-down"></i></div>
+                            </h3>
+                            <div class="menu_products">
+                                <ul id="menu_left">
+                                    <li><a href="#">Đang online: 10 </a></li>
+                                    <li><a href="#">Hôm qua: 50</a></li>
+                                    <li><a href="#">Tổng: 100 </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="footer_bg">
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                           
+                            <div class="add_col">
+                                <p><span style="font-size: medium;">PHÒNG NỘI VỤ HUYỆN PHÚ RIỀNG</span></p>
+                                <p><span style="font-size: medium;"><span><strong>Địa chỉ</strong>: Đường ĐT 741, xã  Phú Riềng, huyện Phú Riềng </span>                                 
+
+                                    <br><strong>Tel</strong>: (0651) 39 39 007 &nbsp; Fax : (0651) 39 39 117</span></p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>

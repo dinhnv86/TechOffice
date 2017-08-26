@@ -1,0 +1,47 @@
+﻿@model AnThinhPhat.ViewModel.ThuTuc.LinhVucThuTucViewModel
+
+@{
+    AjaxOptions ajaxOption = new AjaxOptions
+    {
+        Url = Url.Action("Edit"),
+        HttpMethod = "POST",
+        OnBegin = "onEditMSTBegin",
+        OnComplete = "onEditMSTComplete",
+        OnSuccess = "onEditMSTSuccess",
+        OnFailure = "onEditMSTFailure",
+    };
+}
+@using (Ajax.BeginForm(ajaxOption))
+{
+    <div class="form-horizontal">
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            <label class="control-label col-sm-2">Tên<span class="required">*</span> </label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-control", @id = "txtName" })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Trực thuộc</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(model => model.ParentId, new SelectList(Model.LinhVucThuTuces, "Id", "Ten"), "--- Lĩnh vực trực thuộc ---", htmlAttributes: new { @class = "form-control", @id = "txtNhomCoQuan" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Mô tả</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.Description, htmlAttributes: new { @class = "form-control", @id = "txtDescription" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10" id="outer">
+                <div class="inner"> <input type="submit" value="@Buttons.Save" class="btn btn-primary btn-width-md" name="btnSubmit" id="btnSubmit" /></div>
+                <div class="inner">
+                    <button type="button" class="btn btn-default btn-width-md" name="btnCancel" id="btnCancel" data-dismiss="modal">@Buttons.Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,402 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0024) -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="content-language" content="vi">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phòng nội vụ huyện Phú Riềng</title>
+
+    <link href="Content/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link href="Content/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="Content/style.css" type="text/css" rel="stylesheet">
+
+    <script type="text/javascript" src="Scripts/jquery.js"></script>
+    <script type="text/javascript" src="Scripts/bootstrap.js"></script>
+
+    <!--[if IE 8]>
+        <link href="template/Default/css/ie8.css" type="text/css" rel="stylesheet">
+    <![endif]-->
+    
+    <link href="Content/bootstrap.min.css" rel="stylesheet">
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".btn_down_sp").click(function () {
+                $(".menu_products").slideToggle();
+            });
+
+            $(".btn_down_httt").click(function () {
+                $(".sup").slideToggle();
+            });
+
+
+            $(".btn_down_dl").click(function () {
+                $(".download").slideToggle();
+            });
+
+            $(".btn_down_news").click(function () {
+                $(".news_new").slideToggle();
+            });
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('.navbar').css({ position: 'static' });
+            window.onscroll = function () {
+                if (window.pageYOffset >= 61) {
+                    $('.navbar').css({ position: 'fixed', top: '0' });
+                    $('.navbar').addClass("menu_top_fix");
+                }
+
+                else {
+                    $('.navbar').css({ position: 'static' });
+                    $('.navbar').removeClass("menu_top_fix");
+                }
+            }
+        });
+        $(document).on("mobileinit", function () {
+            $.mobile.ignoreContentEnabled = true;
+        });
+    </script>
+    <script>
+        jQuery(function () {
+            jQuery('#back-top').hide();
+            jQuery(window).scroll(function () {
+                if (jQuery(this).scrollTop() > 200) {
+                    jQuery('#back-top').fadeIn();
+                } else {
+                    jQuery('#back-top').fadeOut();
+                }
+            });
+
+            // scroll body to 0px on click
+            jQuery('#back-top').click(function () {
+                jQuery('body,html').stop(false, false).animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+        });
+    </script>
+   
+</head>
+<body>
+    <div id="back-top" style="display: block;">
+        <i class="fa fa-arrow-circle-up"></i>
+    </div>
+    <div id="topseo"></div>
+    <div class="bg dtapg">
+        <div class="container">
+            <div class="row" style="margin-top: 0px;">
+                <div class="span12">
+                    <div class="header">
+                        <div class="menu_head">
+                            <div class="logo_head"><h2>PHÒNG NỘI VỤ HUYỆN PHÚ RIỀNG</h2></div>
+                            <div class="search_head">
+                                <input type="text" /><input type="button" value="Tìm kiếm" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="logo_mobi"><a href=""><img alt=" " src="Images/logo.png"></a></div>-->
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default menu_top_fix" role="navigation" style="position: fixed; top: 0px;">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                <span class="sr-only">Home</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <div class="bg_menu">
+
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">TRANG CHỦ</a></li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"> Giới thiệu <b class="caret"></b> </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Lịch sử hình thành</a></li>
+                            <li><a href="#">Sơ đồ tổ chức</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="vanban.html">Văn bản</a></li>
+                    <li><a href="thutuc.html">Thủ tục</a></li>
+                    <li><a href="tacnghiep.html">Tác nghiệp</a></li>
+                    <li><a href="quanlycongviec.html">Quản lý công việc</a></li>
+                    <li><a href="tintuc.html">Tin tức</a></li>
+                    <li class="last"><a href="contact.html">LIÊN HỆ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="slide"></div>
+    <div class="bg dtapg">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="span9">
+
+                        <!--start:body-->
+                        <div class="boxr" style="width:100%">
+                            <h1 class="title title_ct"><span>Tác nghiệp</span></h1>
+                            <div class="pading">
+                                <div class="entry">
+                                   <div class="span3">
+                                       <label>Chọn nhóm cơ quan</label>
+                                       <select id="">
+                                           <option>Tất cả </option>
+                                       </select>
+                                       <label>Chọn cơ quan</label>
+                                       <select id="">
+                                           <option>Tất cả </option>
+                                       </select>
+                                       <label>Chọn lĩnh vực</label>
+                                       <select id="">
+                                           <option>Tất cả </option>
+                                       </select>
+                                       <label>Chọn mức độ hoàn thành</label>
+                                       <select id="">
+                                           <option>Tất cả </option>
+                                       </select>
+                                      
+                                   </div>
+
+                                   
+                                    <div class="span5">
+                                        <label>Chọn năm</label>
+                                        <select id="">
+                                            <option>2016 </option>
+                                        </select>
+                                        <label>Nhập thông tin tìm kiếm</label>
+                                        <input type="text" />
+                                        <label>Chọn tiêu chí tìm kiếm</label>
+                                        <input type="text" />
+                                    </div>
+
+                                   
+                                    <div class="span5">
+                                       
+                                       
+                                        <input type="button" value="Tìm kiếm" />
+                                        <input type="button" value="Thống kê" />
+                                        <input type="button" value="Thêm mới" />
+
+                                     </div>
+                                   
+                                    <div class="clear"></div>
+                                    <h3><span style="font-size: x-large;">Danh sách </span></h3>
+                                    <div class="table_over">
+                                        <table style="width: 720px; border-collapse: collapse;" border="1" cellspacing="8" cellpadding="8">
+                                            <tbody>
+                                                <tr style="background-color: #d50100;" align="center" valign="middle">
+                                                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Ngày</span></span></strong></td>
+                                                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Nội dung</span></span></strong></td>
+                                                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Ngày hết hạn</span></span></strong></td>
+                                                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Ngày hoàn thành</span></span></strong></td>
+                                                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Ý kiến trao đổi</span></span></strong></td>
+                                                    <td><strong><span style="font-size: medium;"><span style="color: #ffffff;">Lĩnh vực</span></span></strong></td>
+
+
+                                                </tr>
+                                                <tr align="center">
+                                                    <td><strong>01/10/2016</strong></td>
+                                                    <td>Quy hoạch cán bộ lãnh đạo</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>Ý kiến trao đổi</td>
+                                                    <td>Hành chính</td>
+                                                </tr>
+                                                <tr align="center">
+                                                    <td><strong>01/10/2016</strong></td>
+                                                    <td>Quy hoạch cán bộ lãnh đạo</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>Ý kiến trao đổi</td>
+                                                    <td>Hành chính</td>
+                                                </tr>
+                                                <tr align="center">
+                                                    <td><strong>01/10/2016</strong></td>
+                                                    <td>Quy hoạch cán bộ lãnh đạo</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>Ý kiến trao đổi</td>
+                                                    <td>Hành chính</td>
+                                                </tr>
+                                                <tr align="center">
+                                                    <td><strong>01/10/2016</strong></td>
+                                                    <td>Quy hoạch cán bộ lãnh đạo</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>Ý kiến trao đổi</td>
+                                                    <td>Hành chính</td>
+                                                </tr>
+                                                <tr align="center">
+                                                    <td><strong>01/10/2016</strong></td>
+                                                    <td>Quy hoạch cán bộ lãnh đạo</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>Ý kiến trao đổi</td>
+                                                    <td>Hành chính</td>
+                                                </tr>
+                                                <tr align="center">
+                                                    <td><strong>01/10/2016</strong></td>
+                                                    <td>Quy hoạch cán bộ lãnh đạo</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>01/10/2016</td>
+                                                    <td>Ý kiến trao đổi</td>
+                                                    <td>Hành chính</td>
+                                                </tr>
+                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                </div>
+                               
+                             </div>
+                            <div><div class="scott"><strong class="first active">1</strong> <a href="#">2</a> <a href="#">4</a> <a href="#4">5</a> <a href="#5">6</a> <a href="#6">7</a> <a href="#7">8</a> <a href="#8">9</a> <a href="#9">10</a> <a href="#1">Tiếp</a> <a href="#10" class="last">Cuối »</a></div></div>
+                        </div>
+                        <!--end:body-->
+
+                    </div>
+
+                    <div class="span3">
+                        <div class="supp">
+
+                            <h3 class="sbar">
+                                <a href="" style="color:#000">Danh mục</a>
+                                <div class="btn_down btn_down_sp"><i class="fa fa-chevron-down"></i></div>
+                            </h3>
+                            <div class="menu_products">
+                                <ul id="menu_left">
+                                    <li><a href="#">Tất cả văn bản</a></li>
+                                    <li><a href="#">Cơ quan ban hành</a></li>
+                                    <li><a href="#">+ Quốc hội</a></li>
+                                    <li><a href="#">+ Chính phủ</a></li>
+                                    <li><a href="#">+ Thủ tướng Chính phủ</a></li>
+                                    <li><a href="#">+ Bộ/ Cơ quan ngang bộ</a></li>
+                                    <li><a href="#">+ Liên bộ</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="supp hidemobile">
+                            <h3 class="sbar">
+                                <a href="tin-tuc" style="color:#000">Thông báo</a>
+                                <div class="btn_down btn_down_news"><i class="fa fa-chevron-down"></i></div>
+                            </h3>
+                            <div class="bgsitebar1 news_new">
+                                <ul id="menu_dl">
+
+                                    <li style="height: auto;">
+                                        <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
+                                        <span style="width: 68px;float: left;">2016-07-25</span>
+                                        <a style="width: 148px;" href="#">Phòng nội vụ </a>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <li style="height: auto;">
+                                        <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
+                                        <span style="width: 68px;float: left;">2016-07-25</span>
+                                        <a style="width: 148px;" href="#">Phòng nội vụ </a>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <li style="height: auto;">
+                                        <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
+                                        <span style="width: 68px;float: left;">2016-07-25</span>
+                                        <a style="width: 148px;" href="#">Phòng nội vụ </a>
+                                        <div class="clear"></div>
+                                    </li>
+                                    <li style="height: auto;">
+                                        <!--<span style="width: 68px;float: left;">// <br/>:</span>-->
+                                        <span style="width: 68px;float: left;">2016-07-25</span>
+                                        <a style="width: 148px;" href="#">Phòng nội vụ </a>
+                                        <div class="clear"></div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+
+                        <div class="supp">
+                            <div class="bgsitebar">
+                                <img src="Images/hoctap_lamtheoguongbacsv.jpg" alt="Hỗ trợ Phòng nội vụ">
+                            </div>
+
+                        </div>
+                        <div class="supp">
+                            <div class="bgsitebar">
+                                <img src="Images/bien dao que huong_1369814865500.jpg" alt="Hỗ trợ Phòng nội vụ">
+                            </div>
+                        </div>
+                        <div class="supp">
+                            <div class="bgsitebar">
+                                <img src="Images/nong-thon-moi_1369815473656.jpg" alt="Hỗ trợ Phòng nội vụ">
+                            </div>
+                        </div>
+
+                        <div class="supp">
+                            <h3 class="sbar">
+                                <a href="" style="color:#000">Lượt truy cập</a>
+                                <div class="btn_down btn_down_sp"><i class="fa fa-chevron-down"></i></div>
+                            </h3>
+                            <div class="menu_products">
+                                <ul id="menu_left">
+                                    <li><a href="#">Đang online: 10 </a></li>
+                                    <li><a href="#">Hôm qua: 50</a></li>
+                                    <li><a href="#">Tổng: 100 </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="footer_bg">
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="span12">
+                           
+                            <div class="add_col">
+                                <p><span style="font-size: medium;">PHÒNG NỘI VỤ HUYỆN PHÚ RIỀNG</span></p>
+                                <p><span style="font-size: medium;"><span><strong>Địa chỉ</strong>: Đường ĐT 741, xã  Phú Riềng, huyện Phú Riềng </span>                                 
+
+                                    <br><strong>Tel</strong>: (0651) 39 39 007 &nbsp; Fax : (0651) 39 39 117</span></p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>
