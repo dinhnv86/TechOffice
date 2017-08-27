@@ -64,13 +64,13 @@ namespace AnThinhPhat.Utilities
 
     public enum EnumNhacNho
     {
-        [Description("-- Nhắc nhở --")]
+        [Description("Mức 1")]
         LEVEL0 = 1,
 
-        [Description("Mức 1")]
+        [Description("Mức 2")]
         LEVEL1 = 2,
 
-        [Description("Mức 2")]
+        [Description("Mức 3")]
         LEVEL2 = 3,
     }
 

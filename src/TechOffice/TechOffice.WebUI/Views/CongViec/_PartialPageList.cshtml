@@ -75,10 +75,11 @@
                                                   routeValues: new { guid1 = Guid.NewGuid().ToString("N"), id = item.Id, guid2 = Guid.NewGuid().ToString("N") })
                             </td>
                             <td class="@fontColor">@Html.Raw(item.JsonFiles)</td>
-                            <td class="@fontColor">
+                            <td>
                                 @foreach (var qt in item.CongViecQuaTrinhXuLyResult)
                                 {
-                                    <span>@string.Format("{0}:{1} {2} {3}: {4}", qt.GioBanHanh, qt.PhutBanHanh, qt.NgayBanHanh?.ToString("dd/MM/yyyy"), qt.NguoiThem, qt.NoiDung)</span><br />
+                                    fontColor = qt.NhacNho.Value == 1 ? "#31708f" : qt.NhacNho.Value == 2 ? "yellow" : "red";
+                                    <span style="color: @fontColor">@string.Format("{0}:{1} {2} {3}: {4}", qt.GioBanHanh, qt.PhutBanHanh, qt.NgayBanHanh?.ToString("dd/MM/yyyy"), qt.NguoiThem, qt.NoiDung)</span><br />
                                 }
                             </td>
                         </tr>

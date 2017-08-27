@@ -10,11 +10,11 @@ $(document).ready(function () {
     $('#VanBanLienQuanViewModel_0__Ngay').removeClass('control-datepicker');
 
     var optionCalendarDefault =
-     {
-         autoSize: true,
-         constrainInput: true,
-         dateFormat: 'dd/mm/yy',
-     };
+        {
+            autoSize: true,
+            constrainInput: true,
+            dateFormat: 'dd/mm/yy',
+        };
 
     var optionCalendar = {
         autoSize: true,
@@ -28,20 +28,20 @@ $(document).ready(function () {
     $('#VanBanLienQuanViewModel_0__Ngay').datepicker(optionCalendarDefault);
 
     $.validator.addMethod('date',
-   function (value, element) {
-       if (this.optional(element)) {
-           return true;
-       }
+        function (value, element) {
+            if (this.optional(element)) {
+                return true;
+            }
 
-       var ok = true;
-       try {
-           $.datepicker.parseDate('dd/mm/yy', value);
-       }
-       catch (err) {
-           ok = false;
-       }
-       return ok;
-   });
+            var ok = true;
+            try {
+                $.datepicker.parseDate('dd/mm/yy', value);
+            }
+            catch (err) {
+                ok = false;
+            }
+            return ok;
+        });
 
     $('#btnAddVanBanLienQuan').on('click', function () {
         if (isAddModeVanBan) {
@@ -109,12 +109,12 @@ $(document).ready(function () {
         var tbody = $('#tbodyAddVanBan > tr');
         var tbody_len = (tbody.length);
         var template = ('<tr>' +
-        '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__SoVanBan" name="VanBanLienQuanViewModel[' + tbody_len + '].SoVanBan" type="hidden" value="' + soVanBan + '">' + '<span>' + soVanBan + '</span>' + '</td>'
-        + '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__Ngay" name="VanBanLienQuanViewModel[' + tbody_len + '].Ngay" type="hidden" value="' + ngay + '">' + '<span>' + ngay + '</span>' + '</td>'
-        + '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__NoiDung" name="VanBanLienQuanViewModel[' + tbody_len + '].NoiDung" type="hidden" value="' + noiDung + '">' + '<span>' + noiDung + '</span>' + '</td>'
-        + '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__CoQuanId" name="VanBanLienQuanViewModel[' + tbody_len + '].CoQuanId" type="hidden" value="' + coQuanId + '">' + '<span>' + nameCoQuan + '</span>' + '</td>'
-        + '<td>' + '<input type="button" value="Xóa" class="btn btn-link btnDeleteTemp" id="btnDeleteTemp_' + tbody_len + '"/>|<input type="button" value="Sửa" class="btn btn-link btnEditTemp" id="btnEditTemp_' + tbody_len + '"/>' + '</td>'
-        + '</tr>');
+            '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__SoVanBan" name="VanBanLienQuanViewModel[' + tbody_len + '].SoVanBan" type="hidden" value="' + soVanBan + '">' + '<span>' + soVanBan + '</span>' + '</td>'
+            + '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__Ngay" name="VanBanLienQuanViewModel[' + tbody_len + '].Ngay" type="hidden" value="' + ngay + '">' + '<span>' + ngay + '</span>' + '</td>'
+            + '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__NoiDung" name="VanBanLienQuanViewModel[' + tbody_len + '].NoiDung" type="hidden" value="' + noiDung + '">' + '<span>' + noiDung + '</span>' + '</td>'
+            + '<td>' + '<input id="VanBanLienQuanViewModel_' + tbody_len + '__CoQuanId" name="VanBanLienQuanViewModel[' + tbody_len + '].CoQuanId" type="hidden" value="' + coQuanId + '">' + '<span>' + nameCoQuan + '</span>' + '</td>'
+            + '<td>' + '<input type="button" value="Xóa" class="btn btn-link btnDeleteTemp" id="btnDeleteTemp_' + tbody_len + '"/>|<input type="button" value="Sửa" class="btn btn-link btnEditTemp" id="btnEditTemp_' + tbody_len + '"/>' + '</td>'
+            + '</tr>');
 
         var row = $('table#tableAddVanBan > tbody > tr:last').before(template);
 
@@ -182,6 +182,10 @@ $(document).ready(function () {
         var vanBan = $('#QuaTrinhXuLyViewModel_0__NoiDung').val();
         var nguoiThem = $('#QuaTrinhXuLyViewModel_0__NguoiThem').val();
         var mucDoId = $('#QuaTrinhXuLyViewModel_0__NhacNho').val();
+        var mucDoText = "Mức&nbsp;độ&nbsp;" + mucDoId;
+        
+        if (mucDoId == '1')
+            color = "text-info";
         if (mucDoId == '2')
             color = 'text-yellow';
         if (mucDoId == '3')
@@ -190,20 +194,21 @@ $(document).ready(function () {
         var tbody = $('#tbodyAddQuaTrinhXuLy > tr');
         var tbody_len = (tbody.length);
         var template = ('<tr class="' + color + '">' +
-        '<td>' +
+            '<td>' +
             '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__Gio" name="QuaTrinhXuLyViewModel[' + tbody_len + '].Gio" type="hidden" value=' + getHours() + '>' +
             '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__Phut" name="QuaTrinhXuLyViewModel[' + tbody_len + '].Phut" type="hidden" value=' + getMinutes() + '>' +
             '<span>' + getHours() + '</span>' + ':' + '<span>' + getMinutes() + '</span>' +
-        '</td>'
-        + '<td>' +
+            '</td>'
+            + '<td>' +
             '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__Ngay" name="QuaTrinhXuLyViewModel[' + tbody_len + '].Ngay" type="hidden" value=' + formatDate() + '>' +
-            '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__NhacNho" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NhacNho" type="hidden" value=' + mucDoId + '>' +
+            //'<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__NhacNho" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NhacNho" type="hidden" value=' + mucDoId + '>' +
             '<span>' + formatDate() + '</span>'
-        + '</td>'
-        + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__NoiDung" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NoiDung" type="hidden" value="' + vanBan + '">' + '<span>' + vanBan + '</span>' + '</td>'
-        + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__CoQuanId" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NguoiThem" type="hidden" value="' + nguoiThem + '">' + '<span>' + nguoiThem + '</span>' + '</td>'
-        + '<td>' + '<input type="button" value="Xóa" class="btn btn-link btnDeleteTemp" id="btnDeleteTemp_' + tbody_len + '"/>|<input type="button" value="Sửa" class="btn btn-link btnEditTemp" id="btnEditTemp_' + tbody_len + '"/>' + '</td>'
-        + '</tr>');
+            + '</td>'
+            + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__NoiDung" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NoiDung" type="hidden" value="' + vanBan + '">' + '<span>' + vanBan + '</span>' + '</td>'
+            + '<td>' + '<input id="QuaTrinhXuLyViewModel_' + tbody_len + '__CoQuanId" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NguoiThem" type="hidden" value="' + nguoiThem + '">' + '<span>' + nguoiThem + '</span>' + '</td>'
+            + '<td>' + '<label id="QuaTrinhXuLyViewModel_' + tbody_len + '__NhacNho" name="QuaTrinhXuLyViewModel[' + tbody_len + '].NhacNho" value=' + mucDoText + '>' + mucDoText +  '</label>' + '</td>'
+            + '<td>' + '<input type="button" value="Xóa" class="btn btn-link btnDeleteTemp" id="btnDeleteTemp_' + tbody_len + '"/>|<input type="button" value="Sửa" class="btn btn-link btnEditTemp" id="btnEditTemp_' + tbody_len + '"/>' + '</td>'
+            + '</tr>');
 
         var row = $('tbody#tbodyAddQuaTrinhXuLy > tr:last').before(template);
 

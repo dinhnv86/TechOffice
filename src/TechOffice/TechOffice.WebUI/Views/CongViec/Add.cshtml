@@ -99,8 +99,9 @@
                         <tr>
                             <th class="text-center col-xs-1">@Labels.CongViec_Add_QuaTrinhXuLy_Gio</th>
                             <th class="text-center col-xs-2">@Labels.CongViec_Add_QuaTrinhXuLy_Ngay</th>
-                            <th class="text-center col-xs-5">@Labels.CongViec_Add_QuaTrinhXuLy_NoiDung</th>
+                            <th class="text-center col-xs-3">@Labels.CongViec_Add_QuaTrinhXuLy_NoiDung</th>
                             <th class="text-center col-xs-2">@Labels.CongViec_Add_QuaTrinhXuLy_NguoiThem</th>
+                            <th class="text-center col-xs-2">Nhắc nhở</th>
                             <th class="text-center col-xs-2"></th>
                         </tr>
                     </thead>
@@ -111,6 +112,7 @@
                                 @if (User.IsInRole(RoleConstant.LANHDAO))
                                 {
                                     <td colspan="3">@Html.TextBoxFor(x => Model.QuaTrinhXuLyViewModel[i].NoiDung, htmlAttributes: new { @class = "form-control" })</td>
+                                    <td>@User.Identity.FullName()</td>
                                     <td>@Html.OfficeEnumDropDownListFor(x => Model.QuaTrinhXuLyViewModel[i].NhacNho, htmlAttributes: new { @class = "form-control" })</td>
                                 }
                                 else

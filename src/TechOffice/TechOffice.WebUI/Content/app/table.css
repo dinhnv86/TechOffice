@@ -29,3 +29,7 @@ th.col-action {
     width: 140px;
     max-width: 140px;
 }
+
+.text-yellow {
+    color: yellow;
+}
