@@ -54,7 +54,7 @@
                                 @item.NgayTao.ToString("dd/MM/yyyy") <br />
                                 @if (item.NgayHetHan != null)
                                 {
-                                 @(((DateTime)(item.NgayHetHan)).ToString("dd/MM/yyyy"))
+                                    @(((DateTime)(item.NgayHetHan)).ToString("dd/MM/yyyy"))
                                 }
                                 @*@Html.DisplayFor(x => item.NgayHetHan, "DisplayDate")*@
                             </td>
@@ -99,11 +99,11 @@
                             @Html.PagedListPager(Model, page => Url.Action("List", "CongViec", new
                        {
                            Page = page,
-                           UserId = ValueSearch.UserId,
-                           Role = ValueSearch.Role,
-                           TrangThaiCongViecId = ValueSearch.TrangThaiCongViecId,
-                           LinhVucCongViecId = ValueSearch.LinhVucCongViecId,
-                           NoiDungCongViec = ValueSearch.NoiDungCongViec,
+                           UserId = ValueSearch.UserIds,
+                           Role = ValueSearch.Roles,
+                           TrangThaiCongViecId = ValueSearch.Status,
+                           LinhVucCongViecId = ValueSearch.Areas,
+                           NoiDungCongViec = ValueSearch.Content,
                        }),
                            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(ajaxPaging))
                         </div>

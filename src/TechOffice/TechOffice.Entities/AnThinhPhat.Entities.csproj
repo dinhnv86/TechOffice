@@ -178,6 +178,7 @@
       <DependentUpon>TechOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Searchs\ValueSearchCongViec.cs" />
+    <Compile Include="Searchs\ValueSearchManagementCongViec.cs" />
     <Compile Include="Searchs\ValueSearchTacNghiep.cs" />
     <Compile Include="Statictis_Result.cs">
       <DependentUpon>TechOfficeModel.tt</DependentUpon>

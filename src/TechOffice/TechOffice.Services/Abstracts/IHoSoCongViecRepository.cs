@@ -12,6 +12,8 @@ namespace AnThinhPhat.Services.Abstracts
     {
         IEnumerable<HoSoCongViecResult> Find(ValueSearchCongViec valueSearch);
 
+        IEnumerable<HoSoCongViecResult> Search(ValueSearchManagementCongViec valueSearch);
+
         SaveResult AddCongViecWithChildren(HoSoCongViecResult entity);
 
         IEnumerable<StatisticCongViec> Statistic(DateTime from, DateTime to);

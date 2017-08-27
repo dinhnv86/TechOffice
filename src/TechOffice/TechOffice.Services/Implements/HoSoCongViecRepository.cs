@@ -423,6 +423,56 @@ namespace AnThinhPhat.Services.Implements
             });
         }
 
+        public IEnumerable<HoSoCongViecResult> Search(ValueSearchManagementCongViec valueSearch)
+        {
+            return ExecuteDbWithHandle(_logService, () =>
+            {
+                using (var context = new TechOfficeEntities())
+                {
+                    var query = (from item in context.HoSoCongViecs.Include(x => x.User)
+                                 where item.IsDeleted == false
+                                 select item);
+
+                    IQueryable<HoSoCongViec> queryRole = null;
+                    if (valueSearch.Roles.Any(x => x == EnumRoleExecute.PHOIHOP))
+                    {
+                        queryRole = query.Where(x => valueSearch.Roles.Any(s => s == EnumRoleExecute.PHOIHOP) && x.CongViec_PhoiHop.Any(y => valueSearch.UserIds.Any(z => z == y.UserId)));
+                    }
+
+                    //IQueryable<HoSoCongViec> phuTrach;
+                    if (valueSearch.Roles.Any(x => x == EnumRoleExecute.PHUTRACH))
+                    {
+                        queryRole = (queryRole != null) ?
+                            queryRole.Concat(query.Where(x => valueSearch.UserIds.Any(z => z == x.UserPhuTrachId) && (valueSearch.Roles.Any(s => s == EnumRoleExecute.PHUTRACH)))) :
+                         query.Where(x => valueSearch.UserIds.Any(z => z == x.UserPhuTrachId) && (valueSearch.Roles.Any(s => s == EnumRoleExecute.PHUTRACH)));
+                    }
+
+                    //IQueryable<HoSoCongViec> xuLy;
+                    if (valueSearch.Roles.Any(x => x == EnumRoleExecute.XULYCHINH))
+                    {
+                        queryRole = (queryRole != null) ?
+                           queryRole.Concat(query.Where(x => valueSearch.UserIds.Any(z => z == x.UserXuLyId) && (valueSearch.Roles.Any(s => s == EnumRoleExecute.XULYCHINH)))) :
+                        query.Where(x => valueSearch.UserIds.Any(z => z == x.UserXuLyId) && (valueSearch.Roles.Any(s => s == EnumRoleExecute.XULYCHINH)));
+                    }
+
+                    queryRole = queryRole.Where(x => valueSearch.Status.Any(y => y == (EnumStatus)x.TrangThaiCongViecId));
+
+                    if (valueSearch.Areas != null)
+                    {
+                        queryRole = queryRole.Where(x => valueSearch.Areas.Any(y => y == 0 || y == x.LinhVucCongViecId));
+                    }
+
+                    if (!string.IsNullOrEmpty(valueSearch.Content))
+                        queryRole = queryRole.Where(x => x.NoiDung.Contains(valueSearch.Content));
+
+                    return queryRole.OrderBy(x => x.TrangThaiCongViecId)
+                    .MakeQueryToDatabase()
+                    .Select(x => x.ToDataResult())
+                    .ToList();
+                }
+            });
+        }
+
         public SaveResult AddCongViecWithChildren(HoSoCongViecResult entity)
         {
             return ExecuteDbWithHandle(_logService, () =>

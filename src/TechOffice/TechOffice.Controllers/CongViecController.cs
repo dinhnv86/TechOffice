@@ -12,6 +12,7 @@ using AnThinhPhat.ViewModel;
 using AnThinhPhat.ViewModel.CongViec;
 using Ninject;
 using PagedList;
+using AnThinhPhat.Entities.Infos;
 
 namespace AnThinhPhat.WebUI.Controllers
 {
@@ -46,9 +47,7 @@ namespace AnThinhPhat.WebUI.Controllers
         public ICongViecPhoiHopRepository CongViecPhoiHopRepository { get; set; }
 
         [HttpGet]
-        public ActionResult Index(DateTime? from, DateTime? to, int? userId, int? role,
-            int? trangThaiCongViecId, int? linhVucCongViecId, string noiDungCongViec,
-            string soVanBan, string noiDungVanBan, int? coQuanId)
+        public ActionResult Index(int?[] userIds, EnumRoleExecute?[] roles, int?[] status, int?[] areas, string noiDungCongViec)
         {
             var init = InitModel();
 
@@ -62,39 +61,72 @@ namespace AnThinhPhat.WebUI.Controllers
             if (model.ValueSearch == null)
                 model.ValueSearch = new ValueSearchViewModel();
 
-            if (from != null && to != null)
+            if (userIds == null)
             {
-                model.ValueSearch.From = from;
-                model.ValueSearch.To = to;
-            }
-
-            if (userId == null)
-            {
-                model.UserId = UserId;
-                model.ValueSearch.UserId = UserId; //set current user 
+                model.UserIds = new int?[] { UserId };
+                model.ValueSearch.UserIds = new[] { UserId }; //set current user 
             }
             else
-                model.ValueSearch.UserId = userId;
+            {
+                var ids = new List<int>();
+                foreach (var item in userIds)
+                {
+                    ids.Add(item ?? 0);
+                }
+                model.ValueSearch.UserIds = ids.ToArray();
+            }
 
-            if (role != null)
-                model.ValueSearch.Role = (EnumRoleExecute) role;
+            if (roles != null)
+            {
+                var ids = new List<EnumRoleExecute>();
+                foreach (var item in roles)
+                {
+                    ids.Add((item ?? 0));
+                }
+                model.ValueSearch.Roles = ids.ToArray();
+            }
             else
-                model.ValueSearch.Role = EnumRoleExecute.TATCA;
+            {
+                model.ValueSearch.Roles = new EnumRoleExecute[] { EnumRoleExecute.PHOIHOP, EnumRoleExecute.PHUTRACH, EnumRoleExecute.XULYCHINH };
+            }
 
-            if (trangThaiCongViecId != null)
-                model.ValueSearch.TrangThaiCongViecId = trangThaiCongViecId;
+            model.Roles = model.ValueSearch.Roles;
 
-            if (!string.IsNullOrEmpty(soVanBan))
-                model.ValueSearch.SoVanBan = soVanBan;
+            if (status != null)
+            {
+                var ids = new List<EnumStatus>();
+                foreach (var item in status)
+                {
+                    ids.Add((EnumStatus)(item ?? 0));
+                }
+                model.ValueSearch.Status = ids.ToArray();
+            }
+            else
+            {
+                model.ValueSearch.Status = new EnumStatus[] { EnumStatus.CHUAXULY, EnumStatus.DANGXYLY };
+            }
 
-            if (!string.IsNullOrEmpty(noiDungVanBan))
-                model.ValueSearch.NoiDungVanBan = noiDungVanBan;
+            model.Status = model.ValueSearch.Status;
 
-            if (coQuanId.HasValue)
-                model.ValueSearch.CoQuanId = coQuanId;
+            if (areas != null)
+            {
+                var ids = new List<int>();
+                foreach (var item in areas)
+                {
+                    ids.Add(item ?? 0);
+                }
+                model.ValueSearch.Areas = ids.ToArray();
+            }
+            else
+            {
+                model.ValueSearch.Areas = init.LinhVucCongViecInfos.Select(x => x.Id).ToArray();
+            }
 
-            model.ValueSearch.LinhVucCongViecId = linhVucCongViecId;
-            model.ValueSearch.NoiDungCongViec = noiDungCongViec;
+            model.Areas = model.ValueSearch.Areas;
+
+            if (!string.IsNullOrEmpty(noiDungCongViec))
+                model.ValueSearch.Content = noiDungCongViec;
+
             model.ValueSearch.Page = 1;
 
             return View(model);
@@ -102,9 +134,9 @@ namespace AnThinhPhat.WebUI.Controllers
 
         public ActionResult List(ValueSearchViewModel model)
         {
-            if (model.UserId == null)
+            if (model.UserIds == null)
                 //Get current UserId
-                model.UserId = UserId;
+                model.UserIds = new int[] { UserId };
 
             var result = SearchAll(model);
             ViewBag.ValueSearch = model;
@@ -140,14 +172,14 @@ namespace AnThinhPhat.WebUI.Controllers
             switch (buttonType)
             {
                 case "THONGKE":
-                    return RedirectToRoute(UrlLink.CONGVIEC_THONGKE, new {model.From, model.To});
+                    return RedirectToRoute(UrlLink.CONGVIEC_THONGKE, new { model.From, model.To });
                 case "SEARCH":
                     return RedirectToRoute(UrlLink.CONGVIEC, new
                     {
                         model.From,
                         model.To,
                         model.UserId,
-                        Role = (int?) model.VaiTroXuLy,
+                        Role = (int?)model.VaiTroXuLy,
                         TrangThaiCongViecId = model.TrangThaiCongViecId,
                         model.LinhVucCongViecId,
                         model.NoiDungCongViec,
@@ -248,17 +280,17 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 var data = new HoSoCongViecResult
                 {
-                    CongViecPhoiHopResult = model.UsersPhoiHopId.Select(x => new CongViecPhoiHopResult {UserId = x}),
+                    CongViecPhoiHopResult = model.UsersPhoiHopId.Select(x => new CongViecPhoiHopResult { UserId = x }),
                     CongViecQuaTrinhXuLyResult =
                         model.QuaTrinhXuLyViewModel.Where(x => x.Gio != 0 && x.Phut != 0)
                             .Select(x => new CongViecQuaTrinhXuLyResult
                             {
-                                GioBanHanh = (byte) x.Gio,
-                                PhutBanHanh = (byte) x.Phut,
+                                GioBanHanh = (byte)x.Gio,
+                                PhutBanHanh = (byte)x.Phut,
                                 NgayBanHanh = x.Ngay,
                                 NoiDung = x.NoiDung,
                                 NguoiThem = x.NguoiThem,
-                                NhacNho = (byte) x.NhacNho,
+                                NhacNho = (byte)x.NhacNho,
                                 IsDeleted = false
                             }),
                     CongViecVanBanResults =
@@ -320,7 +352,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 UsersPhoiHopId = hoso.CongViecPhoiHopResult.Select(x => x.UserId).ToArray(),
                 DanhGiaCongViec =
                     hoso.DanhGiaCongViec.HasValue
-                        ? (EnumDanhGiaCongViec) hoso.DanhGiaCongViec.Value
+                        ? (EnumDanhGiaCongViec)hoso.DanhGiaCongViec.Value
                         : EnumDanhGiaCongViec.LEVEL0,
                 JsonFiles = GetPathFiles(EnsureFolderCongViec(id))
             };
@@ -345,10 +377,10 @@ namespace AnThinhPhat.WebUI.Controllers
                     congViec.UserPhuTrachId = model.UserPhuTrachId;
                     congViec.DanhGiaCongViec = model.DanhGiaCongViec == EnumDanhGiaCongViec.LEVEL0
                         ? null
-                        : (byte?) model.DanhGiaCongViec;
+                        : (byte?)model.DanhGiaCongViec;
                     congViec.UserXuLyId = model.UserXuLyChinhId;
                     congViec.CongViecPhoiHopResult =
-                        model.UsersPhoiHopId?.Select(x => new CongViecPhoiHopResult {UserId = x, HoSoCongViecId = id});
+                        model.UsersPhoiHopId?.Select(x => new CongViecPhoiHopResult { UserId = x, HoSoCongViecId = id });
                 }
 
                 congViec.TrangThaiCongViecId = model.TrangThaiCongViecId;
@@ -360,7 +392,7 @@ namespace AnThinhPhat.WebUI.Controllers
                 return new JsonResult
                 {
                     JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = new {code = "SB01"}
+                    Data = new { code = "SB01" }
                 };
             });
         }
@@ -465,7 +497,7 @@ namespace AnThinhPhat.WebUI.Controllers
             {
                 UsersInfos =
                     UsersRepository.GetUsersByCoQuanId(TechOfficeConfig.IDENTITY_PHONGNOIVU).Select(x => x.ToDataInfo()),
-                LinhVucCongViecInfos = LinhVucCongViecRepository.GetAll().Select(x => x.ToDataInfo()),
+                LinhVucCongViecInfos = LinhVucCongViecRepository.GetAll().Select(x => x.ToDataInfo()).ToList(),
                 TrangThaiCongViecInfos = TrangThaiCongViecRepository.GetAll().Select(x => x.ToDataInfo())
             };
 
@@ -474,7 +506,7 @@ namespace AnThinhPhat.WebUI.Controllers
 
         private IPagedList<HoSoCongViecResult> SearchAll(ValueSearchViewModel model)
         {
-            var query = HoSoCongViecRepository.Find(model.ToValueSearch());
+            var query = HoSoCongViecRepository.Search(model.ToValueSearch());
             query.ToList().ForEach(x =>
             {
                 var folderCongViec = EnsureFolderCongViec(x.Id);

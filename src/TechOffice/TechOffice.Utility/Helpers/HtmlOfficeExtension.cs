@@ -18,7 +18,7 @@ namespace AnThinhPhat.Utilities
             Expression<Func<TModel, TEnum>> expression, object htmlAttributes)
         {
             var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
-            var values = Enum.GetValues(typeof (TEnum)).Cast<TEnum>();
+            var values = Enum.GetValues(typeof(TEnum)).Cast<TEnum>();
 
             var items =
                 values.Select(
@@ -32,6 +32,26 @@ namespace AnThinhPhat.Utilities
             var attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
 
             return htmlHelper.DropDownListFor(expression, items, attributes);
+        }
+
+        public static MvcHtmlString OfficeEnumListBoxFor<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TEnum>> expression, Type type, object htmlAttributes)
+        {
+            var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
+            var values = Enum.GetValues(type).Cast<Type>();
+
+            var items =
+                values.Select(
+                    value =>
+                        new SelectListItem
+                        {
+                            Text = GetEnumDescription(value),
+                            Value = Convert.ToInt32(value).ToString(),
+                            Selected = value.Equals(metadata.Model)
+                        });
+            var attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+
+            return htmlHelper.ListBoxFor(expression, items, attributes);
         }
 
         /// <summary>
@@ -172,7 +192,7 @@ namespace AnThinhPhat.Utilities
         private static string GetEnumDescription<TEnum>(TEnum value)
         {
             var field = value.GetType().GetField(value.ToString());
-            var attributes = (DescriptionAttribute[]) field.GetCustomAttributes(typeof (DescriptionAttribute), false);
+            var attributes = (DescriptionAttribute[])field.GetCustomAttributes(typeof(DescriptionAttribute), false);
             return attributes.Length > 0 ? attributes[0].Description : value.ToString();
         }
     }

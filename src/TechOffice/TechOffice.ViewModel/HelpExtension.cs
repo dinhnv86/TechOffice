@@ -147,20 +147,19 @@ namespace AnThinhPhat.ViewModel
             };
         }
 
-        public static ValueSearchCongViec ToValueSearch(this CongViec.ValueSearchViewModel valueSearch)
+        public static ValueSearchManagementCongViec ToValueSearch(this CongViec.ValueSearchViewModel valueSearch)
         {
-            return new ValueSearchCongViec
+            return new ValueSearchManagementCongViec
             {
-                From = valueSearch.From,
-                To = valueSearch.To,
-                NhanVienId = valueSearch.UserId,
-                LinhVucCongViecId = valueSearch.LinhVucCongViecId,
-                NoiDungCongViec = valueSearch.NoiDungCongViec,
-                Role = valueSearch.Role,
-                TrangThaiCongViecId = valueSearch.TrangThaiCongViecId,
-                SoVanBan = valueSearch.SoVanBan,
-                NoiDungVanBan = valueSearch.NoiDungVanBan,
-                CoQuanId = valueSearch.CoQuanId
+                //From = valueSearch.From,
+                //To = valueSearch.To,
+                UserIds = valueSearch.UserIds,
+                Areas = valueSearch.Areas,
+                Content = valueSearch.Content,
+                Roles = valueSearch.Roles,
+                Status = valueSearch.Status,
+                //SoVanBan = valueSearch.SoVanBan,
+                //CoQuanId = valueSearch.CoQuanId
             };
         }
 

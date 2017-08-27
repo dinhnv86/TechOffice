@@ -3,42 +3,47 @@
 @{
     Layout = "~/Views/Shared/_LayoutCV.cshtml";
 }
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
 <div class="col-xs-12 bg dtapg">
     <div class="boxr">
         <h1 class="title title_ct"><span>@Labels.CongViec_Index_Title</span></h1>
         <div class="pading">
             <div class="entry">
                 <div class="frmbox">
-                @using (Html.BeginRouteForm(UrlLink.CONGVIEC, FormMethod.Get))
-                {
-                    <div class="col-md-3">
-                        <label>@Labels.CongViec_Index_ChonNhanVien</label>
-                        @Html.DropDownListFor(x => Model.UserId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), htmlAttributes: new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-3">
-                        <label>@Labels.CongViec_Index_VaiTroXuLy</label>
-                        @Html.OfficeEnumDropDownListFor(x => x.Role, htmlAttributes: new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-3">
-                        <label>@Labels.CongViec_Index_TinhTrang</label>
-                        @Html.DropDownListFor(x => x.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-3">
-                        <label>@Labels.CongViec_Index_LinhVucCongViec</label>
-                        @Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })
-                    </div>
-                    <div class="col-xs-9">
-                        <label>@Labels.CongViec_Index_NoiDungCongViec</label>
-                        @Html.TextBoxFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control" })
-                    </div>
-                    <div class="col-xs-3 margin-btn">
-                        <div class="inner">
-                            <input type="submit" value='@Buttons.CongViec_Index_TimKiem' class="btn btn-primary" id="btnSearch" />
+                    @using (Html.BeginRouteForm(UrlLink.CONGVIEC, FormMethod.Get))
+                    {
+                        <div class="col-md-3">
+                            <label style="width:100%">@Labels.CongViec_Index_ChonNhanVien</label>
+                            @*@Html.DropDownListFor(x => Model.UserId, new SelectList(Model.UsersInfos, "Id", "HoVaTen"), htmlAttributes: new { @class = "form-control" })*@
+                            @Html.ListBoxFor(x => Model.UserIds, new MultiSelectList(Model.UsersInfos, "Id", "HoVaTen"), htmlAttributes: new { @class = "form-control" })
                         </div>
-                        <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThongKe, UrlLink.CONGVIEC_THONGKE_TIMKIEM, null, htmlAttributes: new { @class = "btn btn-primary" })</div>
-                        <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThemMoi, "congviec/themmoi", null, htmlAttributes: new { @class = "btn btn-primary" })</div>
-                    </div>
-                }<div class="clearfix"></div>
+                        <div class="col-md-3">
+                            <label style="width:100%">@Labels.CongViec_Index_VaiTroXuLy</label>
+                            @*@Html.OfficeEnumDropDownListFor(x => x.Role, htmlAttributes: new { @class = "form-control" })*@
+                            @Html.ListBoxFor(x => Model.Roles, new MultiSelectList(Model.RolesSearch, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3">
+                            <label style="width:100%">@Labels.CongViec_Index_TinhTrang</label>
+                            @*@Html.DropDownListFor(x => x.TrangThaiCongViecId, new SelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })*@
+                            @Html.ListBoxFor(x => Model.Status, new MultiSelectList(Model.TrangThaiCongViecInfos, "Id", "Name"), htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-3">
+                            <label style="width:100%">@Labels.CongViec_Index_LinhVucCongViec</label>
+                            @*@Html.DropDownListFor(x => Model.LinhVucCongViecId, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), Labels.CongViec_Index_TatCa, htmlAttributes: new { @class = "form-control" })*@
+                            @Html.ListBoxFor(x => Model.Areas, new SelectList(Model.LinhVucCongViecInfos, "Id", "Name"), htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="col-xs-9">
+                            <label>@Labels.CongViec_Index_NoiDungCongViec</label>
+                            @Html.TextBoxFor(x => Model.NoiDungCongViec, htmlAttributes: new { @class = "form-control", name= "content" })
+                        </div>
+                        <div class="col-xs-3 margin-btn">
+                            <div class="inner">
+                                <input type="submit" value='@Buttons.CongViec_Index_TimKiem' class="btn btn-primary" id="btnSearch" />
+                            </div>
+                            <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThongKe, UrlLink.CONGVIEC_THONGKE_TIMKIEM, null, htmlAttributes: new { @class = "btn btn-primary" })</div>
+                            <div class="inner">@Html.RouteLink(Buttons.CongViec_Index_ThemMoi, "congviec/themmoi", null, htmlAttributes: new { @class = "btn btn-primary" })</div>
+                        </div>
+                    }<div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>
                 <div id="tableAdmin">
@@ -48,3 +53,25 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/Scripts/bootstrap-multiselect.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#UserIds').multiselect({
+                includeSelectAllOption: true
+            });
+
+            $('#Roles').multiselect({
+                includeSelectAllOption: true
+            });
+            $('#Status').multiselect({
+                includeSelectAllOption: true
+            });
+            $('#Areas').multiselect({
+                includeSelectAllOption: true
+            });
+        });
+    </script>
+}
